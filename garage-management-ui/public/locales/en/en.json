@@ -1,0 +1,13 @@
+{
+  "page_not_found": {
+    "title": "Something's missing.",
+    "description": "Sorry, we can't find that page. You'll find lots to explore on the home page.",
+    "go_back": "Go Back"
+  },
+  "home_page_menu": {
+    "home": "HOME",
+    "about": "ABOUT",
+    "service": "SERVICE",
+    "contact": "CONTACT"
+  }
+}
