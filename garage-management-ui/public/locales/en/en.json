@@ -9,5 +9,21 @@
     "about": "ABOUT",
     "service": "SERVICE",
     "contact": "CONTACT"
-  }
+  },
+  "slides": [
+    {
+      "id": 1,
+      "title1": "Car Repair & Auto",
+      "title2": "Services",
+      "description": "Our skilled team of certified technicians is here to provide top-notch car repair and auto services to ensure your vehicle performs at its best.",
+      "img": "hero_slider_bg_1"
+    },
+    {
+      "id": 2,
+      "title1": "AUTOMOTIVE REPAIR",
+      "title2": "MAINTENANCE",
+      "description": "Our skilled team of certified technicians is here to provide top-notch car repair and auto services to ensure your vehicle performs at its best.",
+      "img": "hero_slider_bg_2"
+    }
+  ]
 }

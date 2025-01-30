@@ -9,5 +9,21 @@
     "about": "Về chúng tôi",
     "service": "Dịch vụ",
     "contact": "Liên hệ"
-  }
+  },
+  "slides": [
+    {
+      "id": 1,
+      "title1": "Sửa chữa & Bảo trì Ô tô",
+      "title2": "Dịch vụ",
+      "description": "Đội ngũ kỹ thuật viên được chứng nhận của chúng tôi luôn sẵn sàng cung cấp dịch vụ sửa chữa và bảo trì ô tô chất lượng cao, đảm bảo chiếc xe của bạn hoạt động tốt nhất.",
+      "img": "hero_slider_bg_1"
+    },
+    {
+      "id": 2,
+      "title1": "SỬA CHỮA Ô TÔ",
+      "title2": "BẢO DƯỠNG",
+      "description": "Đội ngũ kỹ thuật viên được chứng nhận của chúng tôi luôn sẵn sàng cung cấp dịch vụ sửa chữa và bảo trì ô tô chất lượng cao, đảm bảo chiếc xe của bạn hoạt động tốt nhất.",
+      "img": "hero_slider_bg_2"
+    }
+  ]
 }

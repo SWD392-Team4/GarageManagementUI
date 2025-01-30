@@ -40,12 +40,36 @@ const Header = () => {
               </a>
             </div>
 
-            <ul className="flex flex-col  font-bold font-title text-base lg:flex-row lg:space-x-6 text-white lg:space-y-0 space-y-4 mt-16 lg:mt-0">
+            <ul className=" flex-col  font-bold font-title text-base lg:flex-row lg:space-x-6 text-white lg:space-y-0 space-y-4 mt-16 lg:mt-0 lg:flex hidden">
               {menuItems.map((key) => (
                 <li key={key}>
                   <a
                     href={`/${key}`}
                     className="text-hover-animaiton  hover:text-red-500"
+                  >
+                    <span className="menu-text">
+                      {t(`home_page_menu.${key}`)
+                        .split("")
+                        .map((char, index) => (
+                          <div key={index}>{char}</div>
+                        ))}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            {/* Menu Items */}
+            <ul
+              className={`${
+                isMenuOpen ? "flex animate-slide-down" : "hidden"
+              } absolute z-20 top-24 left-0 w-full backdrop-blur-sm bg-black/50 shadow-lg text-white font-bold font-title text-base p-4 lg:hidden justify-evenly transition-all duration-500`}
+            >
+              {menuItems.map((key) => (
+                <li key={key} className="hover:text-red-500">
+                  <a
+                    href={`/${key}`}
+                    className="text-hover-animaiton hover:text-red-500"
                   >
                     <span className="menu-text">
                       {t(`home_page_menu.${key}`)
@@ -72,26 +96,45 @@ const Header = () => {
               </a>
               <LanguageSwitcher />
 
-              {/* Hamburger Menu */}
-              <button
-                className="block lg:hidden p-2 bg-gray-100 rounded"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-black"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
+              <div>
+                {/* Hamburger Menu */}
+                <button
+                  className="relative z-20 lg:hidden p-2 bg-gray-100 rounded"
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                </svg>
-              </button>
+                  {isMenuOpen ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-black"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 text-black"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>

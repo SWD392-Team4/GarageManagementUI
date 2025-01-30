@@ -5,6 +5,8 @@
   "dependencies": {
     "cra-template": "1.2.0",
     "flag-icons": "^7.3.2",
+    "garage-management-ui": "file:",
+    "html-react-parser": "^5.2.2",
     "i18next": "^23.2.3",
     "i18next-browser-languagedetector": "^8.0.2",
     "i18next-http-backend": "^3.0.2",
