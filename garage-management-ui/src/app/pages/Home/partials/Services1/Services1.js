@@ -90,11 +90,11 @@ const Services1 = () => {
           </Swiper>
 
           {/* Nút điều hướng */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-2 md:left-[-60px] z-10 custom-button-prev flex items-center justify-center w-8 md:w-10 h-8 md:h-10 bg-blue-950 text-white shadow-lg hover:bg-rose-700 transition-all cursor-pointer rounded-full">
+          <div className="absolute top-1/2 -translate-y-1/2 left-2 md:left-[-60px] z-10 custom-button-prev flex items-center justify-center w-8 md:w-10 h-8 md:h-10 bg-blue-950 text-white shadow-lg hover:bg-rose-700 transition-all cursor-pointer ">
             <HiOutlineArrowNarrowLeft className="w-4 md:w-5 h-4 md:h-5 transition-transform transform hover:-translate-x-1" />
           </div>
 
-          <div className="absolute top-1/2 -translate-y-1/2 right-2 md:right-[-60px] z-10 custom-button-next flex items-center justify-center w-8 md:w-10 h-8 md:h-10 bg-blue-950 text-white shadow-lg hover:bg-rose-700 transition-all cursor-pointer rounded-full">
+          <div className="absolute top-1/2 -translate-y-1/2 right-2 md:right-[-60px] z-10 custom-button-next flex items-center justify-center w-8 md:w-10 h-8 md:h-10 bg-blue-950 text-white shadow-lg hover:bg-rose-700 transition-all cursor-pointer">
             <HiOutlineArrowNarrowRight className="w-4 md:w-5 h-4 md:h-5 transition-transform transform hover:translate-x-1" />
           </div>
         </div>
