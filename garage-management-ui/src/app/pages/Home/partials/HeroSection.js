@@ -46,7 +46,7 @@ const HeroSection = () => {
               />
 
               {/* Overlay */}
-              <div className="absolute inset-0 flex items-center justify-left pl-36 text-left">
+              <div className="absolute inset-0 flex items-center justify-left lg:pl-36 pl-6 text-left">
                 <div className="max-w-2xl text-white">
                   <h1 className="text-2xl lg:text-7xl font-bold uppercase leading-tight drop-shadow-lg">
                     {slide.title1}
