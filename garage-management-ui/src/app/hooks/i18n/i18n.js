@@ -9,7 +9,7 @@ i18n
   .use(initReactI18next) // Tích hợp với React
   .init({
     fallbackLng: "en", // Ngôn ngữ mặc định
-    debug: true, // Hiển thị log để debug
+    debug: false, // Hiển thị log để debug
     interpolation: {
       escapeValue: false, // Không cần escape ký tự HTML
     },
