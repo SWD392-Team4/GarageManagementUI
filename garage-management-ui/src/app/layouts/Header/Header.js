@@ -3,6 +3,7 @@ import LanguageSwitcher from "../../components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 import { FaPhone } from "react-icons/fa6";
 import "./TextHoverAnimation.scss";
+import ButtonAccount from "./ButtonAccount";
 const Header = () => {
   const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,7 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0  w-full z-[100001] transition-all duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
-      } bg-white/5 backdrop-blur-sm shadow-md border-b border-gray-200`}
+      } bg-black/80 backdrop-blur-sm shadow-lg border-b border-gray-200`}
     >
       <div className="w-full">
         <div className="container mx-auto px-4">
@@ -87,7 +88,7 @@ const Header = () => {
             <div className="flex items-center space-x-6">
               <a
                 href="tel:1-800-915-6271"
-                className="flex items-center space-x-2 text-base text-white hover:text-red-500"
+                className="lg:flex items-center space-x-2 text-base text-white hover:text-red-500 hidden "
               >
                 <div className="bg-red-500 p-2 rounded-full text-white">
                   <FaPhone />
@@ -95,7 +96,7 @@ const Header = () => {
                 <span>1-800-915-6271</span>
               </a>
               <LanguageSwitcher />
-
+              <ButtonAccount />
               <div>
                 {/* Hamburger Menu */}
                 <button

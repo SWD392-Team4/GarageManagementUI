@@ -9,7 +9,7 @@ import DedicatedServices from "./partials/DedicatedServices/DedicatedServices";
 import Footer from "./partials/Footer/Footer";
 
 export default function Home() {
-  document.title = "HOME | Gara | 2KS1.NET";
+  document.title = "HOME | Gara | TURBO TRACK";
   const { t } = useTranslation();
 
   return (
