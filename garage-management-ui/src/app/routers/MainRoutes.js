@@ -10,6 +10,11 @@ import ResetPasswordWorker from "../pages/AuthEmployee/partials/ResetPassword";
 import LogOut from "../pages/AuthEmployee/partials/LogOut";
 import LayoutAuthenCustomer from "../layouts/LayoutLoginCustomer/LayoutAuthenCustomer";
 import LoginPage from "../pages/AuthCustomer/LoginPage";
+import AdminProfile from "../pages/AdminProfile/AdminProfile";
+import LayoutAdminHome from "../layouts/LayoutAdminHome/LayoutAdminHome";
+import ManageAccount from "../pages/ManageAccount/ManageAccount";
+import ManageBooking from "../pages/ManageBooking/ManageBooking";
+import AccountDetails from "../pages/ManageAccount/AccountDetails";
 
 export default function MainRoutes() {
   return (
@@ -57,6 +62,54 @@ export default function MainRoutes() {
               </Suspense>
             }
           />
+        </Route>
+
+        <Route
+          path="/admin"
+          element={
+            <Suspense fallback={<LoaddingPage />}>
+              {" "}
+              <LayoutAdminHome />
+            </Suspense>
+          }
+        >
+          <Route
+            index
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                {" "}
+                <AdminProfile />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="account"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ManageAccount />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="account/:id"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <AccountDetails />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="booking"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ManageBooking />
+              </Suspense>
+            }
+          />
+
         </Route>
       </Routes>
     </BrowserRouter>

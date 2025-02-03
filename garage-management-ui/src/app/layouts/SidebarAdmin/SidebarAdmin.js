@@ -6,9 +6,6 @@ import {
   FaTimes,
   FaUser,
   FaCar,
-  FaTools,
-  FaClipboardList,
-  FaMoneyBill,
   FaHome,
   FaMoon,
   FaSun,
@@ -17,7 +14,7 @@ import { ImProfile } from "react-icons/im";
 import { useMediaQuery } from "react-responsive";
 import LanguageSwitcherSideBar from "../../components/LanguageSwitcherSideBar/LanguageSwitcherSideBar";
 
-export default function SideBarAdmin({ isSidebarOpen, toggleSidebar }) {
+export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageChange }) {
   const { t } = useTranslation();
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
@@ -90,7 +87,7 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar }) {
           </div>
 
           {/* ✅ Danh sách menu */}
-          <div className="flex-1 px-2 py-4 overflow-y-auto">
+          <div className="flex-1 px-2 py-4">
             <ul className="space-y-4">
               <li>
                 <Link
@@ -112,29 +109,30 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar }) {
               </li>
               <li>
                 <Link
-                  to="/admin/customers"
+                  to="/admin/account"
                   className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
                 >
                   <FaUser className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.customers")}</span>}
+                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.accounts")}</span>}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/admin/vehicles"
+                  to="/admin/booking"
                   className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
                 >
                   <FaCar className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.vehicles")}</span>}
+                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.booking")}</span>}
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
+
         {/* ✅ Nút chọn ngôn ngữ (Cờ) ở cuối Sidebar */}
         <div className="p-2 border-t dark:border-gray-700">
-          <LanguageSwitcherSideBar isSidebarOpen={isSidebarOpen} />
+          <LanguageSwitcherSideBar isSidebarOpen={isSidebarOpen} onLanguageChange={onLanguageChange} />
         </div>
       </aside>
     </>

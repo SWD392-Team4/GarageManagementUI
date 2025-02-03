@@ -50,5 +50,64 @@
     "title2": "Book an Appointment",
     "submit": "Submit",
     "thankyou": "Thank you!"
+  },
+  "sidebar_admin": {
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "accounts": "Accounts",
+    "booking": "Booking"
+  },
+  "admin_profile": {
+    "title": "Admin Profile",
+    "name": "John Doe",
+    "role": "Administrator",
+    "email": "johndoe@example.com",
+    "stats": {
+      "total_users": "Total Users",
+      "orders_processed": "Orders Processed",
+      "revenue": "Revenue"
+    },
+    "profile_details": {
+      "title": "Profile Details",
+      "full_name": "Full Name",
+      "email": "Email"
+    },
+    "biography": {
+      "title": "Biography",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci vel ligula pharetra laoreet nec ac ligula..."
+    }
+  },
+  "manage_account": {
+    "title": "Manage Accounts",
+    "id": "ID",
+    "name": "Full Name",
+    "email": "Email",
+    "status": "Status",
+    "edit": "Edit",
+    "delete": "Delete",
+    "editing": "Editing account",
+    "deleting": "Deleting account",
+    "view": "Details",
+    "back": "Back to Accounts"
+  },
+  "manage_booking": {
+    "title": "Manage Bookings",
+    "id": "Booking ID",
+    "customer": "Customer",
+    "room": "Room",
+    "status": "Status",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "confirming": "Confirming booking for",
+    "cancelling": "Cancelling booking for",
+    "view": "View"
+  },
+  "table": {
+    "actions": "Actions",
+    "search": "Search...",
+    "no_data": "No data available",
+    "prev": "Previous",
+    "next": "Next",
+    "page": "Page"
   }
 }
