@@ -10,6 +10,7 @@ import ResetPasswordWorker from "../pages/AuthEmployee/partials/ResetPassword";
 import LogOut from "../pages/AuthEmployee/partials/LogOut";
 import LayoutAuthenCustomer from "../layouts/LayoutLoginCustomer/LayoutAuthenCustomer";
 import LoginPage from "../pages/AuthCustomer/LoginPage";
+import RegisterPage from "../pages/AuthCustomer/RegisterPage";
 
 export default function MainRoutes() {
   return (
@@ -21,6 +22,7 @@ export default function MainRoutes() {
         </Route>
         <Route path="/authen" element={<LayoutAuthenCustomer />}>
           <Route index element={<LoginPage />} />
+          <Route path="register" element={<RegisterPage />} />
         </Route>
 
         <Route

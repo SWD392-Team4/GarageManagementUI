@@ -50,5 +50,70 @@
     "title2": "Book an Appointment",
     "submit": "Submit",
     "thankyou": "Thank you!"
+  },
+  "loginCustomer": {
+    "pageTitle": "LOGIN | TURBO TRACK | 2KS1.NET",
+    "userNameLabel": "User Name",
+    "emailPlaceholder": "name@company.com",
+    "emailRequired": "Email is required",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters long",
+    "signInButton": "Sign in",
+    "newMemberText": "New member?",
+    "signUpLink": "Sign up",
+    "forgotPasswordText": "Forgot password?",
+    "resetPassLink": "Reset pass"
+  },
+  "register": {
+    "pageTitle": "REGISTER | TURBO TRACK | 2KS1.NET",
+    "userNameLabel": "User Name",
+    "emailPlaceholder": "name@company.com",
+    "emailRequired": "Email is required",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters long",
+    "signInButton": "Sign in",
+    "MemberText": "Already a member?",
+    "signInLink": "Sign In",
+    "forgotPasswordText": "Forgot password?",
+    "resetPassLink": "Reset pass"
+  },
+  "footer": {
+    "logoTitle": "LOGO",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard. Lorem Ipsum is.",
+    "phone": "+84 111-111-11",
+    "quickLink1Title": "QUICK LINK",
+    "quickLink1": {
+      "about": "About",
+      "services": "Services",
+      "pricing": "Pricing",
+      "team": "Team",
+      "contactUs": "Contact Us"
+    },
+    "quickLink2Title": "QUICK LINK",
+    "quickLink2": {
+      "appointment": "Appointment",
+      "faq": "FA Question",
+      "blogNews": "Blog/ News",
+      "team": "Team"
+    },
+    "locationContactTitle": "LOCATION & CONTACT",
+    "locationContact": {
+      "address": "FPT TP. HCM Long Thành Mỹ, Thành Phố Thủ Đức",
+      "email": "email@email.com",
+      "hours": "Mon - Sat: Open 24/7"
+    },
+    "footerBottom": {
+      "copyright": "Copyright 2025, All Right reserved",
+      "socialLinks": {
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "instagram": "Instagram",
+        "linkedin": "LinkedIn"
+      }
+    }
   }
 }
