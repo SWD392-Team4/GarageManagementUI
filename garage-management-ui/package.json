@@ -1,7 +1,7 @@
 {
   "name": "garage-management-ui",
   "version": "0.1.0",
-  "homepage": "https://swd392-team4.github.io/GarageManagementUI/garage-management-ui",
+  "homepage": "https://swd392-team4.github.io/GarageManagementUI/",
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "cra-template": "1.2.0",
