@@ -52,7 +52,7 @@ jobs:
       - name: Publish package
         run: cd ./garage-management-ui && npm publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_PAT }} # Đổi từ GH_TOKEN -> NODE_AUTH_TOKEN
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deploy with gh-pages
         run: |
