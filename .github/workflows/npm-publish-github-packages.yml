@@ -19,7 +19,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: cd ./garage-management-ui && npm run
+      - run: cd ./garage-management-ui && npm ci
       - run: cd ./garage-management-ui && npm test
 
   publish-gpr:
@@ -35,7 +35,7 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
 
-      - run: cd ./garage-management-ui && npm run
+      - run: cd ./garage-management-ui && npm ci
       - run: cd ./garage-management-ui && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
