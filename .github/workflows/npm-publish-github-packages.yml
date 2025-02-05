@@ -35,12 +35,14 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
 
-      - run: cd ./garage-management-ui && npm ci
-      - run: |
-          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
-      - run: cd ./garage-management-ui && npm publish
+      - name: Create .npmrc
+        run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
+
+      - name: Publish package
+        run: cd ./garage-management-ui && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
       - name: Deploy with gh-pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
