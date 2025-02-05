@@ -38,10 +38,10 @@ jobs:
       - name: Create .npmrc
         run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
 
-      - name: Publish package
-        run: cd ./garage-management-ui && npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      # - name: Publish package
+      #   run: cd ./garage-management-ui && npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
 
       - name: Deploy with gh-pages
         run: |
