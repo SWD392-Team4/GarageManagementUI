@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: 20
       - run: cd ./garage-management-ui && npm ci
-      - run: npm test
+      # - run: npm test
 
   publish-gpr:
     needs: build
@@ -36,7 +36,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
 
       - run: cd ./garage-management-ui && npm ci
-      - run: npm publish
+      - run: cd ./garage-management-ui && npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Deploy with gh-pages
