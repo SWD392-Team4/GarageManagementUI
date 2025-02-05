@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/GarageManagementUI/static/css/main.89ecde48.css",
-    "main.js": "/GarageManagementUI/static/js/main.0f95a76a.js",
+    "main.js": "/GarageManagementUI/static/js/main.1b49b7b4.js",
     "static/js/38.b66d8c17.chunk.js": "/GarageManagementUI/static/js/38.b66d8c17.chunk.js",
     "static/media/hero_slider_bg_2.png": "/GarageManagementUI/static/media/hero_slider_bg_2.c91c401114e0dc72b4d6.png",
     "static/media/hero_slider_bg_1.png": "/GarageManagementUI/static/media/hero_slider_bg_1.d07f3fa77b83452600e8.png",
@@ -282,11 +282,11 @@
     "static/media/pe.svg": "/GarageManagementUI/static/media/pe.d64e9732fcaa8f765994.svg",
     "static/media/id.svg": "/GarageManagementUI/static/media/id.f624e2c8444a7794b357.svg",
     "main.89ecde48.css.map": "/GarageManagementUI/static/css/main.89ecde48.css.map",
-    "main.0f95a76a.js.map": "/GarageManagementUI/static/js/main.0f95a76a.js.map",
+    "main.1b49b7b4.js.map": "/GarageManagementUI/static/js/main.1b49b7b4.js.map",
     "38.b66d8c17.chunk.js.map": "/GarageManagementUI/static/js/38.b66d8c17.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.89ecde48.css",
-    "static/js/main.0f95a76a.js"
+    "static/js/main.1b49b7b4.js"
   ]
 }
