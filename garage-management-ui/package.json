@@ -1,9 +1,6 @@
 {
   "name": "garage-management-ui",
   "version": "0.1.0",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "homepage": "https://swd392-team4.github.io/GarageManagementUI/garage-management-ui",
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
