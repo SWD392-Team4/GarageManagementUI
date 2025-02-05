@@ -5,7 +5,7 @@ import Error404Image from "../../assets/404-NotFound/404.png";
 export default function PageNotFound() {
   const { t } = useTranslation(); // Hook dịch để cập nhật ngôn ngữ
 
-  document.title = "Error 404 | Gara | 2KS1.NET";
+  document.title = "Error 404 | Gara | TURBO TRACK";
 
   return (
     <div className="main-content mt-20">

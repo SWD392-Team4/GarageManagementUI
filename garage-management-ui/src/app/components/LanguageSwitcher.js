@@ -48,7 +48,7 @@ const LanguageSwitcher = () => {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-48 bg-white/20 rounded-lg shadow-lg z-50 border border-gray-200">
+        <div className="absolute left-0 mt-2 w-48 bg-black/60 rounded-lg shadow-lg z-50 border border-gray-200">
           {languages.map((lang) => (
             <button
               key={lang.code}
