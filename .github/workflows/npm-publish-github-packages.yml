@@ -15,42 +15,46 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Đảm bảo lấy đầy đủ lịch sử git
+          fetch-depth: 0 # Lấy toàn bộ lịch sử git
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: "https://npm.pkg.github.com/"
-      - name: Install dependencies
-        run: cd ./garage-management-ui && npm ci
 
-      # - name: Run tests
-      #   run: npm test
+      - name: Install dependencies
+        working-directory: garage-management-ui # Chạy lệnh trong thư mục con
+        run: npm ci
 
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Cần thiết để push code lên GitHub
-      packages: write # Cần thiết để publish package lên GitHub Packages
+      contents: write # Để push code
+      packages: write # Để publish package lên GitHub Packages
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Đảm bảo lấy đầy đủ lịch sử để push không bị lỗi
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          registry-url: https://npm.pkg.github.com/
+          registry-url: "https://npm.pkg.github.com/"
 
-      - name: Create .npmrc
+      - name: Kiểm tra package.json
+        working-directory: garage-management-ui
+        run: cat package.json
+
+      - name: Tạo lại .npmrc
         run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" > ~/.npmrc
 
       - name: Publish package
-        run: cd ./garage-management-ui && npm publish
+        working-directory: garage-management-ui
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -60,5 +64,6 @@ jobs:
           git config --global user.email "github-actions@github.com"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
           npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
+        working-directory: garage-management-ui
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
