@@ -1,0 +1,24 @@
+{
+    "title": "Thông Tin Khách Hàng",
+    "edit_button": "Chỉnh sửa",
+    "cancel_button": "Hủy",
+    "update_button": "Cập nhật",
+    "profile": {
+        "name": "Tên",
+        "role": "Khách Hàng VIP"
+    },
+    "personal_info": {
+        "title": "Thông tin cá nhân",
+        "email": "Email",
+        "phone": "Số điện thoại",
+        "address": "Địa chỉ"
+    },
+    "transaction_history": {
+        "title": "Lịch sử giao dịch",
+        "transactions": [
+            "Mua MacBook Pro 2023 - 35.000.000đ",
+            "Mua iPhone 15 Pro Max - 30.000.000đ",
+            "Mua AirPods Pro 2 - 5.000.000đ"
+        ]
+    }
+}

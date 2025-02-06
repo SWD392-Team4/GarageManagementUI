@@ -3,7 +3,7 @@ import { useReactTable, getCoreRowModel, getPaginationRowModel, getSortedRowMode
 import { useTranslation } from "react-i18next";
 
 export default function BaseTable({ columns, fetchData, actions, pagination }) {
-    const { t } = useTranslation();
+    const { t } = useTranslation("base_table");
     const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(pagination.page);
     const [data, setData] = useState([]);
@@ -30,7 +30,7 @@ export default function BaseTable({ columns, fetchData, actions, pagination }) {
             <div className="mb-4">
                 <input
                     type="text"
-                    placeholder={t("table.search")}
+                    placeholder={t("base_table.search")}
                     className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-600"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -48,11 +48,11 @@ export default function BaseTable({ columns, fetchData, actions, pagination }) {
                                         {flexRender(column.column.columnDef.header, column.getContext())}
                                     </th>
                                 ))}
-                                {actions && <th className="border p-3 text-left">{t("table.actions")}</th>}
+                                {actions && <th className="border p-3 text-left">{t("base_table.actions")}</th>}
                             </tr>
                         ))}
                     </thead>
-                    
+
                     <tbody className="bg-gray-50">
                         {table.getRowModel().rows.length > 0 ? (
                             table.getRowModel().rows.map(row => (
@@ -80,7 +80,7 @@ export default function BaseTable({ columns, fetchData, actions, pagination }) {
                         ) : (
                             <tr>
                                 <td colSpan={columns.length + (actions ? 1 : 0)} className="text-center p-4 text-gray-500">
-                                    {t("table.no_data")}
+                                    {t("base_table.no_data")}
                                 </td>
                             </tr>
                         )}
@@ -99,7 +99,7 @@ export default function BaseTable({ columns, fetchData, actions, pagination }) {
                 </button>
 
                 <span className="text-sm font-medium text-gray-700">
-                    {t("table.page")} {currentPage} / {Math.ceil(pagination.total / pagination.pageSize)}
+                    {t("base_table.page")} {currentPage} / {Math.ceil(pagination.total / pagination.pageSize)}
                 </span>
 
                 <button

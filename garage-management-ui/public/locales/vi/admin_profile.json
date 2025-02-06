@@ -1,8 +1,22 @@
 {
-    "sidebar_admin": {
-        "profile": "Hồ sơ",
-        "dashboard": "Bảng điều khiển",
-        "accounts": "Tài khoản",
-        "booking": "Booking"
+    "admin_profile": {
+        "title": "Hồ Sơ Quản Trị Viên",
+        "name": "John Doe",
+        "role": "Quản trị viên",
+        "email": "johndoe@example.com",
+        "stats": {
+            "total_users": "Tổng số người dùng",
+            "orders_processed": "Đơn hàng đã xử lý",
+            "revenue": "Doanh thu"
+        },
+        "profile_details": {
+            "title": "Chi Tiết Hồ Sơ",
+            "full_name": "Họ và Tên",
+            "email": "Email"
+        },
+        "biography": {
+            "title": "Tiểu Sử",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci vel ligula pharetra laoreet nec ac ligula..."
+        }
     }
 }

@@ -17,6 +17,9 @@ import ManageBooking from "../pages/ManageBooking/ManageBooking";
 import AccountDetails from "../pages/ManageAccount/AccountDetails";
 import RegisterPage from "../pages/AuthCustomer/RegisterPage";
 import i18n from "../hooks/i18n/i18n";
+import CustomerProfile from "../pages/CustomerProfile/CustomerProfile";
+import LayoutCustomer from "../layouts/LayoutCustomer/LayoutCustomer";
+import OrderHistory from "../pages/OrderHistory/OrderHistory";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -32,6 +35,10 @@ export default function MainRoutes() {
             <PageNotFound onLoad={() => loadLanguageResources("ver1")} />
           }
         ></Route>
+
+
+
+
         <Route
           path="/"
           element={<LayoutHome onLoad={() => loadLanguageResources("ver1")} />}
@@ -41,6 +48,8 @@ export default function MainRoutes() {
             element={<Home onLoad={() => loadLanguageResources("ver1")} />}
           />
         </Route>
+
+
         <Route
           path="/authen"
           element={
@@ -60,6 +69,45 @@ export default function MainRoutes() {
             }
           />
         </Route>
+
+
+        {/* Profile Customer */}
+        <Route
+          path="/customer"
+          element={
+            <Suspense fallback={<LoaddingPage />}>
+              {" "}
+              <LayoutCustomer onLoad={() => loadLanguageResources("sidebar_customer")}  />
+            </Suspense>
+          }
+        >
+          <Route
+            index
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                {" "}
+                <CustomerProfile onLoad={() => loadLanguageResources("customer_profile")} />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="orderHistory"
+            element={
+              <OrderHistory onLoad={() => loadLanguageResources("order_history")} />
+            }
+          />
+
+        </Route>
+
+
+
+
+
+
+
+
+
 
         <Route
           path="/worker"
@@ -99,12 +147,14 @@ export default function MainRoutes() {
           />
         </Route>
 
+
+        {/* Admin router */}
         <Route
           path="/admin"
           element={
             <Suspense fallback={<LoaddingPage />}>
               {" "}
-              <LayoutAdminHome />
+              <LayoutAdminHome onLoad={() => loadLanguageResources("sidebar_admin")} />
             </Suspense>
           }
         >
@@ -113,7 +163,7 @@ export default function MainRoutes() {
             element={
               <Suspense fallback={<LoaddingPage />}>
                 {" "}
-                <AdminProfile />
+                <AdminProfile onLoad={() => loadLanguageResources("admin_profile")} />
               </Suspense>
             }
           />
@@ -122,7 +172,7 @@ export default function MainRoutes() {
             path="account"
             element={
               <Suspense fallback={<LoaddingPage />}>
-                <ManageAccount />
+                <ManageAccount onLoad={() => loadLanguageResources("manage_account", "base_table")} />
               </Suspense>
             }
           />
@@ -140,7 +190,7 @@ export default function MainRoutes() {
             path="booking"
             element={
               <Suspense fallback={<LoaddingPage />}>
-                <ManageBooking />
+                <ManageBooking onLoad={() => loadLanguageResources("manage_booking", "base_table")} />
               </Suspense>
             }
           />

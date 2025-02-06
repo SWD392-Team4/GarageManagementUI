@@ -1,0 +1,11 @@
+{
+    "profile": {
+        "name": "John Doe",
+        "role": "Khách Hàng VIP"
+    },
+    "menu": {
+        "personal_info": "Thông tin cá nhân",
+        "order_history": "Lịch sử đơn hàng",
+        "current_orders": "Đơn hàng đang đặt"
+    }
+}

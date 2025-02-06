@@ -4,7 +4,7 @@ import ListAccount from "./partials/ListAccount";
 import CreateAccountForm from "./models/CreateAccountForm";
 
 export default function ManageAccount({ languageKey }) {
-    const { t } = useTranslation();
+    const { t } = useTranslation("manage_account");
     const [showForm, setShowForm] = useState(false);
 
     return (

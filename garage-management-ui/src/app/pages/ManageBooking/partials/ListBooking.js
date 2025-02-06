@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { FaCheck, FaEye } from "react-icons/fa";
 
 export default function ListBooking({ languageKey }) {
-    const { t } = useTranslation();
+    const { t } = useTranslation("manage_booking");
     const [data, setData] = useState([]);
     const [pagination, setPagination] = useState({ total: 6, page: 1, pageSize: 2 });
 

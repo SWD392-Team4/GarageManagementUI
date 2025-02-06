@@ -1,0 +1,14 @@
+{
+    "title": "Lịch Sử Đơn Hàng",
+    "status": {
+        "pending": "Chờ xử lý",
+        "completed": "Hoàn thành",
+        "cancelled": "Đã hủy"
+    },
+    "order": {
+        "id": "Mã đơn hàng",
+        "date": "Ngày",
+        "amount": "Số tiền",
+        "view": "Xem"
+    }
+}

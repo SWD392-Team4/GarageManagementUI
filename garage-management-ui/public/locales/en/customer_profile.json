@@ -1,0 +1,24 @@
+{
+    "title": "Customer Information",
+    "edit_button": "Edit",
+    "cancel_button": "Cancel",
+    "update_button": "Update",
+    "profile": {
+        "name": "Name",
+        "role": "VIP Customer"
+    },
+    "personal_info": {
+        "title": "Personal Information",
+        "email": "Email",
+        "phone": "Phone Number",
+        "address": "Address"
+    },
+    "transaction_history": {
+        "title": "Transaction History",
+        "transactions": [
+            "Purchased MacBook Pro 2023 - 35,000,000đ",
+            "Purchased iPhone 15 Pro Max - 30,000,000đ",
+            "Purchased AirPods Pro 2 - 5,000,000đ"
+        ]
+    }
+}

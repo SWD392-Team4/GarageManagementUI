@@ -2,7 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 export default function AdminProfile() {
-  const { t } = useTranslation();
+  const { t } = useTranslation("admin_profile");
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen overflow-auto">

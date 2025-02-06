@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import ListBooking from "./partials/ListBooking";
 
 export default function ManageBooking({ languageKey }) {
-    const { t } = useTranslation();
+    const { t } = useTranslation("manage_booking");
 
     return (
         <div className="bg-white shadow-lg rounded-lg p-6">

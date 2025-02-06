@@ -1,0 +1,11 @@
+{
+  "profile": {
+    "name": "John Doe",
+    "role": "VIP Customer"
+  },
+  "menu": {
+    "personal_info": "Personal Information",
+    "order_history": "Order History",
+    "current_orders": "Current Orders"
+  }
+}
