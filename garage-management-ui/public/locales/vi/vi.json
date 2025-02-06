@@ -88,7 +88,14 @@
     "editing": "Đang chỉnh sửa tài khoản",
     "deleting": "Đang xóa tài khoản",
     "view": "Chi tiết",
-    "back": "Quay lại danh sách"
+    "back": "Quay lại danh sách",
+    "details": "Thông tin tài khoản",
+    "list": "Danh sách tài khoản",
+    "create": "Tạo tài khoản",
+    "created": "Đã tạo",
+    "create_title": "Thông tin tài khoản",
+    "cancel": "Huỷ",
+    "submit": "Tạo"
   },
   "manage_booking": {
     "title": "Quản lý đặt phòng",

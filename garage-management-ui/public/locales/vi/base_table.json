@@ -1,0 +1,10 @@
+{
+    "base_table": {
+        "actions": "Hành động",
+        "search": "Tìm kiếm...",
+        "no_data": "Không có dữ liệu",
+        "prev": "Trước",
+        "next": "Tiếp",
+        "page": "Trang"
+    }
+}

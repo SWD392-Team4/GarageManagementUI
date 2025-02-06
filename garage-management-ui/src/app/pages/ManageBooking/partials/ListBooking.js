@@ -1,18 +1,39 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { useTranslation } from "react-i18next";
-import { FaCheck, FaTimes } from "react-icons/fa";
+import { FaCheck, FaEye } from "react-icons/fa";
 
 export default function ListBooking({ languageKey }) {
     const { t } = useTranslation();
+    const [data, setData] = useState([]);
+    const [pagination, setPagination] = useState({ total: 6, page: 1, pageSize: 2 });
 
-    // Dữ liệu đặt phòng (sau này có thể gọi API)
-    const data = useMemo(() => [
-        { id: 101, customer: "Trần Văn A", room: "101", status: "Confirmed" },
-        { id: 102, customer: "Nguyễn Thị B", room: "202", status: "Pending" },
-    ], []);
+    // Giả lập API fetch dữ liệu
+    const fetchData = async (page) => {
+        const fakeData = {
+            1: [
+                { id: 101, customer: "Trần Văn A", room: "101", status: "Confirmed" },
+                { id: 102, customer: "Nguyễn Thị B", room: "202", status: "Pending" }
+            ],
+            2: [
+                { id: 103, customer: "Lê Văn C", room: "303", status: "Confirmed" },
+                { id: 104, customer: "Phạm Thị D", room: "404", status: "Pending" }
+            ],
+            3: [
+                { id: 105, customer: "Hoàng Văn E", room: "505", status: "Confirmed" },
+                { id: 106, customer: "Đặng Thị F", room: "606", status: "Pending" }
+            ]
+        };
+        return { data: fakeData[page] || [], total: 6 };
+    };
 
-    // Cấu hình cột
+    useEffect(() => {
+        fetchData(pagination.page).then(response => {
+            setData(response.data);
+            setPagination(prev => ({ ...prev, total: response.total }));
+        });
+    }, [pagination.page]);
+
     const columns = useMemo(() => [
         { header: t("manage_booking.id"), accessorKey: "id" },
         { header: t("manage_booking.customer"), accessorKey: "customer" },
@@ -20,21 +41,14 @@ export default function ListBooking({ languageKey }) {
         { header: t("manage_booking.status"), accessorKey: "status" },
     ], [t, languageKey]);
 
-    // Hành động cho đặt phòng
     const actions = [
         {
             label: t("manage_booking.confirm"),
-            icon: <FaCheck />,
-            color: "bg-green-500",
+            icon: <FaEye />,
+            color: "bg-gray-500",
             onClick: (row) => alert(`${t("manage_booking.confirming")}: ${row.customer}`)
-        },
-        // {
-        //     label: t("manage_booking.cancel"),
-        //     icon: <FaTimes />,
-        //     color: "bg-red-500",
-        //     onClick: (row) => alert(`${t("manage_booking.cancelling")}: ${row.customer}`)
-        // }
+        }
     ];
 
-    return <BaseTable title={t("manage_booking.title")} columns={columns} data={data} actions={actions} />;
+    return <BaseTable columns={columns} data={data} actions={actions} pagination={pagination} fetchData={fetchData} />;
 }

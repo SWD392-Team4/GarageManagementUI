@@ -88,7 +88,14 @@
     "editing": "Editing account",
     "deleting": "Deleting account",
     "view": "Details",
-    "back": "Back to Accounts"
+    "back": "Back to Accounts",
+    "details": "Account Information",
+    "list": "List Account",
+    "create": "Create Account",
+    "created": "Created",
+    "create_title": "Account Infomation",
+    "cancel" : "Cancel",
+    "submit" : "Submit"
   },
   "manage_booking": {
     "title": "Manage Bookings",

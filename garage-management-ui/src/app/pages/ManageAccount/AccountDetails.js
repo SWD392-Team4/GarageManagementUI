@@ -15,7 +15,6 @@ export default function AccountDetails() {
             // Dữ liệu giả lập, sau này thay bằng API
             const fakeData = [
                 { id: 1, name: "Nguyễn Văn A", email: "a@gmail.com", status: "Active" },
-                { id: 2, name: "Trần Thị B", email: "b@gmail.com", status: "Inactive" },
             ];
             const foundAccount = fakeData.find(acc => acc.id === parseInt(id));
             setAccount(foundAccount || null);
@@ -31,8 +30,20 @@ export default function AccountDetails() {
     return (
         <div className="bg-white shadow-lg rounded-lg p-6">
             {/* Breadcrumb */}
+            <nav className="text-gray-600 text-sm mb-4">
+                <ol className="list-reset flex">
+                    <li>
+                        <button className="text-blue-500 hover:underline" onClick={() => navigate("/admin/account")}> {t("manage_account.list")} </button>
+                    </li>
+                    <li>
+                        <span className="mx-2">/</span>
+                    </li>
+                    <li className="text-gray-900">{t("manage_account.details")}</li>
+                </ol>
+            </nav>
+
             <button
-                className="flex items-center gap-2 text-blue-500 hover:underline"
+                className="flex items-center gap-2 text-blue-500 hover:underline mb-4"
                 onClick={() => navigate("/admin/account")}
             >
                 <FaArrowLeft /> {t("manage_account.back")}

@@ -1,0 +1,14 @@
+{
+    "manage_booking": {
+        "title": "Manage Bookings",
+        "id": "Booking ID",
+        "customer": "Customer",
+        "room": "Room",
+        "status": "Status",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "confirming": "Confirming booking for",
+        "cancelling": "Cancelling booking for",
+        "view": "View"
+    }
+}

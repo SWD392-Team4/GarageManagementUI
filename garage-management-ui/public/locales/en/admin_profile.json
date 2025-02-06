@@ -1,0 +1,22 @@
+{
+    "admin_profile": {
+        "title": "Admin Profile",
+        "name": "John Doe",
+        "role": "Administrator",
+        "email": "johndoe@example.com",
+        "stats": {
+            "total_users": "Total Users",
+            "orders_processed": "Orders Processed",
+            "revenue": "Revenue"
+        },
+        "profile_details": {
+            "title": "Profile Details",
+            "full_name": "Full Name",
+            "email": "Email"
+        },
+        "biography": {
+            "title": "Biography",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci vel ligula pharetra laoreet nec ac ligula..."
+        }
+    }
+}

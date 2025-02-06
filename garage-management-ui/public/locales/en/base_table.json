@@ -1,0 +1,10 @@
+{
+    "base_table": {
+        "actions": "Actions",
+        "search": "Search...",
+        "no_data": "No data available",
+        "prev": "Previous",
+        "next": "Next",
+        "page": "Page"
+    }
+}

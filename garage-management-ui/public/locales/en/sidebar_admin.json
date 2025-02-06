@@ -1,0 +1,8 @@
+{
+    "sidebar_admin": {
+        "profile": "Profile",
+        "dashboard": "Dashboard",
+        "accounts": "Accounts",
+        "booking": "Booking"
+    }
+}
