@@ -12,6 +12,7 @@ import LayoutAuthenCustomer from "../layouts/LayoutLoginCustomer/LayoutAuthenCus
 import LoginPage from "../pages/AuthCustomer/LoginPage";
 import RegisterPage from "../pages/AuthCustomer/RegisterPage";
 import i18n from "../hooks/i18n/i18n";
+import ConfirmEmailPage from "../pages/AuthCustomer/ConfirmEmailPage";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -25,6 +26,14 @@ export default function MainRoutes() {
           path="*"
           element={
             <PageNotFound onLoad={() => loadLanguageResources("ver1")} />
+          }
+        ></Route>
+        <Route
+          path="confirm-email"
+          element={
+            <ConfirmEmailPage
+              onLoad={() => loadLanguageResources("confirmEmail")}
+            />
           }
         ></Route>
         <Route
@@ -51,7 +60,15 @@ export default function MainRoutes() {
           <Route
             path="register"
             element={
-              <RegisterPage onLoad={() => loadLanguageResources("ver1")} />
+              <RegisterPage onLoad={() => loadLanguageResources("register")} />
+            }
+          />
+          <Route
+            path="confirm-email"
+            element={
+              <ConfirmEmailPage
+                onLoad={() => loadLanguageResources("register")}
+              />
             }
           />
         </Route>

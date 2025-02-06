@@ -1,0 +1,49 @@
+{
+  "register": {
+    "pageTitle": "ĐĂNG KÝ | TURBO TRACK | 2KS1.NET",
+    "userNameLabel": "Tên đăng nhập",
+    "userNamePlaceholder": "Nhập tên đăng nhập",
+    "emailPlaceholder": "name@company.com",
+    "emailRequired": "Vui lòng nhập email",
+    "passwordLabel": "Mật khẩu",
+    "comfirmPasswordLabel": "Xác nhận mật khẩu",
+    "passwordPlaceholder": "••••••••",
+    "signUpButton": "Đăng ký",
+    "signingUpButton": "Đang đăng ký . . . ",
+    "MemberText": "Bạn đã có tài khoản?",
+    "signInLink": "Đăng nhập",
+    "forgotPasswordText": "Quên mật khẩu?",
+    "resetPassLink": "Đặt lại mật khẩu",
+    "firstName": "Họ",
+    "firstNamePlaceholder": "Nhập họ",
+    "lastName": "Tên",
+    "lastNamePlaceholder": "Nhập tên",
+    "phone": "Số điện thoại",
+    "phonePlaceholder": "Nhập số điện thoại"
+  },
+  "validation": {
+    "userNameRequired": "Vui lòng nhập tên đăng nhập.",
+    "firstNameRequired": "Vui lòng nhập họ.",
+    "lastNameRequired": "Vui lòng nhập tên.",
+    "emailRequired": "Vui lòng nhập email.",
+    "emailInvalid": "Định dạng email không hợp lệ.",
+    "phoneNumberRequired": "Vui lòng nhập số điện thoại.",
+    "phoneNumberInvalid": "Số điện thoại chỉ được chứa số.",
+    "phoneNumberMin": "Số điện thoại phải có ít nhất 10 chữ số.",
+    "passwordRequired": "Vui lòng nhập mật khẩu.",
+    "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự.",
+    "passwordUppercase": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa.",
+    "passwordLowercase": "Mật khẩu phải chứa ít nhất một chữ cái viết thường.",
+    "passwordSpecialCharacter": "Mật khẩu phải chứa ít nhất một ký tự đặc biệt.",
+    "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu.",
+    "confirmPasswordMismatch": "Mật khẩu xác nhận không khớp."
+  },
+  "passwordRequirements": {
+    "re1": "Ít nhất 10 kí tự",
+    "re2": "Có ít nhất 1 chữ hoa",
+    "re3": "Có ít nhất 1 chữ thường",
+    "re4": "Có ít nhất 1 kí tự đặc biệt",
+    "re5": "Có ít nhất 1 chữ số",
+    "passwordsMatch": "Hai mật khẩu trùng khớp"
+  }
+}

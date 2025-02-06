@@ -18,8 +18,9 @@ i18n
       order: ["localStorage", "cookie", "navigator"],
       caches: ["localStorage"],
     },
-    ns: ["ver1"], // Mặc định dùng namespace "common"
+    ns: ["ver1", "errors"], // Mặc định dùng namespace "common"
     defaultNS: "ver1",
+    load: "currentOnly",
   });
 
 export default i18n;

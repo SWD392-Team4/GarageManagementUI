@@ -1,0 +1,50 @@
+{
+  "UserExisted": "Người dùng với email {0}, tên đăng nhập {1} và số điện thoại {2} đã tồn tại.",
+
+  "UsernameRequired": "Vui lòng nhập tên đăng nhập.",
+  "UsernameTooShort": "Tên đăng nhập phải có ít nhất 5 ký tự.",
+  "UsernameTooLong": "Tên đăng nhập không được vượt quá 25 ký tự.",
+  "UsernameContainSpecialCharacter": "Tên đăng nhập không được chứa ký tự đặc biệt.",
+
+  "FirstNameRequired": "Vui lòng nhập họ.",
+  "LastNameRequired": "Vui lòng nhập tên.",
+
+  "EmailRequired": "Vui lòng nhập địa chỉ email.",
+  "EmailInvalid": "Địa chỉ email không hợp lệ.",
+
+  "PasswordRequired": "Vui lòng nhập mật khẩu.",
+  "PasswordTooShort": "Mật khẩu phải có ít nhất 10 ký tự.",
+  "PasswordTooLong": "Mật khẩu không được vượt quá 50 ký tự.",
+  "PasswordMissingUppercase": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa.",
+  "PasswordMissingLowercase": "Mật khẩu phải chứa ít nhất một chữ cái viết thường.",
+  "PasswordMissingDigit": "Mật khẩu phải chứa ít nhất một số.",
+  "PasswordMissingSpecialCharacter": "Mật khẩu phải chứa ít nhất một ký tự đặc biệt (ví dụ: !, ?, *, .).",
+
+  "ConfirmPasswordRequired": "Vui lòng nhập lại mật khẩu.",
+  "ConfirmPasswordMismatch": "Mật khẩu xác nhận không khớp.",
+
+  "PhoneNumberRequired": "Vui lòng nhập số điện thoại.",
+  "PhoneNumberInvalid": "Số điện thoại không hợp lệ. Đảm bảo đây là số điện thoại Việt Nam hợp lệ.",
+
+  "RoleRequired": "Vui lòng chọn vai trò người dùng.",
+  "RoleInvalid": "Vai trò người dùng không hợp lệ.",
+  "DoNotHavePermission": "Bạn không có quyền tạo người dùng với vai trò này.",
+
+  "WorkplaceIdRequired": "Vui lòng chọn nơi làm việc.",
+
+  "CitizenIdentificationRequired": "Vui lòng nhập CMND/CCCD.",
+  "CitizenIdentificationInvalid": "CMND/CCCD không hợp lệ. Hãy kiểm tra lại.",
+
+  "EmployeeExisted": "Nhân viên với số CMND/CCCD {0} đã tồn tại.",
+
+  "UserNotFoundWithEmail": "Không tìm thấy người dùng với email {0}.",
+  "UserNotFoundWithUsername": "Không tìm thấy người dùng với tên đăng nhập {0}.",
+  "UserNotFoundWithId": "Không tìm thấy người dùng với ID {0}.",
+
+  "ConfirmEmailRequired": "Email chưa được xác nhận.",
+
+  "TokenConfirmEmailRequired": "Token xác nhận email là bắt buộc.",
+  "TokenResetPasswordRequired": "Token đặt lại mật khẩu là bắt buộc.",
+
+  "InvalidEndpoint": "Endpoint không hợp lệ khi tạo khách hàng. Vui lòng kiểm tra URL và thử lại."
+}

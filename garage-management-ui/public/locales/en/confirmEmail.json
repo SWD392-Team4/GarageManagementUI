@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Confirm Email",
+  "loadingTitle": "🔄 Verifying email...",
+  "loadingMessage": "Please wait a moment.",
+  "successTitle": "✅ Email confirmed successfully!",
+  "successMessage": "Thank you for using CLCA.",
+  "signInButton": "Sign In",
+  "errorTitle": "❌ Email verification failed",
+  "errorMessage": "The link may have expired or the email is not registered.",
+  "errorHint": "If you have not received the confirmation email, click the button below to resend.",
+  "resendButton": "Resend confirmation email",
+  "resending": "Resending...",
+  "resendSuccess": "Confirmation email has been resent. Please check your inbox! Redirecting in 5 seconds...",
+  "resendFailed": "Unable to resend email. Please try again later! Redirecting in 4 seconds..."
+}
