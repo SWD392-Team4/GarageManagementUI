@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import resetPasswordImage from "../../../assets/auth/reset-password.png";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ResetSchema } from "../schemas/signInSchema"; // Import schema
 
 export default function ResetPasswordWorker() {
   document.title = "RESETPASS WORKER | CLCA | TURBO TRACK";
@@ -10,7 +12,9 @@ export default function ResetPasswordWorker() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(ResetSchema),
+  });
 
   const navigate = useNavigate();
 

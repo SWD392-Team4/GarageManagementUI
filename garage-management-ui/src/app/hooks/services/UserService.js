@@ -9,7 +9,6 @@ class UserService {
     this.callCount = 0; // Đếm số lần gọi API
     this.lastCallTime = 0; // Thời điểm gọi cuối
 
-    // Thiết lập các mặc định cho jQuery AJAX
     $.ajaxSetup({
       contentType: "application/json-patch+json",
       crossDomain: true,
@@ -36,7 +35,6 @@ class UserService {
     localStorage.setItem("rt", refreshToken);
   }
 
-  // Xóa JWT khỏi cookie khi đăng xuất
   clearToken() {
     localStorage.removeItem("at");
     localStorage.removeItem("rt");
@@ -84,7 +82,7 @@ class UserService {
               window.location.href = "/403-forbidden";
             }
 
-            reject({ status: xhr.status, message: xhr.responseText });
+            reject({ status: xhr.status, message: xhr.responseJSON });
           },
         });
       });

@@ -1,144 +1,275 @@
-import React from "react";
-import UserService from "../../hooks/services/UserService";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { registerUser } from "./services/api";
+import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import UserService from "../../hooks/services/UserService";
+import PageTitle from "../../components/common/PageTitle";
+import { CiCircleCheck } from "react-icons/ci";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "./schemas/validationSchema";
 
 export default function RegisterPage() {
-  document.title = "REGISTER | CLCA | 2KS1.NET";
+  const { t } = useTranslation();
+  document.title = t(`loginCustomer.pageTitle`);
 
   const {
     register,
     handleSubmit,
-    getValues,
+    watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(registerSchema),
+  });
 
   const userService = new UserService();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const password = watch("password", "");
+  const confirmPassword = watch("confirmPassword", "");
 
   const onSubmit = async (data) => {
-    // const email = data.email.toLowerCase(); // Chuyển email thành chữ thường
-    // const password = data.password;
-    // try {
-    //   const response = await registerUser(email, password);
-    //   if (response.status === 200) {
-    //     // Thông báo khi đăng ký thành công
-    //     userService.showToast(response.status, response.data.msg);
-    //     navigate("/authen");
-    //   }
-    // } catch (error) {
-    //   if (error.status === 400) {
-    //     userService.showToast(error.status, "Email used already.");
-    //   }
-    // }
+    if (password !== confirmPassword) {
+      userService.showToast(400, "Mật khẩu xác nhận không khớp");
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const result = await userService.sendAjax(
+        "/api/auth/register",
+        "POST",
+        data,
+        false
+      );
+      if (response.ok) {
+        userService.showToast(response.status, "Đăng ký thành công!");
+        navigate("/authen");
+      } else {
+        userService.showToast(
+          response.status,
+          result.message || "Đăng ký thất bại"
+        );
+      }
+    } catch (error) {
+      // if(error.status === )
+      console.log(error);
+      userService.showToast(404, error.description);
+    }
+    setIsLoading(false);
   };
 
+  const passwordRequirements = [
+    { text: "Ít nhất 10 kí tự", regex: /.{10,}/ },
+    { text: "Có ít nhất 1 chữ hoa", regex: /[A-Z]/ },
+    { text: "Có ít nhất 1 chữ thường", regex: /[a-z]/ },
+    { text: "Có ít nhất 1 kí tự đặc biệt", regex: /[!@#$%^&*(),.?":{}|<>]/ },
+  ];
+
   return (
-    <section className="bg-gray-50">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:min-h-[67vh] lg:py-0">
-        <div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-pink-600 md:text-2xl text-left">
-              Say Hi!
-            </h1>
-            <h1 className="text-gray-500 text-xl">
-              We’d like to talk with you.
-            </h1>
+    <>
+      {isLoading && <div>Loading...</div>}
+      <section className="bg-black">
+        <PageTitle title="Sign Up" title1="Home" subtitle="Sign Up" />
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:min-h-[65vh] lg:py-0 border-t border-white">
+          <div className="flex flex-col md:flex-row gap-8">
+            {/* Form */}
             <form
               onSubmit={handleSubmit(onSubmit)}
-              className="space-y-4 md:space-y-6"
+              className="md:w-1/2 flex flex-col gap-4"
             >
+              {/* User Name */}
               <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Your email<span className="text-red-800">*</span>
+                <label className="block mb-2 text-sm font-medium text-white">
+                  Tên đăng nhập
+                </label>
+                <input
+                  {...register("userName")}
+                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
+                  placeholder="Tên đăng nhập"
+                />
+                {errors.userName && (
+                  <p className="text-red-500 mt-2 text-sm">
+                    {errors.userName.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="flex space-x-4">
+                {/* First Name */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-white">
+                    Họ
+                  </label>
+                  <input
+                    {...register("firstName")}
+                    className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
+                    placeholder="Họ"
+                  />
+                  {errors.firstName && (
+                    <p className="text-red-500  mt-2 text-sm">
+                      {errors.firstName.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Last Name */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-white">
+                    Tên
+                  </label>
+                  <input
+                    {...register("lastName")}
+                    className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
+                    placeholder="Tên"
+                  />
+                  {errors.lastName && (
+                    <p className="text-red-500  mt-2 text-sm">
+                      {errors.lastName.message}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Email */}
+              <div>
+                <label className="block mb-2 text-sm font-medium text-white">
+                  Email
                 </label>
                 <input
                   type="email"
-                  name="email"
-                  id="email"
-                  {...register("email", { required: "Email is required" })}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  placeholder="name@company.com"
-                  required
+                  {...register("email")}
+                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
+                  placeholder="Email"
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                  <p className="text-red-500  mt-2 text-sm">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
+
+              {/* Phone Number */}
               <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Password<span className="text-red-800">* </span>
+                <label className="block mb-2 text-sm font-medium text-white">
+                  Số điện thoại
+                </label>
+                <input
+                  {...register("phoneNumber")}
+                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
+                  placeholder="Số điện thoại"
+                />
+                {errors.phoneNumber && (
+                  <p className="text-red-500  mt-2 text-sm">
+                    {errors.phoneNumber.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Password */}
+              <div>
+                <label className="block mb-2 text-sm font-medium text-white">
+                  Mật khẩu
                 </label>
                 <input
                   type="password"
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 8,
-                      message: "Password must be at least 8 characters long",
-                    },
-                  })}
+                  {...register("password")}
+                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  required
                 />
                 {errors.password && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500  mt-2 text-sm">
                     {errors.password.message}
                   </p>
                 )}
               </div>
+
+              {/* Confirm Password */}
               <div>
-                <label
-                  htmlFor="confirmPassword"
-                  className="block mb-2 text-sm font-medium text-gray-900"
-                >
-                  Confirm password<span className="text-red-800">* </span>
+                <label className="block mb-2 text-sm font-medium text-white">
+                  Xác nhận mật khẩu
                 </label>
                 <input
                   type="password"
-                  {...register("confirmPassword", {
-                    required: "Please confirm your password",
-                    validate: (value) =>
-                      value === getValues("password") ||
-                      "Passwords do not match", // Kiểm tra khớp với trường password
-                  })}
+                  {...register("confirmPassword")}
+                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                  required
                 />
                 {errors.confirmPassword && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500  mt-2 text-sm">
                     {errors.confirmPassword.message}
                   </p>
                 )}
               </div>
-              <button
-                type="submit" // Đảm bảo rằng form sẽ được gửi khi nhấn nút
-                className="w-full text-white bg-pink-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-              >
-                Sign Up
-              </button>
-              <p className="text-sm font-light text-gray-500">
-                Already have an account?{" "}
-                <Link
-                  to="/authen"
-                  className="font-medium text-primary-600 hover:underline hover:text-blue-800"
+
+              {/* Submit Button */}
+              <div className="flex justify-between">
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-1/3 bg-white/55 text-white py-2 hover:bg-gray-600 duration-500 "
                 >
-                  Login here
-                </Link>
-              </p>
+                  {isLoading ? "Đang đăng ký..." : "Đăng ký"}
+                </button>
+                <p className="text-sm font-light text-gray-500">
+                  {t(`register.MemberText`)}{" "}
+                  <Link
+                    to="/authen"
+                    className="font-medium text-primary-600 hover:underline hover:text-gray-600"
+                  >
+                    {t(`register.signInButton`)}
+                  </Link>
+                </p>
+              </div>
             </form>
+
+            {/* Password Requirements */}
+            <div className="md:w-1/2 flex flex-col items-center justify-center text-center">
+              {/* Mô tả */}
+              <h3 className="text-lg font-semibold text-white mb-4">
+                Yêu cầu mật khẩu
+              </h3>
+
+              {/* Danh sách yêu cầu mật khẩu */}
+              <ul className="space-y-2">
+                {passwordRequirements.map((req, index) => (
+                  <li
+                    key={index}
+                    className={`flex items-center gap-x-2 ${
+                      password.match(req.regex)
+                        ? "text-green-500"
+                        : "text-red-500"
+                    }`}
+                  >
+                    {password.match(req.regex) ? (
+                      <CiCircleCheck size={20} />
+                    ) : (
+                      <AiOutlineCloseCircle size={20} />
+                    )}
+                    <span className="text-base">{req.text}</span>
+                  </li>
+                ))}
+
+                <li
+                  className={`flex items-center gap-x-2 ${
+                    password === confirmPassword
+                      ? "text-green-500"
+                      : "text-red-500"
+                  }`}
+                >
+                  {password === confirmPassword ? (
+                    <CiCircleCheck size={20} />
+                  ) : (
+                    <AiOutlineCloseCircle size={20} />
+                  )}
+                  2 mật khẩu đã match
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

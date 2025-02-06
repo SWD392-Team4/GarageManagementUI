@@ -50,5 +50,55 @@
     "title2": "Đặt Lịch Hẹn",
     "submit": "Đặt lịch",
     "thankyou": "Cảm ơn!"
+  },
+  "loginCustomer": {
+    "pageTitle": "ĐĂNG NHẬP | CLCA | 2KS1.NET",
+    "userNameLabel": "Tên người dùng",
+    "emailPlaceholder": "tên@côngty.com",
+    "emailRequired": "Vui lòng nhập email",
+    "passwordLabel": "Mật khẩu",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Vui lòng nhập mật khẩu",
+    "passwordMinLength": "Mật khẩu phải có ít nhất 8 ký tự",
+    "signInButton": "Đăng nhập",
+    "newMemberText": "Thành viên mới?",
+    "signUpLink": "Đăng ký",
+    "forgotPasswordText": "Quên mật khẩu?",
+    "resetPassLink": "Đặt lại mật khẩu"
+  },
+  "footer": {
+    "logoTitle": "LOGO",
+    "description": "Lorem Ipsum chỉ là văn bản giả trong ngành in ấn và sắp chữ. Lorem Ipsum đã trở thành tiêu chuẩn của ngành. Lorem Ipsum là.",
+    "phone": "+84 111-111-11",
+    "quickLink1Title": "LIÊN KẾT NHANH",
+    "quickLink1": {
+      "about": "Giới thiệu",
+      "services": "Dịch vụ",
+      "pricing": "Bảng giá",
+      "team": "Đội ngũ",
+      "contactUs": "Liên hệ"
+    },
+    "quickLink2Title": "LIÊN KẾT NHANH",
+    "quickLink2": {
+      "appointment": "Đặt lịch hẹn",
+      "faq": "Câu hỏi thường gặp",
+      "blogNews": "Tin tức / Blog",
+      "team": "Đội ngũ"
+    },
+    "locationContactTitle": "ĐỊA CHỈ & LIÊN HỆ",
+    "locationContact": {
+      "address": "FPT TP. HCM Long Thành Mỹ, Thành Phố Thủ Đức",
+      "email": "email@email.com",
+      "hours": "Thứ 2 - Thứ 7: Mở cửa 24/7"
+    },
+    "footerBottom": {
+      "copyright": "Bản quyền 2025, Đã đăng ký bản quyền",
+      "socialLinks": {
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "instagram": "Instagram",
+        "linkedin": "LinkedIn"
+      }
+    }
   }
 }
