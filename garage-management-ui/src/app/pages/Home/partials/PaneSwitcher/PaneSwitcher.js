@@ -11,7 +11,7 @@ const PaneSwitcher = ({
 }) => {
   const [leftPaneWidth, setLeftPaneWidth] = useState("w-1/2");
   const [rightPaneWidth, setRightPaneWidth] = useState("w-1/2");
-  const { t } = useTranslation();
+  const { t } = useTranslation("ver1");
 
   const handleLeftClick = () => {
     setLeftPaneWidth("w-0");

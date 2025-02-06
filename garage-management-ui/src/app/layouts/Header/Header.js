@@ -5,7 +5,7 @@ import { FaPhone } from "react-icons/fa6";
 import "./TextHoverAnimation.scss";
 import ButtonAccount from "./ButtonAccount";
 const Header = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("ver1");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
