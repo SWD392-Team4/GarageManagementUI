@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"; // Import useTranslation
 import Error404Image from "../../assets/404-NotFound/404.png";
 
 export default function PageNotFound() {
-  const { t } = useTranslation(); // Hook dịch để cập nhật ngôn ngữ
+  const { t } = useTranslation("ver1"); // Hook dịch để cập nhật ngôn ngữ
 
   document.title = "Error 404 | Gara | TURBO TRACK";
 

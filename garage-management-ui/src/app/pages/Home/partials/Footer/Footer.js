@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FaPhone } from "react-icons/fa6";
 
 const Footer = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("ver1");
 
   return (
     <footer className="bg-black text-white py-12 px-6 border-t border-gray-200">

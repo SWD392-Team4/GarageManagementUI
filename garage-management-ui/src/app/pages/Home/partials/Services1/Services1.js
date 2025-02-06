@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import data from "../../Data/services1.json";
 
 const Services1 = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("ver1");
   return (
     <section className="bg-gray-50 relative w-full min-h-screen overflow-hidden">
       {/* Phần Header */}

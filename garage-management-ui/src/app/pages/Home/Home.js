@@ -10,7 +10,7 @@ import Footer from "./partials/Footer/Footer";
 
 export default function Home() {
   document.title = "HOME | Gara | TURBO TRACK";
-  const { t } = useTranslation();
+  const { t } = useTranslation("ver1");
 
   return (
     <>

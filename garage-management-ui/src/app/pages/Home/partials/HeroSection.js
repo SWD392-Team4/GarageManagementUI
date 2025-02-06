@@ -19,7 +19,7 @@ const imageMap = {
   hero_slider_bg_2: anh2,
 };
 const HeroSection = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("ver1");
   return (
     <section className="relative z-10 w-full h-screen bg-gray-900 overflow-hidden">
       <div className="relative w-full h-full">
