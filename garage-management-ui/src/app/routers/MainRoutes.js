@@ -15,17 +15,50 @@ import LayoutAdminHome from "../layouts/LayoutAdminHome/LayoutAdminHome";
 import ManageAccount from "../pages/ManageAccount/ManageAccount";
 import ManageBooking from "../pages/ManageBooking/ManageBooking";
 import AccountDetails from "../pages/ManageAccount/AccountDetails";
+import RegisterPage from "../pages/AuthCustomer/RegisterPage";
+import i18n from "../hooks/i18n/i18n";
+
+const loadLanguageResources = async (namespace) => {
+  await i18n.loadNamespaces([namespace]);
+};
 
 export default function MainRoutes() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="*" element={<PageNotFound />}></Route>
-        <Route path="/" element={<LayoutHome />}>
-          <Route index element={<Home />} />
+        <Route
+          path="*"
+          element={
+            <PageNotFound onLoad={() => loadLanguageResources("ver1")} />
+          }
+        ></Route>
+        <Route
+          path="/"
+          element={<LayoutHome onLoad={() => loadLanguageResources("ver1")} />}
+        >
+          <Route
+            index
+            element={<Home onLoad={() => loadLanguageResources("ver1")} />}
+          />
         </Route>
-        <Route path="/authen" element={<LayoutAuthenCustomer />}>
-          <Route index element={<LoginPage />} />
+        <Route
+          path="/authen"
+          element={
+            <LayoutAuthenCustomer
+              onLoad={() => loadLanguageResources("ver1")}
+            />
+          }
+        >
+          <Route
+            index
+            element={<LoginPage onLoad={() => loadLanguageResources("ver1")} />}
+          />
+          <Route
+            path="register"
+            element={
+              <RegisterPage onLoad={() => loadLanguageResources("ver1")} />
+            }
+          />
         </Route>
 
         <Route
@@ -33,7 +66,7 @@ export default function MainRoutes() {
           element={
             <Suspense fallback={<LoaddingPage />}>
               {" "}
-              <LayoutLoginWork />
+              <LayoutLoginWork onLoad={() => loadLanguageResources("ver1")} />
             </Suspense>
           }
         >
@@ -42,7 +75,7 @@ export default function MainRoutes() {
             element={
               <Suspense fallback={<LoaddingPage />}>
                 {" "}
-                <SignIn />
+                <SignIn onLoad={() => loadLanguageResources("ver1")} />
               </Suspense>
             }
           />
@@ -50,7 +83,9 @@ export default function MainRoutes() {
             path="reset"
             element={
               <Suspense fallback={<LoaddingPage />}>
-                <ResetPasswordWorker />
+                <ResetPasswordWorker
+                  onLoad={() => loadLanguageResources("ver1")}
+                />
               </Suspense>
             }
           />
@@ -58,7 +93,7 @@ export default function MainRoutes() {
             path="logout"
             element={
               <Suspense fallback={<LoaddingPage />}>
-                <LogOut />
+                <LogOut onLoad={() => loadLanguageResources("ver1")} />
               </Suspense>
             }
           />

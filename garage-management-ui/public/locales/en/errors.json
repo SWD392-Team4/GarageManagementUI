@@ -1,0 +1,50 @@
+{
+  "UserExisted": "The provided user with email {0}, username {1}, and phone number {2} already exists.",
+
+  "UsernameRequired": "The username is required.",
+  "UsernameTooShort": "The username must be at least 5 characters long.",
+  "UsernameTooLong": "The username must not exceed 25 characters.",
+  "UsernameContainSpecialCharacter": "The username cannot contain special characters.",
+
+  "FirstNameRequired": "The first name is required.",
+  "LastNameRequired": "The last name is required.",
+
+  "EmailRequired": "The email address is required.",
+  "EmailInvalid": "The provided email address is invalid.",
+
+  "PasswordRequired": "The password is required.",
+  "PasswordTooShort": "The password must be at least 10 characters long.",
+  "PasswordTooLong": "The password must not exceed 50 characters.",
+  "PasswordMissingUppercase": "The password must contain at least one uppercase letter.",
+  "PasswordMissingLowercase": "The password must contain at least one lowercase letter.",
+  "PasswordMissingDigit": "The password must contain at least one number.",
+  "PasswordMissingSpecialCharacter": "The password must contain at least one special character (e.g., !, ?, *, .).",
+
+  "ConfirmPasswordRequired": "The confirmation password is required.",
+  "ConfirmPasswordMismatch": "The confirmation password does not match the password.",
+
+  "PhoneNumberRequired": "The phone number is required.",
+  "PhoneNumberInvalid": "The phone number is invalid. Ensure it is a valid Vietnamese phone number.",
+
+  "RoleRequired": "The user role is required.",
+  "RoleInvalid": "The provided user role is invalid.",
+  "DoNotHavePermission": "You are not authorized to create users with this role.",
+
+  "WorkplaceIdRequired": "The user work place type is required.",
+
+  "CitizenIdentificationRequired": "The employee citizen identification is required.",
+  "CitizenIdentificationInvalid": "The employee citizen identification is invalid. Ensure it is a valid Vietnamese citizen identification.",
+
+  "EmployeeExisted": "The employee with citizen identification {0} already exists.",
+
+  "UserNotFoundWithEmail": "Cannot find user with email {0}.",
+  "UserNotFoundWithUsername": "Cannot find user with username {0}.",
+  "UserNotFoundWithId": "Cannot find user with id {0}.",
+
+  "ConfirmEmailRequired": "Email not confirmed.",
+
+  "TokenConfirmEmailRequired": "Token for confirming email is required.",
+  "TokenResetPasswordRequired": "Token for resetting password is required.",
+
+  "InvalidEndpoint": "The endpoint used is incorrect for creating a customer. Please verify the URL and try again."
+}

@@ -7,3 +7,6 @@ export const signInSchema = yup.object().shape({
     .min(8, "Password must be at least 10 characters long")
     .required("Password is required"),
 });
+export const ResetSchema = yup.object().shape({
+  email: yup.string().required("Email is required!"),
+});

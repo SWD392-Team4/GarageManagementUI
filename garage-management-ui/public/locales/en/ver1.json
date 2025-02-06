@@ -1,0 +1,119 @@
+{
+  "page_not_found": {
+    "title": "Something's missing.",
+    "description": "Sorry, we can't find that page. You'll find lots to explore on the home page.",
+    "go_back": "Go Back"
+  },
+  "home_page_menu": {
+    "home": "HOME",
+    "about": "ABOUT",
+    "service": "SERVICE",
+    "contact": "CONTACT"
+  },
+  "slides": [
+    {
+      "id": 1,
+      "title1": "Car Repair & Auto",
+      "title2": "Services",
+      "description": "Our skilled team of certified technicians is here to provide top-notch car repair and auto services to ensure your vehicle performs at its best.",
+      "img": "hero_slider_bg_1"
+    },
+    {
+      "id": 2,
+      "title1": "AUTOMOTIVE REPAIR",
+      "title2": "MAINTENANCE",
+      "description": "Our skilled team of certified technicians is here to provide top-notch car repair and auto services to ensure your vehicle performs at its best.",
+      "img": "hero_slider_bg_2"
+    }
+  ],
+  "best_services": {
+    "title": "BEST SERVICES",
+    "title2": "Where Your Car Gets Pride the Best Care",
+    "description": "Regular tire rotation ensures even wear, extending the life of your tires and improving vehicle performance. If your car struggles to start, the lights dim when idling or the battery is over."
+  },
+  "PaneSwitcher": {
+    "title1": "Before & After",
+    "title2": "Recent Completed Projects After Before",
+    "Before": "Before",
+    "After": "After"
+  },
+  "Contact": {
+    "title": "Contact Information",
+    "subTitle": "It is a long established fact that a reader can be distracted by the readable layout.",
+    "address": "2972 Westheimer Rd. <br/>Santa Ana, Illinois 5486",
+    "email": "Cripar@gmail.com <br/>InfoCripar@gmal.com",
+    "number": "(402) 4521 5458 44 <br/> (123) 2154 5464 55",
+    "clientNumber": "5,400",
+    "img": "/assets/img/contact_img_1.jpg",
+    "client": "Happy Clients",
+    "subtitle2": "Contact Us",
+    "title2": "Book an Appointment",
+    "submit": "Submit",
+    "thankyou": "Thank you!"
+  },
+  "loginCustomer": {
+    "pageTitle": "LOGIN | TURBO TRACK | 2KS1.NET",
+    "userNameLabel": "User Name",
+    "emailPlaceholder": "name@company.com",
+    "emailRequired": "Email is required",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters long",
+    "signInButton": "Sign in",
+    "newMemberText": "New member?",
+    "signUpLink": "Sign up",
+    "forgotPasswordText": "Forgot password?",
+    "resetPassLink": "Reset pass"
+  },
+  "register": {
+    "pageTitle": "REGISTER | TURBO TRACK | 2KS1.NET",
+    "userNameLabel": "User Name",
+    "emailPlaceholder": "name@company.com",
+    "emailRequired": "Email is required",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Password is required",
+    "passwordMinLength": "Password must be at least 8 characters long",
+    "signInButton": "Sign in",
+    "MemberText": "Already a member?",
+    "signInLink": "Sign In",
+    "forgotPasswordText": "Forgot password?",
+    "resetPassLink": "Reset pass"
+  },
+  "footer": {
+    "logoTitle": "LOGO",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard. Lorem Ipsum is.",
+    "phone": "+84 111-111-11",
+    "quickLink1Title": "QUICK LINK",
+    "quickLink1": {
+      "about": "About",
+      "services": "Services",
+      "pricing": "Pricing",
+      "team": "Team",
+      "contactUs": "Contact Us"
+    },
+    "quickLink2Title": "QUICK LINK",
+    "quickLink2": {
+      "appointment": "Appointment",
+      "faq": "FA Question",
+      "blogNews": "Blog/ News",
+      "team": "Team"
+    },
+    "locationContactTitle": "LOCATION & CONTACT",
+    "locationContact": {
+      "address": "FPT TP. HCM Long Thành Mỹ, Thành Phố Thủ Đức",
+      "email": "email@email.com",
+      "hours": "Mon - Sat: Open 24/7"
+    },
+    "footerBottom": {
+      "copyright": "Copyright 2025, All Right reserved",
+      "socialLinks": {
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "instagram": "Instagram",
+        "linkedin": "LinkedIn"
+      }
+    }
+  }
+}

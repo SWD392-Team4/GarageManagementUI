@@ -2,6 +2,8 @@ import $ from "jquery";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
+import { useTranslation } from "react-i18next";
+import i18n from "../i18n/i18n";
 
 class UserService {
   constructor() {
@@ -9,13 +11,13 @@ class UserService {
     this.callCount = 0; // Đếm số lần gọi API
     this.lastCallTime = 0; // Thời điểm gọi cuối
 
-    // Thiết lập các mặc định cho jQuery AJAX
     $.ajaxSetup({
       contentType: "application/json-patch+json",
       crossDomain: true,
       xhrFields: { withCredentials: false },
     });
   }
+
   getRoleFromToken() {
     const token = localStorage.getItem("at");
     if (!token) {
@@ -36,7 +38,6 @@ class UserService {
     localStorage.setItem("rt", refreshToken);
   }
 
-  // Xóa JWT khỏi cookie khi đăng xuất
   clearToken() {
     localStorage.removeItem("at");
     localStorage.removeItem("rt");
@@ -84,7 +85,26 @@ class UserService {
               window.location.href = "/403-forbidden";
             }
 
-            reject({ status: xhr.status, message: xhr.responseText });
+            const errorCode =
+              xhr.responseJSON?.errors?.[0]?.code || "UnknownError";
+
+            // Đảm bảo `errors.json` đã load trước khi dịch lỗi
+            if (!i18n.hasResourceBundle(i18n.language, "errors")) {
+              console.warn(
+                "⚠️ Namespace 'errors' chưa load. Sử dụng mã lỗi gốc:",
+                errorCode
+              );
+              reject({ status: xhr.status, message: errorCode });
+              return;
+            }
+
+            const errorMessage =
+              i18n.t(errorCode, { ns: "errors" }) ||
+              "An unexpected error occurred.";
+
+            console.log("🔴 i18n error:", errorCode, "=>", errorMessage); // Debug lỗi
+
+            reject({ status: xhr.status, message: errorMessage });
           },
         });
       });

@@ -51,69 +51,54 @@
     "submit": "Đặt lịch",
     "thankyou": "Cảm ơn!"
   },
-  "sidebar_admin": {
-    "profile": "Hồ sơ",
-    "dashboard": "Bảng điều khiển",
-    "accounts": "Tài khoản",
-    "booking": "Booking"
+  "loginCustomer": {
+    "pageTitle": "ĐĂNG NHẬP | CLCA | 2KS1.NET",
+    "userNameLabel": "Tên người dùng",
+    "emailPlaceholder": "tên@côngty.com",
+    "emailRequired": "Vui lòng nhập email",
+    "passwordLabel": "Mật khẩu",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "Vui lòng nhập mật khẩu",
+    "passwordMinLength": "Mật khẩu phải có ít nhất 8 ký tự",
+    "signInButton": "Đăng nhập",
+    "newMemberText": "Thành viên mới?",
+    "signUpLink": "Đăng ký",
+    "forgotPasswordText": "Quên mật khẩu?",
+    "resetPassLink": "Đặt lại mật khẩu"
   },
-  "admin_profile": {
-    "title": "Hồ Sơ Quản Trị",
-    "name": "John Doe",
-    "role": "Quản Trị Viên",
-    "email": "johndoe@example.com",
-    "stats": {
-      "total_users": "Tổng số người dùng",
-      "orders_processed": "Đơn hàng đã xử lý",
-      "revenue": "Doanh thu"
+  "footer": {
+    "logoTitle": "LOGO",
+    "description": "Lorem Ipsum chỉ là văn bản giả trong ngành in ấn và sắp chữ. Lorem Ipsum đã trở thành tiêu chuẩn của ngành. Lorem Ipsum là.",
+    "phone": "+84 111-111-11",
+    "quickLink1Title": "LIÊN KẾT NHANH",
+    "quickLink1": {
+      "about": "Giới thiệu",
+      "services": "Dịch vụ",
+      "pricing": "Bảng giá",
+      "team": "Đội ngũ",
+      "contactUs": "Liên hệ"
     },
-    "profile_details": {
-      "title": "Chi Tiết Hồ Sơ",
-      "full_name": "Họ và Tên",
-      "email": "Email"
+    "quickLink2Title": "LIÊN KẾT NHANH",
+    "quickLink2": {
+      "appointment": "Đặt lịch hẹn",
+      "faq": "Câu hỏi thường gặp",
+      "blogNews": "Tin tức / Blog",
+      "team": "Đội ngũ"
     },
-    "biography": {
-      "title": "Tiểu Sử",
-      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut orci vel ligula pharetra laoreet nec ac ligula..."
+    "locationContactTitle": "ĐỊA CHỈ & LIÊN HỆ",
+    "locationContact": {
+      "address": "FPT TP. HCM Long Thành Mỹ, Thành Phố Thủ Đức",
+      "email": "email@email.com",
+      "hours": "Thứ 2 - Thứ 7: Mở cửa 24/7"
+    },
+    "footerBottom": {
+      "copyright": "Bản quyền 2025, Đã đăng ký bản quyền",
+      "socialLinks": {
+        "facebook": "Facebook",
+        "twitter": "Twitter",
+        "instagram": "Instagram",
+        "linkedin": "LinkedIn"
+      }
     }
-  },
-  "manage_account": {
-    "title": "Quản lý tài khoản",
-    "id": "Mã",
-    "name": "Họ Tên",
-    "email": "Email",
-    "status": "Trạng Thái",
-    "edit": "Chỉnh sửa",
-    "delete": "Xóa",
-    "editing": "Đang chỉnh sửa tài khoản",
-    "deleting": "Đang xóa tài khoản",
-    "view": "Chi tiết",
-    "back": "Quay lại danh sách",
-    "details": "Thông tin tài khoản",
-    "list": "Danh sách tài khoản",
-    "create": "Tạo tài khoản",
-    "created": "Đã tạo",
-    "create_title": "Thông tin tài khoản",
-    "cancel": "Huỷ",
-    "submit": "Tạo"
-  },
-  "manage_booking": {
-    "title": "Quản lý đặt phòng",
-    "id": "Mã Đặt Phòng",
-    "customer": "Khách Hàng",
-    "room": "Phòng",
-    "status": "Trạng Thái",
-    "confirm": "Xác nhận",
-    "cancel": "Hủy",
-    "confirming": "Xác nhận đặt phòng cho",
-    "cancelling": "Hủy đặt phòng cho"
-  },
-  "table": {
-    "actions": "Hành động",
-    "search": "Tìm kiếm...",
-    "no_data": "Không có dữ liệu",
-    "prev": "Trước",
-    "next": "Tiếp",
-    "page": "Trang"
   }
 }
