@@ -16,7 +16,7 @@ export default function LoginPage() {
   } = useForm();
   const userService = new UserService();
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false); // Chuyển từ useRef sang useState
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data) => {
     if (isLoading) return;

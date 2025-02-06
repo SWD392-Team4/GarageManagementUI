@@ -4,6 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import UserService from "../../hooks/services/UserService";
 import PageTitle from "../../components/common/PageTitle";
+import { CiCircleCheck } from "react-icons/ci";
+import { AiOutlineCloseCircle } from "react-icons/ai";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { registerSchema } from "./schemas/validationSchema";
 
 export default function RegisterPage() {
   const { t } = useTranslation();
@@ -14,7 +18,9 @@ export default function RegisterPage() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(registerSchema),
+  });
 
   const userService = new UserService();
   const navigate = useNavigate();
@@ -31,24 +37,12 @@ export default function RegisterPage() {
 
     setIsLoading(true);
     try {
-      const response = await fetch("https://api.example.com/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userName: data.userName,
-          firstName: data.firstName,
-          lastName: data.lastName,
-          email: data.email.toLowerCase(),
-          phoneNumber: data.phoneNumber,
-          role: "Administrator",
-          password: data.password,
-          confirmPassword: data.confirmPassword,
-        }),
-      });
-
-      const result = await response.json();
+      const result = await userService.sendAjax(
+        "/api/auth/register",
+        "POST",
+        data,
+        false
+      );
       if (response.ok) {
         userService.showToast(response.status, "Đăng ký thành công!");
         navigate("/authen");
@@ -59,7 +53,9 @@ export default function RegisterPage() {
         );
       }
     } catch (error) {
-      userService.showToast(500, "Lỗi hệ thống, vui lòng thử lại");
+      // if(error.status === )
+      console.log(error);
+      userService.showToast(404, error.description);
     }
     setIsLoading(false);
   };
@@ -89,14 +85,12 @@ export default function RegisterPage() {
                   Tên đăng nhập
                 </label>
                 <input
-                  {...register("userName", {
-                    required: "Vui lòng nhập tên đăng nhập",
-                  })}
+                  {...register("userName")}
                   className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                   placeholder="Tên đăng nhập"
                 />
                 {errors.userName && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500 mt-2 text-sm">
                     {errors.userName.message}
                   </p>
                 )}
@@ -109,12 +103,12 @@ export default function RegisterPage() {
                     Họ
                   </label>
                   <input
-                    {...register("firstName", { required: "Vui lòng nhập họ" })}
+                    {...register("firstName")}
                     className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                     placeholder="Họ"
                   />
                   {errors.firstName && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-red-500  mt-2 text-sm">
                       {errors.firstName.message}
                     </p>
                   )}
@@ -126,12 +120,12 @@ export default function RegisterPage() {
                     Tên
                   </label>
                   <input
-                    {...register("lastName", { required: "Vui lòng nhập tên" })}
+                    {...register("lastName")}
                     className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                     placeholder="Tên"
                   />
                   {errors.lastName && (
-                    <p className="text-red-500 text-sm">
+                    <p className="text-red-500  mt-2 text-sm">
                       {errors.lastName.message}
                     </p>
                   )}
@@ -145,12 +139,14 @@ export default function RegisterPage() {
                 </label>
                 <input
                   type="email"
-                  {...register("email", { required: "Vui lòng nhập email" })}
+                  {...register("email")}
                   className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                   placeholder="Email"
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-sm">{errors.email.message}</p>
+                  <p className="text-red-500  mt-2 text-sm">
+                    {errors.email.message}
+                  </p>
                 )}
               </div>
 
@@ -160,14 +156,12 @@ export default function RegisterPage() {
                   Số điện thoại
                 </label>
                 <input
-                  {...register("phoneNumber", {
-                    required: "Vui lòng nhập số điện thoại",
-                  })}
+                  {...register("phoneNumber")}
                   className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                   placeholder="Số điện thoại"
                 />
                 {errors.phoneNumber && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500  mt-2 text-sm">
                     {errors.phoneNumber.message}
                   </p>
                 )}
@@ -180,14 +174,12 @@ export default function RegisterPage() {
                 </label>
                 <input
                   type="password"
-                  {...register("password", {
-                    required: "Vui lòng nhập mật khẩu",
-                  })}
+                  {...register("password")}
                   className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                   placeholder="••••••••"
                 />
                 {errors.password && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500  mt-2 text-sm">
                     {errors.password.message}
                   </p>
                 )}
@@ -200,21 +192,19 @@ export default function RegisterPage() {
                 </label>
                 <input
                   type="password"
-                  {...register("confirmPassword", {
-                    required: "Vui lòng nhập lại mật khẩu",
-                  })}
+                  {...register("confirmPassword")}
                   className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                   placeholder="••••••••"
                 />
                 {errors.confirmPassword && (
-                  <p className="text-red-500 text-sm">
+                  <p className="text-red-500  mt-2 text-sm">
                     {errors.confirmPassword.message}
                   </p>
                 )}
               </div>
 
               {/* Submit Button */}
-              <div className="flex justify-center">
+              <div className="flex justify-between">
                 <button
                   type="submit"
                   disabled={isLoading}
@@ -222,33 +212,58 @@ export default function RegisterPage() {
                 >
                   {isLoading ? "Đang đăng ký..." : "Đăng ký"}
                 </button>
+                <p className="text-sm font-light text-gray-500">
+                  {t(`register.MemberText`)}{" "}
+                  <Link
+                    to="/authen"
+                    className="font-medium text-primary-600 hover:underline hover:text-gray-600"
+                  >
+                    {t(`register.signInButton`)}
+                  </Link>
+                </p>
               </div>
             </form>
 
             {/* Password Requirements */}
-            <div className="md:w-1/2 text-center md:text-left">
-              <ul>
+            <div className="md:w-1/2 flex flex-col items-center justify-center text-center">
+              {/* Mô tả */}
+              <h3 className="text-lg font-semibold text-white mb-4">
+                Yêu cầu mật khẩu
+              </h3>
+
+              {/* Danh sách yêu cầu mật khẩu */}
+              <ul className="space-y-2">
                 {passwordRequirements.map((req, index) => (
                   <li
                     key={index}
-                    className={
+                    className={`flex items-center gap-x-2 ${
                       password.match(req.regex)
                         ? "text-green-500"
                         : "text-red-500"
-                    }
+                    }`}
                   >
-                    {password.match(req.regex) ? "✔" : "❌"} {req.text}
+                    {password.match(req.regex) ? (
+                      <CiCircleCheck size={20} />
+                    ) : (
+                      <AiOutlineCloseCircle size={20} />
+                    )}
+                    <span className="text-base">{req.text}</span>
                   </li>
                 ))}
+
                 <li
-                  className={
+                  className={`flex items-center gap-x-2 ${
                     password === confirmPassword
                       ? "text-green-500"
                       : "text-red-500"
-                  }
+                  }`}
                 >
-                  {password === confirmPassword ? "✔" : "❌"} 2 mật khẩu đã
-                  match
+                  {password === confirmPassword ? (
+                    <CiCircleCheck size={20} />
+                  ) : (
+                    <AiOutlineCloseCircle size={20} />
+                  )}
+                  2 mật khẩu đã match
                 </li>
               </ul>
             </div>
