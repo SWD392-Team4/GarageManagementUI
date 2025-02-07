@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { FaPhone } from "react-icons/fa6";
 import "./TextHoverAnimation.scss";
 import ButtonAccount from "./ButtonAccount";
+import { Link } from "react-router-dom";
 const Header = () => {
   const { t } = useTranslation("ver1");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -44,8 +45,8 @@ const Header = () => {
             <ul className=" flex-col  font-bold font-title text-base lg:flex-row lg:space-x-6 text-white lg:space-y-0 space-y-4 mt-16 lg:mt-0 lg:flex hidden">
               {menuItems.map((key) => (
                 <li key={key}>
-                  <a
-                    href={`/${key}`}
+                  <Link
+                    to={`/${key}`}
                     className="text-hover-animaiton  hover:text-red-500"
                   >
                     <span className="menu-text">
@@ -55,7 +56,7 @@ const Header = () => {
                           <div key={index}>{char}</div>
                         ))}
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
