@@ -6,7 +6,7 @@ import { FaArrowLeft } from "react-icons/fa";
 export default function AccountDetails() {
     const { id } = useParams(); // Lấy ID từ URL
     const navigate = useNavigate();
-    const { t } = useTranslation();
+    const { t } = useTranslation( "manage_account");
     const [account, setAccount] = useState(null);
 
     // Giả lập gọi API để lấy thông tin tài khoản

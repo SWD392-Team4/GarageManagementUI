@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 export default function CreateAccountForm({ onClose }) {
-    const { t } = useTranslation();
+    const { t } = useTranslation("manage_account");
     const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = (data) => {

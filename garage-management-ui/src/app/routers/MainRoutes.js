@@ -94,7 +94,7 @@ export default function MainRoutes() {
           <Route
             path="orderHistory"
             element={
-              <OrderHistory onLoad={() => loadLanguageResources("order_history")} />
+              <OrderHistory onLoad={() => loadLanguageResources("order_history_customer")} />
             }
           />
 
@@ -163,7 +163,7 @@ export default function MainRoutes() {
             element={
               <Suspense fallback={<LoaddingPage />}>
                 {" "}
-                <AdminProfile onLoad={() => loadLanguageResources("admin_profile")} />
+                <AdminProfile onLoad={() => loadLanguageResources("admin_profile", "manage_account")} />
               </Suspense>
             }
           />

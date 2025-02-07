@@ -15,6 +15,7 @@ import { useMediaQuery } from "react-responsive";
 import LanguageSwitcherSideBar from "../../components/LanguageSwitcherSideBar/LanguageSwitcherSideBar";
 
 export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageChange }) {
+
   const { t } = useTranslation("sidebar_admin");
   const [isDarkMode, setIsDarkMode] = useState(
     localStorage.getItem("theme") === "dark"

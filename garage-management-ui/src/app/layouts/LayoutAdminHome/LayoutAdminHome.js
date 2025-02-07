@@ -21,7 +21,8 @@ export default function LayoutAdminHome() {
             />
 
             <main className={`flex-1 p-6 transition-all overflow-auto h-screen ${isSidebarOpen ? "md:ml-50" : "md:ml-13"}`}>
-                <Outlet key={languageKey} />
+                <Outlet  />
+                {/* key={languageKey} */}
             </main>
         </div>
     );
