@@ -1,0 +1,49 @@
+{
+  "register": {
+    "pageTitle": "REGISTER | TURBO TRACK | 2KS1.NET",
+    "userNameLabel": "User Name",
+    "userNamePlaceholder": "Enter name",
+    "emailPlaceholder": "name@company.com",
+    "emailRequired": "Email is required",
+    "passwordLabel": "Password",
+    "comfirmPasswordLabel": "Comfirm Password",
+    "passwordPlaceholder": "••••••••",
+    "signUpButton": "Sign Up",
+    "signingUpButton": "Signing Up . . . ",
+    "MemberText": "Already a member?",
+    "signInLink": "Sign In",
+    "forgotPasswordText": "Forgot password?",
+    "resetPassLink": "Reset pass",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "Enter First Name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Enter Last Name",
+    "phone": "Phone",
+    "phonePlaceholder": "Enter phone"
+  },
+  "validation": {
+    "userNameRequired": "Please enter a username.",
+    "firstNameRequired": "Please enter your first name.",
+    "lastNameRequired": "Please enter your last name.",
+    "emailRequired": "Please enter your email.",
+    "emailInvalid": "Invalid email format.",
+    "phoneNumberRequired": "Please enter your phone number.",
+    "phoneNumberInvalid": "Phone number must contain only digits.",
+    "phoneNumberMin": "Phone number must be at least 10 digits.",
+    "passwordRequired": "Please enter a password.",
+    "passwordMin": "Password must be at least 10 characters long.",
+    "passwordUppercase": "Password must contain at least one uppercase letter.",
+    "passwordLowercase": "Password must contain at least one lowercase letter.",
+    "passwordSpecialCharacter": "Password must contain at least one special character.",
+    "confirmPasswordRequired": "Please confirm your password.",
+    "confirmPasswordMismatch": "Passwords do not match."
+  },
+  "passwordRequirements": {
+    "re1": "At least 10 characters",
+    "re2": "At least 1 uppercase letter",
+    "re3": "At least 1 lowercase letter",
+    "re4": "At least 1 special character",
+    "re5": "At least 1 number",
+    "passwordsMatch": "Both passwords match"
+  }
+}

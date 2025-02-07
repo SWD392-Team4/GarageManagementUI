@@ -17,6 +17,7 @@ import ManageBooking from "../pages/ManageBooking/ManageBooking";
 import AccountDetails from "../pages/ManageAccount/AccountDetails";
 import RegisterPage from "../pages/AuthCustomer/RegisterPage";
 import i18n from "../hooks/i18n/i18n";
+import ConfirmEmailPage from "../pages/AuthCustomer/ConfirmEmailPage";
 import CustomerProfile from "../pages/CustomerProfile/CustomerProfile";
 import LayoutCustomer from "../layouts/LayoutCustomer/LayoutCustomer";
 import OrderHistory from "../pages/OrderHistory/OrderHistory";
@@ -39,6 +40,14 @@ export default function MainRoutes() {
 
 
 
+        <Route
+          path="confirm-email"
+          element={
+            <ConfirmEmailPage
+              onLoad={() => loadLanguageResources("confirmEmail")}
+            />
+          }
+        ></Route>
         <Route
           path="/"
           element={<LayoutHome onLoad={() => loadLanguageResources("ver1")} />}
@@ -65,7 +74,15 @@ export default function MainRoutes() {
           <Route
             path="register"
             element={
-              <RegisterPage onLoad={() => loadLanguageResources("ver1")} />
+              <RegisterPage onLoad={() => loadLanguageResources("register")} />
+            }
+          />
+          <Route
+            path="confirm-email"
+            element={
+              <ConfirmEmailPage
+                onLoad={() => loadLanguageResources("register")}
+              />
             }
           />
         </Route>

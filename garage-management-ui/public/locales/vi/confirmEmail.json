@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Xác Nhận Email",
+  "loadingTitle": "🔄 Đang xác nhận email...",
+  "loadingMessage": "Vui lòng chờ trong giây lát.",
+  "successTitle": "✅ Bạn đã xác nhận email thành công!",
+  "successMessage": "Cảm ơn bạn đã sử dụng CLCA.",
+  "signInButton": "Đăng nhập",
+  "errorTitle": "❌ Xác nhận email thất bại",
+  "errorMessage": "Có thể liên kết đã hết hạn hoặc email chưa được đăng ký.",
+  "errorHint": "Nếu bạn chưa nhận được email xác nhận, hãy nhấn vào nút bên dưới để gửi lại.",
+  "resendButton": "Gửi lại email xác nhận",
+  "resending": "Đang gửi lại...",
+  "resendSuccess": "Email xác nhận đã được gửi lại. Vui lòng kiểm tra hộp thư! Chuyển trang sau 5s...",
+  "resendFailed": "Không thể gửi lại email. Vui lòng thử lại sau! Chuyển trang sau 4s..."
+}

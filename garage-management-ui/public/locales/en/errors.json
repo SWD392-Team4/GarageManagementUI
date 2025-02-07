@@ -1,5 +1,5 @@
 {
-  "UserExisted": "The provided user with email {0}, username {1}, and phone number {2} already exists.",
+  "UserExisted": "The provided user with this email, username, and phone number already exists.",
 
   "UsernameRequired": "The username is required.",
   "UsernameTooShort": "The username must be at least 5 characters long.",
@@ -35,11 +35,11 @@
   "CitizenIdentificationRequired": "The employee citizen identification is required.",
   "CitizenIdentificationInvalid": "The employee citizen identification is invalid. Ensure it is a valid Vietnamese citizen identification.",
 
-  "EmployeeExisted": "The employee with citizen identification {0} already exists.",
+  "EmployeeExisted": "The employee with citizen identification already exists.",
 
-  "UserNotFoundWithEmail": "Cannot find user with email {0}.",
-  "UserNotFoundWithUsername": "Cannot find user with username {0}.",
-  "UserNotFoundWithId": "Cannot find user with id {0}.",
+  "UserNotFoundWithEmail": "Cannot find user with email.",
+  "UserNotFoundWithUsername": "Cannot find user with username .",
+  "UserNotFoundWithId": "Cannot find user with id.",
 
   "ConfirmEmailRequired": "Email not confirmed.",
 

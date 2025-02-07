@@ -63,6 +63,8 @@
     "signInButton": "Đăng nhập",
     "newMemberText": "Thành viên mới?",
     "signUpLink": "Đăng ký",
+    "bttnSignIn": "Đăng nhập",
+    "bttnSigningIn": "Đang đăng nhập...",
     "forgotPasswordText": "Quên mật khẩu?",
     "resetPassLink": "Đặt lại mật khẩu"
   },
@@ -87,7 +89,7 @@
     },
     "locationContactTitle": "ĐỊA CHỈ & LIÊN HỆ",
     "locationContact": {
-      "address": "FPT TP. HCM Long Thành Mỹ, Thành Phố Thủ Đức",
+      "address": "FPT TP. HCM Long Thạnh Mỹ, Thành Phố Thủ Đức",
       "email": "email@email.com",
       "hours": "Thứ 2 - Thứ 7: Mở cửa 24/7"
     },

@@ -8,10 +8,8 @@ export default function LayoutAuthenCustomer() {
   return (
     <div>
       <Header />
-      <section className="bg-black ">
-        <PageTitle title="Sign In" title1="Home" subtitle="Sign In" />
-        <Outlet></Outlet>
-      </section>
+
+      <Outlet></Outlet>
 
       <Footer />
     </div>
