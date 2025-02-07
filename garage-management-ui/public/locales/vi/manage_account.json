@@ -1,0 +1,22 @@
+{
+    "manage_account": {
+        "title": "Quản lý tài khoản",
+        "id": "Mã",
+        "name": "Họ Tên",
+        "email": "Email",
+        "status": "Trạng Thái",
+        "edit": "Chỉnh sửa",
+        "delete": "Xóa",
+        "editing": "Đang chỉnh sửa tài khoản",
+        "deleting": "Đang xóa tài khoản",
+        "view": "Chi tiết",
+        "back": "Quay lại danh sách",
+        "details": "Thông tin tài khoản",
+        "list": "Danh sách tài khoản",
+        "create": "Tạo tài khoản",
+        "created": "Đã tạo",
+        "create_title": "Thông tin tài khoản",
+        "cancel": "Huỷ",
+        "submit": "Tạo"
+    }
+}

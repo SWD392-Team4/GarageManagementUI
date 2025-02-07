@@ -1,0 +1,14 @@
+{
+    "title": "Order History",
+    "status": {
+        "pending": "Pending",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+    },
+    "order": {
+        "id": "Order ID",
+        "date": "Date",
+        "amount": "Amount",
+        "view": "View"
+    }
+}

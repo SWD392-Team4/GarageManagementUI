@@ -10,9 +10,17 @@ import ResetPasswordWorker from "../pages/AuthEmployee/partials/ResetPassword";
 import LogOut from "../pages/AuthEmployee/partials/LogOut";
 import LayoutAuthenCustomer from "../layouts/LayoutLoginCustomer/LayoutAuthenCustomer";
 import LoginPage from "../pages/AuthCustomer/LoginPage";
+import AdminProfile from "../pages/AdminProfile/AdminProfile";
+import LayoutAdminHome from "../layouts/LayoutAdminHome/LayoutAdminHome";
+import ManageAccount from "../pages/ManageAccount/ManageAccount";
+import ManageBooking from "../pages/ManageBooking/ManageBooking";
+import AccountDetails from "../pages/ManageAccount/AccountDetails";
 import RegisterPage from "../pages/AuthCustomer/RegisterPage";
 import i18n from "../hooks/i18n/i18n";
 import ConfirmEmailPage from "../pages/AuthCustomer/ConfirmEmailPage";
+import CustomerProfile from "../pages/CustomerProfile/CustomerProfile";
+import LayoutCustomer from "../layouts/LayoutCustomer/LayoutCustomer";
+import OrderHistory from "../pages/OrderHistory/OrderHistory";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -28,6 +36,10 @@ export default function MainRoutes() {
             <PageNotFound onLoad={() => loadLanguageResources("ver1")} />
           }
         ></Route>
+
+
+
+
         <Route
           path="confirm-email"
           element={
@@ -45,6 +57,8 @@ export default function MainRoutes() {
             element={<Home onLoad={() => loadLanguageResources("ver1")} />}
           />
         </Route>
+
+
         <Route
           path="/authen"
           element={
@@ -72,6 +86,45 @@ export default function MainRoutes() {
             }
           />
         </Route>
+
+
+        {/* Profile Customer */}
+        <Route
+          path="/customer"
+          element={
+            <Suspense fallback={<LoaddingPage />}>
+              {" "}
+              <LayoutCustomer onLoad={() => loadLanguageResources("sidebar_customer")}  />
+            </Suspense>
+          }
+        >
+          <Route
+            index
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                {" "}
+                <CustomerProfile onLoad={() => loadLanguageResources("customer_profile")} />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="orderHistory"
+            element={
+              <OrderHistory onLoad={() => loadLanguageResources("order_history")} />
+            }
+          />
+
+        </Route>
+
+
+
+
+
+
+
+
+
 
         <Route
           path="/worker"
@@ -109,6 +162,56 @@ export default function MainRoutes() {
               </Suspense>
             }
           />
+        </Route>
+
+
+        {/* Admin router */}
+        <Route
+          path="/admin"
+          element={
+            <Suspense fallback={<LoaddingPage />}>
+              {" "}
+              <LayoutAdminHome onLoad={() => loadLanguageResources("sidebar_admin")} />
+            </Suspense>
+          }
+        >
+          <Route
+            index
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                {" "}
+                <AdminProfile onLoad={() => loadLanguageResources("admin_profile")} />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="account"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ManageAccount onLoad={() => loadLanguageResources("manage_account", "base_table")} />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="account/:id"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <AccountDetails />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="booking"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ManageBooking onLoad={() => loadLanguageResources("manage_booking", "base_table")} />
+              </Suspense>
+            }
+          />
+
         </Route>
       </Routes>
     </BrowserRouter>

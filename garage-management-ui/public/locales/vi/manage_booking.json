@@ -1,0 +1,13 @@
+{
+    "manage_booking": {
+        "title": "Quản lý đặt phòng",
+        "id": "Mã Đặt Phòng",
+        "customer": "Khách Hàng",
+        "room": "Phòng",
+        "status": "Trạng Thái",
+        "confirm": "Xác nhận",
+        "cancel": "Hủy",
+        "confirming": "Xác nhận đặt phòng cho",
+        "cancelling": "Hủy đặt phòng cho"
+    }
+}
