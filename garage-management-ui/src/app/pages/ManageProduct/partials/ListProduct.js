@@ -1,17 +1,5 @@
 import React from "react";
 
-const fakeData = [
-  { id: 101, name: "Trần Văn A", price: "101", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-  { id: 102, name: "Nguyễn Thị B", price: "202", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-  { id: 103, name: "Trần Văn A", price: "101", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-  { id: 104, name: "Nguyễn Thị B", price: "202", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-  { id: 105, name: "Trần Văn A", price: "101", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-  { id: 106, name: "Nguyễn Thị B", price: "202", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-  { id: 107, name: "Trần Văn A", price: "101", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-  { id: 108, name: "Nguyễn Thị B", price: "202", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-  { id: 109, name: "Trần Văn A", price: "101", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-  { id: 110, name: "Nguyễn Thị B", price: "202", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-];
 const ListProduct = ({products}) => {
   return <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
     {products.map((item, index) => {
