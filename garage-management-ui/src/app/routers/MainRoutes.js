@@ -21,6 +21,8 @@ import ConfirmEmailPage from "../pages/AuthCustomer/ConfirmEmailPage";
 import CustomerProfile from "../pages/CustomerProfile/CustomerProfile";
 import LayoutCustomer from "../layouts/LayoutCustomer/LayoutCustomer";
 import OrderHistory from "../pages/OrderHistory/OrderHistory";
+import ListProduct from "../pages/ManageProduct/partials/ListProduct";
+import ProductsPage from "../pages/ManageProduct/ProductsPage";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -36,10 +38,7 @@ export default function MainRoutes() {
             <PageNotFound onLoad={() => loadLanguageResources("ver1")} />
           }
         ></Route>
-
-
-
-
+      
         <Route
           path="confirm-email"
           element={
@@ -56,9 +55,16 @@ export default function MainRoutes() {
             index
             element={<Home onLoad={() => loadLanguageResources("ver1")} />}
           />
+          
         </Route>
-
-
+        <Route
+            path="products"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ProductsPage/>
+              </Suspense>
+            }
+          />
         <Route
           path="/authen"
           element={
@@ -87,14 +93,15 @@ export default function MainRoutes() {
           />
         </Route>
 
-
         {/* Profile Customer */}
         <Route
           path="/customer"
           element={
             <Suspense fallback={<LoaddingPage />}>
               {" "}
-              <LayoutCustomer onLoad={() => loadLanguageResources("sidebar_customer")}  />
+              <LayoutCustomer
+                onLoad={() => loadLanguageResources("sidebar_customer")}
+              />
             </Suspense>
           }
         >
@@ -103,7 +110,9 @@ export default function MainRoutes() {
             element={
               <Suspense fallback={<LoaddingPage />}>
                 {" "}
-                <CustomerProfile onLoad={() => loadLanguageResources("customer_profile")} />
+                <CustomerProfile
+                  onLoad={() => loadLanguageResources("customer_profile")}
+                />
               </Suspense>
             }
           />
@@ -111,20 +120,12 @@ export default function MainRoutes() {
           <Route
             path="orderHistory"
             element={
-              <OrderHistory onLoad={() => loadLanguageResources("order_history_customer")} />
+              <OrderHistory
+                onLoad={() => loadLanguageResources("order_history_customer")}
+              />
             }
           />
-
         </Route>
-
-
-
-
-
-
-
-
-
 
         <Route
           path="/worker"
@@ -162,8 +163,8 @@ export default function MainRoutes() {
               </Suspense>
             }
           />
+          
         </Route>
-
 
         {/* Admin router */}
         <Route
@@ -171,7 +172,9 @@ export default function MainRoutes() {
           element={
             <Suspense fallback={<LoaddingPage />}>
               {" "}
-              <LayoutAdminHome onLoad={() => loadLanguageResources("sidebar_admin")} />
+              <LayoutAdminHome
+                onLoad={() => loadLanguageResources("sidebar_admin")}
+              />
             </Suspense>
           }
         >
@@ -180,7 +183,11 @@ export default function MainRoutes() {
             element={
               <Suspense fallback={<LoaddingPage />}>
                 {" "}
-                <AdminProfile onLoad={() => loadLanguageResources("admin_profile", "manage_account")} />
+                <AdminProfile
+                  onLoad={() =>
+                    loadLanguageResources("admin_profile", "manage_account")
+                  }
+                />
               </Suspense>
             }
           />
@@ -189,7 +196,11 @@ export default function MainRoutes() {
             path="account"
             element={
               <Suspense fallback={<LoaddingPage />}>
-                <ManageAccount onLoad={() => loadLanguageResources("manage_account", "base_table")} />
+                <ManageAccount
+                  onLoad={() =>
+                    loadLanguageResources("manage_account", "base_table")
+                  }
+                />
               </Suspense>
             }
           />
@@ -207,11 +218,15 @@ export default function MainRoutes() {
             path="booking"
             element={
               <Suspense fallback={<LoaddingPage />}>
-                <ManageBooking onLoad={() => loadLanguageResources("manage_booking", "base_table")} />
+                <ManageBooking
+                  onLoad={() =>
+                    loadLanguageResources("manage_booking", "base_table")
+                  }
+                />
               </Suspense>
             }
           />
-
+          
         </Route>
       </Routes>
     </BrowserRouter>
