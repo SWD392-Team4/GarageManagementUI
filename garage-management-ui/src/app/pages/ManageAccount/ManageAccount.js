@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import ListAccount from "./partials/ListAccount";
 import CreateAccountForm from "./models/CreateAccountForm";
 
-export default function ManageAccount({ languageKey }) {
+export default function ManageAccount() {
     const { t } = useTranslation("manage_account");
     const [showForm, setShowForm] = useState(false);
 
@@ -19,8 +19,8 @@ export default function ManageAccount({ languageKey }) {
                 </button>
             </div>
 
-            {showForm && <CreateAccountForm onClose={() => setShowForm(false)} languageKey={languageKey} />}
-            <ListAccount languageKey={languageKey} />
+            {showForm && <CreateAccountForm onClose={() => setShowForm(false)} />}
+            <ListAccount />
         </div>
     );
 }

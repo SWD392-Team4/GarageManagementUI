@@ -3,7 +3,7 @@ import BaseTable from "../../../components/BaseTable/BaseTable";
 import { useTranslation } from "react-i18next";
 import { FaCheck, FaEye } from "react-icons/fa";
 
-export default function ListBooking({ languageKey }) {
+export default function ListBooking() {
     const { t } = useTranslation("manage_booking");
     const [data, setData] = useState([]);
     const [pagination, setPagination] = useState({ total: 6, page: 1, pageSize: 2 });
@@ -39,7 +39,7 @@ export default function ListBooking({ languageKey }) {
         { header: t("manage_booking.customer"), accessorKey: "customer" },
         { header: t("manage_booking.room"), accessorKey: "room" },
         { header: t("manage_booking.status"), accessorKey: "status" },
-    ], [t, languageKey]);
+    ], [t]);
 
     const actions = [
         {

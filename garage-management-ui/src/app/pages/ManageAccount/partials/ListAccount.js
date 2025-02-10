@@ -4,13 +4,19 @@ import BaseTable from "../../../components/BaseTable/BaseTable";
 import { useTranslation } from "react-i18next";
 import { FaEye } from "react-icons/fa";
 
-export default function ListAccount({ languageKey }) {
+export default function ListAccount() {
     const { t } = useTranslation("manage_account");
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [pagination, setPagination] = useState({ total: 12, page: 1, pageSize: 4 });
 
-    // Giả lập API fetch dữ liệu
+    useEffect(() => {
+        fetchData(pagination.page).then(response => {
+            setData(response.data);
+            setPagination(prev => ({ ...prev, total: response.total }));
+        });
+    }, [pagination.page]);
+
     const fetchData = async (page) => {
         const fakeData = {
             1: [
@@ -35,23 +41,16 @@ export default function ListAccount({ languageKey }) {
         return { data: fakeData[page] || [], total: 12 };
     };
 
-    useEffect(() => {
-        fetchData(pagination.page).then(response => {
-            setData(response.data);
-            setPagination(prev => ({ ...prev, total: response.total }));
-        });
-    }, [pagination.page]);
-
     const columns = useMemo(() => [
-        { header: t("manage_account.id"), accessorKey: "id" },
-        { header: t("manage_account.name"), accessorKey: "name" },
-        { header: t("manage_account.email"), accessorKey: "email" },
-        { header: t("manage_account.status"), accessorKey: "status" },
-    ], [t, languageKey]);
+        { header: t("id"), accessorKey: "id" },
+        { header: t("name"), accessorKey: "name" },
+        { header: t("email"), accessorKey: "email" },
+        { header: t("status"), accessorKey: "status" },
+    ], [t]);
 
     const actions = [
         {
-            label: t("manage_account.view"),
+            label: t("view"),
             icon: <FaEye />,
             color: "bg-gray-500",
             onClick: (row) => navigate(`/admin/account/${row.id}`)
