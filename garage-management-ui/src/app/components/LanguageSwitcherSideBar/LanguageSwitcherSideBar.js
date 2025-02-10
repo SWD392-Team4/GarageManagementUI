@@ -15,7 +15,6 @@ const LanguageSwitcherSideBar = ({ isSidebarOpen, onLanguageChange }) => {
     const changeLanguage = (lng) => {
         i18n.changeLanguage(lng);
         setIsOpen(false);
-        onLanguageChange();  // Thông báo ngôn ngữ đã thay đổi
     };
 
     return (

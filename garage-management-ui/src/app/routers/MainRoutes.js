@@ -21,6 +21,9 @@ import ConfirmEmailPage from "../pages/AuthCustomer/ConfirmEmailPage";
 import CustomerProfile from "../pages/CustomerProfile/CustomerProfile";
 import LayoutCustomer from "../layouts/LayoutCustomer/LayoutCustomer";
 import OrderHistory from "../pages/OrderHistory/OrderHistory";
+import ManageProduct from "../pages/ManageProduct/ManageProduct";
+import ProductDetails from "../pages/ManageProduct/ProductDetails";
+import CreateProduct from "../pages/ManageProduct/CreateProduct";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -94,7 +97,7 @@ export default function MainRoutes() {
           element={
             <Suspense fallback={<LoaddingPage />}>
               {" "}
-              <LayoutCustomer onLoad={() => loadLanguageResources("sidebar_customer")}  />
+              <LayoutCustomer onLoad={() => loadLanguageResources("sidebar_customer")} />
             </Suspense>
           }
         >
@@ -195,6 +198,33 @@ export default function MainRoutes() {
           />
 
           <Route
+            path="product"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ManageProduct onLoad={() => loadLanguageResources("manage_product", "base_table")} />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="product/create"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <CreateProduct onLoad={() => loadLanguageResources("create_product")} />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="product/:id"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ProductDetails onLoad={() => loadLanguageResources("product_details", "breadcrumb_product")} />
+              </Suspense>
+            }
+          />
+
+          <Route
             path="account/:id"
             element={
               <Suspense fallback={<LoaddingPage />}>
@@ -202,6 +232,8 @@ export default function MainRoutes() {
               </Suspense>
             }
           />
+
+
 
           <Route
             path="booking"

@@ -1,0 +1,14 @@
+{
+    "create_product": {
+        "title": "Tạo sản phẩm",
+        "name": "Tên sản phẩm",
+        "category": "Danh mục",
+        "price": "Giá",
+        "stock": "Tồn kho",
+        "brand": "Thương hiệu",
+        "supplier": "Nhà cung cấp",
+        "description": "Mô tả sản phẩm",
+        "submit": "Tạo sản phẩm",
+        "back": "Quay về danh sách"
+    }
+}

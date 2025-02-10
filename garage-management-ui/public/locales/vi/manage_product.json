@@ -1,0 +1,13 @@
+{
+    "manage_product": {
+        "id": "Mã sản phẩm",
+        "name": "Tên sản phẩm",
+        "category": "Danh mục",
+        "price": "Giá",
+        "stock": "Tồn kho",
+        "view": "Xem",
+        "title": "Quản lý sản phẩm",
+        "create": "Tạo sản phẩm"
+        
+    }
+}

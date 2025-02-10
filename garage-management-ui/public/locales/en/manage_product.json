@@ -1,0 +1,12 @@
+{
+    "manage_product": {
+        "id": "ID",
+        "name": "Product Name",
+        "category": "Category",
+        "price": "Price",
+        "stock": "Stock",
+        "view": "View",
+        "title": "Manage Product",
+        "create": "Create Product"
+    }
+}

@@ -3,6 +3,7 @@
         "profile": "Profile",
         "dashboard": "Dashboard",
         "accounts": "Accounts",
-        "booking": "Booking"
+        "booking": "Booking",
+        "product": "Product"
     }
 }

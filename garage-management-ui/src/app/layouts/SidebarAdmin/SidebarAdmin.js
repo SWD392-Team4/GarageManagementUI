@@ -9,6 +9,7 @@ import {
   FaHome,
   FaMoon,
   FaSun,
+  FaTools,
 } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { useMediaQuery } from "react-responsive";
@@ -91,6 +92,13 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
                   {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.profile")}</span>}
                 </Link>
               </li>
+              <li>
+                <Link to="/admin/product" className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
+                  <FaTools className="w-6 h-6" />
+                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.product")}</span>}
+                </Link>
+              </li>
+
               <li>
                 <Link to="/admin/dashboard" className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
                   <FaHome className="w-6 h-6" />

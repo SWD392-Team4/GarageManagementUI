@@ -1,0 +1,14 @@
+{
+    "create_product": {
+        "title": "Create Product",
+        "name": "Product Name",
+        "category": "Category",
+        "price": "Price",
+        "stock": "Stock",
+        "brand": "Brand",
+        "supplier": "Supplier",
+        "description": "Product Description",
+        "submit": "Create Product",
+        "back": "Back to Product List"
+    }
+}

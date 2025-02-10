@@ -1,11 +1,11 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import BaseTable from "../../../components/BaseTable/BaseTable";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaEye } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import BaseTable from "../../../components/BaseTable/BaseTable";
 
 export default function ListAccount() {
-    const { t } = useTranslation("manage_account");
+    const { t, i18n } = useTranslation("manage_account");
     const navigate = useNavigate();
     const [data, setData] = useState([]);
     const [pagination, setPagination] = useState({ total: 12, page: 1, pageSize: 4 });
@@ -42,11 +42,11 @@ export default function ListAccount() {
     };
 
     const columns = useMemo(() => [
-        { header: t("id"), accessorKey: "id" },
-        { header: t("name"), accessorKey: "name" },
-        { header: t("email"), accessorKey: "email" },
-        { header: t("status"), accessorKey: "status" },
-    ], [t]);
+        { header: t("manage_account.id"), accessorKey: "id" },
+        { header: t("manage_account.name"), accessorKey: "name" },
+        { header: t("manage_account.email"), accessorKey: "email" },
+        { header: t("manage_account.status"), accessorKey: "status" },
+    ], [i18n.language]);
 
     const actions = [
         {

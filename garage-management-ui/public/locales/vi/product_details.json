@@ -1,0 +1,30 @@
+{
+    "product_details": {
+        "id": "Mã sản phẩm",
+        "name": "Tên sản phẩm",
+        "category": "Danh mục",
+        "price": "Giá",
+        "stock": "Tồn kho",
+        "description": "Mô tả",
+        "brand": "Thương hiệu",
+        "supplier": "Nhà cung cấp",
+        "manufacture_date": "Ngày sản xuất",
+        "warranty": "Bảo hành",
+        "compatibility": "Tương thích",
+        "weight": "Trọng lượng",
+        "dimensions": "Kích thước",
+        "color": "Màu sắc",
+        "material": "Chất liệu",
+        "origin": "Xuất xứ",
+        "engine_type": "Loại động cơ",
+        "fuel_efficiency": "Tiết kiệm nhiên liệu",
+        "installation": "Hướng dẫn lắp đặt",
+        "view": "Xem",
+        "title": "Chi tiết sản phẩm",
+        "list": "Danh sách sản phẩm",
+        "back": "Quay lại danh sách",
+        "not_found": "Không tìm thấy sản phẩm",
+        "edit": "Chỉnh sửa",
+        "save": "Lưu"
+    }
+}
