@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Quên mật khẩu",
+  "title": "Quên mật khẩu",
+  "home": "Trang chủ",
+  "subtitle": "Đặt lại mật khẩu",
+  "emailLabel": "Email",
+  "emailPlaceholder": "Nhập email của bạn",
+  "confirmButton": "Xác nhận",
+  "confirmingText": "Đang xác nhận...",
+  "alreadyMember": "Bạn đã có tài khoản?",
+  "signIn": "Đăng nhập",
+  "loading": "Đang tải...",
+  "successMessage": "Vui lòng kiểm tra email để đổi mật khẩu.",
+  "errorMessage": "Đã xảy ra lỗi"
+}

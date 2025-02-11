@@ -107,7 +107,7 @@ export default function LoginPage() {
                     <p className="text-sm font-light text-gray-500">
                       {t(`loginCustomer.forgotPasswordText`)}{" "}
                       <Link
-                        to="register"
+                        to="forget-pass"
                         className="font-medium text-primary-600 hover:underline hover:text-gray-600"
                       >
                         {t(`loginCustomer.resetPassLink`)}

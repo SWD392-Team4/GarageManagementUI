@@ -1,0 +1,15 @@
+{
+  "pageTitle": "Forget Password",
+  "title": "Forget Password",
+  "home": "Home",
+  "subtitle": "Reset your password",
+  "emailLabel": "Email",
+  "emailPlaceholder": "Enter your email",
+  "confirmButton": "Confirm",
+  "confirmingText": "Confirming...",
+  "alreadyMember": "Already a member?",
+  "signIn": "Sign In",
+  "loading": "Loading...",
+  "successMessage": "Please check your email to reset your password.",
+  "errorMessage": "An error occurred"
+}

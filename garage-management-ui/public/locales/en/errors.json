@@ -45,6 +45,6 @@
 
   "TokenConfirmEmailRequired": "Token for confirming email is required.",
   "TokenResetPasswordRequired": "Token for resetting password is required.",
-
+  "TooManyRequestsWithRetryAfter": "You have exceeded the request limit. Please wait 300 second(s) before retrying.",
   "InvalidEndpoint": "The endpoint used is incorrect for creating a customer. Please verify the URL and try again."
 }
