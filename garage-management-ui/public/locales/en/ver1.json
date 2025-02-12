@@ -8,7 +8,8 @@
     "home": "HOME",
     "about": "ABOUT",
     "service": "SERVICE",
-    "contact": "CONTACT"
+    "contact": "CONTACT",
+    "lookup" : "LOOKUP"
   },
   "slides": [
     {

@@ -24,6 +24,7 @@ import OrderHistory from "../pages/OrderHistory/OrderHistory";
 import ManageProduct from "../pages/ManageProduct/ManageProduct";
 import ProductDetails from "../pages/ManageProduct/ProductDetails";
 import CreateProduct from "../pages/ManageProduct/CreateProduct";
+import LookUpPage from "../pages/LookUpPage/LookUpPage";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -52,14 +53,21 @@ export default function MainRoutes() {
           }
         ></Route>
         <Route
-          path="/"
+          path="/home"
           element={<LayoutHome onLoad={() => loadLanguageResources("ver1")} />}
         >
           <Route
             index
             element={<Home onLoad={() => loadLanguageResources("ver1")} />}
           />
+          <Route
+            path="lookup"
+            element={<LookUpPage onLoad={() => loadLanguageResources("look_up_page")} />}
+          />
+
         </Route>
+
+
 
 
         <Route

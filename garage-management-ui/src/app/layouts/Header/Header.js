@@ -10,7 +10,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const menuItems = ["home", "about", "service", "contact"];
+  const menuItems = ["home", "about", "service", "contact", "lookup"];
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
