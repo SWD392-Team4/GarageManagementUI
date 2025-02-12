@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import UserService from "../../hooks/services/UserService";
 import PageTitle from "../../components/common/PageTitle";
 import { getRegisterSchema } from "./schemas/validationSchema";
+import CarModelBMW from "./partials/CarModelBMW";
 
 export default function RegisterPage() {
   const { t } = useTranslation("register");
@@ -71,202 +72,178 @@ export default function RegisterPage() {
       {isLoading && <div>Loading...</div>}
       <section className="bg-black ">
         <PageTitle title="Sign Up" title1="Home" subtitle="Sign Up" />
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:min-h-[65vh] lg:py-0 border-t border-white">
-          <div className="flex flex-col md:flex-row gap-8">
-            {/* Form */}
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="md:w-1/2 flex flex-col gap-4"
-            >
-              {/* User Name */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-white">
-                  {t("register.userNameLabel")}
-                </label>
-                <input
-                  {...register("userName")}
-                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
-                  placeholder={t("register.userNamePlaceholder")}
-                />
-                {errors.userName && (
-                  <p className="text-red-500 mt-2 text-sm">
-                    {errors.userName.message}
-                  </p>
-                )}
-              </div>
+        <div className="flex flex-col items-center justify-center px-6 py-8 h-screen mx-auto md:min-h-[65vh] lg:py-0 border-t border-white">
+          <div className="grid grid-cols-12 gap-8" >
+            {/* model car - Chiếm 6 phần */}
+            <div className="col-span-12 md:col-span-6 flex flex-col items-center justify-center text-center 
+                            border-2 border-transparent rounded-lg p-6 shadow-lg bg-black text-white 
+                            transition-all duration-500">
+              <CarModelBMW />
+            </div>
 
-              <div className="flex space-x-4">
-                {/* First Name */}
+
+            {/* Container chứa Form + Nội dung phụ */}
+            <div className="col-span-12 md:col-span-6 flex flex-col md:flex-row items-stretch rounded-lg overflow-hidden shadow-lg 
+                            border-2 border-transparent border-white pl-9">
+              {/* Form sign up - Chiếm 7 phần */}
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-full md:w-7/10 flex flex-col gap-4 p-6 bg-black
+                          text-white transition-all duration-500">
+                {/* User Name */}
                 <div>
                   <label className="block mb-2 text-sm font-medium text-white">
-                    {t("register.firstName")}
+                    {t("register.userNameLabel")}
                   </label>
                   <input
-                    {...register("firstName")}
-                    className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
-                    placeholder={t("register.firstNamePlaceholder")}
+                    {...register("userName")}
+                    className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
+                                ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                    placeholder={t("register.userNamePlaceholder")}
                   />
-                  {errors.firstName && (
-                    <p className="text-red-500  mt-2 text-sm">
-                      {errors.firstName.message}
-                    </p>
+                  {errors.userName && (
+                    <p className="text-red-500 mt-2 text-sm">{errors.userName.message}</p>
                   )}
                 </div>
 
-                {/* Last Name */}
+                {/* Grid chia 2 cột */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* First Name */}
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-white">
+                      {t("register.firstName")}
+                    </label>
+                    <input
+                      {...register("firstName")}
+                      className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
+                                 ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                      placeholder={t("register.firstNamePlaceholder")}
+                    />
+                  </div>
+
+                  {/* Last Name */}
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-white">
+                      {t("register.lastName")}
+                    </label>
+                    <input
+                      {...register("lastName")}
+                      className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
+                                  ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                      placeholder={t("register.lastNamePlaceholder")}
+                    />
+                  </div>
+                </div>
+
+                {/* Email */}
+                <div>
+                  <label className="block mb-2 text-sm font-medium text-white">Email</label>
+                  <input
+                    type="email"
+                    {...register("email")}
+                    className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
+                                ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                    placeholder={t("register.emailPlaceholder")}
+                  />
+                </div>
+
+                {/* Grid chia 2 cột */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Phone Number */}
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-white">
+                      {t("register.phone")}
+                    </label>
+                    <input
+                      {...register("phoneNumber")}
+                      className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
+                                    ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                      placeholder={t("register.phonePlaceholder")}
+                    />
+                  </div>
+
+                  {/* Password */}
+                  <div>
+                    <label className="block mb-2 text-sm font-medium text-white">
+                      {t("register.passwordLabel")}
+                    </label>
+                    <input
+                      type="password"
+                      {...register("password")}
+                      className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
+                                   ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                      placeholder="••••••••"
+                    />
+                  </div>
+                </div>
+
+                {/* Confirm Password */}
                 <div>
                   <label className="block mb-2 text-sm font-medium text-white">
-                    {t("register.lastName")}
+                    {t("register.comfirmPasswordLabel")}
                   </label>
                   <input
-                    {...register("lastName")}
-                    className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
-                    placeholder={t("register.lastNamePlaceholder")}
+                    type="password"
+                    {...register("confirmPassword")}
+                    className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
+                                  ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                    placeholder="••••••••"
                   />
-                  {errors.lastName && (
-                    <p className="text-red-500  mt-2 text-sm">
-                      {errors.lastName.message}
-                    </p>
-                  )}
                 </div>
-              </div>
 
-              {/* Email */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-white">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  {...register("email")}
-                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
-                  placeholder={t("register.emailPlaceholder")}
-                />
-                {errors.email && (
-                  <p className="text-red-500  mt-2 text-sm">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Phone Number */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-white">
-                  {t("register.phone")}
-                </label>
-                <input
-                  {...register("phoneNumber")}
-                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
-                  placeholder={t("register.phonePlaceholder")}
-                />
-                {errors.phoneNumber && (
-                  <p className="text-red-500  mt-2 text-sm">
-                    {errors.phoneNumber.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Password */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-white">
-                  {t("register.passwordLabel")}
-                </label>
-                <input
-                  type="password"
-                  {...register("password")}
-                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
-                  placeholder="••••••••"
-                />
-                {errors.password && (
-                  <p className="text-red-500  mt-2 text-sm">
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Confirm Password */}
-              <div>
-                <label className="block mb-2 text-sm font-medium text-white">
-                  {t("register.comfirmPasswordLabel")}
-                </label>
-                <input
-                  type="password"
-                  {...register("confirmPassword")}
-                  className="bg-black focus:bg-gray-50/10  text-white  block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
-                  placeholder="••••••••"
-                />
-                {errors.confirmPassword && (
-                  <p className="text-red-500  mt-2 text-sm">
-                    {errors.confirmPassword.message}
-                  </p>
-                )}
-              </div>
-
-              {/* Submit Button */}
-              <div className="flex justify-between">
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-1/3 bg-white/55 text-white py-2 hover:bg-gray-600 duration-500 "
-                >
-                  {isLoading
-                    ? t("register.signingUpButton")
-                    : t("register.signUpButton")}
-                </button>
-                <p className="text-sm font-light text-gray-500">
-                  {t(`register.MemberText`)}{" "}
-                  <Link
-                    to="/authen"
-                    className="font-medium text-primary-600 hover:underline hover:text-gray-600"
+                {/* Submit Button */}
+                <div className="flex justify-between">
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="w-1/3 bg-white/55 text-white py-2 hover:bg-gray-600 
+                                duration-500 rounded-md shadow-md"
                   >
-                    {t(`register.signInLink`)}
-                  </Link>
-                </p>
-              </div>
-            </form>
+                    {isLoading ? t("register.signingUpButton") : t("register.signUpButton")}
+                  </button>
+                  <p className="text-sm font-light text-gray-500">
+                    {t(`register.MemberText`)}{" "}
+                    <Link
+                      to="/authen"
+                      className="font-medium text-primary-600 hover:underline hover:text-gray-600"
+                    >
+                      {t(`register.signInLink`)}
+                    </Link>
+                  </p>
+                </div>
+              </form>
 
-            {/* Password Requirements */}
-            <div className="md:w-1/2 flex flex-col items-center justify-center text-center">
-              {/* Mô tả */}
-              <h3 className="text-lg font-semibold text-white mb-4">
-                Yêu cầu mật khẩu
-              </h3>
-
-              {/* Danh sách yêu cầu mật khẩu */}
-              <ul className="space-y-2">
-                {passwordRequirements.map((req, index) => (
+              {/* Nội dung phụ - Chiếm 3 phần */}
+              <div className="w-full md:w-3/10 flex flex-col items-center justify-center p-6 
+                              bg-black text-white 
+                              shadow-lg">
+                <h3 className="text-lg font-semibold text-white mb-4">Yêu cầu mật khẩu</h3>
+                <ul className="space-y-2">
+                  {passwordRequirements.map((req, index) => (
+                    <li
+                      key={index}
+                      className={`flex items-center gap-x-2 ${password.match(req.regex) ? "text-green-500" : "text-red-500"}`}
+                    >
+                      {password.match(req.regex) ? (
+                        <CiCircleCheck size={20} />
+                      ) : (
+                        <AiOutlineCloseCircle size={20} />
+                      )}
+                      <span className="text-base">{req.text}</span>
+                    </li>
+                  ))}
                   <li
-                    key={index}
-                    className={`flex items-center gap-x-2 ${
-                      password.match(req.regex)
-                        ? "text-green-500"
-                        : "text-red-500"
-                    }`}
+                    className={`flex items-center gap-x-2 ${password === confirmPassword ? "text-green-500" : "text-red-500"}`}
                   >
-                    {password.match(req.regex) ? (
+                    {password === confirmPassword ? (
                       <CiCircleCheck size={20} />
                     ) : (
                       <AiOutlineCloseCircle size={20} />
                     )}
-                    <span className="text-base">{req.text}</span>
+                    {t(`passwordRequirements.passwordsMatch`)}
                   </li>
-                ))}
-
-                <li
-                  className={`flex items-center gap-x-2 ${
-                    password === confirmPassword
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }`}
-                >
-                  {password === confirmPassword ? (
-                    <CiCircleCheck size={20} />
-                  ) : (
-                    <AiOutlineCloseCircle size={20} />
-                  )}
-                  {t(`passwordRequirements.passwordsMatch`)}
-                </li>
-              </ul>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

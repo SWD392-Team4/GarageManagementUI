@@ -68,7 +68,6 @@
     "bttnSigningIn": "Signing in...",
     "resetPassLink": "Reset pass"
   },
-
   "footer": {
     "logoTitle": "LOGO",
     "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard. Lorem Ipsum is.",
@@ -103,5 +102,15 @@
         "linkedin": "LinkedIn"
       }
     }
+  },
+  "slogan": {
+    "qualityService": "Experience top-quality car services for the best performance.",
+    "customerSatisfaction": "Customers are at the heart of everything we do.",
+    "accessoryVariety": "A wide range of car accessories to meet all customization needs.",
+    "trustworthy": "Trust - Quality - Prestige is our commitment.",
+    "innovation": "Continuous innovation to provide the best experience.",
+    "bestDeals": "Attractive deals, competitive prices on all products.",
+    "ecoFriendly": "Committed to sustainable and eco-friendly development.",
+    "professionalSupport": "Dedicated support, professional team always ready to assist."
   }
 }
