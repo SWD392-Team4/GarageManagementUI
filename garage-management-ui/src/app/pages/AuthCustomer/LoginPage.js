@@ -29,7 +29,7 @@ export default function LoginPage() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6 py-8 mx-auto border-t border-white">
           {/* Cột 1: Model Car */}
-          <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col items-center justify-center md:col-span-1">
             {/* Thay thế nội dung này bằng hình ảnh hoặc thông tin model xe */}
             <CarModelViewer />
           </div>

@@ -72,25 +72,25 @@ export default function RegisterPage() {
       {isLoading && <div>Loading...</div>}
       <section className="bg-black ">
         <PageTitle title="Sign Up" title1="Home" subtitle="Sign Up" />
-        <div className="flex flex-col items-center justify-center px-6 py-8 h-screen mx-auto md:min-h-[65vh] lg:py-0 border-t border-white">
-          <div className="grid grid-cols-12 gap-8" >
-            {/* model car - Chiếm 6 phần */}
+        <div className="flex flex-col items-center justify-center px-4 sm:px-6 py-6 sm:py-8 h-max-screen mx-auto md:min-h-[65vh] lg:py-0 border-t border-white">
+          <div className="grid grid-cols-12 gap-6 md:gap-8 w-full max-w-screen-lg">
+            {/* Model Car */}
             <div className="col-span-12 md:col-span-6 flex flex-col items-center justify-center text-center 
-                            border-2 border-transparent rounded-lg p-6 shadow-lg bg-black text-white 
-                            transition-all duration-500">
+                    border-2 border-transparent rounded-lg p-6 shadow-lg bg-black text-white 
+                    transition-all duration-500 w-full">
               <CarModelBMW />
             </div>
 
-
             {/* Container chứa Form + Nội dung phụ */}
-            <div className="col-span-12 md:col-span-6 flex flex-col md:flex-row items-stretch rounded-lg overflow-hidden shadow-lg 
-                            border-2 border-transparent border-white pl-9">
-              {/* Form sign up - Chiếm 7 phần */}
+            <div className="col-span-12 md:col-span-6 flex flex-col lg:flex-row items-stretch rounded-lg overflow-hidden shadow-lg 
+                    border-2 border-transparent border-white">
+
+              {/* Form sign up */}
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                className="w-full md:w-7/10 flex flex-col gap-4 p-6 bg-black
-                          text-white transition-all duration-500">
-                {/* User Name */}
+                className="w-full lg:w-7/12 flex flex-col gap-4 p-6 bg-black text-white transition-all duration-500"
+              >
+                {/* Các input form */}
                 <div>
                   <label className="block mb-2 text-sm font-medium text-white">
                     {t("register.userNameLabel")}
@@ -98,7 +98,7 @@ export default function RegisterPage() {
                   <input
                     {...register("userName")}
                     className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                                ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                      ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
                     placeholder={t("register.userNamePlaceholder")}
                   />
                   {errors.userName && (
@@ -107,8 +107,7 @@ export default function RegisterPage() {
                 </div>
 
                 {/* Grid chia 2 cột */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* First Name */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block mb-2 text-sm font-medium text-white">
                       {t("register.firstName")}
@@ -116,12 +115,11 @@ export default function RegisterPage() {
                     <input
                       {...register("firstName")}
                       className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                                 ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                        ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
                       placeholder={t("register.firstNamePlaceholder")}
                     />
                   </div>
 
-                  {/* Last Name */}
                   <div>
                     <label className="block mb-2 text-sm font-medium text-white">
                       {t("register.lastName")}
@@ -129,7 +127,7 @@ export default function RegisterPage() {
                     <input
                       {...register("lastName")}
                       className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                                  ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                        ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
                       placeholder={t("register.lastNamePlaceholder")}
                     />
                   </div>
@@ -142,7 +140,7 @@ export default function RegisterPage() {
                     type="email"
                     {...register("email")}
                     className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                                ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+                        ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
                     placeholder={t("register.emailPlaceholder")}
                   />
                 </div>
@@ -192,16 +190,16 @@ export default function RegisterPage() {
                 </div>
 
                 {/* Submit Button */}
-                <div className="flex justify-between">
+                <div className="flex flex-col sm:flex-row justify-between items-center">
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-1/3 bg-white/55 text-white py-2 hover:bg-gray-600 
-                                duration-500 rounded-md shadow-md"
+                    className="w-full sm:w-1/3 bg-white/55 text-white py-2 hover:bg-gray-600 
+                      duration-500 rounded-md shadow-md"
                   >
                     {isLoading ? t("register.signingUpButton") : t("register.signUpButton")}
                   </button>
-                  <p className="text-sm font-light text-gray-500">
+                  <p className="text-sm font-light text-gray-500 mt-4 sm:mt-0">
                     {t(`register.MemberText`)}{" "}
                     <Link
                       to="/authen"
@@ -213,10 +211,8 @@ export default function RegisterPage() {
                 </div>
               </form>
 
-              {/* Nội dung phụ - Chiếm 3 phần */}
-              <div className="w-full md:w-3/10 flex flex-col items-center justify-center p-6 
-                              bg-black text-white 
-                              shadow-lg">
+              {/* Nội dung phụ */}
+              <div className="w-full lg:w-5/12 flex flex-col items-center justify-center p-6 bg-black text-white shadow-lg">
                 <h3 className="text-lg font-semibold text-white mb-4">Yêu cầu mật khẩu</h3>
                 <ul className="space-y-2">
                   {passwordRequirements.map((req, index) => (
@@ -224,22 +220,14 @@ export default function RegisterPage() {
                       key={index}
                       className={`flex items-center gap-x-2 ${password.match(req.regex) ? "text-green-500" : "text-red-500"}`}
                     >
-                      {password.match(req.regex) ? (
-                        <CiCircleCheck size={20} />
-                      ) : (
-                        <AiOutlineCloseCircle size={20} />
-                      )}
+                      {password.match(req.regex) ? <CiCircleCheck size={20} /> : <AiOutlineCloseCircle size={20} />}
                       <span className="text-base">{req.text}</span>
                     </li>
                   ))}
                   <li
                     className={`flex items-center gap-x-2 ${password === confirmPassword ? "text-green-500" : "text-red-500"}`}
                   >
-                    {password === confirmPassword ? (
-                      <CiCircleCheck size={20} />
-                    ) : (
-                      <AiOutlineCloseCircle size={20} />
-                    )}
+                    {password === confirmPassword ? <CiCircleCheck size={20} /> : <AiOutlineCloseCircle size={20} />}
                     {t(`passwordRequirements.passwordsMatch`)}
                   </li>
                 </ul>
@@ -247,6 +235,7 @@ export default function RegisterPage() {
             </div>
           </div>
         </div>
+
       </section>
     </>
   );

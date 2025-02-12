@@ -25,7 +25,7 @@ export default function BaseTable({ columns, fetchData, actions, pagination }) {
     });
 
     return (
-        <div className="p-6 bg-white rounded-lg shadow-md">
+        <div className="p-6 bg-white ">
             {/* Thanh tìm kiếm */}
             <div className="mb-4">
                 <input
@@ -39,7 +39,7 @@ export default function BaseTable({ columns, fetchData, actions, pagination }) {
 
             {/* Bảng dữ liệu */}
             <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-gray-200 rounded-lg">
+                <table className="w-full border-collapse">
                     <thead className="bg-gray-800 text-white">
                         {table.getHeaderGroups().map(headerGroup => (
                             <tr key={headerGroup.id}>
