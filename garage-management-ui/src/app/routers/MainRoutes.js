@@ -21,8 +21,9 @@ import ConfirmEmailPage from "../pages/AuthCustomer/ConfirmEmailPage";
 import CustomerProfile from "../pages/CustomerProfile/CustomerProfile";
 import LayoutCustomer from "../layouts/LayoutCustomer/LayoutCustomer";
 import OrderHistory from "../pages/OrderHistory/OrderHistory";
-import ListProduct from "../pages/ManageProduct/partials/ListProduct";
+
 import ProductsPage from "../pages/ManageProduct/ProductsPage";
+import ProductDetail from "../pages/ManageProduct/ProductDetail";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -62,6 +63,14 @@ export default function MainRoutes() {
             element={
               <Suspense fallback={<LoaddingPage />}>
                 <ProductsPage/>
+              </Suspense>
+            }
+          />
+          <Route
+            path="detail"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ProductDetail />
               </Suspense>
             }
           />
