@@ -1,0 +1,76 @@
+[
+  {
+    "path": "*",
+    "element": "PageNotFound"
+  },
+  {
+    "path": "/home",
+    "redirect": "/"
+  },
+  {
+    "path": "/",
+    "element": "LayoutHome",
+    "children": [
+      { "index": true, "element": "Home" },
+      { "path": "lookup", "element": "LookUpPage" }
+    ]
+  },
+  {
+    "path": "/authen",
+    "element": "LayoutAuthenCustomer",
+    "children": [
+      { "index": true, "element": "LoginPage" },
+      { "path": "register", "element": "RegisterPage" },
+      { "path": "confirm-email", "element": "ConfirmEmailPage" },
+      { "path": "forget-pass", "element": "ForgetPass" },
+      { "path": "confirm-reset-password", "element": "ConfirmResetPassword" }
+    ]
+  },
+  {
+    "path": "/worker",
+    "element": "LayoutLoginWork",
+    "isSuspense": true,
+    "children": [
+      { "index": true, "element": "SignIn", "isSuspense": true },
+      { "path": "reset", "element": "ResetPasswordWorker", "isSuspense": true },
+      { "path": "logout", "element": "LogOut", "isSuspense": true }
+    ]
+  },
+  {
+    "path": "/customer",
+    "element": "LayoutCustomer",
+    "private": { "allowedRoles": ["Customer"] },
+    "isSuspense": true,
+    "children": [
+      { "index": true, "element": "CustomerProfile", "isSuspense": true },
+      { "path": "orderHistory", "element": "OrderHistory" }
+    ]
+  },
+  {
+    "path": "/admin",
+    "element": "LayoutAdminHome",
+    "private": { "allowedRoles": ["Administrator"] },
+    "isSuspense": true,
+    "children": [
+      { "index": true, "element": "AdminProfile", "isSuspense": true },
+      { "path": "account", "element": "ManageAccount", "isSuspense": true },
+      {
+        "path": "account/:id",
+        "element": "AccountDetails",
+        "isSuspense": true
+      },
+      { "path": "product", "element": "ManageProduct", "isSuspense": true },
+      {
+        "path": "product/create",
+        "element": "CreateProduct",
+        "isSuspense": true
+      },
+      {
+        "path": "product/:id",
+        "element": "ProductDetails",
+        "isSuspense": true
+      },
+      { "path": "booking", "element": "ManageBooking", "isSuspense": true }
+    ]
+  }
+]
