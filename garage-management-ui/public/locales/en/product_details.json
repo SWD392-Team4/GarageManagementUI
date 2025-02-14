@@ -1,0 +1,30 @@
+{
+    "product_details": {
+        "id": "ID",
+        "name": "Product Name",
+        "category": "Category",
+        "price": "Price",
+        "stock": "Stock",
+        "description": "Description",
+        "brand": "Brand",
+        "supplier": "Supplier",
+        "manufacture_date": "Manufacture Date",
+        "warranty": "Warranty",
+        "compatibility": "Compatibility",
+        "weight": "Weight",
+        "dimensions": "Dimensions",
+        "color": "Color",
+        "material": "Material",
+        "origin": "Origin",
+        "engine_type": "Engine Type",
+        "fuel_efficiency": "Fuel Efficiency",
+        "installation": "Installation Guide",
+        "view": "View",
+        "title": "Product Details",
+        "list": "Product List",
+        "back": "Back to Product List",
+        "not_found": "Product not found",
+        "edit" : "Edit",
+        "save" : "Save"
+    }
+}

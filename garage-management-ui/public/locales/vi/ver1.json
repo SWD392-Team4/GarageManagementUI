@@ -8,7 +8,8 @@
     "home": "Trang chủ",
     "about": "Về chúng tôi",
     "service": "Dịch vụ",
-    "contact": "Liên hệ"
+    "contact": "Liên hệ",
+    "lookup": "Tra cứu"
   },
   "slides": [
     {
@@ -102,5 +103,16 @@
         "linkedin": "LinkedIn"
       }
     }
+   
+  },
+  "slogan": {
+    "qualityService": "Trải nghiệm dịch vụ xe hoàn hảo với chất lượng hàng đầu.",
+    "customerSatisfaction": "Khách hàng là trung tâm của mọi hành động của chúng tôi.",
+    "accessoryVariety": "Phụ kiện xe đa dạng, đáp ứng mọi nhu cầu cá nhân hóa.",
+    "trustworthy": "Sự tin cậy - Chất lượng - Uy tín là cam kết của chúng tôi.",
+    "innovation": "Đổi mới không ngừng để mang lại trải nghiệm tuyệt vời nhất.",
+    "bestDeals": "Ưu đãi hấp dẫn, giá cả cạnh tranh trên mọi sản phẩm.",
+    "ecoFriendly": "Hướng đến sự phát triển bền vững, thân thiện với môi trường.",
+    "professionalSupport": "Hỗ trợ tận tâm, đội ngũ chuyên nghiệp luôn sẵn sàng giúp đỡ."
   }
 }

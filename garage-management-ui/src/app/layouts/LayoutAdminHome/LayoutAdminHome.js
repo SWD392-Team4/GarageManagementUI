@@ -6,10 +6,9 @@ import SideBarAdmin from "../SidebarAdmin/SidebarAdmin";
 export default function LayoutAdminHome() {
     const { i18n } = useTranslation();
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const [languageKey, setLanguageKey] = useState(i18n.language);
 
     useEffect(() => {
-        setLanguageKey(i18n.language);
+        // Khi i18n.language thay đổi, React sẽ tự động cập nhật mà không cần lưu vào state riêng
     }, [i18n.language]);
 
     return (
@@ -17,12 +16,10 @@ export default function LayoutAdminHome() {
             <SideBarAdmin
                 isSidebarOpen={isSidebarOpen}
                 toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
-                onLanguageChange={() => setLanguageKey(i18n.language)}
             />
 
             <main className={`flex-1 p-6 transition-all overflow-auto h-screen ${isSidebarOpen ? "md:ml-50" : "md:ml-13"}`}>
-                <Outlet  />
-                {/* key={languageKey} */}
+                <Outlet />
             </main>
         </div>
     );

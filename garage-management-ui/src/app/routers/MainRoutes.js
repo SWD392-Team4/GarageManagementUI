@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import PageNotFound from "../layouts/PageNotFound";
 import Home from "../pages/Home";
 import LayoutHome from "../layouts/LayoutHome";
@@ -21,6 +21,10 @@ import ConfirmEmailPage from "../pages/AuthCustomer/ConfirmEmailPage";
 import CustomerProfile from "../pages/CustomerProfile/CustomerProfile";
 import LayoutCustomer from "../layouts/LayoutCustomer/LayoutCustomer";
 import OrderHistory from "../pages/OrderHistory/OrderHistory";
+import ManageProduct from "../pages/ManageProduct/ManageProduct";
+import ProductDetails from "../pages/ManageProduct/ProductDetails";
+import CreateProduct from "../pages/ManageProduct/CreateProduct";
+import LookUpPage from "../pages/LookUpPage/LookUpPage";
 
 import ProductsPage from "../pages/ManageProduct/ProductsPage";
 import ProductDetail from "../pages/ManageProduct/ProductDetail";
@@ -40,7 +44,7 @@ export default function MainRoutes() {
             <PageNotFound onLoad={() => loadLanguageResources("ver1")} />
           }
         ></Route>
-
+        <Route path="/home" element={<Navigate to="/" replace />} />
         <Route
           path="confirm-email"
           element={
@@ -56,6 +60,14 @@ export default function MainRoutes() {
           <Route
             index
             element={<Home onLoad={() => loadLanguageResources("ver1")} />}
+          />
+          <Route
+            path="lookup"
+            element={
+              <LookUpPage
+                onLoad={() => loadLanguageResources("look_up_page")}
+              />
+            }
           />
         </Route>
         <Route
@@ -218,6 +230,46 @@ export default function MainRoutes() {
                 <ManageAccount
                   onLoad={() =>
                     loadLanguageResources("manage_account", "base_table")
+                  }
+                />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="product"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ManageProduct
+                  onLoad={() =>
+                    loadLanguageResources("manage_product", "base_table")
+                  }
+                />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="product/create"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <CreateProduct
+                  onLoad={() => loadLanguageResources("create_product")}
+                />
+              </Suspense>
+            }
+          />
+
+          <Route
+            path="product/:id"
+            element={
+              <Suspense fallback={<LoaddingPage />}>
+                <ProductDetails
+                  onLoad={() =>
+                    loadLanguageResources(
+                      "product_details",
+                      "breadcrumb_product"
+                    )
                   }
                 />
               </Suspense>
