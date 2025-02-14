@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import ListProduct from "./partials/ListProduct";
 import Pagination from "../../components/Pagination/Pagination";
-import Header from "../../layouts/Header/Header";
-import Footer from "../Home/partials/Footer/Footer";
 import PageTitle from "../../components/common/PageTitle";
 
 const fakeData = [
@@ -39,7 +37,6 @@ const ProductsPage = () => {
 
   return (
     <>
-    <Header/>
     <PageTitle
           title={"Products"}
           title1="Home"
@@ -57,7 +54,6 @@ const ProductsPage = () => {
         onPageChange={setCurrentPage}
       />
     </div>
-    <Footer/>
     </>
   );
 };

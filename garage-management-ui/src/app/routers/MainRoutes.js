@@ -24,6 +24,7 @@ import OrderHistory from "../pages/OrderHistory/OrderHistory";
 
 import ProductsPage from "../pages/ManageProduct/ProductsPage";
 import ProductDetail from "../pages/ManageProduct/ProductDetail";
+import LayoutProduct from "../layouts/LayoutProduct/LayoutProduct";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -39,7 +40,7 @@ export default function MainRoutes() {
             <PageNotFound onLoad={() => loadLanguageResources("ver1")} />
           }
         ></Route>
-      
+
         <Route
           path="confirm-email"
           element={
@@ -56,24 +57,34 @@ export default function MainRoutes() {
             index
             element={<Home onLoad={() => loadLanguageResources("ver1")} />}
           />
-          
         </Route>
         <Route
-            path="products"
+          path="products"
+          element={
+            <Suspense fallback={<LoaddingPage />}>
+              <LayoutProduct />
+            </Suspense>
+          }
+        >
+          <Route
+            index
             element={
-              <Suspense fallback={<LoaddingPage />}>
+              <Suspense fallback={<LoaddingPage/>}> 
                 <ProductsPage/>
               </Suspense>
             }
           />
+
           <Route
-            path="detail"
+            path=":id"
             element={
               <Suspense fallback={<LoaddingPage />}>
                 <ProductDetail />
               </Suspense>
             }
           />
+        </Route>
+
         <Route
           path="/authen"
           element={
@@ -172,7 +183,6 @@ export default function MainRoutes() {
               </Suspense>
             }
           />
-          
         </Route>
 
         {/* Admin router */}
@@ -235,7 +245,6 @@ export default function MainRoutes() {
               </Suspense>
             }
           />
-          
         </Route>
       </Routes>
     </BrowserRouter>
