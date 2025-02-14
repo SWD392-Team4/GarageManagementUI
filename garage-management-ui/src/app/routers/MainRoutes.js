@@ -26,8 +26,8 @@ import ProductDetails from "../pages/ManageProduct/ProductDetails";
 import CreateProduct from "../pages/ManageProduct/CreateProduct";
 import LookUpPage from "../pages/LookUpPage/LookUpPage";
 
-import ProductsPage from "../pages/ManageProduct/ProductsPage";
-import ProductDetail from "../pages/ManageProduct/ProductDetail";
+import ProductsPage from "../pages/CustomerProduct/ProductsPage";
+import ProductDetail from "../pages/CustomerProduct/ProductDetail";
 import LayoutProduct from "../layouts/LayoutProduct/LayoutProduct";
 
 const loadLanguageResources = async (namespace) => {
@@ -81,8 +81,8 @@ export default function MainRoutes() {
           <Route
             index
             element={
-              <Suspense fallback={<LoaddingPage/>}> 
-                <ProductsPage/>
+              <Suspense fallback={<LoaddingPage />}>
+                <ProductsPage />
               </Suspense>
             }
           />
