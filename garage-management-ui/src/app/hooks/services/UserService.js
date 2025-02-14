@@ -96,7 +96,15 @@ class UserService {
           contentType: isFileUpload ? false : "application/json-patch+json",
           headers: headers,
 
-          success: (response) => resolve({ status: 200, data: response }),
+          success: (response, textStatus, xhr) => {
+            const statusCode = xhr.status;
+
+            if (statusCode === 204) {
+              resolve({ status: 204, data: null });
+            } else {
+              resolve({ status: 200, data: response });
+            }
+          },
 
           error: async (xhr) => {
             console.log("Error Response: ", xhr.responseJSON);
@@ -199,6 +207,9 @@ class UserService {
   showToast(status, message, position = "bottom-right", autoClose = 3000) {
     switch (status) {
       case 200:
+        toast.success(message, { position, autoClose: autoClose });
+        break;
+      case 204:
         toast.success(message, { position, autoClose: autoClose });
         break;
       case 400:
