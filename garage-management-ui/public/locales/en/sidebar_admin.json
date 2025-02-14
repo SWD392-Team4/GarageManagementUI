@@ -4,6 +4,13 @@
         "dashboard": "Dashboard",
         "accounts": "Accounts",
         "booking": "Booking",
-        "product": "Product"
+        "product": "Product",
+        "product_list": "Product List",
+        "product_category": "Category",
+        "product_brand": "Brand",
+        "invoices": "Invoices",
+        "invoice_sale": "Invoice Sale",
+        "invoice_service": "Invoice Service",
+        "invoice_booking": "Booking"
     }
 }

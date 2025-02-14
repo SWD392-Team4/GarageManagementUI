@@ -10,6 +10,12 @@ import {
   FaMoon,
   FaSun,
   FaTools,
+  FaFileInvoice,
+  FaBox,
+  FaTags,
+  FaLayerGroup,
+  FaChevronDown,
+  FaChevronRight,
 } from "react-icons/fa";
 import { ImProfile } from "react-icons/im";
 import { useMediaQuery } from "react-responsive";
@@ -17,9 +23,8 @@ import LanguageSwitcherSideBar from "../../components/LanguageSwitcherSideBar/La
 
 export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageChange }) {
   const { t } = useTranslation("sidebar_admin");
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
+  const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem("theme") === "dark");
+  const [openMenu, setOpenMenu] = useState(null);
 
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
 
@@ -32,6 +37,10 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
       localStorage.setItem("theme", "light");
     }
   }, [isDarkMode]);
+
+  const toggleSubMenu = (menu) => {
+    setOpenMenu(openMenu === menu ? null : menu);
+  };
 
   return (
     <>
@@ -87,42 +96,98 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
           <div className="flex-1 px-2 py-4">
             <ul className="space-y-4">
               <li>
-                <Link to="/admin" className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
-                  <ImProfile className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.profile")}</span>}
-                </Link>
-              </li>
-              <li>
-                <Link to="/admin/product" className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
-                  <FaTools className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.product")}</span>}
-                </Link>
-              </li>
-
-              <li>
-                <Link to="/admin/dashboard" className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
+                <Link
+                  to="/admin/dashboard"
+                  className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+                >
                   <FaHome className="w-6 h-6" />
                   {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.dashboard")}</span>}
                 </Link>
               </li>
               <li>
-                <Link to="/admin/account" className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
+                <Link
+                  to="/admin"
+                  className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+                >
                   <FaUser className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.accounts")}</span>}
+                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.profile")}</span>}
                 </Link>
               </li>
+
+              {/* Sản phẩm */}
               <li>
-                <Link to="/admin/booking" className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
-                  <FaCar className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.booking")}</span>}
-                </Link>
+                <button
+                  onClick={() => toggleSubMenu("product")}
+                  className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+                >
+                  <FaTools className="w-6 h-6" />
+                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.product")}</span>}
+                  {isSidebarOpen && (
+                    <span className="ml-auto">
+                      {openMenu === "product" ? <FaChevronDown /> : <FaChevronRight />}
+                    </span>
+                  )}
+                </button>
+                {openMenu === "product" && (
+                  <ul className="ml-6 mt-2 space-y-2">
+                    <li>
+                      <Link to="/admin/product" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                        <FaBox className="w-5 h-5" />
+                        <span className="ml-2">{t("sidebar_admin.product_list")}</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/admin/category" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                        <FaLayerGroup className="w-5 h-5" />
+                        <span className="ml-2">{t("sidebar_admin.product_category")}</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/admin/brand" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                        <FaTags className="w-5 h-5" />
+                        <span className="ml-2">{t("sidebar_admin.product_brand")}</span>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </li>
+
+              {/* Hóa đơn */}
+              <li>
+                <button
+                  onClick={() => toggleSubMenu("invoice")}
+                  className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+                >
+                  <FaFileInvoice className="w-6 h-6" />
+                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.invoices")}</span>}
+                  {isSidebarOpen && (
+                    <span className="ml-auto">
+                      {openMenu === "invoice" ? <FaChevronDown /> : <FaChevronRight />}
+                    </span>
+                  )}
+                </button>
+                {openMenu === "invoice" && (
+                  <ul className="ml-6 mt-2 space-y-2">
+                    <li>
+                      <Link to="/admin/invoice-sale" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                        <span className="ml-2">{t("sidebar_admin.invoice_sale")}</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/admin/invoice-service" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                        <span className="ml-2">{t("sidebar_admin.invoice_service")}</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/admin/booking" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                        <span className="ml-2">{t("sidebar_admin.invoice_booking")}</span>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
               </li>
             </ul>
           </div>
-        </div>
-
-        <div className="p-2 border-t dark:border-gray-700">
-          <LanguageSwitcherSideBar isSidebarOpen={isSidebarOpen} onLanguageChange={onLanguageChange} />
         </div>
       </aside>
     </>

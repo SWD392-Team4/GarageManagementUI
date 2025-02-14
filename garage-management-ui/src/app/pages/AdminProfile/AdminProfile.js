@@ -7,7 +7,7 @@ export default function AdminProfile() {
   return (
     <div className="p-6 bg-gray-100 min-h-screen overflow-auto">
       {/* Header */}
-      <div className="bg-white shadow-md rounded-lg p-6 flex flex-col md:flex-row items-center md:items-start space-x-0 md:space-x-6 text-center md:text-left">
+      <div className="bg-white shadow-md  p-6 flex flex-col md:flex-row items-center md:items-start space-x-0 md:space-x-6 text-center md:text-left">
         <img
           src="https://via.placeholder.com/150"
           alt="Admin Avatar"
@@ -22,22 +22,22 @@ export default function AdminProfile() {
 
       {/* Dashboard Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-        <div className="bg-white shadow-md rounded-lg p-6">
+        <div className="bg-white  p-6">
           <h3 className="text-lg font-semibold text-gray-700">{t("admin_profile.stats.total_users")}</h3>
           <p className="text-3xl font-bold text-blue-500">1,250</p>
         </div>
-        <div className="bg-white shadow-md rounded-lg p-6">
+        <div className="bg-white  p-6">
           <h3 className="text-lg font-semibold text-gray-700">{t("admin_profile.stats.orders_processed")}</h3>
           <p className="text-3xl font-bold text-green-500">3,540</p>
         </div>
-        <div className="bg-white shadow-md rounded-lg p-6">
+        <div className="bg-white  p-6">
           <h3 className="text-lg font-semibold text-gray-700">{t("admin_profile.stats.revenue")}</h3>
           <p className="text-3xl font-bold text-red-500">$42,750</p>
         </div>
       </div>
 
       {/* Profile Details */}
-      <div className="bg-white shadow-md rounded-lg p-6 mt-6">
+      <div className="bg-white  p-6 mt-6">
         <h3 className="text-xl font-semibold text-gray-800 mb-4">{t("admin_profile.profile_details.title")}</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -52,7 +52,7 @@ export default function AdminProfile() {
       </div>
 
       {/* Biography */}
-      <div className="bg-white shadow-md rounded-lg p-6 mt-6">
+      <div className="bg-white  p-6 mt-6">
         <h3 className="text-xl font-semibold text-gray-800 mb-4">{t("admin_profile.biography.title")}</h3>
         <p className="text-gray-700 break-words">{t("admin_profile.biography.content")}</p>
       </div>

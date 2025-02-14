@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import PageNotFound from "../layouts/PageNotFound";
 import Home from "../pages/Home";
 import LayoutHome from "../layouts/LayoutHome";
@@ -27,6 +27,7 @@ import CreateProduct from "../pages/ManageProduct/CreateProduct";
 import ForgetPass from "../pages/AuthCustomer/ForgetPass";
 import ConfirmResetPassword from "../pages/AuthCustomer/ConfirmResetPassword";
 import PrivateRoute from "./PrivateRoute";
+import LookUpPage from "../pages/LookUpPage/LookUpPage";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -50,6 +51,7 @@ export default function MainRoutes() {
             />
           }
         />
+        <Route path="/home" element={<Navigate to="/" replace />} />
         <Route
           path="confirm-email"
           element={
@@ -67,8 +69,12 @@ export default function MainRoutes() {
             element={<Home onLoad={() => loadLanguageResources("ver1")} />}
           />
           <Route
-            path="/home"
-            element={<Home onLoad={() => loadLanguageResources("ver1")} />}
+            path="lookup"
+            element={
+              <LookUpPage
+                onLoad={() => loadLanguageResources("look_up_page")}
+              />
+            }
           />
         </Route>
 
@@ -194,6 +200,7 @@ export default function MainRoutes() {
           element={
             <PrivateRoute allowedRoles={["Administrator"]}>
               <Suspense fallback={<LoaddingPage />}>
+                {" "}
                 <LayoutAdminHome
                   onLoad={() => loadLanguageResources("sidebar_admin")}
                 />

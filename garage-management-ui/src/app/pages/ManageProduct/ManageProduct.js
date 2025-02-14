@@ -8,7 +8,7 @@ export default function ManageProduct() {
     const navigate = useNavigate();
 
     return (
-        <div className="bg-white shadow-lg rounded-lg p-6">
+        <div className="bg-white shadow-lg p-6">
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-semibold">{t("manage_product.title")}</h1>
                 <button
