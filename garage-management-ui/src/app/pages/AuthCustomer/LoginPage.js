@@ -38,24 +38,41 @@ export default function LoginPage() {
           <div className="flex flex-col items-center justify-center">
             <div className="w-full shadow-md sm:max-w-md xl:p-0">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <form onSubmit={handleSubmit((data) => onSubmit(data, userService, navigate, setIsLoading))} className="space-y-4 md:space-y-6">
+                <form
+                  onSubmit={handleSubmit((data) =>
+                    onSubmit(data, userService, navigate, setIsLoading)
+                  )}
+                  className="space-y-4 md:space-y-6"
+                >
                   <div>
-                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-white">
+                    <label
+                      htmlFor="email"
+                      className="block mb-2 text-sm font-medium text-white"
+                    >
                       {t(`loginCustomer.userNameLabel`)}
                     </label>
                     <input
                       type="email"
                       id="email"
-                      {...register("email", { required: t(`loginCustomer.emailRequired`) })}
+                      {...register("email", {
+                        required: t(`loginCustomer.emailRequired`),
+                      })}
                       className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                       placeholder={t(`loginCustomer.emailPlaceholder`)}
                       autoComplete="username"
                     />
-                    {errors.email && <p className="text-red-500 text-sm pt-2">{errors.email.message}</p>}
+                    {errors.email && (
+                      <p className="text-red-500 text-sm pt-2">
+                        {errors.email.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
-                    <label htmlFor="password" className="block mb-2 text-sm font-medium text-white">
+                    <label
+                      htmlFor="password"
+                      className="block mb-2 text-sm font-medium text-white"
+                    >
                       {t(`loginCustomer.passwordLabel`)}
                     </label>
                     <input
@@ -63,29 +80,48 @@ export default function LoginPage() {
                       id="password"
                       {...register("password", {
                         required: t(`loginCustomer.passwordRequired`),
-                        minLength: { value: 8, message: t(`loginCustomer.passwordMinLength`) },
+                        minLength: {
+                          value: 8,
+                          message: t(`loginCustomer.passwordMinLength`),
+                        },
                       })}
                       className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none ring-2 ring-white/55 border-transparent focus:ring-0"
                       placeholder="••••••••"
                       autoComplete="current-password"
                     />
-                    {errors.password && <p className="text-red-500 text-sm pt-2">{errors.password.message}</p>}
+                    {errors.password && (
+                      <p className="text-red-500 text-sm pt-2">
+                        {errors.password.message}
+                      </p>
+                    )}
                   </div>
 
                   <div className="flex justify-between">
-                    <button type="submit" disabled={isLoading} className="w-1/3 bg-white/55 text-white py-2 hover:bg-gray-600 duration-500">
-                      {isLoading ? t(`loginCustomer.bttnSigningIn`) : t(`loginCustomer.bttnSignIn`)}
+                    <button
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-1/3 bg-white/55 text-white py-2 hover:bg-gray-600 duration-500"
+                    >
+                      {isLoading
+                        ? t(`loginCustomer.bttnSigningIn`)
+                        : t(`loginCustomer.bttnSignIn`)}
                     </button>
                     <div>
                       <p className="text-sm font-light text-gray-500">
                         {t(`loginCustomer.newMemberText`)}{" "}
-                        <Link to="register" className="font-medium text-primary-600 hover:underline hover:text-gray-600">
+                        <Link
+                          to="register"
+                          className="font-medium text-primary-600 hover:underline hover:text-gray-600"
+                        >
                           {t(`loginCustomer.signUpLink`)}
                         </Link>
                       </p>
                       <p className="text-sm font-light text-gray-500">
                         {t(`loginCustomer.forgotPasswordText`)}{" "}
-                        <Link to="register" className="font-medium text-primary-600 hover:underline hover:text-gray-600">
+                        <Link
+                          to="forget-pass"
+                          className="font-medium text-primary-600 hover:underline hover:text-gray-600"
+                        >
                           {t(`loginCustomer.resetPassLink`)}
                         </Link>
                       </p>
@@ -101,13 +137,20 @@ export default function LoginPage() {
             <div className="flex flex-col items-center justify-center text-white space-y-4">
               <TypeAnimation
                 sequence={[
-                  t(`slogan.customerSatisfaction`), 2000,
-                  t("slogan.accessoryVariety"), 2000,
-                  t("slogan.trustworthy"), 2000,
-                  t("slogan.innovation"), 2000,
-                  t("slogan.bestDeals"), 2000,
-                  t("slogan.ecoFriendly"), 2000,
-                  t("slogan.professionalSupport"), 2000,
+                  t(`slogan.customerSatisfaction`),
+                  2000,
+                  t("slogan.accessoryVariety"),
+                  2000,
+                  t("slogan.trustworthy"),
+                  2000,
+                  t("slogan.innovation"),
+                  2000,
+                  t("slogan.bestDeals"),
+                  2000,
+                  t("slogan.ecoFriendly"),
+                  2000,
+                  t("slogan.professionalSupport"),
+                  2000,
                 ]}
                 wrapper="p"
                 speed={50}
@@ -116,9 +159,7 @@ export default function LoginPage() {
               />
             </div>
           </div>
-
         </div>
-
       </section>
     </>
   );

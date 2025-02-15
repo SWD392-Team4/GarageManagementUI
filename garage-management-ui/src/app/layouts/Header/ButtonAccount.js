@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaUserPlus } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaRegUserCircle } from "react-icons/fa";
 import { LuSettings, LuLogOut } from "react-icons/lu";
 
@@ -14,12 +14,15 @@ const ssAccountFirstName = sAccount.slice((n) => n.FirstName);
 export default function ButtonAccount() {
   const { t } = useTranslation("bttnSignIn");
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const [isLogIn, setIsLogIn] = useState(localStorage.getItem("at"));
   const userService = new UserService();
   const handleLogout = () => {
     localStorage.clear();
     setIsLogIn(false);
+
     userService.showToast(200, t("title4"));
+    navigate(userService.navigateBasedOnRole());
   };
   if (isLogIn) {
     return (
@@ -46,11 +49,14 @@ export default function ButtonAccount() {
           {/* Dropdown */}
           {isOpen && (
             <div className="absolute left-0 mt-2 w-40 bg-black/60 rounded-lg shadow-lg z-50 border border-gray-200">
-              <button className="flex items-center px-4 py-2 w-full text-left rounded-md  text-white hover:bg-gray-100/50 transition duration-150">
-                <FaRegUserCircle className="text-xl" />
-                <span className="mr-2"></span>
-                {t("title1")}
-              </button>
+              <Link to="/customer">
+                <button className="flex items-center px-4 py-2 w-full text-left rounded-md  text-white hover:bg-gray-100/50 transition duration-150">
+                  <FaRegUserCircle className="text-xl" />
+                  <span className="mr-2"></span>
+                  {t("title1")}
+                </button>
+              </Link>
+
               <button className="flex items-center px-4 py-2 w-full text-left rounded-md  text-white hover:bg-gray-100/50 transition duration-150">
                 <LuSettings className="text-xl" />
                 <span className="mr-2"></span>
@@ -74,7 +80,7 @@ export default function ButtonAccount() {
   return (
     <>
       <Link to="/authen">
-        <button class="flex items-center space-x-2 bg-gray-100/20 text-white font-medium py-2 px-4 rounded-md hover:bg-red-600/30">
+        <button className="flex items-center space-x-2 bg-gray-100/20 text-white font-medium py-2 px-4 rounded-md hover:bg-red-600/30">
           <FaUserPlus />
           <span> {t("title")}</span>
         </button>

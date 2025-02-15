@@ -46,5 +46,6 @@
   "TokenConfirmEmailRequired": "Token xác nhận email là bắt buộc.",
   "TokenResetPasswordRequired": "Token đặt lại mật khẩu là bắt buộc.",
 
-  "InvalidEndpoint": "Endpoint không hợp lệ khi tạo khách hàng. Vui lòng kiểm tra URL và thử lại."
+  "InvalidEndpoint": "Endpoint không hợp lệ khi tạo khách hàng. Vui lòng kiểm tra URL và thử lại.",
+  "TooManyRequestsWithRetryAfter": "You have exceeded the request limit. Please wait 300 second(s) before retrying."
 }

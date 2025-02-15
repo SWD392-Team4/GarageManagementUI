@@ -40,7 +40,7 @@ export const fetchAccountProfile = async (userService) => {
   try {
     const response = await userService.sendAjax("/api/users/info", "GET", null);
     if (response.status === 200) {
-      console.log("Profile fetched successfully:", response.data);
+      // console.log("Profile fetched successfully:", response.data);
       // TODO: Cập nhật state nếu cần
       const newUserData = response.data.value;
       // Kiểm tra nếu dữ liệu từ API khác với dữ liệu cache

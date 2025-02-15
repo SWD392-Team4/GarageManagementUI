@@ -6,6 +6,7 @@ import signInImage from "../../../assets/auth/sign-in.png";
 import { signInSchema } from "../schemas/signInSchema"; // Import schema
 import UserService from "../../../hooks/services/UserService";
 import LoaddingPage from "../../../layouts/LoadingPage";
+import { onSubmit } from "../../AuthCustomer/services/authService";
 
 export default function SignIn() {
   document.title = "Sign In | TURBO TRACK";
@@ -21,29 +22,29 @@ export default function SignIn() {
     resolver: yupResolver(signInSchema),
   });
 
-  // Hàm xử lý đăng nhập
-  const onSubmit = async (data) => {
-    if (isLoading) return;
-    setIsLoading(true);
+  // // Hàm xử lý đăng nhập
+  // const onSubmit = async (data) => {
+  //   if (isLoading) return;
+  //   setIsLoading(true);
 
-    try {
-      const result = await userService.login(
-        data.userName,
-        data.password,
-        "/api/auth/login"
-      );
+  //   try {
+  //     const result = await userService.login(
+  //       data.userName,
+  //       data.password,
+  //       "/api/auth/login"
+  //     );
 
-      setIsLoading(false);
-      if (result.success) {
-        navigate(userService.navigateBasedOnRole());
-      } else {
-        userService.showToast(400, "Invalid email or password");
-      }
-    } catch (error) {
-      setIsLoading(false);
-      alert("Something went wrong!");
-    }
-  };
+  //     setIsLoading(false);
+  //     if (result.success) {
+  //       navigate(userService.navigateBasedOnRole());
+  //     } else {
+  //       userService.showToast(400, "Invalid email or password");
+  //     }
+  //   } catch (error) {
+  //     setIsLoading(false);
+  //     alert("Something went wrong!");
+  //   }
+  // };
 
   return (
     <>
@@ -76,7 +77,9 @@ export default function SignIn() {
               </div>
 
               <form
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={handleSubmit((data) =>
+                  onSubmit(data, userService, navigate, setIsLoading)
+                )}
                 className="space-y-4 md:space-y-6"
               >
                 {/* Email Input */}
@@ -90,14 +93,14 @@ export default function SignIn() {
                   <input
                     type="email"
                     id="email"
-                    {...register("userName")}
+                    {...register("email")}
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none text-black"
                     placeholder="name@company.com"
                     autoComplete="username"
                   />
-                  {errors.userName && (
+                  {errors.email && (
                     <p className="text-red-200 text-sm">
-                      {errors.userName.message}
+                      {errors.email.message}
                     </p>
                   )}
                 </div>

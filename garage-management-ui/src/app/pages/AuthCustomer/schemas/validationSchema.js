@@ -17,7 +17,27 @@ export const getRegisterSchema = (t) => {
       .min(10, t("validation.passwordMin"))
       .matches(/[A-Z]/, t("validation.passwordUppercase"))
       .matches(/[a-z]/, t("validation.passwordLowercase"))
-      .matches(/[0-9]/, t("validation.passwordNumberRequired"))
+      .matches(/[0-9]/, "Mật khẩu phải chứa ít nhất số.")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        t("validation.passwordSpecialCharacter")
+      )
+      .required(t("validation.passwordRequired")),
+    confirmPassword: Yup.string()
+      .oneOf(
+        [Yup.ref("password"), null],
+        t("validation.confirmPasswordMismatch")
+      )
+      .required(t("validation.confirmPasswordRequired")),
+  });
+};
+export const getResetSchema = (t) => {
+  return Yup.object().shape({
+    password: Yup.string()
+      .min(10, t("validation.passwordMin"))
+      .matches(/[A-Z]/, t("validation.passwordUppercase"))
+      .matches(/[a-z]/, t("validation.passwordLowercase"))
+      .matches(/[0-9]/, "Mật khẩu phải chứa ít nhất số.")
       .matches(
         /[!@#$%^&*(),.?":{}|<>]/,
         t("validation.passwordSpecialCharacter")

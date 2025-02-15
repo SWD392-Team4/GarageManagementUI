@@ -10,7 +10,14 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
-  const menuItems = ["home", "about", "service", "contact", "lookup"];
+  const menuItems = {
+    home: "/",
+    about: "/ve-chung-toi",
+    service: "/dich-vu",
+    contact: "/lien-he",
+    lookup: "/lookup",
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.scrollY;
@@ -43,10 +50,10 @@ const Header = () => {
             </div>
 
             <ul className=" flex-col  font-bold font-title text-base lg:flex-row lg:space-x-6 text-white lg:space-y-0 space-y-4 mt-16 lg:mt-0 lg:flex hidden">
-              {menuItems.map((key) => (
+              {Object.entries(menuItems).map(([key, path]) => (
                 <li key={key}>
                   <Link
-                    to={`/${key}`}
+                    to={`${path}`}
                     className="text-hover-animaiton  hover:text-red-500"
                   >
                     <span className="menu-text">
@@ -67,10 +74,10 @@ const Header = () => {
                 isMenuOpen ? "flex animate-slide-down" : "hidden"
               } absolute z-20 top-24 left-0 w-full backdrop-blur-sm bg-black/50 shadow-lg text-white font-bold font-title text-base p-4 lg:hidden justify-evenly transition-all duration-500`}
             >
-              {menuItems.map((key) => (
+              {Object.entries(menuItems).map(([key, path]) => (
                 <li key={key} className="hover:text-red-500">
-                  <a
-                    href={`/${key}`}
+                  <Link
+                    href={`${path}`}
                     className="text-hover-animaiton hover:text-red-500"
                   >
                     <span className="menu-text">
@@ -80,7 +87,7 @@ const Header = () => {
                           <div key={index}>{char}</div>
                         ))}
                     </span>
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

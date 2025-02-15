@@ -24,7 +24,7 @@ const Contact1 = ({
         <div className="flex flex-wrap -mx-4 ">
           {/* Left Column */}
           <div className="w-full lg:w-1/2 px-5 pt-20">
-            <div class="grid grid-cols-3 gap-4 relative z-20">
+            <div className="grid grid-cols-3 gap-4 relative z-20">
               <div className="col-span-2 relative z-20">
                 {/* Contact Info Card */}
                 <div className="bg-white p-6 shadow-lg rounded-tl-[90px] px-10 ring-1 ring-red-500 ">
@@ -131,22 +131,22 @@ const Contact1 = ({
                 className="w-full p-3 bg-slate-200/70 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
               ></textarea>
 
-              <div class="flex justify-start">
+              <div className="flex justify-start">
                 <button
-                  class=" group p-5 cursor-pointer  relative      text-xl     border-0  flex  items-center 
+                  className=" group p-5 cursor-pointer  relative      text-xl     border-0  flex  items-center 
       justify-center bg-transparent text-red-600 font-shadows font-bold  h-auto   w-[170px]   overflow-hidden    transition-all duration-100"
                 >
-                  <span class="group-hover:w-full  absolute left-0  h-full w-5 border-y-2 border-l-2 border-red-500 transition-all duration-500"></span>
+                  <span className="group-hover:w-full  absolute left-0  h-full w-5 border-y-2 border-l-2 border-red-500 transition-all duration-500"></span>
                   <p
-                    class="group-hover:opacity-0 group-hover:translate-x-[-100%] absolute translate-x-0 transition-all
+                    className="group-hover:opacity-0 group-hover:translate-x-[-100%] absolute translate-x-0 transition-all
          duration-200"
                   >
                     {submit}
                   </p>
-                  <span class="group-hover:translate-x-0  group-hover:opacity-100 absolute  translate-x-full opacity-0  transition-all duration-200">
+                  <span className="group-hover:translate-x-0  group-hover:opacity-100 absolute  translate-x-full opacity-0  transition-all duration-200">
                     {thankyou}
                   </span>
-                  <span class="group-hover:w-full absolute right-0 h-full w-5  border-y-2 border-r-2  border-red-500 transition-all duration-500"></span>
+                  <span className="group-hover:w-full absolute right-0 h-full w-5  border-y-2 border-r-2  border-red-500 transition-all duration-500"></span>
                 </button>
               </div>
             </form>
