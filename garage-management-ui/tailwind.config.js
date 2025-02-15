@@ -1,12 +1,14 @@
-
+/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}", // Thêm tất cả các file trong thư mục src
-  ],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"], // Quét tất cả các file trong src
   theme: {
     extend: {
-      // Keyframes tùy chỉnh
+      // Keyframes animation
       keyframes: {
+        "animate-gradient": {
+          "0%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0 50%" },
+        },
         spinSlow: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
@@ -15,14 +17,6 @@ module.exports = {
           "0%": { transform: "translateY(-20%)", opacity: 0 },
           "100%": { transform: "translateY(0)", opacity: 1 },
         },
-        spinOutward: {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
-        },
-        spinInward: {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(-360deg)" },
-        },
         slideRotate: {
           "0%": { transform: "translateX(0) rotate(0deg)" },
           "30%": { transform: "translateX(5px) rotate(3deg)" },
@@ -30,42 +24,39 @@ module.exports = {
           "100%": { transform: "translateX(0) rotate(0deg)" },
         },
         typing: {
-          "0%": {
-            width: "0%",
-            visibility: "hidden",
-          },
-          "100%": {
-            width: "100%",
-          },
+          "0%": { width: "0%", visibility: "hidden" },
+          "100%": { width: "100%" },
         },
         blink: {
-          "50%": {
-            borderColor: "transparent",
-          },
-          "100%": {
-            borderColor: "white",
-          },
-          rotateX: {
-            "0%": { transform: "rotateX(0deg)" }, // Bắt đầu
-            "50%": { transform: "rotateX(180deg)" }, // Xoay nửa vòng
-            "100%": { transform: "rotateX(360deg)" }, // Xoay đủ vòng
-          },
+          "50%": { borderColor: "transparent" },
+          "100%": { borderColor: "white" },
+        },
+        rotateX: {
+          "0%": { transform: "rotateX(0deg)" },
+          "50%": { transform: "rotateX(180deg)" },
+          "100%": { transform: "rotateX(360deg)" },
         },
         spinOnce: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
       },
-      // Animation tùy chỉnh
+      // Animation classes
       animation: {
+        "animate-gradient": "animate-gradient 2.2s ease infinite",
         "spin-slow": "spinSlow 3s linear infinite",
         "slide-down": "slideDown 200ms ease-out",
-        spinOutward: "spinOutward 1s linear infinite",
-        spinInward: "spinInward 1s linear infinite",
-        slideRotate: "slideRotate 1s ease-in-out infinite",
+        "slide-rotate": "slideRotate 1s ease-in-out infinite",
         typing: "typing 2s steps(20) infinite alternate, blink .7s infinite",
         rotateX: "rotateX 1s linear infinite",
-        spinOnce: "spinOnce 0.5s linear",
+        "spin-once": "spinOnce 0.5s linear",
+      },
+      backgroundSize: {
+        "gradient-animate": "300% 300%",
+      },
+      backgroundImage: {
+        "gradient-animate":
+          "linear-gradient(-61deg, rgb(238, 238, 238) 40%, rgb(245, 245, 245) 50%, rgb(238, 238, 238) 60%)",
       },
     },
     fontFamily: {

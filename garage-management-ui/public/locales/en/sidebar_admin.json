@@ -1,16 +1,19 @@
 {
-    "sidebar_admin": {
-        "profile": "Profile",
-        "dashboard": "Dashboard",
-        "accounts": "Accounts",
-        "booking": "Booking",
-        "product": "Product",
-        "product_list": "Product List",
-        "product_category": "Category",
-        "product_brand": "Brand",
-        "invoices": "Invoices",
-        "invoice_sale": "Invoice Sale",
-        "invoice_service": "Invoice Service",
-        "invoice_booking": "Booking"
-    }
+  "sidebar_admin": {
+    "profile": "Profile",
+    "dashboard": "Dashboard",
+    "accounts": "Accounts",
+    "booking": "Booking",
+    "product": "Product",
+    "product_list": "Product List",
+    "product_category": "Category",
+    "product_brand": "Brand",
+    "invoices": "Invoices",
+    "invoice_sale": "Invoice Sale",
+    "invoice_service": "Invoice Service",
+    "invoice_booking": "Booking",
+    "appointment": "Appointment",
+    "re-appointment": "Report Appointment",
+    "ce-appointment": "Create Appointment"
+  }
 }

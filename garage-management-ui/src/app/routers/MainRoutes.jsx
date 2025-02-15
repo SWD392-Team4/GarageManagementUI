@@ -47,6 +47,29 @@ const componentMap = {
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBooking: lazy(() => import("../pages/ManageBooking/ManageBooking")),
+  LayoutAppointment: lazy(() =>
+    import("../pages/AdminManageAppoinment/LayoutAppointment")
+  ),
+  appointmentDetail: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/appointmentDetail")
+  ),
+
+  AllAppointment: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/AllAppointment")
+  ),
+  Canceled: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/Canceled")
+  ),
+  Completed: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/Completed")
+  ),
+  InProgess: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/InProgess")
+  ),
+  Waiting: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/Waiting")
+  ),
+
   CustomerProductPage: lazy(() =>
     import("../pages/CustomerProduct/CustomerProductPage")
   ),
