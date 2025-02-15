@@ -78,7 +78,7 @@
         "element": "LayoutAppointment",
         "isSuspense": true,
         "children": [
-          { "index": true, "element": "AllAppointment", "isSuspense": true },
+          { "index": true, "element": "AllAppointment" },
           { "path": "waiting", "element": "Waiting", "isSuspense": true },
           { "path": "in-progress", "element": "InProgess", "isSuspense": true },
           { "path": "completed", "element": "Completed", "isSuspense": true },
@@ -87,8 +87,7 @@
       },
       {
         "path": "appointment/:id",
-        "element": "appointmentDetail",
-        "isSuspense": true
+        "element": "appointmentDetail"
       }
     ]
   }
