@@ -50,11 +50,13 @@ const componentMap = {
   LayoutAppointment: lazy(() =>
     import("../pages/AdminManageAppoinment/LayoutAppointment")
   ),
-  appointmentDetail: () =>
-    import("../pages/AdminManageAppoinment/partials/appointmentDetail"),
+  appointmentDetail: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/appointmentDetail")
+  ),
 
-  AllAppointment: () =>
-    import("../pages/AdminManageAppoinment/partials/AllAppointment"),
+  AllAppointment: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/AllAppointment")
+  ),
   Canceled: lazy(() =>
     import("../pages/AdminManageAppoinment/partials/Canceled")
   ),
