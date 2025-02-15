@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import ListProduct from "./partials/ListProduct";
-import Pagination from "../../components/Pagination/Pagination";
-import PageTitle from "../../components/common/PageTitle";
-
+import ListProduct from "./ListProduct";
+import Pagination from "../../../components/Pagination/Pagination";
 const fakeData = [
     { id: 101, name: "Lọc dầu động cơ", price: "250", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
     { id: 102, name: "Má phanh trước", price: "800", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
@@ -37,11 +35,6 @@ const ProductsPage = () => {
 
   return (
     <>
-    <PageTitle
-          title={"Products"}
-          title1="Home"
-          subtitle={"Products"}
-        />
     <div className="container mx-auto p-4">
       <h1 className="text-4xl font-bold mb-4 text-center">Our Products</h1>
       

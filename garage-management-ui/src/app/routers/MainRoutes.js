@@ -26,9 +26,9 @@ import ProductDetails from "../pages/ManageProduct/ProductDetails";
 import CreateProduct from "../pages/ManageProduct/CreateProduct";
 import LookUpPage from "../pages/LookUpPage/LookUpPage";
 
-import ProductsPage from "../pages/CustomerProduct/ProductsPage";
-import ProductDetail from "../pages/CustomerProduct/ProductDetail";
+import CustomerProductPage from "../pages/CustomerProduct/CustomerProductPage";
 import LayoutProduct from "../layouts/LayoutProduct/LayoutProduct";
+import CustomerProductDetail from "../pages/CustomerProduct/CustomerProductDetail";
 
 const loadLanguageResources = async (namespace) => {
   await i18n.loadNamespaces([namespace]);
@@ -71,7 +71,7 @@ export default function MainRoutes() {
           />
         </Route>
         <Route
-          path="products"
+          path="product"
           element={
             <Suspense fallback={<LoaddingPage />}>
               <LayoutProduct />
@@ -82,16 +82,16 @@ export default function MainRoutes() {
             index
             element={
               <Suspense fallback={<LoaddingPage />}>
-                <ProductsPage />
+                <CustomerProductPage />
               </Suspense>
             }
           />
 
           <Route
-            path=":id"
+            path="detail/:id"
             element={
               <Suspense fallback={<LoaddingPage />}>
-                <ProductDetail />
+                <CustomerProductDetail />
               </Suspense>
             }
           />
