@@ -12,7 +12,9 @@
     "element": "LayoutHome",
     "children": [
       { "index": true, "element": "Home" },
-      { "path": "lookup", "element": "LookUpPage" }
+      { "path": "lookup", "element": "LookUpPage" },
+      { "path": "product", "element":"CustomerProductPage" },
+      { "path": "product/:id", "element": "CustomerProductDetail" }
     ]
   },
   {
@@ -44,6 +46,7 @@
     "children": [
       { "index": true, "element": "CustomerProfile", "isSuspense": true },
       { "path": "orderHistory", "element": "OrderHistory" }
+      
     ]
   },
   {

@@ -8,7 +8,7 @@ const ListProduct = ({ products }) => {
       {products.map((item, index) => {
         return (
           <div
-            onClick={() => navigate(`/product/detail/${item.id}`)}
+            onClick={() => navigate(`/product/${item.id}`)}
             key={index}
             className=" border rounded-2xl shadow-lg p-4 flex flex-col items-center bg-white transition transform hover:-translate-y-2 hover:shadow-xl cursor-pointer "
           >

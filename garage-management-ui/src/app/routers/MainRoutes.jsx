@@ -47,6 +47,12 @@ const componentMap = {
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBooking: lazy(() => import("../pages/ManageBooking/ManageBooking")),
+  CustomerProductPage: lazy(() =>
+    import("../pages/CustomerProduct/CustomerProductPage")
+  ),
+  CustomerProductDetail: lazy(() =>
+    import("../pages/CustomerProduct/CustomerProductDetail")
+  ),
 };
 const generateRoutes = (routes) => {
   return routes.map((route, index) => {
