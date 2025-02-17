@@ -1,56 +1,50 @@
 import React from "react";
-
-const services = [
-  {
-    title: "DIAGNOSTIC SERVICES",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan.",
-    icon: "🚗", // Thay thế bằng hình icon thực tế của bạn
-  },
-  {
-    title: "ROUTINE MAINTENANCE",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan.",
-    icon: "🛠️",
-  },
-  {
-    title: "BRAKE SYSTEM REPAIR",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan.",
-    icon: "🧰",
-  },
-  {
-    title: "ENGINE REPAIR",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan.",
-    icon: "🚙",
-  },
-  {
-    title: "TRANSMISSION SERVICES",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan.",
-    icon: "⚙️",
-  },
-  {
-    title: "ELECTRICAL REPAIRS",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's stan.",
-    icon: "🔌",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const DedicatedServices = () => {
+  const { t, i18n } = useTranslation("dedicatedServices");
+
+  const services = [
+    {
+      title: t("title1"),
+      description: t("BRAKE SYSTEM REPAIR"),
+      icon: "🚗",
+    },
+    {
+      title: t("title2"),
+      description: t("ELECTRICAL REPAIR"),
+      icon: "🔌",
+    },
+    {
+      title: t("title3"),
+      description: t("MAINTENANCE"),
+      icon: "🧰",
+    },
+    {
+      title: t("title4"),
+      description: t("UPGRADES"),
+      icon: "⚙️",
+    },
+    {
+      title: t("title5"),
+      description: t("CAR WASH"),
+      icon: "🚙",
+    },
+    {
+      title: t("title6"),
+      description: t("DETAILING"),
+      icon: "🛠️",
+    },
+  ];
   return (
     <div className="min-h-screen bg-black/95 text-white flex flex-col items-center px-4 lg:px-0">
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-2xl sm:text-3xl lg:text-4xl font-medium my-4 mt-7">
-          DEDICATED SERVICES
+          {t("title7")}
         </h1>
         <p className="text-sm sm:text-lg lg:text-xl max-w-3xl mx-auto">
-          Explore our offerings and discover how we can provide reliable,
-          efficient, and high-quality care for your car. Your satisfaction and
-          your vehicle’s performance are our top priorities!
+          {t("description")}
         </p>
       </div>
 
@@ -62,7 +56,7 @@ const DedicatedServices = () => {
             className="bg-[#1a1a1a] p-6 group rounded-md shadow-md flex flex-col items-center text-center border-b-4 border-orange-700 transition-transform duration-300 "
           >
             {/* Icon */}
-            <div className="bg-orange-700 p-4 rounded-2xl mb-4 group-hover:animate-spinOnce">
+            <div className="bg-orange-700 p-4 rounded-2xl mb-4 group-hover:animate-spin-once">
               <span className="text-3xl">{service.icon}</span>
             </div>
             {/* Title */}
