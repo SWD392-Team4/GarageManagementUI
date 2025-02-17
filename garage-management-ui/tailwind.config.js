@@ -50,6 +50,7 @@ module.exports = {
         typing: "typing 2s steps(20) infinite alternate, blink .7s infinite",
         rotateX: "rotateX 1s linear infinite",
         "spin-once": "spinOnce 0.5s linear",
+        "spin-once2": "spinOnce 0.3s linear",
       },
       backgroundSize: {
         "gradient-animate": "300% 300%",

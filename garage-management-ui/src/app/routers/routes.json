@@ -14,7 +14,9 @@
       { "index": true, "element": "Home" },
       { "path": "lookup", "element": "LookUpPage" },
       { "path": "product", "element": "CustomerProductPage" },
-      { "path": "product/:id", "element": "CustomerProductDetail" }
+      { "path": "product/:id", "element": "CustomerProductDetail" },
+      { "path": "services", "element": "ServicesSection" },
+      { "path": "services/*", "element": "ServiceCategory" }
     ]
   },
   {

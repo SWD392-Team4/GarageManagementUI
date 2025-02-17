@@ -25,6 +25,8 @@ const componentMap = {
   LayoutLoginWork: lazy(() =>
     import("../layouts/LayoutLoginEmployee/LayoutLoginWork")
   ),
+  ServicesSection: lazy(() => import("../pages/Services/ServicesSection")),
+  ServiceCategory: lazy(() => import("../pages/Services/ServiceCategory")),
   SignIn: lazy(() => import("../pages/AuthEmployee/partials/LoginPage")),
   ResetPasswordWorker: lazy(() =>
     import("../pages/AuthEmployee/partials/ResetPassword")

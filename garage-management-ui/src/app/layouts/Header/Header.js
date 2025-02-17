@@ -13,7 +13,7 @@ const Header = () => {
   const menuItems = {
     home: "/",
     about: "/ve-chung-toi",
-    service: "/dich-vu",
+    service: "/services",
     contact: "/lien-he",
     lookup: "/lookup",
   };

@@ -1,0 +1,73 @@
+{
+  "title": "Quality Services",
+  "subtitle": "We’re Providing Quality Roofing Services",
+  "pageTitle": "Services",
+  "pageTitle2": "Service Category",
+  "home": "Home",
+  "services": {
+    "inspect": {
+      "title": "Inspect",
+      "description": "Thoroughly check for issues and potential damage"
+    },
+    "replace": {
+      "title": "Replace",
+      "description": "Swap out damaged or outdated components"
+    },
+    "lubricate": {
+      "title": "Lubricate",
+      "description": "Ensure smooth operation with proper lubrication"
+    },
+    "align": {
+      "title": "Align",
+      "description": "Adjust positioning for optimal performance"
+    },
+    "refill": {
+      "title": "Refill",
+      "description": "Top up necessary fluids and materials"
+    },
+    "repair": {
+      "title": "Repair",
+      "description": "Fix any identified damages efficiently"
+    },
+    "clean": {
+      "title": "Clean",
+      "description": "Maintain cleanliness for better efficiency"
+    },
+    "upgrade": {
+      "title": "Upgrade",
+      "description": "Enhance functionality with modern solutions"
+    },
+    "restore": {
+      "title": "Restore",
+      "description": "Bring back original conditions and quality"
+    },
+    "update": {
+      "title": "Update",
+      "description": "Install latest software and system improvements"
+    },
+    "polish": {
+      "title": "Polish",
+      "description": "Improve aesthetic appeal with surface polishing"
+    },
+    "protect": {
+      "title": "Protect",
+      "description": "Shield components from external damage"
+    },
+    "deodorize": {
+      "title": "Deodorize",
+      "description": "Eliminate odors and freshen up the environment"
+    },
+    "condition": {
+      "title": "Condition",
+      "description": "Maintain material integrity for long-term durability"
+    },
+    "remove": {
+      "title": "Remove",
+      "description": "Get rid of unnecessary or harmful elements"
+    },
+    "restoreLighting": {
+      "title": "Restore Lighting",
+      "description": "Ensure proper brightness and visibility"
+    }
+  }
+}
