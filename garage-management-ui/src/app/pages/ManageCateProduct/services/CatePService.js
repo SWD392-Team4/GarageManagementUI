@@ -78,12 +78,16 @@ export const searchCategory = async (params) => {
 
         const url = `/api/product/categories?${queryString}`;
 
-        const response = await userService.sendAjax(
-            url,
-            "GET",
-            null,
-            true
-        );
+        const response = await userService.sendAjax(url, "GET", null, true);
+
+        if (response != null && response.data?.value) {
+            response.data.value = response.data.value.map(brand => ({
+                ...brand,
+                CreatedAt: formatDate(brand.CreatedAt),
+                UpdatedAt: formatDate(brand.UpdatedAt),
+            }));
+        }
+
         return response;
     } catch (error) {
         console.error("Error loading brand:", error);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,7 @@ export default function ListBrand({ refresh }) {
     const { t, i18n } = useTranslation("manage_brand");
     const navigate = useNavigate();
     const [data, setData] = useState([]);
-    const [searchResults, setSearchResults] = useState(null); // Lưu kết quả tìm kiếm
+    const [searchResults, setSearchResults] = useState(null);
     const [pagination, setPagination] = useState({
         total: 0,
         page: 1,
@@ -20,27 +20,28 @@ export default function ListBrand({ refresh }) {
     const [selectedBrand, setSelectedBrand] = useState(null);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await getAllBrand();
-                console.log("check response: ", response.data.value);
-                if (response?.data?.value) {
-                    setData(response.data.value);
-                    setPagination({
-                        total: response.data.paging.totalCount,
-                        page: response.data.paging.currentPage,
-                        pageSize: response.data.paging.pageSize,
-                    });
-                } else {
-                    console.error("Loading brands failed");
-                }
-            } catch (error) {
-                console.error("Error fetching brands: ", error);
+    // useCallback để tránh re-create
+    const fetchData = useCallback(async () => {
+        try {
+            const response = await getAllBrand();
+            if (response?.data?.value) {
+                setData(response.data.value);
+                setPagination({
+                    total: response.data.paging.totalCount,
+                    page: response.data.paging.currentPage,
+                    pageSize: response.data.paging.pageSize,
+                });
+            } else {
+                console.error("Loading brands failed");
             }
-        };
+        } catch (error) {
+            console.error("Error fetching brands: ", error);
+        }
+    }, []);
+
+    useEffect(() => {
         fetchData();
-    }, [refresh]);
+    }, [refresh, fetchData]);
 
     // Xử lý tìm kiếm thương hiệu
     const handleSearch = async (searchParams) => {
@@ -62,16 +63,8 @@ export default function ListBrand({ refresh }) {
             { header: t("manage_brand.id"), accessorKey: "Id" },
             { header: t("manage_brand.name"), accessorKey: "BrandName" },
             { header: t("manage_brand.status"), accessorKey: "Status" },
-            {
-                header: t("manage_brand.createdAt"),
-                accessorKey: "CreatedAt",
-                cell: ({ row }) => (row.original.CreatedAt) // Format ngày
-            },
-            {
-                header: t("manage_brand.updatedAt"),
-                accessorKey: "UpdatedAt",
-                cell: ({ row }) => (row.original.UpdatedAt) // Format ngày
-            },
+            { header: t("manage_brand.createdAt"), accessorKey: "CreatedAt" },
+            { header: t("manage_brand.updatedAt"), accessorKey: "UpdatedAt" },
         ],
         [t, i18n.language]
     );
@@ -107,9 +100,10 @@ export default function ListBrand({ refresh }) {
                 isOpen={isUpdateModalOpen}
                 onClose={() => setIsUpdateModalOpen(false)}
                 brand={selectedBrand}
-                onBrandUpdated={() => setData((prev) =>
-                    prev.map((b) => (b.Id === selectedBrand?.Id ? { ...b, ...selectedBrand } : b))
-                )}
+                onBrandUpdated={() => {
+                    setIsUpdateModalOpen(false);
+                    fetchData(); //gọi lại hàm để render lại dữ liệu 
+                }}
             />
         </>
     );

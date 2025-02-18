@@ -8,96 +8,114 @@ import { formatDate } from "../schemas/CateValid";
 
 const schema = yup.object().shape({
     CategoryName: yup.string().required("Tên danh mục không được để trống"),
-    Status: yup.string().required("Trạng thái không được để trống"),
+    Status: yup.string().oneOf(["active", "inactive"], "Trạng thái không hợp lệ"),
 });
 
 export default function UpdateCateModal({ isOpen, onClose, category, onCategoryUpdated }) {
     const { t } = useTranslation("manage_product_category");
-    const { register, handleSubmit, reset, watch, formState: { errors, isSubmitting } } = useForm({
+
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        reset,
+        formState: { errors, isSubmitting },
+    } = useForm({
         resolver: yupResolver(schema),
-        defaultValues: { Id: "", CategoryName: "", Status: "", CreatedAt: "", UpdatedAt: "" },
+        defaultValues: {
+            CategoryName: "",
+            Status: "active",
+        },
     });
 
     useEffect(() => {
         if (category) {
-            console.log(category.Status);
-            reset({
-                Id: category.Id || "",
-                CategoryName: category.Category || "",
-                Status: category.Status ? category.Status.toLowerCase() : "active",
-                CreatedAt: category.CreatedAt ? formatDate(category.CreatedAt) : "",
-                UpdatedAt: category.UpdatedAt ? formatDate(category.UpdatedAt) : "",
-            });
+            setValue("CategoryName", category.Category || "");
+            setValue("Status", category.Status ? category.Status.toLowerCase() : "active");
+        } else {
+            reset();
         }
-    }, [category, reset]);
-
-    const onSubmit = async (data) => {
-        console.log("check data update: ", data);
-        try {
-            const updatedData = {
-                category: data.CategoryName,
-                status: data.Status,
-            };
-
-            const response = await updateCategory(category.Id, updatedData); // Truyền category.Id đúng cách
-
-            if (response.success) {
-                onCategoryUpdated(response.data);
-                onClose();
-            }
-        } catch (error) {
-            console.error("Lỗi khi cập nhật danh mục:", error);
-        }
-    };
-
+    }, [category, setValue, reset]);
 
     if (!isOpen) return null;
 
+    const onSubmit = async (data) => {
+        try {
+            const updatedCategory = { ...category, ...data };
+            await updateCategory(category.Id, updatedCategory);
+            onCategoryUpdated(updatedCategory);
+            onClose();
+        } catch (err) {
+            console.error("Lỗi cập nhật danh mục:", err);
+        }
+    };
+
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
             <div className="bg-white p-6 rounded-lg shadow-lg w-96">
                 <h2 className="text-xl font-semibold mb-4">{t("manage_product_category.edit")}</h2>
+
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="mb-4">
+                    {/* ID (chỉ đọc) */}
+                    <div className="mb-3">
                         <label className="block text-sm font-medium text-gray-700">ID</label>
-                        <input {...register("Id")} className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-gray-100" readOnly />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-sm font-medium text-gray-700">{t("manage_product_category.name")}</label>
-                        <input {...register("CategoryName")} className="mt-1 block w-full p-2 border border-gray-300 rounded-md" />
+                        <input type="text" className="w-full p-2 border rounded bg-gray-200" value={category?.Id || ""} readOnly />
                     </div>
 
-                    <div className="mb-4">
+                    {/* Tên danh mục */}
+                    <div className="mb-3">
+                        <label className="block text-sm font-medium text-gray-700">{t("manage_product_category.name")}</label>
+                        <input
+                            type="text"
+                            {...register("CategoryName")}
+                            className="w-full p-2 border rounded"
+                        />
+                        {errors.CategoryName && <p className="text-red-500 text-sm">{errors.CategoryName.message}</p>}
+                    </div>
+
+                    {/* Trạng thái */}
+                    <div className="mb-3">
                         <label className="block text-sm font-medium text-gray-700">{t("manage_product_category.status")}</label>
-                        <select {...register("Status")} className="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                        <select {...register("Status")} className="w-full p-2 border rounded">
                             <option value="active">{t("manage_product_category.active")}</option>
                             <option value="inactive">{t("manage_product_category.inactive")}</option>
                         </select>
+                        {errors.Status && <p className="text-red-500 text-sm">{errors.Status.message}</p>}
                     </div>
-                    <div className="mb-4">
+
+                    {/* Ngày tạo (chỉ đọc) */}
+                    <div className="mb-3">
                         <label className="block text-sm font-medium text-gray-700">{t("manage_product_category.createdAt")}</label>
                         <input
-                            {...register("CreatedAt")}
-                            value={formatDate(watch("CreatedAt"))}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-gray-100"
+                            type="text"
+                            className="w-full p-2 border rounded bg-gray-200"
+                            value={category?.CreatedAt ? formatDate(category.CreatedAt) : ""}
                             readOnly
                         />
                     </div>
-                    <div className="mb-4">
+
+                    {/* Ngày cập nhật (chỉ đọc) */}
+                    <div className="mb-3">
                         <label className="block text-sm font-medium text-gray-700">{t("manage_product_category.updatedAt")}</label>
                         <input
-                            {...register("UpdatedAt")}
-                            value={formatDate(watch("UpdatedAt"))}
-                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md bg-gray-100"
+                            type="text"
+                            className="w-full p-2 border rounded bg-gray-200"
+                            value={category?.UpdatedAt ? formatDate(category.UpdatedAt) : ""}
                             readOnly
                         />
                     </div>
+
+                    {/* Nút hành động */}
                     <div className="flex justify-end space-x-2">
-                        <button type="button" onClick={onClose} className="px-4 py-2 bg-gray-500 text-white rounded-md">
-                            {t("cancel")}
+                        <button type="button" className="px-4 py-2 bg-gray-300 rounded-lg" onClick={onClose} disabled={isSubmitting}>
+                            {t("manage_product_category.cancel")}
                         </button>
-                        <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded-md" disabled={isSubmitting}>
-                            {isSubmitting ? t("updating") : t("save")}
+                        <button
+                            type="submit"
+                            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? t("manage_product_category.saving") : t("manage_product_category.save")}
                         </button>
                     </div>
                 </form>

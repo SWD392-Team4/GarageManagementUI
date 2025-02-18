@@ -1,14 +1,16 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import BaseTable from "../../../components/BaseTable/BaseTable";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaEye } from "react-icons/fa";
-import { getAllProducts } from "../services/ProductService";
+import { useNavigate } from "react-router-dom";
+import BaseTable from "../../../components/BaseTable/BaseTable";
+import { getAllProducts, searchProduct } from "../services/ProductService";
+import SearchProduct from "./SearchProduct";
 
 export default function ListProduct() {
   const { t, i18n } = useTranslation("manage_product");
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [searchResults, setSearchResults] = useState(null);
   const [pagination, setPagination] = useState({
     total: 0,
     page: 1,
@@ -36,6 +38,21 @@ export default function ListProduct() {
     fetchData();
   }, []);
 
+  // Xử lý tìm kiếm thương hiệu
+  const handleSearch = async (searchParams) => {
+    try {
+      const response = await searchProduct(searchParams);
+      if (response?.data?.value) {
+        setSearchResults(response.data.value);
+      } else {
+        setSearchResults([]);
+        console.error("No search results found");
+      }
+    } catch (error) {
+      console.error("Error searching brands: ", error);
+    }
+  };
+
   const columns = useMemo(
     () => [
       { header: t("manage_product.id"), accessorKey: "Id" },
@@ -60,11 +77,14 @@ export default function ListProduct() {
   ];
 
   return (
-    <BaseTable
-      columns={columns}
-      data={data}
-      actions={actions}
-      pagination={pagination}
-    />
+    <>
+      <SearchProduct onSearch={handleSearch} />
+      <BaseTable
+        columns={columns}
+        data={searchResults !== null ? searchResults : data}
+        actions={actions}
+        pagination={pagination}
+      />
+    </>
   );
 }

@@ -75,3 +75,28 @@ export const createProduct = async (productData) => {
     }
 };
 
+export const searchProduct = async (params) => {
+    try {
+        const queryString = Object.keys(params)
+            .filter(key => params[key])
+            .map(key => `${key}=${encodeURIComponent(params[key])}`)
+            .join("&");
+
+        const url = `/api/products?${queryString}`;
+
+        const response = await userService.sendAjax(url, "GET", null, true);
+
+        if (response != null && response.data?.value) {
+            response.data.value = response.data.value.map(product => ({
+                ...product,
+                CreatedAt: formatDate(product.CreatedAt),
+                UpdatedAt: formatDate(product.UpdatedAt),
+            }));
+        }
+
+        return response;
+    } catch (error) {
+        console.error("Error searching product:", error);
+        throw error;
+    }
+};

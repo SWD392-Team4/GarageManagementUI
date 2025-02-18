@@ -68,21 +68,25 @@ export const getBrandDetails = async (brandId) => {
 export const searchBrand = async (params) => {
     try {
         const queryString = Object.keys(params)
-            .filter(key => params[key]) // Loại bỏ các giá trị rỗng (null, "")
+            .filter(key => params[key])
             .map(key => `${key}=${encodeURIComponent(params[key])}`)
             .join("&");
 
         const url = `/api/brands?${queryString}`;
 
-        const response = await userService.sendAjax(
-            url,
-            "GET",
-            null,
-            true
-        );
+        const response = await userService.sendAjax(url, "GET", null, true);
+
+        if (response != null && response.data?.value) {
+            response.data.value = response.data.value.map(brand => ({
+                ...brand,
+                CreatedAt: formatDate(brand.CreatedAt),
+                UpdatedAt: formatDate(brand.UpdatedAt),
+            }));
+        }
+
         return response;
     } catch (error) {
-        console.error("Error loading brand:", error);
+        console.error("Error searching brands:", error);
         throw error;
     }
 };

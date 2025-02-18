@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { useTranslation } from "react-i18next";
 import { FaPencilAlt } from "react-icons/fa";
@@ -7,9 +7,10 @@ import { CategoryDetails, getAllCategory, searchCategory } from "../services/Cat
 import SearchCategory from "./SearchCategory";
 
 export default function ListCatePro({ refresh }) {
+    console.log("check render");
     const { t, i18n } = useTranslation("manage_product_category");
     const [data, setData] = useState([]);
-    const [searchResults, setSearchResults] = useState(null); // Lưu kết quả tìm kiếm
+    const [searchResults, setSearchResults] = useState(null);
     const [pagination, setPagination] = useState({
         total: 0,
         page: 1,
@@ -18,28 +19,29 @@ export default function ListCatePro({ refresh }) {
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await getAllCategory();
-                if (response?.data?.value) {
-                    setData(response.data.value);
-                    setPagination({
-                        total: response.data.paging.totalCount,
-                        page: response.data.paging.currentPage,
-                        pageSize: response.data.paging.pageSize,
-                    });
-                } else {
-                    console.error("Loading categories failed");
-                }
-            } catch (error) {
-                console.error("Error fetching categories: ", error);
+    // useCallback tránh re-create hàm
+    const fetchData = useCallback(async () => {
+        try {
+            const response = await getAllCategory();
+            if (response?.data?.value) {
+                setData(response.data.value);
+                setPagination({
+                    total: response.data.paging.totalCount,
+                    page: response.data.paging.currentPage,
+                    pageSize: response.data.paging.pageSize,
+                });
+            } else {
+                console.error("Loading categories failed");
             }
-        };
-        fetchData();
-    }, [refresh]);
+        } catch (error) {
+            console.error("Error fetching categories: ", error);
+        }
+    }, []);
 
-    // Xử lý tìm kiếm danh mục
+    useEffect(() => {
+        fetchData();
+    }, [refresh, fetchData]);
+
     const handleSearch = async (searchParams) => {
         try {
             const response = await searchCategory(searchParams);
@@ -62,12 +64,12 @@ export default function ListCatePro({ refresh }) {
             {
                 header: t("manage_product_category.createdAt"),
                 accessorKey: "CreatedAt",
-                cell: ({ row }) => (row.original.CreatedAt)
+                cell: ({ row }) => row.original.CreatedAt,
             },
             {
                 header: t("manage_product_category.updatedAt"),
                 accessorKey: "UpdatedAt",
-                cell: ({ row }) => (row.original.UpdatedAt)
+                cell: ({ row }) => row.original.UpdatedAt,
             },
         ],
         [t, i18n.language]
@@ -104,11 +106,10 @@ export default function ListCatePro({ refresh }) {
                 isOpen={isUpdateModalOpen}
                 onClose={() => setIsUpdateModalOpen(false)}
                 category={selectedCategory}
-                onCategoryUpdated={(updatedCategory) =>
-                    setData((prev) =>
-                        prev.map((c) => (c.Id === updatedCategory.Id ? { ...c, ...updatedCategory } : c))
-                    )
-                }
+                onCategoryUpdated={() => {
+                    setIsUpdateModalOpen(false);
+                    fetchData();
+                }}
             />
         </>
     );

@@ -6,8 +6,7 @@ import BrandModal from "./models/BrandModal";
 export default function ManageBrand() {
     const { t } = useTranslation("manage_brand");
     const [isModalOpen, setIsModalOpen] = useState(false);
-    //Dùng để render lại
-    const [refresh, setRefresh] = useState(false); 
+    const [refresh, setRefresh] = useState(false);
 
     return (
         <div className="bg-white shadow-lg p-6">
