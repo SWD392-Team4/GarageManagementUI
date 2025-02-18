@@ -13,13 +13,16 @@ export const getAllBrand = async () => {
                     UpdatedAt: formatDate(brands.UpdatedAt),
                 }));
             }
+            userService.showToast(200, "Loading Brands Successful");
             return response;
         } else {
             console.error(`Error: Received status ${response.error}`);
+            userService.showToast(400, "Error loading brands");
             return [];
         }
     } catch (error) {
         console.error("Error fetching brands: ", error);
+        userService.showToast(400, "Unknown error");
         return [];
     }
 };
@@ -27,15 +30,16 @@ export const getAllBrand = async () => {
 export const createBrand = async (brandData) => {
     try {
         const response = await userService.sendAjax("/api/brands", "POST", brandData, true);
+        userService.showToast(200, "Brand created successfully");
         return response;
     } catch (error) {
         console.error("Error creating brand:", error);
+        userService.showToast(400, "Error creating brand");
         throw error;
     }
 };
 
 export const updateBrand = async (brandId, updatedData) => {
-    console.log("check id ton tai", brandId);
     try {
         const response = await userService.sendAjax(
             `/api/brands/${brandId}`,
@@ -43,9 +47,11 @@ export const updateBrand = async (brandId, updatedData) => {
             updatedData,
             true
         );
+        userService.showToast(200, "Brand updated successfully");
         return response;
     } catch (error) {
         console.error("Error updating brand:", error);
+        userService.showToast(400, "Error updating brand");
         throw error;
     }
 };
@@ -58,9 +64,11 @@ export const getBrandDetails = async (brandId) => {
             null,
             true
         );
+        userService.showToast(200, "Brand details loaded successfully");
         return response;
     } catch (error) {
         console.error("Error loading brand:", error);
+        userService.showToast(400, "Error loading brand");
         throw error;
     }
 };
@@ -83,10 +91,11 @@ export const searchBrand = async (params) => {
                 UpdatedAt: formatDate(brand.UpdatedAt),
             }));
         }
-
+        userService.showToast(200, "Brands search completed successfully");
         return response;
     } catch (error) {
         console.error("Error searching brands:", error);
+        userService.showToast(400, "Error searching brands");
         throw error;
     }
 };

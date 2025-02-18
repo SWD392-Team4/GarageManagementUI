@@ -1,25 +1,26 @@
 import UserService from "../../../hooks/services/UserService";
 import { formatDate } from "../schemas/CateValid";
+
 const userService = new UserService();
 
 export const getAllCategory = async () => {
     try {
         const response = await userService.sendAjax("/api/product/categories", "GET", null, true);
-        if (response != null) {
-            if (response.data?.value) {
-                response.data.value = response.data.value.map(categories => ({
-                    ...categories,
-                    CreatedAt: formatDate(categories.CreatedAt),
-                    UpdatedAt: formatDate(categories.UpdatedAt),
-                }));
-            }
-            return response;
+
+        if (response?.data?.value) {
+            response.data.value = response.data.value.map(category => ({
+                ...category,
+                CreatedAt: formatDate(category.CreatedAt),
+                UpdatedAt: formatDate(category.UpdatedAt),
+            }));
+            userService.showToast(200, "Loading Category Successful");
         } else {
-            console.error(`Error: Received status ${response.error}`);
-            return [];
+            userService.showToast(404, "No categories found");
         }
+        return response;
     } catch (error) {
-        console.error("Error fetching categories: ", error);
+        userService.showToast(400, "Loading Category Failed");
+        console.error("Error fetching categories:", error);
         return [];
     }
 };
@@ -32,12 +33,21 @@ export const updateCategory = async (categoryId, updatedData) => {
             updatedData,
             true
         );
+
+        if (response?.status === 204) {
+            userService.showToast(204, "Category updated successfully");
+        } else {
+            userService.showToast(response?.status || 400, "Failed to update category");
+        }
+
         return response;
     } catch (error) {
-        console.error("Error updating brand:", error);
+        userService.showToast(400, "Error updating category");
+        console.error("Error updating category:", error);
         throw error;
     }
 };
+
 export const createCategory = async (data) => {
     try {
         const response = await userService.sendAjax(
@@ -46,9 +56,17 @@ export const createCategory = async (data) => {
             data,
             true
         );
+
+        if (response?.status === 201) {
+            userService.showToast(200, "Category created successfully");
+        } else {
+            userService.showToast(response?.status || 400, "Failed to create category");
+        }
+
         return response;
     } catch (error) {
-        console.error("Error updating brand:", error);
+        userService.showToast(400, "Error creating category");
+        console.error("Error creating category:", error);
         throw error;
     }
 };
@@ -61,13 +79,20 @@ export const CategoryDetails = async (categoryId) => {
             null,
             true
         );
+
+        if (response?.status === 200 && response?.data) {
+            userService.showToast(200, "Category details loaded successfully");
+        } else {
+            userService.showToast(404, "Category not found");
+        }
+
         return response;
     } catch (error) {
-        console.error("Error updating brand:", error);
+        userService.showToast(400, "Error fetching category details");
+        console.error("Error fetching category details:", error);
         throw error;
     }
 };
-
 
 export const searchCategory = async (params) => {
     try {
@@ -80,17 +105,21 @@ export const searchCategory = async (params) => {
 
         const response = await userService.sendAjax(url, "GET", null, true);
 
-        if (response != null && response.data?.value) {
-            response.data.value = response.data.value.map(brand => ({
-                ...brand,
-                CreatedAt: formatDate(brand.CreatedAt),
-                UpdatedAt: formatDate(brand.UpdatedAt),
+        if (response?.data?.value?.length > 0) {
+            response.data.value = response.data.value.map(category => ({
+                ...category,
+                CreatedAt: formatDate(category.CreatedAt),
+                UpdatedAt: formatDate(category.UpdatedAt),
             }));
+            userService.showToast(200, "Search successful");
+        } else {
+            userService.showToast(404, "No matching categories found");
         }
 
         return response;
     } catch (error) {
-        console.error("Error loading brand:", error);
+        userService.showToast(400, "Error searching categories");
+        console.error("Error searching categories:", error);
         throw error;
     }
 };
