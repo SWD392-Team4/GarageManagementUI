@@ -7,6 +7,12 @@
     "path": "/home",
     "redirect": "/"
   },
+
+  {
+    "path": "about-us",
+    "redirect": "/about-us/mision"
+  },
+
   {
     "path": "/",
     "element": "LayoutHome",
@@ -16,7 +22,16 @@
       { "path": "product", "element": "CustomerProductPage" },
       { "path": "product/:id", "element": "CustomerProductDetail" },
       { "path": "services", "element": "ServicesSection" },
-      { "path": "services/*", "element": "ServiceCategory" }
+      { "path": "services/*", "element": "ServiceCategory" },
+      {
+        "path": "about-us",
+        "element": "AboutUs",
+        "children": [
+          { "path": "mision", "element": "Mision" },
+          { "path": "vision", "element": "Vision" },
+          { "path": "history", "element": "History" }
+        ]
+      }
     ]
   },
   {

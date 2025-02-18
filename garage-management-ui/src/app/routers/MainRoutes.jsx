@@ -13,6 +13,9 @@ const componentMap = {
   LayoutAuthenCustomer: lazy(() =>
     import("../layouts/LayoutLoginCustomer/LayoutAuthenCustomer")
   ),
+  Mision: lazy(() => import("../pages/AboutUs/partials/Mision")),
+  History: lazy(() => import("../pages/AboutUs/partials/History")),
+  Vision: lazy(() => import("../pages/AboutUs/partials/Vision")),
   LoginPage: lazy(() => import("../pages/AuthCustomer/LoginPage")),
   RegisterPage: lazy(() => import("../pages/AuthCustomer/RegisterPage")),
   ConfirmEmailPage: lazy(() =>
@@ -31,6 +34,8 @@ const componentMap = {
   ResetPasswordWorker: lazy(() =>
     import("../pages/AuthEmployee/partials/ResetPassword")
   ),
+  AboutUs: lazy(() => import("../pages/AboutUs/partials/AboutUs")),
+
   LogOut: lazy(() => import("../pages/AuthEmployee/partials/LogOut")),
   LayoutCustomer: lazy(() =>
     import("../layouts/LayoutCustomer/LayoutCustomer")

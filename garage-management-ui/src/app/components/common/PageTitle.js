@@ -1,16 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import anh1 from "../../assets/car-bg.png";
-const PageTitle = ({ title, title1, subtitle }) => {
+const PageTitle = ({ image, title, title1, subtitle, height }) => {
   return (
     <div className="relative bg-black text-white h-[350px] flex items-center justify-center">
       {/* Background Wrapper */}
       <div className="absolute inset-0 flex items-end justify-center">
         {/* Background Image */}
         <img
-          src={anh1}
+          src={image || anh1}
           alt="Title"
-          className="w-auto h-[200px] md:h-[300px] object-contain opacity-30"
+          className={`w-full h-[200px] md:h-[${
+            height || 300
+          }px] object-contain`}
         />
       </div>
 
