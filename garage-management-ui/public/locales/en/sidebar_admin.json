@@ -14,6 +14,7 @@
     "invoice_booking": "Booking",
     "appointment": "Appointment",
     "re-appointment": "Report Appointment",
-    "ce-appointment": "Create Appointment"
+    "ce-appointment": "Create Appointment",
+    "logout": "Logout"
   }
 }

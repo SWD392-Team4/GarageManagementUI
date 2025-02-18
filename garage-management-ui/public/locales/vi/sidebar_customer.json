@@ -6,6 +6,8 @@
     "menu": {
         "personal_info": "Thông tin cá nhân",
         "order_history": "Lịch sử đơn hàng",
-        "current_orders": "Đơn hàng đang đặt"
+        "current_orders": "Đơn hàng đang đặt",
+        "settings": "Cài đặt",
+        "logout": "Đăng xuất"
     }
 }

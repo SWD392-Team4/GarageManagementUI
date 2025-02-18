@@ -1,0 +1,21 @@
+{
+    "manage_product_category": {
+        "title": "Quản lý danh mục sản phẩm",
+        "create": "Thêm danh mục sản phẩm",
+        "id": "ID",
+        "name": "Tên",
+        "status": "Trạng thái",
+        "createdAt": "Ngày tạo",
+        "updatedAt": "Ngày cập nhật",
+        "save": "Cập nhật",
+        "edit": "Chỉnh sửa",
+        "linkLogo": "URL Logo",
+        "active": "Hoạt động",
+        "inactive": "Không hoạt động",
+        "create_title": "Tạo danh mục mới",
+        "category": "Tên danh mục",
+        "required": "Tên danh mục không được để trống",
+        "cancel": "Hủy",
+        "saving": "Đang lưu..."
+    }
+}

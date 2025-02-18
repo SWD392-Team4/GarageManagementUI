@@ -11,23 +11,56 @@
     "path": "/",
     "element": "LayoutHome",
     "children": [
-      { "index": true, "element": "Home" },
-      { "path": "lookup", "element": "LookUpPage" },
-      { "path": "product", "element": "CustomerProductPage" },
-      { "path": "product/:id", "element": "CustomerProductDetail" },
-      { "path": "services", "element": "ServicesSection" },
-      { "path": "services/*", "element": "ServiceCategory" }
+      {
+        "index": true,
+        "element": "Home"
+      },
+      {
+        "path": "lookup",
+        "element": "LookUpPage"
+      },
+      {
+        "path": "product",
+        "element": "CustomerProductPage"
+      },
+      {
+        "path": "product/:id",
+        "element": "CustomerProductDetail"
+      },
+      {
+        "path": "services",
+        "element": "ServicesSection"
+      },
+      {
+        "path": "services/*",
+        "element": "ServiceCategory"
+      }
     ]
   },
   {
     "path": "/authen",
     "element": "LayoutAuthenCustomer",
     "children": [
-      { "index": true, "element": "LoginPage" },
-      { "path": "register", "element": "RegisterPage" },
-      { "path": "confirm-email", "element": "ConfirmEmailPage" },
-      { "path": "forget-pass", "element": "ForgetPass" },
-      { "path": "confirm-reset-password", "element": "ConfirmResetPassword" }
+      {
+        "index": true,
+        "element": "LoginPage"
+      },
+      {
+        "path": "register",
+        "element": "RegisterPage"
+      },
+      {
+        "path": "confirm-email",
+        "element": "ConfirmEmailPage"
+      },
+      {
+        "path": "forget-pass",
+        "element": "ForgetPass"
+      },
+      {
+        "path": "confirm-reset-password",
+        "element": "ConfirmResetPassword"
+      }
     ]
   },
   {
@@ -35,35 +68,74 @@
     "element": "LayoutLoginWork",
     "isSuspense": true,
     "children": [
-      { "index": true, "element": "SignIn", "isSuspense": true },
-      { "path": "reset", "element": "ResetPasswordWorker", "isSuspense": true },
-      { "path": "logout", "element": "LogOut", "isSuspense": true }
+      {
+        "index": true,
+        "element": "SignIn",
+        "isSuspense": true
+      },
+      {
+        "path": "reset",
+        "element": "ResetPasswordWorker",
+        "isSuspense": true
+      },
+      {
+        "path": "logout",
+        "element": "LogOut",
+        "isSuspense": true
+      }
     ]
   },
   {
     "path": "/customer",
     "element": "LayoutCustomer",
-    "private": { "allowedRoles": ["Customer"] },
+    "private": {
+      "allowedRoles": [
+        "Customer"
+      ]
+    },
     "isSuspense": true,
     "children": [
-      { "index": true, "element": "CustomerProfile", "isSuspense": true },
-      { "path": "orderHistory", "element": "OrderHistory" }
+      {
+        "index": true,
+        "element": "CustomerProfile",
+        "isSuspense": true
+      },
+      {
+        "path": "orderHistory",
+        "element": "OrderHistory"
+      }
     ]
   },
   {
     "path": "/admin",
     "element": "LayoutAdminHome",
-    "private": { "allowedRoles": ["Administrator"] },
+    "private": {
+      "allowedRoles": [
+        "Administrator"
+      ]
+    },
     "isSuspense": true,
     "children": [
-      { "index": true, "element": "AdminProfile", "isSuspense": true },
-      { "path": "account", "element": "ManageAccount", "isSuspense": true },
+      {
+        "index": true,
+        "element": "AdminProfile",
+        "isSuspense": true
+      },
+      {
+        "path": "account",
+        "element": "ManageAccount",
+        "isSuspense": true
+      },
       {
         "path": "account/:id",
         "element": "AccountDetails",
         "isSuspense": true
       },
-      { "path": "product", "element": "ManageProduct", "isSuspense": true },
+      {
+        "path": "product",
+        "element": "ManageProduct",
+        "isSuspense": true
+      },
       {
         "path": "product/create",
         "element": "CreateProduct",
@@ -74,17 +146,50 @@
         "element": "ProductDetails",
         "isSuspense": true
       },
-      { "path": "booking", "element": "ManageBooking", "isSuspense": true },
+      {
+        "path": "brand",
+        "element": "ManageBrand",
+        "isSuspense": true
+      },
+      {
+        "path": "booking",
+        "element": "ManageBooking",
+        "isSuspense": true
+      },
+      {
+        "path": "productCategory",
+        "element": "ManageCateProduct",
+        "isSuspense": true
+      },
       {
         "path": "appointment",
         "element": "LayoutAppointment",
         "isSuspense": true,
         "children": [
-          { "index": true, "element": "AllAppointment" },
-          { "path": "waiting", "element": "Waiting", "isSuspense": true },
-          { "path": "in-progress", "element": "InProgess", "isSuspense": true },
-          { "path": "completed", "element": "Completed", "isSuspense": true },
-          { "path": "canceled", "element": "Canceled", "isSuspense": true }
+          {
+            "index": true,
+            "element": "AllAppointment"
+          },
+          {
+            "path": "waiting",
+            "element": "Waiting",
+            "isSuspense": true
+          },
+          {
+            "path": "in-progress",
+            "element": "InProgess",
+            "isSuspense": true
+          },
+          {
+            "path": "completed",
+            "element": "Completed",
+            "isSuspense": true
+          },
+          {
+            "path": "canceled",
+            "element": "Canceled",
+            "isSuspense": true
+          }
         ]
       },
       {

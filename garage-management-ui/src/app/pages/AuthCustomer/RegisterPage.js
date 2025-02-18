@@ -72,18 +72,18 @@ export default function RegisterPage() {
       {isLoading && <div>Loading...</div>}
       <section className="bg-black ">
         <PageTitle title="Sign Up" title1="Home" subtitle="Sign Up" />
-        <div className="flex flex-col items-center justify-center px-4 sm:px-6 py-6 sm:py-8 h-max-screen mx-auto md:min-h-[65vh] lg:py-0 border-t border-white">
-          <div className="grid grid-cols-12 gap-6 md:gap-8 w-full max-w-screen-lg">
+        <div className="flex flex-col items-center justify-center sm:px-6 py-6 sm:py-8 h-max-screen mx-auto md:min-h-[65vh] lg:py-0 ">
+          <div className="grid grid-cols-12 gap-6 md:gap-8 w-full max-w-screen-xl">
             {/* Model Car */}
-            <div className="col-span-12 md:col-span-6 flex flex-col items-center justify-center text-center 
-                    border-2 border-transparent rounded-lg p-6 shadow-lg bg-black text-white 
-                    transition-all duration-500 w-full">
+            <div className="col-span-12 md:col-span-4 flex flex-col items-start justify-between text-center 
+                    rounded-lg p-6 shadow-lg bg-black text-white 
+                    transition-all duration-500 w-1/2">
               <CarModelBMW />
             </div>
 
             {/* Container chứa Form + Nội dung phụ */}
-            <div className="col-span-12 md:col-span-6 flex flex-col lg:flex-row items-stretch rounded-lg overflow-hidden shadow-lg 
-                    border-2 border-transparent border-white">
+            <div className="col-span-12 md:col-span-8 flex flex-col lg:flex-row items-stretch rounded-lg overflow-hidden shadow-lg 
+                   ">
 
               {/* Form sign up */}
               <form
@@ -98,7 +98,7 @@ export default function RegisterPage() {
                   <input
                     {...register("userName")}
                     className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                      ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+        ring-2 ring-white/55 border border-white focus:ring-0 rounded-none"
                     placeholder={t("register.userNamePlaceholder")}
                   />
                   {errors.userName && (
@@ -115,7 +115,7 @@ export default function RegisterPage() {
                     <input
                       {...register("firstName")}
                       className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                        ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+          ring-2 ring-white/55 border border-white focus:ring-0 rounded-none"
                       placeholder={t("register.firstNamePlaceholder")}
                     />
                   </div>
@@ -127,7 +127,7 @@ export default function RegisterPage() {
                     <input
                       {...register("lastName")}
                       className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                        ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+          ring-2 ring-white/55 border border-white focus:ring-0 rounded-none"
                       placeholder={t("register.lastNamePlaceholder")}
                     />
                   </div>
@@ -140,7 +140,7 @@ export default function RegisterPage() {
                     type="email"
                     {...register("email")}
                     className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                        ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+        ring-2 ring-white/55 border border-white focus:ring-0 rounded-none"
                     placeholder={t("register.emailPlaceholder")}
                   />
                 </div>
@@ -155,7 +155,7 @@ export default function RegisterPage() {
                     <input
                       {...register("phoneNumber")}
                       className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                                    ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+          ring-2 ring-white/55 border border-white focus:ring-0 rounded-none"
                       placeholder={t("register.phonePlaceholder")}
                     />
                   </div>
@@ -169,7 +169,7 @@ export default function RegisterPage() {
                       type="password"
                       {...register("password")}
                       className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                                   ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+          ring-2 ring-white/55 border border-white focus:ring-0 rounded-none"
                       placeholder="••••••••"
                     />
                   </div>
@@ -184,7 +184,7 @@ export default function RegisterPage() {
                     type="password"
                     {...register("confirmPassword")}
                     className="bg-black focus:bg-gray-50/10 text-white block w-full p-2.5 outline-none 
-                                  ring-2 ring-white/55 border-transparent focus:ring-0 rounded-md"
+        ring-2 ring-white/55 border border-white focus:ring-0 rounded-none"
                     placeholder="••••••••"
                   />
                 </div>
@@ -195,7 +195,7 @@ export default function RegisterPage() {
                     type="submit"
                     disabled={isLoading}
                     className="w-full sm:w-1/3 bg-white/55 text-white py-2 hover:bg-gray-600 
-                      duration-500 rounded-md shadow-md"
+        duration-500 rounded-none shadow-md"
                   >
                     {isLoading ? t("register.signingUpButton") : t("register.signUpButton")}
                   </button>
@@ -210,6 +210,7 @@ export default function RegisterPage() {
                   </p>
                 </div>
               </form>
+
 
               {/* Nội dung phụ */}
               <div className="w-full lg:w-5/12 flex flex-col items-center justify-center p-6 bg-black text-white shadow-lg">

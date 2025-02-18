@@ -1,24 +1,41 @@
 {
-    "title": "Thông Tin Khách Hàng",
-    "edit_button": "Chỉnh sửa",
+    "title": "Hồ sơ",
+    "edit_button": "Chỉnh Sửa",
     "cancel_button": "Hủy",
-    "update_button": "Cập nhật",
+    "update_button": "Cập Nhật",
     "profile": {
         "name": "Tên",
         "role": "Khách Hàng VIP"
     },
     "personal_info": {
-        "title": "Thông tin cá nhân",
+        "title": "Thông Tin Cá Nhân",
+        "last_name": "Tên",
+        "first_name": "Họ",
         "email": "Email",
-        "phone": "Số điện thoại",
-        "address": "Địa chỉ"
+        "phone": "Số Điện Thoại",
+        "address": "Địa Chỉ"
     },
     "transaction_history": {
-        "title": "Lịch sử giao dịch",
+        "title": "Lịch Sử Giao Dịch",
         "transactions": [
             "Mua MacBook Pro 2023 - 35.000.000đ",
             "Mua iPhone 15 Pro Max - 30.000.000đ",
             "Mua AirPods Pro 2 - 5.000.000đ"
         ]
+    },
+    "forgot_password": {
+        "title": "Quên Mật Khẩu",
+        "description": "Nếu bạn quên mật khẩu, nhấn vào nút bên dưới để đặt lại.",
+        "button": "Đặt Lại Mật Khẩu",
+        "success": "Một liên kết đặt lại mật khẩu đã được gửi đến email của bạn."
+    },
+    "change_password": {
+        "title": "Đổi Mật Khẩu",
+        "current": "Mật Khẩu Hiện Tại",
+        "new": "Mật Khẩu Mới",
+        "confirm": "Xác Nhận Mật Khẩu Mới",
+        "button": "Đổi Mật Khẩu",
+        "error": "Mật khẩu mới không khớp!",
+        "success": "Mật khẩu đã được thay đổi thành công!"
     }
 }
