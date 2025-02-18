@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function SearchBrand({ onSearch }) {
-    const { t } = useTranslation("manage_brand");
+export default function searchCategory({ onSearch }) {
+    const { t } = useTranslation("manage_product_category");
 
     const [searchName, setSearchName] = useState("");
     const [searchStatus, setSearchStatus] = useState("");
@@ -17,7 +17,7 @@ export default function SearchBrand({ onSearch }) {
     };
 
     const handleSearch = () => {
-        onSearch({ BrandName: searchName, Status: searchStatus });
+        onSearch({ Category: searchName, Status: searchStatus });
     };
 
     return (
@@ -25,13 +25,13 @@ export default function SearchBrand({ onSearch }) {
             {/* Search Input */}
             <div className="flex flex-col">
                 <label className="text-sm font-medium text-gray-700">
-                    {t("manage_brand.search_brand_name")}
+                    {t("manage_product_category.search_brand_name")}
                 </label>
                 <input
                     type="text"
                     value={searchName}
                     onChange={handleSearchName}
-                    placeholder={t("manage_brand.search_placeholder")}
+                    placeholder={t("manage_product_category.search_placeholder")}
                     className="w-40 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
             </div>
@@ -39,7 +39,7 @@ export default function SearchBrand({ onSearch }) {
             {/* Status Dropdown */}
             <div className="flex flex-col">
                 <label className="text-sm font-medium text-gray-700">
-                    {t("manage_brand.search_status")}
+                    {t("manage_product_category.search_status")}
                 </label>
                 <select
                     value={searchStatus}
@@ -47,10 +47,10 @@ export default function SearchBrand({ onSearch }) {
                     className="w-40 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                     <option value="" disabled>
-                        {t("manage_brand.search_status_enum.choose")} {/* "Chọn trạng thái" */}
+                        {t("manage_product_category.search_status_enum.choose")} {/* "Chọn trạng thái" */}
                     </option>
-                    <option value="active">{t("manage_brand.search_status_enum.active")}</option>
-                    <option value="inactive">{t("manage_brand.search_status_enum.inactive")}</option>
+                    <option value="active">{t("manage_product_category.search_status_enum.active")}</option>
+                    <option value="inactive">{t("manage_product_category.search_status_enum.inactive")}</option>
                 </select>
             </div>
 
@@ -61,7 +61,7 @@ export default function SearchBrand({ onSearch }) {
                     onClick={handleClearFilters}
                     className="p-2 border mt-5 border-gray-300 text-gray-500 hover:bg-gray-200 duration-300 focus:outline-none"
                 >
-                    {t("manage_brand.clear_filters")}
+                    {t("manage_product_category.clear_filters")}
                 </button>
             </div>
 
@@ -70,7 +70,7 @@ export default function SearchBrand({ onSearch }) {
                     onClick={handleSearch}
                     className="p-2 border mt-5 border-gray-300 bg-blue-500 text-white hover:bg-blue-600 duration-300 focus:outline-none"
                 >
-                    {t("manage_brand.search")}
+                    {t("manage_product_category.search")}
                 </button>
             </div>
         </div>

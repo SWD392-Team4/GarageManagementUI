@@ -25,6 +25,7 @@
             "updateFailed": "Cập nhật thương hiệu thất bại. Vui lòng thử lại!"
         },
         "search_status_enum": {
+            "choose": "Chọn trạng thái",
             "active": "Hoạt động",
             "inactive": "Không hoạt động",
             "none": "Không có"

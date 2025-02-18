@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { useTranslation } from "react-i18next";
 import { FaPencilAlt } from "react-icons/fa";
-import { getAllBrand, getBrandDetails } from "../services/BrandService";
+import { getAllBrand, getBrandDetails, searchBrand } from "../services/BrandService";
 import UpdateBrandModal from "../models/UpdateBrandModal";
 import SearchBrand from "./SearchBrand";
 
@@ -11,6 +11,7 @@ export default function ListBrand({ refresh }) {
     const { t, i18n } = useTranslation("manage_brand");
     const navigate = useNavigate();
     const [data, setData] = useState([]);
+    const [searchResults, setSearchResults] = useState(null); // Lưu kết quả tìm kiếm
     const [pagination, setPagination] = useState({
         total: 0,
         page: 1,
@@ -23,6 +24,7 @@ export default function ListBrand({ refresh }) {
         const fetchData = async () => {
             try {
                 const response = await getAllBrand();
+                console.log("check response: ", response.data.value);
                 if (response?.data?.value) {
                     setData(response.data.value);
                     setPagination({
@@ -40,13 +42,36 @@ export default function ListBrand({ refresh }) {
         fetchData();
     }, [refresh]);
 
+    // Xử lý tìm kiếm thương hiệu
+    const handleSearch = async (searchParams) => {
+        try {
+            const response = await searchBrand(searchParams);
+            if (response?.data?.value) {
+                setSearchResults(response.data.value);
+            } else {
+                setSearchResults([]);
+                console.error("No search results found");
+            }
+        } catch (error) {
+            console.error("Error searching brands: ", error);
+        }
+    };
+
     const columns = useMemo(
         () => [
             { header: t("manage_brand.id"), accessorKey: "Id" },
             { header: t("manage_brand.name"), accessorKey: "BrandName" },
             { header: t("manage_brand.status"), accessorKey: "Status" },
-            { header: t("manage_brand.createdAt"), accessorKey: "CreatedAt" },
-            { header: t("manage_brand.updatedAt"), accessorKey: "UpdatedAt" },
+            {
+                header: t("manage_brand.createdAt"),
+                accessorKey: "CreatedAt",
+                cell: ({ row }) => (row.original.CreatedAt) // Format ngày
+            },
+            {
+                header: t("manage_brand.updatedAt"),
+                accessorKey: "UpdatedAt",
+                cell: ({ row }) => (row.original.UpdatedAt) // Format ngày
+            },
         ],
         [t, i18n.language]
     );
@@ -71,10 +96,10 @@ export default function ListBrand({ refresh }) {
 
     return (
         <>
-            <SearchBrand />
+            <SearchBrand onSearch={handleSearch} />
             <BaseTable
                 columns={columns}
-                data={data}
+                data={searchResults !== null ? searchResults : data}
                 actions={actions}
                 pagination={pagination}
             />

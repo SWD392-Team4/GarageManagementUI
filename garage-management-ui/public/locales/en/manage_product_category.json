@@ -16,6 +16,16 @@
         "category": "Category Name",
         "required": "Category name is required",
         "cancel": "Cancel",
-        "saving": "Saving..."
+        "saving": "Saving...",
+        "search_brand_name": "Category Name",
+        "search_placeholder": "Enter category name...",
+        "search_status": "Status",
+        "search_status_enum": {
+            "choose": "Choose Status",
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "clear_filters": "Clear Filters",
+        "search": "Search"
     }
 }

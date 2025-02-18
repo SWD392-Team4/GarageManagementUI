@@ -25,6 +25,7 @@
             "updateFailed": "Failed to update brand. Try again!"
         },
         "search_status_enum": {
+            "choose": "Choose Status",
             "active": "Active",
             "inactive": "Inactive",
             "none": "None"

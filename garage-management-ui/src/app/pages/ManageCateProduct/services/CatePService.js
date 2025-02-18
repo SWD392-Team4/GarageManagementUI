@@ -67,3 +67,26 @@ export const CategoryDetails = async (categoryId) => {
         throw error;
     }
 };
+
+
+export const searchCategory = async (params) => {
+    try {
+        const queryString = Object.keys(params)
+            .filter(key => params[key]) // Loại bỏ các giá trị rỗng (null, "")
+            .map(key => `${key}=${encodeURIComponent(params[key])}`)
+            .join("&");
+
+        const url = `/api/product/categories?${queryString}`;
+
+        const response = await userService.sendAjax(
+            url,
+            "GET",
+            null,
+            true
+        );
+        return response;
+    } catch (error) {
+        console.error("Error loading brand:", error);
+        throw error;
+    }
+};
