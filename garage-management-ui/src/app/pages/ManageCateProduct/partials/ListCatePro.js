@@ -7,28 +7,38 @@ import { CategoryDetails, getAllCategory, searchCategory } from "../services/Cat
 import SearchCategory from "./SearchCategory";
 
 export default function ListCatePro({ refresh }) {
-    console.log("check render");
     const { t, i18n } = useTranslation("manage_product_category");
     const [data, setData] = useState([]);
-    const [searchResults, setSearchResults] = useState(null);
     const [pagination, setPagination] = useState({
-        total: 0,
-        page: 1,
-        pageSize: 10,
+        currentPage: 1,
+        totalPages: 1,
+        totalCount: 0,
+        hasPrevious: false,
+        hasNext: false,
     });
+    const [searchParams, setSearchParams] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState(null);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
     // useCallback tránh re-create hàm
-    const fetchData = useCallback(async () => {
+    const fetchData = useCallback(async (page = 1, params = null) => {
         try {
-            const response = await getAllCategory();
+            let response;
+
+            if (params) {
+                response = await searchCategory({ ...params, PageNumber: page });
+            } else {
+                response = await getAllCategory(page);
+            }
+
             if (response?.data?.value) {
                 setData(response.data.value);
                 setPagination({
-                    total: response.data.paging.totalCount,
-                    page: response.data.paging.currentPage,
-                    pageSize: response.data.paging.pageSize,
+                    currentPage: response.data.paging.currentPage,
+                    totalPages: response.data.paging.totalPages,
+                    totalCount: response.data.paging.totalCount,
+                    hasPrevious: response.data.paging.hasPrevious,
+                    hasNext: response.data.paging.hasNext,
                 });
             } else {
                 console.error("Loading categories failed");
@@ -39,21 +49,16 @@ export default function ListCatePro({ refresh }) {
     }, []);
 
     useEffect(() => {
-        fetchData();
+        fetchData(); // Khi mở trang, gọi API lấy dữ liệu mặc định (page 1)
     }, [refresh, fetchData]);
 
-    const handleSearch = async (searchParams) => {
-        try {
-            const response = await searchCategory(searchParams);
-            if (response?.data?.value) {
-                setSearchResults(response.data.value);
-            } else {
-                setSearchResults([]);
-                console.error("No search results found");
-            }
-        } catch (error) {
-            console.error("Error searching categories: ", error);
-        }
+    const handleSearch = (params) => {
+        setSearchParams(params); // Lưu tham số tìm kiếm để dùng khi chuyển trang
+        fetchData(1, params); // Luôn bắt đầu từ trang 1 khi tìm kiếm
+    };
+
+    const handlePageChange = (newPage) => {
+        fetchData(newPage, searchParams); // Nếu có tìm kiếm, giữ nguyên searchParams
     };
 
     const columns = useMemo(
@@ -61,16 +66,8 @@ export default function ListCatePro({ refresh }) {
             { header: t("manage_product_category.id"), accessorKey: "Id" },
             { header: t("manage_product_category.name"), accessorKey: "Category" },
             { header: t("manage_product_category.status"), accessorKey: "Status" },
-            {
-                header: t("manage_product_category.createdAt"),
-                accessorKey: "CreatedAt",
-                cell: ({ row }) => row.original.CreatedAt,
-            },
-            {
-                header: t("manage_product_category.updatedAt"),
-                accessorKey: "UpdatedAt",
-                cell: ({ row }) => row.original.UpdatedAt,
-            },
+            { header: t("manage_product_category.createdAt"), accessorKey: "CreatedAt", },
+            { header: t("manage_product_category.updatedAt"), accessorKey: "UpdatedAt", }
         ],
         [t, i18n.language]
     );
@@ -98,9 +95,10 @@ export default function ListCatePro({ refresh }) {
             <SearchCategory onSearch={handleSearch} />
             <BaseTable
                 columns={columns}
-                data={searchResults !== null ? searchResults : data}
+                data={data}
                 actions={actions}
                 pagination={pagination}
+                onPageChange={handlePageChange}
             />
             <UpdateCateModal
                 isOpen={isUpdateModalOpen}
@@ -108,7 +106,7 @@ export default function ListCatePro({ refresh }) {
                 category={selectedCategory}
                 onCategoryUpdated={() => {
                     setIsUpdateModalOpen(false);
-                    fetchData();
+                    fetchData(pagination.currentPage, searchParams);
                 }}
             />
         </>

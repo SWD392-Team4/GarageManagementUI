@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -10,47 +10,54 @@ export default function ListProduct() {
   const { t, i18n } = useTranslation("manage_product");
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [searchResults, setSearchResults] = useState(null);
   const [pagination, setPagination] = useState({
-    total: 0,
-    page: 1,
-    pageSize: 10,
+    currentPage: 1,
+    totalPages: 1,
+    totalCount: 0,
+    hasPrevious: false,
+    hasNext: false,
   });
+  const [searchParams, setSearchParams] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getAllProducts();
-        if (response?.data?.value) {
-          setData(response.data.value);
-          setPagination({
-            total: response.data.paging.totalCount,
-            page: response.data.paging.currentPage,
-            pageSize: response.data.paging.pageSize,
-          });
-        } else {
-          console.error("Loading products failed");
-        }
-      } catch (error) {
-        console.error("Error fetching products: ", error);
-      }
-    };
-    fetchData();
-  }, []);
-
-  // Xử lý tìm kiếm thương hiệu
-  const handleSearch = async (searchParams) => {
+  // useCallback tránh re-create hàm
+  const fetchData = useCallback(async (page = 1, params = null) => {
     try {
-      const response = await searchProduct(searchParams);
-      if (response?.data?.value) {
-        setSearchResults(response.data.value);
+      let response;
+
+      if (params) {
+        response = await searchProduct({ ...params, PageNumber: page });
       } else {
-        setSearchResults([]);
-        console.error("No search results found");
+        response = await getAllProducts(page);
+      }
+
+      if (response?.data?.value) {
+        setData(response.data.value);
+        setPagination({
+          currentPage: response.data.paging.currentPage,
+          totalPages: response.data.paging.totalPages,
+          totalCount: response.data.paging.totalCount,
+          hasPrevious: response.data.paging.hasPrevious,
+          hasNext: response.data.paging.hasNext,
+        });
+      } else {
+        console.error("Loading products failed");
       }
     } catch (error) {
-      console.error("Error searching brands: ", error);
+      console.error("Error fetching products: ", error);
     }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const handleSearch = (params) => {
+    setSearchParams(params);
+    fetchData(1, params);
+  };
+
+  const handlePageChange = (newPage) => {
+    fetchData(newPage, searchParams);
   };
 
   const columns = useMemo(
@@ -81,9 +88,10 @@ export default function ListProduct() {
       <SearchProduct onSearch={handleSearch} />
       <BaseTable
         columns={columns}
-        data={searchResults !== null ? searchResults : data}
+        data={data}
         actions={actions}
         pagination={pagination}
+        onPageChange={handlePageChange}
       />
     </>
   );

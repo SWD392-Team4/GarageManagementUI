@@ -1,35 +1,44 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import BaseTable from "../../../components/BaseTable/BaseTable";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaPencilAlt } from "react-icons/fa";
-import { getAllBrand, getBrandDetails, searchBrand } from "../services/BrandService";
+import BaseTable from "../../../components/BaseTable/BaseTable";
 import UpdateBrandModal from "../models/UpdateBrandModal";
+import { getAllBrand, getBrandDetails, searchBrand } from "../services/BrandService";
 import SearchBrand from "./SearchBrand";
 
 export default function ListBrand({ refresh }) {
     const { t, i18n } = useTranslation("manage_brand");
-    const navigate = useNavigate();
     const [data, setData] = useState([]);
-    const [searchResults, setSearchResults] = useState(null);
     const [pagination, setPagination] = useState({
-        total: 0,
-        page: 1,
-        pageSize: 10,
+        currentPage: 1,
+        totalPages: 1,
+        totalCount: 0,
+        hasPrevious: false,
+        hasNext: false,
     });
+    const [searchParams, setSearchParams] = useState(null);
     const [selectedBrand, setSelectedBrand] = useState(null);
     const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
     // useCallback để tránh re-create
-    const fetchData = useCallback(async () => {
+    const fetchData = useCallback(async (page = 1, params = null) => {
         try {
-            const response = await getAllBrand();
+            let response;
+
+            if (params) {
+                response = await searchBrand({ ...params, PageNumber: page });
+            } else {
+                response = await getAllBrand(page);
+            }
+
             if (response?.data?.value) {
                 setData(response.data.value);
                 setPagination({
-                    total: response.data.paging.totalCount,
-                    page: response.data.paging.currentPage,
-                    pageSize: response.data.paging.pageSize,
+                    currentPage: response.data.paging.currentPage,
+                    totalPages: response.data.paging.totalPages,
+                    totalCount: response.data.paging.totalCount,
+                    hasPrevious: response.data.paging.hasPrevious,
+                    hasNext: response.data.paging.hasNext,
                 });
             } else {
                 console.error("Loading brands failed");
@@ -44,18 +53,14 @@ export default function ListBrand({ refresh }) {
     }, [refresh, fetchData]);
 
     // Xử lý tìm kiếm thương hiệu
-    const handleSearch = async (searchParams) => {
-        try {
-            const response = await searchBrand(searchParams);
-            if (response?.data?.value) {
-                setSearchResults(response.data.value);
-            } else {
-                setSearchResults([]);
-                console.error("No search results found");
-            }
-        } catch (error) {
-            console.error("Error searching brands: ", error);
-        }
+    const handleSearch = (params) => {
+        setSearchParams(params); // Lưu tham số tìm kiếm để dùng khi chuyển trang
+        fetchData(1, params); // Luôn bắt đầu từ trang 1 khi tìm kiếm
+    };
+
+    // Xử lý khi chuyển trang
+    const handlePageChange = (newPage) => {
+        fetchData(newPage, searchParams); // Nếu có tìm kiếm, giữ nguyên searchParams
     };
 
     const columns = useMemo(
@@ -92,9 +97,10 @@ export default function ListBrand({ refresh }) {
             <SearchBrand onSearch={handleSearch} />
             <BaseTable
                 columns={columns}
-                data={searchResults !== null ? searchResults : data}
+                data={data}
                 actions={actions}
                 pagination={pagination}
+                onPageChange={handlePageChange}
             />
             <UpdateBrandModal
                 isOpen={isUpdateModalOpen}
@@ -102,7 +108,7 @@ export default function ListBrand({ refresh }) {
                 brand={selectedBrand}
                 onBrandUpdated={() => {
                     setIsUpdateModalOpen(false);
-                    fetchData(); //gọi lại hàm để render lại dữ liệu 
+                    fetchData(pagination.currentPage, searchParams);
                 }}
             />
         </>

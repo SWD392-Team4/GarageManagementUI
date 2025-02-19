@@ -1,18 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import BreadcrumbProduct from "./partials/BreadcrumbProduct";
 import MDEditor from "@uiw/react-md-editor";
 import { FaArrowLeft } from "react-icons/fa";
+import { getAllCategory } from "./services/ProductService";
+import { getAllBrand } from "./services/ProductService";
 
 export default function CreateProduct() {
     const { register, handleSubmit, setValue, watch } = useForm();
     const { t, i18n } = useTranslation("create_product");
     const navigate = useNavigate();
+    const [categories, setCategories] = useState([]);
+    const [brands, setBrands] = useState([]);
+
+    // Gọi API để lấy danh sách categories & brands
+    useEffect(() => {
+        const fetchCategories = async () => {
+            const response = await getAllCategory();
+            if (response?.data?.value) {
+                setCategories(response.data.value);
+            }
+        };
+
+        const fetchBrands = async () => {
+            const response = await getAllBrand();
+            if (response?.data?.value) {
+                setBrands(response.data.value);
+            }
+        };
+
+        fetchCategories();
+        fetchBrands();
+    }, []);
 
     const onSubmit = (data) => {
-        console.log("Product Created:", data);
+        const payload = {
+            productName: data.name,
+            productBarcode: data.barcode,
+            productDescription: data.description,
+            productCategoryId: data.category,
+            brandId: data.brand, // ID của brand
+            link: data.link,
+            productPrice: parseFloat(data.price),
+        };
+        console.log("Product Created:", payload);
         navigate("/admin/product");
     };
 
@@ -30,23 +63,33 @@ export default function CreateProduct() {
                 </div>
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.category")}</label>
-                    <input {...register("category")} className="border rounded p-2 w-full" required />
+                    <select {...register("category")} className="border rounded p-2 w-full" required>
+                        <option value="">{t("create_product.select_category")}</option>
+                        {categories.map((cat) => (
+                            <option key={cat.Id} value={cat.Id}>{cat.Category}</option>
+                        ))}
+                    </select>
                 </div>
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.price")}</label>
                     <input type="number" {...register("price")} className="border rounded p-2 w-full" required />
                 </div>
                 <div>
-                    <label className="block text-gray-700 font-semibold">{t("create_product.stock")}</label>
-                    <input type="number" {...register("stock")} className="border rounded p-2 w-full" required />
+                    <label className="block text-gray-700 font-semibold">{t("create_product.barcode")}</label>
+                    <input {...register("barcode")} className="border rounded p-2 w-full" required />
                 </div>
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.brand")}</label>
-                    <input {...register("brand")} className="border rounded p-2 w-full" required />
+                    <select {...register("brand")} className="border rounded p-2 w-full" required>
+                        <option value="">{t("create_product.select_brand")}</option>
+                        {brands.map((brand) => (
+                            <option key={brand.Id} value={brand.Id}>{brand.BrandName}</option>
+                        ))}
+                    </select>
                 </div>
                 <div>
-                    <label className="block text-gray-700 font-semibold">{t("create_product.supplier")}</label>
-                    <input {...register("supplier")} className="border rounded p-2 w-full" required />
+                    <label className="block text-gray-700 font-semibold">{t("create_product.link")}</label>
+                    <input {...register("link")} className="border rounded p-2 w-full" />
                 </div>
                 <div className="col-span-2" data-color-mode="light">
                     <label className="block text-gray-700 font-semibold">{t("create_product.description")}</label>
