@@ -52,8 +52,10 @@ export default function SideBarAdmin({
 
 
   const toggleSubMenu = (menu) => {
+    if (!isSidebarOpen) return; 
     setOpenMenu(openMenu === menu ? null : menu);
   };
+
 
   return (
     <>

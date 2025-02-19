@@ -240,6 +240,35 @@ export default function ListAppoinment({ type }) {
   );
   const actions = [
     {
+      type: "link",
+      label: t("manage_product.view"),
+      icon: <FaEye />,
+      color: "bg-gray-500",
+      link: (id) => `${id}`,
+    },
+    {
+      type: "link",
+      label: t("manage_product.view"),
+      icon: <FaEye />,
+      color: "bg-gray-500",
+      link: (id) => `${id}`,
+    },
+    {
+      type: "link",
+      label: t("manage_product.view"),
+      icon: <FaEye />,
+      color: "bg-gray-500",
+      link: (id) => `${id}`,
+    },
+    {
+      type: "link",
+      label: t("manage_product.view"),
+      icon: <FaEye />,
+      color: "bg-gray-500",
+      link: (id) => `${id}`,
+    },
+    {
+      type: "link",
       label: t("manage_product.view"),
       icon: <FaEye />,
       color: "bg-gray-500",

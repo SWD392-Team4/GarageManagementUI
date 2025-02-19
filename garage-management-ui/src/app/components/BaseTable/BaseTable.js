@@ -32,13 +32,13 @@ export default function BaseTable({
   return (
     <>
       <div className="bg-white">
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse">
+        <div className="overflow-auto">
+          <table className="w-full min-w-max border-collapse">
             <thead className="bg-gray-800 text-white">
               {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                   {headerGroup.headers.map((column) => (
-                    <th key={column.id} className="border p-3 text-left font-medium">
+                    <th key={column.id} className="border p-3 text-left font-medium whitespace-nowrap">
                       {flexRender(column.column.columnDef.header, column.getContext())}
                     </th>
                   ))}
@@ -52,12 +52,12 @@ export default function BaseTable({
                 table.getRowModel().rows.map((row) => (
                   <tr key={row.original?.Id || row.id} className="hover:bg-gray-100">
                     {row.getVisibleCells().map((cell) => (
-                      <td key={cell.id} className="border p-3">
+                      <td key={cell.id} className="border p-3 text-sm">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </td>
                     ))}
                     {actions && (
-                      <td className="border-r border-b h-full p-3 flex gap-2">
+                      <td className="border-r border-b h-full p-3 flex flex-wrap gap-2">
                         {actions.map((action, index) => {
                           if (!action || !action.type) return null;
 
@@ -126,5 +126,6 @@ export default function BaseTable({
         </button>
       </div>
     </>
+
   );
 }

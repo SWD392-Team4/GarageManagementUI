@@ -105,9 +105,32 @@ export default function ProductDetails() {
       {product ? (
         <>
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="flex-1 flex justify-center items-center">
-              <img src={product.ProductImg || "/images/placeholder.png"} alt={product.ProductName} className="max-w-sm w-full h-auto rounded-lg shadow-lg" />
+            <div className="flex-1 flex justify-center items-center flex-col">
+              {isEditing ? (
+                <>
+                  <input
+                    type="text"
+                    name="link"
+                    value={formData.link ?? ""}
+                    onChange={handleChange}
+                    className="border p-2 rounded w-full mb-2"
+                    placeholder={t("product_details.image_link")}
+                  />
+                  <img
+                    src={formData.link || "/images/placeholder.png"}
+                    alt="Preview"
+                    className="max-w-sm w-full h-auto rounded-lg shadow-lg"
+                  />
+                </>
+              ) : (
+                <img
+                  src={product.ProductImg || "/images/placeholder.png"}
+                  alt={product.ProductName}
+                  className="max-w-sm w-full h-auto rounded-lg shadow-lg"
+                />
+              )}
             </div>
+
             <div className="flex-1" data-color-mode="light">
               <h1 className="text-3xl font-bold mb-4">
                 {t("name")}
