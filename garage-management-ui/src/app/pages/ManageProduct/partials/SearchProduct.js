@@ -13,11 +13,11 @@ export default function SearchProduct({ onSearch }) {
     const handleClearFilters = () => {
         setSearchName("");
         setSearchStatus("");
-        onSearch({ ProductName: "", Status: "" });
+        onSearch({ ProductName: "", ProductStatus: "" });
     };
 
     const handleSearch = () => {
-        onSearch({ ProductName: searchName, Status: searchStatus });
+        onSearch({ ProductName: searchName, ProductStatus: searchStatus });
     };
 
     return (

@@ -9,6 +9,10 @@
         "supplier": "Nhà cung cấp",
         "description": "Mô tả sản phẩm",
         "submit": "Tạo sản phẩm",
-        "back": "Quay về danh sách"
+        "back": "Quay về danh sách",
+        "barcode": "Mã",
+        "select_brand": "Chọn thương hiệu",
+        "select_category": "Chọn danh mục",
+        "link": "Đường dẫn hình ảnh"
     }
 }

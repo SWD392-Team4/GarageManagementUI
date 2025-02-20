@@ -3,9 +3,13 @@ import { formatDate } from "../schemas/ProductValid";
 
 const userService = new UserService();
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (PageNumber = 1) => {
     try {
-        const response = await userService.sendAjax("/api/products", "GET", null, true);
+        const response = await userService.sendAjax(
+            `/api/products?PageNumber=${PageNumber}`,
+            "GET",
+            null,
+            true);
         if (response != null) {
             if (response.data?.value) {
                 response.data.value = response.data.value.map(product => ({
@@ -31,9 +35,9 @@ export const getProduct = async (productId) => {
         const response = await userService.sendAjax(`/api/products/product/${productId}`, "GET", null, true);
         if (response?.data) {
             return {
-                ...response.data,
-                CreatedAt: formatDate(response.data.CreatedAt),
-                UpdatedAt: formatDate(response.data.UpdatedAt),
+                ...response.data.value,
+                CreatedAt: formatDate(response.data.value.CreatedAt),
+                UpdatedAt: formatDate(response.data.value.UpdatedAt),
             };
         }
         return null;
@@ -45,13 +49,14 @@ export const getProduct = async (productId) => {
 
 export const updateProduct = async (productId, productData) => {
     try {
+        console.log("check data gửi về back end", productData);
         const response = await userService.sendAjax(
             `/api/products/${productId}`,
             "PUT",
-            JSON.stringify(productData),
+            productData,
             true
         );
-
+        userService.showToast(200, "Update Successfull");
         return response;
     } catch (error) {
         console.error("Lỗi khi cập nhật sản phẩm: ", error);
@@ -64,7 +69,7 @@ export const createProduct = async (productData) => {
         const response = await userService.sendAjax(
             `/api/products`,
             "POST",
-            JSON.stringify(productData),
+            productData,
             true
         );
 
@@ -98,5 +103,52 @@ export const searchProduct = async (params) => {
     } catch (error) {
         console.error("Error searching product:", error);
         throw error;
+    }
+};
+
+export const getAllCategory = async () => {
+    try {
+        const response = await userService.sendAjax("/api/product/categories", "GET", null, true);
+
+        if (response?.data?.value) {
+            response.data.value = response.data.value.map(category => ({
+                ...category,
+                CreatedAt: formatDate(category.CreatedAt),
+                UpdatedAt: formatDate(category.UpdatedAt),
+            }));
+        }
+        return response;
+    } catch (error) {
+        console.error("Error fetching categories:", error);
+        return [];
+    }
+};
+
+export const getAllBrand = async () => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/brands`,
+            "GET",
+            null,
+            true
+        );
+
+        if (response != null) {
+            if (response.data?.value) {
+                response.data.value = response.data.value.map(brands => ({
+                    ...brands,
+                    CreatedAt: formatDate(brands.CreatedAt),
+                    UpdatedAt: formatDate(brands.UpdatedAt),
+                }));
+            }
+
+            return response;
+        } else {
+            console.error(`Error: Received status ${response.error}`);
+            return null;
+        }
+    } catch (error) {
+        console.error("Error fetching brands: ", error);
+        return null;
     }
 };

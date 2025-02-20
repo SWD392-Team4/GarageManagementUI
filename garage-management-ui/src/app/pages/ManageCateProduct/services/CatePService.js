@@ -3,9 +3,14 @@ import { formatDate } from "../schemas/CateValid";
 
 const userService = new UserService();
 
-export const getAllCategory = async () => {
+export const getAllCategory = async (PageNumber = 1) => {
     try {
-        const response = await userService.sendAjax("/api/product/categories", "GET", null, true);
+        const response = await userService.sendAjax(
+            `/api/product/categories?PageNumber=${PageNumber}`,
+            "GET",
+            null,
+            true
+        );
 
         if (response?.data?.value) {
             response.data.value = response.data.value.map(category => ({
@@ -24,6 +29,37 @@ export const getAllCategory = async () => {
         return [];
     }
 };
+
+export const searchCategory = async (params) => {
+    try {
+        const queryString = Object.keys(params)
+            .filter(key => params[key])
+            .map(key => `${key}=${encodeURIComponent(params[key])}`)
+            .join("&");
+
+        const url = `/api/product/categories?${queryString}`;
+
+        const response = await userService.sendAjax(url, "GET", null, true);
+
+        if (response?.data?.value?.length > 0) {
+            response.data.value = response.data.value.map(category => ({
+                ...category,
+                CreatedAt: formatDate(category.CreatedAt),
+                UpdatedAt: formatDate(category.UpdatedAt),
+            }));
+            userService.showToast(200, "Search successful");
+        } else {
+            userService.showToast(404, "No matching categories found");
+        }
+
+        return response;
+    } catch (error) {
+        userService.showToast(400, "Error searching categories");
+        console.error("Error searching categories:", error);
+        throw error;
+    }
+};
+
 
 export const updateCategory = async (categoryId, updatedData) => {
     try {
@@ -57,10 +93,10 @@ export const createCategory = async (data) => {
             true
         );
 
-        if (response?.status === 201) {
+        if (response != null) {
             userService.showToast(200, "Category created successfully");
         } else {
-            userService.showToast(response?.status || 400, "Failed to create category");
+            userService.showToast(400, "Failed to create category");
         }
 
         return response;
@@ -94,32 +130,3 @@ export const CategoryDetails = async (categoryId) => {
     }
 };
 
-export const searchCategory = async (params) => {
-    try {
-        const queryString = Object.keys(params)
-            .filter(key => params[key]) // Loại bỏ các giá trị rỗng (null, "")
-            .map(key => `${key}=${encodeURIComponent(params[key])}`)
-            .join("&");
-
-        const url = `/api/product/categories?${queryString}`;
-
-        const response = await userService.sendAjax(url, "GET", null, true);
-
-        if (response?.data?.value?.length > 0) {
-            response.data.value = response.data.value.map(category => ({
-                ...category,
-                CreatedAt: formatDate(category.CreatedAt),
-                UpdatedAt: formatDate(category.UpdatedAt),
-            }));
-            userService.showToast(200, "Search successful");
-        } else {
-            userService.showToast(404, "No matching categories found");
-        }
-
-        return response;
-    } catch (error) {
-        userService.showToast(400, "Error searching categories");
-        console.error("Error searching categories:", error);
-        throw error;
-    }
-};
