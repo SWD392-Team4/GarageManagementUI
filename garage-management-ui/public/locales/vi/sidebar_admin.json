@@ -1,16 +1,20 @@
 {
-    "sidebar_admin": {
-        "profile": "Hồ sơ",
-        "dashboard": "Bảng điều khiển",
-        "accounts": "Tài khoản",
-        "booking": "Lịch hẹn",
-        "product": "Sản phẩm",
-        "product_list": "Danh sách sản phẩm",
-        "product_category": "Danh mục",
-        "product_brand": "Thương hiệu",
-        "invoices": "Hóa đơn",
-        "invoice_sale": "Hóa đơn bán hàng",
-        "invoice_service": "Hóa đơn dịch vụ",
-        "invoice_booking": "Lịch hẹn"
-    }
+  "sidebar_admin": {
+    "profile": "Hồ sơ",
+    "dashboard": "Bảng điều khiển",
+    "accounts": "Tài khoản",
+    "booking": "Lịch hẹn",
+    "product": "Sản phẩm",
+    "product_list": "Danh sách sản phẩm",
+    "product_category": "Danh mục",
+    "product_brand": "Thương hiệu",
+    "invoices": "Hóa đơn",
+    "invoice_sale": "Hóa đơn bán hàng",
+    "invoice_service": "Hóa đơn dịch vụ",
+    "invoice_booking": "Lịch hẹn",
+    "appointment": "Cuộc hẹn",
+    "re-appointment": "Báo cáo cuộc hẹn",
+    "ce-appointment": "Tạo cuộc hẹn",
+    "logout" : "Đăng xuất"
+  }
 }

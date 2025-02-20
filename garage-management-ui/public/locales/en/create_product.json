@@ -9,6 +9,10 @@
         "supplier": "Supplier",
         "description": "Product Description",
         "submit": "Create Product",
-        "back": "Back to Product List"
+        "back": "Back to Product List",
+        "barcode": "Barcode",
+        "select_brand": "Select Brand",
+        "select_category": "Select Category",
+        "link": "URL Image"
     }
 }

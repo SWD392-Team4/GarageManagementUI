@@ -1,12 +1,24 @@
 {
     "manage_product": {
-        "id": "ID",
-        "name": "Product Name",
-        "category": "Category",
-        "price": "Price",
-        "stock": "Stock",
         "view": "View",
         "title": "Manage Product",
-        "create": "Create Product"
+        "create": "Create Product",
+        "id": "ID",
+        "name": "Name",
+        "barcode": "Barcode",
+        "status": "Status",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At",
+        "price": "Price",
+        "search_product_name": "Product Name",
+        "search_placeholder": "Enter product name...",
+        "search_status": "Status",
+        "search_status_enum": {
+            "choose": "Select status",
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "clear_filters": "Clear Filters",
+        "search": "Search"
     }
 }

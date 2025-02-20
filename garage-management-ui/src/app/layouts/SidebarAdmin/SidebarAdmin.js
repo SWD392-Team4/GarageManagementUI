@@ -5,10 +5,7 @@ import {
   FaBars,
   FaTimes,
   FaUser,
-  FaCar,
   FaHome,
-  FaMoon,
-  FaSun,
   FaTools,
   FaFileInvoice,
   FaBox,
@@ -16,14 +13,22 @@ import {
   FaLayerGroup,
   FaChevronDown,
   FaChevronRight,
+  FaSignOutAlt,
 } from "react-icons/fa";
-import { ImProfile } from "react-icons/im";
+import { AiOutlineSchedule } from "react-icons/ai";
+
 import { useMediaQuery } from "react-responsive";
 import LanguageSwitcherSideBar from "../../components/LanguageSwitcherSideBar/LanguageSwitcherSideBar";
 
-export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageChange }) {
+export default function SideBarAdmin({
+  isSidebarOpen,
+  toggleSidebar,
+  onLanguageChange,
+}) {
   const { t } = useTranslation("sidebar_admin");
-  const [isDarkMode, setIsDarkMode] = useState(localStorage.getItem("theme") === "dark");
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
   const [openMenu, setOpenMenu] = useState(null);
 
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
@@ -38,16 +43,26 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
     }
   }, [isDarkMode]);
 
+  // Đóng tất cả submenu khi sidebar đóng
+  useEffect(() => {
+    if (!isSidebarOpen) {
+      setOpenMenu(null);
+    }
+  }, [isSidebarOpen]);
+
+
   const toggleSubMenu = (menu) => {
+    if (!isSidebarOpen) return; 
     setOpenMenu(openMenu === menu ? null : menu);
   };
+
 
   return (
     <>
       {isMobile && !isSidebarOpen && (
         <button
           onClick={toggleSidebar}
-          className="fixed top-4 left-4 z-50 p-2 bg-blue-500 text-white rounded-md"
+          className="fixed top-4 left-2 z-50 p-2 bg-blue-500 text-white rounded-md"
         >
           <FaBars size={20} />
         </button>
@@ -60,7 +75,7 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
           }`}
       >
         <div>
-          <div className="flex items-center justify-between px-3 py-3 border-b dark:border-gray-700">
+          <div className="flex items-center justify-end px-3 py-3 border-b dark:border-gray-700">
             {isMobile && isSidebarOpen && (
               <button
                 onClick={toggleSidebar}
@@ -73,24 +88,12 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
             {!isMobile && (
               <button
                 onClick={toggleSidebar}
-                className="p-2 bg-blue-500 text-white rounded-md"
+                className="p-2 bg-blue-500 justify-start text-white rounded-md"
               >
                 {isSidebarOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
               </button>
             )}
 
-            {isSidebarOpen && (
-              <button
-                onClick={() => setIsDarkMode(!isDarkMode)}
-                className="p-2 bg-gray-300 dark:bg-gray-700 rounded-md"
-              >
-                {isDarkMode ? (
-                  <FaSun size={20} className="text-yellow-500" />
-                ) : (
-                  <FaMoon size={20} />
-                )}
-              </button>
-            )}
           </div>
 
           <div className="flex-1 px-2 py-4">
@@ -101,7 +104,9 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
                   className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
                 >
                   <FaHome className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.dashboard")}</span>}
+                  {isSidebarOpen && (
+                    <span className="ml-3">{t("sidebar_admin.dashboard")}</span>
+                  )}
                 </Link>
               </li>
               <li>
@@ -110,7 +115,9 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
                   className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
                 >
                   <FaUser className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.profile")}</span>}
+                  {isSidebarOpen && (
+                    <span className="ml-3">{t("sidebar_admin.profile")}</span>
+                  )}
                 </Link>
               </li>
 
@@ -121,31 +128,52 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
                   className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
                 >
                   <FaTools className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.product")}</span>}
+                  {isSidebarOpen && (
+                    <span className="ml-3">{t("sidebar_admin.product")}</span>
+                  )}
                   {isSidebarOpen && (
                     <span className="ml-auto">
-                      {openMenu === "product" ? <FaChevronDown /> : <FaChevronRight />}
+                      {openMenu === "product" ? (
+                        <FaChevronDown />
+                      ) : (
+                        <FaChevronRight />
+                      )}
                     </span>
                   )}
                 </button>
                 {openMenu === "product" && (
                   <ul className="ml-6 mt-2 space-y-2">
                     <li>
-                      <Link to="/admin/product" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                      <Link
+                        to="/admin/product"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
                         <FaBox className="w-5 h-5" />
-                        <span className="ml-2">{t("sidebar_admin.product_list")}</span>
+                        <span className="ml-2">
+                          {t("sidebar_admin.product_list")}
+                        </span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/admin/category" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                      <Link
+                        to="/admin/productCategory"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
                         <FaLayerGroup className="w-5 h-5" />
-                        <span className="ml-2">{t("sidebar_admin.product_category")}</span>
+                        <span className="ml-2">
+                          {t("sidebar_admin.product_category")}
+                        </span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/admin/brand" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
+                      <Link
+                        to="/admin/brand"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
                         <FaTags className="w-5 h-5" />
-                        <span className="ml-2">{t("sidebar_admin.product_brand")}</span>
+                        <span className="ml-2">
+                          {t("sidebar_admin.product_brand")}
+                        </span>
                       </Link>
                     </li>
                   </ul>
@@ -159,28 +187,97 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
                   className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
                 >
                   <FaFileInvoice className="w-6 h-6" />
-                  {isSidebarOpen && <span className="ml-3">{t("sidebar_admin.invoices")}</span>}
+                  {isSidebarOpen && (
+                    <span className="ml-3">{t("sidebar_admin.invoices")}</span>
+                  )}
                   {isSidebarOpen && (
                     <span className="ml-auto">
-                      {openMenu === "invoice" ? <FaChevronDown /> : <FaChevronRight />}
+                      {openMenu === "invoice" ? (
+                        <FaChevronDown />
+                      ) : (
+                        <FaChevronRight />
+                      )}
                     </span>
                   )}
                 </button>
                 {openMenu === "invoice" && (
                   <ul className="ml-6 mt-2 space-y-2">
                     <li>
-                      <Link to="/admin/invoice-sale" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                        <span className="ml-2">{t("sidebar_admin.invoice_sale")}</span>
+                      <Link
+                        to="/admin/invoice-sale"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <span className="ml-2">
+                          {t("sidebar_admin.invoice_sale")}
+                        </span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/admin/invoice-service" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                        <span className="ml-2">{t("sidebar_admin.invoice_service")}</span>
+                      <Link
+                        to="/admin/invoice-service"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <span className="ml-2">
+                          {t("sidebar_admin.invoice_service")}
+                        </span>
                       </Link>
                     </li>
                     <li>
-                      <Link to="/admin/booking" className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg">
-                        <span className="ml-2">{t("sidebar_admin.invoice_booking")}</span>
+                      <Link
+                        to="/admin/booking"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <span className="ml-2">
+                          {t("sidebar_admin.invoice_booking")}
+                        </span>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </li>
+              {/* Appoinment*/}
+              <li>
+                <button
+                  onClick={() => toggleSubMenu("appoinment")}
+                  className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+                >
+                  <AiOutlineSchedule className="w-6 h-6" />
+                  {isSidebarOpen && (
+                    <span className="ml-3">
+                      {t("sidebar_admin.appointment")}
+                    </span>
+                  )}
+                  {isSidebarOpen && (
+                    <span className="ml-auto">
+                      {openMenu === "appoinment" ? (
+                        <FaChevronDown />
+                      ) : (
+                        <FaChevronRight />
+                      )}
+                    </span>
+                  )}
+                </button>
+                {openMenu === "appoinment" && (
+                  <ul className="ml-6 mt-2 space-y-2">
+                    <li>
+                      <Link
+                        to="appointment"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <span className="ml-2">
+                          {t("sidebar_admin.re-appointment")}
+                        </span>
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link
+                        to="create-appointment"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <span className="ml-2">
+                          {t("sidebar_admin.ce-appointment")}
+                        </span>
                       </Link>
                     </li>
                   </ul>
@@ -188,6 +285,13 @@ export default function SideBarAdmin({ isSidebarOpen, toggleSidebar, onLanguageC
               </li>
             </ul>
           </div>
+        </div>
+        {/* Language Switcher và Logout */}
+        <div className="p-2 border-t dark:border-gray-700">
+          <LanguageSwitcherSideBar isSidebarOpen={isSidebarOpen} onLanguageChange={onLanguageChange} />
+          <button className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
+            <FaSignOutAlt className="mr-2" /> {isSidebarOpen && t("sidebar_admin.logout")}
+          </button>
         </div>
       </aside>
     </>

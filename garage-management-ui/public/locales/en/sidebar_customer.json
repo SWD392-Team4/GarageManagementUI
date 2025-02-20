@@ -6,6 +6,8 @@
   "menu": {
     "personal_info": "Personal Information",
     "order_history": "Order History",
-    "current_orders": "Current Orders"
+    "current_orders": "Current Orders",
+    "settings" : "Settings",
+    "logout" : "Logout"
   }
 }

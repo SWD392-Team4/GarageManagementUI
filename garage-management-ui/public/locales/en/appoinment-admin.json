@@ -1,0 +1,38 @@
+{
+  "title1": "ID",
+  "title2": "Customer",
+  "title3": "Employee",
+  "title4": "Type",
+  "title5": "Status",
+  "title6": "Expected Price",
+  "title7": "Estimated Time",
+  "title8": "Actual Time",
+  "title9": "Estimated End Time",
+  "title10": "Actual End Time",
+  "title11": "Action",
+  "list-services": {
+    "title1": "ID",
+    "title2": "Service",
+    "title3": "Employee",
+    "title4": "Estimated End Time",
+    "title5": "Actual End Time",
+    "title6": "Price",
+    "title7": "Created Time",
+    "title8": "Update Time",
+    "title9": "Status",
+    "title10": "Service Note"
+  },
+  "list-packages": {
+    "title1": "ID",
+    "title2": "Package Name",
+    "title3": "Validity Period",
+    "title4": "Time Unit",
+    "title5": "Usage Limit",
+    "title6": "Usage Count",
+    "title7": "Start Date",
+    "title8": "End Time",
+    "title9": "Status",
+    "title10": "Price",
+    "title11": "Service Note"
+  }
+}

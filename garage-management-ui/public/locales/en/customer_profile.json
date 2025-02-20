@@ -1,5 +1,5 @@
 {
-    "title": "Customer Information",
+    "title": "Profile",
     "edit_button": "Edit",
     "cancel_button": "Cancel",
     "update_button": "Update",
@@ -9,6 +9,8 @@
     },
     "personal_info": {
         "title": "Personal Information",
+        "last_name": "Last Name",
+        "first_name": "First Name",
         "email": "Email",
         "phone": "Phone Number",
         "address": "Address"
@@ -20,5 +22,20 @@
             "Purchased iPhone 15 Pro Max - 30,000,000đ",
             "Purchased AirPods Pro 2 - 5,000,000đ"
         ]
+    },
+    "forgot_password": {
+        "title": "Forgot Password",
+        "description": "If you have forgotten your password, click the button below to reset it.",
+        "button": "Reset Password",
+        "success": "A reset link has been sent to your email."
+    },
+    "change_password": {
+        "title": "Change Password",
+        "current": "Current Password",
+        "new": "New Password",
+        "confirm": "Confirm New Password",
+        "button": "Change Password",
+        "error": "New passwords do not match!",
+        "success": "Password changed successfully!"
     }
 }

@@ -25,6 +25,8 @@ const componentMap = {
   LayoutLoginWork: lazy(() =>
     import("../layouts/LayoutLoginEmployee/LayoutLoginWork")
   ),
+  ServicesSection: lazy(() => import("../pages/Services/ServicesSection")),
+  ServiceCategory: lazy(() => import("../pages/Services/ServiceCategory")),
   SignIn: lazy(() => import("../pages/AuthEmployee/partials/LoginPage")),
   ResetPasswordWorker: lazy(() =>
     import("../pages/AuthEmployee/partials/ResetPassword")
@@ -46,7 +48,32 @@ const componentMap = {
   ManageProduct: lazy(() => import("../pages/ManageProduct/ManageProduct")),
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
+  ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
+  ManageCateProduct: lazy(() => import("../pages/ManageCateProduct/ManageCateProduct")),
   ManageBooking: lazy(() => import("../pages/ManageBooking/ManageBooking")),
+  LayoutAppointment: lazy(() =>
+    import("../pages/AdminManageAppoinment/LayoutAppointment")
+  ),
+  appointmentDetail: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/appointmentDetail")
+  ),
+
+  AllAppointment: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/AllAppointment")
+  ),
+  Canceled: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/Canceled")
+  ),
+  Completed: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/Completed")
+  ),
+  InProgess: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/InProgess")
+  ),
+  Waiting: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/Waiting")
+  ),
+
   CustomerProductPage: lazy(() =>
     import("../pages/CustomerProduct/CustomerProductPage")
   ),

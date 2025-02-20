@@ -1,0 +1,40 @@
+{
+    "manage_brand": {
+        "title": "Manage Brand",
+        "id": "ID",
+        "name": "Brand Name",
+        "status": "Status",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At",
+        "view": "View",
+        "create": "Add Brand",
+        "createBrand": "Create New Brand",
+        "brandName": "Brand Name",
+        "linkLogo": "Logo URL",
+        "cancel": "Cancel",
+        "save": "Save",
+        "updateBrand": "Update Brand",
+        "statusActive": "Active",
+        "statusInactive": "Inactive",
+        "saving": "Saving...",
+        "edit": "Edit",
+        "active": "Active",
+        "inactive": "Inactive",
+        "error": {
+            "requiredFields": "Please fill in all fields.",
+            "updateFailed": "Failed to update brand. Try again!"
+        },
+        "search_status_enum": {
+            "choose": "Choose Status",
+            "active": "Active",
+            "inactive": "Inactive",
+            "none": "None"
+        },
+        "search_brand_name": "Search Brand Name",
+        "search_status": "Search Status",
+        "search_placeholder": "Enter brand name...",
+        "clear_filters": "Clear Filters",
+        "search": "Search",
+        "clean": "Clean"
+    }
+}

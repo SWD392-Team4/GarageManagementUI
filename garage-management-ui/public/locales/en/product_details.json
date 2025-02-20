@@ -19,12 +19,17 @@
         "engine_type": "Engine Type",
         "fuel_efficiency": "Fuel Efficiency",
         "installation": "Installation Guide",
+        "barcode": "Product Barcode",
+        "status": "Status",
+        "created_at": "Created At",
+        "updated_at": "Updated At",
+        "image": "Product Image",
         "view": "View",
         "title": "Product Details",
         "list": "Product List",
         "back": "Back to Product List",
         "not_found": "Product not found",
-        "edit" : "Edit",
-        "save" : "Save"
+        "edit": "Edit",
+        "save": "Save"
     }
 }

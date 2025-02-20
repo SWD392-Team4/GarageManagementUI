@@ -1,0 +1,73 @@
+{
+  "title": "Dịch Vụ Chất Lượng",
+  "pageTitle": "Dịch Vụ",
+  "pageTitle2": "Loại dịch vụ",
+  "home": "Trang chủ",
+  "subtitle": "Chúng tôi cung cấp dịch vụ lợp mái chất lượng",
+  "services": {
+    "inspect": {
+      "title": "Kiểm tra",
+      "description": "Kiểm tra kỹ lưỡng các vấn đề và hư hỏng tiềm ẩn"
+    },
+    "replace": {
+      "title": "Thay thế",
+      "description": "Thay thế các bộ phận bị hư hỏng hoặc lỗi thời"
+    },
+    "lubricate": {
+      "title": "Bôi trơn",
+      "description": "Đảm bảo vận hành trơn tru với dầu bôi trơn"
+    },
+    "align": {
+      "title": "Căn chỉnh",
+      "description": "Điều chỉnh vị trí để đạt hiệu suất tối ưu"
+    },
+    "refill": {
+      "title": "Nạp",
+      "description": "Bổ sung các chất lỏng và vật liệu cần thiết"
+    },
+    "repair": {
+      "title": "Sửa chữa",
+      "description": "Khắc phục các hư hỏng đã xác định"
+    },
+    "clean": {
+      "title": "Làm sạch",
+      "description": "Duy trì vệ sinh để nâng cao hiệu quả"
+    },
+    "upgrade": {
+      "title": "Nâng cấp",
+      "description": "Cải thiện chức năng với giải pháp hiện đại"
+    },
+    "restore": {
+      "title": "Phục hồi",
+      "description": "Khôi phục điều kiện và chất lượng ban đầu"
+    },
+    "update": {
+      "title": "Cập nhật phần mềm",
+      "description": "Cài đặt các bản cập nhật và cải tiến hệ thống"
+    },
+    "polish": {
+      "title": "Đánh bóng",
+      "description": "Nâng cao thẩm mỹ với đánh bóng bề mặt"
+    },
+    "protect": {
+      "title": "Bảo vệ",
+      "description": "Che chắn bộ phận khỏi hư hỏng bên ngoài"
+    },
+    "deodorize": {
+      "title": "Khử mùi",
+      "description": "Loại bỏ mùi hôi và làm tươi mới môi trường"
+    },
+    "condition": {
+      "title": "Dưỡng",
+      "description": "Bảo dưỡng vật liệu để duy trì độ bền lâu dài"
+    },
+    "remove": {
+      "title": "Loại bỏ",
+      "description": "Loại bỏ các yếu tố không cần thiết hoặc gây hại"
+    },
+    "restoreLighting": {
+      "title": "Phục hồi ánh sáng",
+      "description": "Đảm bảo độ sáng và tầm nhìn phù hợp"
+    }
+  }
+}
