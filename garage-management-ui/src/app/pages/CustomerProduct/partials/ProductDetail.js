@@ -1,9 +1,11 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
   const { id } = useParams();
+  const {t} = useTranslation("customer_product_detail");
   const product = {
     id: 101,
     name: "Lọc dầu động cơ",
@@ -112,16 +114,16 @@ const ProductDetail = () => {
           </div>
           <div className="text-base lg:leading-tight leading-normal text-gray-600 mt-7 mb-8">
             <p className="text-base leading-4 mt-7 text-gray-600">
-              Product Code: {product.code}
+              {t("customer_product_detail.product_code")}: {product.code}
             </p>
             <p className="text-base leading-4 mt-4 text-gray-600">
-              Brand: {product.brand}
+            {t("customer_product_detail.product_brand")}: {product.brand}
             </p>
             <p className="text-base leading-4 mt-4 text-gray-600">
-              Made in: {product.manufacture}
+            {t("customer_product_detail.product_made_in")}: {product.manufacture}
             </p>
             <p className="text-base leading-4 mt-4 text-gray-600">
-              Warranty Period: {product.warranty}
+            {t("customer_product_detail.product_warranty")}: {product.warranty}
             </p>
           </div>
 
@@ -141,13 +143,13 @@ const ProductDetail = () => {
             transition
 					"
           >
-            Book Now
+            {t("customer_product_detail.product_book_now")}
           </button>
         </div>
       </div>
       <div className="mt-10 border-t border-gray-200 pt-6 ">
         <h2 className="w-full text-2xl font-semibold text-gray-800 mb-4 bg-gray-100 px-4 py-2 rounded-md inline-block">
-          Product's Details
+        {t("customer_product_detail.product_detail")}
         </h2>
         {/* <ReactMarkdown className="prose max-w-none text-gray-600">
             {product.description}

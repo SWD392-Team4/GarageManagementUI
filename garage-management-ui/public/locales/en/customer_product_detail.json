@@ -1,0 +1,11 @@
+{
+    "customer_product_detail": {
+        "product_code": "Product Code",
+        "product_brand": "Product Brand",
+        "product_made_in": "Made In",
+        "product_book_now":"Book Now",
+        "product_warranty": "Warranty Period",
+        "product_detail": "Product Detail",
+        "product_list_title": "Our Products"
+    }
+}

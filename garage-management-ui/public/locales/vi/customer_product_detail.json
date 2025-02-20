@@ -1,0 +1,11 @@
+{
+    "customer_product_detail": {
+        "product_code": "Mã Sản Phẩm",
+        "product_brand": "Hãng Sản Xuất",
+        "product_made_in": "Xuất Xứ",
+        "product_book_now":"Đặt Ngay",
+        "product_warranty": "Thời gian bảo hành",
+        "product_detail": "Chi tiết sản phẩm",
+        "product_list_title": "Sản phẩm của chúng tôi"
+    }
+}

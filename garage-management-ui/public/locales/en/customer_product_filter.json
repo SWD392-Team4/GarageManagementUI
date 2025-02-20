@@ -1,0 +1,12 @@
+{
+    "customer_product_filter": {
+        "title": "Product Filter",
+        "search": "Search...",
+        "category": "Category",
+        "category_all": "All Categories",
+        "brand": "Brand",
+        "brand_all": "All Brands",
+        "price_range": "Price Range",
+        "apply": "Apply Filters"
+    }
+}
