@@ -10,9 +10,8 @@ const PageTitle = ({ image, title, title1, subtitle, height }) => {
         <img
           src={image || anh1}
           alt="Title"
-          className={`w-full h-[200px] md:h-[${
-            height || 300
-          }px] object-contain`}
+          className="w-full object-contain opacity-30"
+          style={{ height: height ? `${height}px` : "300px" }}
         />
       </div>
 

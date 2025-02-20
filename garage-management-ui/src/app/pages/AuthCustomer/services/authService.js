@@ -47,7 +47,7 @@ export const fetchAccountProfile = async (userService) => {
       if (
         newUserData.LastName !== sAccount.value.LastName ||
         newUserData.FirstName !== sAccount.value.FirstName ||
-        newUserData.Image !== sAccount.value.Image ||
+        newUserData.ImageLink !== sAccount.value.ImageLink ||
         newUserData.Email !== sAccount.value.Email ||
         newUserData.PhoneNumber !== sAccount.value.PhoneNumber ||
         newUserData.Gender !== sAccount.value.Gender ||

@@ -1,41 +1,77 @@
 {
-    "title": "Profile",
-    "edit_button": "Edit",
-    "cancel_button": "Cancel",
-    "update_button": "Update",
-    "profile": {
-        "name": "Name",
-        "role": "VIP Customer"
-    },
-    "personal_info": {
-        "title": "Personal Information",
-        "last_name": "Last Name",
-        "first_name": "First Name",
-        "email": "Email",
-        "phone": "Phone Number",
-        "address": "Address"
-    },
-    "transaction_history": {
-        "title": "Transaction History",
-        "transactions": [
-            "Purchased MacBook Pro 2023 - 35,000,000đ",
-            "Purchased iPhone 15 Pro Max - 30,000,000đ",
-            "Purchased AirPods Pro 2 - 5,000,000đ"
-        ]
-    },
-    "forgot_password": {
-        "title": "Forgot Password",
-        "description": "If you have forgotten your password, click the button below to reset it.",
-        "button": "Reset Password",
-        "success": "A reset link has been sent to your email."
-    },
-    "change_password": {
-        "title": "Change Password",
-        "current": "Current Password",
-        "new": "New Password",
-        "confirm": "Confirm New Password",
-        "button": "Change Password",
-        "error": "New passwords do not match!",
-        "success": "Password changed successfully!"
-    }
+  "title": "Profile",
+  "edit_button": "Edit",
+  "cancel_button": "Cancel",
+  "update_button": "Update",
+  "profile": {
+    "name": "Name",
+    "role": "VIP Customer"
+  },
+  "personal_info": {
+    "title": "Personal Information",
+    "last_name": "Last Name",
+    "first_name": "First Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "address": "Address",
+    "error": "Change information failed!",
+    "success": "Change information successfully!",
+    "imgSuccess": "Updating avatar successfully!",
+    "imgError": "Updating image failed!",
+    "ErrorServer": "Error while updating image.",
+    "successMessagePass": "Please check your email to reset your password.",
+    "errorMessagePass": "An error occurred"
+  },
+  "transaction_history": {
+    "title": "Transaction History",
+    "transactions": [
+      "Purchased MacBook Pro 2023 - 35,000,000đ",
+      "Purchased iPhone 15 Pro Max - 30,000,000đ",
+      "Purchased AirPods Pro 2 - 5,000,000đ"
+    ]
+  },
+  "forgot_password": {
+    "title": "Forgot Password",
+    "description": "If you have forgotten your password, click the button below to reset it.",
+    "button": "Reset Password",
+    "success": "A reset link has been sent to your email."
+  },
+  "change_password": {
+    "title": "Change Password",
+    "current": "Current Password",
+    "new": "New Password",
+    "loading": "In progress . . ",
+    "confirm": "Confirm New Password",
+    "button": "Change Password",
+    "error": "Current passwords invalid!",
+    "success": "Password changed successfully!"
+  },
+
+  "validation": {
+    "userNameRequired": "Please enter a username.",
+    "firstNameRequired": "Please enter your first name.",
+    "lastNameRequired": "Please enter your last name.",
+    "emailRequired": "Please enter your email.",
+    "emailInvalid": "Invalid email format.",
+    "phoneNumberRequired": "Please enter your phone number.",
+    "phoneNumberInvalid": "Phone number must contain only digits.",
+    "phoneNumberMin": "Phone number must be at least 10 digits.",
+    "passwordRequired": "Please enter a password.",
+    "passwordMin": "Password must be at least 10 characters long.",
+    "passwordUppercase": "Password must contain at least one uppercase letter.",
+    "passwordLowercase": "Password must contain at least one lowercase letter.",
+    "passwordSpecialCharacter": "Password must contain at least one special character.",
+    "confirmPasswordRequired": "Please confirm your password.",
+    "confirmPasswordMismatch": "Passwords do not match.",
+    "passwordNumberRequired ": "Password must contain at least one number."
+  },
+  "passwordRequirements": {
+    "title": "Password requirement",
+    "re1": "At least 10 characters",
+    "re2": "At least 1 uppercase letter",
+    "re3": "At least 1 lowercase letter",
+    "re4": "At least 1 special character",
+    "re5": "At least 1 number",
+    "passwordsMatch": "Both passwords match"
+  }
 }

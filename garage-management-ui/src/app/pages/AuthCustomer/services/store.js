@@ -5,7 +5,7 @@ export const sAccount = signify(
     Id: "",
     FirstName: "",
     LastName: "",
-    Image: "",
+    ImageLink: "",
     Email: "",
     PhoneNumber: "",
     Gender: null,

@@ -1,41 +1,76 @@
 {
-    "title": "Hồ sơ",
-    "edit_button": "Chỉnh Sửa",
-    "cancel_button": "Hủy",
-    "update_button": "Cập Nhật",
-    "profile": {
-        "name": "Tên",
-        "role": "Khách Hàng VIP"
-    },
-    "personal_info": {
-        "title": "Thông Tin Cá Nhân",
-        "last_name": "Tên",
-        "first_name": "Họ",
-        "email": "Email",
-        "phone": "Số Điện Thoại",
-        "address": "Địa Chỉ"
-    },
-    "transaction_history": {
-        "title": "Lịch Sử Giao Dịch",
-        "transactions": [
-            "Mua MacBook Pro 2023 - 35.000.000đ",
-            "Mua iPhone 15 Pro Max - 30.000.000đ",
-            "Mua AirPods Pro 2 - 5.000.000đ"
-        ]
-    },
-    "forgot_password": {
-        "title": "Quên Mật Khẩu",
-        "description": "Nếu bạn quên mật khẩu, nhấn vào nút bên dưới để đặt lại.",
-        "button": "Đặt Lại Mật Khẩu",
-        "success": "Một liên kết đặt lại mật khẩu đã được gửi đến email của bạn."
-    },
-    "change_password": {
-        "title": "Đổi Mật Khẩu",
-        "current": "Mật Khẩu Hiện Tại",
-        "new": "Mật Khẩu Mới",
-        "confirm": "Xác Nhận Mật Khẩu Mới",
-        "button": "Đổi Mật Khẩu",
-        "error": "Mật khẩu mới không khớp!",
-        "success": "Mật khẩu đã được thay đổi thành công!"
-    }
+  "title": "Hồ sơ",
+  "edit_button": "Chỉnh Sửa",
+  "cancel_button": "Hủy",
+  "update_button": "Cập Nhật",
+  "profile": {
+    "name": "Tên",
+    "role": "Khách Hàng VIP"
+  },
+  "personal_info": {
+    "title": "Thông Tin Cá Nhân",
+    "last_name": "Tên",
+    "first_name": "Họ",
+    "email": "Email",
+    "phone": "Số Điện Thoại",
+    "address": "Địa Chỉ",
+    "error": "Thay đổi thông tin không thành công!",
+    "success": "Thay đổi thông tin thành công!",
+    "imgSuccess": "Cập nhật ảnh đại diện thành công!",
+    "imgError": "Cập nhật ảnh thất bại!",
+    "ErrorServer": "Lỗi trong quá trình cập nhật ảnh.",
+    "successMessagePass": "Vui lòng kiểm tra email của bạn để đặt lại mật khẩu.",
+    "errorMessagePass": "Đã xảy ra lỗi"
+  },
+  "transaction_history": {
+    "title": "Lịch Sử Giao Dịch",
+    "transactions": [
+      "Mua MacBook Pro 2023 - 35.000.000đ",
+      "Mua iPhone 15 Pro Max - 30.000.000đ",
+      "Mua AirPods Pro 2 - 5.000.000đ"
+    ]
+  },
+  "forgot_password": {
+    "title": "Quên Mật Khẩu",
+    "description": "Nếu bạn quên mật khẩu, nhấn vào nút bên dưới để đặt lại.",
+    "button": "Đặt Lại Mật Khẩu",
+    "success": "Một liên kết đặt lại mật khẩu đã được gửi đến email của bạn."
+  },
+  "change_password": {
+    "title": "Đổi Mật Khẩu",
+    "current": "Mật Khẩu Hiện Tại",
+    "new": "Mật Khẩu Mới",
+    "confirm": "Xác Nhận Mật Khẩu Mới",
+    "loading": "Đang thực hiện . . ",
+    "button": "Đổi Mật Khẩu",
+    "error": "Mật khẩu hiện tại sai!",
+    "success": "Mật khẩu đã được thay đổi thành công!"
+  },
+  "validation": {
+    "userNameRequired": "Vui lòng nhập tên đăng nhập.",
+    "firstNameRequired": "Vui lòng nhập họ.",
+    "lastNameRequired": "Vui lòng nhập tên.",
+    "emailRequired": "Vui lòng nhập email.",
+    "emailInvalid": "Định dạng email không hợp lệ.",
+    "phoneNumberRequired": "Vui lòng nhập số điện thoại.",
+    "phoneNumberInvalid": "Số điện thoại chỉ được chứa số.",
+    "phoneNumberMin": "Số điện thoại phải có ít nhất 10 chữ số.",
+    "passwordRequired": "Vui lòng nhập mật khẩu.",
+    "passwordMin": "Mật khẩu phải có ít nhất 10 ký tự.",
+    "passwordUppercase": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa.",
+    "passwordLowercase": "Mật khẩu phải chứa ít nhất một chữ cái viết thường.",
+    "passwordSpecialCharacter": "Mật khẩu phải chứa ít nhất một ký tự đặc biệt.",
+    "confirmPasswordRequired": "Vui lòng xác nhận mật khẩu.",
+    "confirmPasswordMismatch": "Mật khẩu xác nhận không khớp.",
+    "passwordNumberRequired ": "Mật khẩu phải chứa ít nhất số."
+  },
+  "passwordRequirements": {
+    "title": "Yêu cầu mật khẩu",
+    "re1": "Ít nhất 10 kí tự",
+    "re2": "Có ít nhất 1 chữ hoa",
+    "re3": "Có ít nhất 1 chữ thường",
+    "re4": "Có ít nhất 1 kí tự đặc biệt",
+    "re5": "Có ít nhất 1 chữ số",
+    "passwordsMatch": "Hai mật khẩu trùng khớp"
+  }
 }
