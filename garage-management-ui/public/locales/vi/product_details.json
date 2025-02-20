@@ -1,6 +1,6 @@
 {
     "product_details": {
-        "id": "Mã sản phẩm",
+        "id": "ID",
         "name": "Tên sản phẩm",
         "category": "Danh mục",
         "price": "Giá",
@@ -17,12 +17,17 @@
         "material": "Chất liệu",
         "origin": "Xuất xứ",
         "engine_type": "Loại động cơ",
-        "fuel_efficiency": "Tiết kiệm nhiên liệu",
+        "fuel_efficiency": "Hiệu suất nhiên liệu",
         "installation": "Hướng dẫn lắp đặt",
+        "barcode": "Mã vạch sản phẩm",
+        "status": "Trạng thái",
+        "created_at": "Ngày tạo",
+        "updated_at": "Ngày cập nhật",
+        "image": "Hình ảnh sản phẩm",
         "view": "Xem",
         "title": "Chi tiết sản phẩm",
         "list": "Danh sách sản phẩm",
-        "back": "Quay lại danh sách",
+        "back": "Quay lại danh sách sản phẩm",
         "not_found": "Không tìm thấy sản phẩm",
         "edit": "Chỉnh sửa",
         "save": "Lưu"

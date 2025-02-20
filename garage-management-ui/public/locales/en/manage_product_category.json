@@ -1,0 +1,31 @@
+{
+    "manage_product_category": {
+        "title": "Manage Product Category",
+        "create": "Add Product Category",
+        "id": "ID",
+        "name": "Name",
+        "status": "Status",
+        "createdAt": "Create Date",
+        "updatedAt": "Update Date",
+        "save": "Update",
+        "edit": "Edit",
+        "linkLogo": "URL Logo",
+        "active": "Active",
+        "inactive": "Inactive",
+        "create_title": "Create New Category",
+        "category": "Category Name",
+        "required": "Category name is required",
+        "cancel": "Cancel",
+        "saving": "Saving...",
+        "search_brand_name": "Category Name",
+        "search_placeholder": "Enter category name...",
+        "search_status": "Status",
+        "search_status_enum": {
+            "choose": "Choose Status",
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "clear_filters": "Clear Filters",
+        "search": "Search"
+    }
+}
