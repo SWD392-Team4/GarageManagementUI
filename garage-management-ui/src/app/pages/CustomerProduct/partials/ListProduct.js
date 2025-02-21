@@ -5,28 +5,32 @@ const ListProduct = ({ products }) => {
   const navigate = useNavigate();
   const { t } = useTranslation("customer_product_detail");
   return (
-    <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+    <div className="min-h-screen p-6">
+    <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {products.map((item) => {
         return (
           <div
             onClick={() => navigate(`/product/${item.Id}`)}
             key={item.Id}
-            className=" border rounded-2xl shadow-lg p-4 flex flex-col items-center bg-white transition transform hover:-translate-y-2 hover:shadow-xl cursor-pointer "
+            className=" bg-white border border-gray-300 rounded-2xl shadow-md p-4 flex flex-col items-center 
+                          transition transform hover:scale-105 hover:shadow-2xl cursor-pointer "
           >
             <img
               src={item.ProductImg || "https://via.placeholder.com/150"}
               alt={item.ProductName}
               className="w-full h-40 object-contain rounded-md"
             />
-            <hr className="w-full border-t mt-2 outline-red" />
-            <h3 className="text-lg font-semibold mt-2">{item.ProductName}</h3>
-            <p className="text-gray-600 ">{item.ProductPrice}đ</p>
-            <button className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition">
+            <hr className="w-full border-t mt-2" />
+            <h3 className="text-lg font-semibold text-black mt-2">{item.ProductName}</h3>
+            <p className="text-gray-600 font-semibold ">{item.ProductPrice}đ</p>
+            <button className="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg transition 
+                   hover:bg-red-600 hover:text-white">
               {t("customer_product_detail.product_book_now")}
             </button>
           </div>
         );
       })}
+    </div>
     </div>
   );
 };

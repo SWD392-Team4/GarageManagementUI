@@ -112,7 +112,7 @@ const FilterBar = ({ onFilterChange }) => {
       {/* Apply Filters Button */}
       <button
         onClick={applyFilters}
-        className="w-full bg-red-500 text-white py-3 px-4 rounded-md hover:bg-red-600 transition duration-300 flex items-center justify-center"
+        className="w-full bg-black text-white py-3 px-4 rounded-md border border-black hover:bg-red-500 hover:text-white transition duration-300 flex items-center justify-center"
       >
         <FaSave className="mr-2" />
         {t("customer_product_filter.apply")}
