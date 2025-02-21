@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaSearch, FaSave } from "react-icons/fa";
-
-const FilterBar = ({ categories = [], brands = [], onFilterChange }) => {
+import { getAllCategories, getAllBrands } from "../services/CustomerProductService";
+const FilterBar = ({ onFilterChange }) => {
   const {t} = useTranslation("customer_product_filter");
+  const [categories, setCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
   const [filters, setFilters] = useState({
     searchTerm: "",
     category: "",
@@ -22,7 +24,22 @@ const FilterBar = ({ categories = [], brands = [], onFilterChange }) => {
     onFilterChange(filters);
     console.log("Filters Applied:", filters);
   };
+  useEffect(() => {
+    const fetchFilters = async () => {
+      const categoryList = await getAllCategories();
+      const brandList = await getAllBrands();
+      
+    if (categoryList) {
+      setCategories(categoryList);
+    }
 
+    if (brandList) {
+      setBrands(brandList);
+    }
+    };
+  
+    fetchFilters();
+  }, []);
   return (
     <div className="  rounded-lg  w-full  mx-auto">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">{t("customer_product_filter.title")}</h2>
