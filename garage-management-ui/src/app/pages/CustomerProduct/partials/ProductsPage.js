@@ -1,13 +1,12 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ListProduct from "./ListProduct";
 import Pagination from "../../../components/Pagination/Pagination";
 import { useTranslation } from "react-i18next";
 import FilterBar from "./FilterBar";
 import { BsSliders } from "react-icons/bs";
 import { getAllProducts } from "../services/CustomerProductService";
-import LoaddingPage from "../../../layouts/LoadingPage";
+import LoadingSpinner from "../partials/LoadingSpinner";
 const ProductsPage = () => {
-  
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [appliedFilters, setAppliedFilters] = useState({});
   const [loading, setLoading] = useState(true);
@@ -24,10 +23,13 @@ const ProductsPage = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true); // Show loader before fetching
-        const response = await getAllProducts(paging.currentPage, 12, appliedFilters);
-        console.log("Applied filters: ", appliedFilters)
+        const response = await getAllProducts(
+          paging.currentPage,
+          12,
+          appliedFilters
+        );
+        console.log("Applied filters: ", appliedFilters);
         if (response?.value) {
-          
           setFilteredProducts(response.value);
 
           setPaging({
@@ -41,7 +43,7 @@ const ProductsPage = () => {
         }
       } catch (error) {
         console.error("Error fetching products:", error);
-      }finally {
+      } finally {
         setLoading(false); // Hide loader after fetching
       }
     };
@@ -49,7 +51,6 @@ const ProductsPage = () => {
     fetchProducts();
   }, [paging.currentPage, appliedFilters]);
 
-  
   const handleFilterChange = (filters) => {
     setAppliedFilters(filters);
     setPaging((prev) => ({
@@ -60,59 +61,58 @@ const ProductsPage = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen py-6">
-    <div className="container mx-auto px-4 p-6">
-      <h1 className="text-4xl font-bold mb-6 text-center p-6">
-        {t("customer_product_detail.product_list_title")}
-      </h1>
-      {loading ? ( // Show loading screen while fetching products
-          <LoaddingPage />
-        ) : (
-      <div className="flex flex-col md:flex-row gap-4">
-        <div
-          className={`lg:block hidden md:w-1/4 w-full bg-white p-4 rounded-lg shadow-md sticky top-4 h-fit`}
-        >
-          <FilterBar onFilterChange={handleFilterChange} />
-        </div>
-
-        <div className=" w-full">
-          <ListProduct products={filteredProducts} />
-
-          <div className="mt-6 flex justify-center">
-            <Pagination
-              currentPage={paging.currentPage}
-              totalPages={paging.totalPages}
-              hasPrevious={paging.hasPrevious}
-              hasNext={paging.hasNext}
-              onPageChange={(page) =>
-                setPaging((prev) => ({ ...prev, currentPage: page }))
-              }
-            />
-          </div>
-        </div>
-      </div>
-    )}
-            
-      <button
-        className="lg:hidden fixed bottom-4 right-4 bg-red-600 text-white p-3 rounded-full shadow-lg"
-        onClick={() => setShowFilter(true)}
-      >
-        <BsSliders size={24} />
-      </button>
-
-      {showFilter && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-6 w-11/12 max-w-lg rounded-lg shadow-lg relative">
-            <button
-              className="absolute top-2 right-3 text-gray-600 text-2xl"
-              onClick={() => setShowFilter(false)}
+      <div className="container mx-auto px-4 p-6">
+        <h1 className="text-4xl font-bold mb-6 text-center p-6">
+          {t("customer_product_detail.product_list_title")}
+        </h1>
+        
+          
+          <div className="flex flex-col md:flex-row gap-4">
+            <div
+              className={`lg:block hidden md:w-1/4 w-full bg-white p-4 rounded-lg shadow-md sticky top-4 h-fit`}
             >
-              &times;
-            </button>
-            <FilterBar onFilterChange={handleFilterChange} />
+              <FilterBar onFilterChange={handleFilterChange} />
+            </div>
+
+            <div className="w-full">
+            {loading ? <LoadingSpinner /> : <ListProduct products={filteredProducts} />}
+
+              <div className="mt-6 flex justify-center">
+                <Pagination
+                  currentPage={paging.currentPage}
+                  totalPages={paging.totalPages}
+                  hasPrevious={paging.hasPrevious}
+                  hasNext={paging.hasNext}
+                  onPageChange={(page) =>
+                    setPaging((prev) => ({ ...prev, currentPage: page }))
+                  }
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        
+
+        <button
+          className="lg:hidden fixed bottom-4 right-4 bg-red-600 text-white p-3 rounded-full shadow-lg"
+          onClick={() => setShowFilter(true)}
+        >
+          <BsSliders size={24} />
+        </button>
+
+        {showFilter && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 w-11/12 max-w-lg rounded-lg shadow-lg relative">
+              <button
+                className="absolute top-2 right-3 text-gray-600 text-2xl"
+                onClick={() => setShowFilter(false)}
+              >
+                &times;
+              </button>
+              <FilterBar onFilterChange={handleFilterChange} />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
