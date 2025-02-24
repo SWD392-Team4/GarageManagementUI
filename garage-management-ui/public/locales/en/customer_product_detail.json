@@ -6,6 +6,9 @@
         "product_book_now":"Book Now",
         "product_warranty": "Warranty Period",
         "product_detail": "Product Detail",
-        "product_list_title": "Our Products"
+        "product_list_title": "Our Products",
+        "product_list_heading":"Products",
+        "product_list_heading_home":"Home",
+        "product_detail_heading":"Details"
     }
 }

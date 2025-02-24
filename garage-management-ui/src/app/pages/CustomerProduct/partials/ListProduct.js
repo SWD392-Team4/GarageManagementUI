@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 const ListProduct = ({ products }) => {
   const navigate = useNavigate();
+  const placeholder = "/assets/img/service_img_1.jpg";
   const { t } = useTranslation("customer_product_detail");
   return (
     <div className="min-h-screen p-6">
@@ -16,7 +17,7 @@ const ListProduct = ({ products }) => {
                           transition transform hover:scale-105 hover:shadow-2xl cursor-pointer "
           >
             <img
-              src={item.ProductImg || "https://via.placeholder.com/150"}
+              src={item.ProductImg || placeholder}
               alt={item.ProductName}
               className="w-full h-40 object-contain rounded-md"
             />

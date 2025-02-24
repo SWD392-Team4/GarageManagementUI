@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo} from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import ListProduct from "./ListProduct";
 import Pagination from "../../../components/Pagination/Pagination";
 import { useTranslation } from "react-i18next";
@@ -8,7 +9,6 @@ import { getAllProducts } from "../services/CustomerProductService";
 import LoadingSpinner from "../partials/LoadingSpinner";
 const ProductsPage = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
-  const [appliedFilters, setAppliedFilters] = useState({});
   const [loading, setLoading] = useState(true);
   const [paging, setPaging] = useState({
     currentPage: 1,
@@ -17,18 +17,26 @@ const ProductsPage = () => {
     hasNext: false,
   });
   const [showFilter, setShowFilter] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   const { t } = useTranslation("customer_product_detail");
-
+   // Extract filters from URL parameters
+   const appliedFilters = useMemo(() => ({ //useMemo ensures that the object is only created when the URL parameters change, avoid rerenders
+    searchTerm: searchParams.get("searchTerm") || "",
+    category: searchParams.get("category") || "",
+    brand: searchParams.get("brand") || "",
+    price: searchParams.get("price") ? searchParams.get("price").split(",").map(Number) : [0, 500000],
+  }), [searchParams]);
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        setLoading(true); // Show loader before fetching
+        setLoading(true); 
         const response = await getAllProducts(
           paging.currentPage,
           12,
           appliedFilters
         );
-        console.log("Applied filters: ", appliedFilters);
+        
         if (response?.value) {
           setFilteredProducts(response.value);
 
@@ -44,7 +52,7 @@ const ProductsPage = () => {
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
-        setLoading(false); // Hide loader after fetching
+        setLoading(false); 
       }
     };
 
@@ -52,10 +60,15 @@ const ProductsPage = () => {
   }, [paging.currentPage, appliedFilters]);
 
   const handleFilterChange = (filters) => {
-    setAppliedFilters(filters);
+    setSearchParams({
+      searchTerm: filters.searchTerm,
+      category: filters.category,
+      brand: filters.brand,
+      price: filters.price.join(","),
+    });
     setPaging((prev) => ({
       ...prev,
-      currentPage: 1, // Reset to first page on filter change
+      currentPage: 1, 
     }));
   };
 
@@ -71,7 +84,7 @@ const ProductsPage = () => {
             <div
               className={`lg:block hidden md:w-1/4 w-full bg-white p-4 rounded-lg shadow-md sticky top-4 h-fit`}
             >
-              <FilterBar onFilterChange={handleFilterChange} />
+              <FilterBar onFilterChange={handleFilterChange} initialFilters={appliedFilters} />
             </div>
 
             <div className="w-full">
@@ -108,7 +121,7 @@ const ProductsPage = () => {
               >
                 &times;
               </button>
-              <FilterBar onFilterChange={handleFilterChange} />
+              <FilterBar onFilterChange={handleFilterChange} initialFilters={appliedFilters} />
             </div>
           </div>
         )}

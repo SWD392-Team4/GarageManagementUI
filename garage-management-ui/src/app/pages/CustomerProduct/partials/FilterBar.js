@@ -2,17 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaSearch, FaSave } from "react-icons/fa";
 import { getAllCategories, getAllBrands } from "../services/CustomerProductService";
-const FilterBar = ({ onFilterChange }) => {
+const FilterBar = ({ onFilterChange, initialFilters }) => {
   const {t} = useTranslation("customer_product_filter");
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
-  const [filters, setFilters] = useState({
-    searchTerm: "",
-    category: "",
-    brand: "",
-    price: [0, 500000], // Adjust max range based on data
-  });
-
+  // const [filters, setFilters] = useState({
+  //   searchTerm: "",
+  //   category: "",
+  //   brand: "",
+  //   price: [0, 500000], // Adjust max range based on data
+  // });
+  const [filters, setFilters] = useState(initialFilters);
+  useEffect(() => {
+    setFilters(initialFilters); // Update filters when initialFilters change
+  }, [initialFilters]);
   const handleFilterChange = (filterType, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -22,7 +25,6 @@ const FilterBar = ({ onFilterChange }) => {
 
   const applyFilters = () => {
     onFilterChange(filters);
-    console.log("Filters Applied:", filters);
   };
   useEffect(() => {
     const fetchFilters = async () => {

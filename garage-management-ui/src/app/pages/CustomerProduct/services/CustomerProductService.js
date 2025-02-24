@@ -10,7 +10,8 @@ export const getAllProducts = async (PageNumber = 1, PageSize = 12, filters = {}
         ProductName: filters?.searchTerm || "",
         ProductCategory: filters?.category || "",
         ProductBrandName: filters?.brand || "",
-        // ProductPrice: filters?.price ? `${filters.price[0]},${filters.price[1]}` : "",
+        MinPrice: filters?.price ? `${filters.price[0]}` : "",
+        MaxPrice: filters?.price ? `${filters.price[1]}` : "",
         ProductStatus: filters?.status || "",
         OrderBy: filters?.orderBy || "",
         Fields: filters?.fields || "",
@@ -47,24 +48,7 @@ export const getProduct = async (productId) => {
   }
 };
 
-export const searchProduct = async (params) => {
-  try {
-    const response = await api.get(`/products`, { params });
 
-    if (response?.data?.value) {
-      response.data.value = response.data.value.map((product) => ({
-        ...product,
-        CreatedAt: formatDate(product.CreatedAt),
-        UpdatedAt: formatDate(product.UpdatedAt),
-      }));
-    }
-
-    return response.data;
-  } catch (error) {
-    console.error("Error searching product:", error);
-    throw error;
-  }
-};
 export const getAllCategories = async () => {
   try {
     const response = await api.get(`/product/categories`);
