@@ -35,6 +35,8 @@
         "search_placeholder": "Nhập tên thương hiệu...",
         "clear_filters": "Xoá bộ lọc",
         "search": "Tìm kiếm",
-        "clean": "Làm sạch"
+        "clean": "Làm sạch",
+        "search_updated_at": "Ngày cập nhật",
+        "search_created_at": "Ngày tạo"
     }
 }

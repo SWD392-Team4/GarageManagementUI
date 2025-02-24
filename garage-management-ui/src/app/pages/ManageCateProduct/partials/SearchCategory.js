@@ -1,23 +1,35 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { formatYearMonthDay } from "../schemas/CateValid";
 
-export default function searchCategory({ onSearch }) {
+export default function SearchCategory({ onSearch }) {
     const { t } = useTranslation("manage_product_category");
 
     const [searchName, setSearchName] = useState("");
     const [searchStatus, setSearchStatus] = useState("");
+    const [createdAt, setCreatedAt] = useState("");
+    const [updatedAt, setUpdatedAt] = useState("");
 
     const handleSearchName = (e) => setSearchName(e.target.value);
     const handleSearchStatus = (e) => setSearchStatus(e.target.value);
+    const handleCreatedAt = (e) => setCreatedAt(e.target.value);
+    const handleUpdatedAt = (e) => setUpdatedAt(e.target.value);
 
     const handleClearFilters = () => {
         setSearchName("");
         setSearchStatus("");
-        onSearch({ BrandName: "", Status: "" });
+        setCreatedAt("");
+        setUpdatedAt("");
+        onSearch({ Category: "", Status: "", CreatedAt: "", UpdatedAt: "" });
     };
 
     const handleSearch = () => {
-        onSearch({ Category: searchName, Status: searchStatus });
+        onSearch({
+            Category: searchName,
+            Status: searchStatus,
+            CreatedAt: formatYearMonthDay(createdAt),
+            UpdatedAt: formatYearMonthDay(updatedAt)
+        });
     };
 
     return (
@@ -47,13 +59,38 @@ export default function searchCategory({ onSearch }) {
                     className="w-40 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                     <option value="" disabled>
-                        {t("manage_product_category.search_status_enum.choose")} {/* "Chọn trạng thái" */}
+                        {t("manage_product_category.search_status_enum.choose")}
                     </option>
                     <option value="active">{t("manage_product_category.search_status_enum.active")}</option>
                     <option value="inactive">{t("manage_product_category.search_status_enum.inactive")}</option>
                 </select>
             </div>
 
+            {/* CreatedAt Date Picker */}
+            <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-700">
+                    {t("manage_product_category.search_created_at")}
+                </label>
+                <input
+                    type="date"
+                    value={createdAt}
+                    onChange={handleCreatedAt}
+                    className="w-40 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            </div>
+
+            {/* UpdatedAt Date Picker */}
+            <div className="flex flex-col">
+                <label className="text-sm font-medium text-gray-700">
+                    {t("manage_product_category.search_updated_at")}
+                </label>
+                <input
+                    type="date"
+                    value={updatedAt}
+                    onChange={handleUpdatedAt}
+                    className="w-40 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+            </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col">

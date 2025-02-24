@@ -26,6 +26,8 @@
             "inactive": "Inactive"
         },
         "clear_filters": "Clear Filters",
-        "search": "Search"
+        "search": "Search",
+        "search_updated_at": "Updated Date",
+        "search_created_at": "Create Date"
     }
 }

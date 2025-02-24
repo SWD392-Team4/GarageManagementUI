@@ -35,6 +35,8 @@
         "search_placeholder": "Enter brand name...",
         "clear_filters": "Clear Filters",
         "search": "Search",
-        "clean": "Clean"
+        "clean": "Clean",
+        "search_updated_at": "Updated At",
+        "search_created_at": "Created At"
     }
 }
