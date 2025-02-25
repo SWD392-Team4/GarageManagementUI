@@ -1,0 +1,15 @@
+{
+  "manage_car_category": {
+    "title": "Manage Car Categories",
+    "create": "Create Car Category",
+    "id": "ID",
+    "category": "Category",
+    "description": "Description",
+    "status": "Status",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "edit": "Edit",
+    "save": "Save",
+    "close": "Close"
+  }
+}

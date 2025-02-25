@@ -4,6 +4,7 @@ import PrivateRoute from "./PrivateRoute";
 import routesConfig from "./routes.json";
 import LoaddingPage from "../layouts/LoadingPage";
 import RedirectRoute from "./RedirectRoute";
+import ManageCarCategory from "../pages/ManageCarCategory/ManageCarCategory";
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
@@ -50,6 +51,7 @@ const componentMap = {
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
   ManageCarPart: lazy(() => import("../pages/ManageCarPart/ManageCarPart")),
+  ManageCarCategory: lazy(() => import("../pages/ManageCarCategory/ManageCarCategory")),
   ManageCarPartCate: lazy(() => import("../pages/ManageCarPartCate/ManageCarPartCate")),
   ManageCarModal: lazy(() => import("../pages/ManageCarModal/ManageCarModal")),
   ManageCateProduct: lazy(() => import("../pages/ManageCateProduct/ManageCateProduct")),
