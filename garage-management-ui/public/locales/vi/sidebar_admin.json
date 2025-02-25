@@ -18,6 +18,9 @@
     "logout": "Đăng xuất",
     "car_part": "Phụ tùng xe",
     "car_part_list": "Danh sách phụ tùng",
-    "car_part_category": "Danh mục phụ tùng"
+    "car_part_category": "Danh mục phụ tùng",
+    "car": "Xe",
+    "car_modal": "Mẫu xe",
+    "car_category": "Danh mục xe"
   }
 }

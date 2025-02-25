@@ -157,6 +157,11 @@
         "isSuspense": true
       },
       {
+        "path": "carModal",
+        "element": "ManageCarModal",
+        "isSuspense": true
+      },
+      {
         "path": "carPartCategory",
         "element": "ManageCarPartCate",
         "isSuspense": true

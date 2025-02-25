@@ -51,6 +51,7 @@ const componentMap = {
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
   ManageCarPart: lazy(() => import("../pages/ManageCarPart/ManageCarPart")),
   ManageCarPartCate: lazy(() => import("../pages/ManageCarPartCate/ManageCarPartCate")),
+  ManageCarModal: lazy(() => import("../pages/ManageCarModal/ManageCarModal")),
   ManageCateProduct: lazy(() => import("../pages/ManageCateProduct/ManageCateProduct")),
   ManageBooking: lazy(() => import("../pages/ManageBooking/ManageBooking")),
   LayoutAppointment: lazy(() =>
