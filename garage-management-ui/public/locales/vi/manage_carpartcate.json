@@ -1,0 +1,24 @@
+{
+    "manage_carpartcate": {
+        "title": "Quản lý danh mục phụ tùng",
+        "create": "Thêm danh mục mới",
+        "id": "ID",
+        "name": "Tên danh mục",
+        "status": "Trạng thái",
+        "createdAt": "Ngày tạo",
+        "updatedAt": "Ngày cập nhật",
+        "edit": "Chỉnh sửa",
+        "search_part_name": "Tên danh mục",
+        "search_placeholder": "Nhập tên danh mục...",
+        "search_status": "Trạng thái",
+        "search_status_enum": {
+            "choose": "Chọn trạng thái",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động"
+        },
+        "search_created_at": "Ngày tạo",
+        "search_updated_at": "Ngày cập nhật",
+        "clear_filters": "Xóa bộ lọc",
+        "search": "Tìm kiếm"
+    }
+}

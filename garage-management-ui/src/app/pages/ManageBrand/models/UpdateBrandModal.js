@@ -8,7 +8,7 @@ import { formatDate } from "../schemas/BrandValid";
 
 const schema = yup.object().shape({
     BrandName: yup.string().required("Tên thương hiệu không được để trống"),
-    LinkLogo: yup.string().url("Link logo phải là URL hợp lệ").required("Link logo không được để trống"),
+    LogoLink: yup.string().url("Link logo phải là URL hợp lệ").required("Link logo không được để trống"),
     Status: yup.string().oneOf(["Active", "Inactive"], "Trạng thái không hợp lệ"),
 });
 
@@ -25,7 +25,7 @@ export default function UpdateBrandModal({ isOpen, onClose, brand, onBrandUpdate
         resolver: yupResolver(schema),
         defaultValues: {
             BrandName: "",
-            LinkLogo: "",
+            LogoLink: "",
             Status: "None",
         },
     });
@@ -33,7 +33,7 @@ export default function UpdateBrandModal({ isOpen, onClose, brand, onBrandUpdate
     useEffect(() => {
         if (brand) {
             setValue("BrandName", brand.BrandName || "");
-            setValue("LinkLogo", brand.LinkLogo || "");
+            setValue("LogoLink", brand.LogoLink || "");
             setValue("Status", brand.Status || "None");
         } else {
             reset();
@@ -78,13 +78,13 @@ export default function UpdateBrandModal({ isOpen, onClose, brand, onBrandUpdate
 
                     {/* Input Link Logo */}
                     <div className="mb-3">
-                        <label className="block text-sm font-medium text-gray-700">{t("manage_brand.linkLogo")}</label>
+                        <label className="block text-sm font-medium text-gray-700">{t("manage_brand.LogoLink")}</label>
                         <input
                             type="text"
-                            {...register("LinkLogo")}
+                            {...register("LogoLink")}
                             className="w-full p-2 border rounded"
                         />
-                        {errors.LinkLogo && <p className="text-red-500 text-sm">{errors.LinkLogo.message}</p>}
+                        {errors.LogoLink && <p className="text-red-500 text-sm">{errors.LogoLink.message}</p>}
                     </div>
 
                     {/* Trạng thái (Dropdown chọn) */}

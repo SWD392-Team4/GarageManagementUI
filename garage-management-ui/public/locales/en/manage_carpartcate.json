@@ -1,0 +1,24 @@
+{
+    "manage_carpartcate": {
+        "title": "Manage Car Part Categories",
+        "create": "Add New Category",
+        "id": "ID",
+        "name": "Category Name",
+        "status": "Status",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At",
+        "edit": "Edit",
+        "search_part_name": "Category Name",
+        "search_placeholder": "Enter category name...",
+        "search_status": "Status",
+        "search_status_enum": {
+            "choose": "Select status",
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "search_created_at": "Created At",
+        "search_updated_at": "Updated At",
+        "clear_filters": "Clear Filters",
+        "search": "Search"
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "manage_carpart": {
+        "title": "Quản lý phụ tùng",
+        "create": "Thêm phụ tùng",
+        "create_carpart": {
+            "title": "Tạo mới phụ tùng",
+            "name": "Tên phụ tùng",
+            "name_placeholder": "Nhập tên phụ tùng",
+            "select_category": "Chọn danh mục"
+        },
+        "id": "ID",
+        "name": "Tên phụ tùng",
+        "category": "Danh mục",
+        "price": "Giá",
+        "status": "Trạng thái",
+        "createdAt": "Ngày tạo",
+        "updatedAt": "Ngày cập nhật",
+        "edit": "Chỉnh sửa",
+        "search_part_name": "Tên phụ tùng",
+        "search_placeholder": "Nhập tên phụ tùng...",
+        "search_status": "Trạng thái",
+        "search_status_enum": {
+            "choose": "Chọn trạng thái",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động"
+        },
+        "search_created_at": "Ngày tạo",
+        "search_updated_at": "Ngày cập nhật",
+        "clear_filters": "Xóa bộ lọc",
+        "search": "Tìm kiếm",
+        "cancel": "Hủy",
+        "save": "Lưu",
+        "saving": "Đang lưu..."
+    },
+    "validation": {
+        "required_part_name": "Tên phụ tùng không được để trống",
+        "required_category": "Vui lòng chọn danh mục"
+    }
+}

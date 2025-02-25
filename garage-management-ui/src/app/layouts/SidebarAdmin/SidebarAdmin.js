@@ -14,6 +14,10 @@ import {
   FaChevronDown,
   FaChevronRight,
   FaSignOutAlt,
+  FaCogs,
+  FaCar,
+  FaThList
+
 } from "react-icons/fa";
 import { AiOutlineSchedule } from "react-icons/ai";
 
@@ -52,7 +56,7 @@ export default function SideBarAdmin({
 
 
   const toggleSubMenu = (menu) => {
-    if (!isSidebarOpen) return; 
+    if (!isSidebarOpen) return;
     setOpenMenu(openMenu === menu ? null : menu);
   };
 
@@ -174,6 +178,46 @@ export default function SideBarAdmin({
                         <span className="ml-2">
                           {t("sidebar_admin.product_brand")}
                         </span>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </li>
+
+              {/* Car Part */}
+              <li>
+                <button
+                  onClick={() => toggleSubMenu("carpart")}
+                  className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+                >
+                  <FaCogs className="w-6 h-6" />
+                  {isSidebarOpen && (
+                    <span className="ml-3">{t("sidebar_admin.car_part")}</span>
+                  )}
+                  {isSidebarOpen && (
+                    <span className="ml-auto">
+                      {openMenu === "carpart" ? <FaChevronDown /> : <FaChevronRight />}
+                    </span>
+                  )}
+                </button>
+                {openMenu === "carpart" && (
+                  <ul className="ml-6 mt-2 space-y-2">
+                    <li>
+                      <Link
+                        to="/admin/carPart"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <FaCar className="w-5 h-5" />
+                        <span className="ml-2">{t("sidebar_admin.car_part_list")}</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/admin/carPartCategory"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <FaThList className="w-5 h-5" />
+                        <span className="ml-2">{t("sidebar_admin.car_part_category")}</span>
                       </Link>
                     </li>
                   </ul>

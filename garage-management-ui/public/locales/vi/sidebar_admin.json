@@ -15,6 +15,9 @@
     "appointment": "Cuộc hẹn",
     "re-appointment": "Báo cáo cuộc hẹn",
     "ce-appointment": "Tạo cuộc hẹn",
-    "logout" : "Đăng xuất"
+    "logout": "Đăng xuất",
+    "car_part": "Phụ tùng xe",
+    "car_part_list": "Danh sách phụ tùng",
+    "car_part_category": "Danh mục phụ tùng"
   }
 }
