@@ -149,10 +149,10 @@ const ProductDetail = () => {
             {t("customer_product_detail.product_brand")}: {product.BrandName}
             </p>
             <p className="text-base leading-4 mt-4 text-gray-600">
-            {t("customer_product_detail.product_made_in")}: "Vietnam"
+            {t("customer_product_detail.product_made_in")}: Vietnam
             </p>
             <p className="text-base leading-4 mt-4 text-gray-600">
-            {t("customer_product_detail.product_warranty")}: "12 months"
+            {t("customer_product_detail.product_warranty")}: 12 months
             </p>
           </div>
 
