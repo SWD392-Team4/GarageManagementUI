@@ -1,0 +1,15 @@
+{
+    "manage_car_category": {
+        "title": "Quản lý danh mục xe",
+        "create": "Tạo danh mục xe",
+        "id": "ID",
+        "category": "Danh mục",
+        "description": "Mô tả",
+        "status": "Trạng thái",
+        "createdAt": "Ngày tạo",
+        "updatedAt": "Ngày cập nhật",
+        "edit": "Chỉnh sửa",
+        "save": "Lưu",
+        "close": "Đóng"
+    }
+}

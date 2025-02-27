@@ -1,0 +1,12 @@
+{
+    "search_services": "Search Garage Services",
+    "clear_filters": "Clear Filters",
+    "search_placeholder": "Search by service name...",
+    "all_services": "All Services",
+    "maintenance": "Maintenance",
+    "repair": "Repair",
+    "inspection": "Inspection",
+    "search": "Search",
+    "show_advanced_filters": "Show Advanced Filters",
+    "hide_advanced_filters": "Hide Advanced Filters"
+}

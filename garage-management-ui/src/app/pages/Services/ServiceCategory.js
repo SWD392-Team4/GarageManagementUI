@@ -1,7 +1,7 @@
 import React from "react";
 import PageTitle from "../../components/common/PageTitle";
 import { useTranslation } from "react-i18next";
-import Sidebar from "./partials/Sidebar";
+// import Sidebar from "./partials/Sidebar";
 import Content from "./partials/Content";
 
 export default function ServiceCategory() {
@@ -14,9 +14,9 @@ export default function ServiceCategory() {
         title1={t("home")}
         subtitle={t("pageTitle2")}
       />
-      <div className="flex flex-col md:flex-row min-h-screen lg:p-12 p-4 ">
+      <div className="flex md:flex-row min-h-screen lg:p-12 p-4 ">
         {/* Sidebar */}
-        <Sidebar />
+        {/* <Sidebar /> */}
 
         {/* Nội dung chính */}
         <Content />

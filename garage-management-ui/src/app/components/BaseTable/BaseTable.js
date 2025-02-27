@@ -113,9 +113,11 @@ export default function BaseTable({
           ◀
         </button>
 
-        <span className="text-sm font-medium text-gray-700">
-          {t("base_table.page")} {pagination.currentPage} / {pagination.totalPages}
-        </span>
+        {pagination.totalPages > 1 && (
+          <span className="text-sm font-medium text-gray-700">
+            {t("base_table.page")} {pagination.currentPage} / {pagination.totalPages}
+          </span>
+        )}
 
         <button
           className="p-2 bg-gray-300 disabled:opacity-50"

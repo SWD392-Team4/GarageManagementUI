@@ -1,47 +1,69 @@
 import React from "react";
+import SearchService from "./SearchService";
+import ListCardService from "./ListCardService";
+import { HiWrenchScrewdriver, HiClipboardDocumentCheck, HiBuildingOffice2 } from "react-icons/hi2";
+import InspectImage from "../../../assets/services/inspect.jpg";
+
+const services = [
+  {
+    id: 1,
+    image: InspectImage,
+    icon: <HiWrenchScrewdriver />,
+    title: "Garage Repair",
+    description: "Professional repair and maintenance services for all vehicles.",
+  },
+  {
+    id: 2,
+    image: InspectImage,
+    icon: <HiClipboardDocumentCheck />,
+    title: "Insurance Assistance",
+    description: "Helping you handle insurance claims and documentation with ease.",
+  },
+  {
+    id: 3,
+    image: InspectImage,
+    icon: <HiBuildingOffice2 />,
+    title: "Infrastructure Services",
+    description: "Reliable solutions for commercial and residential buildings.",
+  },
+  {
+    id: 1,
+    image: InspectImage,
+    icon: <HiWrenchScrewdriver />,
+    title: "Garage Repair",
+    description: "Professional repair and maintenance services for all vehicles.",
+  },
+  {
+    id: 2,
+    image: InspectImage,
+    icon: <HiClipboardDocumentCheck />,
+    title: "Insurance Assistance",
+    description: "Helping you handle insurance claims and documentation with ease.",
+  },
+  {
+    id: 3,
+    image: InspectImage,
+    icon: <HiBuildingOffice2 />,
+    title: "Infrastructure Services",
+    description: "Reliable solutions for commercial and residential buildings.",
+  },
+];
 
 const Content = () => {
   return (
-    <div className="flex-1 p-6">
-      {/* Tiêu đề */}
-      <h1 className="text-3xl font-bold">Damage Roof Repair</h1>
-      <p className="text-gray-600 mt-2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </p>
+    <div className="flex-1">
+      <SearchService />
 
-      {/* Nội dung chính */}
-      <div className="mt-6 flex flex-col md:flex-row items-start">
-        {/* Phần text */}
-        <div className="md:w-2/3">
-          <h2 className="text-xl font-semibold">Approach</h2>
-          <p className="text-gray-600 mt-2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </div>
-
-        {/* Hình ảnh */}
-        <div className="md:w-1/3 mt-4 md:mt-0 md:ml-6">
-          <img
-            src="https://source.unsplash.com/400x300/?construction,worker"
-            alt="Construction worker"
-            className="rounded-lg shadow-lg"
+      {/* Danh sách dịch vụ */}
+      <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {services.map((service) => (
+          <ListCardService
+            key={service.id}
+            {...service}
+            onBook={() => alert(`Booking service: ${service.title}`)}
+            onView={() => alert(`Viewing details for: ${service.title}`)}
           />
-        </div>
-      </div>
-
-      {/* Danh sách câu hỏi */}
-      <div className="mt-6">
-        <h2 className="text-xl font-semibold">Marriage Counselling</h2>
-        <ul className="list-disc pl-5 text-gray-600 mt-2 space-y-2">
-          <li>Do enim minim veniam quis nostrud exercitation?</li>
-          <li>
-            What commodo consequat duis aute dolor in voluptate velit esse?
-          </li>
-          <li>How officia deserunt mollit anim id est laborum?</li>
-          <li>Are sint occaecat cupidatat non proident?</li>
-        </ul>
+        ))}
       </div>
     </div>
   );

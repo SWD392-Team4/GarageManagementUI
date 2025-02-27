@@ -1,0 +1,28 @@
+{
+    "manage_car_modal": {
+        "title": "Quản lý mẫu xe",
+        "create": "Tạo mẫu xe",
+        "id": "ID",
+        "modalName": "Tên mẫu xe",
+        "category": "Danh mục",
+        "brand": "Thương hiệu",
+        "modelYear": "Năm sản xuất",
+        "createdAt": "Ngày tạo",
+        "updatedAt": "Ngày cập nhật",
+        "edit": "Chỉnh sửa",
+        "search_model_name": "Tìm kiếm tên mẫu xe",
+        "search_placeholder": "Nhập tên mẫu xe...",
+        "search_status": "Trạng thái",
+        "search_status_enum": {
+            "choose": "Chọn trạng thái",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động"
+        },
+        "search_modal_year": "Năm sản xuất",
+        "search_modal_year_placeholder": "Nhập năm sản xuất",
+        "search_created_at": "Ngày tạo",
+        "search_updated_at": "Ngày cập nhật",
+        "clear_filters": "Xóa bộ lọc",
+        "search": "Tìm kiếm"
+    }
+}

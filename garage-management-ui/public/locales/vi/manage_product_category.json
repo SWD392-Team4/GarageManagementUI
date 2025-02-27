@@ -26,6 +26,8 @@
             "inactive": "Không hoạt động"
         },
         "clear_filters": "Xóa bộ lọc",
-        "search": "Tìm kiếm"
+        "search": "Tìm kiếm",
+        "search_updated_at": "Ngày cập nhật",
+        "search_created_at": "Ngày tạo"
     }
 }

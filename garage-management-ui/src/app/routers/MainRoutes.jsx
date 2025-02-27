@@ -4,7 +4,11 @@ import PrivateRoute from "./PrivateRoute";
 import routesConfig from "./routes.json";
 import LoaddingPage from "../layouts/LoadingPage";
 import RedirectRoute from "./RedirectRoute";
+<<<<<<< HEAD
 import LoaddingPage2 from "../layouts/LoadingPage/index2";
+=======
+import ManageCarCategory from "../pages/ManageCarCategory/ManageCarCategory";
+>>>>>>> Develop
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
@@ -55,9 +59,17 @@ const componentMap = {
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
+<<<<<<< HEAD
   ManageCateProduct: lazy(() =>
     import("../pages/ManageCateProduct/ManageCateProduct")
   ),
+=======
+  ManageCarPart: lazy(() => import("../pages/ManageCarPart/ManageCarPart")),
+  ManageCarCategory: lazy(() => import("../pages/ManageCarCategory/ManageCarCategory")),
+  ManageCarPartCate: lazy(() => import("../pages/ManageCarPartCate/ManageCarPartCate")),
+  ManageCarModal: lazy(() => import("../pages/ManageCarModal/ManageCarModal")),
+  ManageCateProduct: lazy(() => import("../pages/ManageCateProduct/ManageCateProduct")),
+>>>>>>> Develop
   ManageBooking: lazy(() => import("../pages/ManageBooking/ManageBooking")),
   LayoutAppointment: lazy(() =>
     import("../pages/AdminManageAppoinment/LayoutAppointment")

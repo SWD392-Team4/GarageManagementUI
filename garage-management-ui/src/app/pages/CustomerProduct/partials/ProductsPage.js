@@ -1,53 +1,132 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useMemo} from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import ListProduct from "./ListProduct";
 import Pagination from "../../../components/Pagination/Pagination";
-const fakeData = [
-    { id: 101, name: "Lọc dầu động cơ", price: "250", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 102, name: "Má phanh trước", price: "800", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 103, name: "Bugi đánh lửa", price: "150", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 104, name: "Ắc quy 12V", price: "1800", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 105, name: "Lốp xe Michelin", price: "2200", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 106, name: "Cảm biến áp suất lốp", price: "550", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 107, name: "Bơm nhiên liệu", price: "1250", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 108, name: "Đèn pha LED", price: "950", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 109, name: "Gạt nước mưa", price: "100", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 110, name: "Lọc gió động cơ", price: "400", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 111, name: "Dây curoa cam", price: "600", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 112, name: "Càng A trước", price: "1500", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 113, name: "Giảm xóc trước", price: "2300", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 114, name: "Bộ ly hợp", price: "3000", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 115, name: "Cảm biến oxy", price: "700", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 116, name: "Bộ tản nhiệt", price: "2500", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 117, name: "Bơm trợ lực lái", price: "1700", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 118, name: "Đèn hậu LED", price: "1200", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 119, name: "Mô tơ kính cửa", price: "850", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-    { id: 120, name: "Cảm biến tốc độ", price: "950", uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png" },
-];
-
+import { useTranslation } from "react-i18next";
+import FilterBar from "./FilterBar";
+import { BsSliders } from "react-icons/bs";
+import { getAllProducts } from "../services/CustomerProductService";
+import LoadingSpinner from "../partials/LoadingSpinner";
 const ProductsPage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [paging, setPaging] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    hasPrevious: false,
+    hasNext: false,
+  });
+  const [showFilter, setShowFilter] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { t } = useTranslation("customer_product_detail");
+   // Extract filters from URL parameters
+   const appliedFilters = useMemo(() => ({ //useMemo ensures that the object is only created when the URL parameters change, avoid rerenders
+    searchTerm: searchParams.get("searchTerm") || "",
+    category: searchParams.get("category") || "",
+    brand: searchParams.get("brand") || "",
+    price: searchParams.get("price") ? searchParams.get("price").split(",").map(Number) : [0, 500000],
+  }), [searchParams]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true); 
+        const response = await getAllProducts(
+          paging.currentPage,
+          12,
+          appliedFilters
+        );
+        
+        if (response?.value) {
+          setFilteredProducts(response.value);
 
-  // Calculate the current products in fake data
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentProducts = fakeData.slice(indexOfFirstItem, indexOfLastItem);
+          setPaging({
+            currentPage: response.paging.currentPage,
+            totalPages: response.paging.totalPages,
+            hasPrevious: response.paging.hasPrevious,
+            hasNext: response.paging.hasNext,
+          });
+        } else {
+          console.error("Error: No data received");
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setLoading(false); 
+      }
+    };
+
+    fetchProducts();
+  }, [paging.currentPage, appliedFilters]);
+
+  const handleFilterChange = (filters) => {
+    setSearchParams({
+      searchTerm: filters.searchTerm,
+      category: filters.category,
+      brand: filters.brand,
+      price: filters.price.join(","),
+    });
+    setPaging((prev) => ({
+      ...prev,
+      currentPage: 1, 
+    }));
+  };
 
   return (
-    <>
-    <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-4 text-center">Our Products</h1>
-      
-      <ListProduct products={currentProducts} />
-      
-      <Pagination
-        currentPage={currentPage}
-        totalItems={fakeData.length}
-        itemsPerPage={itemsPerPage}
-        onPageChange={setCurrentPage}
-      />
+    <div className="bg-gray-100 min-h-screen py-6">
+      <div className="container mx-auto px-4 p-6">
+        <h1 className="text-4xl font-bold mb-6 text-center p-6">
+          {t("customer_product_detail.product_list_title")}
+        </h1>
+        
+          
+          <div className="flex flex-col md:flex-row gap-4">
+            <div
+              className={`lg:block hidden md:w-1/4 w-full bg-white p-4 rounded-lg shadow-md sticky top-4 h-fit`}
+            >
+              <FilterBar onFilterChange={handleFilterChange} initialFilters={appliedFilters} />
+            </div>
+
+            <div className="w-full">
+            {loading ? <LoadingSpinner /> : <ListProduct products={filteredProducts} />}
+
+              <div className="mt-6 flex justify-center">
+                <Pagination
+                  currentPage={paging.currentPage}
+                  totalPages={paging.totalPages}
+                  hasPrevious={paging.hasPrevious}
+                  hasNext={paging.hasNext}
+                  onPageChange={(page) =>
+                    setPaging((prev) => ({ ...prev, currentPage: page }))
+                  }
+                />
+              </div>
+            </div>
+          </div>
+        
+
+        <button
+          className="lg:hidden fixed bottom-4 right-4 bg-red-600 text-white p-3 rounded-full shadow-lg"
+          onClick={() => setShowFilter(true)}
+        >
+          <BsSliders size={24} />
+        </button>
+
+        {showFilter && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 w-11/12 max-w-lg rounded-lg shadow-lg relative">
+              <button
+                className="absolute top-2 right-3 text-gray-600 text-2xl"
+                onClick={() => setShowFilter(false)}
+              >
+                &times;
+              </button>
+              <FilterBar onFilterChange={handleFilterChange} initialFilters={appliedFilters} />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
-    </>
   );
 };
 

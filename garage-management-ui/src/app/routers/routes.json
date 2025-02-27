@@ -172,6 +172,26 @@
         "isSuspense": true
       },
       {
+        "path": "carPart",
+        "element": "ManageCarPart",
+        "isSuspense": true
+      },
+      {
+        "path": "carCategory",
+        "element": "ManageCarCategory",
+        "isSuspense": true
+      },
+      {
+        "path": "carModal",
+        "element": "ManageCarModal",
+        "isSuspense": true
+      },
+      {
+        "path": "carPartCategory",
+        "element": "ManageCarPartCate",
+        "isSuspense": true
+      },
+      {
         "path": "booking",
         "element": "ManageBooking",
         "isSuspense": true

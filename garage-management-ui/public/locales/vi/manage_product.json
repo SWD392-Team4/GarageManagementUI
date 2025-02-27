@@ -19,6 +19,10 @@
             "inactive": "Ngừng hoạt động"
         },
         "clear_filters": "Xóa bộ lọc",
-        "search": "Tìm kiếm"
+        "search": "Tìm kiếm",
+        "search_updated_at": "Ngày cập nhật",
+        "search_created_at": "Ngày tạo",
+        "search_min_price": "Giá tổi thiểu",
+        "search_max_price": "Giá tối đa"
     }
 }

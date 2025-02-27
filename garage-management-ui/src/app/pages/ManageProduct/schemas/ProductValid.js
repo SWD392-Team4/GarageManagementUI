@@ -7,3 +7,8 @@ export const formatDate = (dateString) => {
         year: "numeric"
     });
 };
+
+export const formatYearMonthDay = (date) => {
+    if (!date) return "";
+    return new Date(date).toISOString().split("T")[0];
+};

@@ -1,0 +1,39 @@
+{
+    "manage_carpart": {
+        "title": "Car Part Management",
+        "create": "Add Car Part",
+        "create_carpart": {
+            "title": "Create New Car Part",
+            "name": "Car Part Name",
+            "name_placeholder": "Enter car part name",
+            "select_category": "Select Category"
+        },
+        "id": "ID",
+        "name": "Car Part Name",
+        "category": "Category",
+        "price": "Price",
+        "status": "Status",
+        "createdAt": "Created Date",
+        "updatedAt": "Updated Date",
+        "edit": "Edit",
+        "search_part_name": "Car Part Name",
+        "search_placeholder": "Enter car part name...",
+        "search_status": "Status",
+        "search_status_enum": {
+            "choose": "Select status",
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "search_created_at": "Created Date",
+        "search_updated_at": "Updated Date",
+        "clear_filters": "Clear Filters",
+        "search": "Search",
+        "cancel": "Cancel",
+        "save": "Save",
+        "saving": "Saving..."
+    },
+    "validation": {
+        "required_part_name": "Car part name is required",
+        "required_category": "Please select a category"
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "manage_car_modal": {
+        "title": "Manage Car Models",
+        "create": "Create Car Model",
+        "id": "ID",
+        "modalName": "Model Name",
+        "category": "Category",
+        "brand": "Brand",
+        "modelYear": "Model Year",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At",
+        "edit": "Edit",
+        "search_model_name": "Search Model Name",
+        "search_placeholder": "Enter Model Name...",
+        "search_status": "Status",
+        "search_status_enum": {
+            "choose": "Choose status",
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "search_modal_year": "Model Year",
+        "search_modal_year_placeholder": "Enter Model Year",
+        "search_created_at": "Created At",
+        "search_updated_at": "Updated At",
+        "clear_filters": "Clear Filters",
+        "search": "Search"
+    }
+}

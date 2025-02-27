@@ -1,0 +1,12 @@
+{
+    "customer_product_filter": {
+        "title": "Lọc Sản Phẩm",
+        "search": "Tìm kiếm...",
+        "category": "Danh mục",
+        "category_all": "Tất cả",
+        "brand": "Hãng",
+        "brand_all": "Tất cả",
+        "price_range": "Mức giá",
+        "apply": "Lọc Sản Phẩm"
+    }
+}
