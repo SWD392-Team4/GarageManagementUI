@@ -4,7 +4,8 @@ import PrivateRoute from "./PrivateRoute";
 import routesConfig from "./routes.json";
 import LoaddingPage from "../layouts/LoadingPage";
 import RedirectRoute from "./RedirectRoute";
-import ManageCarCategory from "../pages/ManageCarCategory/ManageCarCategory";
+import LoaddingPage2 from "../layouts/LoadingPage/index2";
+// import ManageCarCategory from "../pages/ManageCarCategory/ManageCarCategory";
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
@@ -14,6 +15,9 @@ const componentMap = {
   LayoutAuthenCustomer: lazy(() =>
     import("../layouts/LayoutLoginCustomer/LayoutAuthenCustomer")
   ),
+  Mision: lazy(() => import("../pages/AboutUs/partials/Mision")),
+  History: lazy(() => import("../pages/AboutUs/partials/History")),
+  Vision: lazy(() => import("../pages/AboutUs/partials/Vision")),
   LoginPage: lazy(() => import("../pages/AuthCustomer/LoginPage")),
   RegisterPage: lazy(() => import("../pages/AuthCustomer/RegisterPage")),
   ConfirmEmailPage: lazy(() =>
@@ -32,6 +36,8 @@ const componentMap = {
   ResetPasswordWorker: lazy(() =>
     import("../pages/AuthEmployee/partials/ResetPassword")
   ),
+  AboutUs: lazy(() => import("../pages/AboutUs/partials/AboutUs")),
+
   LogOut: lazy(() => import("../pages/AuthEmployee/partials/LogOut")),
   LayoutCustomer: lazy(() =>
     import("../layouts/LayoutCustomer/LayoutCustomer")
@@ -50,11 +56,20 @@ const componentMap = {
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
+  ManageCateProduct: lazy(() =>
+    import("../pages/ManageCateProduct/ManageCateProduct")
+  ),
   ManageCarPart: lazy(() => import("../pages/ManageCarPart/ManageCarPart")),
-  ManageCarCategory: lazy(() => import("../pages/ManageCarCategory/ManageCarCategory")),
-  ManageCarPartCate: lazy(() => import("../pages/ManageCarPartCate/ManageCarPartCate")),
+  ManageCarCategory: lazy(() =>
+    import("../pages/ManageCarCategory/ManageCarCategory")
+  ),
+  ManageCarPartCate: lazy(() =>
+    import("../pages/ManageCarPartCate/ManageCarPartCate")
+  ),
   ManageCarModal: lazy(() => import("../pages/ManageCarModal/ManageCarModal")),
-  ManageCateProduct: lazy(() => import("../pages/ManageCateProduct/ManageCateProduct")),
+  ManageCateProduct: lazy(() =>
+    import("../pages/ManageCateProduct/ManageCateProduct")
+  ),
   ManageBooking: lazy(() => import("../pages/ManageBooking/ManageBooking")),
   LayoutAppointment: lazy(() =>
     import("../pages/AdminManageAppoinment/LayoutAppointment")
@@ -97,6 +112,9 @@ const generateRoutes = (routes) => {
     // Bọc `Suspense` nếu có `isSuspense: true`
     if (route.isSuspense) {
       element = <Suspense fallback={<LoaddingPage />}>{element}</Suspense>;
+    }
+    if (route.isSuspense2) {
+      element = <Suspense fallback={<LoaddingPage2 />}>{element}</Suspense>;
     }
 
     // Bọc `PrivateRoute` nếu có quyền hạn

@@ -5,25 +5,17 @@ import { FaRegUserCircle } from "react-icons/fa";
 import { LuSettings, LuLogOut } from "react-icons/lu";
 
 import { sAccount } from "../../pages/AuthCustomer/services/store";
-import UserService from "../../hooks/services/UserService";
 import { useTranslation } from "react-i18next";
-const ssAccountAvatar = sAccount.slice((n) => n.avatar);
+import { useHandleLogout } from "./service/logout";
+const ssAccountAvatar = sAccount.slice((n) => n.ImageLink);
 const ssAccountLastName = sAccount.slice((n) => n.LastName);
 const ssAccountFirstName = sAccount.slice((n) => n.FirstName);
 
 export default function ButtonAccount() {
   const { t } = useTranslation("bttnSignIn");
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   const [isLogIn, setIsLogIn] = useState(localStorage.getItem("at"));
-  const userService = new UserService();
-  const handleLogout = () => {
-    localStorage.clear();
-    setIsLogIn(false);
-
-    userService.showToast(200, t("title4"));
-    navigate(userService.navigateBasedOnRole());
-  };
+  const handleLogout = useHandleLogout();
   if (isLogIn) {
     return (
       <>
@@ -33,7 +25,24 @@ export default function ButtonAccount() {
             onClick={() => setIsOpen(!isOpen)}
             className="flex items-center px-4 py-2 w-40 bg-gray-100/20 text-white rounded-lg shadow-md hover:bg-gray-100/50 focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
           >
-            <FaRegUserCircle />
+            <ssAccountAvatar.Wrap>
+              {(ImageLink) => (
+                <img
+                  src={
+                    ImageLink ||
+                    "https://static-00.iconduck.com/assets.00/profile-major-icon-512x512-xosjbbdq.png"
+                  }
+                  alt="Avatar"
+                  className="w-6 h-6 rounded-full object-cover cursor-pointer"
+                  onClick={() => fileInputRef.current.click()} // Click để chọn file mới
+                  onError={(e) =>
+                    (e.target.src =
+                      "https://static-00.iconduck.com/assets.00/profile-major-icon-512x512-xosjbbdq.png")
+                  }
+                />
+              )}
+            </ssAccountAvatar.Wrap>
+
             <span className="mr-2"></span>
 
             <span className="truncate max-w-[100px] overflow-hidden whitespace-nowrap">
@@ -49,7 +58,7 @@ export default function ButtonAccount() {
           {/* Dropdown */}
           {isOpen && (
             <div className="absolute left-0 mt-2 w-40 bg-black/60 rounded-lg shadow-lg z-50 border border-gray-200">
-              <Link to="/customer">
+              <Link to="/customer/profile">
                 <button className="flex items-center px-4 py-2 w-full text-left rounded-md  text-white hover:bg-gray-100/50 transition duration-150">
                   <FaRegUserCircle className="text-xl" />
                   <span className="mr-2"></span>

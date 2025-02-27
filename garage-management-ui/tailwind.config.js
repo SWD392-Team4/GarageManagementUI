@@ -9,6 +9,10 @@ module.exports = {
           "0%": { backgroundPosition: "100% 50%" },
           "100%": { backgroundPosition: "0 50%" },
         },
+        shine: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
         spinSlow: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
@@ -51,6 +55,7 @@ module.exports = {
         rotateX: "rotateX 1s linear infinite",
         "spin-once": "spinOnce 0.5s linear",
         "spin-once2": "spinOnce 0.3s linear",
+        shine: "shine 6s linear infinite",
       },
       backgroundSize: {
         "gradient-animate": "300% 300%",

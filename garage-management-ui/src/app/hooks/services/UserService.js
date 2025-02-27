@@ -132,7 +132,7 @@ class UserService {
               } catch (refreshError) {
                 console.error("Failed to refresh token:", refreshError);
                 this.clearToken();
-                window.location.href = "/auth";
+                window.location.href = "/authen";
                 return reject({
                   status: 401,
                   message: "Session expired. Please login again.",

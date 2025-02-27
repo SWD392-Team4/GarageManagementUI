@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const ServiceCard = ({ image, icon, title, description }) => {
   return (
     <motion.div
-      className="bg-white rounded-3xl overflow-hidden transition-transform group"
+      className="bg-white rounded-3xl overflow-hidden transition-transform group "
       initial={{ opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.5, ease: "easeOut" }}
@@ -13,7 +13,7 @@ const ServiceCard = ({ image, icon, title, description }) => {
     >
       <div className="relative ">
         {/* Ảnh với rounded-top */}
-        <div className="relative group overflow-hidden rounded-t-lg group">
+        <div className="relative group overflow-hidden rounded-t-lg group ">
           {/* Hình ảnh chính */}
           <img
             src={image}

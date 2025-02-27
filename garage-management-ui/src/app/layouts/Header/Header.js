@@ -12,7 +12,7 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const menuItems = {
     home: "/",
-    about: "/ve-chung-toi",
+    about: "/about-us/mision",
     service: "/services",
     product: "/product",
     contact: "/lien-he",
