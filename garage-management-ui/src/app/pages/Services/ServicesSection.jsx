@@ -72,7 +72,7 @@ const ServicesSection = () => {
         title1={t("home")}
         subtitle={t("pageTitle")}
       />
-      <section className="pt-16 bg-gray-100 text-center relative">
+      <section className="pt-16 bg-gray-100 text-center relative ">
         <h2 className="text-red-500 uppercase text-2xl font-shadows font-semibold">
           {t("title")}
         </h2>

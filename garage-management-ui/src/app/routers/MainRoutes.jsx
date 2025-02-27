@@ -4,6 +4,7 @@ import PrivateRoute from "./PrivateRoute";
 import routesConfig from "./routes.json";
 import LoaddingPage from "../layouts/LoadingPage";
 import RedirectRoute from "./RedirectRoute";
+import LoaddingPage2 from "../layouts/LoadingPage/index2";
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
@@ -54,7 +55,9 @@ const componentMap = {
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
-  ManageCateProduct: lazy(() => import("../pages/ManageCateProduct/ManageCateProduct")),
+  ManageCateProduct: lazy(() =>
+    import("../pages/ManageCateProduct/ManageCateProduct")
+  ),
   ManageBooking: lazy(() => import("../pages/ManageBooking/ManageBooking")),
   LayoutAppointment: lazy(() =>
     import("../pages/AdminManageAppoinment/LayoutAppointment")
@@ -97,6 +100,9 @@ const generateRoutes = (routes) => {
     // Bọc `Suspense` nếu có `isSuspense: true`
     if (route.isSuspense) {
       element = <Suspense fallback={<LoaddingPage />}>{element}</Suspense>;
+    }
+    if (route.isSuspense2) {
+      element = <Suspense fallback={<LoaddingPage2 />}>{element}</Suspense>;
     }
 
     // Bọc `PrivateRoute` nếu có quyền hạn

@@ -139,7 +139,7 @@
       {
         "index": true,
         "element": "AdminProfile",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "account",
