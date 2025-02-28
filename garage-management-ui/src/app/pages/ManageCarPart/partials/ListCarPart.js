@@ -5,6 +5,7 @@ import BaseTable from "../../../components/BaseTable/BaseTable";
 import UpdateCarPartModal from "../models/UpdateCarPartModal";
 import { getAllCarPart, getCarPartDetails, searchCarPart } from "../services/CarPartService";
 import SearchCarPart from "./SearchCarPart";
+import { sCarPart } from "../services/SignifyCarPart";
 
 export default function ListCarPart({ refresh }) {
     const { t, i18n } = useTranslation("manage_carpart");

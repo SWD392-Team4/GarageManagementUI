@@ -29,6 +29,8 @@ export default function BaseTable({
     pageCount: pagination.totalPages,
   });
 
+  console.log("check signi tai table component:  ", signifyInformation);
+
   return (
     <>
       <div className="bg-white">
@@ -53,7 +55,7 @@ export default function BaseTable({
               {signifyInformation &&
                 columns.length > 0 &&
                 signifyInformation[columns[0].accessorKey] !== "" && (
-                  <tr className="hover:bg-green-400 bg-green-200">
+                  <tr className="bg-green-200">
                     {columns.map((column, colIndex) => (
                       <td key={`signify-${colIndex}`} className="border p-3 text-sm">
                         {signifyInformation[column.accessorKey] || "-"}

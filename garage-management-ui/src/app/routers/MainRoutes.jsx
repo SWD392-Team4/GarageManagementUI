@@ -5,6 +5,7 @@ import routesConfig from "./routes.json";
 import LoaddingPage from "../layouts/LoadingPage";
 import RedirectRoute from "./RedirectRoute";
 import LoaddingPage2 from "../layouts/LoadingPage/index2";
+import ManageService from "../pages/ManageService/ManageService";
 // import ManageCarCategory from "../pages/ManageCarCategory/ManageCarCategory";
 
 const componentMap = {
@@ -56,6 +57,7 @@ const componentMap = {
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
+  ManageService: lazy(() => import("../pages/ManageService/ManageService")),
   ManageCateProduct: lazy(() =>
     import("../pages/ManageCateProduct/ManageCateProduct")
   ),

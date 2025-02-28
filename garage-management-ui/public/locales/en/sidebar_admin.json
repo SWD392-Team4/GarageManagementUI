@@ -21,6 +21,7 @@
     "car_part_category": "Car Part Category",
     "car": "Car",
     "car_modal": "Car Model",
-    "car_category": "Car Category"
+    "car_category": "Car Category",
+    "service": "Service"
   }
 }

@@ -10,6 +10,7 @@
         "createdAt": "Created At",
         "updatedAt": "Updated At",
         "price": "Price",
+        "upload_images": "Upload Image",
         "search_product_name": "Product Name",
         "search_placeholder": "Enter product name...",
         "search_status": "Status",

@@ -1,5 +1,6 @@
 import UserService from "../../../hooks/services/UserService";
 import { formatDate } from "../schemas/CarPartValid";
+import { sCarPart } from "./SignifyCarPart";
 
 const userService = new UserService();
 
@@ -73,6 +74,7 @@ export const updateCarPart = async (carPartId, updatedData) => {
             updatedData,
             true
         );
+        //return
         userService.showToast(200, "Car Part updated successfully");
         return response;
     } catch (error) {
@@ -125,6 +127,7 @@ export const getAllCarPartCate = async () => {
 export const createCarPart = async (categoryData) => {
     try {
         const response = await userService.sendAjax("/api/car-parts", "POST", categoryData, true);
+
         userService.showToast(200, "Car Part created successfully");
         return response;
     } catch (error) {

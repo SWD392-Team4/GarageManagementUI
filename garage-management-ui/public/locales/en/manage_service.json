@@ -1,0 +1,33 @@
+{
+    "manage_service": {
+        "Id": "ID",
+        "ServiceName": "Service Name",
+        "ServiceCategory": "Service Category",
+        "PartName": "Part Name",
+        "Category": "Category",
+        "Price": "Price",
+        "WorkNature": "Work Nature",
+        "Action": "Action",
+        "EstimatedHours": "Estimated Hours",
+        "Status": "Status",
+        "view": "View",
+        "title": "Manage Services",
+        "create": "Create Service",
+        "search_service_name": "Service Name",
+        "search_category": "Category",
+        "search_part_name": "Part Name",
+        "search_min_price": "Min Price",
+        "search_max_price": "Max Price",
+        "search_work_nature": "Work Nature",
+        "search_estimated_hours": "Estimated Hours",
+        "search_status": "Status",
+        "search": "Search",
+        "clear_filters": "Clear Filters",
+        "search_placeholder": "Enter keyword...",
+        "search_status_enum": {
+            "choose": "Choose Status",
+            "active": "Active",
+            "inactive": "Inactive"
+        }
+    }
+}

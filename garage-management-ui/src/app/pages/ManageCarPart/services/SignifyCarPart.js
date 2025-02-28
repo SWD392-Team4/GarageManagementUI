@@ -1,17 +1,16 @@
 import { signify } from "react-signify";
 
-export const sBrand = signify(
+export const sCarPart = signify(
     {
         Id: "",
-        BrandName: "",
-        ImageLink: "",
+        PartCategory: "",
         Status: "",
         CreatedAt: "",
         UpdatedAt: "",
     },
     {
         cache: {
-            key: "Brand",
+            key: "CarPart",
         },
     }
 );

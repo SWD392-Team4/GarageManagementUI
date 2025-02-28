@@ -17,7 +17,8 @@ import {
   FaCogs,
   FaCar,
   FaThList,
-  FaCarSide
+  FaCarSide,
+  FaClipboardList 
 
 } from "react-icons/fa";
 import { AiOutlineSchedule } from "react-icons/ai";
@@ -122,6 +123,17 @@ export default function SideBarAdmin({
                   <FaUser className="w-6 h-6" />
                   {isSidebarOpen && (
                     <span className="ml-3">{t("sidebar_admin.profile")}</span>
+                  )}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/admin/service"
+                  className="flex items-center p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+                >
+                  <FaClipboardList className="w-6 h-6" />
+                  {isSidebarOpen && (
+                    <span className="ml-3">{t("sidebar_admin.service")}</span>
                   )}
                 </Link>
               </li>

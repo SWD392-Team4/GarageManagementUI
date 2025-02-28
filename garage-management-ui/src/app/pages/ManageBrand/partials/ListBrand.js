@@ -93,7 +93,6 @@ export default function ListBrand({ refresh }) {
         },
     ];
 
-    console.log("check type :", typeof (sBrand));
 
     return (
         <>
@@ -104,7 +103,7 @@ export default function ListBrand({ refresh }) {
                 actions={actions}
                 pagination={pagination}
                 onPageChange={handlePageChange}
-                signifyInformation={sBrand}
+                signifyInformation={sBrand.value}
             />
             <UpdateBrandModal
                 isOpen={isUpdateModalOpen}
