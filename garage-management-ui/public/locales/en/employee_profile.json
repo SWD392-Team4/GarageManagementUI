@@ -1,0 +1,30 @@
+{
+  "personal_info": {
+    "title": "Personal Information",
+    "last_name": "First Name",
+    "first_name": "Last Name",
+    "email": "Email",
+    "phone": "Phone Number",
+    "dateBirth": "Date of Birth",
+    "Citizen": "Citizen ID",
+    "Gender": "Gender",
+    "SGender": "Select Gender",
+    "Male": "Male",
+    "Female": "Female",
+    "error": "Change information failed!",
+    "success": "Change information successfully!",
+    "imgSuccess": "Update profile picture successfully!",
+    "imgError": "Update picture failed!",
+    "ErrorServer": "Error while updating picture.",
+    "successMessagePass": "Please check your email to reset your password.",
+    "errorMessagePass": "An error occurred"
+  },
+  "error_info": {
+    "first": "First Name is required",
+    "last": "Last Name is required",
+    "dateOfBirth1": "Date of Birth is required",
+    "dateOfBirth2": "Date of birth must be valid",
+    "Citizen": "Citizen ID is required",
+    "Gender": "Please enter a valid gender"
+  }
+}

@@ -6,7 +6,7 @@ export default function Breadcrumb({ title }) {
   const pathnames = location.pathname.split("/").filter((x) => x);
 
   return (
-    <nav className="border-b bg-white shadow-md p-4 mb-4">
+    <nav className="border-b bg-white shadow-md p-4 md:mb-4 md:mt-0 mt-12">
       <ul className="flex space-x-2 text-gray-600">
         {pathnames.map((value, index) => {
           const to = `/${pathnames.slice(0, index + 1).join("/")}`;

@@ -1,0 +1,10 @@
+{
+  "workPlaceInformation": "Thông tin nơi làm việc",
+  "name": "Tên",
+  "phoneNumber": "Số điện thoại",
+  "fullAddress": "Địa chỉ đầy đủ",
+  "workplaceType": "Loại nơi làm việc",
+  "status": "Trạng thái",
+  "createdAt": "Ngày tạo",
+  "updatedAt": "Ngày cập nhật"
+}

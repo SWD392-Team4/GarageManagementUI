@@ -6,6 +6,7 @@ export default function AllAppointment() {
   return (
     <>
       <FilterTablePost />
+
       <ListAppoinment type="type" />
     </>
   );
