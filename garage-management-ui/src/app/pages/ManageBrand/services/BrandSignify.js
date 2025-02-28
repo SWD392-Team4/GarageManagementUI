@@ -4,6 +4,7 @@ export const sBrand = signify(
     {
         Id: "",
         BrandName: "",
+        LogoLink: "",
         Status: "",
         CreatedAt: "",
         UpdatedAt: "",

@@ -1,4 +1,5 @@
 import UserService from "../../../hooks/services/UserService";
+import { sBrand } from "../services/BrandSignify"
 import { formatDate } from "../schemas/BrandValid";
 const userService = new UserService();
 
@@ -63,7 +64,11 @@ export const searchBrand = async (params) => {
 
 export const createBrand = async (brandData) => {
     try {
+        console.log("check brand data:", brandData);
         const response = await userService.sendAjax("/api/brands", "POST", brandData, true);
+        //gan signify
+        sBrand.set(brandData);
+        //return
         userService.showToast(200, "Brand created successfully");
         return response;
     } catch (error) {

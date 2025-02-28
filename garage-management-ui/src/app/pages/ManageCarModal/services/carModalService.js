@@ -14,7 +14,6 @@ export const getAllCarModal = async (PageNumber = 1) => {
                 updatedAt: formatDate(carModal.updatedAt)
             }))
 
-            console.log("check response : ", response);
             userService.showToast(200, "Loading Car Modal Successful");
             return response;
         } else {
@@ -54,6 +53,28 @@ export const searchCarModal = async (params) => {
     }
 }
 
+export const createCarModal = async (data) => {
+    try {
+        const response = userService.sendAjax(
+            "/api/car-models",
+            "POST",
+            data,
+            true
+        );
+
+        if (response) {
+            userService.showToast(200, "Create Car Models Successful");
+            return response;
+        } else {
+            userService.showToast(404, "Create Car Models Fail");
+            return null;
+        }
+
+    } catch (error) {
+        console.error("Error create car models: ", error.message);
+    }
+}
+
 export const getCarModalDetails = async (carModalId) => {
     try {
         const response = userService.sendAjax(
@@ -72,3 +93,49 @@ export const getCarModalDetails = async (carModalId) => {
     }
 }
 
+
+
+
+export const getAllBrand = async () => {
+    try {
+        const response = await userService.sendAjax(
+            "/api/brands",
+            "GET",
+            null,
+            true
+        );
+
+        if (response != null) {
+            return response.data.value;
+        } else {
+            console.error(`Error: Received status ${response.error}`);
+            return null;
+        }
+    } catch (error) {
+        console.error("Error fetching brands: ", error);
+        userService.showToast(400, "Unknown error");
+        return null;
+    }
+};
+
+export const getAllCarCategory = async () => {
+    try {
+        //call api
+        const response = await userService.sendAjax(
+            "/api/car-categories",
+            "GET",
+            null,
+            true
+        )
+        //check response
+        if (response.status == 200) {
+            return response.data.value;
+        } else {
+            console.error(`Error: Received status ${response.error}`);
+            userService.showToast(404, "Loading Car Category Fail");
+            return null;
+        }
+    } catch (error) {
+        console.error("Fail to loading car category", error.message);
+    }
+}

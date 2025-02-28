@@ -49,7 +49,6 @@ export const getProduct = async (productId) => {
 
 export const updateProduct = async (productId, productData) => {
     try {
-        console.log("check data gửi về back end", productData);
         const response = await userService.sendAjax(
             `/api/products/${productId}`,
             "PUT",

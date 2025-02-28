@@ -16,9 +16,9 @@ export default function CreateCarCategoryModal({ isOpenModal, onClose, onCreateC
                 category: data.category,
                 description: data.description,
             });
-            reset(); // Reset form sau khi tạo thành công
             onCreateCarCategory(); // Refresh danh sách
-            onClose(); // Đóng modal
+            reset();
+            onClose();
         } catch (error) {
             console.error("Create failed", error);
         }

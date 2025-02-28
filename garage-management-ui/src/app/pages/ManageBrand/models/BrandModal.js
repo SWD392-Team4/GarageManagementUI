@@ -8,7 +8,7 @@ import { createBrand } from "../services/BrandService";
 // Schema validation sử dụng Yup
 const schema = yup.object().shape({
     brandName: yup.string().required("Tên thương hiệu không được để trống"),
-    linkLogo: yup.string().url("Link logo phải là URL hợp lệ").required("Link logo không được để trống"),
+    LogoLink: yup.string().url("Link logo phải là URL hợp lệ").required("Link logo không được để trống"),
 });
 
 export default function BrandModal({ isOpen, onClose, onBrandCreated }) {
@@ -23,7 +23,7 @@ export default function BrandModal({ isOpen, onClose, onBrandCreated }) {
         resolver: yupResolver(schema),
         defaultValues: {
             brandName: "",
-            linkLogo: "",
+            LogoLink: "",
         },
     });
 
@@ -67,11 +67,11 @@ export default function BrandModal({ isOpen, onClose, onBrandCreated }) {
                     <div className="mb-3">
                         <input
                             type="text"
-                            {...register("linkLogo")}
+                            {...register("LogoLink")}
                             className="w-full p-2 border rounded"
-                            placeholder={t("manage_brand.linkLogo")}
+                            placeholder={t("manage_brand.LogoLink")}
                         />
-                        {errors.linkLogo && <p className="text-red-500 text-sm">{errors.linkLogo.message}</p>}
+                        {errors.LogoLink && <p className="text-red-500 text-sm">{errors.LogoLink.message}</p>}
                     </div>
 
                     <div className="flex justify-end space-x-2">

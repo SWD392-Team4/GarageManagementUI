@@ -4,6 +4,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 import BaseTable from '../../../components/BaseTable/BaseTable';
 import UpdateCarCategoryModal from '../models/UpdateCarCategoryModal';
 import { getAllCarCategory, getCarCategory, SearchCarCategory } from '../services/ServiceCarCategory';
+import { sCarCategory } from '../services/CarCategorySignify';
 
 export default function ListCarCategory({ refesh }) {
     const { t, i18n } = useTranslation("manage_car_category");
@@ -90,6 +91,7 @@ export default function ListCarCategory({ refesh }) {
         },
     ];
 
+
     return (
         <>
             {/* <SearchCarCategory onSearch={handleSearch} /> */}
@@ -99,6 +101,7 @@ export default function ListCarCategory({ refesh }) {
                 actions={actions}
                 pagination={pagination}
                 onPageChange={handlePageChange}
+                signifyInformation={sCarCategory.value}
             />
             <UpdateCarCategoryModal
                 isOpen={isUpdateModalOpen}

@@ -15,7 +15,7 @@ export default function BaseTable({
   actions,
   pagination,
   onPageChange,
-  onPageSizeChange,
+  signifyInformation
 }) {
   const { t } = useTranslation("base_table");
 
@@ -48,6 +48,24 @@ export default function BaseTable({
             </thead>
 
             <tbody className="bg-gray-50">
+              {/* Du lieu cua signify */}
+              {/* Kiểm tra signifyInformation và giá trị trường đầu tiên */}
+              {signifyInformation &&
+                columns.length > 0 &&
+                signifyInformation[columns[0].accessorKey] !== "" && (
+                  <tr className="hover:bg-green-400 bg-green-200">
+                    {columns.map((column, colIndex) => (
+                      <td key={`signify-${colIndex}`} className="border p-3 text-sm">
+                        {signifyInformation[column.accessorKey] || "-"}
+                      </td>
+                    ))}
+                    {actions && <td className="border p-3 text-sm">-</td>}
+                  </tr>
+                )}
+
+
+
+              {/* Du lieu co api */}
               {table.getRowModel().rows.length > 0 ? (
                 table.getRowModel().rows.map((row) => (
                   <tr key={row.original?.Id || row.id} className="hover:bg-gray-100">

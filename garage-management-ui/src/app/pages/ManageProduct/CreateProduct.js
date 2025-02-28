@@ -45,7 +45,6 @@ export default function CreateProduct() {
             link: data.link,
             productPrice: parseFloat(data.price),
         };
-        console.log("Product Created:", payload);
         navigate("/admin/product");
     };
 

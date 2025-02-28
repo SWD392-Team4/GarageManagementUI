@@ -77,7 +77,6 @@ export const updateCarPartCate = async (categoryData, categoryId) => {
         userService.showToast(200, "Car Part Category updated successfully");
         return response;
     } catch (error) {
-        console.log("check error :", error);
         console.error("Error updating category:", error.message);
         userService.showToast(400, "Error updating Car Part Category");
         throw error;

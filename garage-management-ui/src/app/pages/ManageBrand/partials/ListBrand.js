@@ -5,6 +5,7 @@ import BaseTable from "../../../components/BaseTable/BaseTable";
 import UpdateBrandModal from "../models/UpdateBrandModal";
 import { getAllBrand, getBrandDetails, searchBrand } from "../services/BrandService";
 import SearchBrand from "./SearchBrand";
+import { sBrand } from "../services/BrandSignify";
 
 export default function ListBrand({ refresh }) {
     const { t, i18n } = useTranslation("manage_brand");
@@ -92,6 +93,8 @@ export default function ListBrand({ refresh }) {
         },
     ];
 
+    console.log("check type :", typeof (sBrand));
+
     return (
         <>
             <SearchBrand onSearch={handleSearch} />
@@ -101,6 +104,7 @@ export default function ListBrand({ refresh }) {
                 actions={actions}
                 pagination={pagination}
                 onPageChange={handlePageChange}
+                signifyInformation={sBrand}
             />
             <UpdateBrandModal
                 isOpen={isUpdateModalOpen}
