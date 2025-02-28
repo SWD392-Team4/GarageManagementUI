@@ -13,7 +13,7 @@ export default function ManageService() {
                     <h1 className="text-2xl font-semibold">{t("manage_service.title")}</h1>
                     <button
                         className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
-                        onClick={() => navigate("/admin/services/create")}
+                        onClick={() => navigate("/admin/service/createService")}
                     >
                         {t("manage_service.create")}
                     </button>

@@ -231,6 +231,11 @@
         "isSuspense": true
       },
       {
+        "path": "service/createService",
+        "element": "CreateServicePage",
+        "isSuspense": true
+      },
+      {
         "path": "service",
         "element": "ManageService",
         "isSuspense": true

@@ -74,6 +74,26 @@ export const createService = async (data) => {
     }
 }
 
+export const createServiceImage = async (serviceId, FormData) => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/services/${serviceId}/images`,
+            "POST",
+            FormData,
+            true,
+            true
+        );
+        if (response.data) {
+            return response;
+        } else {
+            console.error("Fail to Upload: ", response.description);
+            return null;
+        }
+    } catch (error) {
+    }
+}
+
+
 export const updateService = async (serviceId, updateData) => {
     try {
         const response = await userService.sendAjax(
