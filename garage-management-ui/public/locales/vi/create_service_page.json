@@ -1,0 +1,57 @@
+{
+    "title": "Tạo dịch vụ mới",
+    "form": {
+        "service_name": "Tên dịch vụ",
+        "select_car_category": "Chọn danh mục xe",
+        "select_car_part": "Chọn bộ phận xe",
+        "select_service_category": "Chọn loại dịch vụ",
+        "select_action": "Chọn hành động",
+        "select_work_nature": "Chọn tính chất công việc",
+        "estimated_hours": "Thời gian dự kiến (giờ)",
+        "service_price": "Giá dịch vụ",
+        "description": "Mô tả",
+        "create_service": "Tạo dịch vụ"
+    },
+    "errors": {
+        "service_name": "Tên dịch vụ là bắt buộc",
+        "car_category": "Danh mục xe là bắt buộc",
+        "car_part": "Bộ phận xe là bắt buộc",
+        "category": "Loại dịch vụ là bắt buộc",
+        "action": "Hành động là bắt buộc",
+        "work_nature": "Tính chất công việc là bắt buộc",
+        "estimated_hours": "Thời gian dự kiến là bắt buộc",
+        "service_price": "Giá dịch vụ là bắt buộc"
+    },
+    "categories": {
+        "repair": "Sửa chữa",
+        "maintenance": "Bảo dưỡng",
+        "upgrade": "Nâng cấp",
+        "car_wash": "Rửa xe",
+        "detailing": "Detailing"
+    },
+    "actions": {
+        "inspect": "Kiểm tra",
+        "replace": "Thay thế",
+        "lubricate": "Bôi trơn",
+        "align": "Cân chỉnh",
+        "refill": "Nạp/Thay",
+        "repair": "Sửa chữa",
+        "clean": "Làm sạch",
+        "upgrade": "Nâng cấp",
+        "restore": "Khôi phục",
+        "update": "Cập nhật",
+        "polish": "Đánh bóng",
+        "protect": "Bảo vệ",
+        "deodorize": "Khử mùi",
+        "condition": "Dưỡng chất",
+        "remove": "Loại bỏ",
+        "restore_lighting": "Khôi phục ánh sáng"
+    },
+    "work_natures": {
+        "preventive": "Hành động phòng ngừa",
+        "corrective": "Hành động khắc phục",
+        "enhancement": "Hành động nâng cấp",
+        "digital": "Hành động kỹ thuật số",
+        "aesthetic": "Hành động thẩm mỹ"
+    }
+}

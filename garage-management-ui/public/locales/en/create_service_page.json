@@ -1,0 +1,57 @@
+{
+    "title": "Create New Service",
+    "form": {
+        "service_name": "Service Name",
+        "select_car_category": "Select Car Category",
+        "select_car_part": "Select Car Part",
+        "select_service_category": "Select Service Category",
+        "select_action": "Select Action",
+        "select_work_nature": "Select Work Nature",
+        "estimated_hours": "Estimated Hours",
+        "service_price": "Service Price",
+        "description": "Description",
+        "create_service": "Create Service"
+    },
+    "errors": {
+        "service_name": "Service name is required",
+        "car_category": "Car category is required",
+        "car_part": "Car part is required",
+        "category": "Category is required",
+        "action": "Action is required",
+        "work_nature": "Work nature is required",
+        "estimated_hours": "Estimated hours is required",
+        "service_price": "Service price is required"
+    },
+    "categories": {
+        "repair": "Repair",
+        "maintenance": "Maintenance",
+        "upgrade": "Upgrade",
+        "car_wash": "Car Wash",
+        "detailing": "Detailing"
+    },
+    "actions": {
+        "inspect": "Inspect/Check",
+        "replace": "Replace",
+        "lubricate": "Lubricate",
+        "align": "Align",
+        "refill": "Refill/Recharge",
+        "repair": "Repair",
+        "clean": "Clean",
+        "upgrade": "Upgrade",
+        "restore": "Restore",
+        "update": "Update",
+        "polish": "Polish",
+        "protect": "Protect",
+        "deodorize": "Deodorize",
+        "condition": "Condition",
+        "remove": "Remove",
+        "restore_lighting": "Restore Lighting"
+    },
+    "work_natures": {
+        "preventive": "Preventive Actions",
+        "corrective": "Corrective Actions",
+        "enhancement": "Enhancement Actions",
+        "digital": "Digital Actions",
+        "aesthetic": "Aesthetic Actions"
+    }
+}

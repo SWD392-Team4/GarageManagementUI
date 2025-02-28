@@ -20,16 +20,11 @@ export default function CreateServicePage() {
   const [selectedImages, setSelectedImages] = useState([]);
   const { t } = useTranslation("create_service_page");
 
-  const serviceCategories = ["Sửa chữa", "Bảo dưỡng", "Nâng cấp", "Rửa xe", "Detailing"];
-  const actions = [
-    "Inspect/Check", "Replace", "Lubricate", "Align", "Refill/Recharge",
-    "Repair", "Clean", "Upgrade", "Restore", "Update",
-    "Polish", "Protect", "Deodorize", "Condition", "Remove",
-    "Restore Lighting"
-  ];
-  const workNatures = [
-    "Preventive Actions", "Corrective Actions", "Enhancement Actions", "Digital Actions", "Aesthetic Actions"
-  ];
+  const serviceCategoryKeys = ["repair", "maintenance", "upgrade", "car_wash", "detailing"];
+  const actionKeys = ["inspect", "replace", "lubricate", "align", "refill", "repair", "clean", "upgrade", "restore", "update", "polish", "protect", "deodorize", "condition", "remove", "restore_lighting"];
+  const workNatureKeys = ["preventive", "corrective", "enhancement", "digital", "aesthetic"];
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -66,8 +61,8 @@ export default function CreateServicePage() {
 
     setPayload(formData);
 
-    // const response = await createService(formData);
-    if (response) {
+    const response = await createService(formData);
+    if (response.data) {
       console.log("Service created successfully", response);
 
       if (selectedImages.length > 0) {
@@ -82,17 +77,17 @@ export default function CreateServicePage() {
 
   return (
     <div className="bg-white shadow-lg p-6">
-      <h2 className="text-xl font-semibold mb-4">Create New Service</h2>
+      <h2 className="text-xl font-semibold mb-4">{t("title")}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <input {...register("ServiceName", { required: "Service name is required" })} placeholder="Service Name" className="border p-2 w-full" />
+            <input {...register("ServiceName", { required: t("errors.service_name") })} placeholder={t("form.service_name")} className="border p-2 w-full" />
             {errors.ServiceName && <p className="text-red-500 text-sm">{errors.ServiceName.message}</p>}
           </div>
 
           <div>
-            <select {...register("CarCategoryName", { required: "Car category is required" })} className="border p-2 w-full">
-              <option value="">Select Car Category</option>
+            <select {...register("CarCategoryName", { required: t("errors.car_category") })} className="border p-2 w-full">
+              <option value="">{t("form.select_car_category")}</option>
               {carCategories.map((category) => (
                 <option key={category.Id} value={category.Id}>{category.PartCategory}</option>
               ))}
@@ -101,8 +96,8 @@ export default function CreateServicePage() {
           </div>
 
           <div>
-            <select {...register("CarPartName", { required: "Car part is required" })} className="border p-2 w-full">
-              <option value="">Select Car Part</option>
+            <select {...register("CarPartName", { required: t("errors.car_part") })} className="border p-2 w-full">
+              <option value="">{t("form.select_car_part")}</option>
               {carParts.map((part) => (
                 <option key={part.Id} value={part.Id}>{part.PartName}</option>
               ))}
@@ -111,49 +106,49 @@ export default function CreateServicePage() {
           </div>
 
           <div>
-            <select {...register("Category", { required: "Category is required" })} className="border p-2 w-full">
-              <option value="">Select Service Category</option>
-              {serviceCategories.map((category, index) => (
-                <option key={index} value={category}>{category}</option>
+            <select {...register("Category", { required: t("errors.category") })} className="border p-2 w-full">
+              <option value="">{t("form.select_service_category")}</option>
+              {serviceCategoryKeys.map((key, index) => (
+                <option key={index} value={key}>{t(`categories.${key}`)}</option>
               ))}
             </select>
             {errors.Category && <p className="text-red-500 text-sm">{errors.Category.message}</p>}
           </div>
 
           <div>
-            <select {...register("Action", { required: "Action is required" })} className="border p-2 w-full">
-              <option value="">Select Action</option>
-              {actions.map((action, index) => (
-                <option key={index} value={action}>{action}</option>
+            <select {...register("Action", { required: t("errors.action") })} className="border p-2 w-full">
+              <option value="">{t("form.select_action")}</option>
+              {actionKeys.map((key, index) => (
+                <option key={index} value={key}>{t(`actions.${key}`)}</option>
               ))}
             </select>
             {errors.Action && <p className="text-red-500 text-sm">{errors.Action.message}</p>}
           </div>
 
           <div>
-            <select {...register("WorkNature", { required: "Work nature is required" })} className="border p-2 w-full">
-              <option value="">Select Work Nature</option>
-              {workNatures.map((nature, index) => (
-                <option key={index} value={nature}>{nature}</option>
+            <select {...register("WorkNature", { required: t("errors.work_nature") })} className="border p-2 w-full">
+              <option value="">{t("form.select_work_nature")}</option>
+              {workNatureKeys.map((key, index) => (
+                <option key={index} value={key}>{t(`work_natures.${key}`)}</option>
               ))}
             </select>
             {errors.WorkNature && <p className="text-red-500 text-sm">{errors.WorkNature.message}</p>}
           </div>
 
+
           <div>
-            <input type="number" {...register("EstimatedHours", { required: "Estimated hours is required", min: 0 })} placeholder="Estimated Hours" className="border p-2 w-full" />
+            <input type="number" {...register("EstimatedHours", { required: t("errors.estimated_hours"), min: 0 })} placeholder={t("form.estimated_hours")} className="border p-2 w-full" />
             {errors.EstimatedHours && <p className="text-red-500 text-sm">{errors.EstimatedHours.message}</p>}
           </div>
 
           <div>
-            <input type="number" {...register("ServicePrice", { required: "Service Price is required", min: 0 })} placeholder="Service Price" className="border p-2 w-full" />
+            <input type="number" {...register("ServicePrice", { required: t("errors.service_price"), min: 0 })} placeholder={t("form.service_price")} className="border p-2 w-full" />
             {errors.ServicePrice && <p className="text-red-500 text-sm">{errors.ServicePrice.message}</p>}
           </div>
         </div>
 
-
         <div className="col-span-2" data-color-mode="light">
-          <label className="block text-gray-700 font-semibold">{t("create_service.description")}</label>
+          <label className="block text-gray-700 font-semibold">{t("form.description")}</label>
           <MDEditor value={watch("Description")} onChange={(value) => setValue("Description", value)} />
         </div>
 
@@ -182,7 +177,7 @@ export default function CreateServicePage() {
           )}
         </div>
 
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Create Service</button>
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">{t("form.create_service")}</button>
       </form>
       {payload && (
         <div className="mt-4 p-4 bg-gray-100 rounded-lg">
