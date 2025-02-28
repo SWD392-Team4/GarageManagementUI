@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import AppointmentCard from "./AppointmentCard";
 import AppointmentDetailModal from "./AppointmentDetailModal";
+import UserService from "../../../hooks/services/UserService";
 
 // Dữ liệu fake cho appointment (bao gồm header và danh sách service)
 const fakeAppointment = {
@@ -87,7 +88,7 @@ function MechanicDashboard() {
     });
     return map;
   });
-
+  const userService = new UserService();
   // Tạo 3 cột cố định: Upcoming, In Progress, Completed
   const initialColumns = {
     "column-upcoming": {
@@ -192,14 +193,14 @@ function MechanicDashboard() {
   // -----------------------------
   const handleCreateNew = () => {
     setIsNew(true);
-    setSelectedServiceId(null);
+    setSelectedService(null);
     setShowModal(true);
   };
 
   // -----------------------------
   // Modal: Lưu/Tạo
   // -----------------------------
-  const handleSave = (newData) => {
+  const handleSave = async (newData) => {
     if (isNew) {
       const newId = `appointmentdetail-${Date.now()}`;
       const serviceStatus = newData.status || "upcoming";
@@ -230,12 +231,30 @@ function MechanicDashboard() {
         ...prev,
         [id]: { ...prev[id], ...newData },
       }));
-      // Gọi API cập nhật (giả lập)
-      fetch("https://example.com/api/appointments/update", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newData),
-      }).catch((err) => console.error(err));
+      const formData = new FormData();
+      newData.imagesBefore.forEach((file) => {
+        formData.append("fileDtos", file);
+      });
+
+      try {
+        const response = await userService.sendAjax(
+          "/api/products/ac103ccc-bd82-44ca-adb7-5b478b95965a/images",
+          "POST",
+          formData,
+          false,
+          true
+        );
+        if (response.status === 204) {
+          userService.showToast(response.status, "Lưu được");
+        } else {
+          userService.showToast(
+            response.status,
+            response.message || "Lưu không được"
+          );
+        }
+      } catch (error) {
+        userService.showToast(error.status, error.message);
+      }
     }
     setShowModal(false);
   };
