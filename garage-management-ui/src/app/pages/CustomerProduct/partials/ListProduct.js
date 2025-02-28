@@ -9,6 +9,7 @@ const ListProduct = ({ products }) => {
     <div className="min-h-screen p-6">
     <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {products.map((item) => {
+        const productImage = item.ImageLink?.length > 0 ? item.ImageLink[0] : placeholder;
         return (
           <div
             onClick={() => navigate(`/product/${item.Id}`)}
@@ -17,7 +18,7 @@ const ListProduct = ({ products }) => {
                           transition transform hover:scale-105 hover:shadow-2xl cursor-pointer "
           >
             <img
-              src={item.ProductImg || placeholder}
+              src={productImage}
               alt={item.ProductName}
               className="w-full h-40 object-contain rounded-md"
             />

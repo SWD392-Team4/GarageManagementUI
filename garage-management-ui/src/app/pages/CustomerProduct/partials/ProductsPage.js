@@ -42,7 +42,7 @@ const ProductsPage = () => {
           12,
           appliedFilters
         );
-
+        console.log(response);
         if (response?.value) {
           setFilteredProducts(response.value);
 

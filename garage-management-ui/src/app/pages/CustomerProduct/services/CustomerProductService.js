@@ -14,8 +14,9 @@ export const getAllProducts = async (PageNumber = 1, PageSize = 12, filters = {}
             ProductBrandName: filters?.brand || "",
             MinPrice: filters?.price ? Number(filters.price[0]) : 0,
             MaxPrice: filters?.price ? Number(filters.price[1]) : 500000,
-            ProductStatus: filters?.status || ""
+            ProductStatus: "Active"
         }).toString();
+        console.log("API Query:", queryString);
         const response = await userService.sendAjax(`/api/products?${queryString}`, "GET", null, true);
         
         if (response?.data?.value) {
