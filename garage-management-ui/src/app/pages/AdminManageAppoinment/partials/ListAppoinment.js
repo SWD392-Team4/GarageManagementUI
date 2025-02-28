@@ -245,6 +245,8 @@ export default function ListAppoinment({ type }) {
       icon: <FaEye />,
       color: "bg-gray-500",
       link: (id) => `${id}`,
+      //dung chuyen link nay
+      // link: (row) => `/admin/appointment/${row.original.id}`,
     },
   ];
   return (
