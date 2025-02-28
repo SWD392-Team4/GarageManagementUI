@@ -56,12 +56,10 @@ export default function SideBarAdmin({
     }
   }, [isSidebarOpen]);
 
-
   const toggleSubMenu = (menu) => {
     if (!isSidebarOpen) return;
     setOpenMenu(openMenu === menu ? null : menu);
   };
-
 
   return (
     <>
@@ -75,10 +73,11 @@ export default function SideBarAdmin({
       )}
 
       <aside
-        className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 ${isMobile
-          ? `fixed top-0 left-0 w-64 ${isSidebarOpen ? "block" : "hidden"}`
-          : `relative ${isSidebarOpen ? "w-64" : "w-16"}`
-          }`}
+        className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 ${
+          isMobile
+            ? `fixed top-0 left-0 w-64 ${isSidebarOpen ? "block" : "hidden"}`
+            : `relative ${isSidebarOpen ? "w-64" : "w-16"}`
+        }`}
       >
         <div>
           <div className="flex items-center justify-end px-3 py-3 border-b dark:border-gray-700">
@@ -99,7 +98,6 @@ export default function SideBarAdmin({
                 {isSidebarOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
               </button>
             )}
-
           </div>
 
           <div className="flex-1 px-2 py-4">
@@ -209,7 +207,11 @@ export default function SideBarAdmin({
                   )}
                   {isSidebarOpen && (
                     <span className="ml-auto">
-                      {openMenu === "car" ? <FaChevronDown /> : <FaChevronRight />}
+                      {openMenu === "car" ? (
+                        <FaChevronDown />
+                      ) : (
+                        <FaChevronRight />
+                      )}
                     </span>
                   )}
                 </button>
@@ -221,7 +223,9 @@ export default function SideBarAdmin({
                         className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
                       >
                         <FaCarSide className="w-5 h-5" />
-                        <span className="ml-2">{t("sidebar_admin.car_modal")}</span>
+                        <span className="ml-2">
+                          {t("sidebar_admin.car_modal")}
+                        </span>
                       </Link>
                     </li>
                     <li>
@@ -230,14 +234,14 @@ export default function SideBarAdmin({
                         className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
                       >
                         <FaThList className="w-5 h-5" />
-                        <span className="ml-2">{t("sidebar_admin.car_category")}</span>
+                        <span className="ml-2">
+                          {t("sidebar_admin.car_category")}
+                        </span>
                       </Link>
                     </li>
                   </ul>
                 )}
               </li>
-
-
 
               {/* Car Part */}
               <li>
@@ -251,7 +255,11 @@ export default function SideBarAdmin({
                   )}
                   {isSidebarOpen && (
                     <span className="ml-auto">
-                      {openMenu === "carpart" ? <FaChevronDown /> : <FaChevronRight />}
+                      {openMenu === "carpart" ? (
+                        <FaChevronDown />
+                      ) : (
+                        <FaChevronRight />
+                      )}
                     </span>
                   )}
                 </button>
@@ -263,7 +271,9 @@ export default function SideBarAdmin({
                         className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
                       >
                         <FaCar className="w-5 h-5" />
-                        <span className="ml-2">{t("sidebar_admin.car_part_list")}</span>
+                        <span className="ml-2">
+                          {t("sidebar_admin.car_part_list")}
+                        </span>
                       </Link>
                     </li>
                     <li>
@@ -272,7 +282,9 @@ export default function SideBarAdmin({
                         className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
                       >
                         <FaThList className="w-5 h-5" />
-                        <span className="ml-2">{t("sidebar_admin.car_part_category")}</span>
+                        <span className="ml-2">
+                          {t("sidebar_admin.car_part_category")}
+                        </span>
                       </Link>
                     </li>
                   </ul>
@@ -379,6 +391,16 @@ export default function SideBarAdmin({
                         </span>
                       </Link>
                     </li>
+                    <li>
+                      <Link
+                        to="appointment-mine"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <span className="ml-2">
+                          {t("sidebar_admin.now-appointment")}
+                        </span>
+                      </Link>
+                    </li>
                   </ul>
                 )}
               </li>
@@ -387,9 +409,13 @@ export default function SideBarAdmin({
         </div>
         {/* Language Switcher và Logout */}
         <div className="p-2 border-t dark:border-gray-700">
-          <LanguageSwitcherSideBar isSidebarOpen={isSidebarOpen} onLanguageChange={onLanguageChange} />
+          <LanguageSwitcherSideBar
+            isSidebarOpen={isSidebarOpen}
+            onLanguageChange={onLanguageChange}
+          />
           <button className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
-            <FaSignOutAlt className="mr-2" /> {isSidebarOpen && t("sidebar_admin.logout")}
+            <FaSignOutAlt className="mr-2" />{" "}
+            {isSidebarOpen && t("sidebar_admin.logout")}
           </button>
         </div>
       </aside>

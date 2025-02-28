@@ -1,0 +1,30 @@
+{
+  "personal_info": {
+    "title": "Thông tin cá nhân",
+    "last_name": "Tên",
+    "first_name": "Họ",
+    "email": "Email",
+    "phone": "Số điện thoại",
+    "dateBirth": "Ngày sinh",
+    "Citizen": "CMND",
+    "Gender": "Giới tính",
+    "SGender": "Chọn giới tính",
+    "Male": "Nam",
+    "Female": "Nữ",
+    "error": "Thay đổi thông tin không thành công!",
+    "success": "Thay đổi thông tin thành công!",
+    "imgSuccess": "Cập nhật ảnh đại diện thành công!",
+    "imgError": "Cập nhật ảnh không thành công!",
+    "ErrorServer": "Lỗi khi cập nhật ảnh.",
+    "successMessagePass": "Vui lòng kiểm tra email của bạn để đặt lại mật khẩu.",
+    "errorMessagePass": "Đã xảy ra lỗi"
+  },
+  "error_info": {
+    "first": "Tên là bắt buộc",
+    "last": "Họ là bắt buộc",
+    "dateOfBirth1": "Ngày sinh là bắt buộc",
+    "dateOfBirth2": "Ngày sinh phải hợp lệ",
+    "Citizen": "Cần có CMND",
+    "Gender": "Vui lòng nhập giới tính hợp lệ"
+  }
+}

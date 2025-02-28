@@ -1,14 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "./partials/Navbar";
-import Breadcrumb from "./partials/Breadcrumb";
+import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 
-export default function LayoutAppointment() {
+export default function MechanicManageAppointment() {
   return (
-    <div className=" bg-gray-100 md:p-6">
+    <div className=" bg-gray-100 md:p-6 p-2">
       {" "}
       <Breadcrumb />
-      <Navbar />
       <div className="py-4">
         <Outlet />
       </div>

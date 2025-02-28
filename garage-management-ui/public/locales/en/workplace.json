@@ -1,0 +1,10 @@
+{
+  "workPlaceInformation": "WorkPlace Information",
+  "name": "Name",
+  "phoneNumber": "Phone Number",
+  "fullAddress": "Full Address",
+  "workplaceType": "Workplace Type",
+  "status": "Status",
+  "createdAt": "Created At",
+  "updatedAt": "Updated At"
+}

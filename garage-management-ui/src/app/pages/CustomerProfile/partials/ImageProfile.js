@@ -91,7 +91,7 @@ export default function ImageProfile() {
           "https://static-00.iconduck.com/assets.00/profile-major-icon-512x512-xosjbbdq.png"
         }
         alt="Avatar"
-        className="w-32 h-32 rounded-full object-cover hover:scale-105 duration-200 cursor-pointer"
+        className="w-24 h-24 rounded-full object-cover hover:scale-105 duration-200 cursor-pointer"
         onClick={() => fileInputRef.current.click()} // Click để chọn file mới
         onError={(e) =>
           (e.target.src =

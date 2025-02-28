@@ -171,6 +171,11 @@
         "isSuspense2": true
       },
       {
+        "path": "dashboard",
+        "element": "Dashboard",
+        "isSuspense": true
+      },
+      {
         "path": "account",
         "element": "ManageAccount",
         "isSuspense": true
@@ -274,6 +279,22 @@
       {
         "path": "appointment/:id",
         "element": "appointmentDetail"
+      },
+      {
+        "path": "appointment-mine",
+        "element": "MechanicManageAppointment",
+        "isSuspense": true,
+        "children": [
+          {
+            "index": true,
+            "element": "AppoinmentList"
+          },
+          {
+            "path": "detail/:id",
+            "element": "MechanicDashboard",
+            "isSuspense2": true
+          }
+        ]
       }
     ]
   }

@@ -246,37 +246,9 @@ export default function ListAppoinment({ type }) {
       color: "bg-gray-500",
       link: (id) => `${id}`,
     },
-    {
-      type: "link",
-      label: t("manage_product.view"),
-      icon: <FaEye />,
-      color: "bg-gray-500",
-      link: (id) => `${id}`,
-    },
-    {
-      type: "link",
-      label: t("manage_product.view"),
-      icon: <FaEye />,
-      color: "bg-gray-500",
-      link: (id) => `${id}`,
-    },
-    {
-      type: "link",
-      label: t("manage_product.view"),
-      icon: <FaEye />,
-      color: "bg-gray-500",
-      link: (id) => `${id}`,
-    },
-    {
-      type: "link",
-      label: t("manage_product.view"),
-      icon: <FaEye />,
-      color: "bg-gray-500",
-      link: (id) => `${id}`,
-    },
   ];
   return (
-    <div className="my-5">
+    <div className="py-5">
       <BaseTable
         columns={columns}
         data={data}

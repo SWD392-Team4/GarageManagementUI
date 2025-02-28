@@ -49,6 +49,7 @@ const componentMap = {
     import("../layouts/LayoutAdminHome/LayoutAdminHome")
   ),
   AdminProfile: lazy(() => import("../pages/AdminProfile/AdminProfile")),
+  Dashboard: lazy(() => import("../pages/Dashboard/index")),
   ManageAccount: lazy(() => import("../pages/ManageAccount/ManageAccount")),
   AccountDetails: lazy(() => import("../pages/ManageAccount/AccountDetails")),
   ManageProduct: lazy(() => import("../pages/ManageProduct/ManageProduct")),
@@ -64,9 +65,17 @@ const componentMap = {
   ManageCarCategory: lazy(() =>
     import("../pages/ManageCarCategory/ManageCarCategory")
   ),
-  ManageCarPartCate: lazy(() =>
-    import("../pages/ManageCarPartCate/ManageCarPartCate")
+
+  MechanicDashboard: lazy(() =>
+    import("../pages/MechanicManageAppoinment/partial/MechanicDashboard")
   ),
+  AppoinmentList: lazy(() =>
+    import("../pages/MechanicManageAppoinment/partial/AppoinmentList")
+  ),
+  MechanicManageAppointment: lazy(() =>
+    import("../pages/MechanicManageAppoinment/index")
+  ),
+
   ManageCarModal: lazy(() => import("../pages/ManageCarModal/ManageCarModal")),
   ManageCateProduct: lazy(() =>
     import("../pages/ManageCateProduct/ManageCateProduct")

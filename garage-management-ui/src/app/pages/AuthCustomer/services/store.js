@@ -15,6 +15,7 @@ export const sAccount = signify(
     WorkPlaceId: "",
     CreatedAt: "",
     UpdatedAt: "",
+    Role: "",
   },
   {
     cache: {
