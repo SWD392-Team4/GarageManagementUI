@@ -100,6 +100,9 @@ const componentMap = {
   CustomerProductDetail: lazy(() =>
     import("../pages/CustomerProduct/CustomerProductDetail")
   ),
+  CustomerPackagePage: lazy(() =>
+    import("../pages/CustomerPackage/CustomerPackage")
+  ),
 };
 const generateRoutes = (routes) => {
   return routes.map((route, index) => {
