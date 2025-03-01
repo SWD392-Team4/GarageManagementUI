@@ -125,13 +125,14 @@ export default function BaseTable({
 
       {/* ✅ Phân trang */}
       <div className="flex justify-between items-center py-5">
-        <button
+        {pagination.totalPages > 1 && (<button
           className="p-2 bg-gray-300 disabled:opacity-50"
           onClick={() => onPageChange(pagination.currentPage - 1)}
           disabled={!pagination.hasPrevious}
         >
           ◀
-        </button>
+        </button>)}
+
 
         {pagination.totalPages > 1 && (
           <span className="text-sm font-medium text-gray-700">
@@ -139,13 +140,15 @@ export default function BaseTable({
           </span>
         )}
 
-        <button
-          className="p-2 bg-gray-300 disabled:opacity-50"
-          onClick={() => onPageChange(pagination.currentPage + 1)}
-          disabled={!pagination.hasNext}
-        >
-          ▶
-        </button>
+        {pagination.totalPages > 1 && (
+          <button
+            className="p-2 bg-gray-300 disabled:opacity-50"
+            onClick={() => onPageChange(pagination.currentPage + 1)}
+            disabled={!pagination.hasNext}
+          >
+            ▶
+          </button>
+        )}
       </div>
     </>
 

@@ -79,7 +79,7 @@ export default function ListProduct() {
       label: t("manage_product.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
-      link: (row) => `/admin/product/${row.original.Id}`,
+      link: (row) => `${row.original.Id}`,
     },
   ];
 
