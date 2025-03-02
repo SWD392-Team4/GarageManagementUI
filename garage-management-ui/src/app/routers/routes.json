@@ -62,7 +62,11 @@
       },
       {
         "path": "packages",
-        "element": "CustomerPackagePage"
+        "element": "CustomerPackageList"
+      },
+      {
+        "path": "packages/details",
+        "element": "CustomerPackageDetail"
       }
     ]
   },
