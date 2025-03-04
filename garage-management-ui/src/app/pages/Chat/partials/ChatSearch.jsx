@@ -12,9 +12,9 @@ function ChatSearch() {
 
   return (
     <input
-      className="border rounded px-2 py-1 w-full"
+      className="border  px-2 py-1 w-full outline-none"
       type="text"
-      placeholder="Search friend..."
+      placeholder="Search . . . "
       value={keyword}
       onChange={handleSearch}
     />
