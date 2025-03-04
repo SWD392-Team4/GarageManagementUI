@@ -32,7 +32,7 @@ const ProductDetail = () => {
   const [selectedImage, setSelectedImage] = useState("");
   const [error, setError] = useState(null);
   const placeholder = "/assets/img/service_img_1.jpg";
-  // const [startIndex, setStartIndex] = useState(0);
+  const [startIndex, setStartIndex] = useState(0);
   useEffect(() => {
     const fetchProduct = async () => {
       setLoading(true);
@@ -40,8 +40,7 @@ const ProductDetail = () => {
         const data = await getProduct(id);
         if (data) {
           setProduct(data);
-          setSelectedImage(data.ProductImg ); 
-          // || data.images?.[0]
+          setSelectedImage(data.ImageLink[0] || placeholder ); 
         } else {
           setError("Product not found");
         }
@@ -56,19 +55,22 @@ const ProductDetail = () => {
   if (loading) return <LoadingSpinner />;
   if (error) return <p className="text-center text-red-500">{error}</p>;
   if (!product) return null;
-  // const visibleThumbnails = product.images.slice(startIndex, startIndex + 3);
-  
-  // const nextThumbnails = () => {
-  //   if (startIndex + 3 < product.images.length) {
-  //     setStartIndex(startIndex + 1);
-  //   }
-  // };
 
-  // const prevThumbnails = () => {
-  //   if (startIndex > 0) {
-  //     setStartIndex(startIndex - 1);
-  //   }
-  // };
+  const totalImages = product.ImageLink.length;
+  const thumbnailsToShow = Math.min(totalImages, 5); // Show up to 5 thumbnails
+  const visibleThumbnails = product.ImageLink.slice(startIndex, startIndex + thumbnailsToShow);
+  
+  const nextThumbnails = () => {
+    if (startIndex + thumbnailsToShow < totalImages) {
+      setStartIndex(startIndex + 1);
+    }
+  };
+
+  const prevThumbnails = () => {
+    if (startIndex > 0) {
+      setStartIndex(startIndex - 1);
+    }
+  };
   return (
     <div className="py-12 2xl:px-20 md:px-6 px-4">
       <div className="md:flex items-start justify-center">
@@ -77,46 +79,42 @@ const ProductDetail = () => {
           <img
             className="w-full h-80 object-contain rounded-lg "
             alt={product.ProductName}
-            src={selectedImage||placeholder}
+            src={selectedImage}
           />
         {/* Thumbnail Navigation */}
-          {/* <div className="flex items-center justify-center mt-4 space-x-2">
-            <button
-              className={`p-2 rounded-full ${
-                startIndex === 0
-                  ? "text-gray-400 cursor-not-allowed"
-                  : "text-gray-700 hover:bg-gray-200"
-              }`}
-              onClick={prevThumbnails}
-              disabled={startIndex === 0}
-            >
-              <ChevronLeftIcon className="w-6 h-6" />
-            </button>
+        {totalImages > 1 && (
+            <div className="flex items-center justify-center mt-4 space-x-2">
+              {startIndex > 0 && (
+                <button
+                  className="p-2 rounded-full text-gray-700 hover:bg-gray-200"
+                  onClick={prevThumbnails}
+                >
+                  <ChevronLeftIcon className="w-6 h-6" />
+                </button>
+              )}
 
-            {visibleThumbnails.map((img, index) => (
-              <img
-                key={index}
-                className={`w-16 h-16 object-contain border cursor-pointer rounded-md transition ${
-                  selectedImage === img ? "border-red-500" : "border-gray-300"
-                }`}
-                alt={product.ProductName}
-                src={img}
-                onClick={() => setSelectedImage(img)}
-              />
-            ))}
+              {visibleThumbnails.map((img, index) => (
+                <img
+                  key={index}
+                  className={`w-16 h-16 object-contain border cursor-pointer rounded-md transition ${
+                    selectedImage === img ? "border-red-500" : "border-gray-300"
+                  }`}
+                  alt={product.ProductName}
+                  src={img}
+                  onClick={() => setSelectedImage(img)}
+                />
+              ))}
 
-            <button
-              className={`p-2 rounded-full ${
-                startIndex + 3 >= product.images.length
-                  ? "text-gray-400 cursor-not-allowed"
-                  : "text-gray-700 hover:bg-gray-200"
-              }`}
-              onClick={nextThumbnails}
-              disabled={startIndex + 3 >= product.images.length}
-            >
-              <ChevronRightIcon className="w-6 h-6" />
-            </button>
-          </div> */}
+              {startIndex + thumbnailsToShow < totalImages && (
+                <button
+                  className="p-2 rounded-full text-gray-700 hover:bg-gray-200"
+                  onClick={nextThumbnails}
+                >
+                  <ChevronRightIcon className="w-6 h-6" />
+                </button>
+              )}
+            </div>
+          )}
         </div>
         {/* Product Info Section */}
         <div className="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
@@ -149,10 +147,10 @@ const ProductDetail = () => {
             {t("customer_product_detail.product_brand")}: {product.BrandName}
             </p>
             <p className="text-base leading-4 mt-4 text-gray-600">
-            {t("customer_product_detail.product_made_in")}: "Vietnam"
+            {t("customer_product_detail.product_made_in")}: Vietnam
             </p>
             <p className="text-base leading-4 mt-4 text-gray-600">
-            {t("customer_product_detail.product_warranty")}: "12 months"
+            {t("customer_product_detail.product_warranty")}: 12 months
             </p>
           </div>
 
