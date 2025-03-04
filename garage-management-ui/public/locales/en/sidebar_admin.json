@@ -23,6 +23,9 @@
     "car": "Car",
     "car_modal": "Car Model",
     "car_category": "Car Category",
+    "customer": "Customer",
+    "customer1": "Customer Manage",
+    "customer2": "Customer Chat",
     "service": "Service"
   }
 }

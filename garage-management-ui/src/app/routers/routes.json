@@ -139,9 +139,7 @@
     "path": "/customer",
     "element": "LayoutCustomer",
     "private": {
-      "allowedRoles": [
-        "Customer"
-      ]
+      "allowedRoles": ["Customer"]
     },
     "isSuspense": true,
     "children": [
@@ -159,9 +157,7 @@
     "path": "/admin",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": [
-        "Administrator"
-      ]
+      "allowedRoles": ["Administrator"]
     },
     "isSuspense": true,
     "children": [
@@ -243,6 +239,11 @@
       {
         "path": "service",
         "element": "ManageService",
+        "isSuspense": true
+      },
+      {
+        "path": "Chat",
+        "element": "Chat",
         "isSuspense": true
       },
       {

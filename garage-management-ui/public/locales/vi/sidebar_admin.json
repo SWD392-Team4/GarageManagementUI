@@ -23,6 +23,9 @@
     "car": "Xe",
     "car_modal": "Mẫu xe",
     "car_category": "Danh mục xe",
+    "customer": "Khách hàng",
+    "customer1": "Quản lý khách hàng",
+    "customer2": "Quản lý tin nhắn",
     "service": "Dịch Vụ"
   }
 }
