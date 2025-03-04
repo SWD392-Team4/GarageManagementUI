@@ -70,11 +70,11 @@
         "element": "LookUpPage"
       },
       {
-        "path": "product",
+        "path": "products",
         "element": "CustomerProductPage"
       },
       {
-        "path": "product/:id",
+        "path": "products/:id",
         "element": "CustomerProductDetail"
       },
       {
@@ -84,6 +84,14 @@
       {
         "path": "services/*",
         "element": "ServiceCategory"
+      },
+      {
+        "path": "packages",
+        "element": "CustomerPackageList"
+      },
+      {
+        "path": "packages/details",
+        "element": "CustomerPackageDetail"
       }
     ]
   },

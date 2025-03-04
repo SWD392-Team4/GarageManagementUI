@@ -133,7 +133,7 @@ export default function ProductDetails() {
 
             <div className="flex-1" data-color-mode="light">
               <h1 className="text-3xl font-bold mb-4">
-                {t("name")}
+                {t("product_details.name")}
                 : {isEditing ?
                   <input
                     name="productName"
@@ -146,21 +146,21 @@ export default function ProductDetails() {
               <p className="text-gray-600 text-lg mb-2">
                 <strong>{t("product_details.barcode")}:</strong> {product.ProductBarcode}
               </p>
-              <p className="text-gray-600 text-lg mb-2"><strong>{t("product_details.category")}:</strong>
+              <p className="text-gray-600 text-lg mb-2"><strong>{t("product_details.category")}: </strong>
                 {isEditing ?
                   <select name="productCategoryId" value={formData.productCategoryId} onChange={handleChange} className="border p-2 rounded w-full">
                     {categories.map(cat => <option key={cat.Id} value={cat.Id}>{cat.Category}</option>)}
                   </select>
                   : product.Category}
               </p>
-              <p className="text-gray-600 text-lg mb-2"><strong>{t("product_details.brand")}:</strong>
+              <p className="text-gray-600 text-lg mb-2"><strong>{t("product_details.brand")}: </strong>
                 {isEditing ?
                   <select name="BrandName" value={formData.BrandName} onChange={handleChange} className="border p-2 rounded w-full">
                     {brands.map(brand => <option key={brand.Id} value={brand.BrandName}>{brand.BrandName}</option>)}
                   </select> : product.BrandName}
               </p>
               <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.status")}:</strong>
+                <strong>{t("product_details.status")}: </strong>
                 {isEditing ?
                   <select name="Status" value={formData.Status} onChange={handleChange} className="border p-2 rounded w-full">
                     <option value="active">Active</option>
@@ -169,7 +169,7 @@ export default function ProductDetails() {
                   : product.Status}
               </p>
               <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.price")}:</strong>
+                <strong>{t("product_details.price")}: </strong>
                 {isEditing ?
                   <input
                     name="productPrice"
@@ -182,10 +182,10 @@ export default function ProductDetails() {
                   : `$${product.ProductPrice}`}
               </p>
               <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.created_at")}:</strong> {product.CreatedAt}
+                <strong>{t("product_details.created_at")}: </strong> {product.CreatedAt}
               </p>
               <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.updated_at")}:</strong> {product.UpdatedAt}
+                <strong>{t("product_details.updated_at")}: </strong> {product.UpdatedAt}
               </p>
             </div>
           </div>
