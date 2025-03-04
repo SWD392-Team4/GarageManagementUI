@@ -10,6 +10,7 @@
         "createdAt": "Ngày tạo",
         "updatedAt": "Ngày cập nhật",
         "price": "Giá",
+        "upload_images": "Tải hình ảnh",
         "search_product_name": "Tên sản phẩm",
         "search_placeholder": "Nhập tên sản phẩm...",
         "search_status": "Trạng thái",

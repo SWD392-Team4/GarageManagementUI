@@ -244,7 +244,9 @@ export default function ListAppoinment({ type }) {
       label: t("manage_product.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
-      link: (id) => `${id}`,
+      // link: (id) => `${id}`,
+      //dung chuyen link nay
+      link: (row) => `${row.original.id}`,
     },
   ];
   return (

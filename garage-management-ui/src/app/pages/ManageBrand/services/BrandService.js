@@ -1,4 +1,5 @@
 import UserService from "../../../hooks/services/UserService";
+import { sBrand } from "../services/BrandSignify"
 import { formatDate } from "../schemas/BrandValid";
 const userService = new UserService();
 
@@ -64,6 +65,19 @@ export const searchBrand = async (params) => {
 export const createBrand = async (brandData) => {
     try {
         const response = await userService.sendAjax("/api/brands", "POST", brandData, true);
+        console.log("check response :", response.data.value);
+        //gan signify
+        sBrand.set((pre) => ([
+            pre.value.Id = "",
+            pre.value.BrandName = "",
+            pre.value.ImageLink = "",
+            pre.value.Status = "",
+            pre.value.CreatedAt = "",
+            pre.value.UpdatedAt = ""
+        ]))
+        sBrand.set(response.data.value);
+        console.log("check signi data: ", sBrand.value);
+        //return
         userService.showToast(200, "Brand created successfully");
         return response;
     } catch (error) {
@@ -73,7 +87,33 @@ export const createBrand = async (brandData) => {
     }
 };
 
+export const createBrandImage = async (brandId, ImageBrand) => {
+    try {
+        const response = userService.sendAjax(
+            `/api/brands/${brandId}/image`,
+            "POST",
+            ImageBrand,
+            true,
+            true
+        );
+
+        if (response?.status == 204) {
+            userService.showToast(200, "Upload image successful")
+            return response;
+        } else {
+            console.error("Upload image fails: ");
+        }
+
+        return response;
+    } catch (error) {
+        console.error("Fail to upload image: ", error.message);
+    }
+}
+
+
+
 export const updateBrand = async (brandId, updatedData) => {
+    console.log("check data update: ", updatedData);
     try {
         const response = await userService.sendAjax(
             `/api/brands/${brandId}`,
@@ -81,6 +121,23 @@ export const updateBrand = async (brandId, updatedData) => {
             updatedData,
             true
         );
+        //xu ly du lieu signfi
+        sBrand.set((pre) => ([
+            pre.value.Id = "",
+            pre.value.BrandName = "",
+            pre.value.ImageLink = "",
+            pre.value.Status = "",
+            pre.value.CreatedAt = "",
+            pre.value.UpdatedAt = ""
+        ]))
+        //format ngay
+        updatedData.BrandName = <>{updatedData.BrandName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
+        updatedData.CreatedAt = formatDate(updatedData.CreatedAt);
+        updatedData.UpdatedAt = formatDate(updatedData.UpdatedAt);
+        sBrand.set(updatedData);
+
+
+        //return
         userService.showToast(200, "Brand updated successfully");
         return response;
     } catch (error) {

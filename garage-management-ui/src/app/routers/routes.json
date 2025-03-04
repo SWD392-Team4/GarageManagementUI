@@ -11,29 +11,54 @@
     "path": "/Customer",
     "redirect": "/Customer/profile"
   },
-
   {
     "path": "about-us",
     "redirect": "/about-us/mision"
   },
-
   {
     "path": "/",
     "element": "LayoutHome",
     "children": [
-      { "index": true, "element": "Home" },
-      { "path": "lookup", "element": "LookUpPage" },
-      { "path": "product", "element": "CustomerProductPage" },
-      { "path": "product/:id", "element": "CustomerProductDetail" },
-      { "path": "services", "element": "ServicesSection" },
-      { "path": "services/*", "element": "ServiceCategory" },
+      {
+        "index": true,
+        "element": "Home"
+      },
+      {
+        "path": "lookup",
+        "element": "LookUpPage"
+      },
+      {
+        "path": "product",
+        "element": "CustomerProductPage"
+      },
+      {
+        "path": "product/:id",
+        "element": "CustomerProductDetail"
+      },
+      {
+        "path": "services",
+        "element": "ServicesSection"
+      },
+      {
+        "path": "services/*",
+        "element": "ServiceCategory"
+      },
       {
         "path": "about-us",
         "element": "AboutUs",
         "children": [
-          { "path": "mision", "element": "Mision" },
-          { "path": "vision", "element": "Vision" },
-          { "path": "history", "element": "History" }
+          {
+            "path": "mision",
+            "element": "Mision"
+          },
+          {
+            "path": "vision",
+            "element": "Vision"
+          },
+          {
+            "path": "history",
+            "element": "History"
+          }
         ]
       },
       {
@@ -114,7 +139,9 @@
     "path": "/customer",
     "element": "LayoutCustomer",
     "private": {
-      "allowedRoles": ["Customer"]
+      "allowedRoles": [
+        "Customer"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -132,7 +159,9 @@
     "path": "/admin",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": ["Administrator"]
+      "allowedRoles": [
+        "Administrator"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -204,6 +233,16 @@
       {
         "path": "productCategory",
         "element": "ManageCateProduct",
+        "isSuspense": true
+      },
+      {
+        "path": "service/createService",
+        "element": "CreateServicePage",
+        "isSuspense": true
+      },
+      {
+        "path": "service",
+        "element": "ManageService",
         "isSuspense": true
       },
       {

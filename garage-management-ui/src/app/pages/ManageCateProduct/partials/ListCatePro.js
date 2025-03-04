@@ -5,6 +5,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import UpdateCateModal from "../models/UpdateCateModal";
 import { CategoryDetails, getAllCategory, searchCategory } from "../services/CatePService";
 import SearchCategory from "./SearchCategory";
+import { sCategory } from "../services/CateSignify";
 
 export default function ListCatePro({ refresh }) {
     const { t, i18n } = useTranslation("manage_product_category");
@@ -99,6 +100,7 @@ export default function ListCatePro({ refresh }) {
                 actions={actions}
                 pagination={pagination}
                 onPageChange={handlePageChange}
+                signifyInformation={sCategory.value}
             />
             <UpdateCateModal
                 isOpen={isUpdateModalOpen}

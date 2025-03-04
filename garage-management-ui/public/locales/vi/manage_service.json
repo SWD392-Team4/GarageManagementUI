@@ -1,0 +1,33 @@
+{
+    "manage_service": {
+        "Id": "ID",
+        "ServiceName": "Tên dịch vụ",
+        "ServiceCategory": "Danh mục dịch vụ",
+        "PartName": "Tên phụ tùng",
+        "Category": "Danh mục",
+        "Price": "Giá",
+        "WorkNature": "Tính chất công việc",
+        "Action": "Hành động",
+        "EstimatedHours": "Số giờ ước tính",
+        "Status": "Trạng thái",
+        "view": "Xem",
+        "title": "Quản lý dịch vụ",
+        "create": "Tạo dịch vụ",
+        "search_service_name": "Dịch vụ",
+        "search_category": "Danh mục",
+        "search_part_name": "Phụ tùng",
+        "search_min_price": "Giá tối thiểu",
+        "search_max_price": "Giá tối đa",
+        "search_work_nature": "Tính chất công việc",
+        "search_estimated_hours": "Số giờ ước tính",
+        "search_status": "Trạng thái",
+        "search": "Tìm kiếm",
+        "clear_filters": "Xóa bộ lọc",
+        "search_placeholder": "Nhập từ khóa...",
+        "search_status_enum": {
+            "choose": "Chọn trạng thái",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động"
+        }
+    }
+}

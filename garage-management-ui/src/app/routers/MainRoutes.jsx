@@ -5,7 +5,6 @@ import routesConfig from "./routes.json";
 import LoaddingPage from "../layouts/LoadingPage";
 import RedirectRoute from "./RedirectRoute";
 import LoaddingPage2 from "../layouts/LoadingPage/index2";
-// import ManageCarCategory from "../pages/ManageCarCategory/ManageCarCategory";
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
@@ -57,6 +56,8 @@ const componentMap = {
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
+  ManageService: lazy(() => import("../pages/ManageService/ManageService")),
+  CreateServicePage: lazy(() => import("../pages/ManageService/CreateServicePage")),
   ManageCateProduct: lazy(() =>
     import("../pages/ManageCateProduct/ManageCateProduct")
   ),

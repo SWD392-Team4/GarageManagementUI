@@ -14,3 +14,8 @@ export const formatDateYearMonthDay = (date) => {
     const formattedDate = new Date(date).toISOString().split("T")[0];
     return formattedDate;
 };
+
+export const getFormattedCurrentDate = () => {
+    const currentDate = new Date();
+    return `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()}`;
+};

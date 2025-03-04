@@ -49,7 +49,6 @@ export const getProduct = async (productId) => {
 
 export const updateProduct = async (productId, productData) => {
     try {
-        console.log("check data gửi về back end", productData);
         const response = await userService.sendAjax(
             `/api/products/${productId}`,
             "PUT",
@@ -72,13 +71,33 @@ export const createProduct = async (productData) => {
             productData,
             true
         );
-
         return response;
     } catch (error) {
         console.error("Lỗi khi tạo sản phẩm: ", error);
         return null;
     }
 };
+
+export const createProductImage = async (productId, FormData) => {
+    console.log("check products id: ", productId);
+    try {
+        const response = await userService.sendAjax(
+            `/api/products/${productId}/images`,
+            "POST",
+            FormData,
+            true,
+            true
+        );
+        if (response.data) {
+            return response;
+        } else {
+            console.error("Fail to Upload: ", response.description);
+            return null;
+        }
+    } catch (error) {
+        console.error("Fail to upload image: ", error.message);
+    }
+}
 
 export const searchProduct = async (params) => {
     try {

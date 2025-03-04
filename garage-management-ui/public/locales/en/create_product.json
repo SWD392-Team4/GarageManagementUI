@@ -13,6 +13,6 @@
         "barcode": "Barcode",
         "select_brand": "Select Brand",
         "select_category": "Select Category",
-        "link": "URL Image"
+        "upload_images": "URL Image"
     }
 }

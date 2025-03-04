@@ -1,5 +1,7 @@
 import UserService from "../../../hooks/services/UserService";
 import { formatDate } from "../schemas/CarCategoryValid";
+import { sCarCategory } from "./CarCategorySignify";
+
 const userService = new UserService();
 
 export const getAllCarCategory = async (PageNumber) => {
@@ -76,6 +78,16 @@ export const CreateCarCategory = async (data) => {
             data,
             true
         )
+
+        //chuyen doi bien
+        sCarCategory.set(response.data.value);
+        sCarCategory.set((pre) => {
+            pre.value.createdAt = formatDate(pre.value.createdAt);
+            pre.value.updatedAt = formatDate(pre.value.updatedAt);
+        })
+
+        // console.log("check data siginify service", sCarCategory.value);
+
         userService.showToast(200, "Create Car Category Successful");
         return response;
 
@@ -86,7 +98,6 @@ export const CreateCarCategory = async (data) => {
 }
 
 export const UpdateCarCategory = async (carCategoryID, data) => {
-    console.log("check data", data);
     try {
         const response = await userService.sendAjax(
             `/api/car-categories/${carCategoryID}`,
