@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { FilterAppointment } from "../../AdminManageAppoinment/services/store/FilterStore";
+import { sApointmentMechanic } from "../services/store/FilterStore";
 import FilterTablePost from "./FilterTablePosts";
 
 export default function ListAppoinment({ type }) {
@@ -183,6 +184,7 @@ export default function ListAppoinment({ type }) {
           actions={actions}
           pagination={pagination}
           fetchData={fetchData}
+          signifyInformation={sApointmentMechanic.value}
         />
       </div>
     </div>

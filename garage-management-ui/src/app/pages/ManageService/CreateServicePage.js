@@ -4,6 +4,8 @@ import { createService, createServiceImage, getCarCategory, getCarPart } from ".
 import { FaTrash } from "react-icons/fa";
 import MDEditor from "@uiw/react-md-editor";
 import { useTranslation } from "react-i18next";
+import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
+
 
 export default function CreateServicePage() {
   const {
@@ -77,6 +79,7 @@ export default function CreateServicePage() {
 
   return (
     <div className="bg-white shadow-lg p-6">
+      <Breadcrumb />
       <h2 className="text-xl font-semibold mb-4">{t("title")}</h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div className="grid grid-cols-2 gap-4">

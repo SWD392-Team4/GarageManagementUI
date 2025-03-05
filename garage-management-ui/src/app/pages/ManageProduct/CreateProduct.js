@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import BreadcrumbProduct from "./partials/BreadcrumbProduct";
+import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
 import { FaArrowLeft, FaTrash } from "react-icons/fa";
 import { getAllCategory, getAllBrand, createProduct, createProductImage } from "./services/ProductService";
@@ -69,7 +69,7 @@ export default function CreateProduct() {
 
     return (
         <div className="bg-white shadow-lg p-6">
-            <BreadcrumbProduct />
+            <Breadcrumb />
             <button className="flex items-center gap-2 text-blue-500 hover:underline mb-4" onClick={() => navigate("/admin/product")}>
                 <FaArrowLeft /> {t("create_product.back")}
             </button>

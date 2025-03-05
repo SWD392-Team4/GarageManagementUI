@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { FaEye } from "react-icons/fa";
 import { TbAugmentedReality } from "react-icons/tb";
+import { sPackeagesInAppointment } from "../services/store/FilterStore"
 
 export default function PackeagesINAppointment() {
   const { t, i18n } = useTranslation("appoinment-admin");
@@ -44,7 +45,7 @@ export default function PackeagesINAppointment() {
 
   const columns = useMemo(
     () => [
-      { header: t("list-packages.title1"), accessorKey: "id" },
+      { header: t("list-packages.title1"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
       { header: t("list-packages.title2"), accessorKey: "name-package" },
       { header: t("list-packages.title3"), accessorKey: "validity-period" },
       { header: t("list-packages.title4"), accessorKey: "time-unit" },
@@ -80,6 +81,7 @@ export default function PackeagesINAppointment() {
           actions={actions}
           pagination={pagination}
           fetchData={fetchData}
+          signifyInformation={sPackeagesInAppointment.value}
         />
       </div>
     </>

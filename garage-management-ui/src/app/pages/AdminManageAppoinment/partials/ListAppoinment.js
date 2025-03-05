@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
+import { sListApointment } from "../services/store/FilterStore"
 
 export default function ListAppoinment({ type }) {
   const { t, i18n } = useTranslation("appoinment-admin");
@@ -225,7 +226,7 @@ export default function ListAppoinment({ type }) {
 
   const columns = useMemo(
     () => [
-      { header: t("title1"), accessorKey: "id" },
+      { header: t("title1"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
       { header: t("title2"), accessorKey: "customer" },
       { header: t("title3"), accessorKey: "employee" },
       { header: t("title4"), accessorKey: "type" },
@@ -257,6 +258,7 @@ export default function ListAppoinment({ type }) {
         actions={actions}
         pagination={pagination}
         fetchData={fetchData}
+        signifyInformation={sListApointment.value}
       />
     </div>
   );

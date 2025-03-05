@@ -5,6 +5,7 @@ import BaseTable from "../../../components/BaseTable/BaseTable";
 import { getAllCarPartCate, getCarPartCateDetails, searchCarPartCate } from "../services/CategoryCarPart";
 import SearchCarPartCate from "./SeachCarPartCate";
 import UpdateCarPartCateModal from "../models/UpdateCarPartCateModal";
+import { sCategoryCarPart } from "../services/CategoryCarPartSinginify";
 
 export default function ListCarPartCate({ refresh }) {
   const { t } = useTranslation("manage_carpartcate");
@@ -58,11 +59,11 @@ export default function ListCarPartCate({ refresh }) {
   // Cấu trúc cột bảng
   const columns = useMemo(
     () => [
-      { header: t("manage_carpartcate.id"), accessorKey: "Id" },
-      { header: t("manage_carpartcate.name"), accessorKey: "PartCategory" },
-      { header: t("manage_carpartcate.status"), accessorKey: "Status" },
-      { header: t("manage_carpartcate.createdAt"), accessorKey: "CreatedAt" },
-      { header: t("manage_carpartcate.updatedAt"), accessorKey: "UpdatedAt" },
+      { header: t("manage_carpartcate.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+      { header: t("manage_carpartcate.name"), accessorKey: "partCategory" },
+      { header: t("manage_carpartcate.status"), accessorKey: "status" },
+      { header: t("manage_carpartcate.createdAt"), accessorKey: "createdAt" },
+      { header: t("manage_carpartcate.updatedAt"), accessorKey: "updatedAt" },
     ],
     [t]
   );
@@ -76,7 +77,7 @@ export default function ListCarPartCate({ refresh }) {
       icon: <FaPencilAlt />,
       onClick: async (row) => {
         try {
-          const carPartCateDetails = await getCarPartCateDetails(row.Id);
+          const carPartCateDetails = await getCarPartCateDetails(row.id);
           setSelectedCarPartCate(carPartCateDetails.data.value);
           setIsUpdateModalOpen(true);
         } catch (error) {
@@ -95,6 +96,7 @@ export default function ListCarPartCate({ refresh }) {
         actions={actions}
         pagination={pagination}
         onPageChange={handlePageChange}
+        signifyInformation={sCategoryCarPart.value}
       />
       <UpdateCarPartCateModal
         isOpen={isUpdateModalOpen}

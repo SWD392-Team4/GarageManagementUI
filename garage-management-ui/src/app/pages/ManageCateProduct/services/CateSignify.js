@@ -1,16 +1,16 @@
 import { signify } from "react-signify";
 
-export const sCategory = signify(
+export const sProductCategory = signify(
     {
-        Id: "",
-        Category: "",
-        Status: "",
-        CreatedAt: "",
-        UpdatedAt: "",
+        id: "",
+        category: "",
+        status: "",
+        createdAt: "",
+        updatedAt: "",
     },
     {
         cache: {
-            key: "Category",
+            key: "sProductCategory",
         },
     }
 );

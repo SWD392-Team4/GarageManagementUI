@@ -1,0 +1,24 @@
+{
+    "manage_customer": {
+        "id": "ID",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "phoneNumber": "Phone Number",
+        "status": "Status",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At",
+        "view": "View",
+        "search": "Search",
+        "clear_filters": "Clear Filters",
+        "search_placeholder": "Enter value...",
+        "search_status": "Search Status",
+        "search_created_at": "Search Created At",
+        "search_updated_at": "Search Updated At",
+        "search_status_enum": {
+            "choose": "Choose Status",
+            "active": "Active",
+            "inactive": "Inactive"
+        }
+    }
+}

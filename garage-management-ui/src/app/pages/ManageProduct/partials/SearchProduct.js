@@ -31,12 +31,12 @@ export default function SearchProduct({ onSearch }) {
 
     const handleSearch = () => {
         onSearch({
-            ProductName: searchName,
-            ProductStatus: searchStatus,
-            CreatedAt: formatYearMonthDay(createdAt),
-            UpdatedAt: formatYearMonthDay(updatedAt),
-            MinPrice: minPrice,
-            MaxPrice: maxPrice,
+            productName: searchName,
+            productStatus: searchStatus,
+            createdAt: formatYearMonthDay(createdAt),
+            updatedAt: formatYearMonthDay(updatedAt),
+            minPrice: minPrice,
+            maxPrice: maxPrice,
         });
     };
 

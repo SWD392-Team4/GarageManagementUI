@@ -147,7 +147,9 @@
     "path": "/customer",
     "element": "LayoutCustomer",
     "private": {
-      "allowedRoles": ["Customer"]
+      "allowedRoles": [
+        "Customer"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -165,7 +167,9 @@
     "path": "/admin",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": ["Administrator"]
+      "allowedRoles": [
+        "Administrator"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -180,13 +184,18 @@
         "isSuspense2": true
       },
       {
-        "path": "account",
-        "element": "ManageAccount",
+        "path": "suppliers",
+        "element": "ManageSupplier",
         "isSuspense2": true
       },
       {
-        "path": "account/:id",
-        "element": "AccountDetails",
+        "path": "suppliers-contact",
+        "element": "ManageSupplierContact",
+        "isSuspense2": true
+      },
+      {
+        "path": "employee",
+        "element": "ManageEmployee",
         "isSuspense2": true
       },
       {
@@ -242,6 +251,11 @@
       {
         "path": "service/createService",
         "element": "CreateServicePage",
+        "isSuspense2": true
+      },
+      {
+        "path": "service/:id",
+        "element": "UpdateServicePage",
         "isSuspense2": true
       },
       {

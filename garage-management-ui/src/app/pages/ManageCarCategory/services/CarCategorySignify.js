@@ -4,14 +4,13 @@ export const sCarCategory = signify(
     {
         id: "",
         category: "",
-        description: "",
         status: "",
         createdAt: "",
         updatedAt: "",
     },
     {
         cache: {
-            key: "CarCategory",
+            key: "sCarCategory",
         },
     }
 );

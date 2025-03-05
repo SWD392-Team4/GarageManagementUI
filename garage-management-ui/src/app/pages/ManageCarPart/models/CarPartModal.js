@@ -84,8 +84,8 @@ export default function CarPartModal({ isOpen, onClose, onCarPartCreated }) {
             >
               <option value="">{t("manage_carpart.create_carpart.select_category")}</option>
               {categories.map((category) => (
-                <option key={category.Id} value={category.Id}>
-                  {category.PartCategory}
+                <option key={category.id} value={category.id}>
+                  {category.partCategory}
                 </option>
               ))}
             </select>

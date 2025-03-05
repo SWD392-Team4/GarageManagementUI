@@ -78,14 +78,13 @@ export const CreateCarCategory = async (data) => {
             data,
             true
         )
+        console.log("check data: ", response);
 
         //chuyen doi bien
+        response.data.value.category = <>{data.category}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+        response.data.value.createdAt = formatDate(response.data.value.createdAt)
+        response.data.value.createdAt = formatDate(response.data.value.updatedAt)
         sCarCategory.set(response.data.value);
-        sCarCategory.set((pre) => {
-            pre.value.createdAt = formatDate(pre.value.createdAt);
-            pre.value.updatedAt = formatDate(pre.value.updatedAt);
-        })
-
         // console.log("check data siginify service", sCarCategory.value);
 
         userService.showToast(200, "Create Car Category Successful");
@@ -106,6 +105,25 @@ export const UpdateCarCategory = async (carCategoryID, data) => {
             true
         );
         if (response) {
+            //logic signify
+            sCarCategory.set((pre) => {
+                pre.value.id = ""
+                pre.value.category = ""
+                pre.value.status = ""
+                pre.value.createdAt = ""
+                pre.value.updatedAt = ""
+            })
+            //gan thong tin moi vao
+            sCarCategory.set((pre) => {
+                pre.value.id = carCategoryID
+                pre.value.category = <>{data.category}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
+                pre.value.status = data.status
+                pre.value.createdAt = data.createdAt
+                pre.value.updatedAt = data.updatedAt
+            })
+
+            console.log("check signify: ", sCarCategory.value);
+
             userService.showToast(200, "Update Car Category Successful");
             return response;
         } else {

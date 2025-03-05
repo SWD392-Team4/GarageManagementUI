@@ -4,13 +4,14 @@ import { updateCarPart } from "../services/CarPartService";
 import { getAllCarPartCate } from "../services/CarPartService";
 
 export default function UpdateCarPartModal({ isOpen, onClose, carPart, onCarPartUpdated }) {
+    console.log("check thong tin : ", carPart);
     const [formData, setFormData] = useState({
-        Id: "",
+        id: "",
         carPartCategoryId: "",
-        PartName: "",
+        partName: "",
         status: "Active",
-        CreatedAt: "",
-        UpdatedAt: "",
+        createdAt: "",
+        updatedAt: "",
     });
 
     const [categories, setCategories] = useState([]);
@@ -29,12 +30,12 @@ export default function UpdateCarPartModal({ isOpen, onClose, carPart, onCarPart
     useEffect(() => {
         if (carPart) {
             setFormData({
-                Id: carPart.Id || "",
+                id: carPart.id || "",
                 carPartCategoryId: carPart.carPartCategoryId || "",
-                PartName: carPart.PartName || "",
-                status: carPart.Status || "Active",
-                CreatedAt: carPart.CreatedAt || "",
-                UpdatedAt: carPart.UpdatedAt || "",
+                partName: carPart.partName || "",
+                status: carPart.status || "Active",
+                createdAt: carPart.createdAt || "",
+                updatedAt: carPart.updatedAt || "",
             });
         }
     }, [carPart]);
@@ -47,10 +48,13 @@ export default function UpdateCarPartModal({ isOpen, onClose, carPart, onCarPart
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await updateCarPart(formData.Id, {
+            await updateCarPart(formData.id, {
                 carPartCategoryId: formData.carPartCategoryId,
-                partName: formData.PartName,
+                partName: formData.partName,
                 status: formData.status,
+                createdAt: carPart.createdAt,
+                updatedAt: carPart.updatedAt,
+                partCategory: carPart.partCategory
             });
             onCarPartUpdated();
             onClose();
@@ -87,8 +91,8 @@ export default function UpdateCarPartModal({ isOpen, onClose, carPart, onCarPart
                             <option value="" >Chọn danh mục</option>
                             {/* <option value="" >{carPart.PartCategory}</option> */}
                             {categories.map((category) => (
-                                <option key={category.Id} value={category.Id}>
-                                    {category.PartCategory}
+                                <option key={category.id} value={category.id}>
+                                    {category.partCategory}
                                 </option>
                             ))}
                         </select>
@@ -100,7 +104,7 @@ export default function UpdateCarPartModal({ isOpen, onClose, carPart, onCarPart
                         <input
                             type="text"
                             name="PartName"
-                            value={formData.PartName}
+                            value={formData.partName}
                             onChange={handleChange}
                             className="w-full p-2 border rounded text-black bg-white"
                             required
@@ -126,7 +130,7 @@ export default function UpdateCarPartModal({ isOpen, onClose, carPart, onCarPart
                         <label className="block text-gray-600">Ngày tạo</label>
                         <input
                             type="text"
-                            value={formData.CreatedAt}
+                            value={formData.createdAt}
                             className="w-full p-2 border rounded bg-gray-200 text-gray-700"
                             readOnly
                         />
@@ -137,7 +141,7 @@ export default function UpdateCarPartModal({ isOpen, onClose, carPart, onCarPart
                         <label className="block text-gray-600">Ngày cập nhật</label>
                         <input
                             type="text"
-                            value={formData.UpdatedAt}
+                            value={formData.updatedAt}
                             className="w-full p-2 border rounded bg-gray-200 text-gray-700"
                             readOnly
                         />

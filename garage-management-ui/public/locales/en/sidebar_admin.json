@@ -26,6 +26,12 @@
     "customer": "Customer",
     "customer1": "Customer Manage",
     "customer2": "Customer Chat",
-    "service": "Service"
+    "service": "Service",
+    "employee": "Employee",
+    "employee_list": "Employee List",
+    "employee_schedule": "Employee Schedule",
+    "suppliers": "Suppliers",
+    "supplier_list": "Supplier List",
+    "supplier_contact": "Supplier Contact"
   }
 }

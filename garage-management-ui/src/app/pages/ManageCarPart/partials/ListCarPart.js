@@ -67,12 +67,12 @@ export default function ListCarPart({ refresh }) {
     // Cấu trúc cột bảng phụ tùng xe
     const columns = useMemo(
         () => [
-            { header: t("manage_carpart.id"), accessorKey: "Id" },
-            { header: t("manage_carpart.name"), accessorKey: "PartName" },
-            { header: t("manage_carpart.category"), accessorKey: "PartCategory" },
-            { header: t("manage_carpart.status"), accessorKey: "Status" },
-            { header: t("manage_carpart.createdAt"), accessorKey: "CreatedAt" },
-            { header: t("manage_carpart.updatedAt"), accessorKey: "UpdatedAt" },
+            { header: t("manage_carpart.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+            { header: t("manage_carpart.name"), accessorKey: "partName" },
+            { header: t("manage_carpart.category"), accessorKey: "partCategory" },
+            { header: t("manage_carpart.status"), accessorKey: "status" },
+            { header: t("manage_carpart.createdAt"), accessorKey: "createdAt" },
+            { header: t("manage_carpart.updatedAt"), accessorKey: "updatedAt" },
         ],
         [t, i18n.language]
     );
@@ -86,7 +86,7 @@ export default function ListCarPart({ refresh }) {
             icon: <FaPencilAlt />,
             onClick: async (row) => {
                 try {
-                    const carPartDetails = await getCarPartDetails(row.Id);
+                    const carPartDetails = await getCarPartDetails(row.id);
                     setSelectedCarPart(carPartDetails.data.value);
                     setIsUpdateModalOpen(true);
                 } catch (error) {
@@ -105,6 +105,7 @@ export default function ListCarPart({ refresh }) {
                 actions={actions}
                 pagination={pagination}
                 onPageChange={handlePageChange}
+                signifyInformation={sCarPart.value}
             />
             <UpdateCarPartModal
                 isOpen={isUpdateModalOpen}

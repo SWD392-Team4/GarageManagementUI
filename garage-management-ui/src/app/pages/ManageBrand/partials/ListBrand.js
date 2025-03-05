@@ -66,11 +66,11 @@ export default function ListBrand({ refresh }) {
 
     const columns = useMemo(
         () => [
-            { header: t("manage_brand.id"), accessorKey: "Id" },
-            { header: t("manage_brand.name"), accessorKey: "BrandName" },
-            { header: t("manage_brand.status"), accessorKey: "Status" },
-            { header: t("manage_brand.createdAt"), accessorKey: "CreatedAt" },
-            { header: t("manage_brand.updatedAt"), accessorKey: "UpdatedAt" },
+            { header: t("manage_brand.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+            { header: t("manage_brand.name"), accessorKey: "brandName" },
+            { header: t("manage_brand.status"), accessorKey: "status" },
+            { header: t("manage_brand.createdAt"), accessorKey: "createdAt" },
+            { header: t("manage_brand.updatedAt"), accessorKey: "updatedAt" },
         ],
         [t, i18n.language]
     );
@@ -83,7 +83,7 @@ export default function ListBrand({ refresh }) {
             icon: <FaPencilAlt />,
             onClick: async (row) => {
                 try {
-                    const brandDetails = await getBrandDetails(row.Id);
+                    const brandDetails = await getBrandDetails(row.id);
                     setSelectedBrand(brandDetails.data.value);
                     setIsUpdateModalOpen(true);
                 } catch (error) {

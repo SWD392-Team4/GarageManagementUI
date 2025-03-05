@@ -6,6 +6,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 import BaseTable from '../../../components/BaseTable/BaseTable';
 import UpdateCarModal from '../models/UpdateCarModal';
 import SearchCarModel from './SearchCarModel';
+import { sCarModal } from '../services/carModalSignify';
 
 export default function ListCarModal({ refresh }) {
     const { t, i18n } = useTranslation("manage_car_modal");
@@ -70,7 +71,7 @@ export default function ListCarModal({ refresh }) {
     //xu ly column
     const columns = useMemo(
         () => [
-            { header: t("manage_car_modal.id"), accessorKey: "id" },
+            { header: t("manage_car_modal.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
             { header: t("manage_car_modal.modalName"), accessorKey: "modelName" },
             { header: t("manage_car_modal.category"), accessorKey: "category" },
             { header: t("manage_car_modal.brand"), accessorKey: "brandName" },
@@ -110,6 +111,7 @@ export default function ListCarModal({ refresh }) {
                 actions={actions}
                 pagination={pagination}
                 onPageChange={handlePageChange}
+                signifyInformation={sCarModal.value}
             />
 
             <UpdateCarModal

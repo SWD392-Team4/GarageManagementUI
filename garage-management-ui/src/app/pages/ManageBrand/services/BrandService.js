@@ -16,8 +16,8 @@ export const getAllBrand = async (PageNumber = 1) => {
             if (response.data?.value) {
                 response.data.value = response.data.value.map(brands => ({
                     ...brands,
-                    CreatedAt: formatDate(brands.CreatedAt),
-                    UpdatedAt: formatDate(brands.UpdatedAt),
+                    createdAt: formatDate(brands.createdAt),
+                    updatedAt: formatDate(brands.updatedAt),
                 }));
             }
 
@@ -49,8 +49,8 @@ export const searchBrand = async (params) => {
         if (response != null && response.data?.value) {
             response.data.value = response.data.value.map(brand => ({
                 ...brand,
-                CreatedAt: formatDate(brand.CreatedAt),
-                UpdatedAt: formatDate(brand.UpdatedAt),
+                createdAt: formatDate(brand.createdAt),
+                updatedAt: formatDate(brand.updatedAt),
             }));
         }
         userService.showToast(200, "Brands search completed successfully");
@@ -68,13 +68,17 @@ export const createBrand = async (brandData) => {
         console.log("check response :", response.data.value);
         //gan signify
         sBrand.set((pre) => ([
-            pre.value.Id = "",
-            pre.value.BrandName = "",
-            pre.value.ImageLink = "",
-            pre.value.Status = "",
-            pre.value.CreatedAt = "",
-            pre.value.UpdatedAt = ""
+            pre.value.id = "",
+            pre.value.brandName = "",
+            pre.value.imageLink = "",
+            pre.value.status = "",
+            pre.value.createdAt = "",
+            pre.value.updatedAt = ""
         ]))
+        response.data.value.createdAt = formatDate(response.data.value.createdAt)
+        response.data.value.updatedAt = formatDate(response.data.value.updatedAt)
+        response.data.value.brandName = <>{response.data.value.brandName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+
         sBrand.set(response.data.value);
         console.log("check signi data: ", sBrand.value);
         //return
@@ -89,7 +93,7 @@ export const createBrand = async (brandData) => {
 
 export const createBrandImage = async (brandId, ImageBrand) => {
     try {
-        const response = userService.sendAjax(
+        const response = await userService.sendAjax(
             `/api/brands/${brandId}/image`,
             "POST",
             ImageBrand,
@@ -98,7 +102,7 @@ export const createBrandImage = async (brandId, ImageBrand) => {
         );
 
         if (response?.status == 204) {
-            userService.showToast(200, "Upload image successful")
+            userService.showToast(200, "Upload image successful");
             return response;
         } else {
             console.error("Upload image fails: ");
@@ -123,20 +127,18 @@ export const updateBrand = async (brandId, updatedData) => {
         );
         //xu ly du lieu signfi
         sBrand.set((pre) => ([
-            pre.value.Id = "",
-            pre.value.BrandName = "",
-            pre.value.ImageLink = "",
-            pre.value.Status = "",
-            pre.value.CreatedAt = "",
-            pre.value.UpdatedAt = ""
+            pre.value.id = "",
+            pre.value.brandName = "",
+            pre.value.imageLink = "",
+            pre.value.status = "",
+            pre.value.createdAt = "",
+            pre.value.updatedAt = ""
         ]))
         //format ngay
-        updatedData.BrandName = <>{updatedData.BrandName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
-        updatedData.CreatedAt = formatDate(updatedData.CreatedAt);
-        updatedData.UpdatedAt = formatDate(updatedData.UpdatedAt);
+        updatedData.brandName = <>{updatedData.brandName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
+        updatedData.createdAt = formatDate(updatedData.createdAt);
+        updatedData.updatedAt = formatDate(updatedData.updatedAt);
         sBrand.set(updatedData);
-
-
         //return
         userService.showToast(200, "Brand updated successfully");
         return response;

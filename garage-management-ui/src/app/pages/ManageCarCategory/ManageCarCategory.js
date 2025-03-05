@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import ListCarCategory from './partials/ListCarCategory'
 import { useTranslation } from 'react-i18next'
 import CreateCarCategoryModal from './models/CreateCarCategoryModal';
+import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
+
 
 export default function ManageCarCategory() {
     const { t } = useTranslation("manage_car_category");
@@ -11,6 +13,7 @@ export default function ManageCarCategory() {
 
     return (
         <div className='bg-white shadow-lg p-6'>
+            <Breadcrumb />
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-semibold">{t("manage_car_category.title")}</h1>
                 <button

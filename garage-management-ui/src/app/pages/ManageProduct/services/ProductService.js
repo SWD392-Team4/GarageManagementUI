@@ -14,8 +14,8 @@ export const getAllProducts = async (PageNumber = 1) => {
             if (response.data?.value) {
                 response.data.value = response.data.value.map(product => ({
                     ...product,
-                    CreatedAt: formatDate(product.CreatedAt),
-                    UpdatedAt: formatDate(product.UpdatedAt),
+                    createdAt: formatDate(product.createdAt),
+                    updatedAt: formatDate(product.updatedAt),
                 }));
             }
             return response;
@@ -36,8 +36,8 @@ export const getProduct = async (productId) => {
         if (response?.data) {
             return {
                 ...response.data.value,
-                CreatedAt: formatDate(response.data.value.CreatedAt),
-                UpdatedAt: formatDate(response.data.value.UpdatedAt),
+                createdAt: formatDate(response.data.value.createdAt),
+                updatedAt: formatDate(response.data.value.updatedAt),
             };
         }
         return null;
@@ -71,8 +71,6 @@ export const createProduct = async (productData) => {
             productData,
             true
         );
-
-        
         return response;
     } catch (error) {
         console.error("Lỗi khi tạo sản phẩm: ", error);
@@ -115,8 +113,8 @@ export const searchProduct = async (params) => {
         if (response != null && response.data?.value) {
             response.data.value = response.data.value.map(product => ({
                 ...product,
-                CreatedAt: formatDate(product.CreatedAt),
-                UpdatedAt: formatDate(product.UpdatedAt),
+                createdAt: formatDate(product.createdAt),
+                updatedAt: formatDate(product.updatedAt),
             }));
         }
 
@@ -131,14 +129,12 @@ export const getAllCategory = async () => {
     try {
         const response = await userService.sendAjax("/api/product/categories", "GET", null, true);
 
-        if (response?.data?.value) {
-            response.data.value = response.data.value.map(category => ({
-                ...category,
-                CreatedAt: formatDate(category.CreatedAt),
-                UpdatedAt: formatDate(category.UpdatedAt),
-            }));
+        if (response != null) {
+            return response;
+        } else {
+            console.error(`Error: Received status ${response.error}`);
+            return null;
         }
-        return response;
     } catch (error) {
         console.error("Error fetching categories:", error);
         return [];
@@ -155,14 +151,6 @@ export const getAllBrand = async () => {
         );
 
         if (response != null) {
-            if (response.data?.value) {
-                response.data.value = response.data.value.map(brands => ({
-                    ...brands,
-                    CreatedAt: formatDate(brands.CreatedAt),
-                    UpdatedAt: formatDate(brands.UpdatedAt),
-                }));
-            }
-
             return response;
         } else {
             console.error(`Error: Received status ${response.error}`);

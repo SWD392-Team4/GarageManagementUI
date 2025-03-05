@@ -64,7 +64,7 @@ export default function ListCarCategory({ refesh }) {
 
     const columns = useMemo(
         () => [
-            { header: t("manage_car_category.id"), accessorKey: "id" },
+            { header: t("manage_car_category.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
             { header: t("manage_car_category.category"), accessorKey: "category" },
             { header: t("manage_car_category.status"), accessorKey: "status" },
             { header: t("manage_car_category.createdAt"), accessorKey: "createdAt" },

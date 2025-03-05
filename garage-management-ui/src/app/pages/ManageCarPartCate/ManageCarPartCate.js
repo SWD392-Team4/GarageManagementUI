@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ListCarPartCate from "./partials/ListCarPartCate";
 import { useTranslation } from "react-i18next";
 import CarPartCateModal from "./models/CarPartCateModal";
+import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 
 export default function ManageCarPartCate() {
   const { t } = useTranslation("manage_carpartcate");
@@ -10,6 +11,7 @@ export default function ManageCarPartCate() {
 
   return (
     <div className="bg-white shadow-lg p-6">
+      <Breadcrumb />
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">{t("manage_carpartcate.title")}</h1>
         <button

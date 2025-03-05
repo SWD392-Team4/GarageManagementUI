@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaArrowLeft, FaEdit, FaSave } from "react-icons/fa";
-import BreadcrumbProduct from "./partials/BreadcrumbProduct";
+import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
 import { getProduct, updateProduct, getAllCategory, getAllBrand } from "./services/ProductService";
 
@@ -29,14 +29,14 @@ export default function ProductDetails() {
       if (productData) {
         setProduct(productData);
         setFormData({
-          productName: productData.ProductName,
-          productBarcode: productData.ProductBarcode,
-          productDescription: productData.ProductDescription,
-          productCategoryId: categoryData?.data?.value.find(cat => cat.Category === productData.Category)?.Id || "",
-          brandId: brandData?.data?.value.find(brand => brand.BrandName === productData.BrandName)?.Id || "",
-          link: productData.ProductImg,
-          productPrice: productData.ProductPrice,
-          status: productData.Status
+          productName: productData.productName,
+          productBarcode: productData.productBarcode,
+          productDescription: productData.productDescription,
+          productCategoryId: categoryData?.data?.value.find(cat => cat.category === productData.category)?.Id || "",
+          brandId: brandData?.data?.value.find(brand => brand.brandName === productData.brandName)?.Id || "",
+          link: productData.imageLink,
+          productPrice: productData.productPrice,
+          status: productData.status
         });
 
       } else {
@@ -50,22 +50,20 @@ export default function ProductDetails() {
   };
 
   useEffect(() => {
-
-
     fetchData();
   }, [id, i18n.language]);
 
   const handleEdit = () => {
     setIsEditing(true);
     setFormData({
-      productName: product?.ProductName ?? "",
-      productBarcode: product?.ProductBarcode ?? "",
-      productDescription: product?.ProductDescription ?? "",
-      productCategoryId: categories.find(cat => cat.Category === product.Category)?.Id || "",
-      brandId: brands.find(brand => brand.BrandName === product.BrandName)?.Id || "",
-      link: product?.ProductImg ?? "",
-      productPrice: product?.ProductPrice ?? 0,
-      status: product?.Status ?? "active"
+      productName: product?.productName ?? "",
+      productBarcode: product?.productBarcode ?? "",
+      productDescription: product?.productDescription ?? "",
+      productCategoryId: categories.find(cat => cat.category === product.category)?.Id || "",
+      brandId: brands.find(brand => brand.brandName === product.brandName)?.Id || "",
+      link: product?.imageLink ?? "",
+      productPrice: product?.productPrice ?? 0,
+      status: product?.status ?? "active"
     });
   };
 
@@ -96,7 +94,7 @@ export default function ProductDetails() {
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6">
-      <BreadcrumbProduct />
+      <Breadcrumb />
       <button className="flex items-center gap-2 text-blue-500 hover:underline mb-4" onClick={() => navigate("/admin/product")}>
         <FaArrowLeft /> {t("product_details.back")}
       </button>
@@ -124,8 +122,8 @@ export default function ProductDetails() {
                 </>
               ) : (
                 <img
-                  src={product.ProductImg || "/images/placeholder.png"}
-                  alt={product.ProductName}
+                  src={product.imageLink || "/images/placeholder.png"}
+                  alt={product.productName}
                   className="max-w-sm w-full h-auto rounded-lg shadow-lg"
                 />
               )}
@@ -144,29 +142,29 @@ export default function ProductDetails() {
                   : product.ProductName}
               </h1>
               <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.barcode")}:</strong> {product.ProductBarcode}
+                <strong>{t("product_details.barcode")}:</strong> {product.productBarcode}
               </p>
               <p className="text-gray-600 text-lg mb-2"><strong>{t("product_details.category")}: </strong>
                 {isEditing ?
                   <select name="productCategoryId" value={formData.productCategoryId} onChange={handleChange} className="border p-2 rounded w-full">
-                    {categories.map(cat => <option key={cat.Id} value={cat.Id}>{cat.Category}</option>)}
+                    {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.category}</option>)}
                   </select>
-                  : product.Category}
+                  : product.category}
               </p>
               <p className="text-gray-600 text-lg mb-2"><strong>{t("product_details.brand")}: </strong>
                 {isEditing ?
-                  <select name="BrandName" value={formData.BrandName} onChange={handleChange} className="border p-2 rounded w-full">
-                    {brands.map(brand => <option key={brand.Id} value={brand.BrandName}>{brand.BrandName}</option>)}
-                  </select> : product.BrandName}
+                  <select name="BrandName" value={formData.brandName} onChange={handleChange} className="border p-2 rounded w-full">
+                    {brands.map(brand => <option key={brand.id} value={brand.brandName}>{brand.brandName}</option>)}
+                  </select> : product.brandName}
               </p>
               <p className="text-gray-600 text-lg mb-2">
                 <strong>{t("product_details.status")}: </strong>
                 {isEditing ?
-                  <select name="Status" value={formData.Status} onChange={handleChange} className="border p-2 rounded w-full">
+                  <select name="Status" value={formData.status} onChange={handleChange} className="border p-2 rounded w-full">
                     <option value="active">Active</option>
                     <option value="inactive">Inactive</option>
                   </select>
-                  : product.Status}
+                  : product.status}
               </p>
               <p className="text-gray-600 text-lg mb-2">
                 <strong>{t("product_details.price")}: </strong>
@@ -179,13 +177,13 @@ export default function ProductDetails() {
                     className="border p-2 rounded w-full"
                   />
 
-                  : `$${product.ProductPrice}`}
+                  : `$${product.productPrice}`}
               </p>
               <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.created_at")}: </strong> {product.CreatedAt}
+                <strong>{t("product_details.created_at")}: </strong> {product.createdAt}
               </p>
               <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.updated_at")}: </strong> {product.UpdatedAt}
+                <strong>{t("product_details.updated_at")}: </strong> {product.updatedAt}
               </p>
             </div>
           </div>
@@ -201,7 +199,7 @@ export default function ProductDetails() {
               />
 
             ) : (
-              <MDEditor.Markdown source={product.ProductDescription || ''} />
+              <MDEditor.Markdown source={product.productDescription || ''} />
             )}
           </div>
 

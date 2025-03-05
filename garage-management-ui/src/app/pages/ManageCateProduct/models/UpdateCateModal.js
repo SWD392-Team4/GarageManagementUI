@@ -7,8 +7,8 @@ import { updateCategory } from "../services/CatePService";
 import { formatDate } from "../schemas/CateValid";
 
 const schema = yup.object().shape({
-    CategoryName: yup.string().required("Tên danh mục không được để trống"),
-    Status: yup.string().oneOf(["active", "inactive"], "Trạng thái không hợp lệ"),
+    categoryName: yup.string().required("Tên danh mục không được để trống"),
+    status: yup.string().oneOf(["active", "inactive"], "Trạng thái không hợp lệ"),
 });
 
 export default function UpdateCateModal({ isOpen, onClose, category, onCategoryUpdated }) {
@@ -23,15 +23,15 @@ export default function UpdateCateModal({ isOpen, onClose, category, onCategoryU
     } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
-            CategoryName: "",
-            Status: "active",
+            categoryName: "",
+            status: "active",
         },
     });
 
     useEffect(() => {
         if (category) {
-            setValue("CategoryName", category.Category || "");
-            setValue("Status", category.Status ? category.Status.toLowerCase() : "active");
+            setValue("categoryName", category.category || "");
+            setValue("status", category.Status ? category.status.toLowerCase() : "active");
         } else {
             reset();
         }
@@ -42,7 +42,7 @@ export default function UpdateCateModal({ isOpen, onClose, category, onCategoryU
     const onSubmit = async (data) => {
         try {
             const updatedCategory = { ...category, ...data };
-            await updateCategory(category.Id, updatedCategory);
+            await updateCategory(category.id, updatedCategory);
             onCategoryUpdated(updatedCategory);
             onClose();
         } catch (err) {
@@ -59,7 +59,7 @@ export default function UpdateCateModal({ isOpen, onClose, category, onCategoryU
                     {/* ID (chỉ đọc) */}
                     <div className="mb-3">
                         <label className="block text-sm font-medium text-gray-700">ID</label>
-                        <input type="text" className="w-full p-2 border rounded bg-gray-200" value={category?.Id || ""} readOnly />
+                        <input type="text" className="w-full p-2 border rounded bg-gray-200" value={category?.id || ""} readOnly />
                     </div>
 
                     {/* Tên danh mục */}
@@ -67,20 +67,20 @@ export default function UpdateCateModal({ isOpen, onClose, category, onCategoryU
                         <label className="block text-sm font-medium text-gray-700">{t("manage_product_category.name")}</label>
                         <input
                             type="text"
-                            {...register("CategoryName")}
+                            {...register("categoryName")}
                             className="w-full p-2 border rounded"
                         />
-                        {errors.CategoryName && <p className="text-red-500 text-sm">{errors.CategoryName.message}</p>}
+                        {errors.categoryName && <p className="text-red-500 text-sm">{errors.categoryName.message}</p>}
                     </div>
 
                     {/* Trạng thái */}
                     <div className="mb-3">
                         <label className="block text-sm font-medium text-gray-700">{t("manage_product_category.status")}</label>
-                        <select {...register("Status")} className="w-full p-2 border rounded">
+                        <select {...register("status")} className="w-full p-2 border rounded">
                             <option value="active">{t("manage_product_category.active")}</option>
                             <option value="inactive">{t("manage_product_category.inactive")}</option>
                         </select>
-                        {errors.Status && <p className="text-red-500 text-sm">{errors.Status.message}</p>}
+                        {errors.status && <p className="text-red-500 text-sm">{errors.status.message}</p>}
                     </div>
 
                     {/* Ngày tạo (chỉ đọc) */}
@@ -89,7 +89,7 @@ export default function UpdateCateModal({ isOpen, onClose, category, onCategoryU
                         <input
                             type="text"
                             className="w-full p-2 border rounded bg-gray-200"
-                            value={category?.CreatedAt ? formatDate(category.CreatedAt) : ""}
+                            value={category?.createdAt ? formatDate(category.createdAt) : ""}
                             readOnly
                         />
                     </div>
@@ -100,7 +100,7 @@ export default function UpdateCateModal({ isOpen, onClose, category, onCategoryU
                         <input
                             type="text"
                             className="w-full p-2 border rounded bg-gray-200"
-                            value={category?.UpdatedAt ? formatDate(category.UpdatedAt) : ""}
+                            value={category?.updatedAt ? formatDate(category.updatedAt) : ""}
                             readOnly
                         />
                     </div>

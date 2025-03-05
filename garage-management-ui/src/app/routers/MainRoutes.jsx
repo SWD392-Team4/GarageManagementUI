@@ -51,13 +51,17 @@ const componentMap = {
   ),
   AdminProfile: lazy(() => import("../pages/AdminProfile/AdminProfile")),
   Dashboard: lazy(() => import("../pages/Dashboard/index")),
-  ManageAccount: lazy(() => import("../pages/ManageAccount/ManageAccount")),
-  AccountDetails: lazy(() => import("../pages/ManageAccount/AccountDetails")),
+
+  ManageEmployee: lazy(() => import("../pages/ManageEmployee/ManageEmployee")),
+  ManageSupplier: lazy(() => import("../pages/ManageSupplier/ManageSupplier")),
+  ManageSupplierContact: lazy(() => import("../pages/ManageSupplierContact/ManageSupplierContact")),
   ManageProduct: lazy(() => import("../pages/ManageProduct/ManageProduct")),
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
   ManageService: lazy(() => import("../pages/ManageService/ManageService")),
+  ManageCarPartCate: lazy(() => import("../pages/ManageCarPartCate/ManageCarPartCate")),
+  UpdateServicePage: lazy(() => import("../pages/ManageService/UpdateServicePage")),
   CreateServicePage: lazy(() =>
     import("../pages/ManageService/CreateServicePage")
   ),

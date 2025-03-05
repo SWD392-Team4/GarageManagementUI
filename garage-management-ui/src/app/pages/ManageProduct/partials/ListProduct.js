@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { getAllProducts, searchProduct } from "../services/ProductService";
 import SearchProduct from "./SearchProduct";
+import { sProduct } from "../services/ProductSignify";
 
 export default function ListProduct() {
   const { t, i18n } = useTranslation("manage_product");
@@ -62,13 +63,13 @@ export default function ListProduct() {
 
   const columns = useMemo(
     () => [
-      { header: t("manage_product.id"), accessorKey: "Id" },
-      { header: t("manage_product.name"), accessorKey: "ProductName" },
-      { header: t("manage_product.barcode"), accessorKey: "ProductBarcode" },
-      { header: t("manage_product.status"), accessorKey: "Status" },
-      { header: t("manage_product.createdAt"), accessorKey: "CreatedAt" },
-      { header: t("manage_product.updatedAt"), accessorKey: "UpdatedAt" },
-      { header: t("manage_product.price"), accessorKey: "ProductPrice" },
+      { header: t("manage_product.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+      { header: t("manage_product.name"), accessorKey: "productName" },
+      { header: t("manage_product.barcode"), accessorKey: "productBarcode" },
+      { header: t("manage_product.status"), accessorKey: "status" },
+      { header: t("manage_product.createdAt"), accessorKey: "createdAt" },
+      { header: t("manage_product.updatedAt"), accessorKey: "updatedAt" },
+      { header: t("manage_product.price"), accessorKey: "productPrice" },
     ],
     [t, i18n.language]
   );
@@ -79,7 +80,7 @@ export default function ListProduct() {
       label: t("manage_product.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
-      link: (row) => `${row.original.Id}`,
+      link: (row) => `${row.original.id}`,
     },
   ];
 
@@ -92,6 +93,7 @@ export default function ListProduct() {
         actions={actions}
         pagination={pagination}
         onPageChange={handlePageChange}
+        signifyInformation={sProduct.value}
       />
     </>
   );

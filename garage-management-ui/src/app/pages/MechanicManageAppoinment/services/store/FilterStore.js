@@ -14,3 +14,22 @@ export const FilterAppointment = signify(
     },
   }
 );
+
+//xử lý việc đưa thông tin vừa cập nhật hay tạo lên đầu table
+export const sApointmentMechanic = signify(
+  {
+    id: "",
+    customerName: "",
+    customerPhone: "",
+    actualAppointmentTime: "",
+    estimatedEndTime: "",
+    actualEndTime: "",
+    status: "",
+
+  },
+  {
+    cache: {
+      key: "sApointmentMechanic",
+    },
+  }
+);

@@ -63,7 +63,7 @@ export default function CreateCarModal({ isOpen, onClose, onCarModal }) {
           <select {...register("brandId", { required: true })} className="w-full p-2 border rounded mb-3">
             <option value="">Chọn thương hiệu</option>
             {brands.map((brand) => (
-              <option key={brand.Id} value={brand.Id}>{brand.BrandName}</option>
+              <option key={brand.id} value={brand.Id}>{brand.brandName}</option>
             ))}
           </select>
           {errors.brandId && <p className="text-red-500">Bắt buộc</p>}

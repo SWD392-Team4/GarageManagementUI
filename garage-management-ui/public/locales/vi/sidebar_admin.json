@@ -26,6 +26,9 @@
     "customer": "Khách hàng",
     "customer1": "Quản lý khách hàng",
     "customer2": "Quản lý tin nhắn",
-    "service": "Dịch Vụ"
+    "service": "Dịch Vụ",
+    "employee": "Nhân Viên",
+    "employee_list": "Danh sách nhân viên",
+    "employee_schedule": "Lịch"
   }
 }

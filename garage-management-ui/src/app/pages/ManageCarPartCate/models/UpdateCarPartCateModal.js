@@ -8,11 +8,11 @@ export default function UpdateCarPartCateModal({ isOpen, onClose, carPartCate, o
   useEffect(() => {
     if (carPartCate) {
       reset({
-        id: carPartCate.Id || "",
-        createdAt: carPartCate.CreatedAt || "",
-        updatedAt: carPartCate.UpdatedAt || "",
-        status: carPartCate.Status || "",
-        partCategory: carPartCate.PartCategory || ""
+        id: carPartCate.id || "",
+        createdAt: carPartCate.createdAt || "",
+        updatedAt: carPartCate.updatedAt || "",
+        status: carPartCate.status || "",
+        partCategory: carPartCate.partCategory || ""
       });
     }
   }, [carPartCate, reset]);
@@ -20,10 +20,12 @@ export default function UpdateCarPartCateModal({ isOpen, onClose, carPartCate, o
   const onSubmit = async (data) => {
     try {
       const updateData = {
-        PartCategory: data.partCategory,
-        Status: data.status,
+        partCategory: data.partCategory,
+        createdAt: carPartCate.createdAt,
+        updatedAt: carPartCate.updatedAt,
+        status: data.status,
       };
-      await updateCarPartCate(updateData, carPartCate?.Id);
+      await updateCarPartCate(updateData, carPartCate?.id);
       onCarPartCateUpdated();
     } catch (error) {
       console.error("Error updating Car Part Category:", error);
@@ -37,15 +39,15 @@ export default function UpdateCarPartCateModal({ isOpen, onClose, carPartCate, o
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <label className="block text-sm font-medium">ID</label>
-            <input type="text" value={carPartCate?.Id} disabled className="w-full border p-2 rounded" />
+            <input type="text" value={carPartCate?.id} disabled className="w-full border p-2 rounded" />
           </div>
           <div>
             <label className="block text-sm font-medium">Created At</label>
-            <input type="text" value={carPartCate?.CreatedAt} disabled className="w-full border p-2 rounded" />
+            <input type="text" value={carPartCate?.createdAt} disabled className="w-full border p-2 rounded" />
           </div>
           <div>
             <label className="block text-sm font-medium">Updated At</label>
-            <input type="text" value={carPartCate?.UpdatedAt} disabled className="w-full border p-2 rounded" />
+            <input type="text" value={carPartCate?.updatedAt} disabled className="w-full border p-2 rounded" />
           </div>
           <div>
             <label className="block text-sm font-medium">Status</label>

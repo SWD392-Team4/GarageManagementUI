@@ -1,0 +1,24 @@
+{
+    "manage_customer": {
+        "id": "ID",
+        "firstName": "Tên",
+        "lastName": "Họ",
+        "email": "Email",
+        "phoneNumber": "Số điện thoại",
+        "status": "Trạng thái",
+        "createdAt": "Ngày tạo",
+        "updatedAt": "Ngày cập nhật",
+        "view": "Xem",
+        "search": "Tìm kiếm",
+        "clear_filters": "Xóa bộ lọc",
+        "search_placeholder": "Nhập giá trị...",
+        "search_status": "Tìm theo trạng thái",
+        "search_created_at": "Tìm theo ngày tạo",
+        "search_updated_at": "Tìm theo ngày cập nhật",
+        "search_status_enum": {
+            "choose": "Chọn trạng thái",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động"
+        }
+    }
+}

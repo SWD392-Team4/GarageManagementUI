@@ -20,6 +20,10 @@ import {
   FaCarSide,
   FaClipboardList,
   FaUsers,
+  FaUserCog,
+  FaUserTie,
+  FaBuilding,
+  FaTruck,
 } from "react-icons/fa";
 import { AiOutlineSchedule } from "react-icons/ai";
 
@@ -75,8 +79,8 @@ export default function SideBarAdmin({
 
       <aside
         className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 overflow-y-auto ${isMobile
-            ? `fixed top-0 left-0 w-64 ${isSidebarOpen ? "block" : "hidden"}`
-            : `relative ${isSidebarOpen ? "w-64" : "w-16"}`
+          ? `fixed top-0 left-0 w-64 ${isSidebarOpen ? "block" : "hidden"}`
+          : `relative ${isSidebarOpen ? "w-64" : "w-16"}`
           }`}
       >
         <div>
@@ -135,6 +139,89 @@ export default function SideBarAdmin({
                   )}
                 </Link>
               </li>
+
+              {/* Suppliers */}
+              <li>
+                <button
+                  onClick={() => toggleSubMenu("suppliers")}
+                  className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+                >
+                  <FaTruck className="w-6 h-6" />
+                  {isSidebarOpen && (
+                    <span className="ml-3">{t("sidebar_admin.suppliers")}</span>
+                  )}
+                  {isSidebarOpen && (
+                    <span className="ml-auto">
+                      {openMenu === "suppliers" ? <FaChevronDown /> : <FaChevronRight />}
+                    </span>
+                  )}
+                </button>
+                {openMenu === "suppliers" && (
+                  <ul className="ml-6 mt-2 space-y-2">
+                    <li>
+                      <Link
+                        to="/admin/suppliers"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <FaUsers className="w-5 h-5" />
+                        <span className="ml-2">{t("sidebar_admin.supplier_list")}</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/admin/suppliers-contact"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <FaClipboardList className="w-5 h-5" />
+                        <span className="ml-2">{t("sidebar_admin.supplier_contact")}</span>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </li>
+
+
+
+              {/* Employee */}
+              <li>
+                <button
+                  onClick={() => toggleSubMenu("employee")}
+                  className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+                >
+                  <FaUserTie className="w-6 h-6" />
+                  {isSidebarOpen && (
+                    <span className="ml-3">{t("sidebar_admin.employee")}</span>
+                  )}
+                  {isSidebarOpen && (
+                    <span className="ml-auto">
+                      {openMenu === "employee" ? <FaChevronDown /> : <FaChevronRight />}
+                    </span>
+                  )}
+                </button>
+                {openMenu === "employee" && (
+                  <ul className="ml-6 mt-2 space-y-2">
+                    <li>
+                      <Link
+                        to="/admin/employee"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <FaUserCog className="w-5 h-5" />
+                        <span className="ml-2">{t("sidebar_admin.employee_list")}</span>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/admin/employee-schedule"
+                        className="text-white flex items-center p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg"
+                      >
+                        <FaBuilding className="w-5 h-5" />
+                        <span className="ml-2">{t("sidebar_admin.employee_schedule")}</span>
+                      </Link>
+                    </li>
+                  </ul>
+                )}
+              </li>
+
 
               {/* Sản phẩm */}
               <li>

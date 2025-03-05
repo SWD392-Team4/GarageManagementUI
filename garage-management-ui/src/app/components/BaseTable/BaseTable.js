@@ -30,6 +30,12 @@ export default function BaseTable({
   });
 
   // console.log("check signi tai table component:  ", signifyInformation);
+  // if (signifyInformation.id != "") {
+  //   console.log("Hien");
+  // } else {
+  //   console.log("khong hien");
+  // }
+
 
   return (
     <>
@@ -52,7 +58,7 @@ export default function BaseTable({
             <tbody className="bg-gray-50">
               {/* Du lieu cua signify */}
               {/* Kiểm tra signifyInformation và giá trị trường đầu tiên */}
-              {signifyInformation &&
+              {signifyInformation.id &&
                 columns.length > 0 &&
                 signifyInformation[columns[0].accessorKey] !== "" && (
                   <tr className="bg-green-200">
@@ -125,13 +131,15 @@ export default function BaseTable({
 
       {/* ✅ Phân trang */}
       <div className="flex justify-between items-center py-5">
-        {pagination.totalPages > 1 && (<button
-          className="p-2 bg-gray-300 disabled:opacity-50"
-          onClick={() => onPageChange(pagination.currentPage - 1)}
-          disabled={!pagination.hasPrevious}
-        >
-          ◀
-        </button>)}
+        {pagination.totalPages > 1 && (
+          <button
+            className="p-2 bg-gray-300 disabled:opacity-50"
+            onClick={() => onPageChange(pagination.currentPage - 1)}
+            disabled={!pagination.hasPrevious}
+          >
+            ◀
+          </button>
+        )}
 
 
         {pagination.totalPages > 1 && (

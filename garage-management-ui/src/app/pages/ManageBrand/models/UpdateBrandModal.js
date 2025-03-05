@@ -8,8 +8,8 @@ import { formatDate } from "../schemas/BrandValid";
 import { createBrandImage } from "../services/BrandService"; // Thêm hàm upload ảnh nếu cần
 
 const schema = yup.object().shape({
-    BrandName: yup.string().required("Tên thương hiệu không được để trống"),
-    Status: yup.string().oneOf(["Active", "Inactive"], "Trạng thái không hợp lệ"),
+    brandName: yup.string().required("Tên thương hiệu không được để trống"),
+    status: yup.string().oneOf(["Active", "Inactive"], "Trạng thái không hợp lệ"),
 });
 
 export default function UpdateBrandModal({ isOpen, onClose, brand, onBrandUpdated }) {
@@ -26,18 +26,18 @@ export default function UpdateBrandModal({ isOpen, onClose, brand, onBrandUpdate
     } = useForm({
         resolver: yupResolver(schema),
         defaultValues: {
-            BrandName: "",
-            Status: "None",
+            brandName: "",
+            status: "None",
         },
     });
 
     useEffect(() => {
         if (brand) {
-            setValue("BrandName", brand.BrandName || "");
-            setValue("Status", brand.Status || "None");
+            setValue("brandName", brand.brandName || "");
+            setValue("status", brand.status || "None");
 
             // Hiển thị ảnh mặc định từ ImageLink nếu chưa chọn file mới
-            setImagePreview(brand.ImageLink || null);
+            setImagePreview(brand.imageLink || null);
             setSelectedFile(null);
         } else {
             reset();
@@ -51,11 +51,11 @@ export default function UpdateBrandModal({ isOpen, onClose, brand, onBrandUpdate
     const onSubmit = async (data) => {
         try {
             const updatedBrand = { ...brand, ...data };
-            await updateBrand(brand.Id, updatedBrand);
+            await updateBrand(brand.id, updatedBrand);
 
             // Nếu có file mới thì upload
             if (selectedFile) {
-                await uploadImage(brand.Id, selectedFile);
+                await uploadImage(brand.id, selectedFile);
             }
 
             onBrandUpdated(updatedBrand);
@@ -84,7 +84,7 @@ export default function UpdateBrandModal({ isOpen, onClose, brand, onBrandUpdate
     };
 
     const handleCancel = () => {
-        setImagePreview(brand?.ImageLink || null); // Khôi phục ảnh gốc
+        setImagePreview(brand?.imageLink || null); // Khôi phục ảnh gốc
         setSelectedFile(null);
         onClose();
     };
@@ -99,32 +99,32 @@ export default function UpdateBrandModal({ isOpen, onClose, brand, onBrandUpdate
                     <div>
                         <div className="mb-3">
                             <label className="block text-sm font-medium text-gray-700">{t("manage_brand.id")}</label>
-                            <input type="text" className="w-full p-2 border rounded bg-gray-200" value={brand?.Id || ""} readOnly />
+                            <input type="text" className="w-full p-2 border rounded bg-gray-200" value={brand?.id || ""} readOnly />
                         </div>
 
                         <div className="mb-3">
                             <label className="block text-sm font-medium text-gray-700">{t("manage_brand.brandName")}</label>
-                            <input type="text" {...register("BrandName")} className="w-full p-2 border rounded" />
-                            {errors.BrandName && <p className="text-red-500 text-sm">{errors.BrandName.message}</p>}
+                            <input type="text" {...register("brandName")} className="w-full p-2 border rounded" />
+                            {errors.brandName && <p className="text-red-500 text-sm">{errors.brandName.message}</p>}
                         </div>
 
                         <div className="mb-3">
                             <label className="block text-sm font-medium text-gray-700">{t("manage_brand.status")}</label>
-                            <select {...register("Status")} className="w-full p-2 border rounded">
+                            <select {...register("status")} className="w-full p-2 border rounded">
                                 <option value="Active">{t("manage_brand.active")}</option>
                                 <option value="Inactive">{t("manage_brand.inactive")}</option>
                             </select>
-                            {errors.Status && <p className="text-red-500 text-sm">{errors.Status.message}</p>}
+                            {errors.status && <p className="text-red-500 text-sm">{errors.status.message}</p>}
                         </div>
 
                         <div className="mb-3">
                             <label className="block text-sm font-medium text-gray-700">{t("manage_brand.createdAt")}</label>
-                            <input type="text" className="w-full p-2 border rounded bg-gray-200" value={brand?.CreatedAt ? formatDate(brand.CreatedAt) : ""} readOnly />
+                            <input type="text" className="w-full p-2 border rounded bg-gray-200" value={brand?.createdAt ? formatDate(brand.createdAt) : ""} readOnly />
                         </div>
 
                         <div className="mb-3">
                             <label className="block text-sm font-medium text-gray-700">{t("manage_brand.updatedAt")}</label>
-                            <input type="text" className="w-full p-2 border rounded bg-gray-200" value={brand?.UpdatedAt ? formatDate(brand.UpdatedAt) : ""} readOnly />
+                            <input type="text" className="w-full p-2 border rounded bg-gray-200" value={brand?.updatedAt ? formatDate(brand.updatedAt) : ""} readOnly />
                         </div>
                     </div>
 

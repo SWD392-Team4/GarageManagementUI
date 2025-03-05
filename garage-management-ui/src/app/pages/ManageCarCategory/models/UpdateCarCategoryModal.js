@@ -34,6 +34,8 @@ export default function UpdateCarCategoryModal({ isOpen, onClose, carCategory, o
                 category: data.category,
                 description: data.description,
                 status: data.status,
+                createdAt: data.createdAt,
+                updatedAt: data.updatedAt
             });
             setIsEditing(false);
             onCarCategoryUpdate();

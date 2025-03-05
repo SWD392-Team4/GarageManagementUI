@@ -1,5 +1,6 @@
 import UserService from "../../../hooks/services/UserService"
 import { formatDate } from "../schemas/CarModalValid";
+import { sCarModal } from "./carModalSignify";
 
 const userService = new UserService();
 
@@ -75,6 +76,7 @@ export const createCarModal = async (data) => {
 }
 
 export const updateCarModal = async (carModalId, updateData) => {
+    console.log("check data: ", updateData);
     try {
         const response = await userService.sendAjax(
             `/api/car-models/${carModalId}`,
@@ -83,7 +85,28 @@ export const updateCarModal = async (carModalId, updateData) => {
             true,
         );
 
-        if (response.data.value) {
+        if (response.status == 204) {
+            //clear thong tin signify
+            sCarModal.set((pre) => ([
+                pre.value.id = "",
+                pre.value.brandName = "",
+                pre.value.category = "",
+                pre.value.modelName = "",
+                pre.value.modelYear = "",
+                pre.value.createdAt = "",
+                pre.value.updatedAt = "",
+            ]))
+            //gan thong tin vao
+            sCarModal.set((pre) => ([
+                pre.value.id = carModalId,
+                pre.value.brandName = updateData.brandName,
+                pre.value.category = updateData.category,
+                pre.value.modelName = updateData.modelName,
+                pre.value.modelYear = updateData.modelYear,
+                pre.value.createdAt = updateData.createdAt,
+                pre.value.updatedAt = updateData.updatedAt,
+            ]))
+
             userService.showToast(200, "Update Car Models Succesful ");
             return response;
         } else {
@@ -118,7 +141,7 @@ export const getCarModalDetails = async (carModalId) => {
 export const getAllBrand = async () => {
     try {
         const response = await userService.sendAjax(
-            "/api/brands",
+            "/api/brands?Fields=id%2C%20brandName",
             "GET",
             null,
             true

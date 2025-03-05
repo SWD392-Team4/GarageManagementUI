@@ -4,6 +4,7 @@ import { getAllService, searchService } from '../services/ServiceAPI';
 import SearchService from './SearchService';
 import BaseTable from '../../../components/BaseTable/BaseTable';
 import { FaEye } from 'react-icons/fa';
+import { sService } from "../services/ServiceSignify"
 
 export default function ListService() {
   const { t, i18n } = useTranslation("manage_service");
@@ -62,16 +63,16 @@ export default function ListService() {
 
   const columns = useMemo(
     () => [
-      { header: t("manage_service.Id"), accessorKey: "Id" },
-      { header: t("manage_service.ServiceName"), accessorKey: "ServiceName" },
-      { header: t("manage_service.ServiceCategory"), accessorKey: "ServiceCategory" },
-      { header: t("manage_service.PartName"), accessorKey: "PartName" },
-      { header: t("manage_service.Category"), accessorKey: "Category" },
-      { header: t("manage_service.Price"), accessorKey: "Price" },
-      { header: t("manage_service.WorkNature"), accessorKey: "WorkNature" },
-      { header: t("manage_service.Action"), accessorKey: "Action" },
-      { header: t("manage_service.EstimatedHours"), accessorKey: "EstimatedHours" },
-      { header: t("manage_service.Status"), accessorKey: "Status" },
+      { header: t("manage_service.Id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+      { header: t("manage_service.ServiceName"), accessorKey: "serviceName" },
+      { header: t("manage_service.ServiceCategory"), accessorKey: "serviceCategory" },
+      { header: t("manage_service.PartName"), accessorKey: "partName" },
+      { header: t("manage_service.Category"), accessorKey: "category" },
+      { header: t("manage_service.Price"), accessorKey: "price" },
+      { header: t("manage_service.WorkNature"), accessorKey: "workNature" },
+      { header: t("manage_service.Action"), accessorKey: "action" },
+      { header: t("manage_service.EstimatedHours"), accessorKey: "estimatedHours" },
+      { header: t("manage_service.Status"), accessorKey: "status" },
     ],
     [t, i18n.language]
   );
@@ -82,7 +83,7 @@ export default function ListService() {
       label: t("manage_service.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
-      link: (row) => `/admin/service/${row.original.Id}`,
+      link: (row) => `/admin/service/${row.original.id}`,
     },
   ];
 
@@ -95,6 +96,7 @@ export default function ListService() {
         actions={actions}
         pagination={pagination}
         onPageChange={handlePageChange}
+        signifyInformation={sService.value}
       />
     </>
   )

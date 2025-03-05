@@ -3,11 +3,12 @@ import { useTranslation } from "react-i18next";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
-import { getAllProducts, searchProduct } from "../services/ProductService";
-import SearchProduct from "./SearchProduct";
+import { getAllCustomer, SearchCustomer } from "../services/CustomerService";
+import SearchCustomers from "./SearchCustomers";
+import { sCustomerManage } from "../services/CustomerSignify"
 
 export default function ListCustomer() {
-  const { t, i18n } = useTranslation("manage_product");
+  const { t, i18n } = useTranslation("manage_customer");
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState({
@@ -25,9 +26,9 @@ export default function ListCustomer() {
       let response;
 
       if (params) {
-        // response = await searchProduct({ ...params, PageNumber: page });
+        response = await SearchCustomer({ ...params, PageNumber: page });
       } else {
-        response = await getAllProducts(page);
+        response = await getAllCustomer(page);
       }
 
       if (response?.data?.value) {
@@ -62,36 +63,40 @@ export default function ListCustomer() {
 
   const columns = useMemo(
     () => [
-      { header: t("manage_product.id"), accessorKey: "Id" },
-      { header: t("manage_product.name"), accessorKey: "ProductName" },
-      { header: t("manage_product.barcode"), accessorKey: "ProductBarcode" },
-      { header: t("manage_product.status"), accessorKey: "Status" },
-      { header: t("manage_product.createdAt"), accessorKey: "CreatedAt" },
-      { header: t("manage_product.updatedAt"), accessorKey: "UpdatedAt" },
-      { header: t("manage_product.price"), accessorKey: "ProductPrice" },
+      { header: t("manage_customer.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+      { header: t("manage_customer.firstName"), accessorKey: "firstName" },
+      { header: t("manage_customer.lastName"), accessorKey: "lastName" },
+      { header: t("manage_customer.email"), accessorKey: "email" },
+      { header: t("manage_customer.phoneNumber"), accessorKey: "phoneNumber" },
+      { header: t("manage_customer.status"), accessorKey: "status" },
+      { header: t("manage_customer.createdAt"), accessorKey: "createdAt" },
+      { header: t("manage_customer.updatedAt"), accessorKey: "updatedAt" },
     ],
+
+
     [t, i18n.language]
   );
 
   const actions = [
     {
       type: "link",
-      label: t("manage_product.view"),
+      label: t("manage_customer.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
-      link: (row) => `${row.original.Id}`,
+      link: (row) => `${row.original.id}`,
     },
   ];
 
   return (
     <>
-      <SearchProduct onSearch={handleSearch} />
+      <SearchCustomers onSearch={handleSearch} />
       <BaseTable
         columns={columns}
         data={data}
         actions={actions}
         pagination={pagination}
         onPageChange={handlePageChange}
+        signifyInformation={sCustomerManage.value}
       />
     </>
   );

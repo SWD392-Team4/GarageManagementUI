@@ -18,8 +18,8 @@ export const getAllCarPart = async (PageNumber = 1) => {
             if (response.data?.value) {
                 response.data.value = response.data.value.map(carPart => ({
                     ...carPart,
-                    CreatedAt: formatDate(carPart.CreatedAt),
-                    UpdatedAt: formatDate(carPart.UpdatedAt),
+                    createdAt: formatDate(carPart.createdAt),
+                    updatedAt: formatDate(carPart.updatedAt),
                 }));
             }
 
@@ -52,8 +52,8 @@ export const searchCarPart = async (params) => {
         if (response != null && response.data?.value) {
             response.data.value = response.data.value.map(carPart => ({
                 ...carPart,
-                CreatedAt: formatDate(carPart.CreatedAt),
-                UpdatedAt: formatDate(carPart.UpdatedAt),
+                createdAt: formatDate(carPart.createdAt),
+                updatedAt: formatDate(carPart.updatedAt),
             }));
         }
         userService.showToast(200, "Car parts search completed successfully");
@@ -74,9 +74,36 @@ export const updateCarPart = async (carPartId, updatedData) => {
             updatedData,
             true
         );
-        //return
-        userService.showToast(200, "Car Part updated successfully");
-        return response;
+        //xu ly response
+        if (response.status == 200) {
+            //clear signify
+            sCarPart.set((pre) => ([
+                pre.value.id = "",
+                pre.value.partName = "",
+                pre.value.partCategory = "",
+                pre.value.status = "",
+                pre.value.createdAt = "",
+                pre.value.updatedAt = "",
+            ]))
+            //gan thong tin vao signify
+            sCarPart.set((pre) => ([
+                pre.value.id = carPartId,
+                pre.value.partName = updatedData.partName,
+                pre.value.partCategory = updatedData.partCategory,
+                pre.value.status = updatedData.status,
+                pre.value.createdAt = updatedData.createdAt,
+                pre.value.updatedAt = updatedData.updatedAt,
+            ]))
+            userService.showToast(200, "Car Part updated successfully");
+            return response;
+        } else {
+            userService.showToast(400, "Car Part updated fail");
+            return null;
+        }
+
+
+
+
     } catch (error) {
         console.error("Error updating car part:", error);
         userService.showToast(400, "Error updating car part");
@@ -95,8 +122,8 @@ export const getCarPartDetails = async (carPartId) => {
         );
 
         if (response.data.value) {
-            response.data.value.CreatedAt = formatDate(response.data.value.CreatedAt);
-            response.data.value.UpdatedAt = formatDate(response.data.value.UpdatedAt);
+            response.data.value.createdAt = formatDate(response.data.value.createdAt);
+            response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
         }
 
         userService.showToast(200, "Car Part details loaded successfully");
@@ -111,7 +138,7 @@ export const getCarPartDetails = async (carPartId) => {
 export const getAllCarPartCate = async () => {
     try {
         const response = await userService.sendAjax(
-            "/api/car-parts/category",
+            "/api/car-parts/category?Fields=id%2C%20partCategory",
             "GET",
             null,
             true
@@ -127,9 +154,31 @@ export const getAllCarPartCate = async () => {
 export const createCarPart = async (categoryData) => {
     try {
         const response = await userService.sendAjax("/api/car-parts", "POST", categoryData, true);
+        console.log("check thong tin: ", response);
+        //xu ly thong tin
+        if (response.status == 200) {
+            // clear thong tin signify
+            sCarPart.set((pre) => ([
+                pre.value.id = "",
+                pre.value.partName = "",
+                pre.value.partCategory = "",
+                pre.value.status = "",
+                pre.value.createdAt = "",
+                pre.value.updatedAt = "",
+            ]))
+            //format
+            response.data.value.createdAt = formatDate(response.data.value.createdAt);
+            response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
+            //gan thong tin moi vao api
+            sCarPart.set(response.data.value);
 
-        userService.showToast(200, "Car Part created successfully");
-        return response;
+            userService.showToast(200, "Car Part created successfully");
+            return response;
+        } else {
+            userService.showToast(400, "Car Part created fail");
+            return null;
+        }
+
     } catch (error) {
         console.error("Error creating category:", error);
         userService.showToast(400, "Error creating Car Part");

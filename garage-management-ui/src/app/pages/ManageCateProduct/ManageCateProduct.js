@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ListCatePro from "./partials/ListCatePro";
 import { useTranslation } from "react-i18next";
 import CreateCateForm from "./models/CreateCateForm";
+import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 
 export default function ManageCateProduct() {
     const { t } = useTranslation("manage_product_category");
@@ -10,6 +11,7 @@ export default function ManageCateProduct() {
 
     return (
         <div className="bg-white shadow-lg p-6">
+            <Breadcrumb />
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-semibold">{t("manage_product_category.title")}</h1>
                 <button

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { FaEye } from "react-icons/fa";
 import { TbAugmentedReality } from "react-icons/tb";
+import { sServicesInAppointment } from "../services/store/FilterStore"
 
 export default function ServicesInAppointment() {
   const { t, i18n } = useTranslation("appoinment-admin");
@@ -91,7 +92,7 @@ export default function ServicesInAppointment() {
 
   const columns = useMemo(
     () => [
-      { header: t("list-services.title1"), accessorKey: "id" },
+      { header: t("list-services.title1"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
       { header: t("list-services.title2"), accessorKey: "service" },
       { header: t("list-services.title3"), accessorKey: "employee" },
       { header: t("list-services.title4"), accessorKey: "estimated-end-time" },
@@ -126,6 +127,7 @@ export default function ServicesInAppointment() {
           actions={actions}
           pagination={pagination}
           fetchData={fetchData}
+          signifyInformation={sServicesInAppointment.value}
         />
       </div>
     </>

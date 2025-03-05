@@ -1,6 +1,6 @@
 import UserService from "../../../hooks/services/UserService";
 import { formatDate } from "../schemas/CateValid";
-import { sCategory } from "./CateSignify";
+import { sProductCategory } from "./CateSignify";
 
 const userService = new UserService();
 
@@ -16,8 +16,8 @@ export const getAllCategory = async (PageNumber = 1) => {
         if (response?.data?.value) {
             response.data.value = response.data.value.map(category => ({
                 ...category,
-                CreatedAt: formatDate(category.CreatedAt),
-                UpdatedAt: formatDate(category.UpdatedAt),
+                createdAt: formatDate(category.createdAt),
+                updatedAt: formatDate(category.updatedAt),
             }));
             userService.showToast(200, "Loading Category Successful");
         } else {
@@ -45,8 +45,8 @@ export const searchCategory = async (params) => {
         if (response?.data?.value?.length > 0) {
             response.data.value = response.data.value.map(category => ({
                 ...category,
-                CreatedAt: formatDate(category.CreatedAt),
-                UpdatedAt: formatDate(category.UpdatedAt),
+                createdAt: formatDate(category.createdAt),
+                updatedAt: formatDate(category.updatedAt),
             }));
             userService.showToast(200, "Search successful");
         } else {
@@ -72,18 +72,18 @@ export const updateCategory = async (categoryId, updatedData) => {
             true
         );
         //xu ly signify
-        sCategory.set((pre) => ([
-            pre.value.Id = "",
-            pre.value.Category = "",
-            pre.value.Status = "",
-            pre.value.CreatedAt = "",
-            pre.value.UpdatedAt = "",
+        sProductCategory.set((pre) => ([
+            pre.value.id = "",
+            pre.value.category = "",
+            pre.value.status = "",
+            pre.value.createdAt = "",
+            pre.value.updatedAt = "",
         ]))
 
-        updatedData.CreatedAt = formatDate(updatedData.CreatedAt)
-        updatedData.UpdatedAt = formatDate(updatedData.UpdatedAt)
-        updatedData.Category = <>{updatedData.Category}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
-        sCategory.set(updatedData);
+        updatedData.createdAt = formatDate(updatedData.createdAt)
+        updatedData.updatedAt = formatDate(updatedData.updatedAt)
+        updatedData.category = <>{updatedData.category}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
+        sProductCategory.set(updatedData);
 
 
         if (response?.status === 204) {
@@ -108,21 +108,23 @@ export const createCategory = async (data) => {
             data,
             true
         );
-        //gan signify
-        sCategory.set((pre) => ([
-            pre.value.Id = "",
-            pre.value.Category = "",
-            pre.value.Status = "",
-            pre.value.CreatedAt = "",
-            pre.value.UpdatedAt = "",
-        ]))
-        response.data.value.CreateAt = formatDate(response.data.value.CreateAt);
-        response.data.value.UpdatedAt = formatDate(response.data.value.UpdatedAt);
 
-        sCategory.set(response.data.value);
-        //check and retrun
 
         if (response != null) {
+            //gan signify
+            sProductCategory.set((pre) => ([
+                pre.value.id = "",
+                pre.value.category = "",
+                pre.value.status = "",
+                pre.value.createdAt = "",
+                pre.value.updatedAt = "",
+            ]))
+
+            response.data.value.category = <>{response.data.value.category}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+            response.data.value.createdAt = formatDate(response.data.value.createdAt);
+            response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
+
+            sProductCategory.set(response.data.value);
             userService.showToast(200, "Category created successfully");
         } else {
             userService.showToast(400, "Failed to create category");

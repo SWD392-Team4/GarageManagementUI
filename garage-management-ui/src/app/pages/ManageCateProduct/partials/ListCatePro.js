@@ -5,7 +5,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import UpdateCateModal from "../models/UpdateCateModal";
 import { CategoryDetails, getAllCategory, searchCategory } from "../services/CatePService";
 import SearchCategory from "./SearchCategory";
-import { sCategory } from "../services/CateSignify";
+import { sProductCategory } from "../services/CateSignify";
 
 export default function ListCatePro({ refresh }) {
     const { t, i18n } = useTranslation("manage_product_category");
@@ -64,11 +64,11 @@ export default function ListCatePro({ refresh }) {
 
     const columns = useMemo(
         () => [
-            { header: t("manage_product_category.id"), accessorKey: "Id" },
-            { header: t("manage_product_category.name"), accessorKey: "Category" },
-            { header: t("manage_product_category.status"), accessorKey: "Status" },
-            { header: t("manage_product_category.createdAt"), accessorKey: "CreatedAt", },
-            { header: t("manage_product_category.updatedAt"), accessorKey: "UpdatedAt", }
+            { header: t("manage_product_category.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+            { header: t("manage_product_category.name"), accessorKey: "category" },
+            { header: t("manage_product_category.status"), accessorKey: "status" },
+            { header: t("manage_product_category.createdAt"), accessorKey: "createdAt", },
+            { header: t("manage_product_category.updatedAt"), accessorKey: "updatedAt", }
         ],
         [t, i18n.language]
     );
@@ -81,7 +81,7 @@ export default function ListCatePro({ refresh }) {
             icon: <FaPencilAlt />,
             onClick: async (row) => {
                 try {
-                    const response = await CategoryDetails(row.Id);
+                    const response = await CategoryDetails(row.id);
                     setSelectedCategory(response.data.value);
                     setIsUpdateModalOpen(true);
                 } catch (error) {
@@ -100,7 +100,7 @@ export default function ListCatePro({ refresh }) {
                 actions={actions}
                 pagination={pagination}
                 onPageChange={handlePageChange}
-                signifyInformation={sCategory.value}
+                signifyInformation={sProductCategory.value}
             />
             <UpdateCateModal
                 isOpen={isUpdateModalOpen}

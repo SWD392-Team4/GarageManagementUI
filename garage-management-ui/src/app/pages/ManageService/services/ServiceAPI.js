@@ -83,7 +83,7 @@ export const createServiceImage = async (serviceId, FormData) => {
             true,
             true
         );
-        if (response.data) {
+        if (response == 200) {
             return response;
         } else {
             console.error("Fail to Upload: ", response.description);
@@ -93,16 +93,37 @@ export const createServiceImage = async (serviceId, FormData) => {
     }
 }
 
+export const getServiceDetails = async (serviceId) => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/services/${serviceId}`,
+            "GET",
+            null,
+            true
+        );
+        if (response.status == 200) {
+            userService.showToast(200, "Loading service detail successful");
+            return response.data.value;
+        } else {
+            userService.showToast(400, "Loading service detail fail");
+            return null;
+        }
+
+    } catch (error) {
+        console.error("Loading Service Details fail");
+    }
+}
+
 
 export const updateService = async (serviceId, updateData) => {
     try {
         const response = await userService.sendAjax(
-            `/api/services${serviceId}`,
+            `/api/services/${serviceId}`,
             "PUT",
             updateData,
             true
         );
-        if (response.data.value != null) {
+        if (response.status == 200) {
             userService.showToast(200, "Updated Service Successful");
             return response;
         } else {
@@ -119,7 +140,7 @@ export const updateService = async (serviceId, updateData) => {
 export const getCarCategory = async () => {
     try {
         const response = await userService.sendAjax(
-            "/api/car-parts/category?Fields=Id%20%2CPartCategory",
+            "/api/car-categories",
             "GET",
             null,
             true,
