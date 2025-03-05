@@ -39,6 +39,7 @@ import ConditionImage from "../../assets/services/condition.jpg";
 import RemoveImage from "../../assets/services/remove.jpg";
 import RestoreLightingImage from "../../assets/services/restore-lighting.jpg";
 import TestimonialSwiper from "./TestimonialSwiper";
+import { useNavigate } from "react-router-dom";
 const services = [
   { image: InspectImage, icon: <FaSearch />, key: "inspect" }, // Kiểm tra
   { image: ReplaceImage, icon: <FaSyncAlt />, key: "replace" }, // Thay thế
@@ -64,6 +65,8 @@ const services = [
 
 const ServicesSection = () => {
   const { t } = useTranslation("dedicatedServicesA");
+  const navigate = useNavigate();
+
 
   return (
     <>

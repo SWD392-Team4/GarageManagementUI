@@ -29,7 +29,7 @@ export default function BaseTable({
     pageCount: pagination.totalPages,
   });
 
-  console.log("check signi tai table component:  ", signifyInformation);
+  // console.log("check signi tai table component:  ", signifyInformation);
 
   return (
     <>

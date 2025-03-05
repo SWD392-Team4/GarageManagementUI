@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { getAllCarModal, getCarModalDetails, searchCarModal } from '../services/carModalService';
 import { useTranslation } from 'react-i18next';
-import { label } from 'three/src/nodes/TSL.js';
+import { label, select } from 'three/src/nodes/TSL.js';
 import { FaPencilAlt } from 'react-icons/fa';
 import BaseTable from '../../../components/BaseTable/BaseTable';
 import UpdateCarModal from '../models/UpdateCarModal';

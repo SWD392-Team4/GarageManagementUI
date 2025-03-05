@@ -73,11 +73,10 @@ export default function SideBarAdmin({
       )}
 
       <aside
-        className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 ${
-          isMobile
+        className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 overflow-y-auto ${isMobile
             ? `fixed top-0 left-0 w-64 ${isSidebarOpen ? "block" : "hidden"}`
             : `relative ${isSidebarOpen ? "w-64" : "w-16"}`
-        }`}
+          }`}
       >
         <div>
           <div className="flex items-center justify-end px-3 py-3 border-b dark:border-gray-700">

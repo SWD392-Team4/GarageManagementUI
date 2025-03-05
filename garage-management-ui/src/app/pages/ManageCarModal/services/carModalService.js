@@ -1,4 +1,3 @@
-import { map } from "jquery";
 import UserService from "../../../hooks/services/UserService"
 import { formatDate } from "../schemas/CarModalValid";
 
@@ -55,7 +54,7 @@ export const searchCarModal = async (params) => {
 
 export const createCarModal = async (data) => {
     try {
-        const response = userService.sendAjax(
+        const response = await userService.sendAjax(
             "/api/car-models",
             "POST",
             data,
@@ -75,18 +74,38 @@ export const createCarModal = async (data) => {
     }
 }
 
+export const updateCarModal = async (carModalId, updateData) => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/car-models/${carModalId}`,
+            "PUT",
+            updateData,
+            true,
+        );
+
+        if (response.data.value) {
+            userService.showToast(200, "Update Car Models Succesful ");
+            return response;
+        } else {
+            userService.showToast(404, "Update Car Models Fail");
+            return null;
+        }
+
+    } catch (error) {
+        console.error("Fail to updated car models: ", error.message);
+    }
+}
+
 export const getCarModalDetails = async (carModalId) => {
     try {
-        const response = userService.sendAjax(
+        const response = await userService.sendAjax(
             `/api/car-models/${carModalId}`,
             "GET",
             null,
             true
         )
-        if (response.data.value) {
-            response.data.value.createdAt = formatDate(createAt)
-            response.data.value.updatedAt = formatDate(updatedAt)
-        }
+        response.data.value.createdAt = formatDate(response.data.value.createdAt);
+        response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
         return response;
     } catch (error) {
         console.error("Fail loading car modal infomation with: ", carModalId);

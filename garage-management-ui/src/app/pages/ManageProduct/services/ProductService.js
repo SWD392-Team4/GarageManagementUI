@@ -71,6 +71,8 @@ export const createProduct = async (productData) => {
             productData,
             true
         );
+
+        
         return response;
     } catch (error) {
         console.error("Lỗi khi tạo sản phẩm: ", error);
