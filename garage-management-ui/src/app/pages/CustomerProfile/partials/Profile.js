@@ -43,8 +43,8 @@ export default function Profile() {
         setIsEditing(false);
 
         sAccount.set((v) => {
-          v.value.FirstName = data.firstName;
-          v.value.LastName = data.lastName;
+          v.value.firstName = data.firstName;
+          v.value.lastName = data.lastName;
         });
       } else {
         userService.showToast(
@@ -66,8 +66,8 @@ export default function Profile() {
           onClick={() => {
             setIsEditing(!isEditing);
             reset();
-            setValue("firstName", sAccount.value.FirstName);
-            setValue("lastName", sAccount.value.LastName);
+            setValue("firstName", sAccount.value.firstName);
+            setValue("lastName", sAccount.value.lastName);
           }}
           className="bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-md flex items-center gap-2"
         >
@@ -113,7 +113,7 @@ export default function Profile() {
                 <label className="block font-medium text-gray-700 mb-1">
                   {t("personal_info.email")}
                 </label>
-                <p className="  p-2 rounded w-full">{user.Email}</p>
+                <p className="  p-2 rounded w-full">{user.email}</p>
               </div>
               {/* Last Name */}
               <div>
@@ -134,7 +134,7 @@ export default function Profile() {
                 <label className="block font-medium text-gray-700 mb-1">
                   {t("personal_info.phone")}
                 </label>
-                <p className="   p-2 rounded w-full">{user.PhoneNumber}</p>
+                <p className="   p-2 rounded w-full">{user.phoneNumber}</p>
               </div>
 
               {/* Nút Lưu */}
@@ -155,25 +155,25 @@ export default function Profile() {
               <div>
                 <p>
                   <strong>{t("personal_info.first_name")}:</strong>{" "}
-                  {user.FirstName}
+                  {user.firstName}
                 </p>
               </div>
 
               <div>
                 <p>
-                  <strong>{t("personal_info.email")}:</strong> {user.Email}
+                  <strong>{t("personal_info.email")}:</strong> {user.email}
                 </p>
               </div>
               <div>
                 <p>
                   <strong>{t("personal_info.last_name")}:</strong>{" "}
-                  {user.LastName}
+                  {user.lastName}
                 </p>
               </div>
               <div>
                 <p>
                   <strong>{t("personal_info.phone")}:</strong>{" "}
-                  {user.PhoneNumber}
+                  {user.phoneNumber}
                 </p>
               </div>
             </>

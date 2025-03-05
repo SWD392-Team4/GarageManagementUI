@@ -2,24 +2,24 @@ import { signify } from "react-signify";
 
 export const sAccount = signify(
   {
-    Id: "",
-    FirstName: "",
-    LastName: "",
-    ImageLink: "",
-    Email: "",
-    PhoneNumber: "",
-    Gender: null,
-    CitizenIdentification: "",
-    DateOfBirth: "",
-    Status: "",
-    WorkPlaceId: "",
-    CreatedAt: "",
-    UpdatedAt: "",
-    Role: "",
+    id: "",
+    firstName: "",
+    lastName: "",
+    imageLink: "",
+    email: "",
+    phoneNumber: "",
+    gender: null,
+    citizenIdentification: "",
+    dateOfBirth: "",
+    status: "",
+    workPlaceId: "",
+    createdAt: "",
+    updatedAt: "",
+    role: "",
   },
   {
     cache: {
-      key: "User",
+      key: "sAccount",
     },
   }
 );
