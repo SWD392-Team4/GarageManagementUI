@@ -25,7 +25,7 @@ export default function ListCustomer() {
       let response;
 
       if (params) {
-        response = await searchProduct({ ...params, PageNumber: page });
+        // response = await searchProduct({ ...params, PageNumber: page });
       } else {
         response = await getAllProducts(page);
       }

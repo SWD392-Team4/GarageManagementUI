@@ -52,7 +52,7 @@ export default function ImageProfile() {
     const formData = new FormData();
     formData.append("fileDto", selectedFileRef.current);
     try {
-      const userId = sAccount.value.Id;
+      const userId = sAccount.value.id;
       const response = await userService.sendAjax(
         `/api/users/${userId}/image`,
         "POST",
@@ -87,7 +87,7 @@ export default function ImageProfile() {
       <img
         src={
           preview ||
-          sAccount.value.ImageLink ||
+          sAccount.value.imageLink ||
           "https://static-00.iconduck.com/assets.00/profile-major-icon-512x512-xosjbbdq.png"
         }
         alt="Avatar"

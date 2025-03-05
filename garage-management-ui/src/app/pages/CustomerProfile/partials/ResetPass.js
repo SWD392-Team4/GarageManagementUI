@@ -26,7 +26,7 @@ export default function ResetPass() {
   });
   const handleForgetPassword = async () => {
     try {
-      const email = sAccount.value.Email;
+      const email = sAccount.value.email;
       const result = await userService.sendAjax(
         "/api/auth/forgot-password",
         "POST",

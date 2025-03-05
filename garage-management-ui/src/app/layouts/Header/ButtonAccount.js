@@ -8,9 +8,9 @@ import { sAccount } from "../../pages/AuthCustomer/services/store";
 import { useTranslation } from "react-i18next";
 import { useHandleLogout } from "./service/logout";
 import Notification from "../../pages/Notification/Notification";
-const ssAccountAvatar = sAccount.slice((n) => n.ImageLink);
-const ssAccountLastName = sAccount.slice((n) => n.LastName);
-const ssAccountFirstName = sAccount.slice((n) => n.FirstName);
+const ssAccountAvatar = sAccount.slice((n) => n.imageLink);
+const ssAccountLastName = sAccount.slice((n) => n.lastName);
+const ssAccountFirstName = sAccount.slice((n) => n.firstName);
 
 export default function ButtonAccount() {
   const { t } = useTranslation("bttnSignIn");
