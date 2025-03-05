@@ -28,13 +28,12 @@ export default function PersonalInformation() {
   const validationSchema = getUpdateUserSchema(t);
   // Khởi tạo state profile với giá trị lấy từ store
   const [profile, setProfile] = useState({
-    firstName: sAccount.value.FirstName,
-    lastName: sAccount.value.LastName,
-    dateOfBirth: sAccount.value.DateOfBirth,
-    citizenId: sAccount.value.CitizenIdentification,
-    gender: sAccount.value.Gender, // giá trị boolean
+    firstName: sAccount.value.firstName,
+    lastName: sAccount.value.lastName,
+    dateOfBirth: sAccount.value.dateOfBirth,
+    citizenId: sAccount.value.citizenIdentification,
+    gender: sAccount.value.gender, // giá trị boolean
   });
-
   const {
     register,
     handleSubmit,
@@ -63,11 +62,11 @@ export default function PersonalInformation() {
         setIsEditing(false);
         // Cập nhật dữ liệu vào store
         sAccount.set((v) => {
-          v.value.FirstName = data.firstName;
-          v.value.LastName = data.lastName;
-          v.value.DateOfBirth = data.dateOfBirth;
-          v.value.CitizenId = data.citizenId;
-          v.value.Gender = data.gender;
+          v.value.firstName = data.firstName;
+          v.value.lastName = data.lastName;
+          v.value.dateOfBirth = data.dateOfBirth;
+          v.value.citizenId = data.citizenId;
+          v.value.gender = data.gender;
         });
         // Cập nhật state nội bộ
         setProfile({
@@ -97,7 +96,7 @@ export default function PersonalInformation() {
         lastName: profile.lastName,
         dateOfBirth: profile.dateOfBirth,
         citizenId: profile.citizenId,
-        gender: profile.gender.toString(),
+        gender: profile.gender,
       });
     }
     setIsEditing(!isEditing);
@@ -113,16 +112,16 @@ export default function PersonalInformation() {
             <div>
               {/* Tên người dùng */}
               <h2 className="text-lg font-shadows font-bold text-gray-900">
-                {sAccount.value.FirstName} {sAccount.value.LastName}
+                {sAccount.value.firstName} {sAccount.value.lastName}
               </h2>
               {/* Email hoặc vai trò */}
               <p className="text-sm font-title text-gray-800">
-                {sAccount.value.Email || "alexarowles@gmail.com"}
+                {sAccount.value.email || "alexarowles@gmail.com"}
               </p>
               {/* Role */}
               <p className="text-sm font-title text-gray-800">
                 {" "}
-                {sAccount.value.Role || "alexarowles@gmail.com"}
+                {sAccount.value.role || "alexarowles@gmail.com"}
               </p>
             </div>
           </div>
@@ -191,7 +190,7 @@ export default function PersonalInformation() {
                 </label>
                 <input
                   type="tel"
-                  value={sAccount.value.PhoneNumber}
+                  value={sAccount.value.phoneNumber}
                   className=" p-2 outline-none mt-1 rounded-md  border border-gray-200 w-full"
                   readOnly
                 />
@@ -204,7 +203,7 @@ export default function PersonalInformation() {
                 </label>
                 <input
                   type="text"
-                  value={sAccount.value.Email}
+                  value={sAccount.value.email}
                   className=" p-2 outline-none mt-1 rounded-md  border border-gray-200 w-full"
                   readOnly
                 />
@@ -306,7 +305,7 @@ export default function PersonalInformation() {
               </label>
               <input
                 type="tel"
-                value={sAccount.value.PhoneNumber}
+                value={sAccount.value.phoneNumber}
                 className=" p-2 outline-none mt-1  rounded-md  border border-gray-200 w-full"
                 readOnly
               />
@@ -318,7 +317,7 @@ export default function PersonalInformation() {
               </label>
               <input
                 type="text"
-                value={sAccount.value.Email}
+                value={sAccount.value.email}
                 className=" p-2 outline-none mt-1  rounded-md  border border-gray-200 w-full"
                 readOnly
               />
@@ -329,7 +328,7 @@ export default function PersonalInformation() {
               </label>
               <input
                 type="text"
-                value={formatDate(sAccount.value.DateOfBirth)}
+                value={formatDate(sAccount.value.dateOfBirth)}
                 className=" p-2 outline-none mt-1  rounded-md  border border-gray-200 w-full"
                 readOnly
               />

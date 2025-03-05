@@ -1,5 +1,6 @@
 // pages/Chat/Chat.jsx
 import React from "react";
+import { chatStore } from "./chatStore";
 
 // Import các partial từ file index.js trong partials
 import { ChatSearch, ChatList, ChatContent, ChatMsgForm } from "./partials";

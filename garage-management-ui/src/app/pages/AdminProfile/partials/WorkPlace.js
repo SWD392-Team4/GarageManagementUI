@@ -11,7 +11,7 @@ export default function WorkPlace() {
     const fetchWorkplace = async () => {
       try {
         const response = await userService.sendAjax(
-          `/api/workplaces/${sAccount.value.WorkPlaceId}`,
+          `/api/workplaces/${sAccount.value.workPlaceId}`,
           "GET",
           null,
           true
@@ -94,7 +94,6 @@ export default function WorkPlace() {
       </div>
     ); // Hiển thị khi đang tải dữ liệu
   }
-  console.log("data: ", workPlaceData);
   return (
     <div className="bg-gray-100 shadow-md rounded-lg p-6 border border-gray-300">
       <h2 className="text-lg font-semibold text-gray-900 mb-4">
@@ -105,7 +104,7 @@ export default function WorkPlace() {
           <label className="text-sm text-gray-600">{t("phoneNumber")}</label>
           <input
             type="text"
-            value={workPlaceData.Name}
+            value={workPlaceData.name}
             className="w-full p-2 border rounded-lg mt-1"
             readOnly
           />
@@ -114,7 +113,7 @@ export default function WorkPlace() {
           <label className="text-sm text-gray-600">Phone Number</label>
           <input
             type="tel"
-            value={workPlaceData.PhoneNumber}
+            value={workPlaceData.phoneNumber}
             className="w-full p-2 border rounded-lg mt-1"
             readOnly
           />
@@ -123,7 +122,7 @@ export default function WorkPlace() {
           <label className="text-sm text-gray-600">{t("fullAddress")}</label>
           <input
             type="text"
-            value={workPlaceData.FullAddress}
+            value={workPlaceData.fullAddress}
             className="w-full p-2 border rounded-lg mt-1"
             readOnly
           />
@@ -132,7 +131,7 @@ export default function WorkPlace() {
           <label className="text-sm text-gray-600"> {t("workplaceType")}</label>
           <input
             type="text"
-            value={workPlaceData.WorkplaceType}
+            value={workPlaceData.workplaceType}
             className="w-full p-2 border rounded-lg mt-1"
             readOnly
           />
@@ -141,7 +140,7 @@ export default function WorkPlace() {
           <label className="text-sm text-gray-600">{t("status")}</label>
           <input
             type="text"
-            value={workPlaceData.Status}
+            value={workPlaceData.status}
             className="w-full p-2 border rounded-lg mt-1"
             readOnly
           />
@@ -150,7 +149,7 @@ export default function WorkPlace() {
           <label className="text-sm text-gray-600">{t("createdAt")}</label>
           <input
             type="text"
-            value={new Date(workPlaceData.CreatedAt).toLocaleDateString()}
+            value={new Date(workPlaceData.createdAt).toLocaleDateString()}
             className="w-full p-2 border rounded-lg mt-1"
             readOnly
           />
@@ -159,7 +158,7 @@ export default function WorkPlace() {
           <label className="text-sm text-gray-600">{t("updatedAt")}</label>
           <input
             type="text"
-            value={new Date(workPlaceData.UpdatedAt).toLocaleDateString()}
+            value={new Date(workPlaceData.updatedAt).toLocaleDateString()}
             className="w-full p-2 border rounded-lg mt-1"
             readOnly
           />

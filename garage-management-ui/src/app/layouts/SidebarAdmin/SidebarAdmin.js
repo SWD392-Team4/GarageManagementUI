@@ -25,6 +25,7 @@ import { AiOutlineSchedule } from "react-icons/ai";
 
 import { useMediaQuery } from "react-responsive";
 import LanguageSwitcherSideBar from "../../components/LanguageSwitcherSideBar/LanguageSwitcherSideBar";
+import { useHandleLogout } from "../Header/service/logout";
 
 export default function SideBarAdmin({
   isSidebarOpen,
@@ -38,7 +39,7 @@ export default function SideBarAdmin({
   const [openMenu, setOpenMenu] = useState(null);
 
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
-
+  const handleLogout = useHandleLogout();
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
@@ -457,7 +458,10 @@ export default function SideBarAdmin({
             isSidebarOpen={isSidebarOpen}
             onLanguageChange={onLanguageChange}
           />
-          <button className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg">
+          <button
+            onClick={() => handleLogout()}
+            className="flex items-center w-full p-2 text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 transition-all rounded-lg"
+          >
             <FaSignOutAlt className="mr-2" />{" "}
             {isSidebarOpen && t("sidebar_admin.logout")}
           </button>

@@ -45,17 +45,17 @@ export const fetchAccountProfile = async (userService) => {
       const newUserData = response.data.value;
       // Kiểm tra nếu dữ liệu từ API khác với dữ liệu cache
       if (
-        newUserData.LastName !== sAccount.value.LastName ||
-        newUserData.FirstName !== sAccount.value.FirstName ||
-        newUserData.ImageLink !== sAccount.value.ImageLink ||
-        newUserData.Email !== sAccount.value.Email ||
-        newUserData.PhoneNumber !== sAccount.value.PhoneNumber ||
-        newUserData.Gender !== sAccount.value.Gender ||
-        newUserData.CitizenIdentification !==
-          sAccount.value.CitizenIdentification ||
-        newUserData.DateOfBirth !== sAccount.value.DateOfBirth ||
-        newUserData.Status !== sAccount.value.Status ||
-        newUserData.WorkPlaceId !== sAccount.value.WorkPlaceId
+        newUserData.lastName !== sAccount.value.lastName ||
+        newUserData.firstName !== sAccount.value.firstName ||
+        newUserData.imageLink !== sAccount.value.imageLink ||
+        newUserData.email !== sAccount.value.email ||
+        newUserData.phoneNumber !== sAccount.value.phoneNumber ||
+        newUserData.gender !== sAccount.value.gender ||
+        newUserData.citizenIdentification !==
+          sAccount.value.citizenIdentification ||
+        newUserData.dateOfBirth !== sAccount.value.dateOfBirth ||
+        newUserData.status !== sAccount.value.status ||
+        newUserData.workPlaceId !== sAccount.value.workPlaceId
       ) {
         sAccount.set(newUserData);
       }

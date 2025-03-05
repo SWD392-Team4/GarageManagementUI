@@ -177,82 +177,87 @@
       {
         "path": "dashboard",
         "element": "Dashboard",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "account",
         "element": "ManageAccount",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "account/:id",
         "element": "AccountDetails",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "product",
         "element": "ManageProduct",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "product/create",
         "element": "CreateProduct",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "product/:id",
         "element": "ProductDetails",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "brand",
         "element": "ManageBrand",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "carPart",
         "element": "ManageCarPart",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "carCategory",
         "element": "ManageCarCategory",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "carModal",
         "element": "ManageCarModal",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "carPartCategory",
         "element": "ManageCarPartCate",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "booking",
         "element": "ManageBooking",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "productCategory",
         "element": "ManageCateProduct",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "service/createService",
         "element": "CreateServicePage",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "service",
         "element": "ManageService",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "Chat",
         "element": "Chat",
-        "isSuspense": true
+        "isSuspense2": true
+      },
+      {
+        "path": "manage-customer",
+        "element": "ManageCustomer",
+        "isSuspense2": true
       },
       {
         "path": "appointment",

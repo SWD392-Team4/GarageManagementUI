@@ -1,7 +1,6 @@
 // pages/Chat/partials/ChatList.jsx
 import React from "react";
 import { chatStore } from "../chatStore";
-import { FaUserCircle } from "react-icons/fa";
 
 function ChatList() {
   const handleSwitchChat = (id) => {
@@ -9,15 +8,16 @@ function ChatList() {
       v.value.activeChatId = id;
     });
   };
-
+  // Lấy state & actions từ store
+  const state = chatStore.use();
   return (
     <div className="space-y-1">
-      {chatStore.value.friendList.map((friend) => (
+      {state.friendList.map((friend) => (
         <div className="group">
           <div
             key={friend.id}
             className={`p-2  cursor-pointer group ${
-              friend.id === chatStore.value.activeChatId
+              friend.id === state.activeChatId
                 ? "bg-blue-100/50"
                 : "hover:bg-gray-100"
             }`}

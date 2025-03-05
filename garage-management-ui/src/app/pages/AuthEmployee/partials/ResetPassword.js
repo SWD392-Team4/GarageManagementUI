@@ -4,9 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import resetPasswordImage from "../../../assets/auth/reset-password.png";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ResetSchema } from "../schemas/signInSchema"; // Import schema
+import UserService from "../../../hooks/services/UserService";
+import { useTranslation } from "react-i18next";
 
 export default function ResetPasswordWorker() {
+  const { t } = useTranslation("forgetpass"); // Sử dụng namespace "forgetpass"
   document.title = "RESETPASS WORKER | CLCA | TURBO TRACK";
+  document.title = t("pageTitle");
 
   const {
     register,
@@ -15,25 +19,30 @@ export default function ResetPasswordWorker() {
   } = useForm({
     resolver: yupResolver(ResetSchema),
   });
-
+  const userService = new UserService();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    //   const email = data.email.toLowerCase();
-    //   try {
-    //     const response = await userService.sendAjax(
-    //       "/worker/reset",
-    //       "POST",
-    //       { email },
-    //       false
-    //     );
-    //     if (response.status === 200) {
-    //       userService.showToast(response.status, response.data.msg);
-    //       navigate("/worker");
-    //     }
-    //   } catch (error) {
-    //     userService.showToast(error.status, error.message);
-    //   }
+    try {
+      const result = await userService.sendAjax(
+        "/api/auth/forgot-password",
+        "POST",
+        data,
+        false
+      );
+
+      if (result) {
+        userService.showToast(result.status, t("successMessage"));
+        navigate("/worker");
+      } else {
+        userService.showToast(
+          result.status,
+          result.message || t("errorMessage")
+        );
+      }
+    } catch (error) {
+      userService.showToast(error.status, t("errorMessage"));
+    }
   };
 
   return (
