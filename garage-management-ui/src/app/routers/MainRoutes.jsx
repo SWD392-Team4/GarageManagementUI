@@ -119,6 +119,7 @@ const componentMap = {
   CustomerPackageDetail: lazy(() =>
     import("../pages/CustomerPackage/CustomerPackageDetail")
   ),
+  ManageCustomer: lazy(() => import("../pages/ManageCustomer/ManageCustomer")),
 };
 const generateRoutes = (routes) => {
   return routes.map((route, index) => {

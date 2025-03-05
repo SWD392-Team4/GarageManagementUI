@@ -26,10 +26,13 @@ const LanguageSwitcher = () => {
       {/* Nút chính */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center px-4 py-2  bg-gray-100/20 text-white rounded-lg shadow-md hover:bg-gray-100/50 focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
+        className="flex justify-between items-center px-4 py-2 md:w-40 w-20 bg-gray-100/20 text-white rounded-lg shadow-md hover:bg-gray-100/50 focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
       >
         <span className={`fi fi-${currentLanguage.flag} mr-2`}></span>
-        <span>{currentLanguage.label}</span>
+
+        <div className="hidden md:block">
+          <span>{currentLanguage.label}</span>
+        </div>
         <svg
           className="w-4 h-4 ml-2"
           xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +51,7 @@ const LanguageSwitcher = () => {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-48 bg-black/60 rounded-lg shadow-lg z-50 border border-gray-200">
+        <div className="absolute left-0 mt-2 md:w-40 w-20 bg-black/60 rounded-lg shadow-lg z-50 border border-gray-200">
           {languages.map((lang) => (
             <button
               key={lang.code}
@@ -58,7 +61,7 @@ const LanguageSwitcher = () => {
               }`}
             >
               <span className={`fi fi-${lang.flag} mr-2`}></span>
-              {lang.label}
+              <div className="hidden md:block">{lang.label}</div>
             </button>
           ))}
         </div>

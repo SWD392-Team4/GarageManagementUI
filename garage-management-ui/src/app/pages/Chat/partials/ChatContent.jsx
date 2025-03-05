@@ -4,8 +4,10 @@ import { chatStore } from "../chatStore";
 import "./ChatContent.css"; // import file CSS thuần
 
 function ChatContent() {
-  const activeChatId = chatStore.value.activeChatId;
-  const messages = chatStore.value.messages[activeChatId] || [];
+  const state = chatStore.use();
+
+  const activeChatId = state.activeChatId;
+  const messages = state.messages[activeChatId] || [];
 
   if (!messages || messages.length === 0) {
     return <div className="text-gray-400">No messages</div>;

@@ -252,7 +252,12 @@
       {
         "path": "Chat",
         "element": "Chat",
-        "isSuspense": true
+        "isSuspense1": true
+      },
+      {
+        "path": "manage-customer",
+        "element": "ManageCustomer",
+        "isSuspense1": true
       },
       {
         "path": "appointment",

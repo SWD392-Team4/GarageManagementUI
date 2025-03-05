@@ -5,6 +5,7 @@ import { FaPhone } from "react-icons/fa6";
 import "./TextHoverAnimation.scss";
 import ButtonAccount from "./ButtonAccount";
 import { Link } from "react-router-dom";
+import Notification from "../../pages/Notification/Notification";
 const Header = () => {
   const { t } = useTranslation("ver1");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -72,11 +73,13 @@ const Header = () => {
             {/* Menu Items */}
             <ul
               className={`${
-                isMenuOpen ? "flex animate-slide-down" : "hidden"
-              } absolute z-20 top-24 left-0 w-full backdrop-blur-sm bg-black/50 shadow-lg text-white font-bold font-title text-base p-4 lg:hidden justify-evenly transition-all duration-500`}
+                isMenuOpen
+                  ? "grid grid-cols-3 gap-4 animate-slide-down"
+                  : "hidden"
+              } absolute z-20 top-24 left-0 w-full backdrop-blur-sm bg-black/50 shadow-lg text-white font-bold font-title text-base p-4 lg:hidden transition-all duration-500`}
             >
               {Object.entries(menuItems).map(([key, path]) => (
-                <li key={key} className="hover:text-red-500">
+                <li key={key} className="hover:text-red-500 text-center">
                   <Link
                     href={`${path}`}
                     className="text-hover-animaiton hover:text-red-500"
@@ -94,18 +97,11 @@ const Header = () => {
             </ul>
 
             {/* Contact + Menu Button */}
-            <div className="flex items-center space-x-6">
-              <a
-                href="tel:1-800-915-6271"
-                className="lg:flex items-center space-x-2 text-base text-white hover:text-red-500 hidden "
-              >
-                <div className="bg-red-500 p-2 rounded-full text-white">
-                  <FaPhone />
-                </div>
-                <span>1-800-915-6271</span>
-              </a>
+            <div className="flex items-center space-x-2 md:space-x-3">
               <LanguageSwitcher />
+
               <ButtonAccount />
+
               <div>
                 {/* Hamburger Menu */}
                 <button
