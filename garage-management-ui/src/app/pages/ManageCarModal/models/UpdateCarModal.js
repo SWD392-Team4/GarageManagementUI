@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUpdated }) {
-  console.log("check thong tin model year: ", carModel);
+  console.log("check thong tin car model: ", carModel);
 
   const [formData, setFormData] = useState({
     id: "",

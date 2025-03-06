@@ -2,18 +2,16 @@ import { signify } from "react-signify";
 
 export const sService = signify(
     {
-        Id: "",
-        ServiceName: "",
-        ServiceCategory: "",
-        PartName: "",
-        Category: "",
-        Price: "",
-        WorkNature: "",
-        Action: "",
-        Description: "",
-        ImageLink: [],
-        EstimatedHours: "",
-        Status: "",
+        id: "",
+        serviceName: "",
+        serviceCategory: "",
+        partName: "",
+        category: "",
+        price: "",
+        workNature: "",
+        action: "",
+        estimatedHours: "",
+        status: "",
     },
     {
         cache: {

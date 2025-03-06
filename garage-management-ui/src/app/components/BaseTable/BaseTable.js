@@ -64,12 +64,15 @@ export default function BaseTable({
                   <tr className="bg-green-200">
                     {columns.map((column, colIndex) => (
                       <td key={`signify-${colIndex}`} className="border p-3 text-sm">
-                        {signifyInformation[column.accessorKey] || "-"}
+                        {column.accessorKey === "id"
+                          ? "0" // Hiển thị index thay vì ID
+                          : signifyInformation[column.accessorKey] || "-"}
                       </td>
                     ))}
                     {actions && <td className="border p-3 text-sm">-</td>}
                   </tr>
                 )}
+
 
 
 

@@ -1,5 +1,6 @@
 import UserService from "../../../hooks/services/UserService";
 import { formatDate } from "../schemas/ProductValid";
+import { sProduct } from "./ProductSignify"
 
 const userService = new UserService();
 
@@ -55,6 +56,30 @@ export const updateProduct = async (productId, productData, fileImage) => {
             productData,
             true
         );
+        //Clear thong tin singify
+        sProduct.set((pre) => ([
+            pre.value.id = "",
+            pre.value.productName = "",
+            pre.value.productBarcode = "",
+            pre.value.productPrice = "",
+            pre.value.status = "",
+            pre.value.createdAt = "",
+            pre.value.updatedAt = "",
+        ]));
+        //Parse thong tin
+        productData.productName = <>{productData.productName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+
+        //Gan thong tin signify
+        sProduct.set((pre) => ([
+            pre.value.id = productId,
+            pre.value.productName = productData.productName,
+            pre.value.productBarcode = productData.productBarcode,
+            pre.value.productPrice = productData.productPrice,
+            pre.value.status = productData.status,
+            pre.value.createdAt = productData.createdAt,
+            pre.value.updatedAt = productData.updatedAt,
+        ]));
+
         //xu ly file
         if (fileImage != null) {
             await createProductImage(productId, fileImage);
@@ -78,6 +103,24 @@ export const createProduct = async (productData, FormData) => {
         if (FormData != null) {
             await createProductImage(response.data.value.id, FormData);
         }
+
+        //Clear thong tin singify
+        sProduct.set((pre) => ([
+            pre.value.id = "",
+            pre.value.productName = "",
+            pre.value.productBarcode = "",
+            pre.value.productPrice = "",
+            pre.value.status = "",
+            pre.value.createdAt = "",
+            pre.value.updatedAt = "",
+        ]));
+        //parse thong tin signify
+        response.data.value.productName = <>{response.data.value.productName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+        response.data.value.createdAt = formatDate(response.data.value.createdAt);
+        response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
+        //gan vao signify
+        sProduct.set(response.data.value);
+
 
 
         userService.showToast(200, "Create Product Successfull");

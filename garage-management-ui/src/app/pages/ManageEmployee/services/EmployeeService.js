@@ -6,7 +6,7 @@ const userService = new UserService();
 export const getAllEmployee = async (PageNumber = 1) => {
     try {
         const response = await userService.sendAjax(
-            `/api/users/employees?PageNumber${PageNumber}`,
+            `/api/users/employees?PageNumber=${PageNumber}`,
             "GET",
             null,
             true
@@ -61,7 +61,7 @@ export const searchEmployee = async (params) => {
 export const getEmployeeDetail = async (employeeId) => {
     try {
         const response = await userService.sendAjax(
-            `/api/users/employees${employeeId}`,
+            `/api/users/employees/${employeeId}`,
             "GET",
             null,
             true
@@ -109,15 +109,12 @@ export const createEmployee = async (employeeData) => {
             employeeData,
             true,
         );
-        if (response.status == 200) {
-            userService.showToast(200, "Created Employee Succesful");
-            return response;
-        } else {
-            userService.showToast(400, "Created Employee Fail");
-            return null;
-        }
+        userService.showToast(200, "Created Employee Succesful");
+        return response;
+
 
     } catch (error) {
+        userService.showToast(400, "Created Employee Fail");
         console.error("Fail to create employee");
     }
 }

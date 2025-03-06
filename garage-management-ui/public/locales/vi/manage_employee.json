@@ -40,6 +40,7 @@
         "status": "Trạng thái",
         "createdAt": "Ngày tạo",
         "updatedAt": "Ngày cập nhật",
-        "select_workplace": "Chọn nơi làm việc"
+        "select_workplace": "Chọn nơi làm việc",
+        "select_role": " Chọn chức vụ"
     }
 }

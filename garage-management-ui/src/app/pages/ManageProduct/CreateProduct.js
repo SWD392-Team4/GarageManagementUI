@@ -117,17 +117,7 @@ export default function CreateProduct() {
                     <input {...register("name")} className="border rounded p-2 w-full" required />
                 </div>
 
-                {/* category product */}
-                {/* <div>
-                    <label className="block text-gray-700 font-semibold">{t("create_product.category")}</label>
-                    <select {...register("category")} className="border rounded p-2 w-full" required>
-                        <option value="">{t("create_product.select_category")}</option>
-                        {categories.map((cat) => (
-                            <option key={cat.id} value={cat.id}>{cat.category}</option>
-                        ))}
-                    </select>
-                </div> */}
-                {/* Test select product category */}
+                {/*Select product category */}
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.category")}</label>
                     <AsyncSelect
@@ -156,16 +146,6 @@ export default function CreateProduct() {
                 </div>
 
                 {/* Brands */}
-                {/* <div>
-                    <label className="block text-gray-700 font-semibold">{t("create_product.brand")}</label>
-                    <select {...register("brand")} className="border rounded p-2 w-full" required>
-                        <option value="">{t("create_product.select_brand")}</option>
-                        {brands.map((brand) => (
-                            <option key={brand.id} value={brand.id}>{brand.brandName}</option>
-                        ))}
-                    </select>
-                </div> */}
-                {/* Test select Brands */}
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.brand")}</label>
                     <AsyncSelect
