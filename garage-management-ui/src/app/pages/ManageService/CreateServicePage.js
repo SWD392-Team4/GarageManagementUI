@@ -63,18 +63,15 @@ export default function CreateServicePage() {
 
     setPayload(formData);
 
-    const response = await createService(formData);
-    if (response.data) {
-      console.log("Service created successfully", response);
-
-      if (selectedImages.length > 0) {
-        const imageFormData = new FormData();
-        selectedImages.forEach((image) => {
-          imageFormData.append("images", image);
-        });
-        await createServiceImage(response.data.id, imageFormData);
-      }
+    let imageFormData = null;
+    if (selectedImages.length > 0) {
+      imageFormData = new FormData();
+      selectedImages.forEach((image) => {
+        imageFormData.append("images", image);
+      });
     }
+    await createService(formData, imageFormData);
+
   };
 
   return (
@@ -92,7 +89,7 @@ export default function CreateServicePage() {
             <select {...register("CarCategoryName", { required: t("errors.car_category") })} className="border p-2 w-full">
               <option value="">{t("form.select_car_category")}</option>
               {carCategories.map((category) => (
-                <option key={category.Id} value={category.Id}>{category.PartCategory}</option>
+                <option key={category.id} value={category.id}>{category.category}</option>
               ))}
             </select>
             {errors.CarCategoryName && <p className="text-red-500 text-sm">{errors.CarCategoryName.message}</p>}
@@ -102,7 +99,7 @@ export default function CreateServicePage() {
             <select {...register("CarPartName", { required: t("errors.car_part") })} className="border p-2 w-full">
               <option value="">{t("form.select_car_part")}</option>
               {carParts.map((part) => (
-                <option key={part.Id} value={part.Id}>{part.PartName}</option>
+                <option key={part.id} value={part.id}>{part.partName}</option>
               ))}
             </select>
             {errors.CarPartName && <p className="text-red-500 text-sm">{errors.CarPartName.message}</p>}

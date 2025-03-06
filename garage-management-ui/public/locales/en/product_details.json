@@ -30,6 +30,7 @@
         "back": "Back to Product List",
         "not_found": "Product not found",
         "edit": "Edit",
-        "save": "Save"
+        "save": "Save",
+        "saving": "Saving"
     }
 }

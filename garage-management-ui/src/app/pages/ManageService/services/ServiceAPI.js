@@ -53,7 +53,7 @@ export const searchService = async (params) => {
     }
 }
 
-export const createService = async (data) => {
+export const createService = async (data, formData) => {
     try {
         const response = await userService.sendAjax(
             "/api/services",
@@ -61,16 +61,15 @@ export const createService = async (data) => {
             data,
             true
         );
-
-        if (response.data.value != null) {
-            userService.showToast(200, "Create Service Successful")
-            return response;
-        } else {
-            userService.showToast(400, "Create Service Fail")
-            return null;
+        if (formData) {
+            await createServiceImage(response.data.id, formData);
         }
+        userService.showToast(200, "Create Service Successful");
+        return response;
+
     } catch (error) {
         console.log("Fail to create service: ", error.message);
+        userService.showToast(400, "Create Service Fail", error.description);
     }
 }
 
@@ -83,13 +82,10 @@ export const createServiceImage = async (serviceId, FormData) => {
             true,
             true
         );
-        if (response == 200) {
-            return response;
-        } else {
-            console.error("Fail to Upload: ", response.description);
-            return null;
-        }
+        return response;
+
     } catch (error) {
+        console.log("Error: ", error.message);
     }
 }
 

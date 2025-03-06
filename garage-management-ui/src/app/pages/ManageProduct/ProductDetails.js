@@ -16,6 +16,7 @@ export default function ProductDetails() {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
+  const [imageFiles, setImageFiles] = useState([]);
 
 
   const fetchData = async () => {
@@ -32,9 +33,9 @@ export default function ProductDetails() {
           productName: productData.productName,
           productBarcode: productData.productBarcode,
           productDescription: productData.productDescription,
-          productCategoryId: categoryData?.data?.value.find(cat => cat.category === productData.category)?.Id || "",
-          brandId: brandData?.data?.value.find(brand => brand.brandName === productData.brandName)?.Id || "",
-          link: productData.imageLink,
+          productCategoryId: categoryData?.data?.value.find(cat => cat.category === productData.category)?.id || "",
+          brandId: brandData?.data?.value.find(brand => brand.brandName === productData.brandName)?.id || "",
+          imageLink: productData.imageLink,
           productPrice: productData.productPrice,
           status: productData.status
         });
@@ -59,9 +60,9 @@ export default function ProductDetails() {
       productName: product?.productName ?? "",
       productBarcode: product?.productBarcode ?? "",
       productDescription: product?.productDescription ?? "",
-      productCategoryId: categories.find(cat => cat.category === product.category)?.Id || "",
-      brandId: brands.find(brand => brand.brandName === product.brandName)?.Id || "",
-      link: product?.imageLink ?? "",
+      productCategoryId: categories.find(cat => cat.category === product.category)?.id || "",
+      brandId: brands.find(brand => brand.brandName === product.brandName)?.id || "",
+      imageLink: product?.imageLink ?? "",
       productPrice: product?.productPrice ?? 0,
       status: product?.status ?? "active"
     });
@@ -81,7 +82,17 @@ export default function ProductDetails() {
     setLoading(true);
 
     try {
-      const response = await updateProduct(id, formData);
+      //check file moi 
+      let imageFormData = null;
+      if (imageFiles.length > 0) {
+        imageFormData = new FormData();
+        imageFiles.forEach((image) => {
+          imageFormData.append("fileDtos", image);
+        });
+      }
+
+      //goi api
+      await updateProduct(id, formData, imageFormData);
       fetchData();
       setIsEditing(false);
     } catch (error) {
@@ -103,31 +114,40 @@ export default function ProductDetails() {
       {product ? (
         <>
           <div className="flex flex-col lg:flex-row gap-6">
-            <div className="flex-1 flex justify-center items-center flex-col">
-              {isEditing ? (
-                <>
-                  <input
-                    type="text"
-                    name="link"
-                    value={formData.link ?? ""}
-                    onChange={handleChange}
-                    className="border p-2 rounded w-full mb-2"
-                    placeholder={t("product_details.image_link")}
-                  />
-                  <img
-                    src={formData.link || "/images/placeholder.png"}
-                    alt="Preview"
-                    className="max-w-sm w-full h-auto rounded-lg shadow-lg"
-                  />
-                </>
-              ) : (
+            {/* Image Product */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {formData.imageLink?.map((img, index) => (
                 <img
-                  src={product.imageLink || "/images/placeholder.png"}
-                  alt={product.productName}
-                  className="max-w-sm w-full h-auto rounded-lg shadow-lg"
+                  key={index}
+                  src={img}
+                  alt={`Preview ${index + 1}`}
+                  className="w-full h-auto rounded-lg shadow-lg object-cover"
                 />
-              )}
+              ))}
             </div>
+
+            {isEditing && (
+              <div className="mt-4">
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={(e) => {
+                    const files = [...e.target.files];
+                    setImageFiles(files);
+
+                    // Hiển thị preview ảnh ngay lập tức
+                    const previews = files.map(file => URL.createObjectURL(file));
+                    setFormData(prev => ({
+                      ...prev,
+                      imageLink: [...(prev.imageLink || []), ...previews]
+                    }));
+                  }}
+                  className="border p-2 rounded w-full"
+                />
+              </div>
+            )}
+
 
             <div className="flex-1" data-color-mode="light">
               <h1 className="text-3xl font-bold mb-4">

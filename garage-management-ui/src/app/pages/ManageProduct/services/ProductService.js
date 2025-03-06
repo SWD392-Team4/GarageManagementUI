@@ -47,7 +47,7 @@ export const getProduct = async (productId) => {
     }
 };
 
-export const updateProduct = async (productId, productData) => {
+export const updateProduct = async (productId, productData, fileImage) => {
     try {
         const response = await userService.sendAjax(
             `/api/products/${productId}`,
@@ -55,6 +55,10 @@ export const updateProduct = async (productId, productData) => {
             productData,
             true
         );
+        //xu ly file
+        if (fileImage != null) {
+            await createProductImage(productId, fileImage);
+        }
         userService.showToast(200, "Update Successfull");
         return response;
     } catch (error) {
@@ -63,7 +67,7 @@ export const updateProduct = async (productId, productData) => {
     }
 };
 
-export const createProduct = async (productData) => {
+export const createProduct = async (productData, FormData) => {
     try {
         const response = await userService.sendAjax(
             `/api/products`,
@@ -71,6 +75,12 @@ export const createProduct = async (productData) => {
             productData,
             true
         );
+        if (FormData != null) {
+            await createProductImage(response.data.value.id, FormData);
+        }
+
+
+        userService.showToast(200, "Create Product Successfull");
         return response;
     } catch (error) {
         console.error("Lỗi khi tạo sản phẩm: ", error);
@@ -88,12 +98,7 @@ export const createProductImage = async (productId, FormData) => {
             true,
             true
         );
-        if (response.data) {
-            return response;
-        } else {
-            console.error("Fail to Upload: ", response.description);
-            return null;
-        }
+        return response;
     } catch (error) {
         console.error("Fail to upload image: ", error.message);
     }
@@ -127,7 +132,11 @@ export const searchProduct = async (params) => {
 
 export const getAllCategory = async () => {
     try {
-        const response = await userService.sendAjax("/api/product/categories", "GET", null, true);
+        const response = await userService.sendAjax(
+            "/api/product/categories?PageNumber=0&Fields=id%2C%20category",
+            "GET",
+            null,
+            true);
 
         if (response != null) {
             return response;
@@ -144,7 +153,7 @@ export const getAllCategory = async () => {
 export const getAllBrand = async () => {
     try {
         const response = await userService.sendAjax(
-            `/api/brands`,
+            `/api/brands?&PageSize=0&Fields=id%2C%20brandName`,
             "GET",
             null,
             true
@@ -154,7 +163,7 @@ export const getAllBrand = async () => {
             return response;
         } else {
             console.error(`Error: Received status ${response.error}`);
-            return null;
+            return [];
         }
     } catch (error) {
         console.error("Error fetching brands: ", error);
