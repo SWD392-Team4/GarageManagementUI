@@ -119,15 +119,40 @@ export const updateService = async (serviceId, updateData) => {
             updateData,
             true
         );
-        if (response.status == 200) {
-            userService.showToast(200, "Updated Service Successful");
-            return response;
-        } else {
-            userService.showToast(400, "Updated Service Fail");
-            return null;
-        }
+        //clear signify
+        sService.set((pre) => ([
+            pre.value.id = "",
+            pre.value.serviceName = "",
+            pre.value.serviceCategory = "",
+            pre.value.partName = "",
+            pre.value.category = "",
+            pre.value.price = "",
+            pre.value.workNature = "",
+            pre.value.action = "",
+            pre.value.estimatedHours = "",
+            pre.value.status = "",
+        ]))
+        //parse thong tin xiu
+        updateData.serviceName = <>{updateData.serviceName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
+        //gan siginify
+        sService.set((pre) => ([
+            pre.value.id = serviceId,
+            pre.value.serviceName = updateData.serviceName,
+            pre.value.serviceCategory = updateData.serviceCategory,
+            pre.value.partName = updateData.carPartName,
+            pre.value.category = updateData.carCategoryName,
+            pre.value.price = updateData.servicePrice,
+            pre.value.workNature = updateData.workNature,
+            pre.value.action = updateData.action,
+            pre.value.estimatedHours = updateData.estimatedHours,
+            pre.value.status = updateData.status,
+        ]))
+
+        userService.showToast(200, "Updated Service Successful");
+        return response;
 
     } catch (error) {
+        userService.showToast(400, "Updated Service Fail");
         console.error("Fail to updated service: ", error.message);
     }
 

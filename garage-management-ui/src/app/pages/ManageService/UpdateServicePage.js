@@ -55,6 +55,9 @@ export default function UpdateServicePage() {
                 setValue("ServicePrice", serviceData.price);
                 setValue("Description", serviceData.description);
                 setValue("Status", serviceData.status);
+                // Cập nhật cả tên Car Part và Car Category
+                setValue("CarPartNameDisplay", serviceData.partName || carParts.find((part) => part.id === serviceData.partId)?.partName);
+                setValue("CarCategoryDisplay", serviceData.category || carCategories.find((category) => category.id === serviceData.categoryId)?.category);
 
                 // Chuyển imageLink thành mảng để hiển thị
                 if (serviceData.imageLink) {
@@ -99,7 +102,9 @@ export default function UpdateServicePage() {
                 description: data.Description,
                 estimatedHours: data.EstimatedHours,
                 carPartId: data.CarPartName,
+                carPartName: carParts.find((part) => part.id === data.CarPartName)?.partName || "",
                 carCategoryId: data.CarCategory,
+                carCategoryName: carCategories.find((category) => category.id === data.CarCategory)?.category || "", // Tên danh mục xe
                 status: data.Status
             };
 
@@ -187,7 +192,7 @@ export default function UpdateServicePage() {
                         <select {...register("CarPartName", { required: "Tên phụ tùng là bắt buộc" })} className="border p-2 w-full" disabled={!isEditing}>
                             {service && (
                                 <option value={service.partId}>
-                                    {carParts.find((part) => part.id === service.partId)?.partName || service.partName}
+                                    {service.partName || carParts.find((part) => part.id === service.partId)?.partName}
                                 </option>
                             )}
                             {carParts.map((part) => (
@@ -199,13 +204,14 @@ export default function UpdateServicePage() {
                         {errors.CarPartName && <p className="text-red-500 text-sm">{errors.CarPartName.message}</p>}
                     </div>
 
+
                     {/* Select Car Category */}
                     <div>
                         <label className="block text-gray-700 font-semibold">Car Category</label>
                         <select {...register("CarCategory", { required: "Danh mục xe là bắt buộc" })} className="border p-2 w-full" disabled={!isEditing}>
                             {service && (
                                 <option value={service.categoryId}>
-                                    {carCategories.find((category) => category.id === service.categoryId)?.partCategory || service.category}
+                                    {service.category || carCategories.find((category) => category.id === service.categoryId)?.category}
                                 </option>
                             )}
                             {carCategories.map((category) => (
@@ -216,6 +222,7 @@ export default function UpdateServicePage() {
                         </select>
                         {errors.CarCategory && <p className="text-red-500 text-sm">{errors.CarCategory.message}</p>}
                     </div>
+
 
 
                     {/* Select Action */}
