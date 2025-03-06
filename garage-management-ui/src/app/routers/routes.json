@@ -147,9 +147,7 @@
     "path": "/customer",
     "element": "LayoutCustomer",
     "private": {
-      "allowedRoles": [
-        "Customer"
-      ]
+      "allowedRoles": ["Customer"]
     },
     "isSuspense": true,
     "children": [
@@ -164,12 +162,208 @@
     ]
   },
   {
+    "path": "/Mechanic",
+    "element": "LayoutMechanic",
+    "private": {
+      "allowedRoles": ["Administrator", "Mechanic"]
+    },
+    "isSuspense": true,
+    "children": [
+      {
+        "index": true,
+        "element": "AdminProfile",
+        "isSuspense2": true
+      },
+      {
+        "path": "Chat",
+        "element": "Chat",
+        "isSuspense2": true
+      },
+      {
+        "path": "appointment-mine",
+        "element": "MechanicManageAppointment",
+        "isSuspense": true,
+        "children": [
+          {
+            "index": true,
+            "element": "AppoinmentList"
+          },
+          {
+            "path": "detail/:id",
+            "element": "MechanicDashboard",
+            "isSuspense2": true
+          }
+        ]
+      }
+    ]
+  },
+
+  {
     "path": "/admin",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": [
-        "Administrator"
-      ]
+      "allowedRoles": ["Administrator"]
+    },
+    "isSuspense": true,
+    "children": [
+      {
+        "index": true,
+        "element": "AdminProfile",
+        "isSuspense2": true
+      },
+      {
+        "path": "dashboard",
+        "element": "Dashboard",
+        "isSuspense2": true
+      },
+      {
+        "path": "suppliers",
+        "element": "ManageSupplier",
+        "isSuspense2": true
+      },
+      {
+        "path": "suppliers-contact",
+        "element": "ManageSupplierContact",
+        "isSuspense2": true
+      },
+      {
+        "path": "employee",
+        "element": "ManageEmployee",
+        "isSuspense2": true
+      },
+      {
+        "path": "product",
+        "element": "ManageProduct",
+        "isSuspense2": true
+      },
+      {
+        "path": "product/create",
+        "element": "CreateProduct",
+        "isSuspense2": true
+      },
+      {
+        "path": "product/:id",
+        "element": "ProductDetails",
+        "isSuspense2": true
+      },
+      {
+        "path": "brand",
+        "element": "ManageBrand",
+        "isSuspense2": true
+      },
+      {
+        "path": "carPart",
+        "element": "ManageCarPart",
+        "isSuspense2": true
+      },
+      {
+        "path": "carCategory",
+        "element": "ManageCarCategory",
+        "isSuspense2": true
+      },
+      {
+        "path": "carModal",
+        "element": "ManageCarModal",
+        "isSuspense2": true
+      },
+      {
+        "path": "carPartCategory",
+        "element": "ManageCarPartCate",
+        "isSuspense2": true
+      },
+      {
+        "path": "booking",
+        "element": "ManageBooking",
+        "isSuspense2": true
+      },
+      {
+        "path": "productCategory",
+        "element": "ManageCateProduct",
+        "isSuspense2": true
+      },
+      {
+        "path": "service/createService",
+        "element": "CreateServicePage",
+        "isSuspense2": true
+      },
+      {
+        "path": "service/:id",
+        "element": "UpdateServicePage",
+        "isSuspense2": true
+      },
+      {
+        "path": "service",
+        "element": "ManageService",
+        "isSuspense2": true
+      },
+      {
+        "path": "Chat",
+        "element": "Chat",
+        "isSuspense2": true
+      },
+      {
+        "path": "manage-customer",
+        "element": "ManageCustomer",
+        "isSuspense2": true
+      },
+      {
+        "path": "appointment",
+        "element": "LayoutAppointment",
+        "isSuspense": true,
+        "children": [
+          {
+            "index": true,
+            "element": "AllAppointment"
+          },
+          {
+            "path": "waiting",
+            "element": "Waiting",
+            "isSuspense": true
+          },
+          {
+            "path": "in-progress",
+            "element": "InProgess",
+            "isSuspense": true
+          },
+          {
+            "path": "completed",
+            "element": "Completed",
+            "isSuspense": true
+          },
+          {
+            "path": "canceled",
+            "element": "Canceled",
+            "isSuspense": true
+          }
+        ]
+      },
+      {
+        "path": "appointment/:id",
+        "element": "appointmentDetail"
+      },
+      {
+        "path": "appointment-mine",
+        "element": "MechanicManageAppointment",
+        "isSuspense": true,
+        "children": [
+          {
+            "index": true,
+            "element": "AppoinmentList"
+          },
+          {
+            "path": "detail/:id",
+            "element": "MechanicDashboard",
+            "isSuspense2": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/Cashier",
+    "element": "LayoutCashier",
+    "private": {
+      "allowedRoles": ["Administrator", "Cashier"]
     },
     "isSuspense": true,
     "children": [

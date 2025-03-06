@@ -14,6 +14,11 @@ const componentMap = {
   LayoutAuthenCustomer: lazy(() =>
     import("../layouts/LayoutLoginCustomer/LayoutAuthenCustomer")
   ),
+  LayoutMechanic: lazy(() =>
+    import("../layouts/LayoutMechanic/LayoutMechanic")
+  ),
+  LayoutCashier: lazy(() => import("../layouts/LayoutCashier/LayoutCashier")),
+
   Mision: lazy(() => import("../pages/AboutUs/partials/Mision")),
   History: lazy(() => import("../pages/AboutUs/partials/History")),
   Vision: lazy(() => import("../pages/AboutUs/partials/Vision")),
@@ -54,14 +59,20 @@ const componentMap = {
 
   ManageEmployee: lazy(() => import("../pages/ManageEmployee/ManageEmployee")),
   ManageSupplier: lazy(() => import("../pages/ManageSupplier/ManageSupplier")),
-  ManageSupplierContact: lazy(() => import("../pages/ManageSupplierContact/ManageSupplierContact")),
+  ManageSupplierContact: lazy(() =>
+    import("../pages/ManageSupplierContact/ManageSupplierContact")
+  ),
   ManageProduct: lazy(() => import("../pages/ManageProduct/ManageProduct")),
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
   ManageService: lazy(() => import("../pages/ManageService/ManageService")),
-  ManageCarPartCate: lazy(() => import("../pages/ManageCarPartCate/ManageCarPartCate")),
-  UpdateServicePage: lazy(() => import("../pages/ManageService/UpdateServicePage")),
+  ManageCarPartCate: lazy(() =>
+    import("../pages/ManageCarPartCate/ManageCarPartCate")
+  ),
+  UpdateServicePage: lazy(() =>
+    import("../pages/ManageService/UpdateServicePage")
+  ),
   CreateServicePage: lazy(() =>
     import("../pages/ManageService/CreateServicePage")
   ),

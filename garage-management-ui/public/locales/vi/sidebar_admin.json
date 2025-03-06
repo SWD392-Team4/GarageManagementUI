@@ -29,6 +29,8 @@
     "service": "Dịch Vụ",
     "employee": "Nhân Viên",
     "employee_list": "Danh sách nhân viên",
-    "employee_schedule": "Lịch"
+    "employee_schedule": "Lịch",
+    "extension": "Tiện ích",
+    "extension-sub1": "Xem sản phẩm"
   }
 }

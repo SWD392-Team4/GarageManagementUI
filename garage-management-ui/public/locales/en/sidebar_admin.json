@@ -32,6 +32,8 @@
     "employee_schedule": "Employee Schedule",
     "suppliers": "Suppliers",
     "supplier_list": "Supplier List",
-    "supplier_contact": "Supplier Contact"
+    "supplier_contact": "Supplier Contact",
+    "extension": "Extension",
+    "extension-sub1": "View products"
   }
 }

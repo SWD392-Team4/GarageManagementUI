@@ -1,17 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import SideBarAdmin from "../SidebarAdmin/SidebarAdmin";
+import SidebarMechanic from "../SidebarMechanic/SidebarMechanic";
 
-export default function LayoutAdminHome() {
-  const { i18n } = useTranslation();
+export default function LayoutMechanic() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-
-  useEffect(() => {}, [i18n.language]);
 
   return (
     <div className="flex min-h-screen">
-      <SideBarAdmin
+      <SidebarMechanic
         isSidebarOpen={isSidebarOpen}
         toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
       />

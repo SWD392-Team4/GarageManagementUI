@@ -39,28 +39,17 @@ import { useMediaQuery } from "react-responsive";
 import LanguageSwitcherSideBar from "../../components/LanguageSwitcherSideBar/LanguageSwitcherSideBar";
 import { useHandleLogout } from "../Header/service/logout";
 
-export default function SideBarAdmin({
+export default function SidebarCashier({
   isSidebarOpen,
   toggleSidebar,
   onLanguageChange,
 }) {
   const { t } = useTranslation("sidebar_admin");
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem("theme") === "dark"
-  );
+
   const [openMenu, setOpenMenu] = useState(null);
 
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const handleLogout = useHandleLogout();
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDarkMode]);
 
   // Đóng tất cả submenu khi sidebar đóng
   useEffect(() => {
