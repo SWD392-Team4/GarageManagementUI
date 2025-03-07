@@ -86,3 +86,38 @@ export const creatSupplier = async (supplierData) => {
         throw error;
     }
 }
+
+export const updateSupplier = async (supplierId, updateData) => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/suppliers/${supplierId}`,
+            "PUT",
+            updateData,
+            true
+        );
+        userService.showToast(200, "Update Supplier Successful");
+        return response;
+    } catch (error) {
+        userService.showToast(400, "Updated Supplier Fail");
+        console.error("Error with: ", error.message);
+    }
+}
+
+
+export const getSupplierDetails = async (supplierId) => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/suppliers/${supplierId}`,
+            "GET",
+            null,
+            true
+        );
+
+        userService.showToast(200, "Get Supplier details succesful")
+        return response
+    } catch (error) {
+        userService.showToast(400, "Get Suppliers details fail");
+        console.error("Fail to Loading with: ", error.message);
+    }
+
+}

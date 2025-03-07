@@ -141,17 +141,6 @@ export default function UpdateServicePage() {
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-xl font-semibold">Cập nhật dịch vụ</h2>
 
-                {/* Nút Chỉnh sửa bên ngoài form */}
-                {!isEditing && (
-                    <button
-                        type="button"
-                        className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 flex items-center gap-2"
-                        onClick={() => setIsEditing(true)}
-                    >
-                        <FaEdit />
-                        Chỉnh sửa
-                    </button>
-                )}
             </div>
 
 
@@ -336,6 +325,19 @@ export default function UpdateServicePage() {
                     </div>
                 )}
 
+                {/* Nút Chỉnh sửa bên ngoài form */}
+                {!isEditing && (
+                    <div className="flex justify-end mt-6">
+                        <button
+                            type="button"
+                            className="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 flex items-center gap-2"
+                            onClick={() => setIsEditing(true)}
+                        >
+                            <FaEdit />
+                            Chỉnh sửa
+                        </button>
+                    </div>
+                )}
 
                 {/* Nút "Cập nhật dịch vụ" chỉ hiển thị khi đang chỉnh sửa */}
                 {isEditing && (
