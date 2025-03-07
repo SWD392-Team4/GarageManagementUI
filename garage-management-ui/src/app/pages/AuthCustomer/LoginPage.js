@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import { TypeAnimation } from "react-type-animation";
 
 export default function LoginPage() {
   const { t } = useTranslation("ver1");
+
   document.title = t(`loginCustomer.pageTitle`);
   const {
     register,

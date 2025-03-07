@@ -44,6 +44,10 @@
         "element": "ServiceCategory"
       },
       {
+        "path": "services/detail/:id",
+        "element": "ServiceDetails"
+      },
+      {
         "path": "about-us",
         "element": "AboutUs",
         "children": [

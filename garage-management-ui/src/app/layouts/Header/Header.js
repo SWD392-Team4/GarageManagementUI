@@ -33,7 +33,7 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0  w-full z-[100001] transition-all duration-300 ${
+      className={`fixed z-30 top-0 left-0  w-full  transition-all duration-300 ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       } bg-black/80 backdrop-blur-sm shadow-lg border-b border-gray-200`}
     >
@@ -41,14 +41,12 @@ const Header = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between py-6">
             {/* Logo */}
-            <div className="max-w-[180px]">
-              <a href="/" className="inline-block">
-                <img
-                  src="assets/img/logo.svg"
-                  alt="Logo"
-                  className="h-[45px]"
-                />
-              </a>
+            <div className="max-w-[200px]">
+              <img
+                className=""
+                src="/assets/img/logo.png"
+                alt={t("banner.logo_alt")}
+              />
             </div>
 
             <ul className=" flex-col  font-bold font-title text-base lg:flex-row lg:space-x-6 text-white lg:space-y-0 space-y-4 mt-16 lg:mt-0 lg:flex hidden">
