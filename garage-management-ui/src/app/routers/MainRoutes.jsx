@@ -5,6 +5,7 @@ import routesConfig from "./routes.json";
 import LoaddingPage from "../layouts/LoadingPage";
 import RedirectRoute from "./RedirectRoute";
 import LoaddingPage2 from "../layouts/LoadingPage/index2";
+import { LoadingProvider } from "./LoadingContext";
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
@@ -18,6 +19,9 @@ const componentMap = {
     import("../layouts/LayoutMechanic/LayoutMechanic")
   ),
   LayoutCashier: lazy(() => import("../layouts/LayoutCashier/LayoutCashier")),
+  ServiceDetails: lazy(() =>
+    import("../pages/Services/partials/ServiceDetails")
+  ),
 
   Mision: lazy(() => import("../pages/AboutUs/partials/Mision")),
   History: lazy(() => import("../pages/AboutUs/partials/History")),
@@ -189,7 +193,9 @@ const generateRoutes = (routes) => {
 export default function MainRoutes() {
   return (
     <BrowserRouter>
-      <Routes>{generateRoutes(routesConfig)}</Routes>
+      <LoadingProvider>
+        <Routes>{generateRoutes(routesConfig)}</Routes>
+      </LoadingProvider>
     </BrowserRouter>
   );
 }

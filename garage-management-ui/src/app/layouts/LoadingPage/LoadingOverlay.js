@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "./Preloader.css";
-export default function Preloader() {
-  const [loading, setLoading] = useState(true);
-  const [hidden, setHidden] = useState(true);
+import { useLoading } from "../../routers/LoadingContext";
 
+export default function LoadingOverlay() {
+  const [loading, setLoading2] = useState(true);
+  const [hidden, setHidden] = useState(true);
+  const { setLoading } = useLoading();
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1000);
-    setTimeout(() => setHidden(false), 1800);
+    setTimeout(() => setLoading2(false), 2000);
+    setTimeout(() => setHidden(false), 2800);
+    setTimeout(() => setLoading(false), 6000);
   }, []);
   return (
     <div
       id="preloader"
-      className={`preloader-content ${!loading ? "loaded" : ""} ${
-        !hidden ? "hidden" : ""
-      }`}
+      className={`preloader-content  inset-0 z-50  ${
+        !loading ? "loaded" : ""
+      } ${!hidden ? "hidden" : ""}`}
     >
       <div className="loading-window">
         <div className="car">

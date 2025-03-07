@@ -1,8 +1,16 @@
 import React from "react";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-
+import { sServiceHome } from "./services/SignifyServiceHome";
 import { motion } from "framer-motion";
-const ServiceCard = ({ image, icon, title, description }) => {
+import { useNavigate } from "react-router-dom";
+const ServiceCard = ({ image, icon, title, description, link }) => {
+  const navigate = useNavigate();
+  const handleClick = (e) => {
+    sServiceHome.set((v) => {
+      v.value.action = e;
+    });
+    navigate(`/services/${e}`);
+  };
   return (
     <motion.div
       className="bg-white rounded-3xl overflow-hidden transition-transform group "
@@ -57,7 +65,10 @@ const ServiceCard = ({ image, icon, title, description }) => {
         <div className="my-4 flex justify-center ">
           {/* Group Con Hoạt Động Riêng */}
           <div className="relative group-btn">
-            <button className="w-16 h-16 flex items-center text-red-500  justify-center bg-red-100 hover:text-red-100 duration-200 rounded-full shadow-md hover:bg-red-600 hover:animate-spin-once2">
+            <button
+              onClick={() => handleClick(link)}
+              className="w-16 h-16 flex items-center text-red-500  justify-center bg-red-100 hover:text-red-100 duration-200 rounded-full shadow-md hover:bg-red-600 hover:animate-spin-once2"
+            >
               <HiOutlineArrowNarrowRight className="text-2xl " />
             </button>
           </div>

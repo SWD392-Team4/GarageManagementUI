@@ -1,38 +1,53 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { sServiceHome } from "../../../Services/services/SignifyServiceHome";
+import { useNavigate } from "react-router-dom";
 
 const DedicatedServices = () => {
   const { t, i18n } = useTranslation("dedicatedServices");
+  const navigate = useNavigate();
 
+  const handleClick = (e) => {
+    sServiceHome.set((v) => {
+      v.value.serviceCategory = e;
+    });
+    navigate("/services/view");
+  };
   const services = [
     {
       title: t("title1"),
       description: t("BRAKE SYSTEM REPAIR"),
+      value: "repair",
       icon: "🚗",
     },
     {
       title: t("title2"),
       description: t("ELECTRICAL REPAIR"),
+      value: "repair",
       icon: "🔌",
     },
     {
       title: t("title3"),
       description: t("MAINTENANCE"),
+      value: "maintenance",
       icon: "🧰",
     },
     {
       title: t("title4"),
       description: t("UPGRADES"),
+      value: "upgrade",
       icon: "⚙️",
     },
     {
       title: t("title5"),
       description: t("CAR WASH"),
+      value: "car_wash",
       icon: "🚙",
     },
     {
       title: t("title6"),
       description: t("DETAILING"),
+      value: "detailing",
       icon: "🛠️",
     },
   ];
@@ -69,12 +84,12 @@ const DedicatedServices = () => {
             </p>
             {/* View More */}
             <div className="group mt-5">
-              <a
+              <button
+                onClick={() => handleClick(service.value)}
                 className="uppercase my-2 inline-block text-sm font-normal font-title text-white group-hover:scale-110 duration-200"
-                href="#"
               >
                 View More
-              </a>
+              </button>
               <div className="border-t  border-orange-700 h-1 w-16 group-hover:w-24 transition-all duration-200"></div>
             </div>
           </div>

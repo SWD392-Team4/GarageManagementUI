@@ -10,7 +10,12 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Logo và Mô tả */}
         <div>
-          <h2 className="text-2xl font-bold mb-4">{t("footer.logoTitle")}</h2>
+          {/* <h2 className="text-2xl font-bold mb-4">{t("footer.logoTitle")}</h2> */}
+          <img
+            className="mx-auto mb-3"
+            src="/assets/img/logo.png"
+            alt={t("banner.logo_alt")}
+          />
           <p className="text-gray-400 text-sm mb-6">
             {t("footer.description")}
           </p>
