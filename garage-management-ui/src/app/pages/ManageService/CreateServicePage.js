@@ -5,6 +5,7 @@ import { FaTrash } from "react-icons/fa";
 import MDEditor from "@uiw/react-md-editor";
 import { useTranslation } from "react-i18next";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
+import AsyncSelect from 'react-select/async';
 
 
 export default function CreateServicePage() {
@@ -25,8 +26,6 @@ export default function CreateServicePage() {
   const serviceCategoryKeys = ["repair", "maintenance", "upgrade", "car_wash", "detailing"];
   const actionKeys = ["inspect", "replace", "lubricate", "align", "refill", "repair", "clean", "upgrade", "restore", "update", "polish", "protect", "deodorize", "condition", "remove", "restore_lighting"];
   const workNatureKeys = ["preventive", "corrective", "enhancement", "digital", "aesthetic"];
-
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,19 +62,51 @@ export default function CreateServicePage() {
 
     setPayload(formData);
 
-    const response = await createService(formData);
-    if (response.data) {
-      console.log("Service created successfully", response);
-
-      if (selectedImages.length > 0) {
-        const imageFormData = new FormData();
-        selectedImages.forEach((image) => {
-          imageFormData.append("images", image);
-        });
-        await createServiceImage(response.data.id, imageFormData);
-      }
+    let imageFormData = null;
+    if (selectedImages.length > 0) {
+      imageFormData = new FormData();
+      selectedImages.forEach((image) => {
+        imageFormData.append("images", image);
+      });
     }
+    await createService(formData, imageFormData);
+
   };
+
+  //xu ly select car part
+  const filterCarPart = (inputValue) => {
+    return parts
+      .filter((i) => i.partName.toLowerCase().includes(inputValue.toLowerCase()))
+      .map((i) => ({
+        label: i.partName,
+        value: i.id
+      }));
+  };
+
+  const loadCarPartOption = (inputValue, callback) => {
+    setTimeout(() => {
+      const filterCarParts = filterCarPart(inputValue);
+      callback(filterCarParts);
+    }, 1000); // Giả lập API call với delay 1 giây
+  };
+
+  //xu ly select car category
+  const filterCarCategories = (inputValue) => {
+    return carCategories
+      .filter((i) => i.category.toLowerCase().includes(inputValue.toLowerCase()))
+      .map((i) => ({
+        label: i.category,
+        value: i.id
+      }));
+  };
+
+  const loadCarCategoryOption = (inputValue, callback) => {
+    setTimeout(() => {
+      const filterCarCategory = filterCarCategories(inputValue);
+      callback(filterCarCategory);
+    }, 1000); // Giả lập API call với delay 1 giây
+  };
+
 
   return (
     <div className="bg-white shadow-lg p-6">
@@ -88,24 +119,34 @@ export default function CreateServicePage() {
             {errors.ServiceName && <p className="text-red-500 text-sm">{errors.ServiceName.message}</p>}
           </div>
 
+          {/* Car Categoru */}
           <div>
-            <select {...register("CarCategoryName", { required: t("errors.car_category") })} className="border p-2 w-full">
-              <option value="">{t("form.select_car_category")}</option>
-              {carCategories.map((category) => (
-                <option key={category.Id} value={category.Id}>{category.PartCategory}</option>
-              ))}
-            </select>
-            {errors.CarCategoryName && <p className="text-red-500 text-sm">{errors.CarCategoryName.message}</p>}
+            <AsyncSelect
+              cacheOptions
+              defaultOptions={carCategories.map((i) => ({ label: i.category, value: i.id }))}
+              placeholder={t("form.select_service_category")}
+              loadOptions={loadCarCategoryOption}
+              isSearchable
+              onChange={(selecteCarCategory) => {
+                setValue("Category", selecteCarCategory.value);
+                console.log("Selectd Brand ID: ", selecteCarCategory.value);
+              }}
+            />
           </div>
 
+          {/* Car Parts */}
           <div>
-            <select {...register("CarPartName", { required: t("errors.car_part") })} className="border p-2 w-full">
-              <option value="">{t("form.select_car_part")}</option>
-              {carParts.map((part) => (
-                <option key={part.Id} value={part.Id}>{part.PartName}</option>
-              ))}
-            </select>
-            {errors.CarPartName && <p className="text-red-500 text-sm">{errors.CarPartName.message}</p>}
+            <AsyncSelect
+              cacheOptions
+              defaultOptions={carParts.map((i) => ({ label: i.partName, value: i.id }))}
+              placeholder={t("form.select_car_part")}
+              loadOptions={loadCarPartOption}
+              isSearchable
+              onChange={(selecteCarParts) => {
+                setValue("CarPartName", selecteCarParts.value);
+                console.log("Selectd Brand ID: ", selecteCarParts.value);
+              }}
+            />
           </div>
 
           <div>
@@ -117,6 +158,7 @@ export default function CreateServicePage() {
             </select>
             {errors.Category && <p className="text-red-500 text-sm">{errors.Category.message}</p>}
           </div>
+
 
           <div>
             <select {...register("Action", { required: t("errors.action") })} className="border p-2 w-full">

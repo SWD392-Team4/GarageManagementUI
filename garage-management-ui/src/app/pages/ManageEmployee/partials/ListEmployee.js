@@ -86,8 +86,9 @@ export default function ListEmployee({ refresh }) {
             icon: <FaPencilAlt />,
             onClick: async (row) => {
                 try {
-                    const getEmployeeDetail = await getEmployeeDetail(row.id);
-                    setselectedEmployee(getEmployeeDetail.data.value);
+                    console.log("Click vao roi");
+                    const getEmployeeDetails = await getEmployeeDetail(row.id);
+                    setselectedEmployee(getEmployeeDetails.data.value);
                     setIsUpdateModalOpen(true);
                 } catch (error) {
                     console.error("Error fetching employee details: ", error);
@@ -112,7 +113,7 @@ export default function ListEmployee({ refresh }) {
                 isOpen={isUpdateModalOpen}
                 onClose={() => setIsUpdateModalOpen(false)}
                 employee={selectedEmployee}
-                onBrandUpdated={() => {
+                onEmployeeUpdated={() => {
                     setIsUpdateModalOpen(false);
                     fetchData(pagination.currentPage, searchParams);
                 }}

@@ -86,11 +86,10 @@ export default function SideBarAdmin({
       )}
 
       <aside
-        className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 overflow-y-auto ${
-          isMobile
+        className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 overflow-y-auto ${isMobile
             ? `fixed top-0 left-0 w-64 ${isSidebarOpen ? "block" : "hidden"}`
             : `relative ${isSidebarOpen ? "w-64" : "w-16"}`
-        }`}
+          }`}
       >
         <div>
           <div className="flex items-center justify-end px-3 py-3 border-b ">
@@ -486,6 +485,21 @@ export default function SideBarAdmin({
                       </Link>
                       <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
                     </li>
+                    <li className="group/link">
+                      <Link
+                        to="invoice-goodsIssued"
+                        className="text-white flex items-center p-2"
+                      >
+                        <TbBrandBooking className="w-5 h-5" />
+
+                        <span className="ml-2">
+                          {t("sidebar_admin.invoice_goodsIssue")}
+                        </span>
+                      </Link>
+                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
+                    </li>
+
+
                   </ul>
                 )}
               </li>

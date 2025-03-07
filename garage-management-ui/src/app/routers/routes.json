@@ -151,7 +151,9 @@
     "path": "/customer",
     "element": "LayoutCustomer",
     "private": {
-      "allowedRoles": ["Customer"]
+      "allowedRoles": [
+        "Customer"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -169,7 +171,10 @@
     "path": "/Mechanic",
     "element": "LayoutMechanic",
     "private": {
-      "allowedRoles": ["Administrator", "Mechanic"]
+      "allowedRoles": [
+        "Administrator",
+        "Mechanic"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -201,12 +206,13 @@
       }
     ]
   },
-
   {
     "path": "/admin",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": ["Administrator"]
+      "allowedRoles": [
+        "Administrator"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -311,6 +317,16 @@
         "isSuspense2": true
       },
       {
+        "path": "invoice-goodsIssued",
+        "element": "ManageGoodsIssued",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goodsIssued/create-goodsIssued",
+        "element": "CreateGoodsIssued",
+        "isSuspense2": true
+      },
+      {
         "path": "appointment",
         "element": "LayoutAppointment",
         "isSuspense": true,
@@ -367,7 +383,10 @@
     "path": "/Cashier",
     "element": "LayoutCashier",
     "private": {
-      "allowedRoles": ["Administrator", "Cashier"]
+      "allowedRoles": [
+        "Administrator",
+        "Cashier"
+      ]
     },
     "isSuspense": true,
     "children": [

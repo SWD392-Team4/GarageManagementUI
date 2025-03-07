@@ -1,5 +1,6 @@
 import UserService from "../../../hooks/services/UserService";
 import { formatDate } from "../schemas/ProductValid";
+import { sProduct } from "./ProductSignify"
 
 const userService = new UserService();
 
@@ -47,7 +48,7 @@ export const getProduct = async (productId) => {
     }
 };
 
-export const updateProduct = async (productId, productData) => {
+export const updateProduct = async (productId, productData, fileImage) => {
     try {
         const response = await userService.sendAjax(
             `/api/products/${productId}`,
@@ -55,6 +56,34 @@ export const updateProduct = async (productId, productData) => {
             productData,
             true
         );
+        //Clear thong tin singify
+        sProduct.set((pre) => ([
+            pre.value.id = "",
+            pre.value.productName = "",
+            pre.value.productBarcode = "",
+            pre.value.productPrice = "",
+            pre.value.status = "",
+            pre.value.createdAt = "",
+            pre.value.updatedAt = "",
+        ]));
+        //Parse thong tin
+        productData.productName = <>{productData.productName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+
+        //Gan thong tin signify
+        sProduct.set((pre) => ([
+            pre.value.id = productId,
+            pre.value.productName = productData.productName,
+            pre.value.productBarcode = productData.productBarcode,
+            pre.value.productPrice = productData.productPrice,
+            pre.value.status = productData.status,
+            pre.value.createdAt = productData.createdAt,
+            pre.value.updatedAt = productData.updatedAt,
+        ]));
+
+        //xu ly file
+        if (fileImage != null) {
+            await createProductImage(productId, fileImage);
+        }
         userService.showToast(200, "Update Successfull");
         return response;
     } catch (error) {
@@ -63,7 +92,7 @@ export const updateProduct = async (productId, productData) => {
     }
 };
 
-export const createProduct = async (productData) => {
+export const createProduct = async (productData, FormData) => {
     try {
         const response = await userService.sendAjax(
             `/api/products`,
@@ -71,6 +100,30 @@ export const createProduct = async (productData) => {
             productData,
             true
         );
+        if (FormData != null) {
+            await createProductImage(response.data.value.id, FormData);
+        }
+
+        //Clear thong tin singify
+        sProduct.set((pre) => ([
+            pre.value.id = "",
+            pre.value.productName = "",
+            pre.value.productBarcode = "",
+            pre.value.productPrice = "",
+            pre.value.status = "",
+            pre.value.createdAt = "",
+            pre.value.updatedAt = "",
+        ]));
+        //parse thong tin signify
+        response.data.value.productName = <>{response.data.value.productName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+        response.data.value.createdAt = formatDate(response.data.value.createdAt);
+        response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
+        //gan vao signify
+        sProduct.set(response.data.value);
+
+
+
+        userService.showToast(200, "Create Product Successfull");
         return response;
     } catch (error) {
         console.error("Lỗi khi tạo sản phẩm: ", error);
@@ -88,12 +141,7 @@ export const createProductImage = async (productId, FormData) => {
             true,
             true
         );
-        if (response.data) {
-            return response;
-        } else {
-            console.error("Fail to Upload: ", response.description);
-            return null;
-        }
+        return response;
     } catch (error) {
         console.error("Fail to upload image: ", error.message);
     }
@@ -127,7 +175,11 @@ export const searchProduct = async (params) => {
 
 export const getAllCategory = async () => {
     try {
-        const response = await userService.sendAjax("/api/product/categories", "GET", null, true);
+        const response = await userService.sendAjax(
+            "/api/product/categories?PageNumber=0&Fields=id%2C%20category",
+            "GET",
+            null,
+            true);
 
         if (response != null) {
             return response;
@@ -144,7 +196,7 @@ export const getAllCategory = async () => {
 export const getAllBrand = async () => {
     try {
         const response = await userService.sendAjax(
-            `/api/brands`,
+            `/api/brands?&PageSize=0&Fields=id%2C%20brandName`,
             "GET",
             null,
             true
@@ -154,7 +206,7 @@ export const getAllBrand = async () => {
             return response;
         } else {
             console.error(`Error: Received status ${response.error}`);
-            return null;
+            return [];
         }
     } catch (error) {
         console.error("Error fetching brands: ", error);

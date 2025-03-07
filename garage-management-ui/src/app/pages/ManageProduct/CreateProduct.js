@@ -6,6 +6,7 @@ import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
 import { FaArrowLeft, FaTrash } from "react-icons/fa";
 import { getAllCategory, getAllBrand, createProduct, createProductImage } from "./services/ProductService";
+import AsyncSelect from 'react-select/async';
 
 export default function CreateProduct() {
     const { register, handleSubmit, setValue, watch } = useForm();
@@ -51,21 +52,55 @@ export default function CreateProduct() {
             productPrice: parseFloat(data.price),
         };
 
-        const response = await createProduct(payload);
-        console.log("check respone: ", response);
-        if (response.data.id) {
-            const productId = response.data.id;
-            if (selectedImages.length > 0) {
-                const formData = new FormData();
-                selectedImages.forEach((image) => {
-                    formData.append("fileDtos", image);
-                });
-                await createProductImage(productId, formData);
-            }
-            navigate("/admin/product");
+        let formData = null
+        if (selectedImages.length > 0) {
+            formData = new FormData();
+            selectedImages.forEach((image) => {
+                formData.append("fileDtos", image);
+            });
         }
+        await createProduct(payload, formData);
+
+        // console.log("Check payload: ", payload);
+        navigate("/admin/product");
         setLoading(false);
     };
+
+    //xu ly select brands
+    const filterBrands = (inputValue) => {
+        return brands
+            .filter((i) => i.brandName.toLowerCase().includes(inputValue.toLowerCase()))
+            .map((i) => ({
+                label: i.brandName,
+                value: i.id
+            }));
+    };
+
+    const loadBrandsOption = (inputValue, callback) => {
+        setTimeout(() => {
+            const filteredBrands = filterBrands(inputValue);
+            callback(filteredBrands);
+        }, 1000); // Giả lập API call với delay 1 giây
+    };
+
+    //xu ly select product category
+    const filterProductCategories = (inputValue) => {
+        return categories
+            .filter((i) => i.category.toLowerCase().includes(inputValue.toLowerCase()))
+            .map((i) => ({
+                label: i.category,
+                value: i.id
+            }));
+    };
+
+
+    const loadProductCategoryOption = (inputValue, callback) => {
+        setTimeout(() => {
+            const filterProductCategory = filterProductCategories(inputValue);
+            callback(filterProductCategory);
+        }, 1000); // Giả lập API call với delay 1 giây
+    };
+
 
     return (
         <div className="bg-white shadow-lg p-6">
@@ -75,40 +110,64 @@ export default function CreateProduct() {
             </button>
             <h1 className="text-2xl font-semibold mb-4">{t("create_product.title")}</h1>
             <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-6 md:grid-cols-2">
+
+                {/* Product name */}
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.name")}</label>
                     <input {...register("name")} className="border rounded p-2 w-full" required />
                 </div>
+
+                {/*Select product category */}
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.category")}</label>
-                    <select {...register("category")} className="border rounded p-2 w-full" required>
-                        <option value="">{t("create_product.select_category")}</option>
-                        {categories.map((cat) => (
-                            <option key={cat.Id} value={cat.Id}>{cat.Category}</option>
-                        ))}
-                    </select>
+                    <AsyncSelect
+                        cacheOptions
+                        defaultOptions={categories.map((i) => ({ label: i.category, value: i.id }))}
+                        placeholder={t("create_product.select_category")}
+                        loadOptions={loadProductCategoryOption}
+                        isSearchable
+                        onChange={(selectedProductCategory) => {
+                            setValue("category", selectedProductCategory.value);
+                            console.log("Selectd Product Category ID: ", selectedProductCategory.value);
+                        }}
+                    />
                 </div>
+
+                {/* price */}
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.price")}</label>
                     <input type="number" {...register("price")} className="border rounded p-2 w-full" required />
                 </div>
+
+                {/* barcode  */}
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.barcode")}</label>
                     <input {...register("barcode")} className="border rounded p-2 w-full" required />
                 </div>
+
+                {/* Brands */}
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.brand")}</label>
-                    <select {...register("brand")} className="border rounded p-2 w-full" required>
-                        <option value="">{t("create_product.select_brand")}</option>
-                        {brands.map((brand) => (
-                            <option key={brand.Id} value={brand.Id}>{brand.BrandName}</option>
-                        ))}
-                    </select>
+                    <AsyncSelect
+                        cacheOptions
+                        defaultOptions={brands.map((i) => ({ label: i.brandName, value: i.id }))}
+                        placeholder={t("create_product.select_brand")}
+                        loadOptions={loadBrandsOption}
+                        isSearchable
+                        onChange={(selecteBrands) => {
+                            setValue("brand", selecteBrands.value);
+                            console.log("Selectd Brand ID: ", selecteBrands.value);
+                        }}
+                    />
                 </div>
+
+                {/* Description */}
                 <div className="col-span-2" data-color-mode="light">
                     <label className="block text-gray-700 font-semibold">{t("create_product.description")}</label>
                     <MDEditor value={watch("description")} onChange={(value) => setValue("description", value)} />
                 </div>
+
+                {/* Image Product */}
                 <div className="col-span-2">
                     <label className="block text-gray-700 font-semibold">{t("create_product.upload_images")}</label>
                     <input type="file" multiple onChange={handleImageUpload} className="border rounded p-2 w-full" />

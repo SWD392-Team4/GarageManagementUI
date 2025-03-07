@@ -7,6 +7,7 @@ export default function CreateEmployeeModal({ isOpen, onClose, onEmployeeCreated
   const { t } = useTranslation("manage_employee");
   const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
   const [workplaces, setWorkplaces] = useState([]);
+  const roles = ["Mechanic", "Cashier", "Warehouse Manager"];
 
   useEffect(() => {
     const fetchWorkplaces = async () => {
@@ -31,17 +32,12 @@ export default function CreateEmployeeModal({ isOpen, onClose, onEmployeeCreated
       citizenIdentification: data.citizenIdentification.trim(),
       dateOfBirth: data.dateOfBirth,
       gender: data.gender === "true",
-      workplaceId: data.workplaceId, // Lấy ID từ select
+      workplaceId: data.workplaceId,
     };
 
     try {
       console.log("Submitting Data: ", validData);
       const response = await createEmployee(validData);
-      if (response == 200) {
-        console.log("Successful");
-      } else {
-        console.log("Fail: ", response.message);
-      }
       reset();
       onEmployeeCreated();
       onClose();
@@ -113,11 +109,15 @@ export default function CreateEmployeeModal({ isOpen, onClose, onEmployeeCreated
             {/* Role */}
             <div>
               <label className="text-sm font-medium text-gray-700">{t("manage_employee.role")}</label>
-              <select {...register("role")} className="w-full p-2 border border-gray-300 rounded-md">
-                <option value="Administrator">Administrator</option>
-                <option value="Employee">Employee</option>
+              <select {...register("role", { required: true })} className="w-full p-2 border border-gray-300 rounded-md">
+                <option value="">{t("manage_employee.select_role")}</option>
+                {roles.map((role) => (
+                  <option key={role} value={role}>{role}</option>
+                ))}
               </select>
+              {errors.role && <span className="text-red-500 text-sm">{t("manage_employee.required")}</span>}
             </div>
+
 
             {/* Citizen Identification */}
             <div>

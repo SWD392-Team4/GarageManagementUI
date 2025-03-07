@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { FaArrowLeft, FaEdit, FaSave } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import { FaEdit, FaSave } from "react-icons/fa";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
 import { getProduct, updateProduct, getAllCategory, getAllBrand } from "./services/ProductService";
+import ImageCarousel from "./partials/ImageCarousel";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -13,10 +15,13 @@ export default function ProductDetails() {
   const [product, setProduct] = useState(null);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
-  const [isEditing, setIsEditing] = useState(false);
-  const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [imageFiles, setImageFiles] = useState([]);
 
+  const { register, handleSubmit, setValue, watch } = useForm();
+
+
+  //theo doi trang thai
+  const [isEditing, setIsEditing] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -28,22 +33,20 @@ export default function ProductDetails() {
 
       if (productData) {
         setProduct(productData);
-        setFormData({
-          productName: productData.productName,
-          productBarcode: productData.productBarcode,
-          productDescription: productData.productDescription,
-          productCategoryId: categoryData?.data?.value.find(cat => cat.category === productData.category)?.Id || "",
-          brandId: brandData?.data?.value.find(brand => brand.brandName === productData.brandName)?.Id || "",
-          link: productData.imageLink,
-          productPrice: productData.productPrice,
-          status: productData.status
-        });
-
-      } else {
+        setValue("productName", productData.productName);
+        setValue("productBarcode", productData.productBarcode);
+        setValue("productDescription", productData.productDescription);
+        setValue("productCategoryId", categoryData?.data?.value.find(cat => cat.category === productData.category)?.id || "");
+        setValue("brandId", brandData?.data?.value.find(brand => brand.brandName === productData.brandName)?.id || "");
+        // setValue("imageLink", productData.imageLink);
+        setValue("productPrice", productData.productPrice);
+        setValue("status", productData.status);
+        setValue("createdAt", productData.createdAt);
+        setValue("updatedAt", productData.updatedAt);
       }
 
-      if (categoryData?.data?.value) setCategories(categoryData.data.value);
-      if (brandData?.data?.value) setBrands(brandData.data.value);
+      setCategories(categoryData?.data?.value || []);
+      setBrands(brandData?.data?.value || []);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -51,174 +54,169 @@ export default function ProductDetails() {
 
   useEffect(() => {
     fetchData();
-  }, [id, i18n.language]);
+  }, [i18n.language]);
+
 
   const handleEdit = () => {
     setIsEditing(true);
-    setFormData({
-      productName: product?.productName ?? "",
-      productBarcode: product?.productBarcode ?? "",
-      productDescription: product?.productDescription ?? "",
-      productCategoryId: categories.find(cat => cat.category === product.category)?.Id || "",
-      brandId: brands.find(brand => brand.brandName === product.brandName)?.Id || "",
-      link: product?.imageLink ?? "",
-      productPrice: product?.productPrice ?? 0,
-      status: product?.status ?? "active"
-    });
   };
 
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: name === "productPrice" ? Number(value) || 0 : value,
-    }));
-  };
-
-
-  const handleSave = async () => {
-    setLoading(true);
+  const handleSave = async (data) => {
+    if (!isEditing) return;
 
     try {
-      const response = await updateProduct(id, formData);
+      let imageFormData = null;
+      if (imageFiles.length > 0) {
+        imageFormData = new FormData();
+        imageFiles.forEach((image) => {
+          imageFormData.append("fileDtos", image);
+        });
+      }
+
+      await updateProduct(id, data, imageFormData);
       fetchData();
       setIsEditing(false);
     } catch (error) {
       console.error("Error updating product:", error);
     }
-
-    setLoading(false);
   };
+
 
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-6">
       <Breadcrumb />
-      <button className="flex items-center gap-2 text-blue-500 hover:underline mb-4" onClick={() => navigate("/admin/product")}>
-        <FaArrowLeft /> {t("product_details.back")}
-      </button>
-
-
       {product ? (
-        <>
-          <div className="flex flex-col lg:flex-row gap-6">
-            <div className="flex-1 flex justify-center items-center flex-col">
-              {isEditing ? (
-                <>
-                  <input
-                    type="text"
-                    name="link"
-                    value={formData.link ?? ""}
-                    onChange={handleChange}
-                    className="border p-2 rounded w-full mb-2"
-                    placeholder={t("product_details.image_link")}
-                  />
-                  <img
-                    src={formData.link || "/images/placeholder.png"}
-                    alt="Preview"
-                    className="max-w-sm w-full h-auto rounded-lg shadow-lg"
-                  />
-                </>
-              ) : (
-                <img
-                  src={product.imageLink || "/images/placeholder.png"}
-                  alt={product.productName}
-                  className="max-w-sm w-full h-auto rounded-lg shadow-lg"
-                />
-              )}
+        <form onSubmit={handleSubmit(handleSave)}>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {/* Cột hình ảnh (7/12) */}
+            <div className="lg:col-span-7 flex flex-col items-center justify-center">
+              <ImageCarousel
+                linkImage={product.imageLink}
+                imagesWatch={watch("imageLink") || []}
+                setImages={(newImages) => setValue("imageLink", newImages)}
+                setImageFiles={setImageFiles}
+                isEditing={isEditing}
+              />
             </div>
 
-            <div className="flex-1" data-color-mode="light">
-              <h1 className="text-3xl font-bold mb-4">
-                {t("product_details.name")}
-                : {isEditing ?
+            {/* Cột thông tin sản phẩm (5/12) */}
+            <div className="lg:col-span-5 flex flex-col justify-center">
+              {/* Tiêu đề sản phẩm */}
+              <h1 className="text-4xl font-bold mb-6">
+                {isEditing ? (
                   <input
-                    name="productName"
-                    value={formData.productName ?? ""}
-                    onChange={handleChange}
-                    className="border p-2 rounded w-full"
+                    {...register("productName", { required: true })}
+                    className="border p-3 rounded w-full text-2xl"
                   />
-                  : product.ProductName}
+                ) : (
+                  product.productName
+                )}
               </h1>
-              <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.barcode")}:</strong> {product.productBarcode}
-              </p>
-              <p className="text-gray-600 text-lg mb-2"><strong>{t("product_details.category")}: </strong>
-                {isEditing ?
-                  <select name="productCategoryId" value={formData.productCategoryId} onChange={handleChange} className="border p-2 rounded w-full">
-                    {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.category}</option>)}
-                  </select>
-                  : product.category}
-              </p>
-              <p className="text-gray-600 text-lg mb-2"><strong>{t("product_details.brand")}: </strong>
-                {isEditing ?
-                  <select name="BrandName" value={formData.brandName} onChange={handleChange} className="border p-2 rounded w-full">
-                    {brands.map(brand => <option key={brand.id} value={brand.brandName}>{brand.brandName}</option>)}
-                  </select> : product.brandName}
-              </p>
-              <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.status")}: </strong>
-                {isEditing ?
-                  <select name="Status" value={formData.status} onChange={handleChange} className="border p-2 rounded w-full">
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                  </select>
-                  : product.status}
-              </p>
-              <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.price")}: </strong>
-                {isEditing ?
-                  <input
-                    name="productPrice"
-                    type="number"
-                    value={formData.productPrice ?? ""}
-                    onChange={handleChange}
-                    className="border p-2 rounded w-full"
-                  />
 
-                  : `$${product.productPrice}`}
+              {/* Mã vạch */}
+              <p className="text-gray-700 text-xl mb-4">
+                <strong className="font-semibold">{t("product_details.barcode")}:</strong> {product.productBarcode}
               </p>
-              <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.created_at")}: </strong> {product.createdAt}
+
+              {/* Danh mục */}
+              <p className="text-gray-700 text-xl mb-4">
+                <strong className="font-semibold">{t("product_details.category")}:</strong>
+                {isEditing ? (
+                  <select {...register("productCategoryId")} className="border p-2 rounded w-full text-lg">
+                    {categories.map(cat => (
+                      <option key={cat.id} value={cat.id}>{cat.category}</option>
+                    ))}
+                  </select>
+                ) : (
+                  product.category
+                )}
               </p>
-              <p className="text-gray-600 text-lg mb-2">
-                <strong>{t("product_details.updated_at")}: </strong> {product.updatedAt}
+
+              {/* Thương hiệu */}
+              <p className="text-gray-700 text-xl mb-4">
+                <strong className="font-semibold">{t("product_details.brand")}:</strong>
+                {isEditing ? (
+                  <select {...register("brandId")} className="border p-2 rounded w-full text-lg">
+                    {brands.map(brand => (
+                      <option key={brand.id} value={brand.id}>{brand.brandName}</option>
+                    ))}
+                  </select>
+                ) : (
+                  product.brandName
+                )}
+              </p>
+
+              {/* Giá sản phẩm */}
+              <p className="text-gray-700 text-xl mb-4">
+                <strong className="font-semibold">{t("product_details.price")}:</strong>
+                {isEditing ? (
+                  <input
+                    {...register("productPrice", { required: true })}
+                    className="border p-2 rounded w-full text-lg"
+                  />
+                ) : (
+                  product.productPrice
+                )}
+              </p>
+
+              {/* Ngày tạo & cập nhật */}
+              <p className="text-gray-700 text-xl mb-4">
+                <strong className="font-semibold">{t("product_details.created_at")}:</strong> {product.createdAt}
+              </p>
+              <p className="text-gray-700 text-xl mb-4">
+                <strong className="font-semibold">{t("product_details.updated_at")}:</strong> {product.updatedAt}
               </p>
             </div>
           </div>
+
+
 
           <div className="mt-6 p-4 border-t" data-color-mode="light">
             <h2 className="text-xl font-semibold mb-2">{t("product_details.description")}</h2>
             {isEditing ? (
               <MDEditor
-                value={formData.productDescription ?? ""}
-                onChange={(value) =>
-                  setFormData((prevData) => ({ ...prevData, productDescription: value ?? "" }))
-                }
+                value={watch("productDescription")}
+                onChange={(val) => setValue("productDescription", val)}
               />
-
             ) : (
-              <MDEditor.Markdown source={product.productDescription || ''} />
+              <MDEditor.Markdown source={watch("productDescription") || ''} />
             )}
           </div>
+
 
           <div className="flex justify-end mt-6">
             {isEditing ? (
-              <button className="bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2" onClick={handleSave} disabled={loading}>
-                <FaSave /> {loading ? t("product_details.saving") : t("product_details.save")}
+              <button
+                type="submit" // Chỉ submit khi đang chỉnh sửa
+                className="bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+              >
+                <FaSave /> {t("product_details.save")}
               </button>
-            ) : (
-              <button className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2" onClick={handleEdit}>
-                <FaEdit /> {t("product_details.edit")}
-              </button>
-            )}
+            ) : null}
           </div>
-        </>
+
+
+
+        </form>
       ) : (
         <p className="text-center text-red-500">{t("product_details.not_found")}</p>
       )}
-    </div>
 
+      {/* Nút "Chỉnh sửa" được đặt bên ngoài form để không kích hoạt submit */}
+      {/* 1 con bug khong duoc quyen quen  */}
+      {!isEditing && (
+        <div className="flex justify-end mt-6">
+          <button
+            type="button"
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+            onClick={handleEdit}
+          >
+            <FaEdit /> {t("product_details.edit")}
+          </button>
+        </div>
+      )}
+    </div>
   );
 }
