@@ -73,6 +73,10 @@ const componentMap = {
   ManageService: lazy(() => import("../pages/ManageService/ManageService")),
   ManageGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/ManageGoodsIssued")),
   CreateGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/CreateGoodsIssued")),
+  ManageInvoiceSale: lazy(() => import("../pages/ManageInvoiceSale/ManageInvoiceSale")),
+  CreateInvoiceSale: lazy(() => import("../pages/ManageInvoiceSale/CreateInvoiceSale")),
+  ManageInvoiceService: lazy(() => import("../pages/ManageInvoiceService/ManageInvoiceService")),
+  CreateInvoiceService: lazy(() => import("../pages/ManageInvoiceService/CreateInvoiceService")),
   ManageCarPartCate: lazy(() =>
     import("../pages/ManageCarPartCate/ManageCarPartCate")
   ),

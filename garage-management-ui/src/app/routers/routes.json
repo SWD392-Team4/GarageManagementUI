@@ -327,6 +327,26 @@
         "isSuspense2": true
       },
       {
+        "path": "invoice-sale",
+        "element": "ManageInvoiceSale",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-sale/create",
+        "element": "CreateInvoiceSale",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-service",
+        "element": "ManageInvoiceService",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-service/create",
+        "element": "CreateInvoiceService",
+        "isSuspense2": true
+      },
+      {
         "path": "appointment",
         "element": "LayoutAppointment",
         "isSuspense": true,
