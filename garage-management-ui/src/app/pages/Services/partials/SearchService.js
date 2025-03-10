@@ -14,7 +14,6 @@ export default function ServiceSearchOptions() {
   const [serviceName, setServiceName] = useState(
     sServiceHome.value.serviceName
   );
-
   const [serviceCategory, setServiceCategory] = useState(
     sServiceHome.value.serviceCategory
   );

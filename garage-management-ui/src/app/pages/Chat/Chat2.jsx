@@ -5,7 +5,7 @@ import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import { ConnectionSignify } from "../Notification/services/connectionSignify";
 import { chatStore } from "./chatStore";
 
-const Chat = () => {
+const Chat2 = () => {
   const connection = ConnectionSignify.use().connection;
 
   const getUsers = async () => {
@@ -30,11 +30,8 @@ const Chat = () => {
   }, [connection]);
 
   return (
-    <div className="w-full h-screen bg-blue-100/20 md:p-5 flex flex-col pt-6 ">
-      {/* Breadcrumb */}
-      <Breadcrumb />
-      {/* Khu vực chat */}
-      <div className="flex flex-row flex-1 bg-white h-5/6">
+    <div className="w-full  flex flex-col ">
+      <div className="flex flex-row flex-1 bg-white h-5/6 rounded-md">
         {/* Cột trái: Danh sách friend */}
         <div className="w-3/12 border-r p-4 my-4">
           <div className="mb-4">
@@ -58,4 +55,4 @@ const Chat = () => {
   );
 };
 
-export default Chat;
+export default Chat2;

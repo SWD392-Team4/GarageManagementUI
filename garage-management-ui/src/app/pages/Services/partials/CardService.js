@@ -90,16 +90,16 @@ const CardService = ({
           </h3>
 
           <div className="grid grid-cols-2 ">
-            <p className="flex items-center  text-sm md:text-lg font-normal  text-gray-600 mt-2">
+            <p className="flex items-center  text-sm md:text-lg truncate max-w-full font-normal  text-gray-600 mt-2">
               <FaListAlt className="mr-2" /> {serviceCategory}
             </p>
-            <p className="flex items-center text-sm md:text-lg font-normal  text-gray-600 mt-2">
+            <p className="flex items-center text-sm md:text-lg truncate max-w-full font-normal  text-gray-600 mt-2">
               <FaCogs className="mr-2" /> {partName}
             </p>
-            <p className="flex items-center text-sm md:text-lg font-normal  text-gray-600 mt-2">
+            <p className="flex items-center text-sm md:text-lg truncate max-w-full font-normal  text-gray-600 mt-2">
               <FaTags className="mr-2" /> {category}
             </p>
-            <p className="flex items-center text-sm md:text-lg font-normal  text-gray-600 mt-2">
+            <p className="flex items-center text-sm md:text-lg truncate max-w-full font-normal  text-gray-600 mt-2">
               <FaDollarSign className="mr-2" /> {price}
             </p>
           </div>

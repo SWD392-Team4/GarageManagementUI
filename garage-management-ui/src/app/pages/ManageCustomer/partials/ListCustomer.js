@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { getAllCustomer, SearchCustomer } from "../services/CustomerService";
 import SearchCustomers from "./SearchCustomers";
-import { sCustomerManage } from "../services/CustomerSignify"
+import { sCustomerManage } from "../services/CustomerSignify";
+import { IoIosChatbubbles } from "react-icons/io";
+import { chatStore, newChat } from "../../Chat/chatStore";
 
 export default function ListCustomer() {
   const { t, i18n } = useTranslation("manage_customer");
@@ -63,7 +65,11 @@ export default function ListCustomer() {
 
   const columns = useMemo(
     () => [
-      { header: t("manage_customer.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+      {
+        header: t("manage_customer.id"),
+        accessorKey: "id",
+        accessorFn: (_row, index) => index + 1,
+      },
       { header: t("manage_customer.firstName"), accessorKey: "firstName" },
       { header: t("manage_customer.lastName"), accessorKey: "lastName" },
       { header: t("manage_customer.email"), accessorKey: "email" },
@@ -72,7 +78,6 @@ export default function ListCustomer() {
       { header: t("manage_customer.createdAt"), accessorKey: "createdAt" },
       { header: t("manage_customer.updatedAt"), accessorKey: "updatedAt" },
     ],
-
 
     [t, i18n.language]
   );
@@ -84,6 +89,36 @@ export default function ListCustomer() {
       icon: <FaEye />,
       color: "bg-gray-500",
       link: (row) => `${row.original.id}`,
+    },
+    {
+      type: "modal",
+      label: t("manage_customer.view"),
+      color: "bg-yellow-500",
+      icon: <IoIosChatbubbles />,
+      onClick: (row) => {
+        const friendExists = chatStore.value.friendList.some(
+          (friend) => friend.id === row.id
+        );
+
+        if (!friendExists) {
+          newChat.set({
+            id: row.id,
+            imageLink: row.imageLink,
+            firstName: row.firstName,
+            lastName: row.lastName,
+          });
+        }
+
+        chatStore.set((v) => {
+          v.value.imageLink =
+            row.imageLink !== "N/A"
+              ? row.imageLink
+              : "https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg";
+          v.value.activeChatId = row.id;
+        });
+
+        navigate("/chat");
+      },
     },
   ];
 

@@ -198,8 +198,12 @@ class UserService {
       console.log("Access token refreshed:", response.data.value.accessToken);
       return response.data.value.accessToken;
     } catch (error) {
-      console.error("Failed to refresh access token:", error);
-      return null;
+      this.clearToken();
+      window.location.href = "/authen";
+      return reject({
+        status: 401,
+        message: "Session expired. Please login again.",
+      });
     }
   }
 
