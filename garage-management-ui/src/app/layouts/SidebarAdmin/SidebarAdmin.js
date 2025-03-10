@@ -86,10 +86,11 @@ export default function SideBarAdmin({
       )}
 
       <aside
-        className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 overflow-y-auto ${isMobile
+        className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 overflow-y-auto ${
+          isMobile
             ? `fixed top-0 left-0 w-64 ${isSidebarOpen ? "block" : "hidden"}`
             : `relative ${isSidebarOpen ? "w-64" : "w-16"}`
-          }`}
+        }`}
       >
         <div>
           <div className="flex items-center justify-end px-3 py-3 border-b ">
@@ -116,7 +117,7 @@ export default function SideBarAdmin({
             <ul className="space-y-3">
               <li className="group">
                 <Link
-                  to="dashboard"
+                  to="/admin/dashboard"
                   className="flex items-center p-2  text-white  transition-all rounded-lg"
                 >
                   <FaHome className="w-6 h-6" />
@@ -128,7 +129,7 @@ export default function SideBarAdmin({
               </li>
               <li className="group">
                 <Link
-                  to=""
+                  to="/admin"
                   className="flex items-center p-2  text-white  transition-all rounded-lg"
                 >
                   <FaUser className="w-6 h-6" />
@@ -140,7 +141,7 @@ export default function SideBarAdmin({
               </li>
               <li className="group">
                 <Link
-                  to="service"
+                  to="/admin/service"
                   className="flex items-center p-2  text-white  transition-all rounded-lg"
                 >
                   <FaClipboardList className="w-6 h-6" />
@@ -177,7 +178,7 @@ export default function SideBarAdmin({
                     <li>
                       <div className="group/link">
                         <Link
-                          to="suppliers"
+                          to="/admin/suppliers"
                           className="text-white flex items-center p-2 "
                         >
                           <FaUsers className="w-5 h-5" />
@@ -190,7 +191,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="suppliers-contact"
+                        to="/admin/suppliers-contact"
                         className="text-white flex items-center p-2 "
                       >
                         <FaClipboardList className="w-5 h-5" />
@@ -230,7 +231,7 @@ export default function SideBarAdmin({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="employee"
+                        to="/admin/employee"
                         className="text-white flex items-center p-2"
                       >
                         <FaUserCog className="w-5 h-5" />
@@ -242,7 +243,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="employee-schedule"
+                        to="/admin/employee-schedule"
                         className="text-white flex items-center p-2"
                       >
                         <FaBuilding className="w-5 h-5" />
@@ -282,7 +283,7 @@ export default function SideBarAdmin({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="product"
+                        to="/admin/product"
                         className="text-white flex items-center p-2"
                       >
                         <FaBox className="w-5 h-5" />
@@ -294,7 +295,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="productCategory"
+                        to="/admin/productCategory"
                         className="text-white flex items-center p-2"
                       >
                         <FaLayerGroup className="w-5 h-5" />
@@ -306,7 +307,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="brand"
+                        to="/admin/brand"
                         className="text-white flex items-center p-2"
                       >
                         <FaTags className="w-5 h-5" />
@@ -346,7 +347,7 @@ export default function SideBarAdmin({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="carModal"
+                        to="/admin/carModal"
                         className="text-white flex items-center p-2"
                       >
                         <FaCarSide className="w-5 h-5" />
@@ -358,7 +359,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="carCategory"
+                        to="/admin/carCategory"
                         className="text-white flex items-center p-2"
                       >
                         <FaThList className="w-5 h-5" />
@@ -397,7 +398,7 @@ export default function SideBarAdmin({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="carPart"
+                        to="/admin/carPart"
                         className="text-white flex items-center p-2"
                       >
                         <FaCar className="w-5 h-5" />
@@ -409,7 +410,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="carPartCategory"
+                        to="/admin/carPartCategory"
                         className="text-white flex items-center p-2"
                       >
                         <FaThList className="w-5 h-5" />
@@ -448,7 +449,7 @@ export default function SideBarAdmin({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="invoice-sale"
+                        to="/admin/invoice-sale"
                         className="text-white flex items-center p-2"
                       >
                         <FaFileInvoiceDollar className="w-5 h-5" />
@@ -461,7 +462,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="invoice-service"
+                        to="/admin/invoice-service"
                         className="text-white flex items-center p-2"
                       >
                         <TbFileInvoice className="w-5 h-5" />
@@ -474,7 +475,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="booking"
+                        to="/admin/booking"
                         className="text-white flex items-center p-2"
                       >
                         <TbBrandBooking className="w-5 h-5" />
@@ -487,7 +488,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="invoice-goodsIssued"
+                        to="/admin/invoice-goodsIssued"
                         className="text-white flex items-center p-2"
                       >
                         <TbBrandBooking className="w-5 h-5" />
@@ -498,8 +499,6 @@ export default function SideBarAdmin({
                       </Link>
                       <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
                     </li>
-
-
                   </ul>
                 )}
               </li>
@@ -528,7 +527,7 @@ export default function SideBarAdmin({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="manage-customer"
+                        to="/admin/manage-customer"
                         className="text-white flex items-center p-2"
                       >
                         <PiUserFocus className="w-5 h-5" />
@@ -541,7 +540,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="chat"
+                        to="/chat"
                         className="text-white flex items-center p-2"
                       >
                         <RiCustomerServiceLine className="w-5 h-5" />
@@ -582,7 +581,7 @@ export default function SideBarAdmin({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="appointment"
+                        to="/admin/appointment"
                         className="text-white flex items-center p-2"
                       >
                         <TbReportSearch className="w-5 h-5" />
@@ -596,7 +595,7 @@ export default function SideBarAdmin({
 
                     <li className="group/link">
                       <Link
-                        to="create-appointment"
+                        to="/admin/create-appointment"
                         className="text-white flex items-center p-2"
                       >
                         <IoCreateOutline className="w-5 h-5" />
@@ -609,7 +608,7 @@ export default function SideBarAdmin({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="appointment-mine"
+                        to="/admin/appointment-mine"
                         className="text-white flex items-center p-2"
                       >
                         <RiGalleryView2 className="w-5 h-5" />

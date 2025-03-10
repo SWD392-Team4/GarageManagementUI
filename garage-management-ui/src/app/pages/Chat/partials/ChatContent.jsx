@@ -1,25 +1,85 @@
 // pages/Chat/partials/ChatContent.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { chatStore } from "../chatStore";
 import "./ChatContent.css"; // import file CSS thuần
+import { ConnectionSignify } from "../../Notification/services/connectionSignify";
+import { sAccount } from "../../AuthCustomer/services/store";
+
+// SkeletonCard mô phỏng bố cục chat khi dữ liệu chưa load
+const SkeletonCard = () => (
+  <div className="space-y-3 animate-pulse p-4">
+    {/* Tin nhắn từ người khác (căn trái) */}
+    <div className="flex items-end justify-start">
+      <div className="w-6 h-6 bg-gray-300 rounded-full mr-2"></div>
+      <div className="flex flex-col space-y-1">
+        <div className="w-40 h-4 bg-gray-300 rounded"></div>
+        <div className="w-56 h-4 bg-gray-300 rounded"></div>
+      </div>
+    </div>
+    {/* Tin nhắn của mình (căn phải) */}
+    <div className="flex items-end justify-end">
+      <div className="flex flex-col space-y-1 items-end">
+        <div className="w-48 h-4 bg-gray-300 rounded"></div>
+      </div>
+      <div className="w-6 h-6 bg-gray-300 rounded-full ml-2"></div>
+    </div>
+    {/* Một tin nhắn khác từ người khác */}
+    <div className="flex items-end justify-start">
+      <div className="w-6 h-6 bg-gray-300 rounded-full mr-2"></div>
+      <div className="flex flex-col space-y-1">
+        <div className="w-32 h-4 bg-gray-300 rounded"></div>
+        <div className="w-40 h-4 bg-gray-300 rounded"></div>
+      </div>
+    </div>
+    {/* ... các tin nhắn mô phỏng khác */}
+  </div>
+);
 
 function ChatContent() {
   const state = chatStore.use();
+  const connection = ConnectionSignify.use().connection;
 
-  const activeChatId = state.activeChatId;
-  const messages = state.messages[activeChatId] || [];
+  const getChatHistory = async () => {
+    if (connection) {
+      try {
+        const chatHistory = await connection.invoke(
+          "GetChatHistory",
+          state.activeChatId
+        );
+        chatStore.set((v) => {
+          v.value.messages = chatHistory;
+        });
+      } catch (error) {
+        console.error("Error retrieving chat history:", error);
+      }
+    }
+  };
 
-  if (!messages || messages.length === 0) {
+  useEffect(() => {
+    if (connection && state.activeChatId !== 1) {
+      getChatHistory();
+    }
+  }, [connection, state.loadMessages]);
+
+  const myId = sAccount.value.id;
+
+  if (!state.messages) {
+    return <SkeletonCard />;
+  }
+
+  if (state.messages.length === 0) {
     return <div className="text-gray-400">No messages</div>;
   }
 
   return (
-    <div className="space-y-3">
-      {messages.map((msg, idx) => {
-        // Xác định tin nhắn này là của "Me" hay của user khác
-        const isMe = msg.from === "Me";
-
-        const isFirstInGroup = idx === 0 || msg.from !== messages[idx - 1].from;
+    // Bọc danh sách tin nhắn trong div với chiều cao tối đa và overflow-y-auto
+    <div className="min-h-[526px] max-h-full overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
+      {state.messages.map((msg, idx) => {
+        // Xác định tin nhắn của mình dựa trên id của sender
+        const isMe = msg.senderId.id === myId;
+        // Kiểm tra tin nhắn này có phải là tin đầu tiên của nhóm không
+        const isFirstInGroup =
+          idx === 0 || msg.senderId.id !== state.messages[idx - 1].senderId.id;
 
         let bubbleClass = `bubble ${isMe ? "bubble-me" : "bubble-other"}`;
         if (isFirstInGroup) {
@@ -33,21 +93,23 @@ function ChatContent() {
               isMe ? "justify-end" : "justify-start"
             }`}
           >
-            {/* Nếu là user khác, icon nằm bên trái */}
+            {/* Nếu tin nhắn không phải của mình, hiển thị avatar bên trái */}
             {!isMe && (
               <img
-                src="https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg"
+                src={
+                  state.imageLink !== "N/A"
+                    ? state.imageLink
+                    : "https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg"
+                }
                 alt="Avatar"
                 className="w-6 h-6 rounded-full object-cover mr-2"
               />
             )}
-
-            {/* Bubble chat */}
+            {/* Hiển thị nội dung tin nhắn */}
             <div className={bubbleClass}>
-              <span className="block">{msg.text}</span>
+              <span className="block">{msg.message}</span>
             </div>
-
-            {/* Nếu là mình, icon nằm bên phải */}
+            {/* Nếu tin nhắn của mình, hiển thị avatar bên phải */}
             {isMe && (
               <img
                 src="https://as2.ftcdn.net/v2/jpg/09/37/40/83/1000_F_937408328_ZhK92JRrPqjUlFROdHqOyJQeoIorEvqM.jpg"

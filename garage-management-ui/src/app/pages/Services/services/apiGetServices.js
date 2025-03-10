@@ -13,11 +13,11 @@ export const getServicesWithSignify = async () => {
     if (filters.carPartName) {
       queryParams += `&CarPartName=${encodeURIComponent(filters.carPartName)}`;
     }
-    // if (filters.serviceCategory) {
-    //   queryParams += `&serviceCategory=${encodeURIComponent(
-    //     filters.serviceCategory
-    //   )}`;
-    // }
+    if (filters.serviceCategory) {
+      queryParams += `&ServiceCategory=${encodeURIComponent(
+        filters.serviceCategory
+      )}`;
+    }
     if (filters.category) {
       queryParams += `&CarCategoryName=${encodeURIComponent(filters.category)}`;
     }
@@ -37,7 +37,7 @@ export const getServicesWithSignify = async () => {
       false
     );
     if (response != null) {
-      return response.data.value;
+      return response.data;
     } else {
       console.error(`Error: Received status ${response.error}`);
       return [];

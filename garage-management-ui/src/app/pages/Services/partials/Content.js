@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SearchService from "./SearchService";
 import CardService from "./CardService";
 import { getServicesWithSignify } from "../services/apiGetServices";
 import { sServiceHome } from "../services/SignifyServiceHome";
+import Pagin from "./Pagin";
 
 // Component skeleton card, mô phỏng bố cục của CardService thật
 const SkeletonCard = () => (
@@ -31,19 +32,25 @@ const SkeletonCard = () => (
 
 const Content = () => {
   const [services, setServices] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const loading = useRef(true);
   const serviceHome = sServiceHome.use();
 
   useEffect(() => {
     async function fetchServices() {
-      setLoading(true);
+      loading.current = true;
       const data = await getServicesWithSignify();
-      setServices(data);
-      setLoading(false);
+      setServices(data.value);
+      loading.current = false;
+
+      sServiceHome.set((v) => {
+        (serviceHome.pageNumber = data.paging.currentPage),
+          (v.value.totalPages = data.paging.totalPages),
+          (v.value.hasNext = data.paging.hasNext),
+          (v.value.hasPrevious = data.paging.hasPrevious);
+      });
     }
     fetchServices();
-  }, [serviceHome.search]);
-
+  }, [serviceHome.search, serviceHome.pageNumber]);
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-12 gap-8">
@@ -54,38 +61,41 @@ const Content = () => {
 
         {/* Phần Danh sách dịch vụ - chiếm 9/12 */}
         <div className="col-span-12 md:col-span-9">
-          {loading ? (
+          {loading.current ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {Array.from({ length: 6 }).map((_, index) => (
                 <SkeletonCard key={index} />
               ))}
             </div>
           ) : services.length !== 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-slide-down">
-              {services.map((service) => (
-                <CardService
-                  key={service.id}
-                  id={service.id}
-                  title={service.serviceName}
-                  partName={service.partName}
-                  category={service.category}
-                  serviceCategory={service.serviceCategory}
-                  image={
-                    service.imageLink && service.imageLink.length > 0
-                      ? service.imageLink[0]
-                      : "/assets/img/service_img_5.jpg"
-                  }
-                  icon={service.action}
-                  price={service.price}
-                  onBook={() =>
-                    alert(`Booking service: ${service.serviceName}`)
-                  }
-                  onView={() =>
-                    alert(`Viewing details for: ${service.serviceName}`)
-                  }
-                />
-              ))}
-            </div>
+            <>
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 animate-slide-down">
+                {services.map((service) => (
+                  <CardService
+                    key={service.id}
+                    id={service.id}
+                    title={service.serviceName}
+                    partName={service.partName}
+                    category={service.category}
+                    serviceCategory={service.serviceCategory}
+                    image={
+                      service.imageLink && service.imageLink.length > 0
+                        ? service.imageLink[0]
+                        : "/assets/img/service_img_5.jpg"
+                    }
+                    icon={service.action}
+                    price={service.price}
+                    onBook={() =>
+                      alert(`Booking service: ${service.serviceName}`)
+                    }
+                    onView={() =>
+                      alert(`Viewing details for: ${service.serviceName}`)
+                    }
+                  />
+                ))}
+              </div>
+              <Pagin />
+            </>
           ) : (
             <div className="uppercase">
               No service found. Try adjusting your filters.

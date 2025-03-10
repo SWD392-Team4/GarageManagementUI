@@ -28,6 +28,7 @@ const componentMap = {
   Vision: lazy(() => import("../pages/AboutUs/partials/Vision")),
   LoginPage: lazy(() => import("../pages/AuthCustomer/LoginPage")),
   Chat: lazy(() => import("../pages/Chat/Chat")),
+  Chat2: lazy(() => import("../pages/Chat/Chat2")),
   RegisterPage: lazy(() => import("../pages/AuthCustomer/RegisterPage")),
   ConfirmEmailPage: lazy(() =>
     import("../pages/AuthCustomer/ConfirmEmailPage")
@@ -71,8 +72,12 @@ const componentMap = {
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
   ManageService: lazy(() => import("../pages/ManageService/ManageService")),
-  ManageGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/ManageGoodsIssued")),
-  CreateGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/CreateGoodsIssued")),
+  ManageGoodsIssued: lazy(() =>
+    import("../pages/ManageGoodsIssued/ManageGoodsIssued")
+  ),
+  CreateGoodsIssued: lazy(() =>
+    import("../pages/ManageGoodsIssued/CreateGoodsIssued")
+  ),
   ManageCarPartCate: lazy(() =>
     import("../pages/ManageCarPartCate/ManageCarPartCate")
   ),

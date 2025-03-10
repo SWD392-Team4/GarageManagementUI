@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaUser, FaShoppingCart, FaClipboardList, FaCog } from "react-icons/fa";
 import { MdOutlineLogout } from "react-icons/md";
+import { IoMdChatboxes } from "react-icons/io";
 
 export default function SidebarCustomer() {
   const { t } = useTranslation("sidebar_customer");
@@ -19,6 +20,7 @@ export default function SidebarCustomer() {
       path: "orders",
       icon: <FaShoppingCart />,
     }, // Chưa có route cụ thể
+    { text: t("menu.chatting"), path: "chatting", icon: <IoMdChatboxes /> },
     { text: t("menu.settings"), path: "settings", icon: <FaCog /> },
     { text: t("menu.logout"), path: "logout", icon: <MdOutlineLogout /> },
   ];

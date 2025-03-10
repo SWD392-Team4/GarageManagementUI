@@ -1,20 +1,28 @@
 import React from "react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
 
-const Pagination = ({ currentPage, totalPages, hasPrevious, hasNext, onPageChange }) => {
-  console.log("Pagination Props:", { currentPage, totalPages, hasPrevious, hasNext, onPageChange });
+const Pagination = ({
+  currentPage,
+  totalPages,
+  hasPrevious,
+  hasNext,
+  onPageChange,
+}) => {
+  // console.log("Pagination Props:", { currentPage, totalPages, hasPrevious, hasNext, onPageChange });
   const MAX_VISIBLE_PAGES = 5;
 
   const getVisiblePages = () => {
     if (totalPages <= MAX_VISIBLE_PAGES) {
       return Array.from({ length: totalPages }, (_, index) => index + 1);
     }
-    
+
     const half = Math.floor(MAX_VISIBLE_PAGES / 2);
     if (currentPage <= half) {
-      return [...Array(MAX_VISIBLE_PAGES).keys()].map(i => i + 1);
+      return [...Array(MAX_VISIBLE_PAGES).keys()].map((i) => i + 1);
     } else if (currentPage >= totalPages - half) {
-      return [...Array(MAX_VISIBLE_PAGES).keys()].map(i => totalPages - MAX_VISIBLE_PAGES + 1 + i);
+      return [...Array(MAX_VISIBLE_PAGES).keys()].map(
+        (i) => totalPages - MAX_VISIBLE_PAGES + 1 + i
+      );
     } else {
       return [
         currentPage - half,
@@ -33,7 +41,11 @@ const Pagination = ({ currentPage, totalPages, hasPrevious, hasNext, onPageChang
         onClick={() => hasPrevious && onPageChange(currentPage - 1)}
         disabled={!hasPrevious}
         className={`px-4 py-2 flex items-center gap-1 border rounded-lg transition
-          ${!hasPrevious ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"}
+          ${
+            !hasPrevious
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-gray-200 hover:bg-gray-300"
+          }
         `}
       >
         <ArrowLeftIcon className="h-5 w-5" />
@@ -59,7 +71,11 @@ const Pagination = ({ currentPage, totalPages, hasPrevious, hasNext, onPageChang
             key={page}
             onClick={() => onPageChange(page)}
             className={`px-3 py-2 rounded-lg border transition 
-              ${currentPage === page ? "bg-red-500 text-white" : "bg-gray-100 hover:bg-gray-200"}
+              ${
+                currentPage === page
+                  ? "bg-red-500 text-white"
+                  : "bg-gray-100 hover:bg-gray-200"
+              }
             `}
           >
             {page}
@@ -84,7 +100,11 @@ const Pagination = ({ currentPage, totalPages, hasPrevious, hasNext, onPageChang
         onClick={() => hasNext && onPageChange(currentPage + 1)}
         disabled={!hasNext}
         className={`px-4 py-2 flex items-center gap-1 border rounded-lg transition 
-          ${!hasNext ? "bg-gray-300 cursor-not-allowed" : "bg-gray-200 hover:bg-gray-300"}
+          ${
+            !hasNext
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-gray-200 hover:bg-gray-300"
+          }
         `}
       >
         Next
