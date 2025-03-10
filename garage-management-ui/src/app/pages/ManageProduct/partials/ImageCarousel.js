@@ -69,7 +69,7 @@ const ImageCarousel = ({ linkImage, imagesWatch, setImages, setImageFiles, isEdi
                         <img
                             src={imagesToShow[currentIndex]}
                             alt="Main Product"
-                            className={`w-full h-full object-contain rounded-lg ${isEditing && currentIndex >= validLinkImages.length ? "border-4 border-blue-500 shadow-lg glow" : ""
+                            className={`w-full h-full object-cover rounded-lg ${isEditing && currentIndex >= validLinkImages.length ? "border-4 border-blue-500 shadow-lg glow" : ""
                                 }`}
                         />
                     ) : (
@@ -114,7 +114,7 @@ const ImageCarousel = ({ linkImage, imagesWatch, setImages, setImageFiles, isEdi
                             <img
                                 src={img}
                                 alt={`Thumbnail ${index}`}
-                                className="w-full h-full object-contain rounded-lg"
+                                className="w-full h-full object-cover rounded-lg"
                             />
                         </motion.div>
                     ))}
