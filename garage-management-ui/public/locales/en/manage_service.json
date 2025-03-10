@@ -28,6 +28,20 @@
             "choose": "Choose Status",
             "active": "Active",
             "inactive": "Inactive"
-        }
+        },
+        "service_feedback": "Service Feedback",
+        "feedback_id": "Feedback ID",
+        "feedback": "Feedback",
+        "emoji": "Emoji",
+        "customer_id": "Customer ID",
+        "service_id": "Service ID",
+        "created_at": "Created At",
+        "updated_at": "Updated At",
+        "no_feedback": "No feedback available",
+        "common": {
+            "save": "Save",
+            "close": "Close"
+        },
+        "edit_status": "Edit Status"
     }
 }

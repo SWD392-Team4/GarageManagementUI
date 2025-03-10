@@ -1,4 +1,5 @@
 import UserService from "../../../hooks/services/UserService"
+import { formatDateForFeedBack } from "../schemas/ServiceSchemas";
 import { sService } from "./ServiceSignify"
 
 const userService = new UserService();
@@ -11,7 +12,6 @@ export const getAllService = async (PageNumber = 1) => {
             null,
             true
         );
-
 
         if (response.data.value != null) {
             userService.showToast(200, "Loading List Service Successful");
@@ -180,7 +180,7 @@ export const updateService = async (serviceId, updateData) => {
 export const getCarCategory = async () => {
     try {
         const response = await userService.sendAjax(
-            "/api/car-categories?PageSize=0&Fields=id%2C%20category",
+            "/api/car-categories?PageSize=50&Fields=id%2C%20category",
             "GET",
             null,
             true,
@@ -215,4 +215,28 @@ export const getCarPart = async () => {
     } catch (error) {
         console.error("Fail to loading Car Part: ", error.message);
     }
+}
+
+export const getFeedbackByServiceId = async (serviceId) => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/services/feebacks/service/${serviceId}`,
+            "GET",
+            null,
+            true
+        );
+        response.data.value = response.data.value.map((pre) => ({
+            ...pre,
+            createdAt: formatDateForFeedBack(pre.createdAt),
+            updatedAt: formatDateForFeedBack(pre.updatedAt)
+        }));
+
+
+
+        userService.showToast(200, "Loading Feedback successful");
+        return response
+    } catch (error) {
+        console.error("Fail with: ", error);
+    }
+
 }

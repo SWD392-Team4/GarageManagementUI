@@ -28,6 +28,20 @@
             "choose": "Chọn trạng thái",
             "active": "Hoạt động",
             "inactive": "Không hoạt động"
-        }
+        },
+        "service_feedback": "Phản hồi dịch vụ",
+        "feedback_id": "ID phản hồi",
+        "feedback": "Nội dung phản hồi",
+        "emoji": "Biểu tượng cảm xúc",
+        "customer_id": "ID khách hàng",
+        "service_id": "ID dịch vụ",
+        "created_at": "Ngày tạo",
+        "updated_at": "Ngày cập nhật",
+        "no_feedback": "Không có phản hồi nào",
+        "common": {
+            "save": "Lưu",
+            "close": "Đóng"
+        },
+        "edit_status": "Chỉnh sửa trạng thái"
     }
 }

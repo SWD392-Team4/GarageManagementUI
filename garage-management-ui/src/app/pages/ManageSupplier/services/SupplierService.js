@@ -113,6 +113,10 @@ export const getSupplierDetails = async (supplierId) => {
             true
         );
 
+        response.data.value.createdAt = formatDate(response.data.value.createdAt);
+        response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
+
+
         userService.showToast(200, "Get Supplier details succesful")
         return response
     } catch (error) {
