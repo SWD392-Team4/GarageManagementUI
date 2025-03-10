@@ -6,12 +6,7 @@ const FilterBar = ({ onFilterChange, initialFilters }) => {
   const {t} = useTranslation("customer_product_filter");
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
-  // const [filters, setFilters] = useState({
-  //   searchTerm: "",
-  //   category: "",
-  //   brand: "",
-  //   price: [0, 500000], // Adjust max range based on data
-  // });
+  
   const [filters, setFilters] = useState(initialFilters);
   useEffect(() => {
     setFilters(initialFilters); // Update filters when initialFilters change

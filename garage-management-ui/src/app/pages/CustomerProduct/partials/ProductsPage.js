@@ -37,15 +37,14 @@ const ProductsPage = () => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
+        console.log(appliedFilters)
         const response = await getAllProducts(
           paging.currentPage,
           12,
           appliedFilters
         );
-        console.log(response);
         if (response?.value) {
           setFilteredProducts(response.value);
-
           setPaging({
             currentPage: response.paging.currentPage,
             totalPages: response.paging.totalPages,

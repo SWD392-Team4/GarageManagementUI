@@ -15,8 +15,8 @@ export const getAllProducts = async (
       ProductName: filters?.searchTerm || "",
       ProductCategory: filters?.category || "",
       ProductBrandName: filters?.brand || "",
-      MinPrice: filters?.price ? Number(filters.price[0]) : 0,
-      MaxPrice: filters?.price ? Number(filters.price[1]) : 500000,
+      // MinPrice: filters?.price ? Number(filters.price[0]) : 0,
+      // MaxPrice: filters?.price ? Number(filters.price[1]) : 500000,
       ProductStatus: "Active",
     }).toString();
     console.log("API Query:", queryString);
@@ -30,8 +30,8 @@ export const getAllProducts = async (
     if (response?.data?.value) {
       response.data.value = response.data.value.map((product) => ({
         ...product,
-        CreatedAt: formatDate(product.CreatedAt),
-        UpdatedAt: formatDate(product.UpdatedAt),
+        createdAt: formatDate(product.createdAt),
+        updatedAt: formatDate(product.updatedAt),
       }));
     }
 
@@ -54,8 +54,8 @@ export const getProduct = async (productId) => {
 
     return {
       ...response.data.value,
-      CreatedAt: formatDate(response.data.value.CreatedAt),
-      UpdatedAt: formatDate(response.data.value.UpdatedAt),
+      createdAt: formatDate(response.data.value.createdAt),
+      updatedAt: formatDate(response.data.value.updatedAt),
     };
   } catch (error) {
     console.error("Error fetching product:", error);
@@ -72,7 +72,7 @@ export const getAllCategories = async () => {
       null,
       false
     );
-    return response?.data?.value.map((category) => category.Category) || [];
+    return response?.data?.value.map((category) => category.category) || [];
   } catch (error) {
     console.error("Error fetching categories:", error);
     userService.showToast(400, "Error loading categories");
@@ -88,7 +88,7 @@ export const getAllBrands = async () => {
       null,
       false
     );
-    return response?.data?.value.map((brand) => brand.BrandName) || [];
+    return response?.data?.value.map((brand) => brand.brandName) || [];
   } catch (error) {
     console.error("Error fetching brands:", error);
     userService.showToast(400, "Error loading brands");
