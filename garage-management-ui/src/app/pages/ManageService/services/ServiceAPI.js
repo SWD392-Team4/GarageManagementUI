@@ -64,6 +64,25 @@ export const createService = async (data, formData) => {
         if (formData) {
             await createServiceImage(response.data.id, formData);
         }
+
+        //clear signify
+        sService.set((pre) => ([
+            pre.value.id = "",
+            pre.value.serviceName = "",
+            pre.value.serviceCategory = "",
+            pre.value.partName = "",
+            pre.value.category = "",
+            pre.value.price = "",
+            pre.value.workNature = "",
+            pre.value.action = "",
+            pre.value.estimatedHours = "",
+            pre.value.status = "",
+        ]))
+        //parse thong tin
+        response.data.value.serviceName = <>{response.data.value.serviceName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+        //set thong tin signify
+        sService.set(response.data.value);
+
         userService.showToast(200, "Create Service Successful");
         return response;
 
@@ -161,7 +180,7 @@ export const updateService = async (serviceId, updateData) => {
 export const getCarCategory = async () => {
     try {
         const response = await userService.sendAjax(
-            "/api/car-categories",
+            "/api/car-categories?PageSize=0&Fields=id%2C%20category",
             "GET",
             null,
             true,

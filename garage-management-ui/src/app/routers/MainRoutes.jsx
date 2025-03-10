@@ -72,12 +72,21 @@ const componentMap = {
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
   ManageService: lazy(() => import("../pages/ManageService/ManageService")),
+<<<<<<< HEAD
   ManageGoodsIssued: lazy(() =>
     import("../pages/ManageGoodsIssued/ManageGoodsIssued")
   ),
   CreateGoodsIssued: lazy(() =>
     import("../pages/ManageGoodsIssued/CreateGoodsIssued")
   ),
+=======
+  ManageGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/ManageGoodsIssued")),
+  CreateGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/CreateGoodsIssued")),
+  ManageInvoiceSale: lazy(() => import("../pages/ManageInvoiceSale/ManageInvoiceSale")),
+  CreateInvoiceSale: lazy(() => import("../pages/ManageInvoiceSale/CreateInvoiceSale")),
+  ManageInvoiceService: lazy(() => import("../pages/ManageInvoiceService/ManageInvoiceService")),
+  CreateInvoiceService: lazy(() => import("../pages/ManageInvoiceService/CreateInvoiceService")),
+>>>>>>> Develop
   ManageCarPartCate: lazy(() =>
     import("../pages/ManageCarPartCate/ManageCarPartCate")
   ),

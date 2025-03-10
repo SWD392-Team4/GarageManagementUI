@@ -1,0 +1,29 @@
+{
+    "manage_supplier_contact": {
+        "title": "Quản lý Liên Hệ Nhà Cung Cấp",
+        "create": "Tạo Liên Hệ Nhà Cung Cấp",
+        "id": "ID",
+        "contactPersonName": "Tên Người Liên Hệ",
+        "contactPosition": "Chức Vụ",
+        "contactPhoneNumber": "Số Điện Thoại",
+        "contactEmail": "Email",
+        "createdAt": "Ngày Tạo",
+        "updatedAt": "Ngày Cập Nhật",
+        "edit": "Chỉnh Sửa Liên Hệ Nhà Cung Cấp",
+        "search_placeholder": "Nhập từ khóa tìm kiếm...",
+        "search_status_enum": {
+            "choose": "Chọn trạng thái",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động"
+        },
+        "clear_filters": "Xóa bộ lọc",
+        "search": "Tìm kiếm",
+        "status": "Trạng thái",
+        "cancel": "Huỷ",
+        "supplierId": "Mã người cung cấp",
+        "select_supplier": "Chọn nhà cung cấp",
+        "required": "Bắt buộc",
+        "creating": "Đang tạo",
+        "save": "Lưu"
+    }
+}

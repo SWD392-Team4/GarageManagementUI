@@ -31,6 +31,7 @@
         "not_found": "Product not found",
         "edit": "Edit",
         "save": "Save",
-        "saving": "Saving"
+        "saving": "Saving",
+        "cancel": "Cancel"
     }
 }

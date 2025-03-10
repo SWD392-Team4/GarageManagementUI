@@ -18,6 +18,7 @@ export default function BaseTable({
   signifyInformation
 }) {
   const { t } = useTranslation("base_table");
+  const isLoading = !data || data.length === 0;
 
   const table = useReactTable({
     data,
@@ -76,8 +77,24 @@ export default function BaseTable({
 
 
 
-              {/* Du lieu co api */}
-              {table.getRowModel().rows.length > 0 ? (
+              {isLoading ? (
+                Array(10)
+                  .fill(0)
+                  .map((_, index) => (
+                    <tr key={index} className="animate-pulse">
+                      {columns.map((_, colIndex) => (
+                        <td key={colIndex} className="border p-3 text-sm">
+                          <div className="h-4 bg-gray-300 rounded w-full"></div>
+                        </td>
+                      ))}
+                      {actions && (
+                        <td className="border p-3 text-sm">
+                          <div className="h-4 bg-gray-300 rounded w-full"></div>
+                        </td>
+                      )}
+                    </tr>
+                  ))
+              ) : data.length > 0 ? (
                 table.getRowModel().rows.map((row) => (
                   <tr key={row.original?.Id || row.id} className="hover:bg-gray-100">
                     {row.getVisibleCells().map((cell) => (
@@ -89,7 +106,7 @@ export default function BaseTable({
                       <td className="border-r border-b h-full p-3 flex flex-wrap gap-2">
                         {actions.map((action, index) => {
                           if (!action || !action.type) return null;
-
+                          
                           const actionProps = {
                             key: index,
                             className: "p-2 rounded-sm bg-gray-700 text-white hover:bg-gray-900",

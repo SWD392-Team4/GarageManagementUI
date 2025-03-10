@@ -10,5 +10,6 @@ export const formatDate = (dateString) => {
 
 export const formatYearMonthDay = (date) => {
     if (!date) return "";
-    return new Date(date).toISOString().split("T")[0];
+    const formattedDate = new Date(date).toISOString().split("T")[0];
+    return formattedDate;
 };

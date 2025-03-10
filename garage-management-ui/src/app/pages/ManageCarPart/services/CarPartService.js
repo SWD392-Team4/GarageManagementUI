@@ -101,9 +101,6 @@ export const updateCarPart = async (carPartId, updatedData) => {
             return null;
         }
 
-
-
-
     } catch (error) {
         console.error("Error updating car part:", error);
         userService.showToast(400, "Error updating car part");

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { FaEdit, FaSave } from "react-icons/fa";
+import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
 import { getProduct, updateProduct, getAllCategory, getAllBrand } from "./services/ProductService";
@@ -17,7 +17,7 @@ export default function ProductDetails() {
   const [brands, setBrands] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
 
-  const { register, handleSubmit, setValue, watch } = useForm();
+  const { register, handleSubmit, setValue, watch, reset } = useForm();
 
 
   //theo doi trang thai
@@ -79,6 +79,22 @@ export default function ProductDetails() {
     } catch (error) {
       console.error("Error updating product:", error);
     }
+  };
+
+  const handleCancel = () => {
+    // Khôi phục lại dữ liệu gốc từ sản phẩm
+    reset({
+      productName: product.productName,
+      productBarcode: product.productBarcode,
+      productDescription: product.productDescription,
+      productCategoryId: categories.find(cat => cat.category === product.category)?.id || "",
+      brandId: brands.find(brand => brand.brandName === product.brandName)?.id || "",
+      productPrice: product.productPrice,
+      status: product.status,
+      createdAt: product.createdAt,
+      updatedAt: product.updatedAt,
+    });
+    setIsEditing(false);
   };
 
 
@@ -171,8 +187,6 @@ export default function ProductDetails() {
             </div>
           </div>
 
-
-
           <div className="mt-6 p-4 border-t" data-color-mode="light">
             <h2 className="text-xl font-semibold mb-2">{t("product_details.description")}</h2>
             {isEditing ? (
@@ -186,17 +200,24 @@ export default function ProductDetails() {
           </div>
 
 
-          <div className="flex justify-end mt-6">
-            {isEditing ? (
+          {/* Nút Save và Cancel */}
+          {isEditing && (
+            <div className="flex justify-end mt-6 gap-2">
               <button
-                type="submit" // Chỉ submit khi đang chỉnh sửa
+                type="button"
+                onClick={handleCancel}
+                className="bg-gray-400 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+              >
+                <FaTimes /> {t("product_details.cancel")}
+              </button>
+              <button
+                type="submit"
                 className="bg-green-500 text-white px-4 py-2 rounded-lg flex items-center gap-2"
               >
                 <FaSave /> {t("product_details.save")}
               </button>
-            ) : null}
-          </div>
-
+            </div>
+          )}
 
 
         </form>
