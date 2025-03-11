@@ -87,8 +87,8 @@ export default function SideBarAdmin({
 
       <aside
         className={`h-screen bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 flex flex-col justify-between z-40 overflow-y-auto ${isMobile
-            ? `fixed top-0 left-0 w-64 ${isSidebarOpen ? "block" : "hidden"}`
-            : `relative ${isSidebarOpen ? "w-64" : "w-16"}`
+          ? `fixed top-0 left-0 w-64 ${isSidebarOpen ? "block" : "hidden"}`
+          : `relative ${isSidebarOpen ? "w-64" : "w-16"}`
           }`}
       >
         <div>
@@ -138,17 +138,61 @@ export default function SideBarAdmin({
                 </Link>
                 <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
               </li>
+
+
+              {/* Package Service */}
               <li className="group">
-                <Link
-                  to="/admin/service"
-                  className="flex items-center p-2  text-white  transition-all rounded-lg"
+                <button
+                  onClick={() => toggleSubMenu("package-service")}
+                  className="flex items-center p-2 text-white transition-all rounded-lg"
                 >
                   <FaClipboardList className="w-6 h-6" />
                   {isSidebarOpen && (
                     <span className="ml-3">{t("sidebar_admin.service")}</span>
                   )}
-                </Link>
+                  {isSidebarOpen && (
+                    <span className="ml-2">
+                      {openMenu === "package-service" ? (
+                        <FaChevronDown />
+                      ) : (
+                        <FaChevronRight />
+                      )}
+                    </span>
+                  )}
+                </button>
                 <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
+                {openMenu === "package-service" && (
+                  <ul className="ml-6 space-y-1">
+                    <li>
+                      <div className="group/link">
+                        <Link
+                          to="/admin/package-service"
+                          className="text-white flex items-center p-2"
+                        >
+                          <FaClipboardList className="w-5 h-5" />
+                          <span className="ml-2">
+                            {t("sidebar_admin.package_service")}
+                          </span>
+                        </Link>
+                        <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="group/link">
+                        <Link
+                          to="/admin/service"
+                          className="text-white flex items-center p-2"
+                        >
+                          <FaClipboardList className="w-5 h-5" />
+                          <span className="ml-2">
+                            {t("sidebar_admin.service_list")}
+                          </span>
+                        </Link>
+                        <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
+                      </div>
+                    </li>
+                  </ul>
+                )}
               </li>
 
               {/* Suppliers */}

@@ -93,7 +93,7 @@ class UserService {
           method: type,
           data: data ? (isFileUpload ? data : JSON.stringify(data)) : undefined,
           processData: !isFileUpload,
-          contentType: isFileUpload ? false : "application/json-patch+json",
+          contentType: isFileUpload ? false : "multipart/form-data",
           headers: headers,
 
           success: (response, textStatus, xhr) => {
