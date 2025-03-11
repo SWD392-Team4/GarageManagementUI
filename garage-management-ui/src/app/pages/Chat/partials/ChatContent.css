@@ -18,6 +18,13 @@
   background-color: #e5e7eb; /* Tailwind blue-500 */
   color: #111827;
 }
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Dành cho IE và Edge */
+  scrollbar-width: none; /* Dành cho Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Dành cho Chrome, Safari và Opera */
+}
 
 /* 
    * Arrow bên trái (dành cho bubble-other).

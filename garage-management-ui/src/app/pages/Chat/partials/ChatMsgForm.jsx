@@ -4,6 +4,10 @@ import { ConnectionSignify } from "../../Notification/services/connectionSignify
 import { chatStore } from "../chatStore";
 import * as signalR from "@microsoft/signalr";
 import { useForm } from "react-hook-form";
+import {
+  notificationTypes,
+  sendNotification,
+} from "../../Notification/services/sendNotification";
 
 function ChatMsgForm() {
   const connection = ConnectionSignify.use().connection;
@@ -14,12 +18,23 @@ function ChatMsgForm() {
 
   async function sendMessage(data) {
     if (connection.state === signalR.HubConnectionState.Connected) {
-      await connection.invoke(
-        "NewMessage",
-
-        data.message,
-        chatStore.value.activeChatId
-      );
+      if (
+        chatStore.value.activeChatId !== 1 &&
+        chatStore.value.activeChatId !== null
+      ) {
+        await connection.invoke(
+          "NewMessage",
+          data.message,
+          chatStore.value.activeChatId
+        );
+        await sendNotification(
+          connection,
+          notificationTypes.MESSAGE_SENT,
+          chatStore.value.activeChatId
+        );
+      } else {
+        await connection.invoke("SendMessageToManagers", data.message, null);
+      }
       reset();
     } else {
       console.error("SignalR is not connected!");
@@ -36,7 +51,7 @@ function ChatMsgForm() {
         />
         <button
           type="submit"
-          disabled={!messageValue}
+          disabled={!messageValue && chatStore.value.activeChatId !== null}
           className={`px-4 py-2 bg-blue-500 text-white rounded-r-sm ${
             !messageValue ? "opacity-50 cursor-not-allowed" : ""
           }`}

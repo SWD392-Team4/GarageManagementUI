@@ -1,0 +1,14 @@
+{
+  "notifications": "Thông báo",
+  "markAsRead": "Đánh dấu đã đọc",
+  "clearAll": "Xóa tất cả",
+  "new": "Mới",
+  "earlier": "Trước đó",
+  "showAll": "Xem tất cả",
+  "from": "Từ",
+  "messages": {
+    "newMessage": "Bạn có một tin nhắn mới",
+    "appointmentAssigned": "Cuộc hẹn của bạn đã được giao",
+    "other": "Thông báo khác"
+  }
+}

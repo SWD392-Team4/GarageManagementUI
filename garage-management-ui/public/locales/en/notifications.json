@@ -1,0 +1,14 @@
+{
+  "notifications": "Notifications",
+  "markAsRead": "Mark as Read",
+  "clearAll": "Clear All",
+  "new": "New",
+  "earlier": "Earlier",
+  "showAll": "Show All",
+  "from": "From",
+  "messages": {
+    "newMessage": "You have a new message",
+    "appointmentAssigned": "Your appointment has been assigned",
+    "other": "Other notifications"
+  }
+}
