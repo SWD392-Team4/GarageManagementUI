@@ -52,8 +52,8 @@
         "element": "AboutUs",
         "children": [
           {
-            "path": "mision",
-            "element": "Mision"
+            "path": "mission",
+            "element": "Mission"
           },
           {
             "path": "vision",

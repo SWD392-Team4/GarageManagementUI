@@ -23,7 +23,7 @@ const componentMap = {
     import("../pages/Services/partials/ServiceDetails")
   ),
 
-  Mision: lazy(() => import("../pages/AboutUs/partials/Mision")),
+  Mission: lazy(() => import("../pages/AboutUs/partials/Mission")),
   History: lazy(() => import("../pages/AboutUs/partials/History")),
   Vision: lazy(() => import("../pages/AboutUs/partials/Vision")),
   LoginPage: lazy(() => import("../pages/AuthCustomer/LoginPage")),

@@ -1,6 +1,6 @@
 const QualitySection = () => {
   return (
-    <section className="relative pt-24 bg-gray-100">
+    <section className="relative p-10 bg-gray-100">
       <div className="absolute top-0 left-0 w-full h-full -z-10">
         <img
           src="/assets/img/car-shape.png"
