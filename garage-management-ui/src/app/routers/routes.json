@@ -151,7 +151,9 @@
     "path": "/customer",
     "element": "LayoutCustomer",
     "private": {
-      "allowedRoles": ["Customer"]
+      "allowedRoles": [
+        "Customer"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -173,7 +175,10 @@
     "path": "/Mechanic",
     "element": "LayoutMechanic",
     "private": {
-      "allowedRoles": ["Administrator", "Mechanic"]
+      "allowedRoles": [
+        "Administrator",
+        "Mechanic"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -205,12 +210,13 @@
       }
     ]
   },
-
   {
     "path": "/chat",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": ["Administrator"]
+      "allowedRoles": [
+        "Administrator"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -221,12 +227,13 @@
       }
     ]
   },
-
   {
     "path": "/admin",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": ["Administrator"]
+      "allowedRoles": [
+        "Administrator"
+      ]
     },
     "isSuspense": true,
     "children": [
@@ -253,6 +260,16 @@
       {
         "path": "employee",
         "element": "ManageEmployee",
+        "isSuspense2": true
+      },
+      {
+        "path": "package-service",
+        "element": "ManagePackageService",
+        "isSuspense2": true
+      },
+      {
+        "path": "package-service/create-package",
+        "element": "CreatePackageServicePage",
         "isSuspense2": true
       },
       {
@@ -320,7 +337,6 @@
         "element": "ManageService",
         "isSuspense2": true
       },
-
       {
         "path": "manage-customer",
         "element": "ManageCustomer",
@@ -334,6 +350,16 @@
       {
         "path": "invoice-goodsIssued/create-goodsIssued",
         "element": "CreateGoodsIssued",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goods-Received",
+        "element": "ManageGoodReceived",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goods-Received/create-goods-Received",
+        "element": "CreateGoodReceived",
         "isSuspense2": true
       },
       {
@@ -413,7 +439,10 @@
     "path": "/Cashier",
     "element": "LayoutCashier",
     "private": {
-      "allowedRoles": ["Administrator", "Cashier"]
+      "allowedRoles": [
+        "Administrator",
+        "Cashier"
+      ]
     },
     "isSuspense": true,
     "children": [

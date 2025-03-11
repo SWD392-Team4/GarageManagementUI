@@ -1,0 +1,44 @@
+{
+    "manage_package": {
+        "title": "Quản lý gói dịch vụ",
+        "create": "Tạo gói dịch vụ",
+        "id": "ID",
+        "packageName": "Tên gói",
+        "category": "Danh mục",
+        "serviceCategory": "Danh mục dịch vụ",
+        "type": "Loại",
+        "packagePrice": "Giá gói",
+        "validityPeriod": "Thời hạn hiệu lực",
+        "timeUnit": "Đơn vị thời gian",
+        "usageLimit": "Giới hạn sử dụng",
+        "status": "Trạng thái",
+        "createdAt": "Ngày tạo",
+        "updatedAt": "Ngày cập nhật",
+        "view": "Xem",
+        "search": "Tìm kiếm",
+        "clear_filters": "Xóa bộ lọc",
+        "search_package_name": "Tìm theo tên gói",
+        "search_category": "Tìm theo danh mục",
+        "search_service_category": "Tìm theo danh mục dịch vụ",
+        "search_type": "Tìm theo loại",
+        "search_status": "Tìm theo trạng thái",
+        "search_validity_period": "Tìm theo thời hạn hiệu lực",
+        "search_time_unit": "Tìm theo đơn vị thời gian",
+        "search_usage_limit": "Tìm theo giới hạn sử dụng",
+        "search_created_at": "Tìm theo ngày tạo",
+        "search_updated_at": "Tìm theo ngày cập nhật",
+        "search_min_price": "Tìm theo giá tối thiểu",
+        "search_max_price": "Tìm theo giá tối đa",
+        "search_placeholder": "Nhập từ khóa tìm kiếm...",
+        "search_status_enum": {
+            "choose": "Chọn trạng thái",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động"
+        },
+        "search_time_unit_enum": {
+            "choose": "Chọn đơn vị thời gian",
+            "days": "Ngày",
+            "months": "Tháng"
+        }
+    }
+}

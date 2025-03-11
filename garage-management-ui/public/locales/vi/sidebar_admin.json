@@ -32,6 +32,9 @@
     "employee_schedule": "Lịch",
     "extension": "Tiện ích",
     "extension-sub1": "Xem sản phẩm",
-    "invoice_goodsIssue": "Hoá đơn nhập"
+    "invoice_goodsIssue": "Hoá đơn xuất",
+    "invoice-goods-Received": "Hoá đơn nhập",
+    "service_list": "Danh sách dịch vụ",
+    "package_service": "Gói dịch vụ"
   }
 }

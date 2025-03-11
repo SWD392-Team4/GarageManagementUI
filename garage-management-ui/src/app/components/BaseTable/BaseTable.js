@@ -106,7 +106,7 @@ export default function BaseTable({
                       <td className="border-r border-b h-full p-3 flex flex-wrap gap-2">
                         {actions.map((action, index) => {
                           if (!action || !action.type) return null;
-                          
+
                           const actionProps = {
                             key: index,
                             className: "p-2 rounded-sm bg-gray-700 text-white hover:bg-gray-900",

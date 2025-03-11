@@ -72,6 +72,16 @@ const componentMap = {
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
   ManageService: lazy(() => import("../pages/ManageService/ManageService")),
+  ManageGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/ManageGoodsIssued")),
+  CreateGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/CreateGoodsIssued")),
+  ManageInvoiceSale: lazy(() => import("../pages/ManageInvoiceSale/ManageInvoiceSale")),
+  CreateInvoiceSale: lazy(() => import("../pages/ManageInvoiceSale/CreateInvoiceSale")),
+  ManageInvoiceService: lazy(() => import("../pages/ManageInvoiceService/ManageInvoiceService")),
+  CreateInvoiceService: lazy(() => import("../pages/ManageInvoiceService/CreateInvoiceService")),
+  ManageGoodReceived: lazy(() => import("../pages/ManageGoodReceived/ManageGoodReceived")),
+  CreateGoodReceived: lazy(() => import("../pages/ManageGoodReceived/CreateGoodReceived")),
+  ManagePackageService: lazy(() => import("../pages/ManagePackageService/ManagePackageService")),
+  CreatePackageServicePage: lazy(() => import("../pages/ManagePackageService/CreatePackageServicePage")),
   ManageGoodsIssued: lazy(() =>
     import("../pages/ManageGoodsIssued/ManageGoodsIssued")
   ),

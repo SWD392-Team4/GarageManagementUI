@@ -35,6 +35,9 @@
     "supplier_contact": "Supplier Contact",
     "extension": "Extension",
     "extension-sub1": "View products",
-    "invoice_goodsIssue": "Invoice GoodsIssue"
+    "invoice_goodsIssue": "Invoice GoodsIssue",
+    "invoice-goods-Received": "Invoice Goods Receipt",
+    "service_list": "Service List",
+    "package_service": "Package Service"
   }
 }
