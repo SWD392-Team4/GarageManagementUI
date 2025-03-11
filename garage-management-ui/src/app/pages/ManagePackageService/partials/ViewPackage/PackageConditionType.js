@@ -5,8 +5,10 @@ import {
     createPackageConditionType
 } from "../../services/PackageServiceAPI";
 import { FaEdit, FaSave, FaTimes, FaPlus } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 export default function PackageConditionType({ id }) {
+    const { t, i18n } = useTranslation("manage_package");
     const [conditions, setConditions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [editingId, setEditingId] = useState(null);
@@ -91,7 +93,7 @@ export default function PackageConditionType({ id }) {
     // Gửi API tạo điều kiện mới
     const handleSaveNewCondition = async () => {
         if (!newCondition.conditionValue) {
-            alert("Vui lòng nhập giá trị cho điều kiện!");
+            alert(t("manage_package.condition_type.enter_value"));
             return;
         }
 
@@ -120,17 +122,19 @@ export default function PackageConditionType({ id }) {
     };
 
     if (loading) {
-        return <p className="text-gray-500 text-center">Đang tải dữ liệu...</p>;
+        return <p className="text-gray-500 text-center">{t("manage_package.condition_type.loading")}</p>;
     }
 
     return (
-        <div className="border p-4 rounded-lg bg-white shadow-md">
-            <h2 className="text-lg font-semibold text-gray-700 mb-3">Package Condition Type</h2>
+        <div className="mt-6 border p-6 rounded-lg shadow-md bg-white">
+            <h2 className="text-lg font-semibold text-gray-700 mb-3">
+                {t("manage_package.condition_type.title")}
+            </h2>
 
             {/* Hiển thị nút tạo nếu còn thiếu điều kiện */}
             {missingConditions.length > 0 && (
                 <div className="mb-4">
-                    <p className="text-gray-600">Các điều kiện còn thiếu:</p>
+                    <p className="text-gray-600">{t("manage_package.condition_type.missing_conditions")}:</p>
                     <div className="flex gap-2">
                         {missingConditions.map((type) => (
                             <button
@@ -139,7 +143,7 @@ export default function PackageConditionType({ id }) {
                                 onClick={() => handleCreateCondition(type)}
                                 className="bg-blue-500 text-white px-3 py-1 rounded-lg flex items-center gap-1 hover:bg-blue-600 transition"
                             >
-                                <FaPlus /> {type}
+                                <FaPlus /> {t("manage_package.condition_type.add")} {type}
                             </button>
                         ))}
                     </div>
@@ -161,24 +165,25 @@ export default function PackageConditionType({ id }) {
                         onClick={handleSaveNewCondition}
                         className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
                     >
-                        <FaSave />
+                        <FaSave /> {t("manage_package.condition_type.save")}
                     </button>
                     <button
                         type="button"
                         onClick={handleCancelNewCondition}
                         className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-600"
                     >
-                        <FaTimes />
+                        <FaTimes /> {t("manage_package.condition_type.cancel")}
                     </button>
+
                 </div>
             )}
 
             <table className="w-full border-collapse border border-gray-300">
                 <thead className="bg-gray-200">
                     <tr>
-                        <th className="p-3 border border-gray-300 text-left">Condition Type</th>
-                        <th className="p-3 border border-gray-300 text-left">Condition Value</th>
-                        <th className="p-3 border border-gray-300 text-center">Action</th>
+                        <th className="p-3 border border-gray-300 text-left">{t("manage_package.condition_type.condition_type")}</th>
+                        <th className="p-3 border border-gray-300 text-left">{t("manage_package.condition_type.condition_value")}</th>
+                        <th className="p-3 border border-gray-300 text-center">{t("manage_package.condition_type.action")}</th>
                     </tr>
                 </thead>
                 <tbody>

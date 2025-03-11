@@ -12,8 +12,11 @@ import PackageServices from "./partials/ViewPackage/PackageServices";
 import SelectServiceModal from "./models/SelectServiceModal";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import PackageConditionType from "./partials/ViewPackage/PackageConditionType";
+import PackageHistory from "./partials/ViewPackage/PackageHistory";
+import { useTranslation } from "react-i18next";
 
 export default function ViewPackageServicePage() {
+  const { t, i8ln } = useTranslation("manage_package");
   const { id } = useParams();
   const [packageData, setPackageData] = useState(null);
   const [services, setServices] = useState([]); // Danh sách dịch vụ hiển thị
@@ -102,11 +105,11 @@ export default function ViewPackageServicePage() {
   };
 
   if (loading) {
-    return <div className="text-center text-lg py-6">Đang tải dữ liệu...</div>;
+    return <div className="text-center text-lg py-6">{t("manage_package.view.loading")}</div>;
   }
 
   if (!packageData) {
-    return <div className="text-center text-red-500 py-6">Không tìm thấy gói dịch vụ.</div>;
+    return <div className="text-center text-red-500 py-6">{t("manage_package.view.not_found")}</div>;
   }
 
   return (
@@ -120,7 +123,7 @@ export default function ViewPackageServicePage() {
             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition"
             onClick={() => setIsEditing(!isEditing)}
           >
-            {isEditing ? "Hủy" : "Chỉnh sửa"}
+            {isEditing ? t("manage_package.view.cancel") : t("manage_package.view.edit")}
           </button>
         </div>
 
@@ -139,10 +142,12 @@ export default function ViewPackageServicePage() {
 
           <PackageConditionType id={packageData.id} />
 
+          <PackageHistory id={packageData.id} />
+
           {isEditing && (
             <div className="mt-6 text-center">
               <button type="submit" className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
-                Lưu thay đổi
+                {t("manage_package.view.save_changes")} 
               </button>
             </div>
           )}

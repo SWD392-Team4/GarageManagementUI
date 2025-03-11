@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { createImagePackage, createImagePackageUpdate, deteleImagePackage } from "../../services/PackageServiceAPI";
 import { FaTrash, FaPlus } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 export default function PackageImages({ packageImages, setPackageImages, packageId }) {
+    const { t, i8ln } = useTranslation("manage_package");
     const [isUploading, setIsUploading] = useState(false);
     const [previewImages, setPreviewImages] = useState([]); // ✅ State lưu ảnh preview
 
@@ -95,12 +97,12 @@ export default function PackageImages({ packageImages, setPackageImages, package
         <div className="border p-6 rounded-lg shadow-md bg-white">
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-semibold">Hình ảnh gói</h2>
+                <h2 className="text-lg font-semibold">{t("manage_package.images.title")}</h2>
 
                 {/* Nút chọn ảnh */}
                 <label className="cursor-pointer bg-blue-500 text-white px-3 py-1.5 rounded-lg hover:bg-blue-600 flex items-center gap-2">
                     <FaPlus />
-                    Thêm ảnh
+                    {t("manage_package.images.add_image")}
                     <input type="file" accept="image/*" multiple onChange={handleSelectImage} className="hidden" />
                 </label>
             </div>
@@ -108,7 +110,7 @@ export default function PackageImages({ packageImages, setPackageImages, package
             {/* Hiển thị ảnh preview */}
             {previewImages.length > 0 && (
                 <div className="mt-4">
-                    <h3 className="text-md font-semibold mb-2">Ảnh xem trước</h3>
+                    <h3 className="text-md font-semibold mb-2">{t("manage_package.images.preview_title")}</h3>
                     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                         {previewImages.map((img) => (
                             <div key={img.id} className="relative group">
@@ -151,7 +153,7 @@ export default function PackageImages({ packageImages, setPackageImages, package
                     ))}
                 </div>
             ) : (
-                <p className="text-gray-500">Không có hình ảnh.</p>
+                <p className="text-gray-500">{t("manage_package.images.no_images")}</p>
             )}
 
             {/* Nút tải ảnh lên server */}
@@ -162,8 +164,9 @@ export default function PackageImages({ packageImages, setPackageImages, package
                         className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
                         disabled={isUploading}
                     >
-                        {isUploading ? "Đang tải lên..." : "Tải ảnh lên"}
+                        {isUploading ? t("manage_package.images.uploading") : t("manage_package.images.upload_button")}
                     </button>
+
                 </div>
             )}
         </div>

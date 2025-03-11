@@ -12,9 +12,11 @@ import SelectServiceModal from "./models/SelectServiceModal";
 import SelectImageModal from "./models/SelectImageModal";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import { FaTrash, FaCamera, FaPlus, FaTimes } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 
 export default function CreatePackageServicePage() {
+  const { t } = useTranslation("manage_package");
   const { register, handleSubmit, setValue, control, watch, reset } = useForm({
     defaultValues: {
       PackageConditions: [],
@@ -192,7 +194,7 @@ export default function CreatePackageServicePage() {
   return (
     <div className="bg-white shadow-lg p-6 rounded-lg">
       <Breadcrumb />
-      <h2 className="text-xl font-bold mb-6">Create Package Service</h2>
+      <h2 className="text-xl font-bold mb-6">{t("manage_package.create.title")}</h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Grid layout */}
@@ -200,7 +202,7 @@ export default function CreatePackageServicePage() {
           {/* Cột 1 */}
           <div className="space-y-4">
             <select {...register("ServiceCategory")} className="border p-3 w-full rounded">
-              <option value="">Select Service Category</option>
+              <option value="">{t("manage_package.create.form.service_category")}</option>
               {serviceCategories.map((service, index) => (
                 <option key={index} value={service.serviceCategory}>
                   {service.serviceCategory}
@@ -209,7 +211,7 @@ export default function CreatePackageServicePage() {
             </select>
 
             <select {...register("CarCategoryId")} className="border p-3 w-full rounded">
-              <option value="">Select Car Category</option>
+              <option value="">{t("manage_package.create.form.car_category")}</option>
               {carCategories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.category}
@@ -217,38 +219,38 @@ export default function CreatePackageServicePage() {
               ))}
             </select>
 
-            <input {...register("PackageName")} placeholder="Package Name" className="border p-3 w-full rounded" />
-            <textarea {...register("Description")} placeholder="Description" className="border p-3 w-full rounded h-24" />
+            <input {...register("PackageName")} placeholder={t("manage_package.create.form.package_name")} className="border p-3 w-full rounded" />
+            <textarea {...register("Description")} placeholder={t("manage_package.create.form.description")} className="border p-3 w-full rounded h-24" />
           </div>
 
           {/* Cột 2 */}
           <div className="space-y-4">
             <select {...register("Type")} className="border p-3 w-full rounded">
-              <option value="">Select Type</option>
+              <option value="">{t("manage_package.create.form.type")}</option>
               {packageTypes.map((type, index) => (
                 <option key={index} value={type}>{type}</option>
               ))}
             </select>
 
-            <input {...register("PackagePrice")} placeholder="Package Price" type="number" className="border p-3 w-full rounded" />
+            <input {...register("PackagePrice")} placeholder={t("manage_package.create.form.package_price")} type="number" className="border p-3 w-full rounded" />
 
             <div className="grid grid-cols-2 gap-4">
-              <input {...register("ValidityPeriod")} placeholder="Validity Period" type="number" className="border p-3 w-full rounded" />
+              <input {...register("ValidityPeriod")} placeholder={t("manage_package.create.form.validity_period")} type="number" className="border p-3 w-full rounded" />
               <select {...register("TimeUnit")} className="border p-3 w-full rounded">
-                <option value="">Select Time Unit</option>
+                <option value="">{t("manage_package.create.form.time_unit")}</option>
                 {timeUnits.map((unit, index) => (
                   <option key={index} value={unit}>{unit}</option>
                 ))}
               </select>
             </div>
 
-            <input {...register("UsageLimit")} placeholder="Usage Limit" type="number" className="border p-3 w-full rounded" />
+            <input {...register("UsageLimit")} placeholder={t("manage_package.create.form.usage_limit")} type="number" className="border p-3 w-full rounded" />
           </div>
         </div>
 
         {/* Package Conditions */}
         <div className="border p-4 rounded-lg">
-          <h3 className="font-bold mb-3">Package Conditions</h3>
+          <h3 className="font-bold mb-3">{t("manage_package.create.package_conditions")}</h3>
           {fields.map((item, index) => (
             <div key={item.id} className="flex items-center space-x-3 mb-2">
               <span className="text-gray-500">#{index + 1}</span>
@@ -257,7 +259,7 @@ export default function CreatePackageServicePage() {
                 className="border p-2 w-full rounded"
                 onChange={(e) => handleConditionChange(index, e.target.value)}
               >
-                <option value="">Select Condition Type</option>
+                <option value="">{t("manage_package.create.conditions.select_condition")}</option>
                 {getAvailableConditions(watch(`PackageConditions.${index}.ConditionType`)).map((condition, idx) => (
                   <option key={idx} value={condition}>{condition}</option>
                 ))}
@@ -271,20 +273,20 @@ export default function CreatePackageServicePage() {
             onClick={() => append({ ConditionType: "", ConditionValue: "" })}
             className="bg-green-500 text-white px-4 py-2 rounded mt-2"
           >
-            + Add Condition
+            + {t("manage_package.create.conditions.add_condition")}
           </button>
         </div>
 
         {/* Service Selection */}
         <div className="border p-4 rounded-lg bg-white shadow-md">
           <div className="flex justify-between items-center mb-3">
-            <h2 className="text-lg font-semibold text-gray-700">Service Selection</h2>
+            <h2 className="text-lg font-semibold text-gray-700">{t("manage_package.create.service_selection")}</h2>
             <button
               type="button"
               onClick={() => setServiceModalOpen(true)}
               className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-200"
             >
-              <FaPlus /> Select Service
+              <FaPlus /> {t("manage_package.create.services.select_service")}
             </button>
           </div>
 
@@ -294,12 +296,12 @@ export default function CreatePackageServicePage() {
               <table className="w-full border-collapse border border-gray-300 rounded-lg">
                 <thead>
                   <tr className="bg-gray-200 text-gray-700 text-left">
-                    <th className="p-3 border border-gray-300">Service Name</th>
-                    <th className="p-3 border border-gray-300">Car Category</th>
-                    <th className="p-3 border border-gray-300">Car Part</th>
-                    <th className="p-3 border border-gray-300">Price</th>
-                    <th className="p-3 border border-gray-300">Service Category</th>
-                    <th className="p-3 border border-gray-300 text-center">Action</th>
+                    <th className="p-3 border border-gray-300">{t("manage_package.create.services.table.name")}</th>
+                    <th className="p-3 border border-gray-300">{t("manage_package.create.services.table.car_category")}</th>
+                    <th className="p-3 border border-gray-300">{t("manage_package.create.services.table.car_part")}</th>
+                    <th className="p-3 border border-gray-300">{t("manage_package.create.services.table.price")}</th>
+                    <th className="p-3 border border-gray-300">{t("manage_package.create.services.table.service_category")}</th>
+                    <th className="p-3 border border-gray-300 text-center">{t("manage_package.create.services.table.action")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -325,7 +327,7 @@ export default function CreatePackageServicePage() {
               </table>
             </div>
           ) : (
-            <p className="text-gray-500 text-sm mt-2">No services selected.</p>
+            <p className="text-gray-500 text-sm mt-2">{t("manage_package.create.services.no_services")}</p>
           )}
 
           {/* Modal chọn dịch vụ */}
@@ -345,7 +347,7 @@ export default function CreatePackageServicePage() {
         <div className="border p-6 rounded-lg bg-white shadow-md">
           {/* Nút chọn hình ảnh với icon (giống Service Selection) */}
           <div className="flex justify-between items-center mb-3">
-            <h2 className="text-lg font-semibold text-gray-700">Image Selection</h2>
+            <h2 className="text-lg font-semibold text-gray-700">{t("manage_package.create.services.image_selection")}</h2>
             <button
               type="button"
               onClick={() => {
@@ -354,7 +356,7 @@ export default function CreatePackageServicePage() {
               }}
               className="bg-blue-500 text-white flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-blue-600 transition"
             >
-              <FaCamera /> Select Images
+              <FaCamera /> {t("manage_package.create.images.select_images")}
             </button>
           </div>
 
@@ -396,7 +398,7 @@ export default function CreatePackageServicePage() {
               ))}
             </div>
           ) : (
-            <p className="text-gray-500 text-sm mt-2">No image selected</p>
+            <p className="text-gray-500 text-sm mt-2">{t("manage_package.create.images.no_images")}</p>
           )}
 
           {/* Modal chọn ảnh */}
@@ -409,7 +411,7 @@ export default function CreatePackageServicePage() {
 
         {/* Submit Button */}
         <button type="submit" className="bg-blue-500 text-white px-4 py-2 w-full rounded-lg">
-          Tạo gói dịch vụ
+          {t("manage_package.create.submit_button")}
         </button>
       </form>
     </div>

@@ -317,3 +317,23 @@ export const createPackageConditionType = async (PackageId, data) => {
     console.error("Fail With :", error);
   }
 }
+
+export const getPackageHistory = async (PackageId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${PackageId}/histories`,
+      "GET",
+      null,
+      true
+    );
+
+    response.data.value = response.data.value.map(pre => ({
+      ...pre,
+      createdAt: formatDate(pre.createdAt)
+    }))
+
+    return response;
+  } catch (error) {
+    console.error("Fail with: ", error);
+  }
+}

@@ -1,7 +1,7 @@
 {
     "manage_package": {
         "title": "Manage Package Service",
-        "create": "Create Package Service",
+        "create1": "Create Package Service",
         "id": "ID",
         "packageName": "Package Name",
         "category": "Category",
@@ -14,11 +14,10 @@
         "status": "Status",
         "createdAt": "Created At",
         "updatedAt": "Updated At",
-        "view": "View",
         "search": "Search",
         "clear_filters": "Clear Filters",
         "search_package_name": "Package Name",
-        "search_category": " Category",
+        "search_category": "Category",
         "search_service_category": "Service Category",
         "search_type": "Type",
         "search_status": "Status",
@@ -39,6 +38,125 @@
             "choose": "Choose Time Unit",
             "days": "Days",
             "months": "Months"
+        },
+        "history": {
+            "title": "Package History",
+            "fetch_error": "Error fetching Package History",
+            "loading_error": "Loading Package History failed",
+            "price_history": "Package History Price"
+        },
+        "condition_type": {
+            "title": "Package Condition Type",
+            "loading": "Loading data...",
+            "missing_conditions": "Missing Conditions",
+            "create_new": "Create New Condition",
+            "condition_type": "Condition Type",
+            "condition_value": "Condition Value",
+            "action": "Action",
+            "save": "Save",
+            "edit": "Edit",
+            "cancel": "Cancel",
+            "add": "Add",
+            "error_fetch": "Error fetching package condition type",
+            "error_update": "Error updating package condition type",
+            "error_create": "Error creating package condition type",
+            "enter_value": "Please enter a value for the condition!"
+        },
+        "services": {
+            "title": "Services in Package",
+            "add_service": "Add Service",
+            "no_services": "This package has no services.",
+            "service_category": "Service Category",
+            "car_part": "Car Part",
+            "car_category": "Car Category",
+            "work_nature": "Work Nature",
+            "action": "Action",
+            "estimated_hours": "Estimated Time",
+            "status": "Status",
+            "status_enum": {
+                "inactive": " Inactive",
+                "active": " Active"
+            }
+        },
+        "images": {
+            "title": "Package Images",
+            "add_image": "Add Image",
+            "preview_title": "Preview Images",
+            "no_images": "No images available.",
+            "upload_button": "Upload Images",
+            "uploading": "Uploading...",
+            "delete_confirm": "Are you sure you want to delete this image?",
+            "error_select": "No file selected!",
+            "error_upload": "Error uploading images!",
+            "error_delete": "Error deleting image!"
+        },
+        "info": {
+            "title": "Package Information",
+            "fields": {
+                "package_name": "Package Name",
+                "service_category": "Service Category",
+                "category": "Car Category",
+                "type": "Package Type",
+                "package_price": "Price",
+                "validity_period": "Validity Period",
+                "time_unit": "Time Unit",
+                "usage_limit": "Usage Limit",
+                "status": "Status"
+            },
+            "status_options": {
+                "inactive": "Inactive",
+                "active": "Active"
+            }
+        },
+        "view": {
+            "loading": "Loading data...",
+            "not_found": "Package service not found.",
+            "edit": "Edit",
+            "cancel": "Cancel",
+            "save_changes": "Save Changes"
+        },
+        "create": {
+            "title": "Create Package Service",
+            "package_conditions": "Package Condition",
+            "breadcrumb": "Manage Package Service",
+            "service_selection": "Service Selection",
+            "form": {
+                "service_category": "Service Category",
+                "car_category": "Car Category",
+                "package_name": "Package Name",
+                "description": "Description",
+                "type": "Package Type",
+                "package_price": "Package Price",
+                "validity_period": "Validity Period",
+                "time_unit": "Time Unit",
+                "usage_limit": "Usage Limit"
+            },
+            "conditions": {
+                "title": "Package Conditions",
+                "select_condition": "Select Condition Type",
+                "condition_value": "Condition Value",
+                "add_condition": "Add Condition"
+            },
+            "services": {
+                "title": "Service Selection",
+                "select_service": "Select Service",
+                "no_services": "No services selected.",
+                "image_selection": "Image selection",
+                "table": {
+                    "name": "Service Name",
+                    "car_category": "Car Category",
+                    "car_part": "Car Part",
+                    "price": "Price",
+                    "service_category": "Service Category",
+                    "action": "Action"
+                }
+            },
+            "images": {
+                "title": "Image Selection",
+                "select_images": "Select Images",
+                "no_images": "No images selected."
+            },
+            "submit_button": "Create Package Service"
         }
     }
 }

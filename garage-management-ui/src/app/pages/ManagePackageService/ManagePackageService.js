@@ -18,7 +18,7 @@ export default function ManagePackageService() {
           className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
           onClick={() => navigate("/admin/package-service/create-package")}
         >
-          {t("manage_package.create")}
+          {t("manage_package.create1")}
         </button>
       </div>
       <ListPackageService />

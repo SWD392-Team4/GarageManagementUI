@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
-    getPackageType,
-    getPackageStatus,
-    getPakageTimeUnit,
-    getAllServiceCategory,
     getAllCarCategory,
+    getAllServiceCategory,
+    getPackageStatus,
+    getPackageType,
+    getPakageTimeUnit,
 } from "../../services/PackageServiceAPI";
 
 export default function PackageInfo({ register, packageData, isEditing }) {
+    const { t, i8ln } = useTranslation("manage_package");
     const [packageTypes, setPackageTypes] = useState([]);
     const [statuses, setStatuses] = useState([]);
     const [timeUnits, setTimeUnits] = useState([]);
@@ -46,16 +48,16 @@ export default function PackageInfo({ register, packageData, isEditing }) {
 
     return (
         <div className="border p-6 rounded-lg shadow-md bg-white">
-            <h2 className="text-lg font-semibold mb-4">Thông tin gói dịch vụ</h2>
+            <h2 className="text-lg font-semibold mb-4">{t("manage_package.info.title")}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
                     {
-                        label: "Tên gói",
+                        label: t("manage_package.info.fields.package_name"),
                         name: "packageName",
                         type: "text",
                     },
                     {
-                        label: "Danh mục dịch vụ",
+                        label: t("manage_package.info.fields.service_category"),
                         name: "serviceCategory",
                         type: "select",
                         options: serviceCategories.map((item, index) => ({
@@ -65,7 +67,7 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                         })),
                     },
                     {
-                        label: "Loại xe",
+                        label: t("manage_package.info.fields.category"),
                         name: "category",
                         type: "select",
                         options: carCategories.map((item, index) => ({
@@ -75,7 +77,7 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                         })),
                     },
                     {
-                        label: "Loại gói",
+                        label: t("manage_package.info.fields.type"),
                         name: "type",
                         type: "select",
                         options: packageTypes.map((item, index) => ({
@@ -85,17 +87,17 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                         })),
                     },
                     {
-                        label: "Giá",
+                        label: t("manage_package.info.fields.package_price"),
                         name: "packagePrice",
                         type: "text",
                     },
                     {
-                        label: "Thời hạn",
+                        label: t("manage_package.info.fields.validity_period"),
                         name: "validityPeriod",
                         type: "text",
                     },
                     {
-                        label: "Đơn vị thời gian",
+                        label: t("manage_package.info.fields.time_unit"),
                         name: "timeUnit",
                         type: "select",
                         options: timeUnits.map((item, index) => ({
@@ -105,17 +107,17 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                         })),
                     },
                     {
-                        label: "Giới hạn sử dụng",
+                        label: t("manage_package.info.fields.usage_limit"),
                         name: "usageLimit",
                         type: "text",
                     },
                     {
-                        label: "Trạng thái",
+                        label: t("manage_package.info.fields.status"),
                         name: "status",
                         type: "select",
                         options: [
-                            { key: "status-0", value: "Inactive", label: "Inactive" },
-                            { key: "status-1", value: "Active", label: "Active" },
+                            { key: "status-0", value: "Inactive", label: t("manage_package.info.status_options.inactive") },
+                            { key: "status-1", value: "Active", label: t("manage_package.info.status_options.active") },
                         ],
                     },
                 ].map((item, index) => (
