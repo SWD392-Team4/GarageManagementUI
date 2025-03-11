@@ -1,0 +1,44 @@
+{
+    "manage_package": {
+        "title": "Manage Package Service",
+        "create": "Create Package Service",
+        "id": "ID",
+        "packageName": "Package Name",
+        "category": "Category",
+        "serviceCategory": "Service Category",
+        "type": "Type",
+        "packagePrice": "Package Price",
+        "validityPeriod": "Validity Period",
+        "timeUnit": "Time Unit",
+        "usageLimit": "Usage Limit",
+        "status": "Status",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At",
+        "view": "View",
+        "search": "Search",
+        "clear_filters": "Clear Filters",
+        "search_package_name": "Package Name",
+        "search_category": " Category",
+        "search_service_category": "Service Category",
+        "search_type": "Type",
+        "search_status": "Status",
+        "search_validity_period": "Validity Period",
+        "search_time_unit": "Time Unit",
+        "search_usage_limit": "Usage Limit",
+        "search_created_at": "Created At",
+        "search_updated_at": "Updated At",
+        "search_min_price": "Min Price",
+        "search_max_price": "Max Price",
+        "search_placeholder": "Enter search keyword...",
+        "search_status_enum": {
+            "choose": "Choose Status",
+            "active": "Active",
+            "inactive": "Inactive"
+        },
+        "search_time_unit_enum": {
+            "choose": "Choose Time Unit",
+            "days": "Days",
+            "months": "Months"
+        }
+    }
+}
