@@ -53,7 +53,7 @@ function ChatList() {
   // Lấy state & actions từ store
   const state = chatStore.use();
   return (
-    <div className="space-y-1 h-full">
+    <div className="space-y-1 h-5/6 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200">
       {newChat.value.firstName ? (
         <div className="group">
           <div
