@@ -71,6 +71,25 @@ export const createPackage = async (data) => {
   }
 };
 
+export const getPackageDetail = async (PackageId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${PackageId}`,
+      "GET",
+      null,
+      true,
+    );
+    response.data.value.createdAt = formatDate(response.data.value.createdAt);
+    response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
+    userService.showToast(200, "Loading PackageDetail Successful");
+    return response;
+  } catch (error) {
+    console.error("Error with : ", error.message);
+    userService.showToast(400, "Loading PackageDetail Successful");
+
+  }
+}
+
 export const updatePackage = async (PackageId, FormData) => {
   try {
     const response = await userService.sendAjax(
@@ -201,3 +220,100 @@ export const getAllService = async () => {
     console.error("Fail to loading service", error.message);
   }
 };
+
+export const GetServiceByPackageId = async (PackageId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${PackageId}/services`,
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fail with: ", error);
+  }
+}
+
+
+export const deteleImagePackage = async (packageId, imageId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${packageId}/images/${imageId}`,
+      "DELETE",
+      null,
+      true
+    );
+    // Kiểm tra status code trong header, nếu là 204 thì xác nhận xóa thành công
+    if (response?.status === 204) {
+      userService.showToast(200, "Remove image successful");
+      return true; // Trả về true để xác nhận ảnh đã bị xóa
+    }
+
+    return false; // Nếu không phải 204, trả về false
+  } catch (error) {
+    console.error("Error with:", error);
+  }
+}
+
+
+
+export const createImagePackageUpdate = async (PackageID, FormImage) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${PackageID}/images`,
+      "POST",
+      FormImage,
+      true,
+      true,
+    );
+    return response;
+  } catch (error) {
+    console.error("Error with: ", error);
+  }
+};
+
+
+export const getPackageConditionTypeById = async (PackageId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${PackageId}/conditions`,
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fail with: ", error);
+  }
+}
+
+export const updatePackageConditionType = async (PackageId, ConditionId, data) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${PackageId}/conditions/${ConditionId}`,
+      "PUT",
+      data,
+      true
+    );
+    userService.showToast(200, "Update Package Conditions Succesful");
+    return response;
+  } catch (error) {
+    console.error("Fail with: ", error);
+  }
+}
+
+export const createPackageConditionType = async (PackageId, data) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${PackageId}/conditions`,
+      "POST",
+      data,
+      true
+    );
+    userService.showToast(200, "Create Package Conditions Successful");
+    return response;
+  } catch (error) {
+    console.error("Fail With :", error);
+  }
+}

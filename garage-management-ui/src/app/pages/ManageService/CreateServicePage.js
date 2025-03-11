@@ -68,7 +68,7 @@ export default function CreateServicePage() {
     if (selectedImages.length > 0) {
       imageFormData = new FormData();
       selectedImages.forEach((image) => {
-        imageFormData.append("images", image);
+        imageFormData.append("fileDtos", image);
       });
     }
     await createService(formData, imageFormData);
