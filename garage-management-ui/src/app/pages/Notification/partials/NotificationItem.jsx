@@ -10,11 +10,15 @@ const NotificationItem = ({ notification, onClick }) => {
       className="flex items-start p-4 hover:bg-gray-100 border-b"
       onClick={onClick}
     >
-      <img
-        src={notification.senderId.imageLink}
-        alt="notification"
-        className="w-10 h-10 rounded-full object-cover mr-3"
-      />
+      {notification.senderId.imageLink !== "N/A" ? (
+        <img
+          src={notification.senderId.imageLink}
+          alt="notification"
+          className="w-10 h-10 rounded-full object-cover mr-3"
+        />
+      ) : (
+        <div className="mr-3 ">📩</div>
+      )}
       <div className="flex-1">
         <p className="text-sm text-gray-800">
           <span className="font-semibold">{t(notification.message)}</span>

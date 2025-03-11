@@ -8,6 +8,7 @@ import anh1 from "../../../assets/HomePage/hero_slider_bg_1.png";
 import anh2 from "../../../assets/HomePage/hero_slider_bg_2.png";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { MdAlternateEmail, MdSchedule } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 import {
   HiOutlineArrowNarrowRight,
@@ -92,7 +93,7 @@ const HeroSection = () => {
           <div className="bg-red-500/50 p-3 rounded-full text-white">
             <MdAlternateEmail />
           </div>
-          <span>example@email.com</span>
+          <span>turbotrack@email.com</span>
         </a>
         <a className="flex items-center space-x-2 text-white ">
           <div className="bg-red-500/50 p-3 rounded-full text-white">
@@ -110,15 +111,24 @@ const HeroSection = () => {
 
       {/* Social Media */}
       <div className="absolute top-1/2 left-6 transform -translate-y-1/2 flex flex-col items-center gap-4">
-        <a href="#" className="text-white hover:text-red-500 transition-all">
+        <a
+          href="https://www.facebook.com/profile.php?id=61564242264542"
+          className="text-white hover:text-red-500 transition-all"
+        >
           🔵 Facebook
         </a>
-        <a href="#" className="text-white hover:text-red-500 transition-all">
+        <a
+          href="https://www.facebook.com/profile.php?id=61564242264542"
+          className="text-white hover:text-red-500 transition-all"
+        >
           🟣 Instagram
         </a>
-        <a href="#" className="text-white hover:text-red-500 transition-all">
+        <Link
+          to="https://www.facebook.com/profile.php?id=61564242264542"
+          className="text-white hover:text-red-500 transition-all"
+        >
           🔵 Twitter
-        </a>
+        </Link>
       </div>
     </section>
   );

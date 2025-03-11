@@ -117,16 +117,28 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row items-center justify-between">
           <p>{t("footer.footerBottom.copyright")}</p>
           <div className="flex gap-4 mt-4 sm:mt-0">
-            <a href="#" className="hover:text-white">
+            <a
+              href="https://www.facebook.com/profile.php?id=61564242264542"
+              className="hover:text-white"
+            >
               {t("footer.footerBottom.socialLinks.facebook")}
             </a>
-            <a href="#" className="hover:text-white">
+            <a
+              href="https://www.facebook.com/profile.php?id=61564242264542"
+              className="hover:text-white"
+            >
               {t("footer.footerBottom.socialLinks.twitter")}
             </a>
-            <a href="#" className="hover:text-white">
+            <a
+              href="https://www.facebook.com/profile.php?id=61564242264542"
+              className="hover:text-white"
+            >
               {t("footer.footerBottom.socialLinks.instagram")}
             </a>
-            <a href="#" className="hover:text-white">
+            <a
+              href="https://www.facebook.com/profile.php?id=61564242264542"
+              className="hover:text-white"
+            >
               {t("footer.footerBottom.socialLinks.linkedin")}
             </a>
           </div>

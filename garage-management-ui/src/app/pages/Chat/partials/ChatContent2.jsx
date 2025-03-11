@@ -139,19 +139,19 @@ function ChatContent2() {
 
   if (!state.messages) {
     return (
-      <div className="text-gray-400">
+      <div className="text-gray-400 h-[503px]">
         Enter something to talk with instructor
       </div>
     );
   }
 
   if (state.messages.length === 0) {
-    return <div className="text-gray-400">No messages</div>;
+    return <div className="text-gray-400  h-[503px]">No messages</div>;
   }
 
   return (
     // Bọc danh sách tin nhắn trong div với chiều cao tối đa và overflow-y-auto
-    <div className="min-h-[526px] max-h-[526px] h-[526px] overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 ">
+    <div className="min-h-[503px] max-h-[503px] h-[503px] overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 ">
       {state.messages.map((msg, idx) => {
         // Xác định tin nhắn của mình dựa trên id của sender
         const isMe = msg.senderId.id === myId;
