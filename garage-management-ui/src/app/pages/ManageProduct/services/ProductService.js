@@ -67,7 +67,7 @@ export const updateProduct = async (productId, productData, fileImage) => {
             pre.value.updatedAt = "",
         ]));
         //Parse thong tin
-        productData.productName = <>{productData.productName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+        productData.productName = <>{productData.productName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
 
         //Gan thong tin signify
         sProduct.set((pre) => ([

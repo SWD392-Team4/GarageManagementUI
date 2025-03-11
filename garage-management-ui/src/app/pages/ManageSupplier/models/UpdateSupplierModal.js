@@ -54,7 +54,14 @@ export default function UpdateSupplierModal({ isOpen, onClose, supplier, onSuppl
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-96 relative">
+                <button
+                    onClick={onClose}
+                    className="absolute top-2 right-2 p-1 text-gray-600 hover:text-gray-900"
+                >
+                    ✖
+                </button>
+
                 <h2 className="text-xl font-semibold mb-4">{t("manage_supplier.edit")}</h2>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

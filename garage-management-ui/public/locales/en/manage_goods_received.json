@@ -1,0 +1,40 @@
+{
+    "manage_goods_received": {
+        "title": "Manage Goods Received",
+        "create": "Create Goods Received",
+        "id": "ID",
+        "referenceNumber": "Reference Number",
+        "invoiceCode": "Invoice Code",
+        "sourceAddress": "Source Address",
+        "sourceProvince": "Source Province",
+        "sourceDistrict": "Source District",
+        "sourceWards": "Source Wards",
+        "totalPrice": "Total Price",
+        "contactPersonName": "Contact Person",
+        "workPlaceName": "Workplace",
+        "warehouseManagerName": "Warehouse Manager",
+        "status": "Status",
+        "createdAt": "Created At",
+        "updatedAt": "Updated At",
+        "search": {
+            "reference_number": "Reference Number",
+            "invoice_code": "Invoice Code",
+            "source_address": "Source Address",
+            "source_province": "Source Province",
+            "source_district": "Source District",
+            "source_wards": "Source Wards",
+            "min_price": "Min Price",
+            "max_price": "Max Price",
+            "status": "Status",
+            "created_at": "Created At",
+            "clear_filters": "Clear Filters",
+            "search": "Search",
+            "status_enum": {
+                "choose": "Choose Status",
+                "active": "Active",
+                "inactive": "Inactive"
+            }
+        },
+        "view": "View Details"
+    }
+}

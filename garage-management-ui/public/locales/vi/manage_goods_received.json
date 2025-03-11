@@ -1,0 +1,40 @@
+{
+    "manage_goods_received": {
+        "title": "Quản lý phiếu nhập hàng",
+        "create": "Tạo phiếu nhập hàng",
+        "id": "ID",
+        "referenceNumber": "Mã tham chiếu",
+        "invoiceCode": "Mã hóa đơn",
+        "sourceAddress": "Địa chỉ nguồn",
+        "sourceProvince": "Tỉnh nguồn",
+        "sourceDistrict": "Quận/Huyện nguồn",
+        "sourceWards": "Phường/Xã nguồn",
+        "totalPrice": "Tổng giá trị",
+        "contactPersonName": "Người liên hệ",
+        "workPlaceName": "Nơi làm việc",
+        "warehouseManagerName": "Quản lý kho",
+        "status": "Trạng thái",
+        "createdAt": "Ngày tạo",
+        "updatedAt": "Ngày cập nhật",
+        "search": {
+            "reference_number": "Mã tham chiếu",
+            "invoice_code": "Mã hóa đơn",
+            "source_address": "Địa chỉ nguồn",
+            "source_province": "Tỉnh nguồn",
+            "source_district": "Quận/Huyện nguồn",
+            "source_wards": "Phường/Xã nguồn",
+            "min_price": "Giá tối thiểu",
+            "max_price": "Giá tối đa",
+            "status": "Trạng thái",
+            "created_at": "Ngày tạo",
+            "clear_filters": "Xóa bộ lọc",
+            "search": "Tìm kiếm",
+            "status_enum": {
+                "choose": "Chọn trạng thái",
+                "active": "Hoạt động",
+                "inactive": "Không hoạt động"
+            }
+        },
+        "view": "Xem chi tiết"
+    }
+}

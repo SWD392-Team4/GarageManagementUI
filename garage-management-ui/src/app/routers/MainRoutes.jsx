@@ -28,6 +28,7 @@ const componentMap = {
   Vision: lazy(() => import("../pages/AboutUs/partials/Vision")),
   LoginPage: lazy(() => import("../pages/AuthCustomer/LoginPage")),
   Chat: lazy(() => import("../pages/Chat/Chat")),
+  Chat2: lazy(() => import("../pages/Chat/Chat2")),
   RegisterPage: lazy(() => import("../pages/AuthCustomer/RegisterPage")),
   ConfirmEmailPage: lazy(() =>
     import("../pages/AuthCustomer/ConfirmEmailPage")
@@ -77,6 +78,32 @@ const componentMap = {
   CreateInvoiceSale: lazy(() => import("../pages/ManageInvoiceSale/CreateInvoiceSale")),
   ManageInvoiceService: lazy(() => import("../pages/ManageInvoiceService/ManageInvoiceService")),
   CreateInvoiceService: lazy(() => import("../pages/ManageInvoiceService/CreateInvoiceService")),
+  ManageGoodReceived: lazy(() => import("../pages/ManageGoodReceived/ManageGoodReceived")),
+  CreateGoodReceived: lazy(() => import("../pages/ManageGoodReceived/CreateGoodReceived")),
+  ManageGoodsIssued: lazy(() =>
+    import("../pages/ManageGoodsIssued/ManageGoodsIssued")
+  ),
+  CreateGoodsIssued: lazy(() =>
+    import("../pages/ManageGoodsIssued/CreateGoodsIssued")
+  ),
+  ManageGoodsIssued: lazy(() =>
+    import("../pages/ManageGoodsIssued/ManageGoodsIssued")
+  ),
+  CreateGoodsIssued: lazy(() =>
+    import("../pages/ManageGoodsIssued/CreateGoodsIssued")
+  ),
+  ManageInvoiceSale: lazy(() =>
+    import("../pages/ManageInvoiceSale/ManageInvoiceSale")
+  ),
+  CreateInvoiceSale: lazy(() =>
+    import("../pages/ManageInvoiceSale/CreateInvoiceSale")
+  ),
+  ManageInvoiceService: lazy(() =>
+    import("../pages/ManageInvoiceService/ManageInvoiceService")
+  ),
+  CreateInvoiceService: lazy(() =>
+    import("../pages/ManageInvoiceService/CreateInvoiceService")
+  ),
   ManageCarPartCate: lazy(() =>
     import("../pages/ManageCarPartCate/ManageCarPartCate")
   ),

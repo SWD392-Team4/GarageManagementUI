@@ -54,10 +54,12 @@ export const SearchSupplier = async (params) => {
 }
 
 export const createSupplierContact = async (data) => {
+    console.log("check du lieu ", data);
+
     try {
         const response = await userService.sendAjax(
             "/api/supplier/contacts",
-            "GET",
+            "POST",
             data,
             true
         );

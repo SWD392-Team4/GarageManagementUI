@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next';
-import { getAllService, searchService } from '../services/ServiceAPI';
+import { getAllService, getFeedbackByServiceId, searchService } from '../services/ServiceAPI';
 import SearchService from './SearchService';
 import BaseTable from '../../../components/BaseTable/BaseTable';
-import { FaEye } from 'react-icons/fa';
+import { FaEye, FaStar } from 'react-icons/fa';
 import { sService } from "../services/ServiceSignify"
+import FeedbackServiceModal from '../modals/FeedbackServiceModal';
 
 export default function ListService() {
   const { t, i18n } = useTranslation("manage_service");
@@ -17,6 +18,8 @@ export default function ListService() {
     hasNext: false,
   });
   const [searchParams, setSearchParams] = useState(null);
+  const [selectedService, setSelectedService] = useState(null);
+  const [isViewFeedbackService, setIsViewFeedbackService] = useState(false);
 
   //usecallback tranh tao ham
   const fetchData = useCallback(async (page = 1, params = null) => {
@@ -66,8 +69,8 @@ export default function ListService() {
       { header: t("manage_service.Id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
       { header: t("manage_service.ServiceName"), accessorKey: "serviceName" },
       { header: t("manage_service.ServiceCategory"), accessorKey: "serviceCategory" },
-      { header: t("manage_service.PartName"), accessorKey: "partName" },
-      { header: t("manage_service.Category"), accessorKey: "category" },
+      { header: t("manage_service.PartName"), accessorKey: "carPart" },
+      { header: t("manage_service.Category"), accessorKey: "carCategory" },
       { header: t("manage_service.Price"), accessorKey: "price" },
       { header: t("manage_service.WorkNature"), accessorKey: "workNature" },
       { header: t("manage_service.Action"), accessorKey: "action" },
@@ -85,7 +88,24 @@ export default function ListService() {
       color: "bg-gray-500",
       link: (row) => `/admin/service/${row.original.id}`,
     },
+    {
+      type: "modal",
+      label: t("manage_service.service_feedback"),
+      color: "bg-yellow-500",
+      icon: <FaStar />,
+      onClick: async (row) => {
+        try {
+          console.log("Id da chon: ", row.id);
+          const FeedbackByService = await getFeedbackByServiceId(row.id);
+          setSelectedService(FeedbackByService.data.value);
+          setIsViewFeedbackService(true);
+        } catch (error) {
+          console.error("Error fetching car part details: ", error);
+        }
+      },
+    },
   ];
+
 
   return (
     <>
@@ -98,6 +118,12 @@ export default function ListService() {
         onPageChange={handlePageChange}
         signifyInformation={sService.value}
       />
-    </>
+      <FeedbackServiceModal
+        isOpen={isViewFeedbackService}
+        onClose={() => setIsViewFeedbackService(false)}
+        service={selectedService}
+      />
+
+    </ >
   )
 }

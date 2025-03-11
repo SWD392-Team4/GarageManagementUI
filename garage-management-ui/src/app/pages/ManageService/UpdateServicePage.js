@@ -47,17 +47,19 @@ export default function UpdateServicePage() {
                 setService(serviceData);
                 setValue("ServiceName", serviceData.serviceName);
                 setValue("ServiceCategory", serviceData.serviceCategory);
-                setValue("CarCategory", serviceData.categoryId);
-                setValue("CarPartName", serviceData.partId);
+                setValue("CarCategory", serviceData.carCategoryId); // Lưu ID danh mục xe
+                setValue("CarCategoryName", serviceData.carCategory); // Lưu tên danh mục xe
+                setValue("CarPart", serviceData.carPartId); // Lưu ID phụ tùng
+                setValue("CarPartName", serviceData.carPart); // Lưu tên phụ tùng
                 setValue("Action", serviceData.action);
                 setValue("WorkNature", serviceData.workNature);
                 setValue("EstimatedHours", serviceData.estimatedHours);
                 setValue("ServicePrice", serviceData.price);
                 setValue("Description", serviceData.description);
                 setValue("Status", serviceData.status);
-                // Cập nhật cả tên Car Part và Car Category
-                setValue("CarPartNameDisplay", serviceData.partName || carParts.find((part) => part.id === serviceData.partId)?.partName);
-                setValue("CarCategoryDisplay", serviceData.category || carCategories.find((category) => category.id === serviceData.categoryId)?.category);
+
+
+                // console.log("check thong tin :", serviceData);
 
                 // Chuyển imageLink thành mảng để hiển thị
                 if (serviceData.imageLink) {
@@ -91,6 +93,9 @@ export default function UpdateServicePage() {
 
     const onSubmit = async (data) => {
         if (!isEditing) return;
+
+        console.log("check data gui ve back end", data);
+
         try {
             // Chuẩn bị dữ liệu cập nhật dịch vụ
             const updatedService = {
@@ -101,18 +106,18 @@ export default function UpdateServicePage() {
                 action: data.Action,
                 description: data.Description,
                 estimatedHours: data.EstimatedHours,
-                carPartId: data.CarPartName,
-                carPartName: carParts.find((part) => part.id === data.CarPartName)?.partName || "",
+                carPartId: data.CarPart, // Đảm bảo đây là ID
+                carPartName: carParts.find((part) => part.id === data.CarPart)?.partName || "", // Lấy tên từ ID
                 carCategoryId: data.CarCategory,
-                carCategoryName: carCategories.find((category) => category.id === data.CarCategory)?.category || "", // Tên danh mục xe
-                status: data.Status
+                carCategoryName: carCategories.find((category) => category.id === data.CarCategory)?.category || "", // Lấy tên từ ID
+                status: data.Status,
             };
 
             console.log("thong tin gui cho api : ", updatedService);
 
             // Gửi yêu cầu cập nhật dịch vụ trước
             const updateResponse = await updateService(id, updatedService);
-            console.log("Check response: ", updateResponse);
+            // console.log("Check response: ", updateResponse);
             // Lọc ra chỉ những ảnh mới (file)
             const newImages = selectedImages.filter((img) => typeof img !== "string");
 
@@ -178,18 +183,16 @@ export default function UpdateServicePage() {
                     {/* Select Car Part */}
                     <div>
                         <label className="block text-gray-700 font-semibold">Car Part</label>
-                        <select {...register("CarPartName", { required: "Tên phụ tùng là bắt buộc" })} className="border p-2 w-full" disabled={!isEditing}>
-                            {service && (
-                                <option value={service.partId}>
-                                    {service.partName || carParts.find((part) => part.id === service.partId)?.partName}
-                                </option>
-                            )}
-                            {carParts.map((part) => (
-                                <option key={part.id} value={part.id}>
+                        <select {...register("CarPart")} className="border p-2 w-full" disabled={!isEditing} defaultValue={service?.carPartId}>
+                            {service && <option value={service.carPartId}>{service.carPart}</option>}
+                            {isEditing && carParts.map((part) => (
+                                <option key={part.id} value={part.id} selected={part.id === service?.carPartId}>
                                     {part.partName}
                                 </option>
                             ))}
                         </select>
+
+
                         {errors.CarPartName && <p className="text-red-500 text-sm">{errors.CarPartName.message}</p>}
                     </div>
 
@@ -197,18 +200,16 @@ export default function UpdateServicePage() {
                     {/* Select Car Category */}
                     <div>
                         <label className="block text-gray-700 font-semibold">Car Category</label>
-                        <select {...register("CarCategory", { required: "Danh mục xe là bắt buộc" })} className="border p-2 w-full" disabled={!isEditing}>
-                            {service && (
-                                <option value={service.categoryId}>
-                                    {service.category || carCategories.find((category) => category.id === service.categoryId)?.category}
-                                </option>
-                            )}
-                            {carCategories.map((category) => (
+                        <select {...register("CarCategory")} className="border p-2 w-full" disabled={!isEditing} defaultValue={service?.carCategoryId}>
+                            {service && <option value={service.carCategoryId}>{service.carCategory}</option>}
+                            {isEditing && carCategories.map((category) => (
                                 <option key={category.id} value={category.id}>
                                     {category.category}
                                 </option>
                             ))}
                         </select>
+
+
                         {errors.CarCategory && <p className="text-red-500 text-sm">{errors.CarCategory.message}</p>}
                     </div>
 

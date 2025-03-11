@@ -10,6 +10,9 @@ export const sServiceHome = signify(
     action: "",
     search: true,
     pageNumber: 1,
+    totalPages: 0,
+    hasPrevious: false,
+    hasNext: false,
   },
   {
     cache: {
