@@ -72,8 +72,8 @@
   },
   "footer": {
     "logoTitle": "LOGO",
-    "description": "Lorem Ipsum chỉ là văn bản giả trong ngành in ấn và sắp chữ. Lorem Ipsum đã trở thành tiêu chuẩn của ngành. Lorem Ipsum là.",
-    "phone": "+84 111-111-11",
+    "description": "Chào mừng đến với [TurboTrack]. Chúng tôi cung cấp dịch vụ sửa chữa và bảo dưỡng xe đáng tin cậy để bạn luôn di chuyển.",
+    "phone": "+84 962-418-452",
     "quickLink1Title": "LIÊN KẾT NHANH",
     "quickLink1": {
       "about": "Giới thiệu",
@@ -104,7 +104,6 @@
         "linkedin": "LinkedIn"
       }
     }
-   
   },
   "slogan": {
     "qualityService": "Trải nghiệm dịch vụ xe hoàn hảo với chất lượng hàng đầu.",

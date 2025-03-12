@@ -1,44 +1,162 @@
 {
     "manage_package": {
-        "title": "Quản lý gói dịch vụ",
-        "create": "Tạo gói dịch vụ",
+        "title": "Quản lý Gói Dịch Vụ",
+        "create1": "Tạo Gói Dịch Vụ",
         "id": "ID",
-        "packageName": "Tên gói",
-        "category": "Danh mục",
-        "serviceCategory": "Danh mục dịch vụ",
+        "packageName": "Tên Gói",
+        "category": "Danh Mục",
+        "serviceCategory": "Danh Mục Dịch Vụ",
         "type": "Loại",
-        "packagePrice": "Giá gói",
-        "validityPeriod": "Thời hạn hiệu lực",
-        "timeUnit": "Đơn vị thời gian",
-        "usageLimit": "Giới hạn sử dụng",
-        "status": "Trạng thái",
-        "createdAt": "Ngày tạo",
-        "updatedAt": "Ngày cập nhật",
-        "view": "Xem",
-        "search": "Tìm kiếm",
-        "clear_filters": "Xóa bộ lọc",
-        "search_package_name": "Tìm theo tên gói",
-        "search_category": "Tìm theo danh mục",
-        "search_service_category": "Tìm theo danh mục dịch vụ",
-        "search_type": "Tìm theo loại",
-        "search_status": "Tìm theo trạng thái",
-        "search_validity_period": "Tìm theo thời hạn hiệu lực",
-        "search_time_unit": "Tìm theo đơn vị thời gian",
-        "search_usage_limit": "Tìm theo giới hạn sử dụng",
-        "search_created_at": "Tìm theo ngày tạo",
-        "search_updated_at": "Tìm theo ngày cập nhật",
-        "search_min_price": "Tìm theo giá tối thiểu",
-        "search_max_price": "Tìm theo giá tối đa",
+        "packagePrice": "Giá Gói",
+        "validityPeriod": "Thời Hạn Hiệu Lực",
+        "timeUnit": "Đơn Vị Thời Gian",
+        "usageLimit": "Giới Hạn Sử Dụng",
+        "status": "Trạng Thái",
+        "createdAt": "Ngày Tạo",
+        "updatedAt": "Ngày Cập Nhật",
+        "search": "Tìm Kiếm",
+        "clear_filters": "Xóa Bộ Lọc",
+        "search_package_name": "Tên Gói",
+        "search_category": "Danh Mục",
+        "search_service_category": "Danh Mục Dịch Vụ",
+        "search_type": "Loại",
+        "search_status": "Trạng Thái",
+        "search_validity_period": "Thời Hạn Hiệu Lực",
+        "search_time_unit": "Đơn Vị Thời Gian",
+        "search_usage_limit": "Giới Hạn Sử Dụng",
+        "search_created_at": "Ngày Tạo",
+        "search_updated_at": "Ngày Cập Nhật",
+        "search_min_price": "Giá Tối Thiểu",
+        "search_max_price": "Giá Tối Đa",
         "search_placeholder": "Nhập từ khóa tìm kiếm...",
         "search_status_enum": {
-            "choose": "Chọn trạng thái",
-            "active": "Hoạt động",
-            "inactive": "Không hoạt động"
+            "choose": "Chọn Trạng Thái",
+            "active": "Hoạt Động",
+            "inactive": "Không Hoạt Động"
         },
         "search_time_unit_enum": {
-            "choose": "Chọn đơn vị thời gian",
+            "choose": "Chọn Đơn Vị Thời Gian",
             "days": "Ngày",
             "months": "Tháng"
+        },
+        "history": {
+            "title": "Lịch Sử Gói Dịch Vụ",
+            "fetch_error": "Lỗi khi tải lịch sử gói dịch vụ",
+            "loading_error": "Tải lịch sử gói dịch vụ thất bại",
+            "price_history": "Lịch Sử Giá Gói Dịch Vụ"
+        },
+        "condition_type": {
+            "title": "Loại Điều Kiện Gói Dịch Vụ",
+            "loading": "Đang tải dữ liệu...",
+            "missing_conditions": "Các Điều Kiện Còn Thiếu",
+            "create_new": "Tạo Điều Kiện Mới",
+            "condition_type": "Loại Điều Kiện",
+            "condition_value": "Giá Trị Điều Kiện",
+            "action": "Hành Động",
+            "save": "Lưu",
+            "edit": "Chỉnh Sửa",
+            "cancel": "Hủy",
+            "add": "Thêm",
+            "error_fetch": "Lỗi khi tải điều kiện gói dịch vụ",
+            "error_update": "Lỗi khi cập nhật điều kiện gói dịch vụ",
+            "error_create": "Lỗi khi tạo điều kiện gói dịch vụ",
+            "enter_value": "Vui lòng nhập giá trị cho điều kiện!"
+        },
+        "services": {
+            "title": "Dịch vụ trong gói",
+            "add_service": "Thêm dịch vụ",
+            "no_services": "Gói này chưa có dịch vụ nào.",
+            "service_category": "Danh mục",
+            "car_part": "Bộ phận xe",
+            "car_category": "Loại xe",
+            "work_nature": "Tính chất công việc",
+            "action": "Hành động",
+            "estimated_hours": "Thời gian dự kiến",
+            "status": "Trạng thái",
+            "status_enum": {
+                "inactive": "Không hoạt động",
+                "active": "Hoạt động"
+            }
+        },
+        "images": {
+            "title": "Hình ảnh gói",
+            "add_image": "Thêm ảnh",
+            "preview_title": "Ảnh xem trước",
+            "no_images": "Không có hình ảnh.",
+            "upload_button": "Tải ảnh lên",
+            "uploading": "Đang tải lên...",
+            "delete_confirm": "Bạn có chắc chắn muốn xóa ảnh này?",
+            "error_select": "Không có file nào được chọn!",
+            "error_upload": "Lỗi khi tải ảnh lên!",
+            "error_delete": "Lỗi khi xóa ảnh!"
+        },
+        "info": {
+            "title": "Thông tin gói dịch vụ",
+            "fields": {
+                "package_name": "Tên gói",
+                "service_category": "Danh mục dịch vụ",
+                "category": "Loại xe",
+                "type": "Loại gói",
+                "package_price": "Giá",
+                "validity_period": "Thời hạn",
+                "time_unit": "Đơn vị thời gian",
+                "usage_limit": "Giới hạn sử dụng",
+                "status": "Trạng thái"
+            },
+            "status_options": {
+                "inactive": "Không hoạt động",
+                "active": "Hoạt động"
+            }
+        },
+        "view": {
+            "loading": "Đang tải dữ liệu...",
+            "not_found": "Không tìm thấy gói dịch vụ.",
+            "edit": "Chỉnh sửa",
+            "cancel": "Hủy",
+            "save_changes": "Lưu thay đổi"
+        },
+        "create": {
+            "title": "Tạo Gói Dịch Vụ",
+            "breadcrumb": "Quản lý gói dịch vụ",
+            "package_conditions": "Điều kiện gói",
+            "service_selection": "Chọn dịch vụ",
+            "form": {
+                "service_category": "Danh mục dịch vụ",
+                "car_category": "Loại xe",
+                "package_name": "Tên gói",
+                "description": "Mô tả",
+                "type": "Loại gói",
+                "package_price": "Giá gói",
+                "validity_period": "Thời hạn",
+                "time_unit": "Đơn vị thời gian",
+                "usage_limit": "Giới hạn sử dụng"
+            },
+            "conditions": {
+                "title": "Điều Kiện Gói",
+                "select_condition": "Chọn loại điều kiện",
+                "condition_value": "Giá trị điều kiện",
+                "add_condition": "Thêm điều kiện"
+            },
+            "services": {
+                "title": "Lựa Chọn Dịch Vụ",
+                "select_service": "Chọn Dịch Vụ",
+                "no_services": "Chưa chọn dịch vụ nào.",
+                "image_selection": "Image selection",
+                "table": {
+                    "name": "Tên Dịch Vụ",
+                    "car_category": "Loại Xe",
+                    "car_part": "Bộ Phận Xe",
+                    "price": "Giá",
+                    "service_category": "Danh mục dịch vụ",
+                    "action": "Hành Động"
+                }
+            },
+            "images": {
+                "title": "Lựa Chọn Hình Ảnh",
+                "select_images": "Chọn Hình Ảnh",
+                "no_images": "Chưa chọn hình ảnh nào."
+            },
+            "submit_button": "Tạo Gói Dịch Vụ"
         }
     }
 }

@@ -1,0 +1,46 @@
+{
+    "update_service_page": {
+        "title": "Cập Nhật Dịch Vụ",
+        "breadcrumb": "Quản lý dịch vụ",
+        "form": {
+            "service_name": "Tên Dịch Vụ",
+            "service_category": "Danh Mục Dịch Vụ",
+            "car_part": "Bộ Phận Xe",
+            "car_category": "Loại Xe",
+            "work_nature": "Bản Chất Công Việc",
+            "action": "Hành Động",
+            "estimated_hours": "Số Giờ Ước Tính",
+            "price": "Giá",
+            "status": "Trạng Thái",
+            "description": "Mô Tả",
+            "images": "Hình Ảnh Dịch Vụ",
+            "select_status": "Chọn Trạng Thái",
+            "status_active": "Hoạt Động",
+            "status_inactive": "Không Hoạt Động",
+            "upload_images": "Tải Ảnh Lên",
+            "remove_image": "Xóa Ảnh",
+            "save_changes": "Lưu Thay Đổi",
+            "edit": "Chỉnh Sửa",
+            "update_service": "Cập Nhật Dịch Vụ"
+        },
+        "placeholders": {
+            "service_name": "Nhập tên dịch vụ",
+            "service_category": "Chọn danh mục dịch vụ",
+            "car_part": "Chọn bộ phận xe",
+            "car_category": "Chọn loại xe",
+            "work_nature": "Chọn bản chất công việc",
+            "action": "Chọn hành động",
+            "estimated_hours": "Nhập số giờ ước tính",
+            "price": "Nhập giá dịch vụ",
+            "status": "Chọn trạng thái",
+            "description": "Nhập mô tả dịch vụ"
+        },
+        "buttons": {
+            "edit": "Chỉnh Sửa",
+            "save": "Lưu",
+            "cancel": "Hủy",
+            "upload": "Tải Lên",
+            "delete": "Xóa"
+        }
+    }
+}

@@ -5,9 +5,11 @@ import { getServiceDetails, getCarCategory, getCarPart, createServiceImage, upda
 import MDEditor from "@uiw/react-md-editor";
 import { FaEdit, FaSave, FaTrash } from "react-icons/fa";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
+import { useTranslation } from "react-i18next";
 
 
 export default function UpdateServicePage() {
+    const { t } = useTranslation("update_service_page");
     const { id } = useParams();
     const [service, setService] = useState(null);
     const [selectedImages, setSelectedImages] = useState([]);
@@ -144,19 +146,19 @@ export default function UpdateServicePage() {
             <Breadcrumb />
 
             <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-semibold">Cập nhật dịch vụ</h2>
-
+                <h1 className="text-xl font-semibold">{t("update_service_page.title")}</h1>
             </div>
+
 
 
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-gray-700 font-semibold">Service Name</label>
+                        <label className="block text-gray-700 font-semibold">{t("update_service_page.form.service_name")}</label>
                         <input
                             {...register("ServiceName", { required: "Tên dịch vụ là bắt buộc" })}
-                            placeholder="Tên dịch vụ"
+                            placeholder={t("update_service_page.placeholders.service_name")}
                             className="border p-2 w-full"
                             disabled={!isEditing}
                         />
@@ -165,7 +167,10 @@ export default function UpdateServicePage() {
 
                     {/* Select Service Category */}
                     <div>
-                        <label className="block text-gray-700 font-semibold">Service Category</label>
+                        <label className="block text-gray-700 font-semibold">
+                            {t("update_service_page.form.service_category")}
+                        </label>
+
                         <select {...register("ServiceCategory", { required: "Danh mục xe là bắt buộc" })} className="border p-2 w-full" disabled={!isEditing}>
                             {service && <option value={service.serviceCategory}>{service.serviceCategory}</option>}
                             {serviceCategoryKeys.map((category, index) => (
@@ -182,7 +187,9 @@ export default function UpdateServicePage() {
 
                     {/* Select Car Part */}
                     <div>
-                        <label className="block text-gray-700 font-semibold">Car Part</label>
+                        <label className="block text-gray-700 font-semibold">
+                            {t("update_service_page.form.car_part")}
+                        </label>
                         <select {...register("CarPart")} className="border p-2 w-full" disabled={!isEditing} defaultValue={service?.carPartId}>
                             {service && <option value={service.carPartId}>{service.carPart}</option>}
                             {isEditing && carParts.map((part) => (
@@ -199,7 +206,9 @@ export default function UpdateServicePage() {
 
                     {/* Select Car Category */}
                     <div>
-                        <label className="block text-gray-700 font-semibold">Car Category</label>
+                        <label className="block text-gray-700 font-semibold">
+                            {t("update_service_page.form.car_category")}
+                        </label>
                         <select {...register("CarCategory")} className="border p-2 w-full" disabled={!isEditing} defaultValue={service?.carCategoryId}>
                             {service && <option value={service.carCategoryId}>{service.carCategory}</option>}
                             {isEditing && carCategories.map((category) => (
@@ -217,7 +226,9 @@ export default function UpdateServicePage() {
 
                     {/* Select Action */}
                     <div>
-                        <label className="block text-gray-700 font-semibold">Action</label>
+                        <label className="block text-gray-700 font-semibold">
+                            {t("update_service_page.form.action")}
+                        </label>
                         <select {...register("Action", { required: "Hành động là bắt buộc" })} className="border p-2 w-full" disabled={!isEditing}>
                             {service && <option value={service.action}>{service.action}</option>}
                             {actionKeys.map((key, index) => (
@@ -231,7 +242,9 @@ export default function UpdateServicePage() {
 
                     {/* Select Work Nature */}
                     <div>
-                        <label className="block text-gray-700 font-semibold">Work Nature</label>
+                        <label className="block text-gray-700 font-semibold">
+                            {t("update_service_page.form.work_nature")}
+                        </label>
                         <select {...register("WorkNature", { required: "Bản chất công việc là bắt buộc" })} className="border p-2 w-full" disabled={!isEditing}>
                             {service && <option value={service.workNature}>{service.workNature}</option>}
                             {workNatureKeys.map((key, index) => (
@@ -244,11 +257,14 @@ export default function UpdateServicePage() {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-semibold">Estimated Hours</label>
+                        <label className="block text-gray-700 font-semibold">
+                            {t("update_service_page.form.estimated_hours")}
+                        </label>
+
                         <input
                             type="number"
                             {...register("EstimatedHours", { required: "Số giờ ước tính là bắt buộc", min: 0 })}
-                            placeholder="Thời gian dự kiến (giờ)"
+                            placeholder={t("update_service_page.placeholders.estimated_hours")}
                             className="border p-2 w-full"
                             disabled={!isEditing}
                         />
@@ -256,11 +272,13 @@ export default function UpdateServicePage() {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-semibold">Price</label>
+                        <label className="block text-gray-700 font-semibold">
+                            {t("update_service_page.form.price")}
+                        </label>
                         <input
                             type="number"
                             {...register("ServicePrice", { required: "Giá dịch vụ là bắt buộc", min: 0 })}
-                            placeholder="Giá dịch vụ (VND)"
+                            placeholder={t("update_service_page.placeholders.price")}
                             className="border p-2 w-full"
                             disabled={!isEditing}
                         />
@@ -268,10 +286,13 @@ export default function UpdateServicePage() {
                     </div>
 
                     <div>
-                        <label className="block text-gray-700 font-semibold">Trạng thái</label>
-                        <select {...register("Status", { required: "Trạng thái là bắt buộc" })} className="border p-2 w-full" disabled={!isEditing}>
-                            <option value="Active" selected={service?.status === "Active"}>Active</option>
-                            <option value="Inactive" selected={service?.status === "Inactive"}>Inactive</option>
+                        <label className="block text-gray-700 font-semibold">
+                            {t("update_service_page.form.status")}
+                        </label>
+                        <select {...register("Status")} className="border p-2 w-full" disabled={!isEditing}>
+                            <option value="">{t("update_service_page.form.select_status")}</option>
+                            <option value="Active">{t("update_service_page.form.status_active")}</option>
+                            <option value="Inactive">{t("update_service_page.form.status_inactive")}</option>
                         </select>
                         {errors.Status && <p className="text-red-500 text-sm">{errors.Status.message}</p>}
                     </div>
@@ -281,15 +302,21 @@ export default function UpdateServicePage() {
 
                 {/* Mô tả */}
                 <div className="col-span-2" data-color-mode="light">
-                    <label className="block text-gray-700 font-semibold">Mô tả</label>
+                    <label className="block text-gray-700 font-semibold">
+                        {t("update_service_page.form.description")}
+                    </label>
                     <MDEditor
                         value={watch("Description")}
                         onChange={(value) => isEditing && setValue("Description", value)}
+                        placeholder={t("update_service_page.placeholders.description")}
                     />
                 </div>
 
                 {/* Upload ảnh */}
-                <label className="block text-gray-700 font-semibold">Service Image</label>
+
+                <label className="block text-gray-700 font-semibold">
+                    {t("update_service_page.form.images")}
+                </label>
 
                 <div className="mt-4 grid grid-cols-6 gap-3">
                     {selectedImages.length > 0 ? (
@@ -335,7 +362,7 @@ export default function UpdateServicePage() {
                             onClick={() => setIsEditing(true)}
                         >
                             <FaEdit />
-                            Chỉnh sửa
+                            {t("update_service_page.buttons.edit")}
                         </button>
                     </div>
                 )}
@@ -343,12 +370,13 @@ export default function UpdateServicePage() {
                 {/* Nút "Cập nhật dịch vụ" chỉ hiển thị khi đang chỉnh sửa */}
                 {isEditing && (
                     <div className="flex justify-end mt-6">
+
                         <button
                             type="submit"
                             className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 flex items-center gap-2"
                         >
                             <FaSave />
-                            Cập nhật dịch vụ
+                            {t("update_service_page.buttons.save_changes")}
                         </button>
                     </div>
                 )}

@@ -41,7 +41,7 @@
         "common": {
             "save": "Save",
             "close": "Close"
-        },
+        },  
         "edit_status": "Edit Status"
     }
 }

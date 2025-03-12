@@ -273,6 +273,11 @@
         "isSuspense2": true
       },
       {
+        "path": "package-service/:id",
+        "element": "ViewPackageServicePage",
+        "isSuspense2": true
+      },
+      {
         "path": "product",
         "element": "ManageProduct",
         "isSuspense2": true

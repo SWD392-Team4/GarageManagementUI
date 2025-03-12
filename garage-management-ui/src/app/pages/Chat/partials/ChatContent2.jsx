@@ -7,7 +7,7 @@ import { sAccount } from "../../AuthCustomer/services/store";
 
 // SkeletonCard mô phỏng bố cục chat khi dữ liệu chưa load
 const SkeletonCard = () => (
-  <div className="space-y-3 animate-pulse p-4">
+  <div className="h-[503px] space-y-3 animate-pulse p-4">
     {/* Tin nhắn từ người khác (căn trái) */}
     <div className="flex items-end justify-start">
       <div className="w-6 h-6 bg-gray-300 rounded-full mr-2"></div>
@@ -101,7 +101,7 @@ const SkeletonCard = () => (
   </div>
 );
 
-function ChatContent() {
+function ChatContent2() {
   const state = chatStore.use();
   const connection = ConnectionSignify.use().connection;
   const messagesEndRef = useRef(null); // Tạo ref cho phần tử cuối cùng
@@ -138,16 +138,20 @@ function ChatContent() {
   const myId = sAccount.value.id;
 
   if (!state.messages) {
-    return <SkeletonCard />;
+    return (
+      <div className="text-gray-400 h-[503px]">
+        Enter something to talk with instructor
+      </div>
+    );
   }
 
   if (state.messages.length === 0) {
-    return <div className="text-gray-400">No messages</div>;
+    return <div className="text-gray-400  h-[503px]">No messages</div>;
   }
 
   return (
     // Bọc danh sách tin nhắn trong div với chiều cao tối đa và overflow-y-auto
-    <div className="min-h-[526px] max-h-full overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 ">
+    <div className="min-h-[503px] max-h-[503px] h-[503px] overflow-y-auto space-y-3 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 ">
       {state.messages.map((msg, idx) => {
         // Xác định tin nhắn của mình dựa trên id của sender
         const isMe = msg.senderId.id === myId;
@@ -200,4 +204,4 @@ function ChatContent() {
   );
 }
 
-export default ChatContent;
+export default ChatContent2;

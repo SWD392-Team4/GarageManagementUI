@@ -25,3 +25,28 @@ export const sPackageService = signify(
     }
 )
 
+
+export const sPackageHistory = signify(
+    {
+
+        id: "",
+        serviceCategory: "",
+        category: "",
+        packageName: "",
+        type: "",
+        status: "",
+        packagePrice: "",
+        validityPeriod: "",
+        timeUnit: "",
+        usageLimit: "",
+        createdAt: "",
+        updatedAt: ""
+
+    },
+    {
+        cache: {
+            key: "sPackageHistory",
+        },
+    }
+)
+

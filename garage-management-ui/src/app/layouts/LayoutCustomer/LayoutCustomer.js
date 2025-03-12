@@ -11,7 +11,7 @@ export default function LayoutCustomer() {
         <div className="container mx-auto  ">
           <Header />
           <PageTitle title={"Profile"} title1="Home" subtitle={"Profile"} />
-          <div className="grid grid-cols-4 sm:grid-cols-12 gap-2 px-4 relative -top-24">
+          <div className="grid grid-cols-4 sm:grid-cols-12 gap-2 px-4 relative -top-32">
             <SidebarCustomer />
             <div className="col-span-4 sm:col-span-9">
               <Outlet />

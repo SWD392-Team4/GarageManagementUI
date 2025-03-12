@@ -1,0 +1,46 @@
+{
+    "update_service_page": {
+        "title": "Update Service",
+        "breadcrumb": "Manage Services",
+        "form": {
+            "service_name": "Service Name",
+            "service_category": "Service Category",
+            "car_part": "Car Part",
+            "car_category": "Car Category",
+            "work_nature": "Work Nature",
+            "action": "Action",
+            "estimated_hours": "Estimated Hours",
+            "price": "Price",
+            "status": "Status",
+            "description": "Description",
+            "images": "Service Images",
+            "select_status": "Select Status",
+            "status_active": "Active",
+            "status_inactive": "Inactive",
+            "upload_images": "Upload Images",
+            "remove_image": "Remove Image",
+            "save_changes": "Save Changes",
+            "edit": "Edit",
+            "update_service": "Update Service"
+        },
+        "placeholders": {
+            "service_name": "Enter service name",
+            "service_category": "Select service category",
+            "car_part": "Select car part",
+            "car_category": "Select car category",
+            "work_nature": "Select work nature",
+            "action": "Select action",
+            "estimated_hours": "Enter estimated hours",
+            "price": "Enter service price",
+            "status": "Select status",
+            "description": "Enter service description"
+        },
+        "buttons": {
+            "edit": "Edit",
+            "save": "Save",
+            "cancel": "Cancel",
+            "upload": "Upload",
+            "delete": "Delete"
+        }
+    }
+}
