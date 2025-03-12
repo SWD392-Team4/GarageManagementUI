@@ -1,6 +1,41 @@
 {
     "manage_goods_issued": {
         "title": "Manage Goods Issued",
-        "create": "Create Goods Issued"
+        "create": "Create Goods Issued",
+        "search": {
+            "reference_number": "Reference Number",
+            "invoice_code": "Invoice Code",
+            "min_total_cost": "Min Total Cost",
+            "max_total_cost": "Max Total Cost",
+            "status": "Status",
+            "created_at": "Created At",
+            "updated_at": "Updated At",
+            "status_enum": {
+                "choose": "Choose Status",
+                "active": "Active",
+                "inactive": "Inactive"
+            },
+            "clear_filters": "Clear Filters",
+            "search": "Search"
+        },
+        "table": {
+            "id": "Id",
+            "total_cost": "Total Cost",
+            "reference_number": "Reference Number",
+            "invoice_code": "Invoice Code",
+            "status": "Status",
+            "created_at": "Created At",
+            "updated_at": "Updated At",
+            "view": "view"
+        },
+        "detail_table": {
+            "id": "Id",
+            "total_cost": "Total Cost",
+            "reference_number": "Reference Number",
+            "invoice_code": "Invoice Code",
+            "status": "Status",
+            "created_at": "Created At",
+            "updated_at": "Updated At"
+        }
     }
 }

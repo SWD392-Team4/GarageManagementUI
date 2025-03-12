@@ -3,6 +3,12 @@ import { signify } from "react-signify";
 export const sGoodsIssued = signify(
     {
         id: "",
+        totalCost: "",
+        referenceNumber: "",
+        invoiceCode: "",
+        status: "",
+        createdAt: "",
+        updatedAt: "",
 
     },
     {

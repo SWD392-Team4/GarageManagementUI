@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import MDEditor from "@uiw/react-md-editor";
 import {
     getAllCarCategory,
     getAllServiceCategory,
@@ -8,13 +9,16 @@ import {
     getPakageTimeUnit,
 } from "../../services/PackageServiceAPI";
 
-export default function PackageInfo({ register, packageData, isEditing }) {
+export default function PackageInfo({ register, setValue, watch, packageData, isEditing }) {
     const { t, i8ln } = useTranslation("manage_package");
     const [packageTypes, setPackageTypes] = useState([]);
     const [statuses, setStatuses] = useState([]);
     const [timeUnits, setTimeUnits] = useState([]);
     const [serviceCategories, setServiceCategories] = useState([]);
     const [carCategories, setCarCategories] = useState([]);
+
+    // Lấy giá trị description từ form
+    const description = watch("description", packageData?.description || "");
 
     useEffect(() => {
         async function fetchData() {
@@ -47,7 +51,7 @@ export default function PackageInfo({ register, packageData, isEditing }) {
     }, []);
 
     return (
-        <div className="border p-6 rounded-lg shadow-md bg-white">
+        <div className="mt-6 border p-6 rounded-lg shadow-md bg-white">
             <h2 className="text-lg font-semibold mb-4">{t("manage_package.info.title")}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
@@ -152,6 +156,25 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                         )}
                     </div>
                 ))}
+
+
+                {/* Trường Description với MDEditor */}
+                <div className="col-span-1 md:col-span-2 flex flex-col" data-color-mode="light">
+                    <label className="text-gray-700 font-semibold mb-1">
+                        {t("manage_package.info.fields.description")}:
+                    </label>
+                    {isEditing ? (
+                        <MDEditor
+                            value={description}
+                            onChange={(value) => setValue("description", value || "", { shouldValidate: true })}
+                            className="border p-3 w-full"
+                        />
+                    ) : (
+                        <div className="text-gray-800 bg-gray-100 p-2">
+                            <MDEditor.Markdown source={packageData.description || ""} />
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

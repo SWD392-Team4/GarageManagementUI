@@ -101,7 +101,8 @@
                 "validity_period": "Validity Period",
                 "time_unit": "Time Unit",
                 "usage_limit": "Usage Limit",
-                "status": "Status"
+                "status": "Status",
+                "description": "Description"
             },
             "status_options": {
                 "inactive": "Inactive",

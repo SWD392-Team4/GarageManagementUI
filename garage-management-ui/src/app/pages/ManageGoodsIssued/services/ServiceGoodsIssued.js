@@ -1,4 +1,5 @@
 import UserService from "../../../hooks/services/UserService"
+import { formatDate } from "../schemas/GoodsIssuedSchemas";
 
 const userService = new UserService();
 
@@ -10,6 +11,13 @@ export const getAllGoodsIssued = async (PageNumber = 1) => {
             null,
             true
         );
+        response.data.value = response.data.value.map(pre => ({
+            ...pre,
+            createdAt: formatDate(pre.createdAt),
+            updatedAt: formatDate(pre.updatedAt)
+        }))
+
+
         return response;
     } catch (error) {
         console.error("Fail to loading Goods Issued", error.message);
@@ -30,6 +38,14 @@ export const searchGoodsIssued = async (params) => {
             null,
             true
         );
+
+        response.data.value = response.data.value.map(pre => ({
+            ...pre,
+            createdAt: formatDate(pre.createdAt),
+            updatedAt: formatDate(pre.updatedAt)
+        }))
+
+
         return response;
     } catch (error) {
         console.error("Fail to searching Goods Issued", error.message);
@@ -65,5 +81,44 @@ export const updateGoodsIssue = async (goodsIssuedId, updatedData) => {
     } catch (error) {
         userService.showToast(400, "Updated Goods Issued Fail");
         console.error("Fail to searching Goods Issued", error.message);
+    }
+}
+
+export const getGoodsIssued = async (id) => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/goods-issued/${id}`,
+            "GET",
+            null,
+            true
+        );
+        response.data.value.createdAt = formatDate(response.data.value.createdAt);
+        response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
+
+        return response;
+    } catch (error) {
+        console.error("Fail with: ", error);
+    }
+}
+
+export const getGoodsIssuedDetails = async (id) => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/goods-issued/detail/${id}`,
+            "GET",
+            null,
+            true
+        );
+
+        response.data.value = response.data.value.map(pre => ({
+            ...pre,
+            createdAt: formatDate(pre.createdAt),
+            updatedAt: formatDate(pre.updatedAt),
+        }))
+
+        return response;
+
+    } catch (error) {
+        console.error("Fail with: ", error);
     }
 }

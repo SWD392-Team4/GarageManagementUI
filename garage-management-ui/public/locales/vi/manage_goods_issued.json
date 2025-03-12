@@ -1,0 +1,32 @@
+{
+    "manage_goods_issued": {
+        "title": "Quản lý hoá đơn xuất",
+        "create": "Tạo hoá đơn",
+        "search": {
+            "reference_number": "Số tham chiếu",
+            "invoice_code": "Mã hóa đơn",
+            "min_total_cost": "Chi phí tối thiểu",
+            "max_total_cost": "Chi phí tối đa",
+            "status": "Trạng thái",
+            "created_at": "Ngày tạo",
+            "updated_at": "Ngày cập nhật",
+            "status_enum": {
+                "choose": "Chọn trạng thái",
+                "active": "Hoạt động",
+                "inactive": "Không hoạt động"
+            },
+            "clear_filters": "Xóa bộ lọc",
+            "search": "Tìm kiếm"
+        },
+        "table": {
+            "id": "Id",
+            "total_cost": "Tổng chi phí",
+            "reference_number": "Số tham chiếu",
+            "invoice_code": "Mã hóa đơn",
+            "status": "Trạng thái",
+            "created_at": "Ngày tạo",
+            "updated_at": "Ngày cập nhật",
+            "view": "Xem"
+        }
+    }
+}

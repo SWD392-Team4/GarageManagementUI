@@ -94,7 +94,7 @@ export default function PackageImages({ packageImages, setPackageImages, package
 
 
     return (
-        <div className="border p-6 rounded-lg shadow-md bg-white">
+        <div className="mt-6 border p-6 rounded-lg shadow-md bg-white">
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold">{t("manage_package.images.title")}</h2>
