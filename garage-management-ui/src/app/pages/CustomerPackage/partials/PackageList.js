@@ -2,7 +2,7 @@ import React from "react";
 
 export default function PackageList({ packages }) {
   return (
-    <section className="pt-24 pb-16 bg-gray-100">
+    <section className="pb-16 bg-gray-100">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {packages.map((pkg) => (
@@ -12,7 +12,9 @@ export default function PackageList({ packages }) {
                   {/* Image Section */}
                   <div className="relative h-2/3 ">
                     <img
-                      src={pkg.packageImages[0].imageLink}
+                      src={pkg.packageImages && pkg.packageImages.length > 0
+                        ? pkg.packageImages[0].imageLink
+                        : "/assets/img/hands-engine-2.jpg"}
                       alt={pkg.packageName}
                       className="w-full h-full object-cover rounded-md"
                     />

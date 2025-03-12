@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaSearch, FaSave } from "react-icons/fa";
 import { getAllCategories, getAllBrands } from "../services/CustomerProductService";
-const FilterBar = ({ onFilterChange, initialFilters }) => {
+const FilterBar = ({ onFilterChange, initialFilters, maxPrice }) => {
   const {t} = useTranslation("customer_product_filter");
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
@@ -93,7 +93,7 @@ const FilterBar = ({ onFilterChange, initialFilters }) => {
         <input
           type="range"
           min="0"
-          max="500000"
+          max={maxPrice}
           step="10000"
           value={filters.price[1]}
           onChange={(e) =>

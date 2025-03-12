@@ -20,14 +20,14 @@ const PackageFilterBar = ({ onFilterChange, initialFilters }) => {
   };
 
   return (
-    <div className="rounded-lg w-full mx-auto bg-white p-4 shadow-md">
+    <div className=" rounded-lg  w-full  mx-aut">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">Filter Packages</h2>
 
       {/* Search Bar */}
       <div className="mb-4 relative w-full">
         <input
           type="text"
-          placeholder="Search package name..."
+          placeholder="Search name..."
           value={filters.searchTerm}
           onChange={(e) => handleFilterChange("searchTerm", e.target.value)}
           className="w-full p-3 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"

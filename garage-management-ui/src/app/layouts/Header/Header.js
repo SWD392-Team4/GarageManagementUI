@@ -16,7 +16,8 @@ const Header = () => {
     about: "/about-us/mission",
     service: "/services",
     product: "/product",
-    contact: "/lien-he",
+    package: "/packages",
+    contact: "/contact",
     lookup: "/lookup",
   };
 

@@ -76,7 +76,10 @@ const ProductsPage = () => {
       currentPage: 1,
     }));
   };
-
+  const maxPrice = useMemo(() => {
+    if (!filteredProducts.length) return 500000; // Default max price if no products exist
+    return Math.max(...filteredProducts.map(product => product.price));
+  }, [filteredProducts]);
   return (
     <div className="bg-gray-100 min-h-screen py-6">
       <div className="container mx-auto px-4 p-6">
@@ -91,6 +94,7 @@ const ProductsPage = () => {
             <FilterBar
               onFilterChange={handleFilterChange}
               initialFilters={appliedFilters}
+              maxPrice={maxPrice}
             />
           </div>
 
