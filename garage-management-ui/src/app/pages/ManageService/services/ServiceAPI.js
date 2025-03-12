@@ -1,4 +1,5 @@
 import UserService from "../../../hooks/services/UserService"
+import { formatVietnameseCurrency } from "../../ManagePackageService/schemas/PackageServiceSchemas";
 import { formatDateForFeedBack } from "../schemas/ServiceSchemas";
 import { sService } from "./ServiceSignify"
 
@@ -12,6 +13,11 @@ export const getAllService = async (PageNumber = 1) => {
             null,
             true
         );
+        response.data.value = response.data.value.map(pre => ({
+            ...pre,
+            price: formatVietnameseCurrency(pre.price)
+        }))
+
 
         if (response.data.value != null) {
             userService.showToast(200, "Loading List Service Successful");
@@ -40,6 +46,11 @@ export const searchService = async (params) => {
             null,
             true
         );
+        response.data.value = response.data.value.map(pre => ({
+            ...pre,
+            price: formatVietnameseCurrency(pre.price)
+        }))
+
         if (response.data.value != null) {
             userService.showToast(200, "Search List Service Successful");
             return response;
@@ -47,7 +58,6 @@ export const searchService = async (params) => {
             userService.showToast(400, "Search List Service Fail");
             return null;
         }
-
     } catch (error) {
         console.error("Fail to searching: ", error.message);
     }
@@ -62,7 +72,7 @@ export const createService = async (data, formData) => {
             true
         );
         if (formData) {
-            await createServiceImage(response.data.id, formData);
+            await createServiceImage(response.data.value.id, formData);
         }
 
         //clear signify
@@ -158,8 +168,8 @@ export const updateService = async (serviceId, updateData) => {
             pre.value.id = serviceId,
             pre.value.serviceName = updateData.serviceName,
             pre.value.serviceCategory = updateData.serviceCategory,
-            pre.value.partName = updateData.carPartName,
-            pre.value.category = updateData.carCategoryName,
+            pre.value.carPart = updateData.carPartName,
+            pre.value.carCategory = updateData.carCategoryName,
             pre.value.price = updateData.servicePrice,
             pre.value.workNature = updateData.workNature,
             pre.value.action = updateData.action,

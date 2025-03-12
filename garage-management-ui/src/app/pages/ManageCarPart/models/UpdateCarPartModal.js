@@ -4,7 +4,6 @@ import { updateCarPart } from "../services/CarPartService";
 import { getAllCarPartCate } from "../services/CarPartService";
 
 export default function UpdateCarPartModal({ isOpen, onClose, carPart, onCarPartUpdated }) {
-    console.log("check thong tin : ", carPart);
     const [formData, setFormData] = useState({
         id: "",
         carPartCategoryId: "",

@@ -4,7 +4,7 @@
         "ServiceName": "Service Name",
         "ServiceCategory": "Service Category",
         "PartName": "Part Name",
-        "Category": "Category",
+        "Category": "Car Category",
         "Price": "Price",
         "WorkNature": "Work Nature",
         "Action": "Action",
@@ -41,7 +41,7 @@
         "common": {
             "save": "Save",
             "close": "Close"
-        },  
+        },
         "edit_status": "Edit Status"
     }
 }

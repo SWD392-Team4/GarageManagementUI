@@ -38,6 +38,7 @@ export const getProduct = async (productId) => {
         if (response?.data) {
             return {
                 ...response.data.value,
+                productPrice: formatVietnameseCurrency(response.data.value.productPrice),
                 createdAt: formatDate(response.data.value.createdAt),
                 updatedAt: formatDate(response.data.value.updatedAt),
             };

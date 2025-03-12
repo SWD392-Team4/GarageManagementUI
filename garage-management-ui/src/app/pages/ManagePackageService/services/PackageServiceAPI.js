@@ -1,5 +1,5 @@
 import UserService from "../../../hooks/services/UserService";
-import { formatDate } from "../schemas/PackageServiceSchemas";
+import { formatDate, formatVietnameseCurrency } from "../schemas/PackageServiceSchemas";
 import { sPackageService } from "../services/PackageServiceSignify";
 
 const userService = new UserService();
@@ -15,6 +15,7 @@ export const getAllPackageService = async (PageNumber = 1) => {
 
     response.data.value = response.data.value.map((pre) => ({
       ...pre,
+      packagePrice: formatVietnameseCurrency(pre.packagePrice),
       createdAt: formatDate(pre.createdAt),
       updatedAt: formatDate(pre.updatedAt),
     }));
@@ -43,6 +44,7 @@ export const searchPackageService = async (params) => {
 
     response.data.value = response.data.value.map((pre) => ({
       ...pre,
+      packagePrice: formatVietnameseCurrency(pre.packagePrice),
       createdAt: formatDate(pre.createdAt),
       updatedAt: formatDate(pre.updatedAt),
     }));
@@ -63,6 +65,33 @@ export const createPackage = async (data) => {
       true
     );
 
+    //clear thong tin signify
+    sPackageService.set((pre) => ([
+      pre.value.id = "",
+      pre.value.serviceCategory = "",
+      pre.value.carCategory = "",
+      pre.value.category = "",
+      pre.value.packageName = "",
+      pre.value.type = "",
+      pre.value.status = "",
+      pre.value.packagePrice = "",
+      pre.value.validityPeriod = "",
+      pre.value.timeUnit = "",
+      pre.value.usageLimit = "",
+      pre.value.createdAt = "",
+      pre.value.updatedAt = ""
+    ]))
+
+    console.log("check thong tin: 1111 ", response.data);
+    response.data.value.packageName = <>{response.data.value.packageName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+    response.data.value.packagePrice = formatVietnameseCurrency(response.data.value.packagePrice)
+    response.data.value.createdAt = formatDate(response.data.value.createdAt)
+    response.data.value.updatedAt = formatDate(response.data.value.updatedAt)
+    //gan vao signify
+    sPackageService.set(response.data.value)
+
+
+
     userService.showToast(200, "Create Package Service Successful");
     return response;
   } catch (error) {
@@ -79,6 +108,7 @@ export const getPackageDetail = async (PackageId) => {
       null,
       true,
     );
+    response.data.value.packagePrice = formatVietnameseCurrency(response.data.value.packagePrice);
     response.data.value.createdAt = formatDate(response.data.value.createdAt);
     response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
     userService.showToast(200, "Loading PackageDetail Successful");
@@ -98,6 +128,43 @@ export const updatePackage = async (PackageId, FormData) => {
       FormData,
       true
     );
+    //clear thong tin signify
+    sPackageService.set((pre) => ([
+      pre.value.id = "",
+      pre.value.serviceCategory = "",
+      pre.value.carCategory = "",
+      pre.value.category = "",
+      pre.value.packageName = "",
+      pre.value.type = "",
+      pre.value.status = "",
+      pre.value.packagePrice = "",
+      pre.value.validityPeriod = "",
+      pre.value.timeUnit = "",
+      pre.value.usageLimit = "",
+      pre.value.createdAt = "",
+      pre.value.updatedAt = ""
+    ]))
+
+    console.log("check thong tin: 1111 ", FormData);
+    FormData.packageName = <>{FormData.packageName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
+    FormData.packagePrice = formatVietnameseCurrency(FormData.packagePrice)
+    //gan vao signify
+    sPackageService.set((pre) => ([
+      pre.value.id = PackageId,
+      pre.value.serviceCategory = FormData.serviceCategory,
+      pre.value.category = FormData.category,
+      pre.value.packageName = FormData.packageName,
+      pre.value.type = FormData.type,
+      pre.value.status = FormData.status,
+      pre.value.packagePrice = FormData.packagePrice,
+      pre.value.validityPeriod = FormData.validityPeriod,
+      pre.value.timeUnit = FormData.timeUnit,
+      pre.value.usageLimit = FormData.usageLimit,
+      pre.value.createdAt = FormData.createdAt,
+      pre.value.updatedAt = FormData.updatedAt
+    ]))
+
+
     userService.showToast(200, "Update Package Service Successful");
     return response;
   } catch (error) {
@@ -166,7 +233,7 @@ export const getPakageTimeUnit = async () => {
 export const getAllServiceCategory = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/services?PageSize=0&Fields=serviceCategory",
+      "/api/services/categories",
       "GET",
       null,
       true
@@ -215,6 +282,12 @@ export const getAllService = async () => {
       null,
       true
     );
+    response.data.value = response.data.value.map(pre => ({
+      ...pre,
+      price: formatVietnameseCurrency(pre.price)
+    }))
+    // console.log("check data: ", response.data.value)
+
     return response;
   } catch (error) {
     console.error("Fail to loading service", error.message);
@@ -229,6 +302,12 @@ export const GetServiceByPackageId = async (PackageId) => {
       null,
       true
     );
+    response.data.value = response.data.value.map(pre => ({
+      ...pre,
+      price: formatVietnameseCurrency(pre.price)
+    }))
+
+
     return response;
   } catch (error) {
     console.error("Fail with: ", error);

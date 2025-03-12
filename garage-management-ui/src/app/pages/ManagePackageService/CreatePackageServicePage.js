@@ -202,8 +202,8 @@ export default function CreatePackageServicePage() {
             <select {...register("ServiceCategory")} className="border p-3 w-full rounded">
               <option value="">{t("manage_package.create.form.service_category")}</option>
               {serviceCategories.map((service, index) => (
-                <option key={index} value={service.serviceCategory}>
-                  {service.serviceCategory}
+                <option key={index} value={service}>
+                  {service}
                 </option>
               ))}
             </select>
@@ -256,7 +256,7 @@ export default function CreatePackageServicePage() {
         </div>
 
         {/* Package Conditions */}
-        <div className="border p-4 rounded-lg">
+        <div className="border p-6 rounded-lg bg-white shadow-md">
           <h3 className="font-bold mb-3">{t("manage_package.create.package_conditions")}</h3>
           {fields.map((item, index) => (
             <div key={item.id} className="flex items-center space-x-3 mb-2">
