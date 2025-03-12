@@ -15,8 +15,8 @@ export const getAllProducts = async (
       ProductName: filters?.searchTerm || "",
       ProductCategory: filters?.category || "",
       ProductBrandName: filters?.brand || "",
-      // MinPrice: filters?.price ? Number(filters.price[0]) : 0,
-      // MaxPrice: filters?.price ? Number(filters.price[1]) : 500000,
+      MinPrice: filters?.price ? Number(filters.price[0]) : 0,
+      MaxPrice: filters?.price ? Number(filters.price[1]) : 500000,
       ProductStatus: "Active",
     }).toString();
     console.log("API Query:", queryString);

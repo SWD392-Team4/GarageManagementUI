@@ -1,41 +1,129 @@
+import React, { useEffect, useState, useMemo } from "react";
+import { useSearchParams, useNavigate } from "react-router-dom";
+import PackageList from "./PackageList";
+import Pagination from "../../../components/Pagination/Pagination";
+import { getAllPackages } from "../services/PackageServiceAPI";
+import LoadingSpinner from "../../CustomerProduct/partials/LoadingSpinner";
+import PackageFilterBar from "./PackageFilterBar";
+import { BsSliders } from "react-icons/bs";
 
-import React from 'react'
-import PackageList from './PackageList';
+const PackageListPage = () => {
+  const [filteredPackages, setFilteredPackages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [paging, setPaging] = useState({
+    currentPage: 1,
+    totalPages: 1,
+    hasPrevious: false,
+    hasNext: false,
+  });
+  const [showFilter, setShowFilter] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
 
-export default function PackageListPage() {
-    const packages = [
-        {
-          id: 1,
-          name: 'Basic Maintenance Package',
-          description: 'Oil change, tire pressure check, fluid level check, battery health check, and more.',
-        },
-        {
-          id: 2,
-          name: 'Intermediate Maintenance Package',
-          description: 'Includes Basic Package services plus air filter replacement, brake inspection, and more.',
-        },
-        {
-          id: 3,
-          name: 'Comprehensive Maintenance Package',
-          description: 'Full vehicle diagnostic, transmission fluid flush, suspension inspection, and more.',
-        },
-        {
-          id: 4,
-          name: 'Seasonal Tune-Up Package',
-          description: 'Winter or summer-specific services like antifreeze check, AC recharge, and tire changes.',
-        },
-        {
-          id: 5,
-          name: 'Performance Enhancement Package',
-          description: 'Engine tuning, exhaust upgrades, suspension upgrades, and more for car enthusiasts.',
-        },
-        {
-          id: 6,
-          name: 'Eco-Friendly Maintenance Package',
-          description: 'Hybrid/electric vehicle battery check, emission system cleaning, and fuel efficiency services.',
-        },
-      ];
+  const appliedFilters = useMemo(
+    () => ({
+      searchTerm: searchParams.get("searchTerm") || "",
+      // serviceCategory: searchParams.get("serviceCategory") || "",
+      price: searchParams.get("price")
+        ? searchParams.get("price").split(",").map(Number)
+        : [0, 50000000],
+    }),
+    [searchParams]
+  );
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        setLoading(true);
+        const response = await getAllPackages(paging.currentPage, 12, appliedFilters);
+        if (response?.value) {
+          setFilteredPackages(response.value);
+          setPaging({
+            currentPage: response.paging.currentPage,
+            totalPages: response.paging.totalPages,
+            hasPrevious: response.paging.hasPrevious,
+            hasNext: response.paging.hasNext,
+          });
+        } else {
+          console.error("Error: No data received");
+        }
+      } catch (error) {
+        console.error("Error fetching packages:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPackages();
+  }, [paging.currentPage, appliedFilters]);
+
+  const handleFilterChange = (filters) => {
+    setSearchParams({
+      searchTerm: filters.searchTerm,
+      // serviceCategory: filters.serviceCategory,
+      price: filters.price.join(","),
+    });
+    setPaging((prev) => ({ ...prev, currentPage: 1 }));
+  };
+
   return (
-      <PackageList packages={packages} /> 
-  )
-}
+    <div className="bg-gray-100 min-h-screen py-6">
+      <div className="container mx-auto px-4 p-6">
+        <h1 className="text-4xl font-bold mb-6 text-center p-6">Our Packages</h1>
+
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className={`lg:block hidden md:w-1/4 w-full bg-white p-4 rounded-lg shadow-md sticky top-4 h-fit`}>
+            <PackageFilterBar onFilterChange={handleFilterChange} initialFilters={appliedFilters} />
+          </div>
+
+          <div className="w-full">
+            {loading ? (
+              <LoadingSpinner />
+            ) : filteredPackages.length > 0 ? (
+              <PackageList packages={filteredPackages} />
+            ) : (
+              <div className="text-center text-gray-500 text-lg mt-6">No packages found. Try adjusting your filters.</div>
+            )}
+
+            <div className="mt-6 flex justify-center">
+              {!loading && filteredPackages.length > 0 && (
+                <Pagination
+                  currentPage={paging.currentPage}
+                  totalPages={paging.totalPages}
+                  hasPrevious={paging.hasPrevious}
+                  hasNext={paging.hasNext}
+                  onPageChange={(page) =>
+                    setPaging((prev) => ({ ...prev, currentPage: page }))
+                  }
+                />
+              )}
+            </div>
+          </div>
+        </div>
+
+        <button
+          className="lg:hidden fixed bottom-4 right-4 bg-red-600 text-white p-3 rounded-full shadow-lg"
+          onClick={() => setShowFilter(true)}
+        >
+          <BsSliders size={24} />
+        </button>
+
+        {showFilter && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div className="bg-white p-6 w-11/12 max-w-lg rounded-lg shadow-lg relative">
+              <button
+                className="absolute top-2 right-3 text-gray-600 text-2xl"
+                onClick={() => setShowFilter(false)}
+              >
+                &times;
+              </button>
+              <PackageFilterBar onFilterChange={handleFilterChange} initialFilters={appliedFilters} />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default PackageListPage;

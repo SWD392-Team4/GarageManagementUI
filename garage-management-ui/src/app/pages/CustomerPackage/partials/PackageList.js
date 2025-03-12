@@ -12,17 +12,17 @@ export default function PackageList({ packages }) {
                   {/* Image Section */}
                   <div className="relative h-2/3 ">
                     <img
-                      src="/assets/img/service_img_1.jpg"
-                      alt={pkg.name}
+                      src={pkg.packageImages[0].imageLink}
+                      alt={pkg.packageName}
                       className="w-full h-full object-cover rounded-md"
                     />
                   </div>
 
                   {/* Text Section */}
                   <div className="rounded-md absolute left-0 top-[200px] h-2/5 w-10/12 bg-black text-white p-4 transition-all duration-300 group-hover:w-full group-hover:bg-red-600">
-                    <h3 className="text-xl font-semibold mb-2">{pkg.name}</h3>
+                    <h3 className="text-xl font-semibold mb-2">{pkg.packageName}</h3>
                     <p className="text-gray-300 group-hover:text-white line-clamp-3">
-                      {pkg.description}
+                      {pkg.packageDescription}
                     </p>
                   </div>
                 </div>

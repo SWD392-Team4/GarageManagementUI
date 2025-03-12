@@ -8,26 +8,7 @@ import ImageCarousel from "../../ManageProduct/partials/ImageCarousel";
 const ProductDetail = () => {
   const { id } = useParams();
   const {t} = useTranslation("customer_product_detail");
-  // const product = {
-  //   id: 101,
-  //   name: "Lọc dầu động cơ",
-  //   price: "250",
-  //   uri: "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png",
-  //   category: "Engine Parts",
-  //   code: "LOCD101",
-  //   brand: "OEM",
-  //   manufacture: "Vietnam",
-  //   warranty: "12 months",
-  //   description:
-  //     "A high-quality engine oil filter designed to improve performance and longevity.",
-  //   images: [
-  //     "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/1.png",
-  //     "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/2.png",
-  //     "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/3.png",
-  //     "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/4.png",
-  //     "https://templates.hibootstrap.com/audeck/default/assets/img/home-one/parts/5.png",
-  //   ],
-  // };
+  
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
