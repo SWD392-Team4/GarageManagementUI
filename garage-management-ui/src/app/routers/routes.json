@@ -13,7 +13,7 @@
   },
   {
     "path": "about-us",
-    "redirect": "/about-us/mision"
+    "redirect": "/about-us/mission"
   },
   {
     "path": "/",

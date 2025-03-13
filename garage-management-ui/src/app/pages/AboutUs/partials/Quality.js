@@ -1,11 +1,11 @@
 const QualitySection = () => {
   return (
-    <section className="relative p-10 bg-gray-100">
-      <div className="absolute top-0 left-0 w-full h-full -z-10">
+    <section className="relative p-10 bg-white overflow-hidden">
+      <div className="absolute bottom-0 right-0 w-auto h-auto">
         <img
           src="/assets/img/car-shape.png"
           alt="Quality"
-          className="w-full h-full object-cover opacity-20"
+          
         />
       </div>
       <div className="container mx-auto px-4">
