@@ -7,7 +7,7 @@ import {
 import { FaEdit, FaSave, FaTimes, FaPlus } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-export default function PackageConditionType({ id }) {
+export default function PackageConditionType({ id, isEditing }) {
     const { t, i18n } = useTranslation("manage_package");
     const [conditions, setConditions] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -132,7 +132,7 @@ export default function PackageConditionType({ id }) {
             </h2>
 
             {/* Hiển thị nút tạo nếu còn thiếu điều kiện */}
-            {missingConditions.length > 0 && (
+            {isEditing && missingConditions.length > 0 && (
                 <div className="mb-4">
                     <p className="text-gray-600">{t("manage_package.condition_type.missing_conditions")}:</p>
                     <div className="flex gap-2">
@@ -151,7 +151,7 @@ export default function PackageConditionType({ id }) {
             )}
 
             {/* Hiển thị ô nhập liệu khi tạo điều kiện mới */}
-            {newCondition && (
+            {isEditing && newCondition && (
                 <div className="flex items-center gap-3 bg-gray-100 p-3 rounded-lg mb-4">
                     <p className="text-gray-700 font-medium">{newCondition.conditionType}:</p>
                     <input
@@ -165,16 +165,15 @@ export default function PackageConditionType({ id }) {
                         onClick={handleSaveNewCondition}
                         className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
                     >
-                        <FaSave /> {t("manage_package.condition_type.save")}
+                        <FaSave />
                     </button>
                     <button
                         type="button"
                         onClick={handleCancelNewCondition}
                         className="bg-gray-500 text-white px-2 py-1 rounded hover:bg-gray-600"
                     >
-                        <FaTimes /> {t("manage_package.condition_type.cancel")}
+                        <FaTimes />
                     </button>
-
                 </div>
             )}
 
@@ -183,7 +182,11 @@ export default function PackageConditionType({ id }) {
                     <tr>
                         <th className="p-3 border border-gray-300 text-left">{t("manage_package.condition_type.condition_type")}</th>
                         <th className="p-3 border border-gray-300 text-left">{t("manage_package.condition_type.condition_value")}</th>
-                        <th className="p-3 border border-gray-300 text-center">{t("manage_package.condition_type.action")}</th>
+                        {isEditing && (
+                            <th className="p-3 border border-gray-300 text-center">
+                                {t("manage_package.condition_type.action")}
+                            </th>
+                        )}
                     </tr>
                 </thead>
                 <tbody>
@@ -202,17 +205,20 @@ export default function PackageConditionType({ id }) {
                                     condition.conditionValue
                                 )}
                             </td>
-                            <td className="p-3 border border-gray-300 text-center">
-                                {editingId === condition.id ? (
-                                    <button type="button" onClick={handleSave} className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600">
-                                        <FaSave />
-                                    </button>
-                                ) : (
-                                    <button type="button" onClick={() => handleEdit(condition)} className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
-                                        <FaEdit />
-                                    </button>
-                                )}
-                            </td>
+                            {/* Cột hành động trong bảng */}
+                            {isEditing && (
+                                <td className="p-3 border border-gray-300 text-center">
+                                    {editingId === condition.id ? (
+                                        <button type="button" onClick={handleSave} className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600">
+                                            <FaSave />
+                                        </button>
+                                    ) : (
+                                        <button type="button" onClick={() => handleEdit(condition)} className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
+                                            <FaEdit />
+                                        </button>
+                                    )}
+                                </td>
+                            )}
                         </tr>
                     ))}
                 </tbody>

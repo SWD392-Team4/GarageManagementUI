@@ -66,10 +66,10 @@ export default function ListProduct() {
       { header: t("manage_product.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
       { header: t("manage_product.name"), accessorKey: "productName" },
       { header: t("manage_product.barcode"), accessorKey: "productBarcode" },
+      { header: t("manage_product.price"), accessorKey: "productPrice" },
       { header: t("manage_product.status"), accessorKey: "status" },
       { header: t("manage_product.createdAt"), accessorKey: "createdAt" },
       { header: t("manage_product.updatedAt"), accessorKey: "updatedAt" },
-      { header: t("manage_product.price"), accessorKey: "productPrice" },
     ],
     [t, i18n.language]
   );
