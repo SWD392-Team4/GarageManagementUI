@@ -1,0 +1,22 @@
+{
+  "error": {
+    "required": "Not access empty",
+    "at_least_one_product": "At least one product must be added",
+    "min": "The {field} must be at least {min}"
+  },
+  "labels": {
+    "reference_number": "Reference Number",
+    "invoice_code": "Invoice Code",
+    "warehouse": "Warehouse",
+    "garage": "Garage",
+    "product_name": "Product Name",
+    "quantity": "Quantity",
+    "goods_received_id": "Goods Received ID"
+  },
+  "buttons": {
+    "create": "Create",
+    "reset": "Reset",
+    "add": "Add",
+    "remove": "Remove"
+  }
+}

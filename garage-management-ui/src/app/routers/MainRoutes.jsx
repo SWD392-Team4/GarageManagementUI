@@ -23,6 +23,9 @@ const componentMap = {
     import("../pages/Services/partials/ServiceDetails")
   ),
 
+  CreateAppointment: lazy(() =>
+    import("../pages/AdminManageAppoinment/CreateAppointment")
+  ),
   Mision: lazy(() => import("../pages/AboutUs/partials/Mision")),
   History: lazy(() => import("../pages/AboutUs/partials/History")),
   Vision: lazy(() => import("../pages/AboutUs/partials/Vision")),
@@ -72,18 +75,42 @@ const componentMap = {
   ProductDetails: lazy(() => import("../pages/ManageProduct/ProductDetails")),
   ManageBrand: lazy(() => import("../pages/ManageBrand/ManageBrand")),
   ManageService: lazy(() => import("../pages/ManageService/ManageService")),
-  ManageGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/ManageGoodsIssued")),
-  CreateGoodsIssued: lazy(() => import("../pages/ManageGoodsIssued/CreateGoodsIssued")),
-  ManageInvoiceSale: lazy(() => import("../pages/ManageInvoiceSale/ManageInvoiceSale")),
-  CreateInvoiceSale: lazy(() => import("../pages/ManageInvoiceSale/CreateInvoiceSale")),
-  ManageInvoiceService: lazy(() => import("../pages/ManageInvoiceService/ManageInvoiceService")),
-  CreateInvoiceService: lazy(() => import("../pages/ManageInvoiceService/CreateInvoiceService")),
-  ManageGoodReceived: lazy(() => import("../pages/ManageGoodReceived/ManageGoodReceived")),
-  CreateGoodReceived: lazy(() => import("../pages/ManageGoodReceived/CreateGoodReceived")),
-  ViewGoodReceived: lazy(() => import("../pages/ManageGoodReceived/ViewGoodReceived")),
-  ManagePackageService: lazy(() => import("../pages/ManagePackageService/ManagePackageService")),
-  CreatePackageServicePage: lazy(() => import("../pages/ManagePackageService/CreatePackageServicePage")),
-  ViewPackageServicePage: lazy(() => import("../pages/ManagePackageService/ViewPackageServicePage")),
+  ManageGoodsIssued: lazy(() =>
+    import("../pages/ManageGoodsIssued/ManageGoodsIssued")
+  ),
+  CreateGoodsIssued: lazy(() =>
+    import("../pages/ManageGoodsIssued/CreateGoodsIssued")
+  ),
+  ManageInvoiceSale: lazy(() =>
+    import("../pages/ManageInvoiceSale/ManageInvoiceSale")
+  ),
+  CreateInvoiceSale: lazy(() =>
+    import("../pages/ManageInvoiceSale/CreateInvoiceSale")
+  ),
+  ManageInvoiceService: lazy(() =>
+    import("../pages/ManageInvoiceService/ManageInvoiceService")
+  ),
+  CreateInvoiceService: lazy(() =>
+    import("../pages/ManageInvoiceService/CreateInvoiceService")
+  ),
+  ManageGoodReceived: lazy(() =>
+    import("../pages/ManageGoodReceived/ManageGoodReceived")
+  ),
+  CreateGoodReceived: lazy(() =>
+    import("../pages/ManageGoodReceived/CreateGoodReceived")
+  ),
+  ViewGoodReceived: lazy(() =>
+    import("../pages/ManageGoodReceived/ViewGoodReceived")
+  ),
+  ManagePackageService: lazy(() =>
+    import("../pages/ManagePackageService/ManagePackageService")
+  ),
+  CreatePackageServicePage: lazy(() =>
+    import("../pages/ManagePackageService/CreatePackageServicePage")
+  ),
+  ViewPackageServicePage: lazy(() =>
+    import("../pages/ManagePackageService/ViewPackageServicePage")
+  ),
   ManageGoodsIssued: lazy(() =>
     import("../pages/ManageGoodsIssued/ManageGoodsIssued")
   ),
