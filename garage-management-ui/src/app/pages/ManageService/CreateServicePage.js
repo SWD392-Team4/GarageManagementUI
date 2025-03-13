@@ -14,28 +14,92 @@ export default function CreateServicePage() {
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const [payload, setPayload] = useState(null);
+  // const [payload, setPayload] = useState(null);
   const [carCategories, setCarCategories] = useState([]);
   const [carParts, setCarParts] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
+  const [isCarCategoriesLoaded, setIsCarCategoriesLoaded] = useState(false);
+  const [isCarPartsLoaded, setIsCarPartsLoaded] = useState(false);
   const { t } = useTranslation("create_service_page");
 
   const serviceCategoryKeys = ["repair", "maintenance", "upgrade", "car_wash", "detailing"];
   const actionKeys = ["inspect", "replace", "lubricate", "align", "refill", "repair", "clean", "upgrade", "restore", "update", "polish", "protect", "deodorize", "condition", "remove", "restore_lighting"];
   const workNatureKeys = ["preventive", "corrective", "enhancement", "digital", "aesthetic"];
 
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchCarCategories = async () => {
+    try {
       const categories = await getCarCategory();
-      const parts = await getCarPart();
       setCarCategories(categories || []);
+      setIsCarCategoriesLoaded(true);
+    } catch (error) {
+      console.error("❌ Error fetching car categories:", error);
+    }
+  };
+
+  const fetchCarParts = async () => {
+    try {
+      const parts = await getCarPart();
       setCarParts(parts || []);
-    };
-    fetchData();
+      setIsCarPartsLoaded(true);
+    } catch (error) {
+      console.error("❌ Error fetching car parts:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCarCategories();
+    fetchCarParts();
   }, []);
+
+
+
+  const loadCarCategoryOption = (inputValue) => {
+    return new Promise((resolve) => {
+      if (!isCarCategoriesLoaded) {
+        console.warn("⚠️ Car categories not loaded yet, waiting...");
+        fetchCarCategories().then(() => {
+          resolve(filterCarCategories(inputValue));
+        });
+      } else {
+        resolve(filterCarCategories(inputValue));
+      }
+    });
+  };
+
+  const loadCarPartOption = (inputValue) => {
+    return new Promise((resolve) => {
+      if (!isCarPartsLoaded) {
+        console.warn("⚠️ Car parts not loaded yet, waiting...");
+        fetchCarParts().then(() => {
+          resolve(filterCarPart(inputValue));
+        });
+      } else {
+        resolve(filterCarPart(inputValue));
+      }
+    });
+  };
+
+  const filterCarPart = (inputValue) => {
+    return carParts
+      .filter((i) => i?.partName?.toLowerCase().includes(inputValue.toLowerCase()))
+      .map((i) => ({
+        label: i.partName,
+        value: i.id,
+      }));
+  };
+
+  const filterCarCategories = (inputValue) => {
+    return carCategories
+      .filter((i) => i?.category?.toLowerCase().includes(inputValue.toLowerCase()))
+      .map((i) => ({
+        label: i.category,
+        value: i.id,
+      }));
+  };
 
 
   const handleImageChange = (event) => {
@@ -62,7 +126,7 @@ export default function CreateServicePage() {
       carCategoryName: carCategories.find((category) => category.id === data.CarCategory)?.category || "", // Lấy tên từ ID
     };
 
-    setPayload(formData);
+    // setPayload(formData);
 
     let imageFormData = null;
     if (selectedImages.length > 0) {
@@ -72,42 +136,10 @@ export default function CreateServicePage() {
       });
     }
     await createService(formData, imageFormData);
-
+    reset(); // Reset toàn bộ form về trạng thái ban đầu
+    setSelectedImages([]); // Xóa ảnh đã chọn
   };
 
-  //xu ly select car part
-  const filterCarPart = (inputValue) => {
-    return parts
-      .filter((i) => i.partName.toLowerCase().includes(inputValue.toLowerCase()))
-      .map((i) => ({
-        label: i.partName,
-        value: i.id
-      }));
-  };
-
-  const loadCarPartOption = (inputValue, callback) => {
-    setTimeout(() => {
-      const filterCarParts = filterCarPart(inputValue);
-      callback(filterCarParts);
-    }, 1000); // Giả lập API call với delay 1 giây
-  };
-
-  //xu ly select car category
-  const filterCarCategories = (inputValue) => {
-    return carCategories
-      .filter((i) => i.category.toLowerCase().includes(inputValue.toLowerCase()))
-      .map((i) => ({
-        label: i.category,
-        value: i.id
-      }));
-  };
-
-  const loadCarCategoryOption = (inputValue, callback) => {
-    setTimeout(() => {
-      const filterCarCategory = filterCarCategories(inputValue);
-      callback(filterCarCategory);
-    }, 1000); // Giả lập API call với delay 1 giây
-  };
 
 
   return (
@@ -124,29 +156,46 @@ export default function CreateServicePage() {
 
           {/* Car Category */}
           <div>
-            <label className="block text-gray-700 font-semibold">{t("create_service_page.car_category")}</label>
-            <select {...register("CarCategory")} className="border p-2 w-full">
-              <option value="">{t("create_service_page.form.select_service_category")}</option>
-              {carCategories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.category}
-                </option>
-              ))}
-            </select>
+            <label className="block text-gray-700 font-semibold">
+              {t("create_service_page.car_category")}
+            </label>
+            <AsyncSelect
+              cacheOptions
+              loadOptions={loadCarCategoryOption}
+              defaultOptions={carCategories.map((i) => ({
+                label: i.category,
+                value: i.id,
+              }))} // Giảm gọi API khi render lần đầu
+              onChange={(selectedOption) => {
+                console.log("Selected Car Category:", selectedOption);
+                setValue("CarCategory", selectedOption ? selectedOption.value : "");
+              }}
+              placeholder={t("create_service_page.form.select_service_category")}
+              isClearable
+            />
           </div>
 
           {/* Car Parts */}
           <div>
-            <label className="block text-gray-700 font-semibold">{t("create_service_page.car_part")}</label>
-            <select {...register("CarPart")} className="border p-2 w-full">
-              <option value="">{t("create_service_page.form.select_car_part")}</option>
-              {carParts.map((part) => (
-                <option key={part.id} value={part.id}>
-                  {part.partName}
-                </option>
-              ))}
-            </select>
+            <label className="block text-gray-700 font-semibold">
+              {t("create_service_page.car_part")}
+            </label>
+            <AsyncSelect
+              cacheOptions
+              loadOptions={loadCarPartOption}
+              defaultOptions={carParts.map((i) => ({
+                label: i.partName,
+                value: i.id,
+              }))} // Giảm gọi API khi render lần đầu
+              onChange={(selectedOption) => {
+                console.log("Selected Car Part:", selectedOption);
+                setValue("CarPart", selectedOption ? selectedOption.value : "");
+              }}
+              placeholder={t("create_service_page.form.select_car_part")}
+              isClearable
+            />
           </div>
+
 
           <div>
             <label className="block text-gray-700 font-semibold">{t("create_service_page.car_part")}</label>
@@ -229,12 +278,12 @@ export default function CreateServicePage() {
 
         <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">{t("create_service_page.form.create_service")}</button>
       </form>
-      {payload && (
+      {/* {payload && (
         <div className="mt-4 p-4 bg-gray-100 rounded-lg">
           <h3 className="text-lg font-semibold">Payload Preview:</h3>
           <pre className="text-sm text-gray-700">{JSON.stringify(payload, null, 2)}</pre>
         </div>
-      )}
+      )} */}
     </div>
   );
 }

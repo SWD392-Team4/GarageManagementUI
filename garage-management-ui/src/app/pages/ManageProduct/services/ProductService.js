@@ -1,5 +1,5 @@
 import UserService from "../../../hooks/services/UserService";
-import { formatDate } from "../schemas/ProductValid";
+import { formatDate, formatVietnameseCurrency } from "../schemas/ProductValid";
 import { sProduct } from "./ProductSignify"
 
 const userService = new UserService();
@@ -15,6 +15,7 @@ export const getAllProducts = async (PageNumber = 1) => {
             if (response.data?.value) {
                 response.data.value = response.data.value.map(product => ({
                     ...product,
+                    productPrice: formatVietnameseCurrency(product.productPrice),
                     createdAt: formatDate(product.createdAt),
                     updatedAt: formatDate(product.updatedAt),
                 }));
@@ -37,6 +38,7 @@ export const getProduct = async (productId) => {
         if (response?.data) {
             return {
                 ...response.data.value,
+                productPrice: formatVietnameseCurrency(response.data.value.productPrice),
                 createdAt: formatDate(response.data.value.createdAt),
                 updatedAt: formatDate(response.data.value.updatedAt),
             };
@@ -161,6 +163,7 @@ export const searchProduct = async (params) => {
         if (response != null && response.data?.value) {
             response.data.value = response.data.value.map(product => ({
                 ...product,
+                productPrice: formatVietnameseCurrency(product.productPrice),
                 createdAt: formatDate(product.createdAt),
                 updatedAt: formatDate(product.updatedAt),
             }));

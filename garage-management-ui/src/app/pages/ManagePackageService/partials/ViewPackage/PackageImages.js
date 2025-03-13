@@ -3,12 +3,12 @@ import { createImagePackage, createImagePackageUpdate, deteleImagePackage } from
 import { FaTrash, FaPlus } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-export default function PackageImages({ packageImages, setPackageImages, packageId }) {
+export default function PackageImages({ packageImages, setPackageImages, packageId, isEditing }) {
     const { t, i8ln } = useTranslation("manage_package");
     const [isUploading, setIsUploading] = useState(false);
     const [previewImages, setPreviewImages] = useState([]); // ✅ State lưu ảnh preview
 
-    console.log("check thong tin: ", packageId);
+    // console.log("check thong tin: ", packageId);
 
     // **Xóa ảnh**
     const handleDeleteImage = async (imageId) => {
@@ -94,17 +94,19 @@ export default function PackageImages({ packageImages, setPackageImages, package
 
 
     return (
-        <div className="border p-6 rounded-lg shadow-md bg-white">
+        <div className="mt-6 border p-6 rounded-lg shadow-md bg-white">
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold">{t("manage_package.images.title")}</h2>
 
                 {/* Nút chọn ảnh */}
-                <label className="cursor-pointer bg-blue-500 text-white px-3 py-1.5 rounded-lg hover:bg-blue-600 flex items-center gap-2">
-                    <FaPlus />
-                    {t("manage_package.images.add_image")}
-                    <input type="file" accept="image/*" multiple onChange={handleSelectImage} className="hidden" />
-                </label>
+                {isEditing && (
+                    <label className="cursor-pointer bg-blue-500 text-white px-3 py-1.5 rounded-lg hover:bg-blue-600 flex items-center gap-2">
+                        <FaPlus />
+                        {t("manage_package.images.add_image")}
+                        <input type="file" accept="image/*" multiple onChange={handleSelectImage} className="hidden" />
+                    </label>
+                )}
             </div>
 
             {/* Hiển thị ảnh preview */}

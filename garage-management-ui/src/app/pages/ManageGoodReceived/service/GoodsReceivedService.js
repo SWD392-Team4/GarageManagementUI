@@ -71,8 +71,24 @@ export const createGoodsReceived = async (data) => {
 
 }
 
+export const getAllProduct = async () => {
+    try {
+        const response = await userService.sendAjax(
+            "/api/products",
+            "GET",
+            null,
+            true
+        );
+        return response;
 
-export const getGoodReceivedDetails = async (goodsReceivedId) => {
+    } catch (error) {
+        console.error("Fail with: ", error);
+    }
+}
+
+
+
+export const getGoodReceived = async (goodsReceivedId) => {
     try {
         const response = await userService.sendAjax(
             `/api/goods-received/${goodsReceivedId}`,
@@ -80,6 +96,9 @@ export const getGoodReceivedDetails = async (goodsReceivedId) => {
             null,
             true
         );
+        response.data.value.createdAt = formatDate(response.data.value.createdAt);
+        response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
+
         return response;
     } catch (error) {
         console.error("Fail with: ", error.message);
@@ -88,4 +107,24 @@ export const getGoodReceivedDetails = async (goodsReceivedId) => {
 }
 
 
-// export const 
+export const getGoodsReceivedDetails = async (goodReceivedId) => {
+    try {
+        const response = await userService.sendAjax(
+            `/api/goods-received-detail/${goodReceivedId}/details`,
+            "GET",
+            null,
+            true
+        );
+        response.data.value = response.data.value.map(pre => ({
+            ...pre,
+            createdAt: formatDate(pre.createdAt),
+            updatedAt: formatDate(pre.updatedAt)
+        }))
+        console.log("check details: ", response.data);
+
+        return response;
+    } catch (error) {
+        console.error("Fail with: ", error);
+    }
+
+}

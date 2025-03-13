@@ -35,6 +35,31 @@
                 "inactive": "Inactive"
             }
         },
-        "view": "View Details"
+        "view": "View Details",
+        "view_goods_received": {
+            "title": "View Goods Received Detail",
+            "reference_number": "Reference Number",
+            "invoice_code": "Invoice Code",
+            "source_address": "Source Address",
+            "total_price": "Total Price",
+            "contact_person": "Contact Person",
+            "workplace_name": "Workplace Name",
+            "warehouse_manager": "Warehouse Manager",
+            "status": "Status",
+            "created_at": "Created At",
+            "updated_at": "Updated At"
+        },
+        "goods_received_details": {
+            "title" : "Imported Product",
+            "id": "ID",
+            "quantity": "Quantity",
+            "unit_price": "Unit Price",
+            "total_price": "Total Price",
+            "product_name": "Product Name",
+            "reference_number": "Reference Number",
+            "status": "Status",
+            "created_at": "Created At",
+            "updated_at": "Updated At"
+        }
     }
 }

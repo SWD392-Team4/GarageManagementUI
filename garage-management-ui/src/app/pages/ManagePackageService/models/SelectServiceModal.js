@@ -103,7 +103,7 @@ export default function SelectServiceModal({ isOpen, onClose, onSelect, selected
                                     {service.status === 0 ? "Inactive" : "Active"}
                                 </p>
                                 <p className="font-semibold text-green-600">
-                                    {service.price > 0 ? `$${service.price}` : <span className="text-red-500">Price Not Set</span>}
+                                    {service.price ? `${service.price}` : <span className="text-red-500">Price Not Set</span>}
                                 </p>
                             </div>
                         </div>

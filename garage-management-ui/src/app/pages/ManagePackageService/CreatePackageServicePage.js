@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
+import MDEditor from "@uiw/react-md-editor";
 import {
   getPackageType,
   getPakageTimeUnit,
@@ -43,6 +44,7 @@ export default function CreatePackageServicePage() {
   const [isImageModalOpen, setImageModalOpen] = useState(false);
   const [serviceDetails, setServiceDetails] = useState([]);
 
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "PackageConditions",
@@ -74,6 +76,7 @@ export default function CreatePackageServicePage() {
     .filter(Boolean);
   const selectedServices = watch("ServiceList");
   const selectedImages = watch("imagePackage");
+  const description = watch("Description");
 
   const getAvailableConditions = (currentCondition) => {
     return conditionTypes.filter(
@@ -88,11 +91,6 @@ export default function CreatePackageServicePage() {
 
   const handleServiceSelection = (selectedIds) => {
     setValue("ServiceList", selectedIds);
-  };
-
-  // Hàm này sẽ được truyền xuống modal để lưu thông tin chi tiết của dịch vụ
-  const handleServiceDetails = (selectedDetails) => {
-    setServiceDetails(selectedDetails);
   };
 
   // Xoá dịch vụ khỏi danh sách đã chọn
@@ -200,12 +198,12 @@ export default function CreatePackageServicePage() {
         {/* Grid layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Cột 1 */}
-          <div className="space-y-4">
+          <div className="space-y-4" data-color-mode="light">
             <select {...register("ServiceCategory")} className="border p-3 w-full rounded">
               <option value="">{t("manage_package.create.form.service_category")}</option>
               {serviceCategories.map((service, index) => (
-                <option key={index} value={service.serviceCategory}>
-                  {service.serviceCategory}
+                <option key={index} value={service}>
+                  {service}
                 </option>
               ))}
             </select>
@@ -220,7 +218,6 @@ export default function CreatePackageServicePage() {
             </select>
 
             <input {...register("PackageName")} placeholder={t("manage_package.create.form.package_name")} className="border p-3 w-full rounded" />
-            <textarea {...register("Description")} placeholder={t("manage_package.create.form.description")} className="border p-3 w-full rounded h-24" />
           </div>
 
           {/* Cột 2 */}
@@ -246,10 +243,20 @@ export default function CreatePackageServicePage() {
 
             <input {...register("UsageLimit")} placeholder={t("manage_package.create.form.usage_limit")} type="number" className="border p-3 w-full rounded" />
           </div>
+
+          {/* Hàng mới cho MDEditor - Chiếm full width */}
+          <div className="md:col-span-2 space-y-2" data-color-mode="light">
+            <label className="font-semibold text-gray-700">{t("manage_package.create.form.description")}</label>
+            <MDEditor
+              value={description}
+              onChange={(value) => setValue("Description", value || "", { shouldValidate: true })}
+              className="border p-3 w-full rounded"
+            />
+          </div>
         </div>
 
         {/* Package Conditions */}
-        <div className="border p-4 rounded-lg">
+        <div className="border p-6 rounded-lg bg-white shadow-md">
           <h3 className="font-bold mb-3">{t("manage_package.create.package_conditions")}</h3>
           {fields.map((item, index) => (
             <div key={item.id} className="flex items-center space-x-3 mb-2">

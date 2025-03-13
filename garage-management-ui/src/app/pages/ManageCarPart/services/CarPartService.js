@@ -151,7 +151,6 @@ export const getAllCarPartCate = async () => {
 export const createCarPart = async (categoryData) => {
     try {
         const response = await userService.sendAjax("/api/car-parts", "POST", categoryData, true);
-        console.log("check thong tin: ", response);
         //xu ly thong tin
         if (response.status == 200) {
             // clear thong tin signify

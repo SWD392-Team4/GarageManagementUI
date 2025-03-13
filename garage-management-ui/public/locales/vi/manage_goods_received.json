@@ -35,6 +35,31 @@
                 "inactive": "Không hoạt động"
             }
         },
-        "view": "Xem chi tiết"
+        "view": "Xem chi tiết",
+        "view_goods_received": {
+            "title": "Chi tiết phiếu nhập hàng",
+            "reference_number": "Số tham chiếu",
+            "invoice_code": "Mã hóa đơn",
+            "source_address": "Địa chỉ nguồn",
+            "total_price": "Tổng giá trị",
+            "contact_person": "Người liên hệ",
+            "workplace_name": "Tên nơi làm việc",
+            "warehouse_manager": "Quản lý kho",
+            "status": "Trạng thái",
+            "created_at": "Ngày tạo",
+            "updated_at": "Ngày cập nhật"
+        },
+        "goods_received_details": {
+            "title": "Sản phẩm nhập khẩu",
+            "id": "ID",
+            "quantity": "Số lượng",
+            "unit_price": "Đơn giá",
+            "total_price": "Tổng giá",
+            "product_name": "Tên sản phẩm",
+            "reference_number": "Số tham chiếu",
+            "status": "Trạng thái",
+            "created_at": "Ngày tạo",
+            "updated_at": "Ngày cập nhật"
+        }
     }
 }

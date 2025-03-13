@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import MDEditor from "@uiw/react-md-editor";
+import AsyncSelect from 'react-select/async';
 import {
     getAllCarCategory,
     getAllServiceCategory,
@@ -7,14 +9,18 @@ import {
     getPackageType,
     getPakageTimeUnit,
 } from "../../services/PackageServiceAPI";
+import { parseVietnameseCurrency } from "../../schemas/PackageServiceSchemas";
 
-export default function PackageInfo({ register, packageData, isEditing }) {
+export default function PackageInfo({ register, setValue, watch, packageData, isEditing }) {
     const { t, i8ln } = useTranslation("manage_package");
     const [packageTypes, setPackageTypes] = useState([]);
     const [statuses, setStatuses] = useState([]);
     const [timeUnits, setTimeUnits] = useState([]);
     const [serviceCategories, setServiceCategories] = useState([]);
     const [carCategories, setCarCategories] = useState([]);
+    const [isCarCategoriesLoaded, setIsCarCategoriesLoaded] = useState(false);
+    // Lấy giá trị description từ form
+    const description = watch("description", packageData?.description || "");
 
     useEffect(() => {
         async function fetchData() {
@@ -37,17 +43,61 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                 setStatuses(statusRes?.data?.value || []);
                 setTimeUnits(timeUnitsRes?.data?.value || []);
                 setServiceCategories(serviceCategoriesRes?.data?.value || []);
-                setCarCategories(carCategoriesRes?.data?.value || []);
+                // setCarCategories(carCategoriesRes?.data?.value || []);
+
+                //format tien
+                setValue("packagePrice", parseVietnameseCurrency(packageData.packagePrice));
+
             } catch (error) {
                 console.error("Error loading select options:", error);
             }
         }
 
         fetchData();
+        fetchCarCategories();
     }, []);
 
+    // Fetch Car Category **một lần duy nhất**
+    const fetchCarCategories = async () => {
+        try {
+            const response = await getAllCarCategory();
+            setCarCategories(response?.data?.value.map((i) => ({
+                label: i.category,
+                value: i.id,
+            })) || []);
+            setIsCarCategoriesLoaded(true);
+        } catch (error) {
+            console.error("❌ Error fetching car categories:", error);
+        }
+    };
+
+    // Xử lý tìm kiếm danh mục xe trong AsyncSelect
+    const loadCarCategoryOption = (inputValue) => {
+        return new Promise((resolve) => {
+            if (!isCarCategoriesLoaded) {
+                console.warn("⚠️ Car categories not loaded yet, waiting...");
+                fetchCarCategories().then(() => {
+                    resolve(filterCarCategories(inputValue));
+                });
+            } else {
+                resolve(filterCarCategories(inputValue));
+            }
+        });
+    };
+
+    // Hàm lọc danh mục xe
+    const filterCarCategories = (inputValue) => {
+        return carCategories
+            .filter((i) => i.label.toLowerCase().includes(inputValue.toLowerCase()))
+            .map((i) => ({
+                label: i.label,
+                value: i.value,
+            }));
+    };
+
+
     return (
-        <div className="border p-6 rounded-lg shadow-md bg-white">
+        <div className="mt-6 border p-6 rounded-lg shadow-md bg-white">
             <h2 className="text-lg font-semibold mb-4">{t("manage_package.info.title")}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {[
@@ -62,19 +112,19 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                         type: "select",
                         options: serviceCategories.map((item, index) => ({
                             key: `serviceCategory-${index}`,
-                            value: item.serviceCategory,
-                            label: item.serviceCategory,
+                            value: item,
+                            label: item,
                         })),
                     },
                     {
                         label: t("manage_package.info.fields.category"),
                         name: "category",
-                        type: "select",
-                        options: carCategories.map((item, index) => ({
-                            key: `carCategory-${index}`,
-                            value: item.category,
-                            label: item.category,
-                        })),
+                        type: "asyncSelect",
+                        // options: carCategories.map((item, index) => ({
+                        //     key: `carCategory-${index}`,
+                        //     value: item.category,
+                        //     label: item.category,
+                        // })),
                     },
                     {
                         label: t("manage_package.info.fields.type"),
@@ -89,7 +139,7 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                     {
                         label: t("manage_package.info.fields.package_price"),
                         name: "packagePrice",
-                        type: "text",
+                        type: "currency",
                     },
                     {
                         label: t("manage_package.info.fields.validity_period"),
@@ -126,7 +176,28 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                             {item.label}:
                         </label>
                         {isEditing ? (
-                            item.type === "select" ? (
+                            item.name === "category" ? (
+                                <AsyncSelect
+                                    key={packageData?.category} //bat no render lai
+                                    cacheOptions
+                                    loadOptions={loadCarCategoryOption}
+                                    defaultOptions={carCategories} // Giảm gọi API khi render lần đầu
+                                    isDisabled={!isEditing}
+                                    onChange={(selectedOption) => {
+                                        console.log("✅ Updated Car Category:", selectedOption);
+                                        setValue("carCategoryId", selectedOption ? selectedOption.value : "");
+                                    }}
+                                    className="react-select-container"
+                                    classNamePrefix="react-select"
+                                    placeholder={t("manage_package.info.fields.select_category")}
+                                    isClearable
+                                    defaultValue={
+                                        packageData[item.name]
+                                            ? { value: packageData[item.name], label: packageData[item.name] }
+                                            : null
+                                    }
+                                />
+                            ) : item.type === "select" ? (
                                 <select
                                     {...register(item.name)}
                                     className="w-full p-2 border border-gray-300 rounded-md focus:outline-none"
@@ -152,6 +223,25 @@ export default function PackageInfo({ register, packageData, isEditing }) {
                         )}
                     </div>
                 ))}
+
+
+                {/* Trường Description với MDEditor */}
+                <div className="col-span-1 md:col-span-2 flex flex-col" data-color-mode="light">
+                    <label className="text-gray-900 font-semibold mb-1">
+                        {t("manage_package.info.fields.description")}:
+                    </label>
+                    {isEditing ? (
+                        <MDEditor
+                            value={description}
+                            onChange={(value) => setValue("description", value || "", { shouldValidate: true })}
+                            className="p-2 w-full"
+                        />
+                    ) : (
+                        <div className="text-gray-800 p-1">
+                            <MDEditor.Markdown source={packageData.description || ""} />
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

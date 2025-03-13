@@ -3,9 +3,9 @@ import { signify } from "react-signify";
 
 export const sPackageService = signify(
     {
-
         id: "",
         serviceCategory: "",
+        carCategory: "",
         category: "",
         packageName: "",
         type: "",
@@ -16,7 +16,6 @@ export const sPackageService = signify(
         usageLimit: "",
         createdAt: "",
         updatedAt: ""
-
     },
     {
         cache: {

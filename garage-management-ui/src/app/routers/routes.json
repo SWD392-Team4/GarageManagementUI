@@ -358,6 +358,11 @@
         "isSuspense2": true
       },
       {
+        "path": "invoice-goodsIssued/:id",
+        "element": "ViewGoodsIssued",
+        "isSuspense2": true
+      },
+      {
         "path": "invoice-goods-Received",
         "element": "ManageGoodReceived",
         "isSuspense2": true
@@ -365,6 +370,11 @@
       {
         "path": "invoice-goods-Received/create-goods-Received",
         "element": "CreateGoodReceived",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goods-Received/:id",
+        "element": "ViewGoodReceived",
         "isSuspense2": true
       },
       {

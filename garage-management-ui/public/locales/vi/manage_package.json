@@ -101,7 +101,8 @@
                 "validity_period": "Thời hạn",
                 "time_unit": "Đơn vị thời gian",
                 "usage_limit": "Giới hạn sử dụng",
-                "status": "Trạng thái"
+                "status": "Trạng thái",
+                "description": "Mô tả"
             },
             "status_options": {
                 "inactive": "Không hoạt động",

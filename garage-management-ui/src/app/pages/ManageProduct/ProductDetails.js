@@ -7,6 +7,7 @@ import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
 import { getProduct, updateProduct, getAllCategory, getAllBrand } from "./services/ProductService";
 import ImageCarousel from "./partials/ImageCarousel";
+import { formatVietnameseCurrency, parseVietnameseCurrency } from "./schemas/ProductValid";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -39,7 +40,7 @@ export default function ProductDetails() {
         setValue("productCategoryId", categoryData?.data?.value.find(cat => cat.category === productData.category)?.id || "");
         setValue("brandId", brandData?.data?.value.find(brand => brand.brandName === productData.brandName)?.id || "");
         // setValue("imageLink", productData.imageLink);
-        setValue("productPrice", productData.productPrice);
+        setValue("productPrice", parseVietnameseCurrency(productData.productPrice));
         setValue("status", productData.status);
         setValue("createdAt", productData.createdAt);
         setValue("updatedAt", productData.updatedAt);
@@ -98,7 +99,6 @@ export default function ProductDetails() {
   };
 
 
-
   return (
     <div className="bg-white shadow-lg rounded-lg p-6">
       <Breadcrumb />
@@ -133,12 +133,12 @@ export default function ProductDetails() {
 
               {/* Mã vạch */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.barcode")}:</strong> {product.productBarcode}
+                <strong className="font-semibold">{t("product_details.barcode")}: </strong>{product.productBarcode}
               </p>
 
               {/* Danh mục */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.category")}:</strong>
+                <strong className="font-semibold">{t("product_details.category")}: </strong>
                 {isEditing ? (
                   <select {...register("productCategoryId")} className="border p-2 rounded w-full text-lg">
                     {categories.map(cat => (
@@ -152,7 +152,7 @@ export default function ProductDetails() {
 
               {/* Thương hiệu */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.brand")}:</strong>
+                <strong className="font-semibold">{t("product_details.brand")}: </strong>
                 {isEditing ? (
                   <select {...register("brandId")} className="border p-2 rounded w-full text-lg">
                     {brands.map(brand => (
@@ -166,7 +166,7 @@ export default function ProductDetails() {
 
               {/* Giá sản phẩm */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.price")}:</strong>
+                <strong className="font-semibold">{t("product_details.price")}: </strong>
                 {isEditing ? (
                   <input
                     {...register("productPrice", { required: true })}
@@ -179,10 +179,10 @@ export default function ProductDetails() {
 
               {/* Ngày tạo & cập nhật */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.created_at")}:</strong> {product.createdAt}
+                <strong className="font-semibold">{t("product_details.created_at")}: </strong> {product.createdAt}
               </p>
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.updated_at")}:</strong> {product.updatedAt}
+                <strong className="font-semibold">{t("product_details.updated_at")}: </strong> {product.updatedAt}
               </p>
             </div>
           </div>

@@ -6,6 +6,7 @@ import MDEditor from "@uiw/react-md-editor";
 import { FaEdit, FaSave, FaTrash } from "react-icons/fa";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import { useTranslation } from "react-i18next";
+import AsyncSelect from 'react-select/async';
 
 
 export default function UpdateServicePage() {
@@ -15,9 +16,9 @@ export default function UpdateServicePage() {
     const [selectedImages, setSelectedImages] = useState([]);
 
     // luu tru cac thong tin
-    const serviceCategoryKeys = ["repair", "maintenance", "upgrade", "car_wash", "detailing"];
-    const actionKeys = ["inspect", "replace", "lubricate", "align", "refill", "repair", "clean", "upgrade", "restore", "update", "polish", "protect", "deodorize", "condition", "remove", "restore_lighting"];
-    const workNatureKeys = ["preventive", "corrective", "enhancement", "digital", "aesthetic"];
+    const serviceCategoryKeys = ["Repair", "Maintenance", "Upgrade", "Car Wash", "Detailing"];
+    const actionKeys = ["Inspect", "Replace", "Lubricate", "Align", "Refill", "Repair", "Clean", "Upgrade", "Restore", "Update", "Polish", "Protect", "Deodorize", "Condition", "Remove", "Restore Lighting"];
+    const workNatureKeys = ["Preventive", "Corrective", "Enhancement", "Digital", "Aesthetic"];
     const [carCategories, setCarCategories] = useState([]);
     const [carParts, setCarParts] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
@@ -82,10 +83,17 @@ export default function UpdateServicePage() {
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
 
-        setSelectedImages((prev) => [
-            ...prev.filter((img) => typeof img === "string"), // Giữ lại ảnh từ API
-            ...files, // Thêm ảnh mới vào
-        ]);
+        setSelectedImages((prev) => {
+            // Lọc ra file mới chưa có trong danh sách
+            const uniqueFiles = files.filter(
+                (file) => !prev.some((prevFile) => prevFile.name === file.name)
+            );
+
+            return [
+                ...prev, // Giữ lại tất cả ảnh cũ
+                ...uniqueFiles, // Thêm ảnh mới vào danh sách
+            ];
+        });
     };
 
 
@@ -118,17 +126,16 @@ export default function UpdateServicePage() {
             console.log("thong tin gui cho api : ", updatedService);
 
             // Gửi yêu cầu cập nhật dịch vụ trước
-            const updateResponse = await updateService(id, updatedService);
+            await updateService(id, updatedService);
             // console.log("Check response: ", updateResponse);
             // Lọc ra chỉ những ảnh mới (file)
-            const newImages = selectedImages.filter((img) => typeof img !== "string");
+            const newImages = selectedImages.filter((img) => img instanceof File);
 
             if (newImages.length > 0) {
                 const formData = new FormData();
                 newImages.forEach((image) => {
                     formData.append("fileDtos", image);
                 });
-
                 await createServiceImage(id, formData);
             }
 
@@ -138,6 +145,26 @@ export default function UpdateServicePage() {
             console.error("Lỗi khi cập nhật dịch vụ:", error);
         }
     };
+
+
+    const loadCarCategoryOption = async (inputValue) => {
+        return carCategories
+            .filter((category) => category.category.toLowerCase().includes(inputValue.toLowerCase()))
+            .map((category) => ({
+                label: category.category,
+                value: category.id,
+            }));
+    };
+
+    const loadCarPartOption = async (inputValue) => {
+        return carParts
+            .filter((part) => part.partName.toLowerCase().includes(inputValue.toLowerCase()))
+            .map((part) => ({
+                label: part.partName,
+                value: part.id,
+            }));
+    };
+
 
 
 
@@ -182,25 +209,28 @@ export default function UpdateServicePage() {
                         {errors.ServiceCategory && <p className="text-red-500 text-sm">{errors.ServiceCategory.message}</p>}
                     </div>
 
-
-                    {/* Đợi api thêm trường id của car part và car category cho đỡ so sánh name */}
-
                     {/* Select Car Part */}
                     <div>
                         <label className="block text-gray-700 font-semibold">
                             {t("update_service_page.form.car_part")}
                         </label>
-                        <select {...register("CarPart")} className="border p-2 w-full" disabled={!isEditing} defaultValue={service?.carPartId}>
-                            {service && <option value={service.carPartId}>{service.carPart}</option>}
-                            {isEditing && carParts.map((part) => (
-                                <option key={part.id} value={part.id} selected={part.id === service?.carPartId}>
-                                    {part.partName}
-                                </option>
-                            ))}
-                        </select>
-
-
-                        {errors.CarPartName && <p className="text-red-500 text-sm">{errors.CarPartName.message}</p>}
+                        <AsyncSelect
+                            cacheOptions
+                            defaultOptions={carParts.map((part) => ({
+                                label: part.partName,
+                                value: part.id,
+                            }))}
+                            loadOptions={loadCarPartOption}
+                            isDisabled={!isEditing}
+                            value={carParts.find(part => part.id === watch("CarPart")) ?
+                                { label: carParts.find(part => part.id === watch("CarPart")).partName, value: watch("CarPart") } : null}
+                            onChange={(selectedOption) => {
+                                setValue("CarPart", selectedOption ? selectedOption.value : "");
+                            }}
+                            placeholder={t("update_service_page.form.select_car_part")}
+                            isClearable
+                        />
+                        {errors.CarPart && <p className="text-red-500 text-sm">{errors.CarPart.message}</p>}
                     </div>
 
 
@@ -209,18 +239,25 @@ export default function UpdateServicePage() {
                         <label className="block text-gray-700 font-semibold">
                             {t("update_service_page.form.car_category")}
                         </label>
-                        <select {...register("CarCategory")} className="border p-2 w-full" disabled={!isEditing} defaultValue={service?.carCategoryId}>
-                            {service && <option value={service.carCategoryId}>{service.carCategory}</option>}
-                            {isEditing && carCategories.map((category) => (
-                                <option key={category.id} value={category.id}>
-                                    {category.category}
-                                </option>
-                            ))}
-                        </select>
-
-
+                        <AsyncSelect
+                            cacheOptions
+                            defaultOptions={carCategories.map((category) => ({
+                                label: category.category,
+                                value: category.id,
+                            }))}
+                            loadOptions={loadCarCategoryOption}
+                            isDisabled={!isEditing}
+                            value={carCategories.find(category => category.id === watch("CarCategory")) ?
+                                { label: carCategories.find(category => category.id === watch("CarCategory")).category, value: watch("CarCategory") } : null}
+                            onChange={(selectedOption) => {
+                                setValue("CarCategory", selectedOption ? selectedOption.value : "");
+                            }}
+                            placeholder={t("update_service_page.form.select_car_category")}
+                            isClearable
+                        />
                         {errors.CarCategory && <p className="text-red-500 text-sm">{errors.CarCategory.message}</p>}
                     </div>
+
 
 
 
@@ -314,18 +351,19 @@ export default function UpdateServicePage() {
 
                 {/* Upload ảnh */}
 
+                {/* Upload Images */}
                 <label className="block text-gray-700 font-semibold">
                     {t("update_service_page.form.images")}
                 </label>
 
-                <div className="mt-4 grid grid-cols-6 gap-3">
+                <div className="mt-4 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     {selectedImages.length > 0 ? (
                         selectedImages.map((file, index) => (
-                            <div key={index} className="relative rounded-lg overflow-hidden shadow-lg group">
+                            <div key={index} className="relative group rounded-lg overflow-hidden shadow-lg border border-gray-200">
                                 <img
                                     src={typeof file === "string" ? file : URL.createObjectURL(file)}
                                     alt="Preview"
-                                    className="w-full h-64 object-cover transition-transform duration-300 transform group-hover:scale-105"
+                                    className="w-full h-40 object-cover transition-transform duration-300 transform group-hover:scale-105"
                                 />
                                 {isEditing && (
                                     <button
@@ -338,18 +376,20 @@ export default function UpdateServicePage() {
                             </div>
                         ))
                     ) : (
-                        <div className="grid grid-cols-3 gap-4">
-                            {[...Array(1)].map((_, index) => (
-                                <div key={index} className="w-64 h-64 bg-gray-300 animate-pulse rounded-lg"></div>
-                            ))}
-                        </div>
+                        <p className="text-gray-500 text-sm">{t("update_service_page.form.no_images")}</p>
                     )}
                 </div>
 
-
+                {/* Input file upload */}
                 {isEditing && (
-                    <div className="w-1/4">
-                        <input type="file" multiple onChange={handleImageChange} className="border rounded p-2 w-full" />
+                    <div className="mt-4">
+                        <input
+                            type="file"
+                            multiple
+                            onChange={handleImageChange}
+                            className="border rounded p-2 w-full"
+                            accept="image/*"
+                        />
                     </div>
                 )}
 

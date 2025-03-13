@@ -12,3 +12,11 @@ export function formatDateForFeedBack(dateString) {
 
     return `${day}/${month}/${year} ${hours}:${minutes}`;
 }
+
+export const formatVietnameseCurrency = (amount) => {
+    return amount.toLocaleString("vi-VN") + " VND";
+};
+
+export const parseVietnameseCurrency = (formattedAmount) => {
+    return Number(formattedAmount.replace(/\./g, "").replace(" VND", ""));
+};

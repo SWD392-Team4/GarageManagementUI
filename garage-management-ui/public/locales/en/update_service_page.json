@@ -21,7 +21,10 @@
             "remove_image": "Remove Image",
             "save_changes": "Save Changes",
             "edit": "Edit",
-            "update_service": "Update Service"
+            "update_service": "Update Service",
+            "no_images": "No Imnages",
+            "select_car_category": "Select Car Category",
+            "select_car_part": "Select Car Part"
         },
         "placeholders": {
             "service_name": "Enter service name",
@@ -37,7 +40,7 @@
         },
         "buttons": {
             "edit": "Edit",
-            "save": "Save",
+            "save_changes": "Save",
             "cancel": "Cancel",
             "upload": "Upload",
             "delete": "Delete"

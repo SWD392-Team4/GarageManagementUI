@@ -21,7 +21,10 @@
             "remove_image": "Xóa Ảnh",
             "save_changes": "Lưu Thay Đổi",
             "edit": "Chỉnh Sửa",
-            "update_service": "Cập Nhật Dịch Vụ"
+            "update_service": "Cập Nhật Dịch Vụ",
+            "no_images": "Không Có Hình Ảnh",
+            "select_car_category": "Chọn danh mục xe",
+            "select_car_part": "Chọn bộ phận xe"
         },
         "placeholders": {
             "service_name": "Nhập tên dịch vụ",
@@ -37,7 +40,7 @@
         },
         "buttons": {
             "edit": "Chỉnh Sửa",
-            "save": "Lưu",
+            "save_changes": "Lưu",
             "cancel": "Hủy",
             "upload": "Tải Lên",
             "delete": "Xóa"

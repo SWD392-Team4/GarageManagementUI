@@ -12,3 +12,11 @@ export const formatYearMonthDay = (date) => {
     if (!date) return "";
     return new Date(date).toISOString().split("T")[0];
 };
+
+export const formatVietnameseCurrency = (amount) => {
+    return amount.toLocaleString("vi-VN") + " VND";
+};
+
+export const parseVietnameseCurrency = (formattedAmount) => {
+    return Number(formattedAmount.replace(/\./g, "").replace(" VND", ""));
+};
