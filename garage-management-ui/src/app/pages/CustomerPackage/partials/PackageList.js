@@ -1,13 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+
 
 export default function PackageList({ packages }) {
+  const navigate = useNavigate();
   return (
     <section className="pb-16 bg-gray-100">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {packages.map((pkg) => (
-            <a key={pkg.id} href="/packages/:id" className="block group">
-              <div className="h-[400px]">
+            <a key={pkg.id} className="block group cursor-pointer">
+              <div className="h-[400px]" onClick={() => navigate(`/packages/${pkg.id}`)}>
                 <div className="rounded-md overflow-visible transition-shadow duration-300 h-full relative">
                   {/* Image Section */}
                   <div className="relative h-2/3 ">

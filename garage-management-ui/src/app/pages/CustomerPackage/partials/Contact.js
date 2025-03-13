@@ -3,10 +3,10 @@ import { IoChevronForward, IoLocationSharp, IoCall, IoMail } from "react-icons/i
 const Contact = () => {
   return (
     <div className=" p-6 ">
-      <h3 className="text-xl font-semibold mb-2 relative pb-2 border-b-4 border-red-500 inline-block">
+      <h3 className="text-2xl font-semibold mb-2 relative pb-2 border-b-4 border-red-500 inline-block">
         Contact Us
       </h3>
-      <ul className="space-y-2 mt-3 text-gray-700">
+      <ul className="text-lg space-y-2 mt-3 text-gray-700">
         <li className="flex items-center space-x-2">
           <IoLocationSharp className="text-red-500" />
           <span>FPT HCM City Long Thanh My, Thu Duc City</span>

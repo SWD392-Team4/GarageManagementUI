@@ -61,12 +61,43 @@ export const getPackage = async (packageId) => {
       updatedAt: formatDate(response.data.value.updatedAt),
     };
   } catch (error) {
-    console.error("Error fetching product:", error);
-    userService.showToast(400, "Error loading product");
+    console.error("Error fetching package:", error);
+    userService.showToast(400, "Error loading package");
     return null;
   }
 };
+export const getPackageServices = async (packageId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${packageId}/services`,
+      "GET",
+      null,
+      false
+    );
 
+    return response.data.value;
+  } catch (error) {
+    console.error("Error fetching services:", error);
+    userService.showToast(400, "Error loading services");
+    return null;
+  }
+};
+export const getPackageConditions = async (packageId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${packageId}/conditions`,
+      "GET",
+      null,
+      false
+    );
+
+    return response.data.value;
+  } catch (error) {
+    console.error("Error fetching conditions:", error);
+    userService.showToast(400, "Error loading conditions");
+    return null;
+  }
+};
 export const getAllServicesCategories = async () => {
   try {
     const response = await userService.sendAjax(
