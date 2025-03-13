@@ -1,0 +1,57 @@
+{
+  "labels": {
+    "carModel": "Model Xe",
+    "mileage": "Số km",
+    "customerName": "Tên Khách Hàng",
+    "customerPhoneNumber": "Số Điện Thoại",
+    "customerEmail": "Email",
+    "estimatedAppointmentTime": "Thời Gian Hẹn",
+    "estimatedEndTime": "Thời Gian Kết Thúc",
+    "carLicensePlateNumber": "Biển Số Xe",
+    "serviceAndProduct": "Dịch Vụ & Phụ Tùng",
+    "selectPackage": "Chọn Package"
+  },
+  "placeholder": {
+    "selectCarModel": "Chọn Model Xe",
+    "enterMileage": "Nhập số km",
+    "enterCustomerName": "Nhập tên khách hàng",
+    "enterPhoneNumber": "Nhập số điện thoại",
+    "enterEmail": "Nhập email",
+    "selectService": "Chọn Service",
+    "selectProduct": "Chọn Product",
+    "enterQuantity": "Số lượng",
+    "selectPackage": "Chọn Package",
+    "enterCarLicensePlateNumber": "Nhập biển số xe"
+  },
+  "error": {
+    "required_carModelId": "Vui lòng chọn model xe",
+    "required_mileage": "Vui lòng nhập số km",
+    "invalid_mileage": "Số km không hợp lệ",
+    "required_customerName": "Vui lòng nhập tên khách hàng",
+    "required_customerPhoneNumber": "Vui lòng nhập số điện thoại",
+    "invalid_email": "Email không hợp lệ",
+    "required_customerEmail": "Vui lòng nhập email",
+    "required_estimatedAppointmentTime": "Vui lòng chọn thời gian hẹn",
+    "required_estimatedEndTime": "Vui lòng chọn thời gian kết thúc",
+    "required_carLicensePlateNumber": "Vui lòng nhập biển số xe",
+    "add_service": "Vui lòng thêm ít nhất một dịch vụ (có thể không chọn sản phẩm)"
+  },
+  "buttons": {
+    "add": "Thêm",
+    "remove": "Xóa",
+    "createAppointment": "Tạo Appointment"
+  },
+  "tableHeaders": {
+    "stt": "STT",
+    "serviceName": "Tên Dịch Vụ",
+    "products": "Phụ Tùng",
+    "packageName": "Tên Package",
+    "action": "Action"
+  },
+  "success": {
+    "create": "Tạo appointment thành công!"
+  },
+  "error": {
+    "create": "Có lỗi xảy ra khi tạo appointment"
+  }
+}

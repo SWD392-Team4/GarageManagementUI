@@ -134,9 +134,9 @@ const CreateGoodsIssued = () => {
 
   const onSubmit = async (formData) => {
     const detailArray = selectedProducts.map((item) => ({
-      productAtWareHouseId: item.productAtWareHouseId,
+      productId: item.productAtWareHouseId,
       quantity: item.quantity,
-      goodsReceivedId: item.goodsReceivedId,
+      // goodsReceivedId: item.goodsReceivedId,
     }));
 
     if (detailArray.length === 0) {
