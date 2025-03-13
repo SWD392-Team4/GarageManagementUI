@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { FaSearch, FaSave } from "react-icons/fa";
 
-const PackageFilterBar = ({ onFilterChange, initialFilters }) => {
+const PackageFilterBar = ({
+  onFilterChange,
+  initialFilters,
+  serviceCategory,
+  packageType,
+  carCategory,
+}) => {
   const [filters, setFilters] = useState(initialFilters);
 
   useEffect(() => {
@@ -17,11 +23,14 @@ const PackageFilterBar = ({ onFilterChange, initialFilters }) => {
 
   const applyFilters = () => {
     onFilterChange(filters);
+    console.log("Applied filters:", filters);
   };
 
   return (
     <div className=" rounded-lg  w-full  mx-aut">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">Filter Packages</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">
+        Filter Packages
+      </h2>
 
       {/* Search Bar */}
       <div className="mb-4 relative w-full">
@@ -36,25 +45,66 @@ const PackageFilterBar = ({ onFilterChange, initialFilters }) => {
       </div>
 
       {/* Service Category Dropdown */}
-      {/* <div className="mb-4 w-full">
-        <label className="block mb-2 font-semibold text-gray-700">Service Category</label>
+      <div className="mb-4 w-full">
+        <label className="block mb-2 font-semibold text-gray-700">
+          Service Category
+        </label>
         <select
           value={filters.serviceCategory}
-          onChange={(e) => handleFilterChange("serviceCategory", e.target.value)}
+          onChange={(e) =>
+            handleFilterChange("serviceCategory", e.target.value)
+          }
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">All Categories</option>
-          {serviceCategories.map((category, index) => (
+          {serviceCategory.map((category, index) => (
             <option key={index} value={category}>
               {category}
             </option>
           ))}
         </select>
-      </div> */}
-
+      </div>
+      {/* Car Category Dropdown */}
+      <div className="mb-4 w-full">
+        <label className="block mb-2 font-semibold text-gray-700">
+          Car Type
+        </label>
+        <select
+          value={filters.carCategory}
+          onChange={(e) => handleFilterChange("carCategory", e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">All Types</option>
+          {carCategory.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.category}
+            </option>
+          ))}
+        </select>
+      </div>
+      {/* Package Type Dropdown */}
+      <div className="mb-4 w-full">
+        <label className="block mb-2 font-semibold text-gray-700">
+          Package Type
+        </label>
+        <select
+          value={filters.packageType}
+          onChange={(e) => handleFilterChange("packageType", e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">All Types</option>
+          {packageType.map((type, index) => (
+            <option key={index} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </div>
       {/* Price Range Slider */}
       <div className="mb-4 w-full">
-        <label className="block mb-2 font-semibold text-gray-700">Price Range</label>
+        <label className="block mb-2 font-semibold text-gray-700">
+          Price Range
+        </label>
         <input
           type="range"
           min="0"
@@ -62,7 +112,10 @@ const PackageFilterBar = ({ onFilterChange, initialFilters }) => {
           step="100000"
           value={filters.price[1]}
           onChange={(e) =>
-            handleFilterChange("price", [filters.price[0], parseInt(e.target.value)])
+            handleFilterChange("price", [
+              filters.price[0],
+              parseInt(e.target.value),
+            ])
           }
           className="w-full accent-red-500"
         />

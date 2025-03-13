@@ -16,7 +16,7 @@ export default function Banner() {
         </a>
         <h3 className="text-xl font-semibold mb-2">
           {t("banner.title")}{" "}
-          <span className="text-yellow-600">TURBOTRACK!</span>
+          <span className="text-yellow-600">TURBO TRACK!</span>
         </h3>
 
         <p className="text-red-400 mb-3">{t("banner.subtitle")}</p>

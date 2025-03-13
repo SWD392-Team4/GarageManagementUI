@@ -13,9 +13,11 @@ export const getAllPackages = async (
       PageNumber,
       PageSize,
       PackageName: filters?.searchTerm || "",
-      // ServiceCategory: filters?.serviceCategory || "",
+      ServiceCategory: filters?.serviceCategory || "",
+      CarCategoryId: filters?.carCategory || "",
+      Type: filters?.packageType||"",
       MinPrice: filters?.price ? Number(filters.price[0]) : 0,
-      MaxPrice: filters?.price ? Number(filters.price[1]) : 500000,
+      MaxPrice: filters?.price ? Number(filters.price[1]) : 10000000,
       PackageStatus: "Active",
     }).toString();
 
@@ -42,5 +44,72 @@ export const getAllPackages = async (
     console.error("Error fetching packages:", error);
     userService.showToast(400, "Loading Package Service Fail");
     return { value: [], paging: {} };
+  }
+};
+export const getPackage = async (packageId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${packageId}`,
+      "GET",
+      null,
+      false
+    );
+
+    return {
+      ...response.data.value,
+      createdAt: formatDate(response.data.value.createdAt),
+      updatedAt: formatDate(response.data.value.updatedAt),
+    };
+  } catch (error) {
+    console.error("Error fetching product:", error);
+    userService.showToast(400, "Error loading product");
+    return null;
+  }
+};
+
+export const getAllServicesCategories = async () => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/services/categories`,
+      "GET",
+      null,
+      false
+    );
+    return response?.data?.value || [];
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    userService.showToast(400, "Error loading categories");
+    return [];
+  }
+};
+
+export const getAllTypes = async () => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/type`,
+      "GET",
+      null,
+      false
+    );
+    return response?.data?.value|| [];
+  } catch (error) {
+    console.error("Error fetching types:", error);
+    userService.showToast(400, "Error loading types");
+    return [];
+  }
+};
+export const getAllCars = async () => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/car-categories`,
+      "GET",
+      null,
+      false
+    );
+    return response?.data?.value.filter(car => car.status === "Active") || [];
+  } catch (error) {
+    console.error("Error fetching types:", error);
+    userService.showToast(400, "Error loading cars");
+    return [];
   }
 };

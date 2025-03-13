@@ -94,7 +94,7 @@
         "element": "CustomerPackageList"
       },
       {
-        "path": "packages/details",
+        "path": "packages/:id",
         "element": "CustomerPackageDetail"
       }
     ]

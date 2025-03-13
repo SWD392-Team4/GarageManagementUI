@@ -6,7 +6,7 @@ export default function PackageList({ packages }) {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {packages.map((pkg) => (
-            <a key={pkg.id} href="/packages/details" className="block group">
+            <a key={pkg.id} href="/packages/:id" className="block group">
               <div className="h-[400px]">
                 <div className="rounded-md overflow-visible transition-shadow duration-300 h-full relative">
                   {/* Image Section */}
@@ -24,7 +24,13 @@ export default function PackageList({ packages }) {
                   <div className="rounded-md absolute left-0 top-[200px] h-2/5 w-10/12 bg-black text-white p-4 transition-all duration-300 group-hover:w-full group-hover:bg-red-600">
                     <h3 className="text-xl font-semibold mb-2">{pkg.packageName}</h3>
                     <p className="text-gray-300 group-hover:text-white line-clamp-3">
-                      {pkg.packageDescription}
+                      Category: { pkg.serviceCategory}
+                    </p>
+                    <p className="text-gray-300 group-hover:text-white line-clamp-3">
+                      Car Type: {pkg.category}
+                    </p>
+                    <p className="text-gray-300 group-hover:text-white line-clamp-3">
+                      Package Type: {pkg.type}
                     </p>
                   </div>
                 </div>
