@@ -29,20 +29,22 @@ const ProductsPage = () => {
       brand: searchParams.get("brand") || "",
       price: searchParams.get("price")
         ? searchParams.get("price").split(",").map(Number)
-        : [0, 500000],
+        : [0, 10000000],
     }),
     [searchParams]
   );
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        console.log(appliedFilters)
+        console.log(appliedFilters);
         const response = await getAllProducts(
           paging.currentPage,
           12,
           appliedFilters
         );
+
         if (response?.value) {
           setFilteredProducts(response.value);
           setPaging({
@@ -76,10 +78,6 @@ const ProductsPage = () => {
       currentPage: 1,
     }));
   };
-  const maxPrice = useMemo(() => {
-    if (!filteredProducts.length) return 500000; // Default max price if no products exist
-    return Math.max(...filteredProducts.map(product => product.price));
-  }, [filteredProducts]);
   return (
     <div className="bg-gray-100 min-h-screen py-6">
       <div className="container mx-auto px-4 p-6">
@@ -91,11 +89,12 @@ const ProductsPage = () => {
           <div
             className={`lg:block hidden md:w-1/4 w-full bg-white p-4 rounded-lg shadow-md sticky top-4 h-fit`}
           >
-            <FilterBar
-              onFilterChange={handleFilterChange}
-              initialFilters={appliedFilters}
-              maxPrice={maxPrice}
-            />
+            {!loading && (
+              <FilterBar
+                onFilterChange={handleFilterChange}
+                initialFilters={appliedFilters}
+              />
+            )}
           </div>
 
           <div className="w-full">

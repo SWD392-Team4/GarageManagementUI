@@ -58,8 +58,8 @@ const PackageFilterBar = ({ onFilterChange, initialFilters }) => {
         <input
           type="range"
           min="0"
-          max="50000000"
-          step="1000000"
+          max="10000000"
+          step="100000"
           value={filters.price[1]}
           onChange={(e) =>
             handleFilterChange("price", [filters.price[0], parseInt(e.target.value)])

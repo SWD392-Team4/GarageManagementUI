@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaSearch, FaSave } from "react-icons/fa";
-import { getAllCategories, getAllBrands } from "../services/CustomerProductService";
-const FilterBar = ({ onFilterChange, initialFilters, maxPrice }) => {
-  const {t} = useTranslation("customer_product_filter");
+import {
+  getAllCategories,
+  getAllBrands,
+} from "../services/CustomerProductService";
+const FilterBar = ({ onFilterChange, initialFilters }) => {
+  const { t } = useTranslation("customer_product_filter");
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
-  
+
   const [filters, setFilters] = useState(initialFilters);
   useEffect(() => {
     setFilters(initialFilters); // Update filters when initialFilters change
   }, [initialFilters]);
+
   const handleFilterChange = (filterType, value) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -25,21 +29,23 @@ const FilterBar = ({ onFilterChange, initialFilters, maxPrice }) => {
     const fetchFilters = async () => {
       const categoryList = await getAllCategories();
       const brandList = await getAllBrands();
-      
-    if (categoryList) {
-      setCategories(categoryList);
-    }
 
-    if (brandList) {
-      setBrands(brandList);
-    }
+      if (categoryList) {
+        setCategories(categoryList);
+      }
+
+      if (brandList) {
+        setBrands(brandList);
+      }
     };
-  
+
     fetchFilters();
   }, []);
   return (
     <div className="  rounded-lg  w-full  mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">{t("customer_product_filter.title")}</h2>
+      <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">
+        {t("customer_product_filter.title")}
+      </h2>
 
       {/* Search Bar */}
       <div className="mb-4 relative w-full">
@@ -55,7 +61,9 @@ const FilterBar = ({ onFilterChange, initialFilters, maxPrice }) => {
 
       {/* Category Dropdown */}
       <div className="mb-4 w-full">
-        <label className="block mb-2 font-semibold text-gray-700">{t("customer_product_filter.category")}</label>
+        <label className="block mb-2 font-semibold text-gray-700">
+          {t("customer_product_filter.category")}
+        </label>
         <select
           value={filters.category}
           onChange={(e) => handleFilterChange("category", e.target.value)}
@@ -72,7 +80,9 @@ const FilterBar = ({ onFilterChange, initialFilters, maxPrice }) => {
 
       {/* Brand Dropdown */}
       <div className="mb-4 w-full">
-        <label className="block mb-2 font-semibold text-gray-700">{t("customer_product_filter.brand")}</label>
+        <label className="block mb-2 font-semibold text-gray-700">
+          {t("customer_product_filter.brand")}
+        </label>
         <select
           value={filters.brand}
           onChange={(e) => handleFilterChange("brand", e.target.value)}
@@ -87,17 +97,22 @@ const FilterBar = ({ onFilterChange, initialFilters, maxPrice }) => {
         </select>
       </div>
 
-       {/* Price Range Slider */}
-       <div className="mb-4 w-full">
-        <label className="block mb-2 font-semibold text-gray-700">{t("customer_product_filter.price_range")}</label>
+      {/* Price Range Slider */}
+      <div className="mb-4 w-full">
+        <label className="block mb-2 font-semibold text-gray-700">
+          {t("customer_product_filter.price_range")}
+        </label>
         <input
           type="range"
           min="0"
-          max={maxPrice}
-          step="10000"
+          max="10000000"
+          step="100000"
           value={filters.price[1]}
           onChange={(e) =>
-            handleFilterChange("price", [filters.price[0], parseInt(e.target.value)])
+            handleFilterChange("price", [
+              filters.price[0],
+              parseInt(e.target.value),
+            ])
           }
           className="w-full accent-red-500"
         />
@@ -105,7 +120,7 @@ const FilterBar = ({ onFilterChange, initialFilters, maxPrice }) => {
         <div className="text-gray-600 text-center mt-2">
           {filters.price[0]}đ - {filters.price[1]}đ
         </div>
-      </div>      
+      </div>
       {/* Apply Filters Button */}
       <button
         onClick={applyFilters}

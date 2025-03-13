@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 const ListProduct = ({ products }) => {
   const navigate = useNavigate();
-  const placeholder = "/assets/img/service_img_1.jpg";
+  const placeholder = "/assets/img/placeholder-product.jpeg";
   const { t } = useTranslation("customer_product_detail");
   return (
     <div className="min-h-screen p-6">

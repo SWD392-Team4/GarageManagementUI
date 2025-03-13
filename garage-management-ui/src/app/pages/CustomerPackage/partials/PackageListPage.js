@@ -26,7 +26,7 @@ const PackageListPage = () => {
       // serviceCategory: searchParams.get("serviceCategory") || "",
       price: searchParams.get("price")
         ? searchParams.get("price").split(",").map(Number)
-        : [0, 50000000],
+        : [0, 10000000],
     }),
     [searchParams]
   );

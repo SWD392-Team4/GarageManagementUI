@@ -6,7 +6,7 @@ export default function PackageList({ packages }) {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
           {packages.map((pkg) => (
-            <a key={pkg.id} href="/service-details" className="block group">
+            <a key={pkg.id} href="/packages/details" className="block group">
               <div className="h-[400px]">
                 <div className="rounded-md overflow-visible transition-shadow duration-300 h-full relative">
                   {/* Image Section */}

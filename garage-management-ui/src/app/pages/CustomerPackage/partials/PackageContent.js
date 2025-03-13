@@ -23,7 +23,7 @@ export default function PackageContent({ packageData }) {
           {packageData.services.map((service, index) => (
             <li key={index} className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition">
               <IoChevronForward className="text-red-500" />
-              <a href="/service-details" className="hover:underline">
+              <a href="/package-details" className="hover:underline">
                 {service}
               </a>
             </li>
