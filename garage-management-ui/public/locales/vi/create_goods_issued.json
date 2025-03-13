@@ -1,0 +1,22 @@
+{
+  "error": {
+    "required": "Không được để trống",
+    "at_least_one_product": "Cần thêm ít nhất một sản phẩm",
+    "min": "Trường {field} phải có giá trị tối thiểu là {min}"
+  },
+  "labels": {
+    "reference_number": "Số tham chiếu",
+    "invoice_code": "Mã hóa đơn",
+    "warehouse": "Kho",
+    "garage": "Nhà xe",
+    "product_name": "Tên sản phẩm",
+    "quantity": "Số lượng",
+    "goods_received_id": "ID hàng nhận"
+  },
+  "buttons": {
+    "create": "Tạo",
+    "reset": "Làm mới",
+    "add": "Thêm",
+    "remove": "Xóa"
+  }
+}

@@ -1,12 +1,22 @@
 import { signify } from "react-signify";
 
 export const sGoodsReceived = signify(
-    {
-        id: "",
+  {
+    id: "",
+  },
+  {
+    cache: {
+      key: "sGoodsReceived",
     },
-    {
-        cache: {
-            key: "sGoodsReceived",
-        },
-    }
+  }
+);
+export const sGoodsReceivedGara = signify(
+  {
+    garaCurrent: "",
+  },
+  {
+    cache: {
+      key: "sGoodsReceivedGara",
+    },
+  }
 );

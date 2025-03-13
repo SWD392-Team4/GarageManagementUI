@@ -1,0 +1,32 @@
+{
+  "title": "Tạo hóa đơn nhập hàng",
+  "error": {
+    "supplier_required": "Nhà cung cấp là bắt buộc",
+    "warehouse_required": "Kho là bắt buộc",
+    "reference_number_required": "Số tham chiếu là bắt buộc",
+    "invoice_code_required": "Mã hóa đơn là bắt buộc",
+    "source_address_required": "Địa chỉ nguồn là bắt buộc",
+    "source_wards_required": "Phường là bắt buộc",
+    "source_province_required": "Tỉnh là bắt buộc",
+    "source_district_required": "Quận/Huyện là bắt buộc",
+    "at_least_one_product": "Cần ít nhất một sản phẩm",
+    "min_price": "Giá đơn vị không được thấp hơn 1000 VNĐ"
+  },
+  "labels": {
+    "supplier": "Nhà cung cấp",
+    "warehouse": "Kho",
+    "reference_number": "Số tham chiếu",
+    "invoice_code": "Mã hóa đơn",
+    "source_address": "Địa chỉ nguồn",
+    "source_wards": "Phường",
+    "source_province": "Tỉnh",
+    "source_district": "Quận/Huyện",
+    "product_in_invoice": "Sản phẩm trong hóa đơn"
+  },
+  "buttons": {
+    "create": "Tạo",
+    "reset": "Làm mới",
+    "add": "Thêm",
+    "remove": "Xóa"
+  }
+}
