@@ -32,8 +32,8 @@ const LanguageSwitcherSideBar = ({ isSidebarOpen }) => {
 
       {isOpen && (
         <div className="absolute bottom-full right-1 mb-3 w-48 bg-gray-800 shadow-lg rounded-sm border  ">
-          {languages.map((lang) => (
-            <div className="group/link">
+          {languages.map((lang, index) => (
+            <div className="group/link" key={index}>
               <button
                 key={lang.code}
                 onClick={() => changeLanguage(lang.code)}

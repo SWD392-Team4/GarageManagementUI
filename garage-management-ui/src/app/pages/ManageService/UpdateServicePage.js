@@ -7,6 +7,7 @@ import { FaEdit, FaSave, FaTrash } from "react-icons/fa";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import { useTranslation } from "react-i18next";
 import AsyncSelect from 'react-select/async';
+import { parseVietnameseCurrency } from "./schemas/ServiceSchemas";
 
 
 export default function UpdateServicePage() {
@@ -57,7 +58,7 @@ export default function UpdateServicePage() {
                 setValue("Action", serviceData.action);
                 setValue("WorkNature", serviceData.workNature);
                 setValue("EstimatedHours", serviceData.estimatedHours);
-                setValue("ServicePrice", serviceData.price);
+                setValue("ServicePrice", parseVietnameseCurrency(serviceData.price));
                 setValue("Description", serviceData.description);
                 setValue("Status", serviceData.status);
 
@@ -186,7 +187,7 @@ export default function UpdateServicePage() {
                         <input
                             {...register("ServiceName", { required: "Tên dịch vụ là bắt buộc" })}
                             placeholder={t("update_service_page.placeholders.service_name")}
-                            className="border p-2 w-full"
+                            className="border p-2 w-full bg-white"
                             disabled={!isEditing}
                         />
                         {errors.ServiceName && <p className="text-red-500 text-sm">{errors.ServiceName.message}</p>}
@@ -215,6 +216,22 @@ export default function UpdateServicePage() {
                             {t("update_service_page.form.car_part")}
                         </label>
                         <AsyncSelect
+                            styles={{
+                                control: (baseStyles, state) => ({
+                                    ...baseStyles,
+                                    backgroundColor: 'white',
+                                    borderColor: state.isFocused ? 'grey' : 'grey',
+                                }),
+                                menu: (base) => ({
+                                    ...base,
+                                    backgroundColor: 'white',
+                                }),
+                                option: (base, state) => ({
+                                    ...base,
+                                    backgroundColor: state.isFocused ? '#f0f0f0' : 'white',
+                                    color: 'black',
+                                }),
+                            }}
                             cacheOptions
                             defaultOptions={carParts.map((part) => ({
                                 label: part.partName,
@@ -240,6 +257,22 @@ export default function UpdateServicePage() {
                             {t("update_service_page.form.car_category")}
                         </label>
                         <AsyncSelect
+                            styles={{
+                                control: (baseStyles, state) => ({
+                                    ...baseStyles,
+                                    backgroundColor: 'white',
+                                    borderColor: state.isFocused ? 'grey' : 'grey',
+                                }),
+                                menu: (base) => ({
+                                    ...base,
+                                    backgroundColor: 'white',
+                                }),
+                                option: (base, state) => ({
+                                    ...base,
+                                    backgroundColor: state.isFocused ? '#f0f0f0' : 'white',
+                                    color: 'black',
+                                }),
+                            }}
                             cacheOptions
                             defaultOptions={carCategories.map((category) => ({
                                 label: category.category,
@@ -302,7 +335,7 @@ export default function UpdateServicePage() {
                             type="number"
                             {...register("EstimatedHours", { required: "Số giờ ước tính là bắt buộc", min: 0 })}
                             placeholder={t("update_service_page.placeholders.estimated_hours")}
-                            className="border p-2 w-full"
+                            className="border p-2 w-full bg-white"
                             disabled={!isEditing}
                         />
                         {errors.EstimatedHours && <p className="text-red-500 text-sm">{errors.EstimatedHours.message}</p>}
@@ -312,15 +345,33 @@ export default function UpdateServicePage() {
                         <label className="block text-gray-700 font-semibold">
                             {t("update_service_page.form.price")}
                         </label>
-                        <input
-                            type="number"
-                            {...register("ServicePrice", { required: "Giá dịch vụ là bắt buộc", min: 0 })}
-                            placeholder={t("update_service_page.placeholders.price")}
-                            className="border p-2 w-full"
-                            disabled={!isEditing}
-                        />
+
+                        {!isEditing ? (
+                            // Chế độ hiển thị (format currency)
+                            <input
+                                type="currency"
+                                value={service?.price} // Hiển thị dạng tiền tệ
+                                className="border p-2 w-full bg-white"
+                                disabled
+                            />
+                        ) : (
+                            // Chế độ chỉnh sửa (chỉ nhập số)
+                            <input
+                                type="text"
+                                {...register("ServicePrice", { required: "Giá dịch vụ là bắt buộc", min: 0 })}
+                                defaultValue={service?.price}
+                                placeholder={t("update_service_page.placeholders.price")}
+                                className="border p-2 w-full"
+                                onChange={(e) => {
+                                    const rawValue = e.target.value.replace(/\D/g, ""); // Chỉ giữ lại số
+                                    setValue("ServicePrice", rawValue); // Cập nhật giá trị nhập
+                                }}
+                            />
+                        )}
+
                         {errors.ServicePrice && <p className="text-red-500 text-sm">{errors.ServicePrice.message}</p>}
                     </div>
+
 
                     <div>
                         <label className="block text-gray-700 font-semibold">

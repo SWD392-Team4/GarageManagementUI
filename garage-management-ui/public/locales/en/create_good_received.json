@@ -1,0 +1,32 @@
+{
+  "title": "Create Goods Received Invoice",
+  "error": {
+    "supplier_required": "Supplier is required",
+    "warehouse_required": "Warehouse is required",
+    "reference_number_required": "Reference Number is required",
+    "invoice_code_required": "Invoice Code is required",
+    "source_address_required": "Source Address is required",
+    "source_wards_required": "Source Wards is required",
+    "source_province_required": "Source Province is required",
+    "source_district_required": "Source District is required",
+    "at_least_one_product": "At least one product must be added",
+    "min_price": "Unit price must be at least 1000 VND"
+  },
+  "labels": {
+    "supplier": "Supplier",
+    "warehouse": "Warehouse",
+    "reference_number": "Reference Number",
+    "invoice_code": "Invoice Code",
+    "source_address": "Source Address",
+    "source_wards": "Source Wards",
+    "source_province": "Source Province",
+    "source_district": "Source District",
+    "product_in_invoice": "Product in Invoice"
+  },
+  "buttons": {
+    "create": "Create",
+    "reset": "Reset",
+    "add": "Add",
+    "remove": "Remove"
+  }
+}

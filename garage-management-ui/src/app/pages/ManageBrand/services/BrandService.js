@@ -77,10 +77,7 @@ export const createBrand = async (brandData) => {
         ]))
         response.data.value.createdAt = formatDate(response.data.value.createdAt)
         response.data.value.updatedAt = formatDate(response.data.value.updatedAt)
-        response.data.value.brandName = <>{response.data.value.brandName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
-
         sBrand.set(response.data.value);
-        console.log("check signi data: ", sBrand.value);
         //return
         userService.showToast(200, "Brand created successfully");
         return response;
@@ -135,7 +132,6 @@ export const updateBrand = async (brandId, updatedData) => {
             pre.value.updatedAt = ""
         ]))
         //format ngay
-        updatedData.brandName = <>{updatedData.brandName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
         updatedData.createdAt = formatDate(updatedData.createdAt);
         updatedData.updatedAt = formatDate(updatedData.updatedAt);
         sBrand.set(updatedData);

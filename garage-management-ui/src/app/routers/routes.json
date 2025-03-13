@@ -151,9 +151,7 @@
     "path": "/customer",
     "element": "LayoutCustomer",
     "private": {
-      "allowedRoles": [
-        "Customer"
-      ]
+      "allowedRoles": ["Customer"]
     },
     "isSuspense": true,
     "children": [
@@ -175,10 +173,7 @@
     "path": "/Mechanic",
     "element": "LayoutMechanic",
     "private": {
-      "allowedRoles": [
-        "Administrator",
-        "Mechanic"
-      ]
+      "allowedRoles": ["Administrator", "Mechanic"]
     },
     "isSuspense": true,
     "children": [
@@ -214,9 +209,7 @@
     "path": "/chat",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": [
-        "Administrator"
-      ]
+      "allowedRoles": ["Administrator"]
     },
     "isSuspense": true,
     "children": [
@@ -231,9 +224,7 @@
     "path": "/admin",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": [
-        "Administrator"
-      ]
+      "allowedRoles": ["Administrator"]
     },
     "isSuspense": true,
     "children": [
@@ -433,6 +424,10 @@
         "element": "appointmentDetail"
       },
       {
+        "path": "create-appointment",
+        "element": "CreateAppointment"
+      },
+      {
         "path": "appointment-mine",
         "element": "MechanicManageAppointment",
         "isSuspense": true,
@@ -454,10 +449,7 @@
     "path": "/Cashier",
     "element": "LayoutCashier",
     "private": {
-      "allowedRoles": [
-        "Administrator",
-        "Cashier"
-      ]
+      "allowedRoles": ["Administrator", "Cashier"]
     },
     "isSuspense": true,
     "children": [
@@ -591,6 +583,10 @@
             "isSuspense": true
           }
         ]
+      },
+      {
+        "path": "create-appointment",
+        "element": "CreateAppointment"
       },
       {
         "path": "appointment/:id",

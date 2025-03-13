@@ -45,7 +45,6 @@ export default function CreateProduct() {
         setLoading(true);
         const payload = {
             productName: data.name,
-            productBarcode: data.barcode,
             productDescription: data.description,
             productCategoryId: data.category,
             brandId: data.brand,
@@ -137,12 +136,6 @@ export default function CreateProduct() {
                 <div>
                     <label className="block text-gray-700 font-semibold">{t("create_product.price")}</label>
                     <input type="number" {...register("price")} className="border rounded p-2 w-full" required />
-                </div>
-
-                {/* barcode  */}
-                <div>
-                    <label className="block text-gray-700 font-semibold">{t("create_product.barcode")}</label>
-                    <input {...register("barcode")} className="border rounded p-2 w-full" required />
                 </div>
 
                 {/* Brands */}
