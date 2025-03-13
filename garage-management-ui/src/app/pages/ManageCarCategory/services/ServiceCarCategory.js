@@ -81,7 +81,6 @@ export const CreateCarCategory = async (data) => {
         console.log("check data: ", response);
 
         //chuyen doi bien
-        response.data.value.category = <>{data.category}<span className="font-semibold text-green-500"> - Recently Created</span> </>
         response.data.value.createdAt = formatDate(response.data.value.createdAt)
         response.data.value.createdAt = formatDate(response.data.value.updatedAt)
         sCarCategory.set(response.data.value);
@@ -116,7 +115,6 @@ export const UpdateCarCategory = async (carCategoryID, data) => {
             //gan thong tin moi vao
             sCarCategory.set((pre) => {
                 pre.value.id = carCategoryID
-                pre.value.category = <>{data.category}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
                 pre.value.status = data.status
                 pre.value.createdAt = data.createdAt
                 pre.value.updatedAt = data.updatedAt

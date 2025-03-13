@@ -27,21 +27,18 @@ export default function CreateCarModal({ isOpen, onClose, onCarModal }) {
 
   const fetchCarCategories = async () => {
     const data = await getAllCarCategory();
-    console.log("check data", data);
     if (data) setCarCategories(data);
   };
 
   const onSubmit = async (data) => {
+    // Định dạng `modelYear` thành `yyyy/MM/dd`
+    const formattedModelYear = `${String(data.year).padStart(4, "0")}/${String(data.month).padStart(2, "0")}/${String(data.day).padStart(2, "0")}`;
+
     const response = await createCarModal({
-      brandId: data.brandId,
-      carCategoryId: data.carCategoryId,
-      modelName: data.modelName,
-      modelYear: {
-        year: parseInt(data.year),
-        month: parseInt(data.month),
-        day: parseInt(data.day),
-        dayOfWeek: "Sunday",
-      },
+      BrandId: data.brandId,
+      CarCategoryId: data.carCategoryId,
+      ModelName: data.modelName,
+      ModelYear: formattedModelYear,
     });
 
     if (response) {
@@ -53,6 +50,7 @@ export default function CreateCarModal({ isOpen, onClose, onCarModal }) {
 
   if (!isOpen) return null;
 
+
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg w-96">
@@ -63,10 +61,11 @@ export default function CreateCarModal({ isOpen, onClose, onCarModal }) {
           <select {...register("brandId", { required: true })} className="w-full p-2 border rounded mb-3">
             <option value="">Chọn thương hiệu</option>
             {brands.map((brand) => (
-              <option key={brand.id} value={brand.Id}>{brand.brandName}</option>
+              <option key={brand.id} value={brand.id}>{brand.brandName}</option>
             ))}
           </select>
           {errors.brandId && <p className="text-red-500">Bắt buộc</p>}
+
 
           {/* Select Car Category */}
           <label className="block mb-2">Danh mục xe</label>
@@ -86,9 +85,9 @@ export default function CreateCarModal({ isOpen, onClose, onCarModal }) {
           {/* Model Year */}
           <label className="block mb-2">Năm sản xuất</label>
           <div className="flex space-x-2">
-            <input type="number" placeholder="Năm" {...register("year", { required: true })} className="w-1/3 p-2 border rounded" />
-            <input type="number" placeholder="Tháng" {...register("month", { required: true })} className="w-1/3 p-2 border rounded" />
             <input type="number" placeholder="Ngày" {...register("day", { required: true })} className="w-1/3 p-2 border rounded" />
+            <input type="number" placeholder="Tháng" {...register("month", { required: true })} className="w-1/3 p-2 border rounded" />
+            <input type="number" placeholder="Năm" {...register("year", { required: true })} className="w-1/3 p-2 border rounded" />
           </div>
           {(errors.year || errors.month || errors.day) && <p className="text-red-500">Bắt buộc</p>}
 

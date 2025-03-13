@@ -69,7 +69,10 @@ export const updateProduct = async (productId, productData, fileImage) => {
             pre.value.updatedAt = "",
         ]));
         //Parse thong tin
-        productData.productName = <>{productData.productName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
+        console.log("check thong tin: ", productData)
+        // productData.productPrice = parseInt(productData.productPrice);
+        productData.productPrice = formatVietnameseCurrency(parseInt(productData.productPrice));
+
 
         //Gan thong tin signify
         sProduct.set((pre) => ([
@@ -117,13 +120,12 @@ export const createProduct = async (productData, FormData) => {
             pre.value.updatedAt = "",
         ]));
         //parse thong tin signify
-        response.data.value.productName = <>{response.data.value.productName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+        console.log("Check tien: ", response.data.value.productPrice);
+        response.data.value.productPrice = formatVietnameseCurrency(response.data.value.productPrice);
         response.data.value.createdAt = formatDate(response.data.value.createdAt);
         response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
         //gan vao signify
         sProduct.set(response.data.value);
-
-
 
         userService.showToast(200, "Create Product Successfull");
         return response;

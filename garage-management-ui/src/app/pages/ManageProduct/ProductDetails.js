@@ -7,16 +7,19 @@ import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
 import { getProduct, updateProduct, getAllCategory, getAllBrand } from "./services/ProductService";
 import ImageCarousel from "./partials/ImageCarousel";
-import { formatVietnameseCurrency, parseVietnameseCurrency } from "./schemas/ProductValid";
+import { parseVietnameseCurrency } from "./schemas/ProductValid";
+import AsyncSelect from 'react-select/async';
 
 export default function ProductDetails() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const { t, i18n } = useTranslation("product_details");
   const [product, setProduct] = useState(null);
   const [categories, setCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [imageFiles, setImageFiles] = useState([]);
+  const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false);
+  const [isBrandsLoaded, setIsBrandsLoaded] = useState(false);
+
 
   const { register, handleSubmit, setValue, watch, reset } = useForm();
 
@@ -37,9 +40,8 @@ export default function ProductDetails() {
         setValue("productName", productData.productName);
         setValue("productBarcode", productData.productBarcode);
         setValue("productDescription", productData.productDescription);
-        setValue("productCategoryId", categoryData?.data?.value.find(cat => cat.category === productData.category)?.id || "");
-        setValue("brandId", brandData?.data?.value.find(brand => brand.brandName === productData.brandName)?.id || "");
-        // setValue("imageLink", productData.imageLink);
+        setValue("productCategoryId", productData.productCategoryId);
+        setValue("brandId", productData.brandId);
         setValue("productPrice", parseVietnameseCurrency(productData.productPrice));
         setValue("status", productData.status);
         setValue("createdAt", productData.createdAt);
@@ -56,8 +58,72 @@ export default function ProductDetails() {
   useEffect(() => {
     fetchData();
   }, [i18n.language]);
+  ///////////////////////////////////////////////////////////////////////////////////
+
+  const loadCategoryOptions = (inputValue) => {
+    return new Promise((resolve) => {
+      if (!isCategoriesLoaded) {
+        fetchCategories().then(() => {
+          resolve(filterCategories(inputValue));
+        });
+      } else {
+        resolve(filterCategories(inputValue));
+      }
+    });
+  };
+
+  const loadBrandOptions = (inputValue) => {
+    return new Promise((resolve) => {
+      if (!isBrandsLoaded) {
+        fetchBrands().then(() => {
+          resolve(filterBrands(inputValue));
+        });
+      } else {
+        resolve(filterBrands(inputValue));
+      }
+    });
+  };
+
+  // Lọc danh mục sản phẩm theo input
+  const filterCategories = (inputValue) => {
+    return categories
+      .filter((cat) => cat.category.toLowerCase().includes(inputValue.toLowerCase()))
+      .map((cat) => ({ value: cat.id, label: cat.category }));
+  };
+
+  // Lọc thương hiệu theo input
+  const filterBrands = (inputValue) => {
+    return brands
+      .filter((brand) => brand.brandName.toLowerCase().includes(inputValue.toLowerCase()))
+      .map((brand) => ({ value: brand.id, label: brand.brandName }));
+  };
+
+  // Hàm tải danh mục sản phẩm (chỉ gọi API 1 lần)
+  const fetchCategories = async () => {
+    try {
+      const response = await getAllCategory();
+      setCategories(response?.data?.value || []);
+      setIsCategoriesLoaded(true);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  // Hàm tải thương hiệu (chỉ gọi API 1 lần)
+  const fetchBrands = async () => {
+    try {
+      const response = await getAllBrand();
+      setBrands(response?.data?.value || []);
+      setIsBrandsLoaded(true);
+    } catch (error) {
+      console.error("Error fetching brands:", error);
+    }
+  };
 
 
+
+
+  ///////////////////////////////////////////////////////////////////////////////////
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -88,8 +154,8 @@ export default function ProductDetails() {
       productName: product.productName,
       productBarcode: product.productBarcode,
       productDescription: product.productDescription,
-      productCategoryId: categories.find(cat => cat.category === product.category)?.id || "",
-      brandId: brands.find(brand => brand.brandName === product.brandName)?.id || "",
+      productCategoryId: product.productCategoryId,
+      brandId: product.brandId,
       productPrice: product.productPrice,
       status: product.status,
       createdAt: product.createdAt,
@@ -136,15 +202,24 @@ export default function ProductDetails() {
                 <strong className="font-semibold">{t("product_details.barcode")}: </strong>{product.productBarcode}
               </p>
 
-              {/* Danh mục */}
+              {/* Danh mục sản phẩm */}
               <p className="text-gray-700 text-xl mb-4">
                 <strong className="font-semibold">{t("product_details.category")}: </strong>
                 {isEditing ? (
-                  <select {...register("productCategoryId")} className="border p-2 rounded w-full text-lg">
-                    {categories.map(cat => (
-                      <option key={cat.id} value={cat.id}>{cat.category}</option>
-                    ))}
-                  </select>
+                  <AsyncSelect
+                    cacheOptions
+                    loadOptions={loadCategoryOptions}
+                    defaultOptions={categories.map(cat => ({ value: cat.id, label: cat.category }))}
+                    isDisabled={!isEditing}
+                    onChange={(selectedOption) => setValue("productCategoryId", selectedOption ? selectedOption.value : "")}
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    placeholder={t("product_details.select_category")}
+                    isClearable
+                    defaultValue={
+                      product.productCategoryId ? { value: product.productCategoryId, label: product.category } : null
+                    }
+                  />
                 ) : (
                   product.category
                 )}
@@ -154,15 +229,25 @@ export default function ProductDetails() {
               <p className="text-gray-700 text-xl mb-4">
                 <strong className="font-semibold">{t("product_details.brand")}: </strong>
                 {isEditing ? (
-                  <select {...register("brandId")} className="border p-2 rounded w-full text-lg">
-                    {brands.map(brand => (
-                      <option key={brand.id} value={brand.id}>{brand.brandName}</option>
-                    ))}
-                  </select>
+                  <AsyncSelect
+                    cacheOptions
+                    loadOptions={loadBrandOptions}
+                    defaultOptions={brands.map(brand => ({ value: brand.id, label: brand.brandName }))}
+                    isDisabled={!isEditing}
+                    onChange={(selectedOption) => setValue("brandId", selectedOption ? selectedOption.value : "")}
+                    className="react-select-container"
+                    classNamePrefix="react-select"
+                    placeholder={t("product_details.select_brand")}
+                    isClearable
+                    defaultValue={
+                      product.brandId ? { value: product.brandId, label: product.brandName } : null
+                    }
+                  />
                 ) : (
                   product.brandName
                 )}
               </p>
+
 
               {/* Giá sản phẩm */}
               <p className="text-gray-700 text-xl mb-4">

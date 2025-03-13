@@ -73,10 +73,8 @@ export const creatSupplier = async (supplierData) => {
         //format
         response.data.value.createdAt = formatDate(response.data.value.createdAt)
         response.data.value.updatedAt = formatDate(response.data.value.updatedAt)
-        // response.data.value.brandName = <>{response.data.value.brandName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
 
         //gan signify
-        // sBrand.set(response.data.value);
         //return
         userService.showToast(200, "Supplier created successfully");
         return response;

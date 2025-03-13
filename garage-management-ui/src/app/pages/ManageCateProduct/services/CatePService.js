@@ -82,7 +82,6 @@ export const updateCategory = async (categoryId, updatedData) => {
 
         updatedData.createdAt = formatDate(updatedData.createdAt)
         updatedData.updatedAt = formatDate(updatedData.updatedAt)
-        updatedData.category = <>{updatedData.category}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
         sProductCategory.set(updatedData);
 
 
@@ -120,7 +119,6 @@ export const createCategory = async (data) => {
                 pre.value.updatedAt = "",
             ]))
 
-            response.data.value.category = <>{response.data.value.category}<span className="font-semibold text-green-500"> - Recently Created</span> </>
             response.data.value.createdAt = formatDate(response.data.value.createdAt);
             response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
 
