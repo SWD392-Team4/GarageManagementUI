@@ -3,14 +3,22 @@ import { FilterAppointment } from "../services/store/FilterStore";
 
 export default function FilterTablePost() {
   const [searchNamecus, setSearchNamecus] = useState("");
+  const [searchEmailCus, setSearchEmailCus] = useState("");
   const [filters, setFilters] = useState({
     searchNameEmp: "",
+    searchEmailCus: "",
     startDate: "",
     endDate: "",
-    type: "",
     status: "",
+    type: "",
   });
 
+  const handleSearchEmailCus = (e) => {
+    FilterAppointment.set((v) => {
+      v.value.searchEmailCus = e.target.value;
+    });
+    setSearchEmailCus(e.target.value);
+  };
   const handleSearchCus = (e) => {
     FilterAppointment.set((v) => {
       v.value.searchNamecus = e.target.value;
@@ -21,21 +29,28 @@ export default function FilterTablePost() {
   const handleClearFilters = () => {
     const clearedFilters = {
       searchNamecus: "",
-      searchNameEmp: "",
+      searchEmailCus: "",
       startDate: "",
+      status: "",
       endDate: "",
       type: "",
-      status: "",
     };
 
     setFilters(clearedFilters);
     setSearchNamecus("");
+    setSearchEmailCus("");
     FilterAppointment.set((v) => {
       v.value.searchNamecus = "";
       v.value.startDate = "";
       v.value.endDate = "";
       v.value.type = "";
       v.value.status = "";
+      v.value.searchEmailCus = "";
+    });
+  };
+  const handerSearchWithFilter = () => {
+    FilterAppointment.set((v) => {
+      v.value.search = v.value.search + 1;
     });
   };
 
@@ -51,9 +66,7 @@ export default function FilterTablePost() {
   };
 
   return (
-    <div className="flex bg-white flex-wrap items-center gap-4 p-2 shadow-md">
-      {/* Search Input */}
-
+    <div className="flex bg-white flex-wrap items-center gap-4 p-1 shadow-md">
       <div className="flex flex-col">
         <label className="text-sm ml-1 font-medium text-gray-700">
           Search Customer{" "}
@@ -66,6 +79,18 @@ export default function FilterTablePost() {
           className="w-36 p-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
+      <div className="flex flex-col">
+        <label className="text-sm ml-1 font-medium text-gray-700">
+          Search Customer Email{" "}
+        </label>
+        <input
+          type="text"
+          value={searchEmailCus}
+          onChange={handleSearchEmailCus}
+          placeholder="Search title..."
+          className="w-36 p-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
 
       {/* Start Date Filter */}
       <div className="flex flex-col">
@@ -73,7 +98,7 @@ export default function FilterTablePost() {
           Start Date
         </label>
         <input
-          type="date"
+          type="datetime-local"
           name="startDate"
           value={filters.startDate}
           onChange={handleInputChange}
@@ -87,7 +112,7 @@ export default function FilterTablePost() {
           End Date
         </label>
         <input
-          type="date"
+          type="datetime-local"
           name="endDate"
           value={filters.endDate}
           onChange={handleInputChange}
@@ -99,31 +124,36 @@ export default function FilterTablePost() {
       <div className="flex flex-col">
         <label className="text-sm ml-1 font-medium text-gray-700">Type</label>
         <select
-          name="type"
-          value={filters.type}
-          onChange={handleInputChange}
-          className="w-36 p-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Select</option>
-          <option value="valid">Mua bán</option>
-          <option value="expired">Sửa chữa và package</option>
-        </select>
-      </div>
-      {/* Type status */}
-      <div className="flex flex-col">
-        <label className="text-sm ml-1 font-medium text-gray-700">Status</label>
-        <select
           name="status"
           value={filters.status}
           onChange={handleInputChange}
           className="w-36 p-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="">Select</option>
-          <option value="0">status 1</option>
-          <option value="1">status 2</option>
-          <option value="2">status 3</option>
-          <option value="3">status 4</option>
-          <option value="4">status 5</option>
+
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+          <option value="Canceled">Canceled</option>
+          <option value="InProgress">InProgress</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+      {/* Type Filter */}
+      <div className="flex flex-col">
+        <label className="text-sm ml-1 font-medium text-gray-700">Type</label>
+        <select
+          name="type"
+          value={filters.type}
+          onChange={handleInputChange}
+          className="w-36 p-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Select</option>
+          <option value="ServiceBooking">Service booking</option>
+          <option value="ServicePackageBooking">
+            Service and package booking
+          </option>
+          <option value="ScheduledMaintenance">Scheduled maintenance</option>
+          <option value="SellingProduct">Selling product</option>
         </select>
       </div>
 
@@ -139,7 +169,7 @@ export default function FilterTablePost() {
       </div>
       <div className="flex flex-col">
         <button
-          onClick={handleClearFilters}
+          onClick={handerSearchWithFilter}
           className="p-2 border mt-5 border-gray-300 bg-blue-500 text-white  hover:bg-blue-600 duration-300 focus:outline-none"
           title="Clear Filters"
         >

@@ -1,0 +1,49 @@
+{
+  "title": "Discover the online booking for your car service!",
+  "description": "We help you easily find the best garage, view details, and book an appointment in just a few clicks!",
+  "column1Title": "Find a Garage",
+  "column1Description": "Locate the best garage near you for maintenance or repair.",
+  "column2Title": "View Details",
+  "column2Description": "Check the garage's location, available services, and operating hours.",
+  "column3Title": "Book a Service",
+  "column3Description": "Choose a convenient time slot and book your car service in just a few steps.",
+  "buttonFindGarage": "Find Garage",
+  "choiceGara1": "Choose Garage",
+  "choiceGara2": "Please choose a garage to continue",
+  "choiceGara3": "LOCATION & CONTACT",
+  "bookingDateTime": "Booking Time",
+  "select": {
+    "title": "Your vehicle details & services",
+    "carBrand": "Car Brand*",
+    "selectCarBrand": "Select Car Brand",
+    "carType": "Car Type*",
+    "selectCarType": "Select Car Type",
+    "carModel": "Car Model*",
+    "selectCarModel": "Select Car Model",
+    "toggle": {
+      "individualService": {
+        "title": "Individual Service",
+        "description": "If you know what your car needs, choose each service individually. From maintenance and repair to cleaning, you can flexibly select services according to your needs without paying extra for unnecessary items."
+      },
+      "comboService": {
+        "title": "Combo Service Package",
+        "description": "If you are not knowledgeable about cars or simply want to save time, all-inclusive service packages are the optimal choice. Each combo is pre-designed, including essential items to ensure your car is always in top condition, giving you peace of mind."
+      }
+    }
+  },
+  "billingDetails": "BILLING DETAILS",
+  "fullName": "Full Name",
+  "emailAddress": "Email Address",
+  "phone": "Phone",
+  "carLicensePlateNumber": "Car License Plate Number",
+  "mileage": "Mileage",
+  "placeOrder": "PLACE ORDER",
+  "requiredField": "This field is required",
+  "invalidEmail": "Invalid email format",
+  "title1": "Address",
+  "title2": "Gara name:",
+  "title3": "Address:",
+  "title4": "Phone:",
+  "title5": "Email Address:",
+  "title6": "Opening hours:"
+}

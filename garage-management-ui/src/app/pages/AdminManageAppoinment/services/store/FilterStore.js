@@ -4,13 +4,16 @@ export const FilterAppointment = signify(
   {
     searchNamecus: "",
     searchNameEmp: "",
+    searchEmailCus: "",
     startDate: "",
     endDate: "",
     type: "",
+    pageCurrent: 1,
+    search: 1,
   },
   {
     cache: {
-      key: "filterPost",
+      key: "FilterAppointment",
     },
   }
 );
@@ -37,7 +40,6 @@ export const sListApointment = signify(
   }
 );
 
-
 // List package in apointment
 export const sPackeagesInAppointment = signify(
   {
@@ -46,7 +48,6 @@ export const sPackeagesInAppointment = signify(
     validityPeriod: "",
     timeUnit: "",
     usageLimit: "",
-
     usageCount: "",
     startDate: "",
     endTime: "",
@@ -59,7 +60,6 @@ export const sPackeagesInAppointment = signify(
     },
   }
 );
-
 
 // List service in apointment
 export const sServicesInAppointment = signify(

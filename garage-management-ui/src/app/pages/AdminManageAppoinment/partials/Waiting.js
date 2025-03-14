@@ -1,10 +1,13 @@
 import React from "react";
 import ListAppoinment from "./ListAppoinment";
+import FilterTablePost from "./FilterTablePosts";
 
 export default function Waiting() {
   return (
     <>
-      <ListAppoinment type="type 2" />
+      <FilterTablePost />
+
+      <ListAppoinment status="Pending" />
     </>
   );
 }

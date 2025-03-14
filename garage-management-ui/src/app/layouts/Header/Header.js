@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import LanguageSwitcher from "../../components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
-import { FaPhone } from "react-icons/fa6";
 import "./TextHoverAnimation.scss";
 import ButtonAccount from "./ButtonAccount";
 import { Link } from "react-router-dom";
-import Notification from "../../pages/Notification/Notification";
 const Header = () => {
   const { t } = useTranslation("ver1");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,6 +16,7 @@ const Header = () => {
     product: "/product",
     contact: "/lien-he",
     lookup: "/lookup",
+    booking: "/booking",
   };
 
   useEffect(() => {

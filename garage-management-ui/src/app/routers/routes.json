@@ -8,6 +8,28 @@
     "redirect": "/"
   },
   {
+    "path": "/booking",
+    "element": "LayoutBookingPage",
+    "children": [
+      {
+        "index": true,
+        "element": "BookingOnlineComponent"
+      },
+      {
+        "path": "address",
+        "element": "PickGara"
+      },
+      {
+        "path": "select-options",
+        "element": "SelectOptions"
+      },
+      {
+        "path": "customer-info",
+        "element": "FormCustomer"
+      }
+    ]
+  },
+  {
     "path": "/Customer",
     "redirect": "/Customer/profile"
   },
@@ -413,6 +435,11 @@
             "isSuspense": true
           },
           {
+            "path": "approved",
+            "element": "Approved",
+            "isSuspense": true
+          },
+          {
             "path": "canceled",
             "element": "Canceled",
             "isSuspense": true
@@ -565,6 +592,11 @@
           {
             "path": "waiting",
             "element": "Waiting",
+            "isSuspense": true
+          },
+          {
+            "path": "approved",
+            "element": "Approved",
             "isSuspense": true
           },
           {

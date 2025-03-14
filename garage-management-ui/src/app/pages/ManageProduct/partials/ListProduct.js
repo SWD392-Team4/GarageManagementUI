@@ -63,7 +63,11 @@ export default function ListProduct() {
 
   const columns = useMemo(
     () => [
-      { header: t("manage_product.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+      {
+        header: t("manage_product.id"),
+        accessorKey: "id",
+        accessorFn: (_row, index) => index + 1,
+      },
       { header: t("manage_product.name"), accessorKey: "productName" },
       { header: t("manage_product.barcode"), accessorKey: "productBarcode" },
       { header: t("manage_product.price"), accessorKey: "productPrice" },

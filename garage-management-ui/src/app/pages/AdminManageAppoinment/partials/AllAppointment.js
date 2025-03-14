@@ -7,7 +7,7 @@ export default function AllAppointment() {
     <>
       <FilterTablePost />
 
-      <ListAppoinment type="type" />
+      <ListAppoinment status="" />
     </>
   );
 }

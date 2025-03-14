@@ -10,7 +10,8 @@
     "service": "SERVICE",
     "product": "PRODUCT",
     "contact": "CONTACT",
-    "lookup": "LOOKUP"
+    "lookup": "LOOKUP",
+    "booking": "BOOKING"
   },
   "slides": [
     {
