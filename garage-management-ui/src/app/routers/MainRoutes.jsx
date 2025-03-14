@@ -37,7 +37,7 @@ const componentMap = {
   CreateAppointment: lazy(() =>
     import("../pages/AdminManageAppoinment/CreateAppointment")
   ),
-  Mision: lazy(() => import("../pages/AboutUs/partials/Mision")),
+  Mission: lazy(() => import("../pages/AboutUs/partials/Mission")),
   History: lazy(() => import("../pages/AboutUs/partials/History")),
   Vision: lazy(() => import("../pages/AboutUs/partials/Vision")),
   LoginPage: LoginPage,
@@ -60,7 +60,7 @@ const componentMap = {
   ResetPasswordWorker: lazy(() =>
     import("../pages/AuthEmployee/partials/ResetPassword")
   ),
-  AboutUs: lazy(() => import("../pages/AboutUs/partials/AboutUs")),
+  AboutUs: lazy(() => import("../pages/AboutUs/AboutUs")),
 
   LogOut: lazy(() => import("../pages/AuthEmployee/partials/LogOut")),
   LayoutCustomer: lazy(() =>

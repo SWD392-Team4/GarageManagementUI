@@ -76,7 +76,6 @@ export const createCarModal = async (data) => {
 }
 
 export const updateCarModal = async (carModalId, updateData) => {
-    console.log("check data: ", updateData);
     try {
         const response = await userService.sendAjax(
             `/api/car-models/${carModalId}`,
@@ -141,7 +140,7 @@ export const getCarModalDetails = async (carModalId) => {
 export const getAllBrand = async () => {
     try {
         const response = await userService.sendAjax(
-            "/api/brands?Fields=id%2C%20brandName",
+            "/api/brands?PageSize=0&Fields=id%2C%20brandName",
             "GET",
             null,
             true

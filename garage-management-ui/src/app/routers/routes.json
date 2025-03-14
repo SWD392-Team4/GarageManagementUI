@@ -35,7 +35,7 @@
   },
   {
     "path": "about-us",
-    "redirect": "/about-us/mision"
+    "redirect": "/about-us/mission"
   },
   {
     "path": "/",
@@ -74,8 +74,8 @@
         "element": "AboutUs",
         "children": [
           {
-            "path": "mision",
-            "element": "Mision"
+            "path": "mission",
+            "element": "Mission"
           },
           {
             "path": "vision",
@@ -116,7 +116,7 @@
         "element": "CustomerPackageList"
       },
       {
-        "path": "packages/details",
+        "path": "packages/:id",
         "element": "CustomerPackageDetail"
       }
     ]

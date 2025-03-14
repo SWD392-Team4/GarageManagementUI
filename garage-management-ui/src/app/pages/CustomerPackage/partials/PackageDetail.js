@@ -1,40 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
-import { IoChevronForward, IoLocationSharp, IoCall, IoMail } from "react-icons/io5";
+import { useParams } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import PackageContent from "./PackageContent";
+import Banner from "../../Services/partials/Banner";
+import Category from "./Category";
+import Contact from "./Contact";
+import { getPackage, getPackageConditions, getPackageServices } from "../services/PackageServiceAPI";
+import LoadingSpinner from "../../CustomerProduct/partials/LoadingSpinner";
 
 export default function PackageDetail() {
-    const packages = [
-        {
-          id: 1,
-          title: "Minor Maintenance Package (5,000 km / 6 months)",
-          description: [
-            "This package covers essential maintenance services to keep your vehicle in top shape.",
-            "It includes fluid checks, tire and brake inspections, and minor adjustments to ensure smooth operation.",
-            "Ideal for new vehicles reaching their first maintenance milestone or regular small check-ups.",
-          ],
-          services: [
-            "Brake fluid and transmission fluid check",
-            "Headlights and horn functionality test",
-            "Coolant and windshield washer fluid check",
-            "Engine oil change",
-            "Tire pressure check and tread wear inspection",
-            "Battery health and electrode wear check",
-            "Cabin air filter and engine air filter check",
-          ],
-        }]
-    const [packageData, setPackageData] = useState(packages[0]);
-  const packageList = [
-    "Tyre Service",
-    "Engine Service",
-    "Tuning Service",
-    "Motor Service",
-    "System Service",
-    "Washing Service",
-  ];
-  
+ 
+  const { id } = useParams(); 
+  const [packageData, setPackageData] = useState(null);
+  const [services, setServices] = useState([]);
+  const [conditions, setConditions] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const sliderSettings = {
     dots: true,
     infinite: true,
@@ -45,13 +29,39 @@ export default function PackageDetail() {
     autoplaySpeed: 3000,
   };
   const sliderImages = [
-    "https://templates.hibootstrap.com/audeck/default/assets/img/service-details.jpg",
-    "https://templates.hibootstrap.com/audeck/default/assets/img/service-details2.jpg",
-    "https://templates.hibootstrap.com/audeck/default/assets/img/service-details3.jpg",
+    "/assets/img/service-details.jpg",
+    "/assets/img/service-details2.jpg",
+    "/assets/img/service-details3.jpg",
   ];
+  useEffect(() => {
+    const fetchPackageDetails = async () => {
+      setLoading(true);
+      try {
+        const packageData = await getPackage(id);
+        const serviceData = await getPackageServices(id);
+        const conditionData = await getPackageConditions(id); 
+        if (packageData && serviceData) {
+          setPackageData(packageData);
+          setServices(serviceData); 
+          setConditions(conditionData);
+        } else {
+          setError("Package not found");
+        }
+      } catch (err) {
+        setError("Failed to fetch package details");
+      }
+      setLoading(false);
+    };
+
+    fetchPackageDetails();
+  }, [id]);
+  if (loading) return <LoadingSpinner />;
+  if (error) return <p className="text-center text-red-500 p-6">{error}</p>;
+  if (!packageData) return null;
+
 
   return (
-    <div className="pt-5 pb-16 bg-white">
+    <div className="pt-5 pb-16 bg-gray-100">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row ">
           {/* Main Content*/}
@@ -60,58 +70,26 @@ export default function PackageDetail() {
             <Slider {...sliderSettings} className="mb-6">
               {sliderImages.map((image, index) => (
                 <div key={index}>
-                  <img src={image} alt="package" className="w-full rounded-lg" />
+                  <img
+                    src={image}
+                    alt="package"
+                    className="w-full rounded-lg"
+                  />
                 </div>
               ))}
             </Slider>
 
             {/* Package Details */}
-            <PackageContent packageData={packageData} />
+            <PackageContent packageData={packageData} services={services} conditions={conditions} />
           </div>
 
           {/* Sidebar */}
           <div className="lg:w-1/3 p-6">
-          <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2 relative pb-2 border-b-4 border-red-500 inline-block">
-                All Maintenance Packages
-              </h3>
-              <ul className="space-y-2 mt-3">
-                {packageList.map((service, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center space-x-2 text-gray-700 hover:text-red-600 transition"
-                  >
-                    <IoChevronForward className="text-red-500" />
-                    <a href="/service-details" className="hover:underline">
-                      {service}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+            <Contact />
+            <div className=" mb-6 ">
+              <Category packageData={packageData}/>
             </div>
-            <div className=" p-6 ">
-              <h3 className="text-xl font-semibold mb-2 relative pb-2 border-b-4 border-red-500 inline-block">
-                Contact Us
-              </h3>
-              <ul className="space-y-2 mt-3 text-gray-700">
-                <li className="flex items-center space-x-2">
-                  <IoLocationSharp className="text-red-500" />
-                  <span>FPT HCM City Long Thanh My, Thu Duc City</span>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <IoCall className="text-red-500" />
-                  <a href="tel:+880123456789" className="hover:underline">
-                    1-800-915-6271
-                  </a>
-                </li>
-                <li className="flex items-center space-x-2">
-                  <IoMail className="text-red-500" />
-                  <a href="mailto:info@example.com" className="hover:underline">
-                    email@email.com
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <Banner />
           </div>
         </div>
       </div>

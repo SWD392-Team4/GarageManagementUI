@@ -73,7 +73,7 @@ export default function ListCarModal({ refresh }) {
         () => [
             { header: t("manage_car_modal.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
             { header: t("manage_car_modal.modalName"), accessorKey: "modelName" },
-            { header: t("manage_car_modal.category"), accessorKey: "category" },
+            { header: t("manage_car_modal.category"), accessorKey: "carCategory" },
             { header: t("manage_car_modal.brand"), accessorKey: "brandName" },
             { header: t("manage_car_modal.modelYear"), accessorKey: "modelYear" },
             { header: t("manage_car_modal.createdAt"), accessorKey: "createdAt" },

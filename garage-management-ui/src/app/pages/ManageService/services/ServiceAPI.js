@@ -89,7 +89,7 @@ export const createService = async (data, formData) => {
             pre.value.status = "",
         ]))
         //parse thong tin
-        response.data.value.serviceName = <>{response.data.value.serviceName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
+        response.data.value.price = formatVietnameseCurrency(response.data.value.price);
         //set thong tin signify
         sService.set(response.data.value);
 
@@ -126,6 +126,9 @@ export const getServiceDetails = async (serviceId) => {
             null,
             true
         );
+
+        response.data.value.price = formatVietnameseCurrency(response.data.value.price);
+
         if (response.status == 200) {
             userService.showToast(200, "Loading service detail successful");
             return response.data.value;
@@ -162,7 +165,9 @@ export const updateService = async (serviceId, updateData) => {
             pre.value.status = "",
         ]))
         //parse thong tin xiu
-        updateData.serviceName = <>{updateData.serviceName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
+        updateData.servicePrice = parseInt(updateData.servicePrice);
+        updateData.servicePrice = formatVietnameseCurrency(updateData.servicePrice);
+
         //gan siginify
         sService.set((pre) => ([
             pre.value.id = serviceId,
@@ -181,7 +186,6 @@ export const updateService = async (serviceId, updateData) => {
         return response;
 
     } catch (error) {
-        userService.showToast(400, "Updated Service Fail");
         console.error("Fail to updated service: ", error.message);
     }
 

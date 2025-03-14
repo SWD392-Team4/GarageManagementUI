@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { FaSearch, FaSave } from "react-icons/fa";
-import {
-  getAllCategories,
-  getAllBrands,
-} from "../services/CustomerProductService";
-const FilterBar = ({ onFilterChange, initialFilters }) => {
-  const { t } = useTranslation("customer_product_filter");
-  const [categories, setCategories] = useState([]);
-  const [brands, setBrands] = useState([]);
 
+const PackageFilterBar = ({
+  onFilterChange,
+  initialFilters,
+  serviceCategory,
+  packageType,
+  carCategory,
+}) => {
   const [filters, setFilters] = useState(initialFilters);
+
   useEffect(() => {
     setFilters(initialFilters); // Update filters when initialFilters change
   }, [initialFilters]);
@@ -24,34 +23,20 @@ const FilterBar = ({ onFilterChange, initialFilters }) => {
 
   const applyFilters = () => {
     onFilterChange(filters);
+    console.log("Applied filters:", filters);
   };
-  useEffect(() => {
-    const fetchFilters = async () => {
-      const categoryList = await getAllCategories();
-      const brandList = await getAllBrands();
 
-      if (categoryList) {
-        setCategories(categoryList);
-      }
-
-      if (brandList) {
-        setBrands(brandList);
-      }
-    };
-
-    fetchFilters();
-  }, []);
   return (
-    <div className="  rounded-lg  w-full  mx-auto">
+    <div className=" rounded-lg  w-full  mx-aut">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">
-        {t("customer_product_filter.title")}
+        Filter Packages
       </h2>
 
       {/* Search Bar */}
       <div className="mb-4 relative w-full">
         <input
           type="text"
-          placeholder={t("customer_product_filter.search")}
+          placeholder="Search name..."
           value={filters.searchTerm}
           onChange={(e) => handleFilterChange("searchTerm", e.target.value)}
           className="w-full p-3 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -59,48 +44,66 @@ const FilterBar = ({ onFilterChange, initialFilters }) => {
         <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
       </div>
 
-      {/* Category Dropdown */}
+      {/* Service Category Dropdown */}
       <div className="mb-4 w-full">
         <label className="block mb-2 font-semibold text-gray-700">
-          {t("customer_product_filter.category")}
+          Service Category
         </label>
         <select
-          value={filters.category}
-          onChange={(e) => handleFilterChange("category", e.target.value)}
+          value={filters.serviceCategory}
+          onChange={(e) =>
+            handleFilterChange("serviceCategory", e.target.value)
+          }
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">{t("customer_product_filter.category_all")}</option>
-          {categories.map((category, index) => (
+          <option value="">All Categories</option>
+          {serviceCategory.map((category, index) => (
             <option key={index} value={category}>
               {category}
             </option>
           ))}
         </select>
       </div>
-
-      {/* Brand Dropdown */}
+      {/* Car Category Dropdown */}
       <div className="mb-4 w-full">
         <label className="block mb-2 font-semibold text-gray-700">
-          {t("customer_product_filter.brand")}
+          Car Type
         </label>
         <select
-          value={filters.brand}
-          onChange={(e) => handleFilterChange("brand", e.target.value)}
+          value={filters.carCategory}
+          onChange={(e) => handleFilterChange("carCategory", e.target.value)}
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">{t("customer_product_filter.brand_all")}</option>
-          {brands.map((brand, index) => (
-            <option key={index} value={brand}>
-              {brand}
+          <option value="">All Types</option>
+          {carCategory.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.category}
             </option>
           ))}
         </select>
       </div>
-
+      {/* Package Type Dropdown */}
+      <div className="mb-4 w-full">
+        <label className="block mb-2 font-semibold text-gray-700">
+          Package Type
+        </label>
+        <select
+          value={filters.packageType}
+          onChange={(e) => handleFilterChange("packageType", e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">All Types</option>
+          {packageType.map((type, index) => (
+            <option key={index} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </div>
       {/* Price Range Slider */}
       <div className="mb-4 w-full">
         <label className="block mb-2 font-semibold text-gray-700">
-          {t("customer_product_filter.price_range")}
+          Price Range
         </label>
         <input
           type="range"
@@ -116,21 +119,21 @@ const FilterBar = ({ onFilterChange, initialFilters }) => {
           }
           className="w-full accent-red-500"
         />
-        {/* Moved price display below */}
         <div className="text-gray-600 text-center mt-2">
           {filters.price[0]}đ - {filters.price[1]}đ
         </div>
       </div>
+
       {/* Apply Filters Button */}
       <button
         onClick={applyFilters}
         className="w-full bg-black text-white py-3 px-4 rounded-md border border-black hover:bg-red-500 hover:text-white transition duration-300 flex items-center justify-center"
       >
         <FaSave className="mr-2" />
-        {t("customer_product_filter.apply")}
+        Apply Filters
       </button>
     </div>
   );
 };
 
-export default FilterBar;
+export default PackageFilterBar;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { getAllBrand, getAllCarCategory, updateCarModal } from "../services/carModalService";
 
 export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUpdated }) {
-
   const [formData, setFormData] = useState({
     id: "",
     modelName: "",
@@ -9,35 +9,63 @@ export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUp
     brandId: "",
     carCategoryId: "",
     createdAt: "",
-    updatedAt: ""
+    updatedAt: "",
+    status: "",
   });
 
+  const [brands, setBrands] = useState([]);
+  const [carCategories, setCarCategories] = useState([]);
+
   useEffect(() => {
-    if (isOpen && carModel) {
-      setFormData({
-        id: carModel.id || "",
-        modelName: carModel.modelName || "",
-        modelYear: carModel.modelYear || "",
-        brandId: carModel.brandId || "",
-        carCategoryId: carModel.carCategoryId || "",
-        createdAt: carModel.createdAt || "",
-        updatedAt: carModel.updatedAt || ""
-      });
+    if (isOpen) {
+      // Gọi API lấy danh sách thương hiệu và danh mục xe
+      const loadData = async () => {
+        const brandsData = await getAllBrand();
+        const carCategoriesData = await getAllCarCategory();
+        setBrands(brandsData || []);
+        setCarCategories(carCategoriesData || []);
+      };
+
+      loadData();
+
+      // Nếu có dữ liệu xe, cập nhật vào form
+      if (carModel) {
+        setFormData({
+          id: carModel.id || "",
+          modelName: carModel.modelName || "",
+          modelYear: carModel.modelYear || "",
+          brandId: carModel.brandId || "",
+          carCategoryId: carModel.carCategoryId || "",
+          createdAt: carModel.createdAt || "",
+          updatedAt: carModel.updatedAt || "",
+          brandName: carModel.brandName,
+          carCategory: carModel.carCategory,
+          Status: carModel.status
+        });
+      }
     }
   }, [isOpen, carModel]);
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("🔄 Updating Car Model:", formData);
-    onCarModelUpdated(formData);
-    onClose();
+
+    try {
+      await updateCarModal(formData.id, formData);
+      onCarModelUpdated();
+      onClose();
+    } catch (error) {
+      console.error("⚠️ Error updating car model:", error);
+    }
   };
 
+
   if (!isOpen) return null;
+
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -102,26 +130,55 @@ export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUp
             />
           </div>
 
+          {/* Thương hiệu */}
           <div>
-            <label className="block text-sm font-medium">Mã thương hiệu</label>
-            <input
-              type="text"
+            <label className="block text-sm font-medium">Thương hiệu</label>
+            <select
               name="brandId"
               value={formData.brandId}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md"
-            />
+            >
+              {/* Hiển thị mặc định theo `carModel` */}
+              <option value={carModel?.brandId}>{carModel?.brandName || "Chọn thương hiệu"}</option>
+
+              {/* Danh sách thương hiệu từ API */}
+              {brands.map((brand) => (
+                <option key={brand.id} value={brand.id}>
+                  {brand.brandName}
+                </option>
+              ))}
+            </select>
           </div>
 
+          {/* Danh mục xe */}
           <div>
-            <label className="block text-sm font-medium">Mã danh mục xe</label>
-            <input
-              type="text"
+            <label className="block text-sm font-medium">Danh mục xe</label>
+            <select
               name="carCategoryId"
               value={formData.carCategoryId}
               onChange={handleChange}
               className="w-full px-3 py-2 border rounded-md"
-            />
+            >
+              {/* Hiển thị mặc định theo `carModel` */}
+              <option value={carModel?.carCategoryId}>{carModel?.carCategory || "Chọn danh mục xe"}</option>
+
+              {/* Danh sách danh mục xe từ API */}
+              {carCategories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.category}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Trạng thái (Status) */}
+          <div>
+            <label className="block text-sm font-medium">Trạng thái</label>
+            <select name="status" value={formData.status} onChange={handleChange} className="w-full px-3 py-2 border rounded-md">
+              <option value="Active">Active</option>
+              <option value="Inactive">Inactive</option>
+            </select>
           </div>
 
           <div className="flex justify-end gap-2">

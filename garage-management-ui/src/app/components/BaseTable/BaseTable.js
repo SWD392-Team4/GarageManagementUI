@@ -79,7 +79,7 @@ export default function BaseTable({
                         className="border p-3 text-sm"
                       >
                         {column.accessorKey === "id"
-                          ? "0" // Hiển thị index thay vì ID
+                          ? (<span className="font-semibold text-green-500 italic">Recently</span>)
                           : signifyInformation[column.accessorKey] || "-"}
                       </td>
                     ))}

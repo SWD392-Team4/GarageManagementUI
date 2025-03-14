@@ -83,7 +83,6 @@ export const createPackage = async (data) => {
     ]))
 
     console.log("check thong tin: 1111 ", response.data);
-    response.data.value.packageName = <>{response.data.value.packageName}<span className="font-semibold text-green-500"> - Recently Created</span> </>
     response.data.value.packagePrice = formatVietnameseCurrency(response.data.value.packagePrice)
     response.data.value.createdAt = formatDate(response.data.value.createdAt)
     response.data.value.updatedAt = formatDate(response.data.value.updatedAt)
@@ -146,8 +145,10 @@ export const updatePackage = async (PackageId, FormData) => {
     ]))
 
     console.log("check thong tin: 1111 ", FormData);
-    FormData.packageName = <>{FormData.packageName}<span className="font-semibold text-green-500"> - Recently Updated</span> </>
+    FormData.packagePrice = parseInt(FormData.packagePrice)
     FormData.packagePrice = formatVietnameseCurrency(FormData.packagePrice)
+
+
     //gan vao signify
     sPackageService.set((pre) => ([
       pre.value.id = PackageId,
