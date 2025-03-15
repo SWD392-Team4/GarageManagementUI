@@ -1,0 +1,8 @@
+{
+    "customer_package_category": {
+        "service_category": "Danh mục",
+        "car_type": "Loại xe",
+        "package_type": "Loại gói",
+        "price": "Giá"
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "customer_package_filter": {
+        "title": "Lọc Gói Dịch Vụ",
+        "search": "Tìm theo tên...",
+        "service_category": "Danh mục dịch vụ",
+        "service_category_all": "Tất cả danh mục",
+        "car_category": "Loại xe",
+        "car_category_all": "Tất cả loại xe",
+        "package_type": "Loại gói",
+        "package_type_all": "Tất cả loại",
+        "price_range": "Mức giá",
+        "apply": "Lọc gói dịch vụ"
+    }
+}

@@ -6,8 +6,10 @@ import { getAllCars, getAllPackages, getAllServicesCategories, getAllTypes } fro
 import LoadingSpinner from "../../CustomerProduct/partials/LoadingSpinner";
 import PackageFilterBar from "./PackageFilterBar";
 import { BsSliders } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 
 const PackageListPage = () => {
+  const { t } = useTranslation("customer_package_list");
   const [filteredPackages, setFilteredPackages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [paging, setPaging] = useState({
@@ -98,7 +100,7 @@ const PackageListPage = () => {
     <div className="bg-gray-100 min-h-screen py-6">
       <div className="container mx-auto px-4 p-6">
         <h1 className="text-4xl font-bold mb-6 text-center p-6">
-          Our Packages
+        {t("customer_package_list.title")}
         </h1>
 
         <div className="flex flex-col md:flex-row gap-4">
@@ -121,7 +123,7 @@ const PackageListPage = () => {
               <PackageList packages={filteredPackages} />
             ) : (
               <div className="text-center text-gray-500 text-lg mt-6">
-                No packages found. Try adjusting your filters.
+                {t("customer_package_list.no_packages")}
               </div>
             )}
 
