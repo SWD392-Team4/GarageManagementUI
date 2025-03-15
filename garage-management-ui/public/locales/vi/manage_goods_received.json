@@ -16,6 +16,9 @@
         "status": "Trạng thái",
         "createdAt": "Ngày tạo",
         "updatedAt": "Ngày cập nhật",
+        "userName": "Tên quản lý",
+        "warehouse": "Nhà kho",
+        "loading": "Đang tải...",
         "search": {
             "reference_number": "Mã tham chiếu",
             "invoice_code": "Mã hóa đơn",

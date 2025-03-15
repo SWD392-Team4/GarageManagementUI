@@ -90,6 +90,18 @@ export default function ViewPackagePartial() {
         setServices((prev) => [...prev, ...newServiceDetails]); // Cập nhật danh sách hiển thị
     };
 
+    const handleCancelEdit = () => {
+        setAddServices([]);
+        setRemoveServices([]);
+
+        setIsEditing(false);
+
+    }
+
+    const handleEdit = () => {
+        setIsEditing(true);
+    }
+
     // **Gửi dữ liệu cập nhật**
     const onSubmit = async (data) => {
         const updatedData = {
@@ -141,21 +153,23 @@ export default function ViewPackagePartial() {
                         <button
                             type="button"
                             className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition flex items-center gap-2"
-                            onClick={() => setIsEditing(!isEditing)}
+                            onClick={isEditing ? handleCancelEdit : handleEdit}
                         >
                             {isEditing ? <FaTimes /> : <FaEdit />}
                             {isEditing ? t("manage_package.view.cancel") : t("manage_package.view.edit")}
                         </button>
                     </div>
-                    {/* <div className="mt-6 border p-6 rounded-lg shadow-md bg-white"> */}
-                    <PackageInfo register={register} setValue={setValue} watch={watch} packageData={packageData} isEditing={isEditing} />
-                    {/* </div> */}
+
                     <PackageImages
                         packageImages={packageImages}
                         setPackageImages={setPackageImages}
                         packageId={packageData.id}
                         isEditing={isEditing}
                     />
+                    {/* <div className="mt-6 border p-6 rounded-lg shadow-md bg-white"> */}
+                    <PackageInfo register={register} setValue={setValue} watch={watch} packageData={packageData} isEditing={isEditing} />
+                    {/* </div> */}
+
                     <PackageServices
                         services={services}
                         handleRemoveService={handleRemoveService}

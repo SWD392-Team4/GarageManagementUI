@@ -38,6 +38,9 @@
     "invoice_goodsIssue": "Invoice GoodsIssue",
     "invoice-goods-Received": "Invoice Goods Receipt",
     "service_list": "Service List",
-    "package_service": "Package Service"
+    "package_service": "Package Service",
+    "product_at": "Inventory",
+    "product_at_warehouse": "Product at Warehouse",
+    "product_at_store": "Product at Store"
   }
 }

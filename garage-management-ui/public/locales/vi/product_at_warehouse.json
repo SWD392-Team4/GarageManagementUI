@@ -1,0 +1,25 @@
+{
+    "product_at_warehouse": {
+        "search": {
+            "minQuantity": "Số lượng tối thiểu",
+            "search_placeholder_minQuantity": "Nhập số lượng tối thiểu",
+            "maxQuantity": "Số lượng tối đa",
+            "search_placeholder_maxQuantity": "Nhập số lượng tối đa",
+            "status": "Trạng thái",
+            "search_status_placeholder": "Chọn trạng thái",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động",
+            "createdAt": "Ngày tạo",
+            "updatedAt": "Ngày cập nhật",
+            "clear_filters": "Xóa bộ lọc",
+            "search": "Tìm kiếm"
+        },
+        "product_at_house": "Xem",
+        "id": "ID",
+        "quantity": "Số lượng",
+        "goodsReceivedDetailId": "Mã chi tiết hàng nhận",
+        "status": "Trạng thái",
+        "createdAt": "Ngày tạo",
+        "updatedAt": "Ngày cập nhật"
+    }
+}

@@ -24,6 +24,7 @@
         "search_updated_at": "Updated Date",
         "search_created_at": "Created Date",
         "search_min_price": "Min Price",
-        "search_max_price": "Max Price"
+        "search_max_price": "Max Price",
+        "car_parts": "Car Part"
     }
 }

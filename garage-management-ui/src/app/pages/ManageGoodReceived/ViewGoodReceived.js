@@ -30,6 +30,13 @@ export default function ViewGoodReceived() {
             const goodsReceivedDetails = await getGoodsReceivedDetails(id);
             if (goodsReceivedDetails.data.value) {
                 setGoodsDetails(goodsReceivedDetails.data.value);
+                setPagination({
+                    currentPage: response.data.paging.currentPage,
+                    totalPages: response.data.paging.totalPages,
+                    totalCount: response.data.paging.totalCount,
+                    hasPrevious: response.data.paging.hasPrevious,
+                    hasNext: response.data.paging.hasNext,
+                });
             }
 
         } catch (error) {

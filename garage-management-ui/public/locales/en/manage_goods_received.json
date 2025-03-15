@@ -16,6 +16,9 @@
         "status": "Status",
         "createdAt": "Created At",
         "updatedAt": "Updated At",
+        "userName": "Manager Name",
+        "warehouse": "Warehouse",
+        "loading": "Loading...",
         "search": {
             "reference_number": "Reference Number",
             "invoice_code": "Invoice Code",

@@ -1,7 +1,8 @@
 {
     "manage_goods_issued": {
-        "title": "Quản lý hoá đơn xuất",
-        "create": "Tạo hoá đơn",
+        "title": "Quản lý xuất hàng",
+        "create": "Tạo phiếu xuất hàng",
+        "loading": "Đang tải...",
         "search": {
             "reference_number": "Số tham chiếu",
             "invoice_code": "Mã hóa đơn",
@@ -13,20 +14,46 @@
             "status_enum": {
                 "choose": "Chọn trạng thái",
                 "active": "Hoạt động",
-                "inactive": "Không hoạt động"
+                "inactive": "Ngưng hoạt động"
             },
             "clear_filters": "Xóa bộ lọc",
             "search": "Tìm kiếm"
         },
         "table": {
-            "id": "Id",
+            "id": "ID",
             "total_cost": "Tổng chi phí",
             "reference_number": "Số tham chiếu",
             "invoice_code": "Mã hóa đơn",
             "status": "Trạng thái",
             "created_at": "Ngày tạo",
             "updated_at": "Ngày cập nhật",
-            "view": "Xem"
+            "view": "xem",
+            "warehouseName": "Tên nhà kho",
+            "managerName": "Tên quản lý",
+            "garageName": "Tên Garage"
+        },
+        "detail_table": {
+            "id": "ID",
+            "total_cost": "Tổng chi phí",
+            "reference_number": "Số tham chiếu",
+            "invoice_code": "Mã hóa đơn",
+            "status": "Trạng thái",
+            "created_at": "Ngày tạo",
+            "updated_at": "Ngày cập nhật",
+            "warehouseName": "Tên nhà kho",
+            "managerName": "Tên quản lý",
+            "garageName": "Tên Garage"
+        },
+        "view_goods_issued": {
+            "title": "Chi tiết phiếu xuất hàng",
+            "reference_number": "Số tham chiếu",
+            "invoice_code": "Mã hóa đơn",
+            "total_price": "Tổng giá",
+            "createdWareHouseManager": "Người quản lý kho đã tạo",
+            "wareHouse": "Kho",
+            "status": "Trạng thái",
+            "created_at": "Ngày tạo",
+            "updated_at": "Ngày cập nhật"
         }
     }
 }

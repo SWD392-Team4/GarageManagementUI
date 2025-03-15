@@ -13,6 +13,32 @@
         "barcode": "Barcode",
         "select_brand": "Select Brand",
         "select_category": "Select Category",
-        "upload_images": "URL Image"
+        "upload_images": "URL Image",
+        "car_parts": "Car Part",
+        "no_car_parts_selected": "No car parts selected",
+        "car_models": "Car Models",
+        "no_car_models_selected": "No Car Models",
+        "select_car_parts": {
+            "title": "Select Car Parts",
+            "search_placeholder": "Search for car parts...",
+            "category": "Category",
+            "active": "Active",
+            "inactive": "Inactive",
+            "created_at": "Created at",
+            "updated_at": "Updated at",
+            "no_results": "No car parts found",
+            "confirm": "Confirm"
+        },
+        "select_car_models": {
+            "title": "Select Car Models",
+            "search_placeholder": "Search for car models...",
+            "brand": "Brand",
+            "category": "Category",
+            "year": "Year",
+            "active": "Active",
+            "inactive": "Inactive",
+            "no_results": "No car models found",
+            "confirm": "Confirm"
+        }
     }
 }

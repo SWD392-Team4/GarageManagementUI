@@ -32,6 +32,12 @@
         "edit": "Chỉnh sửa",
         "save": "Lưu",
         "saving": "Đang lưu",
-        "cancel": "Huỷ"
+        "cancel": "Huỷ",
+        "car_parts": "Phụ tùng xe",
+        "select_car_parts": "Chọn phù tùng xe",
+        "car_models": "Dòng xe",
+        "select_car_models": "Chọn dòng xe",
+        "no_car_parts": "Không có phụ tùng",
+        "no_car_models": "Không có dòng xe"
     }
 }

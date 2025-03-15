@@ -2,6 +2,7 @@
     "manage_goods_issued": {
         "title": "Manage Goods Issued",
         "create": "Create Goods Issued",
+        "loading": "Loading...",
         "search": {
             "reference_number": "Reference Number",
             "invoice_code": "Invoice Code",
@@ -26,13 +27,30 @@
             "status": "Status",
             "created_at": "Created At",
             "updated_at": "Updated At",
-            "view": "view"
+            "view": "view",
+            "warehouseName": "Warehouse Name",
+            "managerName": "Manager Name",
+            "garageName": "Garage Name"
         },
         "detail_table": {
             "id": "Id",
             "total_cost": "Total Cost",
             "reference_number": "Reference Number",
             "invoice_code": "Invoice Code",
+            "status": "Status",
+            "created_at": "Created At",
+            "updated_at": "Updated At",
+            "warehouseName": "Warehouse Name",
+            "managerName": "Manager Name",
+            "garageName": "Garage Name"
+        },
+        "view_goods_issued": {
+            "title": "Goods Issued Details",
+            "reference_number": "Reference Number",
+            "invoice_code": "Invoice Code",
+            "total_price": "Total Price",
+            "createdWareHouseManager": "Created Warehouse Manager",
+            "wareHouse": "Warehouse",
             "status": "Status",
             "created_at": "Created At",
             "updated_at": "Updated At"

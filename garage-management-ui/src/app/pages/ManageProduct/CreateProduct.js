@@ -4,9 +4,12 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
-import { FaArrowLeft, FaTrash } from "react-icons/fa";
+import { FaArrowLeft, FaPlus, FaTrash } from "react-icons/fa";
 import { getAllCategory, getAllBrand, createProduct, createProductImage } from "./services/ProductService";
 import AsyncSelect from 'react-select/async';
+import ModelSelectCarPart from "./models/ModelSelectCarPart";
+import ModelSelectCarModel from "./models/ModelSelectCarModel";
+
 
 export default function CreateProduct() {
     const { register, handleSubmit, setValue, watch } = useForm();
@@ -16,6 +19,14 @@ export default function CreateProduct() {
     const [brands, setBrands] = useState([]);
     const [selectedImages, setSelectedImages] = useState([]);
     const [loading, setLoading] = useState(false);
+
+    ///luu tru car part
+    const [isCarPartModalOpen, setIsCarPartModalOpen] = useState(false);
+    const [selectedCarParts, setSelectedCarParts] = useState([]);
+
+    //luu tru car model
+    const [isCarModelModalOpen, setIsCarModelModalOpen] = useState(false);
+    const [selectedCarModels, setSelectedCarModels] = useState([]);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -49,6 +60,8 @@ export default function CreateProduct() {
             productCategoryId: data.category,
             brandId: data.brand,
             productPrice: parseFloat(data.price),
+            carPartIds: selectedCarParts.map((item) => item.id),
+            carModelIds: selectedCarModels.map((item) => item.id),
         };
 
         let formData = null
@@ -154,6 +167,80 @@ export default function CreateProduct() {
                     />
                 </div>
 
+                {/* Car Parts */}
+                <div className="col-span-2">
+                    <label className="block text-gray-700 font-semibold">{t("create_product.car_parts")}</label>
+                    <button
+                        type="button"
+                        className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg"
+                        onClick={() => setIsCarPartModalOpen(true)}
+                    >
+                        <FaPlus /> {t("create_product.select_car_parts.title")}
+                    </button>
+
+                    {/* Hiển thị danh sách car parts đã chọn */}
+                    <div className="mt-2">
+                        {selectedCarParts.length > 0 ? (
+                            <div className="flex flex-wrap gap-2 p-3 border rounded-md bg-gray-50">
+                                {selectedCarParts.map((part) => (
+                                    <div
+                                        key={part.id}
+                                        className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-lg shadow-md"
+                                    >
+                                        <span className="text-sm font-semibold">{part.partName}</span>
+                                        <button
+                                            className="text-red-600 hover:text-red-800"
+                                            onClick={() => setSelectedCarParts(selectedCarParts.filter((p) => p.id !== part.id))}
+                                        >
+                                            ✖
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-gray-500 italic">{t("create_product.no_car_parts_selected")}</p>
+                        )}
+                    </div>
+                </div>
+
+
+                {/* Car Models - Chọn từ modal */}
+                <div className="col-span-2">
+                    <label className="block text-gray-700 font-semibold">{t("create_product.car_models")}</label>
+                    <button
+                        type="button"
+                        className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg"
+                        onClick={() => setIsCarModelModalOpen(true)}
+                    >
+                        <FaPlus /> {t("create_product.select_car_models.title")}
+                    </button>
+
+                    {/* ✅ Hiển thị danh sách Car Models đã chọn */}
+                    <div className="mt-2">
+                        {selectedCarModels.length > 0 ? (
+                            <div className="flex flex-wrap gap-2 p-3 border rounded-md bg-gray-50">
+                                {selectedCarModels.map((model) => (
+                                    <div
+                                        key={model.id}
+                                        className="flex items-center gap-2 bg-green-100 text-green-800 px-3 py-1 rounded-lg shadow-md"
+                                    >
+                                        <span className="text-sm font-semibold">{model.modelName} ({model.modelYear})</span>
+                                        <button
+                                            className="text-red-600 hover:text-red-800"
+                                            onClick={() => setSelectedCarModels(selectedCarModels.filter((m) => m.id !== model.id))}
+                                        >
+                                            ✖
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <p className="text-gray-500 italic">{t("create_product.no_car_models_selected")}</p>
+                        )}
+                    </div>
+                </div>
+
+
                 {/* Description */}
                 <div className="col-span-2" data-color-mode="light">
                     <label className="block text-gray-700 font-semibold">{t("create_product.description")}</label>
@@ -194,6 +281,27 @@ export default function CreateProduct() {
                     </button>
                 </div>
             </form>
+
+            {/* Modal chọn Car Parts */}
+            {isCarPartModalOpen && (
+                <ModelSelectCarPart
+                    isOpen={isCarPartModalOpen}
+                    onClose={() => setIsCarPartModalOpen(false)}
+                    selectedCarParts={selectedCarParts}
+                    setSelectedCarParts={setSelectedCarParts}
+                />
+            )}
+
+
+            {/* ✅ Modal chọn Car Models */}
+            {isCarModelModalOpen && (
+                <ModelSelectCarModel
+                    isOpen={isCarModelModalOpen}
+                    onClose={() => setIsCarModelModalOpen(false)}
+                    selectedCarModels={selectedCarModels}
+                    setSelectedCarModels={setSelectedCarModels}
+                />
+            )}
         </div>
     );
 }

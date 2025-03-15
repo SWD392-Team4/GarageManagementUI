@@ -65,12 +65,15 @@ export default function ListGoodsIssued() {
     const columns = useMemo(
         () => [
             { header: t("manage_goods_issued.table.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
-            { header: t("manage_goods_issued.table.total_cost"), accessorKey: "totalCost" },
+            { header: t("manage_goods_issued.table.warehouseName"), accessorKey: "warehouseName" },
+            { header: t("manage_goods_issued.table.managerName"), accessorKey: "userName" },
+            { header: t("manage_goods_issued.table.garageName"), accessorKey: "garageName" },
             { header: t("manage_goods_issued.table.reference_number"), accessorKey: "referenceNumber" },
             { header: t("manage_goods_issued.table.invoice_code"), accessorKey: "invoiceCode" },
+            { header: t("manage_goods_issued.table.total_cost"), accessorKey: "totalCost" },
             { header: t("manage_goods_issued.table.status"), accessorKey: "status" },
             { header: t("manage_goods_issued.table.created_at"), accessorKey: "createdAt" },
-            { header: t("manage_goods_issued.table.updated_at"), accessorKey: "updatedAt" },
+            // { header: t("manage_goods_issued.table.updated_at"), accessorKey: "updatedAt" },
 
         ],
         [t, i18n.language]

@@ -13,6 +13,28 @@
         "barcode": "Mã",
         "select_brand": "Chọn thương hiệu",
         "select_category": "Chọn danh mục",
-        "upload_images": "Đường dẫn hình ảnh"
+        "upload_images": "Đường dẫn hình ảnh",
+        "select_car_parts": {
+            "title": "Chọn phụ tùng xe",
+            "search_placeholder": "Tìm kiếm phụ tùng...",
+            "category": "Danh mục",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động",
+            "created_at": "Ngày tạo",
+            "updated_at": "Cập nhật",
+            "no_results": "Không tìm thấy phụ tùng nào",
+            "confirm": "Xác nhận"
+        },
+        "select_car_models": {
+            "title": "Chọn mẫu xe",
+            "search_placeholder": "Tìm kiếm mẫu xe...",
+            "brand": "Thương hiệu",
+            "category": "Danh mục",
+            "year": "Năm",
+            "active": "Hoạt động",
+            "inactive": "Không hoạt động",
+            "no_results": "Không tìm thấy mẫu xe",
+            "confirm": "Xác nhận"
+        }
     }
 }

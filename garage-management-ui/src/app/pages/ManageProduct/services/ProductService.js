@@ -218,3 +218,37 @@ export const getAllBrand = async () => {
         return null;
     }
 };
+
+export const getAllCarPart = async () => {
+    try {
+        const response = await userService.sendAjax(
+            "/api/car-parts?Status=Active&PageSize=0",
+            "GET",
+            null,
+            true
+        );
+        response.data.value = response.data.value.map((pre) => ({
+            ...pre,
+            createdAt: formatDate(pre.createdAt),
+            updatedAt: formatDate(pre.updatedAt),
+        }))
+
+        return response;
+    } catch (error) {
+        console.error("Error with: ", error)
+    }
+}
+
+export const getAllCarModels = async () => {
+    try {
+        const response = await userService.sendAjax(
+            "/api/car-models?Status=Active",
+            "GET",
+            null,
+            true
+        );
+        return response;
+    } catch (error) {
+        console.error("Error with : ", error);
+    }
+}

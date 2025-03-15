@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createImagePackage, createImagePackageUpdate, deteleImagePackage } from "../../services/PackageServiceAPI";
 import { FaTrash, FaPlus } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
@@ -9,6 +9,13 @@ export default function PackageImages({ packageImages, setPackageImages, package
     const [previewImages, setPreviewImages] = useState([]); // ✅ State lưu ảnh preview
 
     // console.log("check thong tin: ", packageId);
+    //khi cancel tu component cha thi xoa cac anh preview
+    useEffect(() => {
+        if (!isEditing) {
+            setPreviewImages([]); // ✅ Xóa ảnh preview khi thoát chế độ chỉnh sửa
+        }
+    }, [isEditing]);
+
 
     // **Xóa ảnh**
     const handleDeleteImage = async (imageId) => {
@@ -113,7 +120,7 @@ export default function PackageImages({ packageImages, setPackageImages, package
             {previewImages.length > 0 && (
                 <div className="mt-4">
                     <h3 className="text-md font-semibold mb-2">{t("manage_package.images.preview_title")}</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4  mb-10">
                         {previewImages.map((img) => (
                             <div key={img.id} className="relative group">
                                 <img

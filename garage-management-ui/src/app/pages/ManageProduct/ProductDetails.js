@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { FaEdit, FaSave, FaTimes } from "react-icons/fa";
+import { FaEdit, FaPlus, FaSave, FaTimes } from "react-icons/fa";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
 import { getProduct, updateProduct, getAllCategory, getAllBrand } from "./services/ProductService";
 import ImageCarousel from "./partials/ImageCarousel";
 import { parseVietnameseCurrency } from "./schemas/ProductValid";
 import AsyncSelect from 'react-select/async';
+import ModelSelectCarPart from "./models/ModelSelectCarPart";
+import ModelSelectCarModel from "./models/ModelSelectCarModel";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -19,6 +21,10 @@ export default function ProductDetails() {
   const [imageFiles, setImageFiles] = useState([]);
   const [isCategoriesLoaded, setIsCategoriesLoaded] = useState(false);
   const [isBrandsLoaded, setIsBrandsLoaded] = useState(false);
+  const [selectedCarParts, setSelectedCarParts] = useState([]);
+  const [selectedCarModels, setSelectedCarModels] = useState([]);
+  const [isCarPartModalOpen, setIsCarPartModalOpen] = useState(false);
+  const [isCarModelModalOpen, setIsCarModelModalOpen] = useState(false);
 
 
   const { register, handleSubmit, setValue, watch, reset } = useForm();
@@ -46,6 +52,9 @@ export default function ProductDetails() {
         setValue("status", productData.status);
         setValue("createdAt", productData.createdAt);
         setValue("updatedAt", productData.updatedAt);
+        setSelectedCarParts(productData.carParts || []);
+        setSelectedCarModels(productData.carModels || []);
+
       }
 
       setCategories(categoryData?.data?.value || []);
@@ -140,7 +149,13 @@ export default function ProductDetails() {
         });
       }
 
-      await updateProduct(id, data, imageFormData);
+      const payload = {
+        ...data,
+        carPartIds: selectedCarParts.map((part) => part.id), // ✅ Gửi danh sách Car Part
+        carModelIds: selectedCarModels.map((model) => model.id) // ✅ Gửi danh sách Car Model
+      };
+
+      await updateProduct(id, payload, imageFormData);
       fetchData();
       setIsEditing(false);
     } catch (error) {
@@ -273,6 +288,85 @@ export default function ProductDetails() {
           </div>
 
           <div className="mt-6 p-4 border-t" data-color-mode="light">
+
+            {/* Car Parts */}
+            <div className="mt-6">
+              <h2 className="text-xl font-semibold mb-2">{t("product_details.car_parts")}</h2>
+
+              {/* Nếu đang chỉnh sửa, hiển thị nút chọn Car Parts */}
+              {isEditing && (
+                <button
+                  type="button"
+                  className="flex items-center gap-2 bg-blue-500 text-white px-4 py-2 rounded-lg"
+                  onClick={() => setIsCarPartModalOpen(true)}
+                >
+                  <FaPlus /> {t("product_details.select_car_parts")}
+                </button>
+              )}
+
+              {/* Hiển thị danh sách Car Parts từ product hoặc state */}
+              <div className="mt-2 flex flex-wrap gap-2">
+                {(isEditing ? selectedCarParts : product?.carParts || []).length > 0 ? (
+                  (isEditing ? selectedCarParts : product.carParts).map((part) => (
+                    <div key={part.id} className="bg-gray-200 px-3 py-1 rounded-lg text-gray-800 flex items-center gap-2">
+                      {part.partName}
+
+                      {/* Nếu đang chỉnh sửa, hiển thị nút xóa */}
+                      {isEditing && (
+                        <button
+                          className="text-red-600"
+                          onClick={() => setSelectedCarParts(selectedCarParts.filter((p) => p.id !== part.id))}
+                        >
+                          ✖
+                        </button>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500 italic">{t("product_details.no_car_parts")}</p>
+                )}
+              </div>
+            </div>
+
+            {/* Car Models */}
+            <div className="mt-6">
+              <h2 className="text-xl font-semibold mb-2">{t("product_details.car_models")}</h2>
+
+              {/* Nếu đang chỉnh sửa, hiển thị nút chọn Car Models */}
+              {isEditing && (
+                <button
+                  type="button"
+                  className="flex items-center gap-2 bg-green-500 text-white px-4 py-2 rounded-lg"
+                  onClick={() => setIsCarModelModalOpen(true)}
+                >
+                  <FaPlus /> {t("product_details.select_car_models")}
+                </button>
+              )}
+
+              {/* Hiển thị danh sách Car Models từ product hoặc state */}
+              <div className="mt-2 flex flex-wrap gap-2">
+                {(isEditing ? selectedCarModels : product?.carModels || []).length > 0 ? (
+                  (isEditing ? selectedCarModels : product.carModels).map((model) => (
+                    <div key={model.id} className="bg-gray-200 px-3 py-1 rounded-lg text-gray-800 flex items-center gap-2">
+                      {model.modelName}
+
+                      {/* Nếu đang chỉnh sửa, hiển thị nút xóa */}
+                      {isEditing && (
+                        <button
+                          className="text-red-600"
+                          onClick={() => setSelectedCarModels(selectedCarModels.filter((m) => m.id !== model.id))}
+                        >
+                          ✖
+                        </button>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500 italic">{t("product_details.no_car_models")}</p>
+                )}
+              </div>
+            </div>
+
             <h2 className="text-xl font-semibold mb-2">{t("product_details.description")}</h2>
             {isEditing ? (
               <MDEditor
@@ -304,6 +398,26 @@ export default function ProductDetails() {
             </div>
           )}
 
+
+          {/* Modal chọn Car Parts */}
+          {isCarPartModalOpen && (
+            <ModelSelectCarPart
+              isOpen={isCarPartModalOpen}
+              onClose={() => setIsCarPartModalOpen(false)}
+              selectedCarParts={selectedCarParts}
+              setSelectedCarParts={setSelectedCarParts}
+            />
+          )}
+
+          {/* Modal chọn Car Models */}
+          {isCarModelModalOpen && (
+            <ModelSelectCarModel
+              isOpen={isCarModelModalOpen}
+              onClose={() => setIsCarModelModalOpen(false)}
+              selectedCarModels={selectedCarModels}
+              setSelectedCarModels={setSelectedCarModels}
+            />
+          )}
 
         </form>
       ) : (

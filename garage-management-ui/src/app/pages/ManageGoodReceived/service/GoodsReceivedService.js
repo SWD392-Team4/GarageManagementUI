@@ -1,5 +1,5 @@
 import UserService from "../../../hooks/services/UserService";
-import { formatDate } from "../schemas/GoodsReceivedSchema";
+import { formatDate, formatVietnameseCurrency } from "../schemas/GoodsReceivedSchema";
 import { sGoodsReceived, sGoodsReceivedGara } from "./GoodsReceivedSignify";
 
 const userService = new UserService();
@@ -14,6 +14,7 @@ export const getAllGoodReceived = async (PageNumber = 1) => {
     );
     response.data.value = response.data.value.map((pre) => ({
       ...pre,
+      totalPrice: formatVietnameseCurrency(pre.totalPrice),
       createdAt: formatDate(pre.createdAt),
       updatedAt: formatDate(pre.updatedAt),
     }));
@@ -41,6 +42,7 @@ export const searchGoodsReceived = async (params) => {
     );
     response.data.value = response.data.value.map((pre) => ({
       ...pre,
+      totalPrice: formatVietnameseCurrency(pre.totalPrice),
       createdAt: formatDate(pre.createdAt),
       updatedAt: formatDate(pre.updatedAt),
     }));
@@ -121,6 +123,8 @@ export const getGoodsReceivedDetails = async (goodReceivedId) => {
     );
     response.data.value = response.data.value.map((pre) => ({
       ...pre,
+      unitPrice: formatVietnameseCurrency(pre.unitPrice),
+      totalPrice: formatVietnameseCurrency(pre.totalPrice),
       createdAt: formatDate(pre.createdAt),
       updatedAt: formatDate(pre.updatedAt),
     }));

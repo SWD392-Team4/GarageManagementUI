@@ -67,48 +67,17 @@ export default function ListGoodsReceived() {
 
   const columns = useMemo(
     () => [
-      {
-        header: t("manage_goods_received.id"),
-        accessorKey: "id",
-        accessorFn: (_row, index) => index + 1,
-      },
-      {
-        header: t("manage_goods_received.referenceNumber"),
-        accessorKey: "refereneceNumber",
-      },
-      {
-        header: t("manage_goods_received.invoiceCode"),
-        accessorKey: "invoiceCode",
-      },
-      // { header: t("manage_goods_received.sourceAddress"), accessorKey: "sourceAddress" },
-      // { header: t("manage_goods_received.sourceProvince"), accessorKey: "sourceProvince" },
-      // { header: t("manage_goods_received.sourceDistrict"), accessorKey: "sourceDistrict" },
-      // { header: t("manage_goods_received.sourceWards"), accessorKey: "sourceWards" },
-      {
-        header: t("manage_goods_received.totalPrice"),
-        accessorKey: "totalPrice",
-      },
-      {
-        header: t("manage_goods_received.contactPersonName"),
-        accessorKey: "contactPersonName",
-      },
-      {
-        header: t("manage_goods_received.workPlaceName"),
-        accessorKey: "workPlaceName",
-      },
-      {
-        header: t("manage_goods_received.warehouseManagerName"),
-        accessorKey: "warehouseManagereName",
-      },
+      { header: t("manage_goods_received.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1, },
+      { header: t("manage_goods_received.userName"), accessorKey: "userName" },
+      { header: t("manage_goods_received.warehouse"), accessorKey: "warehouse" },
+      { header: t("manage_goods_received.referenceNumber"), accessorKey: "refereneceNumber" },
+      { header: t("manage_goods_received.invoiceCode"), accessorKey: "invoiceCode" },
+      { header: t("manage_goods_received.totalPrice"), accessorKey: "totalPrice" },
+      { header: t("manage_goods_received.contactPersonName"), accessorKey: "contactPersonName" },
+      // { header: t("manage_goods_received.workPlaceName"), accessorKey: "workPlaceName" },
+      // { header: t("manage_goods_received.warehouseManagerName"), accessorKey: "warehouseManagereName" },
       { header: t("manage_goods_received.status"), accessorKey: "status" },
-      {
-        header: t("manage_goods_received.createdAt"),
-        accessorKey: "createdAt",
-      },
-      {
-        header: t("manage_goods_received.updatedAt"),
-        accessorKey: "updatedAt",
-      },
+      { header: t("manage_goods_received.createdAt"), accessorKey: "createdAt", },
     ],
     [t, i18n.language]
   );

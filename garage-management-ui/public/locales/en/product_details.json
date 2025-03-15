@@ -32,6 +32,12 @@
         "edit": "Edit",
         "save": "Save",
         "saving": "Saving",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "car_parts": "Car Parts",
+        "select_car_parts": "Select Car Part",
+        "car_models": "Car Models",
+        "select_car_models": "Car Models",
+        "no_car_parts": "No Car Parts",
+        "no_car_models": "No Car Models"
     }
 }
