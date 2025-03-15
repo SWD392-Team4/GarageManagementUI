@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
 import { getAppointmentSchema } from "./schemas/appointmentSchema";
 import {
-  CreateAppointmentApi,
+  createAppointmentApi,
   getAllCarModel,
   getAllServices,
   getAllPackages,
@@ -33,7 +33,7 @@ export default function CreateAppointment() {
       customerPhoneNumber: "",
       customerEmail: "",
       estimatedAppointmentTime: "",
-      estimatedEndTime: "",
+      // estimatedEndTime: "",
       carLicensePlateNumber: "",
     },
   });
@@ -167,21 +167,19 @@ export default function CreateAppointment() {
       estimatedAppointmentTime: new Date(
         data.estimatedAppointmentTime
       ).toISOString(),
-      estimatedEndTime: new Date(data.estimatedEndTime).toISOString(),
+      // estimatedEndTime: new Date(data.estimatedEndTime).toISOString(),
       carLicensePlateNumber: data.carLicensePlateNumber,
       services: selectedServices, // mỗi object: { serviceId, replacementParts: [ { productId, quantity } ] }
       packages: selectedPackageIds.map((pkgId) => ({ packageId: pkgId })),
     };
 
     try {
-      await CreateAppointmentApi(payload);
-      alert(t("success.create", "Tạo appointment thành công!"));
+      await createAppointmentApi(payload);
       reset();
       setSelectedServices([]);
       setSelectedPackageIds([]);
     } catch (error) {
       console.error("Error creating appointment", error);
-      alert(t("error.create", "Có lỗi xảy ra khi tạo appointment"));
     }
   };
 
@@ -322,7 +320,7 @@ export default function CreateAppointment() {
               </p>
             )}
           </div>
-          <div>
+          {/* <div>
             <label className="block mb-1">
               {t("labels.estimatedEndTime", "Thời Gian Kết Thúc")}
             </label>
@@ -336,7 +334,7 @@ export default function CreateAppointment() {
                 {errors.estimatedEndTime.message}
               </p>
             )}
-          </div>
+          </div> */}
           <div>
             <label className="block mb-1">
               {t("labels.carLicensePlateNumber", "Biển Số Xe")}

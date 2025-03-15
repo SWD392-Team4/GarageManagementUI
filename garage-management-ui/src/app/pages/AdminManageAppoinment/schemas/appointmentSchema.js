@@ -23,10 +23,30 @@ export const getAppointmentSchema = (t) =>
         "Vui lòng chọn thời gian hẹn"
       )
     ),
-    estimatedEndTime: Yup.date().required(
-      t("error.required_estimatedEndTime", "Vui lòng chọn thời gian kết thúc")
-    ),
+    // estimatedEndTime: Yup.date().required(
+    //   t("error.required_estimatedEndTime", "Vui lòng chọn thời gian kết thúc")
+    // ),
     carLicensePlateNumber: Yup.string().required(
       t("error.required_carLicensePlateNumber", "Vui lòng nhập biển số xe")
     ),
   });
+export const formatDate = (dateString) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+
+  // Lấy phần ngày/tháng/năm
+  const datePart = date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+
+  // Lấy phần giờ/phút (24h)
+  const timePart = date.toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  });
+
+  return `${datePart} ${timePart}`;
+};

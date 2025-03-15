@@ -1,15 +1,18 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "./partials/Navbar";
+import Navbar1 from "./partials/Navbar";
 import Breadcrumb from "./partials/Breadcrumb";
+import Navbar2 from "./partials/Navbar2";
+import { sAccount } from "../AuthCustomer/services/store";
 
 export default function LayoutAppointment() {
   return (
-    <div className=" bg-gray-100 md:p-6">
+    <div className=" bg-gray-100 md:p-1">
       {" "}
       <Breadcrumb />
-      <Navbar />
-      <div className="py-4">
+      {sAccount.value.role === "Administrator" && <Navbar2 />}
+      <Navbar1 />
+      <div>
         <Outlet />
       </div>
     </div>

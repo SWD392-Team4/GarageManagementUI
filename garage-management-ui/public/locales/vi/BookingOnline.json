@@ -1,0 +1,51 @@
+{
+  "title": "Khám phá dịch vụ đặt lịch sửa xe trực tuyến!",
+  "description": "Chúng tôi giúp bạn dễ dàng tìm gara tốt nhất, xem chi tiết và đặt lịch chỉ trong vài bước!",
+  "column1Title": "Tìm Gara",
+  "column1Description": "Tìm gara phù hợp gần bạn để bảo dưỡng hoặc sửa chữa xe.",
+  "column2Title": "Xem Chi Tiết",
+  "column2Description": "Kiểm tra vị trí gara, các dịch vụ có sẵn và giờ hoạt động.",
+  "column3Title": "Đặt Lịch",
+  "column3Description": "Chọn khung giờ thuận tiện và đặt lịch sửa xe chỉ trong vài phút.",
+  "buttonFindGarage": "Tìm Gara",
+  "choiceGara1": "Chọn Gara",
+  "choiceGara2": "Vui lòng chọn gara để tiếp tục",
+  "choiceGara3": "VỊ TRÍ & LIÊN LẠC",
+  "bookingDateTime": "Thời gian hẹn",
+  "select": {
+    "title": "Thông tin chi tiết và dịch vụ cho xe của bạn",
+    "carBrand": "Hãng xe*",
+    "selectCarBrand": "Chọn hãng xe",
+    "carType": "Loại xe*",
+    "selectCarType": "Chọn loại xe",
+    "selectCarPart": "chọn phụ tùng xe",
+    "carModel": "Mẫu xe*",
+    "carPart": "Phụ tùng*",
+    "selectCarModel": "Chọn mẫu xe",
+    "toggle": {
+      "individualService": {
+        "title": "Dịch Vụ Riêng Lẻ",
+        "description": "Nếu bạn đã biết xe cần gì, hãy tự chọn từng dịch vụ phù hợp. Từ bảo dưỡng, sửa chữa đến vệ sinh, bạn có thể linh hoạt lựa chọn theo nhu cầu mà không phải trả thêm cho những hạng mục không cần thiết."
+      },
+      "comboService": {
+        "title": "Gói Dịch Vụ Combo",
+        "description": "Nếu bạn không hiểu về xe hay đơn giản là muốn tiết kiệm thời gian, các gói dịch vụ trọn gói sẽ là lựa chọn tối ưu. Mỗi combo được thiết kế sẵn, bao gồm các hạng mục quan trọng để đảm bảo xe luôn trong tình trạng tốt nhất, giúp bạn yên tâm mà không cần lo nghĩ."
+      }
+    }
+  },
+  "billingDetails": "THÔNG TIN THANH TOÁN",
+  "fullName": "Họ và Tên",
+  "emailAddress": "Địa chỉ Email",
+  "phone": "Số điện thoại",
+  "carLicensePlateNumber": "Biển số xe",
+  "mileage": "Số km",
+  "placeOrder": "ĐẶT HÀNG",
+  "requiredField": "Trường này là bắt buộc",
+  "invalidEmail": "Định dạng email không hợp lệ",
+  "title1": "Chi nhánh cửa hàng",
+  "title2": "Tên cửa hàng:",
+  "title3": "Địa Chỉ",
+  "title4": "Số liên lạc:",
+  "title6": "Thời gian mở cửa:",
+  "title5": "Địa chỉ email:"
+}

@@ -48,7 +48,7 @@ module.exports = {
       // Animation classes
       animation: {
         "animate-gradient": "animate-gradient 2.2s ease infinite",
-        "spin-slow": "spinSlow 3s linear infinite",
+        "spin-slow": "spinSlow 4s linear infinite",
         "slide-down": "slideDown 200ms ease-out",
         "slide-rotate": "slideRotate 1s ease-in-out infinite",
         typing: "typing 2s steps(20) infinite alternate, blink .7s infinite",

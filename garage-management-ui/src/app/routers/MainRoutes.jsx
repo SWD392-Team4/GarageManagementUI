@@ -4,17 +4,34 @@ import PrivateRoute from "./PrivateRoute";
 import routesConfig from "./routes.json";
 import LoaddingPage from "../layouts/LoadingPage";
 import RedirectRoute from "./RedirectRoute";
+import Home from "../pages/Home";
+import LayoutBookingPage from "../layouts/LayoutBooking/LayoutBookingPage";
 import LoaddingPage2 from "../layouts/LoadingPage/index2";
+import LoginPage from "../pages/AuthCustomer/LoginPage";
+import LayoutAuthenCustomer from "../layouts/LayoutLoginCustomer/LayoutAuthenCustomer";
+import BookingOnlineComponent from "../pages/BookingPage/Partials/BookingOnlineComponent";
+import PickGara from "../pages/BookingPage/Partials/PickGara";
+import FormCustomer from "../pages/BookingPage/Partials/FormCustomer";
+import SelectOptions from "../pages/BookingPage/Partials/SelectOptions";
+import SelectService from "../pages/BookingPage/Partials/SelectService";
+import PackageSelect from "../pages/BookingPage/Partials/PackageSelect";
+import SuccessPage from "../pages/BookingPage/Partials/SuccessPage";
 import { LoadingProvider } from "./LoadingContext";
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
-  Home: lazy(() => import("../pages/Home")),
+  Home: Home,
+  SuccessPage: SuccessPage,
+  SelectService: SelectService,
+  SelectOptions: SelectOptions,
+  PackageSelect: PackageSelect,
+  PickGara: PickGara,
+  FormCustomer: FormCustomer,
+  BookingOnlineComponent: BookingOnlineComponent,
   LayoutHome: lazy(() => import("../layouts/LayoutHome")),
   LookUpPage: lazy(() => import("../pages/LookUpPage/LookUpPage")),
-  LayoutAuthenCustomer: lazy(() =>
-    import("../layouts/LayoutLoginCustomer/LayoutAuthenCustomer")
-  ),
+  LayoutAuthenCustomer: LayoutAuthenCustomer,
+  LayoutBookingPage: LayoutBookingPage,
   LayoutMechanic: lazy(() =>
     import("../layouts/LayoutMechanic/LayoutMechanic")
   ),
@@ -29,7 +46,7 @@ const componentMap = {
   Mission: lazy(() => import("../pages/AboutUs/partials/Mission")),
   History: lazy(() => import("../pages/AboutUs/partials/History")),
   Vision: lazy(() => import("../pages/AboutUs/partials/Vision")),
-  LoginPage: lazy(() => import("../pages/AuthCustomer/LoginPage")),
+  LoginPage: LoginPage,
   Chat: lazy(() => import("../pages/Chat/Chat")),
   Chat2: lazy(() => import("../pages/Chat/Chat2")),
   RegisterPage: lazy(() => import("../pages/AuthCustomer/RegisterPage")),
@@ -187,6 +204,9 @@ const componentMap = {
   ),
   InProgess: lazy(() =>
     import("../pages/AdminManageAppoinment/partials/InProgess")
+  ),
+  Approved: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/Approved")
   ),
   Waiting: lazy(() =>
     import("../pages/AdminManageAppoinment/partials/Waiting")

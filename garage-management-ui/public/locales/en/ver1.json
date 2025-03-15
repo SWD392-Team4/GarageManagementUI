@@ -11,7 +11,8 @@
     "product": "PRODUCT",
     "package": "PACKAGE",
     "contact": "CONTACT",
-    "lookup": "LOOKUP"
+    "lookup": "LOOKUP",
+    "booking": "BOOKING"
   },
   "slides": [
     {

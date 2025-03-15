@@ -1,57 +1,55 @@
 {
   "labels": {
-    "carModel": "Model Xe",
-    "mileage": "Số km",
-    "customerName": "Tên Khách Hàng",
-    "customerPhoneNumber": "Số Điện Thoại",
+    "carModel": "Car Model",
+    "mileage": "Mileage",
+    "customerName": "Customer Name",
+    "customerPhoneNumber": "Phone Number",
     "customerEmail": "Email",
-    "estimatedAppointmentTime": "Thời Gian Hẹn",
-    "estimatedEndTime": "Thời Gian Kết Thúc",
-    "carLicensePlateNumber": "Biển Số Xe",
-    "serviceAndProduct": "Dịch Vụ & Phụ Tùng",
-    "selectPackage": "Chọn Package"
+    "estimatedAppointmentTime": "Appointment Time",
+    "estimatedEndTime": "End Time",
+    "carLicensePlateNumber": "License Plate Number",
+    "serviceAndProduct": "Service & Parts",
+    "selectPackage": "Select Package"
   },
   "placeholder": {
-    "selectCarModel": "Chọn Model Xe",
-    "enterMileage": "Nhập số km",
-    "enterCustomerName": "Nhập tên khách hàng",
-    "enterPhoneNumber": "Nhập số điện thoại",
-    "enterEmail": "Nhập email",
-    "selectService": "Chọn Service",
-    "selectProduct": "Chọn Product",
-    "enterQuantity": "Số lượng",
-    "selectPackage": "Chọn Package",
-    "enterCarLicensePlateNumber": "Nhập biển số xe"
+    "selectCarModel": "Select Car Model",
+    "enterMileage": "Enter mileage",
+    "enterCustomerName": "Enter customer name",
+    "enterPhoneNumber": "Enter phone number",
+    "enterEmail": "Enter email",
+    "selectService": "Select Service",
+    "selectProduct": "Select Product",
+    "enterQuantity": "Quantity",
+    "selectPackage": "Select Package",
+    "enterCarLicensePlateNumber": "Enter license plate number"
   },
   "error": {
-    "required_carModelId": "Vui lòng chọn model xe",
-    "required_mileage": "Vui lòng nhập số km",
-    "invalid_mileage": "Số km không hợp lệ",
-    "required_customerName": "Vui lòng nhập tên khách hàng",
-    "required_customerPhoneNumber": "Vui lòng nhập số điện thoại",
-    "invalid_email": "Email không hợp lệ",
-    "required_customerEmail": "Vui lòng nhập email",
-    "required_estimatedAppointmentTime": "Vui lòng chọn thời gian hẹn",
-    "required_estimatedEndTime": "Vui lòng chọn thời gian kết thúc",
-    "required_carLicensePlateNumber": "Vui lòng nhập biển số xe",
-    "add_service": "Vui lòng thêm ít nhất một dịch vụ (có thể không chọn sản phẩm)"
+    "required_carModelId": "Please select a car model",
+    "required_mileage": "Please enter mileage",
+    "invalid_mileage": "Invalid mileage",
+    "required_customerName": "Please enter customer name",
+    "required_customerPhoneNumber": "Please enter phone number",
+    "invalid_email": "Invalid email",
+    "required_customerEmail": "Please enter email",
+    "required_estimatedAppointmentTime": "Please select an appointment time",
+    "required_estimatedEndTime": "Please select an end time",
+    "required_carLicensePlateNumber": "Please enter license plate number",
+    "add_service": "Please add at least one service (you may choose not to select a product)",
+    "create": "An error occurred while creating the appointment"
   },
   "buttons": {
-    "add": "Thêm",
-    "remove": "Xóa",
-    "createAppointment": "Tạo Appointment"
+    "add": "Add",
+    "remove": "Remove",
+    "createAppointment": "Create Appointment"
   },
   "tableHeaders": {
-    "stt": "STT",
-    "serviceName": "Tên Dịch Vụ",
-    "products": "Phụ Tùng",
-    "packageName": "Tên Package",
+    "stt": "No.",
+    "serviceName": "Service Name",
+    "products": "Parts",
+    "packageName": "Package Name",
     "action": "Action"
   },
   "success": {
-    "create": "Tạo appointment thành công!"
-  },
-  "error": {
-    "create": "Có lỗi xảy ra khi tạo appointment"
+    "create": "Appointment created successfully!"
   }
 }
