@@ -98,7 +98,7 @@ export default function ListService() {
       label: t("manage_service.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
-      link: (row) => `/${row.original.id}`,
+      link: (row) => `${row.original.id}`,
     },
     {
       type: "modal",
