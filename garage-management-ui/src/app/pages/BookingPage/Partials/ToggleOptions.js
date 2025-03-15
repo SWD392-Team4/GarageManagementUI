@@ -23,7 +23,7 @@ const ToggleCards = () => {
         <span className="absolute left-0 top-0 h-full w-5 border-y-2 border-l-2 border-red-700/60 transition-all duration-500 group-hover:w-full"></span>
         <span className="absolute right-0 top-0 h-full w-5 border-y-2 border-r-2 border-red-700/60 transition-all duration-500 group-hover:w-full"></span>
 
-        <div className="absolute top-2 left-2 z-20 text-xl text-red-700">
+        <div className="absolute top-2 left-2 z-15 text-xl text-red-700">
           {sBooking.type === "sigle-service" ? (
             <FaCheckSquare />
           ) : (
@@ -62,7 +62,7 @@ const ToggleCards = () => {
         <span className="absolute left-0 top-0 h-full w-5 border-y-2 border-l-2 border-orange-700/60 transition-all duration-500 group-hover:w-full"></span>
         <span className="absolute right-0 top-0 h-full w-5 border-y-2 border-r-2 border-orange-700/60 transition-all duration-500 group-hover:w-full"></span>
 
-        <div className="absolute top-2 left-2 z-20 text-xl text-orange-700/60">
+        <div className="absolute top-2 left-2 z-15 text-xl text-orange-700/60">
           {sBooking.type === "package-service" ? (
             <FaCheckSquare />
           ) : (

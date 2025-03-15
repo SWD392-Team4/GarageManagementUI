@@ -18,7 +18,9 @@
     "selectCarBrand": "Chọn hãng xe",
     "carType": "Loại xe*",
     "selectCarType": "Chọn loại xe",
+    "selectCarPart": "chọn phụ tùng xe",
     "carModel": "Mẫu xe*",
+    "carPart": "Phụ tùng*",
     "selectCarModel": "Chọn mẫu xe",
     "toggle": {
       "individualService": {

@@ -1,11 +1,15 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next';
-import { getAllService, getFeedbackByServiceId, searchService } from '../services/ServiceAPI';
-import SearchService from './SearchService';
-import BaseTable from '../../../components/BaseTable/BaseTable';
-import { FaEye, FaStar } from 'react-icons/fa';
-import { sService } from "../services/ServiceSignify"
-import FeedbackServiceModal from '../modals/FeedbackServiceModal';
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  getAllService,
+  getFeedbackByServiceId,
+  searchService,
+} from "../services/ServiceAPI";
+import SearchService from "./SearchService";
+import BaseTable from "../../../components/BaseTable/BaseTable";
+import { FaEye, FaStar } from "react-icons/fa";
+import { sService } from "../services/ServiceSignify";
+import FeedbackServiceModal from "../modals/FeedbackServiceModal";
 
 export default function ListService() {
   const { t, i18n } = useTranslation("manage_service");
@@ -32,7 +36,6 @@ export default function ListService() {
         response = await getAllService(page);
       }
 
-
       if (response?.data?.value) {
         setData(response.data.value);
         setPagination({
@@ -45,7 +48,6 @@ export default function ListService() {
       } else {
         console.error("Loading services failed");
       }
-
     } catch (error) {
       console.error("Error fetching services: ", error);
     }
@@ -61,20 +63,30 @@ export default function ListService() {
   };
 
   const handlePageChange = (newPage) => {
-    fetchData(newPage, searchParams)
-  }
+    fetchData(newPage, searchParams);
+  };
 
   const columns = useMemo(
     () => [
-      { header: t("manage_service.Id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+      {
+        header: t("manage_service.Id"),
+        accessorKey: "id",
+        accessorFn: (_row, index) => index + 1,
+      },
       { header: t("manage_service.ServiceName"), accessorKey: "serviceName" },
-      { header: t("manage_service.ServiceCategory"), accessorKey: "serviceCategory" },
+      {
+        header: t("manage_service.ServiceCategory"),
+        accessorKey: "serviceCategory",
+      },
       { header: t("manage_service.PartName"), accessorKey: "carPart" },
       { header: t("manage_service.Category"), accessorKey: "carCategory" },
       { header: t("manage_service.Price"), accessorKey: "price" },
       { header: t("manage_service.WorkNature"), accessorKey: "workNature" },
       { header: t("manage_service.Action"), accessorKey: "action" },
-      { header: t("manage_service.EstimatedHours"), accessorKey: "estimatedHours" },
+      {
+        header: t("manage_service.EstimatedHours"),
+        accessorKey: "estimatedHours",
+      },
       { header: t("manage_service.Status"), accessorKey: "status" },
     ],
     [t, i18n.language]
@@ -86,7 +98,7 @@ export default function ListService() {
       label: t("manage_service.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
-      link: (row) => `/admin/service/${row.original.id}`,
+      link: (row) => `${row.original.id}`,
     },
     {
       type: "modal",
@@ -106,7 +118,6 @@ export default function ListService() {
     },
   ];
 
-
   return (
     <>
       <SearchService onSearch={handleSearch} />
@@ -123,7 +134,6 @@ export default function ListService() {
         onClose={() => setIsViewFeedbackService(false)}
         service={selectedService}
       />
-
-    </ >
-  )
+    </>
+  );
 }

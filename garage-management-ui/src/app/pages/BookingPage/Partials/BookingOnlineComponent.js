@@ -7,9 +7,7 @@ export default function BookingOnlineComponent() {
   // Lấy hàm t từ hook useTranslation với namespace "BookingOnline"
   const { t } = useTranslation("BookingOnline");
   useEffect(() => {
-    BookingSignify.set((v) => {
-      v.value.garaId = "";
-    });
+    BookingSignify.reset();
   }, []);
   return (
     <div>

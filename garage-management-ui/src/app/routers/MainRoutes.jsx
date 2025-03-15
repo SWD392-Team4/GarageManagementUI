@@ -13,12 +13,18 @@ import BookingOnlineComponent from "../pages/BookingPage/Partials/BookingOnlineC
 import PickGara from "../pages/BookingPage/Partials/PickGara";
 import FormCustomer from "../pages/BookingPage/Partials/FormCustomer";
 import SelectOptions from "../pages/BookingPage/Partials/SelectOptions";
+import SelectService from "../pages/BookingPage/Partials/SelectService";
+import PackageSelect from "../pages/BookingPage/Partials/PackageSelect";
+import SuccessPage from "../pages/BookingPage/Partials/SuccessPage";
 import { LoadingProvider } from "./LoadingContext";
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
   Home: Home,
+  SuccessPage: SuccessPage,
+  SelectService: SelectService,
   SelectOptions: SelectOptions,
+  PackageSelect: PackageSelect,
   PickGara: PickGara,
   FormCustomer: FormCustomer,
   BookingOnlineComponent: BookingOnlineComponent,

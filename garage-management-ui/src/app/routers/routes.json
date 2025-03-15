@@ -26,6 +26,18 @@
       {
         "path": "customer-info",
         "element": "FormCustomer"
+      },
+      {
+        "path": "select-services",
+        "element": "SelectService"
+      },
+      {
+        "path": "select-packages",
+        "element": "PackageSelect"
+      },
+      {
+        "path": "success",
+        "element": "SuccessPage"
       }
     ]
   },

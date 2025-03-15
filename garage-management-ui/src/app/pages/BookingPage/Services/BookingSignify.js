@@ -7,7 +7,9 @@ export const BookingSignify = signify(
     carCategoryId: "",
     type: "",
     carModel: "",
-    time: "",
+    carPartId: "",
+    services: [],
+    package: [],
   },
   {
     cache: {

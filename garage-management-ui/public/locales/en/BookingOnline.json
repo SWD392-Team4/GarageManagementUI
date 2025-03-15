@@ -17,7 +17,9 @@
     "carBrand": "Car Brand*",
     "selectCarBrand": "Select Car Brand",
     "carType": "Car Type*",
+    "carPart": "Car Part*",
     "selectCarType": "Select Car Type",
+    "selectCarPart": "Select Car Part",
     "carModel": "Car Model*",
     "selectCarModel": "Select Car Model",
     "toggle": {
