@@ -3,6 +3,11 @@ import ListInvoiceSale from './partials/ListInvoiceSale'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom';
 import Breadcrumb from '../AdminManageAppoinment/partials/Breadcrumb';
+import UserService from '../../hooks/services/UserService';
+const userService = new UserService();
+const role = userService.getRoleFromToken()
+
+const url = "/" + role + "/invoice-sale/create"
 
 export default function ManageInvoiceSale() {
     const { t } = useTranslation("manage_invoice_sale");
@@ -15,7 +20,7 @@ export default function ManageInvoiceSale() {
                 <h1 className="text-2xl font-semibold">{t("manage_invoice_sale.title")}</h1>
                 <button
                     className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
-                    onClick={() => navigate("/admin/invoice-sale/create")}
+                    onClick={() => navigate(url)}
                 >
                     {t("manage_invoice_sale.create")}
                 </button>

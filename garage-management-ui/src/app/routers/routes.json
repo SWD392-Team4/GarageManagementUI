@@ -382,6 +382,11 @@
         "isSuspense2": true
       },
       {
+        "path": "manage-customer/:id",
+        "element": "CustomerDetails",
+        "isSuspense2": true
+      },
+      {
         "path": "product-at-warehouse",
         "element": "ProductAtWareHouse",
         "isSuspense2": true
@@ -612,6 +617,21 @@
       {
         "path": "manage-customer",
         "element": "ManageCustomer",
+        "isSuspense2": true
+      },
+      {
+        "path": "manage-customer/:id",
+        "element": "CustomerDetails",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-sale",
+        "element": "ManageInvoiceSale",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-sale/create",
+        "element": "CreateInvoiceSale",
         "isSuspense2": true
       },
       {

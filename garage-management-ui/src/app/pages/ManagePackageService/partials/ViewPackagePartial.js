@@ -55,47 +55,44 @@ export default function ViewPackagePartial() {
         fetchData();
     }, [fetchData]);
 
-    // **Xóa dịch vụ** (Thêm vào RemoveServices, xóa khỏi danh sách hiển thị)
-    const handleRemoveService = (serviceId) => {
-        if (addServices.includes(serviceId)) {
-            // Nếu dịch vụ mới thêm thì chỉ xóa khỏi danh sách thêm
-            setAddServices((prev) => prev.filter((id) => id !== serviceId));
-        } else {
-            // Nếu dịch vụ từ trước thì thêm vào danh sách RemoveServices
-            setRemoveServices((prev) => [...prev, serviceId]);
-        }
+    // // **Xóa dịch vụ** (Thêm vào RemoveServices, xóa khỏi danh sách hiển thị)
+    // const handleRemoveService = (serviceId) => {
+    //     if (addServices.includes(serviceId)) {
+    //         // Nếu dịch vụ mới thêm thì chỉ xóa khỏi danh sách thêm
+    //         setAddServices((prev) => prev.filter((id) => id !== serviceId));
+    //     } else {
+    //         // Nếu dịch vụ từ trước thì thêm vào danh sách RemoveServices
+    //         setRemoveServices((prev) => [...prev, serviceId]);
+    //     }
 
-        // Xóa khỏi danh sách hiển thị
-        setServices((prev) => prev.filter((s) => s.id !== serviceId));
-    };
+    //     // Xóa khỏi danh sách hiển thị
+    //     setServices((prev) => prev.filter((s) => s.id !== serviceId));
+    // };
 
-    // **Thêm dịch vụ** (Chỉ thêm nếu chưa có)
-    const handleSelectServices = (selectedServiceIds) => {
-        const newServices = selectedServiceIds.filter(
-            (id) => !services.some((s) => s.id === id) // Kiểm tra nếu đã có thì bỏ qua
-        );
+    // // **Thêm dịch vụ** (Chỉ thêm nếu chưa có)
+    // const handleSelectServices = (selectedServiceIds) => {
+    //     const newServices = selectedServiceIds.filter(
+    //         (id) => !services.some((s) => s.id === id) // Kiểm tra nếu đã có thì bỏ qua
+    //     );
 
-        setAddServices((prev) => [...prev, ...newServices]); // Lưu ID vào danh sách thêm
+    //     setAddServices((prev) => [...prev, ...newServices]); // Lưu ID vào danh sách thêm
 
-        // Nếu dịch vụ nằm trong danh sách RemoveServices thì xóa nó khỏi đó
-        setRemoveServices((prev) => prev.filter((id) => !newServices.includes(id)));
-    };
+    //     // Nếu dịch vụ nằm trong danh sách RemoveServices thì xóa nó khỏi đó
+    //     setRemoveServices((prev) => prev.filter((id) => !newServices.includes(id)));
+    // };
 
-    // **Nhận danh sách chi tiết dịch vụ để hiển thị**
-    const handleServiceDetailsSelect = (selectedServiceDetails) => {
-        const newServiceDetails = selectedServiceDetails.filter(
-            (service) => !services.some((s) => s.id === service.id)
-        );
+    // // **Nhận danh sách chi tiết dịch vụ để hiển thị**
+    // const handleServiceDetailsSelect = (selectedServiceDetails) => {
+    //     const newServiceDetails = selectedServiceDetails.filter(
+    //         (service) => !services.some((s) => s.id === service.id)
+    //     );
 
-        setServices((prev) => [...prev, ...newServiceDetails]); // Cập nhật danh sách hiển thị
-    };
+    //     setServices((prev) => [...prev, ...newServiceDetails]); // Cập nhật danh sách hiển thị
+    // };
 
     const handleCancelEdit = () => {
-        setAddServices([]);
-        setRemoveServices([]);
-
         setIsEditing(false);
-
+        fetchData();
     }
 
     const handleEdit = () => {
@@ -172,10 +169,12 @@ export default function ViewPackagePartial() {
 
                     <PackageServices
                         services={services}
-                        handleRemoveService={handleRemoveService}
-                        handleAddService={() => setIsModalOpen(true)}
                         isEditing={isEditing}
+                        onServicesChange={setServices}
+                        onAddServiceChange={setAddServices}
+                        onRemoveServiceChange={setRemoveServices}
                     />
+
                     <PackageConditionType
                         id={packageData.id}
                         isEditing={isEditing}
@@ -197,13 +196,13 @@ export default function ViewPackagePartial() {
                 </form>
             </div>
             {/* Modal chọn dịch vụ */}
-            <SelectServiceModal
+            {/* <SelectServiceModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 onSelect={handleSelectServices}
                 onServiceDetailsSelect={handleServiceDetailsSelect}
                 selectedServices={[...addServices, ...services.map((s) => s.id)]}
-            />
+            /> */}
         </>
     );
 }

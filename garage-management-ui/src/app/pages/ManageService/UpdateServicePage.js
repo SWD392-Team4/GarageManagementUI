@@ -460,7 +460,18 @@ export default function UpdateServicePage() {
 
                 {/* Nút "Cập nhật dịch vụ" chỉ hiển thị khi đang chỉnh sửa */}
                 {isEditing && (
-                    <div className="flex justify-end mt-6">
+                    <div className="flex justify-end mt-6 space-x-2">
+                        <button
+                            type="button"
+                            className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 flex items-center gap-2"
+                            onClick={() => {
+                                setIsEditing(false);
+                                fetchData(); // Load lại dữ liệu cũ từ API
+                            }}
+                        >
+                            <FaTrash />
+                            {t("update_service_page.buttons.cancel")}
+                        </button>
 
                         <button
                             type="submit"

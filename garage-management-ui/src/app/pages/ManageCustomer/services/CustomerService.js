@@ -60,3 +60,106 @@ export const SearchCustomer = async (params) => {
     console.error("Fail to searching: ", error.message);
   }
 }
+
+
+export const getCustomerDetails = async (customerId) => {
+  try {
+    // "/api/users/customers/${customerId}",
+    // "/api/users/info"
+    const response = await userService.sendAjax(
+      `/api/users/customers/${customerId}`,
+      "GET",
+      null,
+      true
+    );
+
+    response.data.value.createdAt = formatDate(response.data.value.createdAt);
+    response.data.value.updatedAt = formatDate(response.data.value.updatedAt);
+
+    return response;
+  } catch (error) {
+    console.error("Fail with: ", error.message);
+  }
+}
+
+export const getAllGarage = async () => {
+  try {
+    const response = await userService.sendAjax(
+      "/api/workplaces?WorkplaceType=Garage",
+      "GET",
+      null,
+      true,
+    );
+    return response;
+
+  } catch (error) {
+    console.error("Fail with: ", error.message);
+  }
+}
+
+
+export const getApointmentCustomer = async (garageId, customerEmail, PageNumber = 1,) => {
+  //customerPhoneNumer
+  try {
+    // CustomerPhoneNumber=${customerPhoneNumer}&
+    const response = await userService.sendAjax(
+      `/api/workplaces/${garageId}/appointments?CustomerEmail=${customerEmail}&PageNumber=${PageNumber}`,
+      "GET",
+      null,
+      true
+    );
+
+    response.data.value = response.data.value.map(pre => ({
+      ...pre,
+      createdAt: formatDate(pre.createdAt),
+      updatedAt: formatDate(pre.updatedAt)
+    }));
+
+    return response;
+  } catch (error) {
+    console.error("Fail with : ", error.message);
+  }
+}
+
+
+export const searchApointmentCustomer = async (garageId, customerEmail, params) => {
+  try {
+    const queryString = Object.keys(params)
+      .filter(key => params[key])
+      .map(key => `${key}=${encodeURIComponent(params[key])}`)
+      .join("&");
+
+    const response = await userService.sendAjax(
+      `/api/workplaces/${garageId}/appointments?CustomerEmail=${customerEmail}&${queryString}`,
+      "GET",
+      null,
+      true
+    );
+
+    response.data.value = response.data.value.map(pre => ({
+      ...pre,
+      createdAt: formatDate(pre.createdAt),
+      updatedAt: formatDate(pre.updatedAt)
+    }));
+    return response;
+
+  } catch (error) {
+    console.error("Error with : ", error.message);
+  }
+}
+
+export const getApointmentDetails = async (garageId, apointmentId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${garageId}/appointments/${apointmentId}`,
+      "GET",
+      null,
+      true
+    );
+    console.log("check tai service: ", response.data.value);
+
+    return response;
+  } catch (error) {
+    console.error("Fail with: ", error.message);
+  }
+}

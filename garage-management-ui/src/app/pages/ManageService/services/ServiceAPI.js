@@ -128,15 +128,7 @@ export const getServiceDetails = async (serviceId) => {
         );
 
         response.data.value.price = formatVietnameseCurrency(response.data.value.price);
-
-        if (response.status == 200) {
-            userService.showToast(200, "Loading service detail successful");
-            return response.data.value;
-        } else {
-            userService.showToast(400, "Loading service detail fail");
-            return null;
-        }
-
+        return response.data.value;
     } catch (error) {
         console.error("Loading Service Details fail");
     }
@@ -186,6 +178,7 @@ export const updateService = async (serviceId, updateData) => {
         return response;
 
     } catch (error) {
+        userService.showToast(400, "Create Service Fail", error.description);
         console.error("Fail to updated service: ", error.message);
     }
 
