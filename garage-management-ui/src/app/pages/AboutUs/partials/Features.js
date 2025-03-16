@@ -2,29 +2,30 @@
 
 import { FaBox, FaTruck, FaMoneyBillWave } from "react-icons/fa";
 import React from "react";
-
-const features = [
-  {
-    icon: <FaBox size={24} />,
-    title: "Trusted & Quality Work",
-    description:
-      "We prioritize quality and reliability in every service, ensuring your vehicle gets the best care possible.",
-  },
-  {
-    icon: <FaTruck size={24} />,
-    title: "Fast Service",
-    description:
-      "Our efficient team works quickly without compromising quality, so you can get back on the road sooner.",
-  },
-  {
-    icon: <FaMoneyBillWave size={24} />,
-    title: "Money-Back Guarantee",
-    description:
-      "Customer satisfaction is our priority. If you're not happy, we offer a hassle-free money-back guarantee.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const FeatureSection = () => {
+  const { t } = useTranslation("about_features");
+  const features = [
+    {
+      icon: <FaBox size={24} />,
+      title: t("about_features.trusted_quality"),
+      description:
+      t("about_features.trusted_quality_desc"),
+    },
+    {
+      icon: <FaTruck size={24} />,
+      title: t("about_features.fast_service"),
+      description:
+      t("about_features.fast_service_desc"),
+    },
+    {
+      icon: <FaMoneyBillWave size={24} />,
+      title: t("about_features.money_back"),
+      description:
+      t("about_features.money_back_desc"),
+    },
+  ];
   return (
     <div className="bg-black relative overflow-hidden">
       {/* Feature Shape */}
@@ -48,7 +49,7 @@ const FeatureSection = () => {
           <div className="w-full lg:w-1/2 p-0 flex items-center justify-center">
             <div className="max-w-[670px] mx-auto lg:mx-auto pt-10 pb-10 lg:pt-[100px] lg:pb-[100px] relative z-10 px-4 lg:px-0">
               <h2 className="font-semibold text-3xl lg:text-[38px] text-white mb-8 lg:mb-10">
-                Our Features
+              {t("about_features.our_features")}
               </h2>
               <ul className="list-none p-0">
                 {features.map((feature, index) => (
@@ -62,7 +63,7 @@ const FeatureSection = () => {
                         : "lg:ml-[150px]"
                     }`}
                   >
-                    <div className="absolute left-0 top-0 w-12 h-12 flex items-center justify-center text-black bg-yellow-400 rounded-lg">
+                    <div className="absolute left-0 top-0 w-12 h-12 flex items-center justify-center text-white bg-red-600 rounded-lg">
                       {feature.icon}
                     </div>
                     <h3 className="font-semibold text-xl lg:text-[20px] text-white mb-2">

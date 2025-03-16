@@ -1,0 +1,14 @@
+{
+    "customer_package_filter": {
+        "title": "Filter Packages",
+        "search": "Search name...",
+        "service_category": "Service Category",
+        "service_category_all": "All Categories",
+        "car_category": "Car Type",
+        "car_category_all": "All Types",
+        "package_type": "Package Type",
+        "package_type_all": "All Types",
+        "price_range": "Price Range",
+        "apply": "Apply Filters"
+    }
+}

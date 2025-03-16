@@ -1,5 +1,6 @@
-import React from "react";
+import React, { use } from "react";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { useTranslation } from "react-i18next";
 
 const Pagination = ({
   currentPage,
@@ -33,7 +34,7 @@ const Pagination = ({
       ];
     }
   };
-
+  const {t} = useTranslation("pagination");
   return (
     <div className="flex items-center gap-2 justify-center mt-4">
       {/* Previous Button */}
@@ -49,7 +50,7 @@ const Pagination = ({
         `}
       >
         <ArrowLeftIcon className="h-5 w-5" />
-        Previous
+        {t("pagination.previous")}
       </button>
 
       {/* Page Numbers */}
@@ -107,7 +108,7 @@ const Pagination = ({
           }
         `}
       >
-        Next
+         {t("pagination.next")}
         <ArrowRightIcon className="h-5 w-5" />
       </button>
     </div>

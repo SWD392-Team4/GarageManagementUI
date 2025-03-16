@@ -1,9 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 
 export default function PackageList({ packages }) {
   const navigate = useNavigate();
+  const { t } = useTranslation("customer_package_category");
   return (
     <section className="pb-16 bg-gray-100">
       <div className="container mx-auto px-4">
@@ -24,16 +26,16 @@ export default function PackageList({ packages }) {
                   </div>
 
                   {/* Text Section */}
-                  <div className="rounded-md absolute left-0 top-[200px] h-2/5 w-10/12 bg-black text-white p-4 transition-all duration-300 group-hover:w-full group-hover:bg-red-600">
+                  <div className="rounded-md absolute left-0 top-[200px] h-2/5 w-10/12 bg-white text-black p-4 transition-all duration-300 group-hover:w-full group-hover:bg-red-600 group-hover:text-white">
                     <h3 className="text-xl font-semibold mb-2">{pkg.packageName}</h3>
-                    <p className="text-gray-300 group-hover:text-white line-clamp-3">
-                      Category: { pkg.serviceCategory}
+                    <p className="text-black-300 group-hover:text-white line-clamp-3">
+                    {t("customer_package_category.service_category")}: { pkg.serviceCategory}
                     </p>
-                    <p className="text-gray-300 group-hover:text-white line-clamp-3">
-                      Car Type: {pkg.category}
+                    <p className="text-black-300 group-hover:text-white line-clamp-3">
+                    {t("customer_package_category.car_type")}: {pkg.category}
                     </p>
-                    <p className="text-gray-300 group-hover:text-white line-clamp-3">
-                      Package Type: {pkg.type}
+                    <p className="text-black-300 group-hover:text-white line-clamp-3">
+                    {t("customer_package_category.package_type")}: {pkg.type}
                     </p>
                   </div>
                 </div>

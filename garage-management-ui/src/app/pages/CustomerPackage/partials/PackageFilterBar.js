@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaSearch, FaSave } from "react-icons/fa";
 
 const PackageFilterBar = ({
@@ -9,7 +10,7 @@ const PackageFilterBar = ({
   carCategory,
 }) => {
   const [filters, setFilters] = useState(initialFilters);
-
+  const { t } = useTranslation("customer_package_filter");
   useEffect(() => {
     setFilters(initialFilters); // Update filters when initialFilters change
   }, [initialFilters]);
@@ -29,14 +30,14 @@ const PackageFilterBar = ({
   return (
     <div className=" rounded-lg  w-full  mx-aut">
       <h2 className="text-2xl font-bold mb-4 text-gray-800 text-center">
-        Filter Packages
+      {t("customer_package_filter.title")}
       </h2>
 
       {/* Search Bar */}
       <div className="mb-4 relative w-full">
         <input
           type="text"
-          placeholder="Search name..."
+          placeholder={t("customer_package_filter.search")}
           value={filters.searchTerm}
           onChange={(e) => handleFilterChange("searchTerm", e.target.value)}
           className="w-full p-3 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -47,7 +48,7 @@ const PackageFilterBar = ({
       {/* Service Category Dropdown */}
       <div className="mb-4 w-full">
         <label className="block mb-2 font-semibold text-gray-700">
-          Service Category
+        {t("customer_package_filter.service_category")}
         </label>
         <select
           value={filters.serviceCategory}
@@ -56,7 +57,7 @@ const PackageFilterBar = ({
           }
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">All Categories</option>
+          <option value="">{t("customer_package_filter.service_category_all")}</option>
           {serviceCategory.map((category, index) => (
             <option key={index} value={category}>
               {category}
@@ -67,14 +68,14 @@ const PackageFilterBar = ({
       {/* Car Category Dropdown */}
       <div className="mb-4 w-full">
         <label className="block mb-2 font-semibold text-gray-700">
-          Car Type
+        {t("customer_package_filter.car_category")}
         </label>
         <select
           value={filters.carCategory}
           onChange={(e) => handleFilterChange("carCategory", e.target.value)}
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">All Types</option>
+          <option value="">{t("customer_package_filter.car_category_all")}</option>
           {carCategory.map((category) => (
             <option key={category.id} value={category.id}>
               {category.category}
@@ -85,14 +86,14 @@ const PackageFilterBar = ({
       {/* Package Type Dropdown */}
       <div className="mb-4 w-full">
         <label className="block mb-2 font-semibold text-gray-700">
-          Package Type
+        {t("customer_package_filter.package_type")}
         </label>
         <select
           value={filters.packageType}
           onChange={(e) => handleFilterChange("packageType", e.target.value)}
           className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
-          <option value="">All Types</option>
+          <option value="">{t("customer_package_filter.package_type_all")}</option>
           {packageType.map((type, index) => (
             <option key={index} value={type}>
               {type}
@@ -103,7 +104,7 @@ const PackageFilterBar = ({
       {/* Price Range Slider */}
       <div className="mb-4 w-full">
         <label className="block mb-2 font-semibold text-gray-700">
-          Price Range
+        {t("customer_package_filter.price_range")}
         </label>
         <input
           type="range"
@@ -130,7 +131,7 @@ const PackageFilterBar = ({
         className="w-full bg-black text-white py-3 px-4 rounded-md border border-black hover:bg-red-500 hover:text-white transition duration-300 flex items-center justify-center"
       >
         <FaSave className="mr-2" />
-        Apply Filters
+        {t("customer_package_filter.apply")}
       </button>
     </div>
   );

@@ -56,13 +56,14 @@ const Header = () => {
                     to={`${path}`}
                     className="text-hover-animaiton  hover:text-red-500"
                   >
-                    <span className="menu-text">
+                    {/* <span className="menu-text">
                       {t(`home_page_menu.${key}`)
                         .split("")
                         .map((char, index) => (
                           <div key={index}>{char}</div>
                         ))}
-                    </span>
+                    </span> */}
+                     <span className="menu-text">{t(`home_page_menu.${key}`)}</span>
                   </Link>
                 </li>
               ))}
@@ -82,13 +83,14 @@ const Header = () => {
                     href={`${path}`}
                     className="text-hover-animaiton hover:text-red-500"
                   >
-                    <span className="menu-text">
+                    {/* <span className="menu-text">
                       {t(`home_page_menu.${key}`)
                         .split("")
                         .map((char, index) => (
                           <div key={index}>{char}</div>
                         ))}
-                    </span>
+                    </span> */}
+                    <span className="menu-text">{t(`home_page_menu.${key}`)}</span>
                   </Link>
                 </li>
               ))}
