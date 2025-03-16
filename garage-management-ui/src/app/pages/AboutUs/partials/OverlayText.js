@@ -1,18 +1,19 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 const OverlayText = () => {
+  const { t } = useTranslation("about_overview");
   return (
     <div className="relative flex items-center justify-center min-h-[20rem] bg-white text-black">
       {/* Chữ nền mờ */}
-      {/* <h1
+      <h1
         className="absolute text-[4rem] md:text-[5rem] font-extrabold font-raleway select-none
-          bg-gradient-to-r from-gray-800 via-gray-400/65 to-gray-800 bg-clip-text text-transparent 
+          bg-gradient-to-r from-red-300 via-red-200/65 to-red-300 bg-clip-text text-transparent 
           animate-shine"
         style={{ backgroundSize: "200% auto" }}
       >
-        ABOUT COMPANY
-      </h1> */}
+        {t("about_overview.brand_name")}
+      </h1>
       {/* Nội dung chính */}
       <div className="text-center z-10">
         <div className="flex space-x-4 justify-center mb-4 text-gray-400 text-sm">
@@ -24,7 +25,7 @@ const OverlayText = () => {
                 : "cursor-pointer hover:text-red-500"
             }
           >
-            MISSION
+            {t("about_overview.mission")}
           </NavLink>
           <NavLink
             to="vision"
@@ -34,7 +35,7 @@ const OverlayText = () => {
                 : "cursor-pointer hover:text-red-500"
             }
           >
-            VISION
+            {t("about_overview.vision")}
           </NavLink>
           <NavLink
             to="history"
@@ -44,7 +45,7 @@ const OverlayText = () => {
                 : "cursor-pointer hover:text-red-500"
             }
           >
-            HISTORY
+            {t("about_overview.history")}
           </NavLink>
         </div>
         <Outlet />

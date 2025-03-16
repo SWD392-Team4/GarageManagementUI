@@ -2,30 +2,31 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useTranslation } from "react-i18next";
 
 const engineers = [
   {
     id: 1,
     name: "Jerry Hudson",
-    role: "Mechanical Engineer",
+    role: "mechanical_engineer",
     img: "/assets/img/engineer-1.jpg",
   },
   {
     id: 2,
     name: "Tom Henry",
-    role: "System Engineer",
+    role: "system_engineer",
     img: "/assets/img/engineer-2.jpg",
   },
   {
     id: 3,
     name: "Jac Jacson",
-    role: "Head Engineer",
+    role: "head_engineer",
     img: "/assets/img/engineer-3.jpg",
   },
   {
     id: 4,
     name: "Micheal Shon",
-    role: "Automobile Engineer",
+    role: "automobile_engineer",
     img: "/assets/img/engineer-4.jpg",
   },
 ];
@@ -50,13 +51,13 @@ const EngineerSlider = () => {
       },
     ],
   };
-
+  const { t } = useTranslation("about_engineer");
   return (
     <section className="py-12 bg-gray-100">
       <div className="container mx-auto text-center">
         <div className="mb-8">
-          <span className="text-lg text-red-500 font-semibold">ENGINEER</span>
-          <h2 className="text-3xl font-bold text-gray-800">Meet Our Expert Engineers</h2>
+          <span className="text-lg text-red-500 font-semibold">{t("about_engineer.engineer")}</span>
+          <h2 className="text-3xl font-bold text-gray-800">{t("about_engineer.meet_experts")}</h2>
         </div>
 
         <Slider {...settings}>
@@ -72,7 +73,7 @@ const EngineerSlider = () => {
                   <h3 className="text-xl font-semibold text-gray-800 transition-all duration-500 group-hover:text-white">
                     {engineer.name}
                   </h3>
-                  <span className="block text-base text-gray-500 transition-all duration-500 group-hover:text-white">{engineer.role}</span>
+                  <span className="block text-base text-gray-500 transition-all duration-500 group-hover:text-white"> {t(`about_engineer.${engineer.role}`)}</span>
                 </div>
               </div>
             </div>
