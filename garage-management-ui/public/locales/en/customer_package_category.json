@@ -1,0 +1,8 @@
+{
+    "customer_package_category": {
+        "service_category": "Category",
+        "car_type": "Car Type",
+        "package_type": "Package Type",
+        "price": "Price"
+    }
+}
