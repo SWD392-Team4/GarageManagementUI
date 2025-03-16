@@ -5,6 +5,7 @@ import OverlayText from "./partials/OverlayText";
 import Footer from "../Home/partials/Footer/Footer";
 import QualitySection from "./partials/Quality";
 import FeatureSection from "./partials/Features";
+import EngineerSlider from "./partials/EngineerSlider";
 export default function AboutUs() {
   return (
     <>
@@ -18,6 +19,7 @@ export default function AboutUs() {
 
       <OverlayText />
       <QualitySection/>
+      <EngineerSlider/>
       <FeatureSection/>
       <Footer />
     </>

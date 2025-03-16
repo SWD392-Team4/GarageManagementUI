@@ -62,7 +62,7 @@ const FeatureSection = () => {
                         : "lg:ml-[150px]"
                     }`}
                   >
-                    <div className="absolute left-0 top-0 w-12 h-12 flex items-center justify-center text-black bg-yellow-400 rounded-lg">
+                    <div className="absolute left-0 top-0 w-12 h-12 flex items-center justify-center text-white bg-red-600 rounded-lg">
                       {feature.icon}
                     </div>
                     <h3 className="font-semibold text-xl lg:text-[20px] text-white mb-2">

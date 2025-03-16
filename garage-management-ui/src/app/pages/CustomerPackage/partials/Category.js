@@ -17,10 +17,6 @@ const Category = ({packageData}) => {
         <p className="mb-2">
           <span className="text-black font-bold">{t("customer_package_category.package_type")}: {packageData.type}</span> 
         </p>
-        <hr className="border-gray-300 mb-2" />
-        <p className="mb-2">
-          <span className="text-black font-bold">{t("customer_package_category.price")}: {packageData.packagePrice}</span> 
-        </p>
         
       </div>
     </div>
