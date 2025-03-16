@@ -31,17 +31,38 @@ const Notification = () => {
         connection.on("ReceiveMessage", (message) => {
           console.log("📩 New message received:", message);
           chatStore.set((v) => {
-            const currentMessages = v.value.messages || [];
-            v.value.messages = [...currentMessages, message];
+            const currentMessages = chatStore.value.messages || [];
             const currentUserId = sAccount.value.id;
-            if (message.receiverId === null) {
-              const friendCandidate = {
-                id: null,
-                firstName: "Cashier",
-                lastName: "",
-                imageLink: "",
-              };
-              v.value.friendList = [...v.value.friendList, friendCandidate];
+            const currentRole = sAccount.value.role;
+            if (currentRole === "Cashier") {
+              if (
+                v.value.typeChatOfCashier === "type-1" &&
+                message.receiverId === null &&
+                v.value.activeChatId === message.senderId.id
+              ) {
+                v.value.messages = [...currentMessages, message];
+              }
+            } else if (currentRole === "Customer") {
+              if (
+                v.value.activeChatId === null &&
+                message.senderId.id === currentUserId
+              ) {
+                console.log("heaa");
+                v.value.messages = [...currentMessages, message];
+              }
+            }
+
+            if (
+              message.senderId.id === currentUserId &&
+              v.value.activeChatId === message.receiverId.id
+            ) {
+              v.value.messages = [...currentMessages, message];
+            }
+
+            if (
+              message.receiverId === null &&
+              message.senderId.id === currentUserId
+            ) {
             } else {
               const friendCandidate =
                 message.senderId.id === currentUserId

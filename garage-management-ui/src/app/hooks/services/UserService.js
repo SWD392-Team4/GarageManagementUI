@@ -274,7 +274,6 @@ class UserService {
 
   navigateBasedOnRole() {
     const role = this.getRoleFromToken();
-    console.log("role: ", role);
     switch (role) {
       case "Administrator":
         return process.env.REACT_APP_LOGIN_REDIRECT_ROLE_1;

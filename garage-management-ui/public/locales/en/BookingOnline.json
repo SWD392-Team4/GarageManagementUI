@@ -15,13 +15,13 @@
   "select": {
     "title": "Your vehicle details & services",
     "carBrand": "Car Brand*",
-    "selectCarBrand": "Select Car Brand",
+    "selectCarBrand": "Select Brand",
     "carType": "Car Type*",
     "carPart": "Car Part*",
-    "selectCarType": "Select Car Type",
-    "selectCarPart": "Select Car Part",
+    "selectCarType": "Select Type",
+    "selectCarPart": "Select Part",
     "carModel": "Car Model*",
-    "selectCarModel": "Select Car Model",
+    "selectCarModel": "Select Model",
     "toggle": {
       "individualService": {
         "title": "Individual Service",

@@ -22,6 +22,7 @@ import {
 } from "react-icons/fa";
 import { BookingSignify } from "../Services/BookingSignify";
 import Navigation from "./Navigation";
+import { useNavigate } from "react-router-dom";
 
 // Mảng mapping icon (dữ liệu fake)
 const servicesFake = [
@@ -60,6 +61,32 @@ export default function SelectService() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const {
+      brandId,
+      carCategoryId,
+      carModel,
+      garaId,
+      carPartId,
+      package: pkg,
+      services,
+      type,
+    } = BookingSignify.value;
+
+    if (
+      brandId === "" ||
+      carCategoryId === "" ||
+      carModel === "" ||
+      garaId === "" ||
+      type === "" ||
+      carPartId === ""
+    ) {
+      navigate("/booking");
+    }
+  }, [navigate]);
 
   return (
     <>
