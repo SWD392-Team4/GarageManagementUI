@@ -3,6 +3,7 @@ import { getAllPackage } from "../Services/BookingPageService";
 import Navigation from "./Navigation";
 import PackageCard from "./PackageCard";
 import { BookingSignify } from "../Services/BookingSignify";
+import { useNavigate } from "react-router-dom";
 const services = [
   {
     value: "repair",
@@ -45,6 +46,32 @@ export default function PackageSelect() {
   useEffect(() => {
     fetchData();
   }, [fetchData]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const {
+      brandId,
+      carCategoryId,
+      carModel,
+      garaId,
+      carPartId,
+      package: pkg,
+      services,
+      type,
+    } = BookingSignify.value;
+
+    if (
+      brandId === "" ||
+      carCategoryId === "" ||
+      carModel === "" ||
+      garaId === "" ||
+      type === "" ||
+      carPartId === ""
+    ) {
+      navigate("/booking");
+    }
+  }, [navigate]);
 
   return (
     <>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 
 export default function Navbar() {
@@ -7,82 +8,35 @@ export default function Navbar() {
     location.pathname.includes("/appointment") &&
     !location.pathname.includes("/appointment/");
 
+  const { t } = useTranslation("appoinment-admin");
+
+  const navItems = [
+    { path: "", label: t("status.all") },
+    { path: "waiting", label: t("status.waiting") },
+    { path: "approved", label: t("status.approved") },
+    { path: "in-progress", label: t("status.in_progress") },
+    { path: "completed", label: t("status.completed") },
+    { path: "canceled", label: t("status.canceled") },
+  ];
+
   return (
     <nav className="border-b bg-white shadow-md">
       <ul className="grid grid-cols-2 sm:grid-cols-3 font-title md:grid-cols-6 text-center">
-        <li>
-          <NavLink
-            to=""
-            className={() =>
-              isAppointmentActive
-                ? "text-red-500 border-b-2  font-bold border-red-500 pb-2 block w-full py-3"
-                : "text-black block w-full  py-3"
-            }
-            end
-          >
-            Tất cả
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="waiting"
-            className={({ isActive }) =>
-              isActive
-                ? "text-red-500 border-b-2 font-bold border-red-500 pb-2 block w-full py-3"
-                : "text-black block w-full py-3"
-            }
-          >
-            Trạng thái chờ
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="approved"
-            className={({ isActive }) =>
-              isActive
-                ? "text-red-500 border-b-2 font-bold border-red-500 pb-2 block w-full py-3"
-                : "text-black block w-full py-3"
-            }
-          >
-            Đã xác nhận
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="in-progress"
-            className={({ isActive }) =>
-              isActive
-                ? "text-red-500 border-b-2 font-bold border-red-500 pb-2 block w-full py-3"
-                : "text-black block w-full py-3"
-            }
-          >
-            Đang thực hiện
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="completed"
-            className={({ isActive }) =>
-              isActive
-                ? "text-red-500 border-b-2 font-bold border-red-500 pb-2 block w-full py-3"
-                : "text-black block w-full py-3"
-            }
-          >
-            Hoàn Thành
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to="canceled"
-            className={({ isActive }) =>
-              isActive
-                ? "text-red-500 border-b-2 font-bold border-red-500 pb-2 block w-full py-3"
-                : "text-black block w-full py-3"
-            }
-          >
-            Đã hủy
-          </NavLink>
-        </li>
+        {navItems.map(({ path, label }) => (
+          <li key={path}>
+            <NavLink
+              to={path}
+              className={({ isActive }) =>
+                (isAppointmentActive && path === "") || isActive
+                  ? "text-red-500 border-b-2 font-bold border-red-500 pb-2 block w-full py-3"
+                  : "text-black block w-full py-3"
+              }
+              end
+            >
+              {label}
+            </NavLink>
+          </li>
+        ))}
       </ul>
     </nav>
   );

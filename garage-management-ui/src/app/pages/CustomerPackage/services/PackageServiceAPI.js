@@ -15,7 +15,7 @@ export const getAllPackages = async (
       PackageName: filters?.searchTerm || "",
       ServiceCategory: filters?.serviceCategory || "",
       CarCategoryId: filters?.carCategory || "",
-      Type: filters?.packageType||"",
+      Type: filters?.packageType || "",
       MinPrice: filters?.price ? Number(filters.price[0]) : 0,
       MaxPrice: filters?.price ? Number(filters.price[1]) : 10000000,
       PackageStatus: "Active",
@@ -38,7 +38,7 @@ export const getAllPackages = async (
       }));
     }
 
-    userService.showToast(200, "Loading Package Service Successful");
+    // userService.showToast(200, "Loading Package Service Successful");
     return response.data;
   } catch (error) {
     console.error("Error fetching packages:", error);
@@ -122,7 +122,7 @@ export const getAllTypes = async () => {
       null,
       false
     );
-    return response?.data?.value|| [];
+    return response?.data?.value || [];
   } catch (error) {
     console.error("Error fetching types:", error);
     userService.showToast(400, "Error loading types");
@@ -137,7 +137,7 @@ export const getAllCars = async () => {
       null,
       false
     );
-    return response?.data?.value.filter(car => car.status === "Active") || [];
+    return response?.data?.value.filter((car) => car.status === "Active") || [];
   } catch (error) {
     console.error("Error fetching types:", error);
     userService.showToast(400, "Error loading cars");

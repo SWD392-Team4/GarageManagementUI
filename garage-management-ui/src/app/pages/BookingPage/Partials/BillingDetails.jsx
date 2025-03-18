@@ -49,7 +49,6 @@ const BillingDetails = () => {
       };
 
       const respone = await createAppointmentApi(payload);
-      console.log("respone ", respone);
       if (respone) {
         BookingSignify.reset();
 

@@ -78,9 +78,13 @@ export default function BaseTable({
                         key={`signify-${colIndex}`}
                         className="border p-3 text-sm"
                       >
-                        {column.accessorKey === "id"
-                          ? (<span className="font-semibold text-green-500 italic">Recently</span>)
-                          : signifyInformation[column.accessorKey] || "-"}
+                        {column.accessorKey === "id" ? (
+                          <span className="font-semibold text-green-500 italic">
+                            Recently
+                          </span>
+                        ) : (
+                          signifyInformation[column.accessorKey] || "-"
+                        )}
                       </td>
                     ))}
                     {actions && <td className="border p-3 text-sm">-</td>}
@@ -119,50 +123,56 @@ export default function BaseTable({
                       </td>
                     ))}
                     {actions && (
-                      <td className="border-r border-b h-full p-3 flex flex-wrap gap-2">
-                        {actions.map((action, index) => {
-                          if (!action || !action.type) return null;
+                      <td className="border-r border-b h-full md:max-h-min md:min-h-11 p-3 flex flex-wrap gap-2">
+                        {actions
+                          .filter((action) =>
+                            typeof action.shouldDisplay === "function"
+                              ? action.shouldDisplay(row.original)
+                              : true
+                          )
+                          .map((action, index) => {
+                            if (!action || !action.type) return null;
 
-                          const actionProps = {
-                            key: index,
-                            className:
-                              "p-2 rounded-sm bg-gray-700 text-white hover:bg-gray-900",
-                            children: action.icon,
-                          };
+                            const actionProps = {
+                              key: index,
+                              className:
+                                "p-2 rounded-sm bg-gray-700 text-white hover:bg-gray-900",
+                              children: action.icon,
+                            };
 
-                          if (action.type === "link") {
-                            return (
-                              <Link key={index} to={action.link(row)}>
-                                <button {...actionProps} />
-                              </Link>
-                            );
-                          }
+                            if (action.type === "link") {
+                              return (
+                                <Link key={index} to={action.link(row)}>
+                                  <button {...actionProps} />
+                                </Link>
+                              );
+                            }
 
-                          if (action.type === "navigate") {
-                            return (
-                              <button
-                                {...actionProps}
-                                onClick={() =>
-                                  navigate(action.link(row.original))
-                                }
-                              />
-                            );
-                          }
+                            if (action.type === "navigate") {
+                              return (
+                                <button
+                                  {...actionProps}
+                                  onClick={() =>
+                                    navigate(action.link(row.original))
+                                  }
+                                />
+                              );
+                            }
 
-                          if (
-                            action.type === "modal" ||
-                            action.type === "callback"
-                          ) {
-                            return (
-                              <button
-                                {...actionProps}
-                                onClick={() => action.onClick(row.original)}
-                              />
-                            );
-                          }
+                            if (
+                              action.type === "modal" ||
+                              action.type === "callback"
+                            ) {
+                              return (
+                                <button
+                                  {...actionProps}
+                                  onClick={() => action.onClick(row.original)}
+                                />
+                              );
+                            }
 
-                          return null;
-                        })}
+                            return null;
+                          })}
                       </td>
                     )}
                   </tr>

@@ -97,17 +97,8 @@ export default function ListCustomer() {
       icon: <IoIosChatbubbles />,
       onClick: (row) => {
         const friendExists = chatStore.value.friendList.some(
-          (friend) => friend.id === row.id
+          (friend) => friend.id === row.original.id
         );
-
-        if (!friendExists) {
-          newChat.set({
-            id: row.id,
-            imageLink: row.imageLink,
-            firstName: row.firstName,
-            lastName: row.lastName,
-          });
-        }
 
         chatStore.set((v) => {
           v.value.imageLink =

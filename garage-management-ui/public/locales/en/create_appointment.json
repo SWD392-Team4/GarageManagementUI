@@ -23,7 +23,7 @@
     "selectPackage": "Select Package",
     "enterCarLicensePlateNumber": "Enter license plate number"
   },
-  "error": {
+  "error2": {
     "required_carModelId": "Please select a car model",
     "required_mileage": "Please enter mileage",
     "invalid_mileage": "Invalid mileage",
@@ -34,6 +34,7 @@
     "required_estimatedAppointmentTime": "Please select an appointment time",
     "required_estimatedEndTime": "Please select an end time",
     "required_carLicensePlateNumber": "Please enter license plate number",
+    "required_carLicensePlateNumber2": "Invalid license plate number. Please enter correct format (eg: 30A-12345 or 51G-678901).",
     "add_service": "Please add at least one service (you may choose not to select a product)",
     "create": "An error occurred while creating the appointment"
   },

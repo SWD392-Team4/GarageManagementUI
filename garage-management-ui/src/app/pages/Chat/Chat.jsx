@@ -7,12 +7,14 @@ import { chatStore } from "./chatStore";
 
 const Chat = () => {
   const connection = ConnectionSignify.use().connection;
-
+  const sChat = chatStore.use();
   const getUsers = async () => {
     if (connection) {
       try {
         const chatHistory = await connection.invoke(
-          "GetChattedUsersWithDetails"
+          chatStore.value.typeChatOfCashier === "type-1"
+            ? "GetChattedUsersByCashierWithDetails"
+            : "GetChattedUsersWithDetails"
         );
         chatStore.set((v) => {
           v.value.friendList = chatHistory;
@@ -27,8 +29,8 @@ const Chat = () => {
     if (connection) {
       getUsers();
     }
-  }, [connection]);
-
+  }, [connection, chatStore.value.typeChatOfCashier]);
+  console.log("render: ", chatStore.value.typeChatOfCashier);
   return (
     <div className="w-full h-screen bg-blue-100/20 md:p-5 flex flex-col pt-6 ">
       {/* Breadcrumb */}

@@ -7,6 +7,7 @@ import RedirectRoute from "./RedirectRoute";
 import Home from "../pages/Home";
 import LayoutBookingPage from "../layouts/LayoutBooking/LayoutBookingPage";
 import LoaddingPage2 from "../layouts/LoadingPage/index2";
+import DynamicLayout from "../layouts/LayoutDynamic/DynamicLayout";
 import LoginPage from "../pages/AuthCustomer/LoginPage";
 import LayoutAuthenCustomer from "../layouts/LayoutLoginCustomer/LayoutAuthenCustomer";
 import BookingOnlineComponent from "../pages/BookingPage/Partials/BookingOnlineComponent";
@@ -25,6 +26,7 @@ import ViewAppointmentLookUp from "../pages/LookUpPage/partials/ViewAppointmentL
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
   Home: Home,
+  DynamicLayout: DynamicLayout,
   SuccessPage: SuccessPage,
   SelectService: SelectService,
   SelectOptions: SelectOptions,
@@ -41,6 +43,9 @@ const componentMap = {
   ViewAppointmentLookUp: ViewAppointmentLookUp,
   LayoutMechanic: lazy(() =>
     import("../layouts/LayoutMechanic/LayoutMechanic")
+  ),
+  LayoutWareHouse: lazy(() =>
+    import("../layouts/LayoutWareHouse/LayoutWareHouse")
   ),
   LayoutCashier: lazy(() => import("../layouts/LayoutCashier/LayoutCashier")),
   ServiceDetails: lazy(() =>
@@ -94,7 +99,9 @@ const componentMap = {
   ManageSupplierContact: lazy(() =>
     import("../pages/ManageSupplierContact/ManageSupplierContact")
   ),
-  ProductAtWareHouse: lazy(() => import("../pages/ProductAtWareHouse/ProductAtWareHouse")),
+  ProductAtWareHouse: lazy(() =>
+    import("../pages/ProductAtWareHouse/ProductAtWareHouse")
+  ),
   ProductAtStore: lazy(() => import("../pages/ProductAtStore/ProductAtStore")),
   ManageProduct: lazy(() => import("../pages/ManageProduct/ManageProduct")),
   CreateProduct: lazy(() => import("../pages/ManageProduct/CreateProduct")),

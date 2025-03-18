@@ -3,6 +3,7 @@ import { IoMailOpenOutline } from "react-icons/io5";
 import { FaPhoneVolume } from "react-icons/fa6";
 import parse from "html-react-parser";
 import { MdHomeRepairService } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const Contact1 = ({
   Title,
@@ -18,8 +19,19 @@ const Contact1 = ({
   submit,
   thankyou,
 }) => {
+  const nav = useNavigate();
   return (
-    <section className="bg-gray-50 relative w-full min-h-screen overflow-hidden">
+    <section
+      className="bg-gray-50 relative w-full min-h-screen overflow-hidden"
+      style={{
+        backgroundImage: `url("./assets/bg.jpg")`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+
       <div className="container mx-auto ">
         <div className="flex flex-wrap -mx-4 ">
           {/* Left Column */}
@@ -84,72 +96,29 @@ const Contact1 = ({
 
                 {subtitle2}
               </h3>
-              <h2 className="animate-typing overflow-hidden whitespace-nowrap  pr-5 text-4xl text-blue-950 font-medium">
-                {title2}
-              </h2>
             </div>
 
-            {/* Form */}
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  className="w-full p-3 bg-slate-200/70 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
-                />
-
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  className="w-full p-3 bg-slate-200/70 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
-                />
-                <input
-                  type="text"
-                  name="subject"
-                  placeholder="Subject"
-                  className="w-full p-3 bg-slate-200/70 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
-                />
-                <select
-                  className="w-full p-3 bg-slate-200/70 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
-                  defaultValue=""
-                >
-                  <option value="" disabled>
-                    Choose an option
-                  </option>
-                  <option value="car-service">Car Service</option>
-                  <option value="car-wash">Car Wash</option>
-                  <option value="engine-oil">Engine Oil</option>
-                  <option value="motor-service">Motor Service</option>
-                </select>
-              </div>
-              <textarea
-                name="message"
-                rows="6"
-                placeholder="Message"
-                className="w-full p-3 bg-slate-200/70 rounded-md focus:outline-none focus:ring-1 focus:ring-black"
-              ></textarea>
-
-              <div className="flex justify-start">
-                <button
-                  className=" group p-5 cursor-pointer  relative      text-xl     border-0  flex  items-center 
-      justify-center bg-transparent text-red-600 font-shadows font-bold  h-auto   w-[170px]   overflow-hidden    transition-all duration-100"
-                >
-                  <span className="group-hover:w-full  absolute left-0  h-full w-5 border-y-2 border-l-2 border-red-500 transition-all duration-500"></span>
-                  <p
-                    className="group-hover:opacity-0 group-hover:translate-x-[-100%] absolute translate-x-0 transition-all
+            <div className="flex justify-start">
+              <button
+                onClick={() => {
+                  nav("booking");
+                }}
+                className=" group p-10 cursor-pointer  relative      text-2xl     border-0  flex  items-center 
+      justify-center bg-transparent text-red-600 font-shadows font-bold  h-auto   w-[250px]   overflow-hidden    transition-all duration-100"
+              >
+                <span className="group-hover:w-full  absolute left-0  h-full w-5 border-y-2 border-l-2 border-red-500 transition-all duration-500"></span>
+                <p
+                  className="group-hover:opacity-0 group-hover:translate-x-[-100%] absolute translate-x-0 transition-all
          duration-200"
-                  >
-                    {submit}
-                  </p>
-                  <span className="group-hover:translate-x-0  group-hover:opacity-100 absolute  translate-x-full opacity-0  transition-all duration-200">
-                    {thankyou}
-                  </span>
-                  <span className="group-hover:w-full absolute right-0 h-full w-5  border-y-2 border-r-2  border-red-500 transition-all duration-500"></span>
-                </button>
-              </div>
-            </form>
+                >
+                  {submit}
+                </p>
+                <span className="group-hover:translate-x-0  group-hover:opacity-100 absolute  translate-x-full opacity-0  transition-all duration-200">
+                  {thankyou}
+                </span>
+                <span className="group-hover:w-full absolute right-0 h-full w-5  border-y-2 border-r-2  border-red-500 transition-all duration-500"></span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -50,9 +50,9 @@
     "clientNumber": "5,400",
     "img": "/assets/img/contact_img_1.jpg",
     "client": "Happy Clients",
-    "subtitle2": "Contact Us",
+    "subtitle2": "Booking Now",
     "title2": "Book an Appointment",
-    "submit": "Submit",
+    "submit": "Book an Appointment",
     "thankyou": "Thank you!"
   },
   "loginCustomer": {

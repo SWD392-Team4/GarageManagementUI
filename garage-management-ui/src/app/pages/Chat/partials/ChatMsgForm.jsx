@@ -8,6 +8,7 @@ import {
   notificationTypes,
   sendNotification,
 } from "../../Notification/services/sendNotification";
+import { sAccount } from "../../AuthCustomer/services/store";
 
 function ChatMsgForm() {
   const connection = ConnectionSignify.use().connection;
@@ -18,10 +19,34 @@ function ChatMsgForm() {
 
   async function sendMessage(data) {
     if (connection.state === signalR.HubConnectionState.Connected) {
-      if (
-        chatStore.value.activeChatId !== 1 &&
-        chatStore.value.activeChatId !== null
+      if (sAccount.value.role === "Cashier") {
+        if (chatStore.value.typeChatOfCashier === "type-1") {
+          console.log(" Cashier -  type-1  -  SendMessageToManagers Co data");
+          await connection.invoke(
+            "SendMessageToManagers",
+            data.message,
+            chatStore.value.activeChatId
+          );
+        } else {
+          console.log(" Cashier -  type-1  -  NewMessage ");
+
+          await connection.invoke(
+            "NewMessage",
+            data.message,
+            chatStore.value.activeChatId
+          );
+          await sendNotification(
+            connection,
+            notificationTypes.MESSAGE_SENT,
+            chatStore.value.activeChatId
+          );
+        }
+      } else if (
+        sAccount.value.role === "Customer" &&
+        chatStore.value.activeChatId === null
       ) {
+        await connection.invoke("SendMessageToManagers", data.message, null);
+      } else {
         await connection.invoke(
           "NewMessage",
           data.message,
@@ -32,9 +57,8 @@ function ChatMsgForm() {
           notificationTypes.MESSAGE_SENT,
           chatStore.value.activeChatId
         );
-      } else {
-        await connection.invoke("SendMessageToManagers", data.message, null);
       }
+
       reset();
     } else {
       console.error("SignalR is not connected!");
@@ -51,7 +75,7 @@ function ChatMsgForm() {
         />
         <button
           type="submit"
-          disabled={!messageValue && chatStore.value.activeChatId !== null}
+          disabled={!messageValue}
           className={`px-4 py-2 bg-blue-500 text-white rounded-r-sm ${
             !messageValue ? "opacity-50 cursor-not-allowed" : ""
           }`}

@@ -22,7 +22,11 @@ export const getFormattedCurrentDate = () => {
 };
 
 export const formatVietnameseCurrency = (amount) => {
-  return amount.toLocaleString("vi-VN") + " VND";
+  try {
+    return amount.toLocaleString("vi-VN") + " VND";
+  } catch (error) {
+    return "N/A";
+  }
 };
 
 export const parseVietnameseCurrency = (formattedAmount) => {

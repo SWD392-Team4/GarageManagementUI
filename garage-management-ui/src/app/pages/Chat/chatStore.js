@@ -4,11 +4,12 @@ import { signify } from "react-signify";
 export const chatStore = signify(
   {
     friendList: "",
-    activeChatId: 1,
+    activeChatId: null,
     messages: "",
     loadMessages: false,
     imageLink: "",
     selectFullName: "",
+    typeChatOfCashier: "type-1",
   },
   {
     cache: {

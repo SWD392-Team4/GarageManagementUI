@@ -107,7 +107,7 @@ export default function PickGara() {
             <p className="text-gray-900">{t("choiceGara2")}</p>
           )}
         </div>
-        <div className="w-full">
+        <div className="w-full hidden md:block">
           {selectedGara && (
             <iframe
               title="Google Map"

@@ -1,5 +1,12 @@
 import { signify } from "react-signify";
 
-export const ConnectionSignify = signify({
-  connection: "",
-});
+export const ConnectionSignify = signify(
+  {
+    connection: "",
+  },
+  {
+    cache: {
+      key: "connectSinify",
+    },
+  }
+);

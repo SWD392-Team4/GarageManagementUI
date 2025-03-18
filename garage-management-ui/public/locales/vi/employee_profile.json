@@ -20,6 +20,7 @@
     "errorMessagePass": "Đã xảy ra lỗi"
   },
   "error_info": {
+    "N/A": "CMND/CCCD không hợp lệ. Vui lòng nhập 9 hoặc 12 chữ số.",
     "first": "Tên là bắt buộc",
     "last": "Họ là bắt buộc",
     "dateOfBirth1": "Ngày sinh là bắt buộc",

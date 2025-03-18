@@ -1,78 +1,88 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { MdListAlt } from "react-icons/md";
 import BaseTable from "../../../components/BaseTable/BaseTable";
-import { FaEye } from "react-icons/fa";
-import { TbAugmentedReality } from "react-icons/tb";
-import { sPackeagesInAppointment } from "../services/store/FilterStore"
+import { currentAppointment } from "../services/store/AppointmentSignify";
+import { sPackeagesInAppointment } from "../services/store/FilterStore";
+import { formatVietnameseCurrency } from "../../ManageGoodsIssued/schemas/GoodsIssuedSchemas";
+import { formatDate } from "../schemas/appointmentSchema";
+import UpdateServiceModal from "../models/UpdateServiceModal";
+import { getAllServicesOnPackages } from "../services/AppointmentService";
 
 export default function PackeagesINAppointment() {
   const { t, i18n } = useTranslation("appoinment-admin");
   const [data, setData] = useState([]);
-  const navigate = useNavigate();
   const [pagination, setPagination] = useState({
-    total: 3,
+    total: 0,
     page: 1,
     pageSize: 10,
   });
+  const sAppointment = currentAppointment.use();
+  const [services, setServices] = useState(null);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   useEffect(() => {
-    fetchData(pagination.page).then((response) => {
-      setData(response.data);
-      setPagination((prev) => ({ ...prev, total: response.total }));
-    });
-  }, [pagination.page]);
-  const fetchData = async (page) => {
-    const fakeData = {
-      1: [
-        {
-          id: 1,
-          "name-package": "Gói Bảo Dưỡng Định Kỳ",
-          "validity-period": "12",
-          "time-unit": "Tháng",
-          "usage-limit": "4",
-          "usage-count": "2",
-          "start-date": "2024-01-15",
-          "end-time": "2025-01-15",
-          price: "5,000,000 VND",
-          status: "Hoạt động",
-          // "service-note": "Thay dầu nhớt, kiểm tra phanh",
-        },
-      ],
-    };
+    // Lấy dữ liệu thực từ store thay vì fake data
+    const packages = currentAppointment.value.appointmentDetailPackages || [];
+    setData(packages);
+    setPagination((prev) => ({ ...prev, total: packages.length }));
+  }, [
+    sAppointment.appointmentDetailPackages,
+    sAppointment.appointmentDetailPackages,
+  ]);
 
-    return { data: fakeData[page] || [], total: 1 };
-  };
-
+  // Cấu hình các cột hiển thị theo dữ liệu thực
   const columns = useMemo(
     () => [
-      { header: t("list-packages.title1"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
-      { header: t("list-packages.title2"), accessorKey: "name-package" },
-      { header: t("list-packages.title3"), accessorKey: "validity-period" },
-      { header: t("list-packages.title4"), accessorKey: "time-unit" },
-      { header: t("list-packages.title5"), accessorKey: "usage-limit" },
-      { header: t("list-packages.title6"), accessorKey: "usage-count" },
-      { header: t("list-packages.title7"), accessorKey: "start-date" },
-      { header: t("list-packages.title8"), accessorKey: "end-time" },
-      { header: t("list-packages.title9"), accessorKey: "status" },
-      { header: t("list-packages.title10"), accessorKey: "price" },
-      // { header: t("list-packages.title11"), accessorKey: "service-note" },
+      {
+        header: t("list-packages.title1"),
+        accessorKey: "id",
+        accessorFn: (_row, index) => index + 1,
+      },
+      { header: t("list-packages.title2"), accessorKey: "packageName" },
+      {
+        header: t("list-packages.title3"),
+        accessorKey: "packagePrice",
+        accessorFn: (row) => formatVietnameseCurrency(row.packagePrice),
+      },
+      { header: t("list-packages.title4"), accessorKey: "status" },
+      {
+        header: t("list-packages.title5"),
+        accessorKey: "createdAt",
+        accessorFn: (row) => formatDate(row.createdAt),
+      },
+      {
+        header: t("list-packages.title6"),
+        accessorKey: "updatedAt",
+        accessorFn: (row) => formatDate(row.updatedAt),
+      },
     ],
     [t, i18n.language]
   );
+
   const actions = [
     {
-      label: t("manage_product.view"),
-      icon: <TbAugmentedReality />,
+      type: "modal",
+      label: t("list-packages.view"),
+      icon: <MdListAlt />,
       color: "bg-gray-500",
-      link: (id) => `${id}`,
+      onClick: async (row) => {
+        try {
+          const serviceListOnPackage = await getAllServicesOnPackages(row.id);
+          setSelectedBrand(serviceListOnPackage.data.value);
+          setIsUpdateModalOpen(true);
+        } catch (error) {
+          console.error("Error fetching serviceListOnPackage details: ", error);
+        }
+      },
     },
   ];
-
+  if (data.length === 0) {
+    return;
+  }
   return (
     <>
       <div className="bg-gray-300 text-sm uppercase mt-5 p-2 font-title font-bold">
-        {" "}
-        Packages in appointment{" "}
+        {t("bookingInfo.packagesInAppointment")}
       </div>
       <div className="">
         <BaseTable
@@ -80,10 +90,14 @@ export default function PackeagesINAppointment() {
           data={data}
           actions={actions}
           pagination={pagination}
-          fetchData={fetchData}
           signifyInformation={sPackeagesInAppointment.value}
         />
       </div>
+      <UpdateServiceModal
+        isOpen={isUpdateModalOpen}
+        onClose={() => setIsUpdateModalOpen(false)}
+        services={services}
+      />
     </>
   );
 }

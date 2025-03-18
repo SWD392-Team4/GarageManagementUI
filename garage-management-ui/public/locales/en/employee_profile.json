@@ -20,6 +20,8 @@
     "errorMessagePass": "An error occurred"
   },
   "error_info": {
+    "N/A": "Invalid ID/CCCD. Please enter 9 or 12 digits.",
+
     "first": "First Name is required",
     "last": "Last Name is required",
     "dateOfBirth1": "Date of Birth is required",

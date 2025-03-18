@@ -22,6 +22,8 @@ export const getAllServices = async () => {
   try {
     const response = await userService.sendAjax(
       "/api/services?Status=Active&PageSize=1000",
+
+      // "/api/services/carModel/1f9f9bce-f9f2-4ac6-a614-004ae7fd9d6a",
       "GET",
       null,
       true
@@ -31,10 +33,38 @@ export const getAllServices = async () => {
     console.error("Fail with: ", error);
   }
 };
-export const getAllServicesOnPackage = async () => {
+
+export const getAllServiceByCarModel = async (carModelId) => {
   try {
     const response = await userService.sendAjax(
-      `/api/packages/${AppointmentSignify.value.packageCurrent}/services`,
+      `/api/services/carModel/${carModelId}`,
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fail with: getAllServiceByCarModel", error);
+  }
+};
+export const getAllService = async () => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/services?Status=Active&PageSize=0`,
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fail with: getAllService", error);
+  }
+};
+
+export const getAllServicesOnPackages = async (idpackage) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/packages/${idpackage}/services?PageSize=50`,
       "GET",
       null,
       true
@@ -44,17 +74,18 @@ export const getAllServicesOnPackage = async () => {
     console.error("Fail with: ", error);
   }
 };
-export const getAllProductsOnService = async () => {
+export const getAllProductSuitable = async (carModelSelectId, carPartId) => {
   try {
     const response = await userService.sendAjax(
-      "/api/products?ProductStatus=Active&PageSize=1000",
+      `/api/products/car-model/car-part/${carModelSelectId}/${carPartId}?ProductStatus=Active&PageSize=0`,
+      // "/api/products?ProductStatus=Active",
       "GET",
       null,
       true
     );
     return response;
   } catch (error) {
-    console.error("Fail with: ", error);
+    console.error("Fail with: getAllServiceByCarModel", error);
   }
 };
 export const getAllPackages = async () => {
@@ -68,6 +99,19 @@ export const getAllPackages = async () => {
     return response;
   } catch (error) {
     console.error("Fail with: ", error);
+  }
+};
+export const getAllProducts = async () => {
+  try {
+    const response = await userService.sendAjax(
+      "/api/product-at-garages",
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fail with: getAllProducts", error);
   }
 };
 export const getAllAppointment = async (status) => {
@@ -146,6 +190,67 @@ export const createAppointmentApi = async (data) => {
     userService.showToast(400, error.message);
   }
 };
+export const updatedAppointmentApi = async (data, id) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${id}`,
+      "PUT",
+      data,
+      true
+    );
+    userService.showToast(200, "Updated Appointment Successful");
+    return response;
+  } catch (error) {
+    console.error("Fail with : ", error.message);
+    userService.showToast(400, error.message);
+  }
+};
+export const updatedAppointmentDetailApi = async (data, id) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${id}/details`,
+      "POST",
+      data,
+      true
+    );
+    userService.showToast(200, "Updated Appointment Detail Successful");
+    return response;
+  } catch (error) {
+    console.error("Fail with : ", error.message);
+    userService.showToast(400, error.message);
+  }
+};
+export const AddAppointmentReplacementPartDetailApi = async (
+  data,
+  id,
+  serviceDetailId
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${id}/details/${serviceDetailId}/products`,
+      "POST",
+      data,
+      true
+    );
+    userService.showToast(200, "Add Product to service successful");
+    return response;
+  } catch (error) {
+    console.error("Fail with : ", error.message);
+    userService.showToast(400, error.message);
+  }
+};
 export const getAllGara = async () => {
   try {
     const response = await userService.sendAjax(
@@ -156,6 +261,140 @@ export const getAllGara = async () => {
     );
     return response;
   } catch (error) {
+    console.error("Fail with: ", error);
+  }
+};
+export const confirmAppointment = async (
+  estimatedAppointmentTime,
+  appoinmentId
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${appoinmentId}/confirmation`,
+      "PUT",
+      {
+        estimatedAppointmentTime: estimatedAppointmentTime,
+      },
+      true
+    );
+    userService.showToast(200, "Confirm appointment successfull");
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const cancelAppointment = async (reason, appoinmentId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${appoinmentId}/cancel`,
+      "PUT",
+      {
+        cancelledReason: reason,
+      },
+      true
+    );
+    userService.showToast(200, "Cancel appointment successfull");
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const cancelAppointmentDetail = async (
+  reason,
+  appoinmentId,
+  serviceDetailId,
+  type
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${appoinmentId}/details/${type}`,
+      "PUT",
+      {
+        appointmentDetailId: [serviceDetailId],
+        cancelledReason: reason,
+      },
+      true
+    );
+    userService.showToast(200, "Cancel appointment detail successfull!");
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const arrivalAppointment = async (data, appoinmentId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${appoinmentId}/arrival`,
+      "PUT",
+      data,
+      true
+    );
+    userService.showToast(200, "Confirm Arrival successfull");
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const getFullInfomationAppointment = async (appoinmentId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${appoinmentId}`,
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const addAppointmentDetail = async (data, appoinmentId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${appoinmentId}/details`,
+      "POST",
+      data,
+      true
+    );
+    userService.showToast(200, "Add detail appointment successfull");
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
     console.error("Fail with: ", error);
   }
 };

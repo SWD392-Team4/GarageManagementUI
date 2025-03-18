@@ -1,51 +1,54 @@
 {
-  "UserExisted": "Người dùng với email {0}, tên đăng nhập {1} và số điện thoại {2} đã tồn tại.",
-
-  "UsernameRequired": "Vui lòng nhập tên đăng nhập.",
-  "UsernameTooShort": "Tên đăng nhập phải có ít nhất 5 ký tự.",
-  "UsernameTooLong": "Tên đăng nhập không được vượt quá 25 ký tự.",
-  "UsernameContainSpecialCharacter": "Tên đăng nhập không được chứa ký tự đặc biệt.",
-
-  "FirstNameRequired": "Vui lòng nhập họ.",
-  "LastNameRequired": "Vui lòng nhập tên.",
-
-  "EmailRequired": "Vui lòng nhập địa chỉ email.",
-  "EmailInvalid": "Địa chỉ email không hợp lệ.",
-
-  "PasswordRequired": "Vui lòng nhập mật khẩu.",
+  "UserExisted": "Người dùng với email, tên người dùng và số điện thoại được cung cấp đã tồn tại.",
+  "UsernameRequired": "Tên người dùng là bắt buộc.",
+  "UsernameTooShort": "Tên người dùng phải có ít nhất 5 ký tự.",
+  "UsernameTooLong": "Tên người dùng không được vượt quá 25 ký tự.",
+  "UsernameContainSpecialCharacter": "Tên người dùng không được chứa ký tự đặc biệt.",
+  "FirstNameRequired": "Tên là bắt buộc.",
+  "LastNameRequired": "Họ là bắt buộc.",
+  "EmailRequired": "Địa chỉ email là bắt buộc.",
+  "EmailInvalid": "Địa chỉ email được cung cấp không hợp lệ.",
+  "PasswordRequired": "Mật khẩu là bắt buộc.",
   "PasswordTooShort": "Mật khẩu phải có ít nhất 10 ký tự.",
   "PasswordTooLong": "Mật khẩu không được vượt quá 50 ký tự.",
-  "PasswordMissingUppercase": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa.",
-  "PasswordMissingLowercase": "Mật khẩu phải chứa ít nhất một chữ cái viết thường.",
-  "PasswordMissingDigit": "Mật khẩu phải chứa ít nhất một số.",
+  "PasswordMissingUppercase": "Mật khẩu phải chứa ít nhất một chữ cái in hoa.",
+  "PasswordMissingLowercase": "Mật khẩu phải chứa ít nhất một chữ cái in thường.",
+  "PasswordMissingDigit": "Mật khẩu phải chứa ít nhất một chữ số.",
   "PasswordMissingSpecialCharacter": "Mật khẩu phải chứa ít nhất một ký tự đặc biệt (ví dụ: !, ?, *, .).",
-
-  "ConfirmPasswordRequired": "Vui lòng nhập lại mật khẩu.",
-  "ConfirmPasswordMismatch": "Mật khẩu xác nhận không khớp.",
-
-  "PhoneNumberRequired": "Vui lòng nhập số điện thoại.",
-  "PhoneNumberInvalid": "Số điện thoại không hợp lệ. Đảm bảo đây là số điện thoại Việt Nam hợp lệ.",
-
-  "RoleRequired": "Vui lòng chọn vai trò người dùng.",
-  "RoleInvalid": "Vai trò người dùng không hợp lệ.",
+  "ConfirmPasswordRequired": "Mật khẩu xác nhận là bắt buộc.",
+  "ConfirmPasswordMismatch": "Mật khẩu xác nhận không khớp với mật khẩu.",
+  "PhoneNumberRequired": "Số điện thoại là bắt buộc.",
+  "PhoneNumberInvalid": "Số điện thoại không hợp lệ. Hãy đảm bảo nó là một số điện thoại Việt Nam hợp lệ.",
+  "RoleRequired": "Vai trò người dùng là bắt buộc.",
+  "RoleInvalid": "Vai trò người dùng được cung cấp không hợp lệ.",
   "DoNotHavePermission": "Bạn không có quyền tạo người dùng với vai trò này.",
-
-  "WorkplaceIdRequired": "Vui lòng chọn nơi làm việc.",
-
-  "CitizenIdentificationRequired": "Vui lòng nhập CMND/CCCD.",
-  "CitizenIdentificationInvalid": "CMND/CCCD không hợp lệ. Hãy kiểm tra lại.",
-
-  "EmployeeExisted": "Nhân viên với số CMND/CCCD {0} đã tồn tại.",
-
-  "UserNotFoundWithEmail": "Không tìm thấy người dùng với email {0}.",
-  "UserNotFoundWithUsername": "Không tìm thấy người dùng với tên đăng nhập {0}.",
-  "UserNotFoundWithId": "Không tìm thấy người dùng với ID {0}.",
-
+  "WorkplaceIdRequired": "Loại nơi làm việc của người dùng là bắt buộc.",
+  "CitizenIdentificationRequired": "Số căn cước công dân của nhân viên là bắt buộc.",
+  "CitizenIdentificationInvalid": "Số căn cước công dân của nhân viên không hợp lệ. Hãy đảm bảo nó là số căn cước công dân hợp lệ của Việt Nam.",
+  "EmployeeExisted": "Nhân viên với số căn cước công dân này đã tồn tại.",
+  "UserNotFoundWithEmail": "Không tìm thấy người dùng với email này.",
+  "UserNotFoundWithUsername": "Không tìm thấy người dùng với tên người dùng này.",
+  "UserNotFoundWithId": "Không tìm thấy người dùng với id này.",
   "ConfirmEmailRequired": "Email chưa được xác nhận.",
-
-  "TokenConfirmEmailRequired": "Token xác nhận email là bắt buộc.",
-  "TokenResetPasswordRequired": "Token đặt lại mật khẩu là bắt buộc.",
-
-  "InvalidEndpoint": "Endpoint không hợp lệ khi tạo khách hàng. Vui lòng kiểm tra URL và thử lại.",
-  "TooManyRequestsWithRetryAfter": "You have exceeded the request limit. Please wait 300 second(s) before retrying."
+  "TokenConfirmEmailRequired": "Token để xác nhận email là bắt buộc.",
+  "TokenResetPasswordRequired": "Token để đặt lại mật khẩu là bắt buộc.",
+  "TooManyRequestsWithRetryAfter": "Bạn đã vượt quá giới hạn yêu cầu. Vui lòng chờ 300 giây trước khi thử lại.",
+  "InvalidEndpoint": "Endpoint sử dụng không chính xác để tạo khách hàng. Vui lòng kiểm tra URL và thử lại.",
+  "AppointmentNotFound": "Không tìm thấy lịch hẹn.",
+  "InvalidAppointment": "Vui lòng cung cấp ít nhất một dịch vụ hoặc gói dịch vụ.",
+  "NotAllowedToConfirmAppointment": "Bạn không được phép xác nhận lịch hẹn này.",
+  "AppointmentExceedLimit": "Garage chỉ được có {1} lịch hẹn mỗi ngày.",
+  "AppointmentServiceDuplicate": "Dịch vụ đã được thêm vào lịch hẹn.",
+  "AppointmentPackageDuplicate": "Gói dịch vụ đã được thêm vào lịch hẹn.",
+  "AppointmentHasDuplicateProductInService": "Dịch vụ có sản phẩm trùng lặp.",
+  "AppointmentWrongPackageType": "Loại gói dịch vụ không chính xác.",
+  "AppointmentStatusNotPending": "Lịch hẹn không ở trạng thái chờ duyệt nên không thể xác nhận.",
+  "AppointmentEstimatedAppointmentTimeInvalid": "Thời gian hẹn dự kiến phải lớn hơn thời gian hiện tại.",
+  "AppointmentEstimatedEndTimeInvalid": "Thời gian kết thúc dự kiến phải lớn hơn thời gian hiện tại.",
+  "AppointmentStatusCompleted": "Lịch hẹn đã hoàn thành.",
+  "AppointmentDetailIdRequired": "ID chi tiết lịch hẹn là bắt buộc.",
+  "AppointmentDetailNotFound": "Không tìm thấy chi tiết lịch hẹn.",
+  "AppointmentDetailAlreadyCancelled": "Chi tiết lịch hẹn đã bị hủy.",
+  "AppointmentDetailAlreadyRejected": "Chi tiết lịch hẹn đã bị từ chối.",
+  "AppointmentReplacementPartNotFound": "Không tìm thấy linh kiện thay thế cho lịch hẹn."
 }

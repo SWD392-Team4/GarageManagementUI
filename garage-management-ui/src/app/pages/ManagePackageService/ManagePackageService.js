@@ -1,9 +1,9 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
-import ListPackageService from './partials/ListPackageService';
-
+import ListPackageService from "./partials/ListPackageService";
+import { sAccount } from "../AuthCustomer/services/store";
 
 export default function ManagePackageService() {
   const { t } = useTranslation("manage_package");
@@ -14,15 +14,18 @@ export default function ManagePackageService() {
       <Breadcrumb />
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">{t("manage_package.title")}</h1>
-        <button
-          className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
-          onClick={() => navigate("/admin/package-service/create-package")}
-        >
-          {t("manage_package.create1")}
-        </button>
+        {sAccount.value.role === "Administrator" && (
+          <button
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
+            onClick={() =>
+              navigate(`/${sAccount.value.role}/package-service/create-package`)
+            }
+          >
+            {t("manage_package.create1")}
+          </button>
+        )}
       </div>
       <ListPackageService />
-
     </div>
-  )
+  );
 }

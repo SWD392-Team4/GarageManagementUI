@@ -104,7 +104,7 @@ const SkeletonCard = () => (
 function ChatContent2() {
   const state = chatStore.use();
   const connection = ConnectionSignify.use().connection;
-  const messagesEndRef = useRef(null); // Tạo ref cho phần tử cuối cùng
+  const messagesEndRef = useRef(null);
 
   const getChatHistory = async () => {
     if (connection) {
@@ -121,19 +121,38 @@ function ChatContent2() {
       }
     }
   };
+  const GetManagerChatHistory = async () => {
+    if (connection) {
+      try {
+        const chatHistory = await connection.invoke(
+          "GetManagerChatHistory",
+          null
+        );
+        chatStore.set((v) => {
+          v.value.messages = chatHistory;
+        });
+      } catch (error) {
+        console.error("Error retrieving chat history:", error);
+      }
+    }
+  };
 
   useEffect(() => {
-    if (connection && state.activeChatId !== 1) {
-      getChatHistory();
+    if (connection) {
+      if (state.activeChatId === null) {
+        GetManagerChatHistory();
+      } else {
+        getChatHistory();
+      }
     }
-  }, [connection, state.loadMessages]);
+  }, [connection, state.activeChatId, state.loadMessages]);
 
-  // Sau mỗi lần state.messages thay đổi, scroll đến phần tử cuối cùng
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [state.messages]);
+  // // Sau mỗi lần state.messages thay đổi, scroll đến phần tử cuối cùng
+  // useEffect(() => {
+  //   if (messagesEndRef.current) {
+  //     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // }, [state.messages]);
 
   const myId = sAccount.value.id;
 
@@ -199,7 +218,7 @@ function ChatContent2() {
         );
       })}
       {/* Dummy div dùng để scroll tới */}
-      <div ref={messagesEndRef} />
+      {/* <div ref={messagesEndRef} /> */}
     </div>
   );
 }

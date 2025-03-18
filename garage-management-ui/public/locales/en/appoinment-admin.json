@@ -22,19 +22,102 @@
     "title7": "Created Time",
     "title8": "Update Time",
     "title9": "Status",
-    "title10": "Service Note"
+    "title10": "Service Note",
+    "title11": "Estimated Hours",
+    "title12": "View Part"
+  },
+  "arrivalModal": {
+    "title": "Confirm Vehicle Arrival Information",
+    "customerNameLabel": "Customer Name:",
+    "phoneLabel": "Phone Number:",
+    "emailLabel": "Email Address:",
+    "licenserLabel": "License Plate:",
+    "estimatedEndTimeLabel": "Estimated End Time:"
+  },
+  "cancelModal": {
+    "title": "Cancel Appointment",
+    "prompt": "Please enter the reason for cancellation:",
+    "placeholder": "Reason for cancellation",
+    "confirmButton": "Confirm Cancellation",
+    "emptyReason": "The reason cannot be empty!",
+    "cancel": "Cancel order from employee",
+    "reject": "Cancel order from customer request"
+  },
+  "confirmationModal": {
+    "title": "Confirmation",
+    "prompt": "Are you sure you want to confirm this appointment?"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "confirm": "Confirm"
   },
   "list-packages": {
-    "title1": "ID",
+    "title1": "No.",
     "title2": "Package Name",
-    "title3": "Validity Period",
-    "title4": "Time Unit",
-    "title5": "Usage Limit",
-    "title6": "Usage Count",
-    "title7": "Start Date",
-    "title8": "End Time",
-    "title9": "Status",
-    "title10": "Price",
-    "title11": "Service Note"
+    "title3": "Package Price",
+    "title4": "Status",
+    "title5": "Created At",
+    "title6": "Updated At",
+    "view": "Xem"
+  },
+  "bookingInfo": {
+    "id": "ID",
+    "employeeApproved": "Employee Approved",
+    "employeeReject": "Employee Reject",
+    "status": "Status",
+    "model": "Model",
+    "mileage": "Mileage",
+    "licenser": "License Plate",
+    "gara": "Garage",
+    "estimatedTime": "Estimated Time",
+    "actualTime": "Actual Time",
+    "estimatedEndTime": "Estimated End Time",
+    "actualEndTime": "Actual End Time",
+    "expectedPrice": "Expected Price",
+    "dateCreated": "Date Created",
+    "dateUpdated": "Date Updated",
+    "type": "Type",
+    "customerName": "Customer Name",
+    "phone": "Phone",
+    "email": "Email",
+    "packagesInAppointment": "Packages in Appointment"
+  },
+  "replacementPartsModal": {
+    "title": "Update Replacement Parts"
+  },
+  "tableHeaders": {
+    "stt": "No.",
+    "productId": "Product Name",
+    "quantity": "Quantity",
+    "action": "Action",
+    "total": "Total Quantity"
+  },
+  "buttons": {
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close"
+  },
+  "placeholders": {
+    "productId": "Select Product",
+    "quantity": "Enter Quantity"
+  },
+  "text": {
+    "available": "Available"
+  },
+  "errors": {
+    "exceedsQuantity": "Quantity exceeds available stock"
+  },
+  "status": {
+    "all": "All",
+    "waiting": "Waiting",
+    "approved": "Approved",
+    "in_progress": "In Progress",
+    "completed": "Completed",
+    "canceled": "Canceled"
   }
 }

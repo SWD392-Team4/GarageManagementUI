@@ -14,6 +14,8 @@ import {
 import { BookingSignify } from "../Services/BookingSignify";
 import Navigation from "./Navigation";
 import ToggleOptions from "./ToggleOptions";
+import { useNavigate } from "react-router-dom";
+
 const formatOptionLabel = ({ label, image }) => (
   <div style={{ display: "flex", alignItems: "center" }}>
     <img
@@ -24,6 +26,7 @@ const formatOptionLabel = ({ label, image }) => (
     <span>{label}</span>
   </div>
 );
+
 export default function SelectOptions() {
   const { t } = useTranslation("BookingOnline");
 
@@ -49,11 +52,8 @@ export default function SelectOptions() {
 
   useEffect(() => {
     BookingSignify.set((v) => {
-      v.value.brandId = "";
-      v.value.type = "";
-      v.value.carCategoryId = "";
-      v.value.carModel = "";
       v.value.services = [];
+      v.value.package = [];
     });
     fetchData();
   }, [fetchData]);
@@ -72,9 +72,7 @@ export default function SelectOptions() {
       fetchCarModel();
     }
   }, [sBooking.brandId, sBooking.carCategoryId, fetchCarModel]);
-  // Custom render option với hình ảnh
 
-  // Tạo options cho react-select
   const brandOptions = brands.map((brand) => ({
     value: brand.id,
     label: brand.brandName,
@@ -92,6 +90,15 @@ export default function SelectOptions() {
     value: carM.id,
     label: `${carM.modelName} ${new Date(carM.modelYear).getFullYear()}`,
   }));
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (BookingSignify.value.garaId === "") {
+      navigate("/booking");
+    }
+  }, [navigate]);
+
   return (
     <div className="p-4">
       <div className="text-gray-800 text-5xl font-extrabold font-space text-center pb-10 ">
@@ -111,6 +118,11 @@ export default function SelectOptions() {
             className="z-30"
             formatOptionLabel={formatOptionLabel}
             options={brandOptions}
+            value={
+              brandOptions.find(
+                (option) => option.value === BookingSignify.value.brandId
+              ) || null
+            }
             onChange={(option) => {
               BookingSignify.set((v) => {
                 v.value.brandId = option.value;
@@ -133,6 +145,11 @@ export default function SelectOptions() {
           <Select
             id="category-select"
             options={carCategoryOptions}
+            value={
+              carCategoryOptions.find(
+                (option) => option.value === BookingSignify.value.carCategoryId
+              ) || null
+            }
             placeholder={t("select.selectCarType")}
             className="z-30"
             onChange={(option) => {
@@ -158,6 +175,11 @@ export default function SelectOptions() {
             options={carPartOptions}
             placeholder={t("select.selectCarPart")}
             className="z-20"
+            value={
+              carPartOptions.find(
+                (option) => option.value === BookingSignify.value.carPartId
+              ) || null
+            }
             onChange={(option) => {
               BookingSignify.set((v) => {
                 v.value.carPartId = option.value;
@@ -178,6 +200,11 @@ export default function SelectOptions() {
             options={carModelOptions}
             placeholder={t("select.selectCarModel")}
             className="z-20"
+            value={
+              carModelOptions.find(
+                (option) => option.value === BookingSignify.value.carModel
+              ) || null
+            }
             onChange={(option) => {
               BookingSignify.set((v) => {
                 v.value.carModel = option.value;
@@ -200,10 +227,10 @@ export default function SelectOptions() {
             BookingSignify.value.brandId &&
             BookingSignify.value.carCategoryId &&
             BookingSignify.value.carModel &&
-            BookingSignify.value.type === "sigle-service"
-              ? "/booking/select-services"
-              : BookingSignify.value.type
-              ? "/booking/select-packages"
+            BookingSignify.value.type
+              ? BookingSignify.value.type === "sigle-service"
+                ? "/booking/select-services"
+                : "/booking/select-packages"
               : undefined
           }
         />
