@@ -23,7 +23,7 @@
     "selectPackage": "Chọn Package",
     "enterCarLicensePlateNumber": "Nhập biển số xe"
   },
-  "error": {
+  "error2": {
     "required_carModelId": "Vui lòng chọn model xe",
     "required_mileage": "Vui lòng nhập số km",
     "invalid_mileage": "Số km không hợp lệ",
@@ -34,6 +34,7 @@
     "required_estimatedAppointmentTime": "Vui lòng chọn thời gian hẹn",
     "required_estimatedEndTime": "Vui lòng chọn thời gian kết thúc",
     "required_carLicensePlateNumber": "Vui lòng nhập biển số xe",
+    "required_carLicensePlateNumber2": "Biển số xe không hợp lệ. Vui lòng nhập đúng định dạng (VD: 30A-12345 hoặc 51G-678901).",
     "add_service": "Vui lòng thêm ít nhất một dịch vụ (có thể không chọn sản phẩm)"
   },
   "buttons": {

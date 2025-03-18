@@ -22,7 +22,11 @@ export const getFormattedCurrentDate = () => {
 };
 
 export const formatVietnameseCurrency = (amount) => {
-  return amount.toLocaleString("vi-VN") + " VND";
+  try {
+    return amount.toLocaleString("vi-VN") + " VND";
+  } catch (error) {
+    return "N/A";
+  }
 };
 
 export const parseVietnameseCurrency = (formattedAmount) => {
@@ -33,12 +37,6 @@ import * as Yup from "yup";
 
 export const getGoodsIssuedSchema = (t) => {
   return Yup.object().shape({
-    referenceNumber: Yup.string().required(
-      t("error.required", { field: t("labels.reference_number") })
-    ),
-    invoiceCode: Yup.string().required(
-      t("error.required", { field: t("labels.invoice_code") })
-    ),
     warehouseId: Yup.string().required(
       t("error.required", { field: t("labels.warehouse") })
     ),

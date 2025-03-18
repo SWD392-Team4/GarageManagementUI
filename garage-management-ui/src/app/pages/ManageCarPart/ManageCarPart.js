@@ -3,6 +3,7 @@ import ListCarPart from "./partials/ListCarPart";
 import { useTranslation } from "react-i18next";
 import CarPartModal from "./models/CarPartModal";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
+import { sAccount } from "../AuthCustomer/services/store";
 
 export default function ManageCarPart() {
   const { t } = useTranslation("manage_carpart");
@@ -15,12 +16,15 @@ export default function ManageCarPart() {
 
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-semibold">{t("manage_carpart.title")}</h1>
-        <button
-          className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
-          onClick={() => setIsModalOpen(true)}
-        >
-          {t("manage_carpart.create")}
-        </button>
+
+        {sAccount.value.role === "Administrator" && (
+          <button
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
+            onClick={() => setIsModalOpen(true)}
+          >
+            {t("manage_carpart.create")}
+          </button>
+        )}
       </div>
 
       <ListCarPart refresh={refresh} />

@@ -1,13 +1,14 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FaEye } from "react-icons/fa";
 import BaseTable from "../../../components/BaseTable/BaseTable";
+import { getAllAppointment } from "../services/AppointmentService";
+import { AppointmentSignify } from "../services/store/AppointmentSignify";
 import {
   FilterAppointment,
   sListApointment,
 } from "../services/store/FilterStore";
-import { getAllAppointment } from "../services/AppointmentService";
-import { AppointmentSignify } from "../services/store/AppointmentSignify";
+import { sAccount } from "../../AuthCustomer/services/store";
 
 export default function ListAppoinment({ status }) {
   const { t, i18n } = useTranslation("appoinment-admin");
@@ -49,16 +50,6 @@ export default function ListAppoinment({ status }) {
     filter.pageCurrent,
     appointmentSignify.garaCurrent,
   ]);
-  // useEffect(() => {
-  //   FilterAppointment.set((v) => {
-  //     v.value.searchNamecus = "";
-  //     v.value.searchNameEmp = "";
-  //     v.value.startDate = "";
-  //     v.value.endDate = "";
-  //     v.value.type = "";
-  //     v.value.searchEmailCus = "";
-  //   });
-  // }, []);
 
   const handlePageChange = (newPage) => {
     FilterAppointment.set((v) => {
@@ -91,7 +82,7 @@ export default function ListAppoinment({ status }) {
       label: t("manage_product.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
-      link: (row) => `${row.original.id}`,
+      link: (row) => `/${sAccount.value.role}/appointment/${row.original.id}`,
     },
   ];
   return (

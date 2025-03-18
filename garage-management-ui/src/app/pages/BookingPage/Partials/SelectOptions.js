@@ -72,9 +72,7 @@ export default function SelectOptions() {
       fetchCarModel();
     }
   }, [sBooking.brandId, sBooking.carCategoryId, fetchCarModel]);
-  // Custom render option với hình ảnh
 
-  // Tạo options cho react-select
   const brandOptions = brands.map((brand) => ({
     value: brand.id,
     label: brand.brandName,

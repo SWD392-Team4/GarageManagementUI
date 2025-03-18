@@ -17,7 +17,7 @@ export default function LayoutAdminHome() {
       />
 
       <main
-        className={`flex-1  transition-all overflow-auto bg-gray-100 h-screen ${
+        className={`flex-1  transition-all z-50 overflow-auto bg-gray-100 h-screen ${
           isSidebarOpen ? "md:ml-50" : "md:ml-13"
         }`}
       >

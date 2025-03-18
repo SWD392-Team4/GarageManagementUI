@@ -12,3 +12,28 @@ export const AppointmentSignify = signify(
     },
   }
 );
+export const packagePick = signify(
+  {
+    Packages: "",
+    servicesOnPackage: "",
+  },
+  {
+    cache: {
+      key: "sPackagePick",
+    },
+  }
+);
+
+export const currentAppointment = signify(
+  {
+    status: "",
+    appointmentDetails: "",
+    appointmentDetailPackages: "",
+    load: 1,
+  },
+  {
+    cache: {
+      key: "sCurrentAppointment",
+    },
+  }
+);

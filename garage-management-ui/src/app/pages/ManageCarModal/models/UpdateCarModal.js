@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { getAllBrand, getAllCarCategory, updateCarModal } from "../services/carModalService";
+import {
+  getAllBrand,
+  getAllCarCategory,
+  updateCarModal,
+} from "../services/carModalService";
+import { sAccount } from "../../AuthCustomer/services/store";
 
-export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUpdated }) {
+export default function UpdateCarModal({
+  isOpen,
+  onClose,
+  carModel,
+  onCarModelUpdated,
+}) {
   const [formData, setFormData] = useState({
     id: "",
     modelName: "",
@@ -40,12 +50,11 @@ export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUp
           updatedAt: carModel.updatedAt || "",
           brandName: carModel.brandName,
           carCategory: carModel.carCategory,
-          Status: carModel.status
+          Status: carModel.status,
         });
       }
     }
   }, [isOpen, carModel]);
-
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -63,9 +72,7 @@ export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUp
     }
   };
 
-
   if (!isOpen) return null;
-
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -140,7 +147,9 @@ export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUp
               className="w-full px-3 py-2 border rounded-md"
             >
               {/* Hiển thị mặc định theo `carModel` */}
-              <option value={carModel?.brandId}>{carModel?.brandName || "Chọn thương hiệu"}</option>
+              <option value={carModel?.brandId}>
+                {carModel?.brandName || "Chọn thương hiệu"}
+              </option>
 
               {/* Danh sách thương hiệu từ API */}
               {brands.map((brand) => (
@@ -161,7 +170,9 @@ export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUp
               className="w-full px-3 py-2 border rounded-md"
             >
               {/* Hiển thị mặc định theo `carModel` */}
-              <option value={carModel?.carCategoryId}>{carModel?.carCategory || "Chọn danh mục xe"}</option>
+              <option value={carModel?.carCategoryId}>
+                {carModel?.carCategory || "Chọn danh mục xe"}
+              </option>
 
               {/* Danh sách danh mục xe từ API */}
               {carCategories.map((category) => (
@@ -175,7 +186,12 @@ export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUp
           {/* Trạng thái (Status) */}
           <div>
             <label className="block text-sm font-medium">Trạng thái</label>
-            <select name="status" value={formData.status} onChange={handleChange} className="w-full px-3 py-2 border rounded-md">
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border rounded-md"
+            >
               <option value="Active">Active</option>
               <option value="Inactive">Inactive</option>
             </select>
@@ -189,12 +205,14 @@ export default function UpdateCarModal({ isOpen, onClose, carModel, onCarModelUp
             >
               Đóng
             </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-600 text-white rounded-md"
-            >
-              Lưu
-            </button>
+            {sAccount.value.role === "Administrator" && (
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded-md"
+              >
+                Lưu
+              </button>
+            )}
           </div>
         </form>
       </div>

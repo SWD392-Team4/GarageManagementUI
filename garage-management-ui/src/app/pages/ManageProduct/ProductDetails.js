@@ -5,12 +5,18 @@ import { useForm } from "react-hook-form";
 import { FaEdit, FaPlus, FaSave, FaTimes } from "react-icons/fa";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import MDEditor from "@uiw/react-md-editor";
-import { getProduct, updateProduct, getAllCategory, getAllBrand } from "./services/ProductService";
+import {
+  getProduct,
+  updateProduct,
+  getAllCategory,
+  getAllBrand,
+} from "./services/ProductService";
 import ImageCarousel from "./partials/ImageCarousel";
 import { parseVietnameseCurrency } from "./schemas/ProductValid";
-import AsyncSelect from 'react-select/async';
+import AsyncSelect from "react-select/async";
 import ModelSelectCarPart from "./models/ModelSelectCarPart";
 import ModelSelectCarModel from "./models/ModelSelectCarModel";
+import { sAccount } from "../AuthCustomer/services/store";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -26,9 +32,7 @@ export default function ProductDetails() {
   const [isCarPartModalOpen, setIsCarPartModalOpen] = useState(false);
   const [isCarModelModalOpen, setIsCarModelModalOpen] = useState(false);
 
-
   const { register, handleSubmit, setValue, watch, reset } = useForm();
-
 
   //theo doi trang thai
   const [isEditing, setIsEditing] = useState(false);
@@ -38,7 +42,7 @@ export default function ProductDetails() {
       const [productData, categoryData, brandData] = await Promise.all([
         getProduct(id),
         getAllCategory(),
-        getAllBrand()
+        getAllBrand(),
       ]);
 
       if (productData) {
@@ -48,13 +52,15 @@ export default function ProductDetails() {
         setValue("productDescription", productData.productDescription);
         setValue("productCategoryId", productData.productCategoryId);
         setValue("brandId", productData.brandId);
-        setValue("productPrice", parseVietnameseCurrency(productData.productPrice));
+        setValue(
+          "productPrice",
+          parseVietnameseCurrency(productData.productPrice)
+        );
         setValue("status", productData.status);
         setValue("createdAt", productData.createdAt);
         setValue("updatedAt", productData.updatedAt);
         setSelectedCarParts(productData.carParts || []);
         setSelectedCarModels(productData.carModels || []);
-
       }
 
       setCategories(categoryData?.data?.value || []);
@@ -96,14 +102,18 @@ export default function ProductDetails() {
   // Lọc danh mục sản phẩm theo input
   const filterCategories = (inputValue) => {
     return categories
-      .filter((cat) => cat.category.toLowerCase().includes(inputValue.toLowerCase()))
+      .filter((cat) =>
+        cat.category.toLowerCase().includes(inputValue.toLowerCase())
+      )
       .map((cat) => ({ value: cat.id, label: cat.category }));
   };
 
   // Lọc thương hiệu theo input
   const filterBrands = (inputValue) => {
     return brands
-      .filter((brand) => brand.brandName.toLowerCase().includes(inputValue.toLowerCase()))
+      .filter((brand) =>
+        brand.brandName.toLowerCase().includes(inputValue.toLowerCase())
+      )
       .map((brand) => ({ value: brand.id, label: brand.brandName }));
   };
 
@@ -129,9 +139,6 @@ export default function ProductDetails() {
     }
   };
 
-
-
-
   ///////////////////////////////////////////////////////////////////////////////////
   const handleEdit = () => {
     setIsEditing(true);
@@ -152,7 +159,7 @@ export default function ProductDetails() {
       const payload = {
         ...data,
         carPartIds: selectedCarParts.map((part) => part.id), // ✅ Gửi danh sách Car Part
-        carModelIds: selectedCarModels.map((model) => model.id) // ✅ Gửi danh sách Car Model
+        carModelIds: selectedCarModels.map((model) => model.id), // ✅ Gửi danh sách Car Model
       };
 
       await updateProduct(id, payload, imageFormData);
@@ -179,13 +186,11 @@ export default function ProductDetails() {
     setIsEditing(false);
   };
 
-
   return (
     <div className="bg-white shadow-lg rounded-lg p-6">
       <Breadcrumb />
       {product ? (
         <form onSubmit={handleSubmit(handleSave)}>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             {/* Cột hình ảnh (7/12) */}
             <div className="lg:col-span-7 flex flex-col items-center justify-center">
@@ -214,25 +219,43 @@ export default function ProductDetails() {
 
               {/* Mã vạch */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.barcode")}: </strong>{product.productBarcode}
+                <strong className="font-semibold">
+                  {t("product_details.barcode")}:{" "}
+                </strong>
+                {product.productBarcode}
               </p>
 
               {/* Danh mục sản phẩm */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.category")}: </strong>
+                <strong className="font-semibold">
+                  {t("product_details.category")}:{" "}
+                </strong>
                 {isEditing ? (
                   <AsyncSelect
                     cacheOptions
                     loadOptions={loadCategoryOptions}
-                    defaultOptions={categories.map(cat => ({ value: cat.id, label: cat.category }))}
+                    defaultOptions={categories.map((cat) => ({
+                      value: cat.id,
+                      label: cat.category,
+                    }))}
                     isDisabled={!isEditing}
-                    onChange={(selectedOption) => setValue("productCategoryId", selectedOption ? selectedOption.value : "")}
+                    onChange={(selectedOption) =>
+                      setValue(
+                        "productCategoryId",
+                        selectedOption ? selectedOption.value : ""
+                      )
+                    }
                     className="react-select-container"
                     classNamePrefix="react-select"
                     placeholder={t("product_details.select_category")}
                     isClearable
                     defaultValue={
-                      product.productCategoryId ? { value: product.productCategoryId, label: product.category } : null
+                      product.productCategoryId
+                        ? {
+                            value: product.productCategoryId,
+                            label: product.category,
+                          }
+                        : null
                     }
                   />
                 ) : (
@@ -242,20 +265,32 @@ export default function ProductDetails() {
 
               {/* Thương hiệu */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.brand")}: </strong>
+                <strong className="font-semibold">
+                  {t("product_details.brand")}:{" "}
+                </strong>
                 {isEditing ? (
                   <AsyncSelect
                     cacheOptions
                     loadOptions={loadBrandOptions}
-                    defaultOptions={brands.map(brand => ({ value: brand.id, label: brand.brandName }))}
+                    defaultOptions={brands.map((brand) => ({
+                      value: brand.id,
+                      label: brand.brandName,
+                    }))}
                     isDisabled={!isEditing}
-                    onChange={(selectedOption) => setValue("brandId", selectedOption ? selectedOption.value : "")}
+                    onChange={(selectedOption) =>
+                      setValue(
+                        "brandId",
+                        selectedOption ? selectedOption.value : ""
+                      )
+                    }
                     className="react-select-container"
                     classNamePrefix="react-select"
                     placeholder={t("product_details.select_brand")}
                     isClearable
                     defaultValue={
-                      product.brandId ? { value: product.brandId, label: product.brandName } : null
+                      product.brandId
+                        ? { value: product.brandId, label: product.brandName }
+                        : null
                     }
                   />
                 ) : (
@@ -263,10 +298,11 @@ export default function ProductDetails() {
                 )}
               </p>
 
-
               {/* Giá sản phẩm */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.price")}: </strong>
+                <strong className="font-semibold">
+                  {t("product_details.price")}:{" "}
+                </strong>
                 {isEditing ? (
                   <input
                     {...register("productPrice", { required: true })}
@@ -279,19 +315,26 @@ export default function ProductDetails() {
 
               {/* Ngày tạo & cập nhật */}
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.created_at")}: </strong> {product.createdAt}
+                <strong className="font-semibold">
+                  {t("product_details.created_at")}:{" "}
+                </strong>{" "}
+                {product.createdAt}
               </p>
               <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.updated_at")}: </strong> {product.updatedAt}
+                <strong className="font-semibold">
+                  {t("product_details.updated_at")}:{" "}
+                </strong>{" "}
+                {product.updatedAt}
               </p>
             </div>
           </div>
 
           <div className="mt-6 p-4 border-t" data-color-mode="light">
-
             {/* Car Parts */}
             <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-2">{t("product_details.car_parts")}</h2>
+              <h2 className="text-xl font-semibold mb-2">
+                {t("product_details.car_parts")}
+              </h2>
 
               {/* Nếu đang chỉnh sửa, hiển thị nút chọn Car Parts */}
               {isEditing && (
@@ -306,31 +349,45 @@ export default function ProductDetails() {
 
               {/* Hiển thị danh sách Car Parts từ product hoặc state */}
               <div className="mt-2 flex flex-wrap gap-2">
-                {(isEditing ? selectedCarParts : product?.carParts || []).length > 0 ? (
-                  (isEditing ? selectedCarParts : product.carParts).map((part) => (
-                    <div key={part.id} className="bg-gray-200 px-3 py-1 rounded-lg text-gray-800 flex items-center gap-2">
-                      {part.partName}
+                {(isEditing ? selectedCarParts : product?.carParts || [])
+                  .length > 0 ? (
+                  (isEditing ? selectedCarParts : product.carParts).map(
+                    (part) => (
+                      <div
+                        key={part.id}
+                        className="bg-gray-200 px-3 py-1 rounded-lg text-gray-800 flex items-center gap-2"
+                      >
+                        {part.partName}
 
-                      {/* Nếu đang chỉnh sửa, hiển thị nút xóa */}
-                      {isEditing && (
-                        <button
-                          className="text-red-600"
-                          onClick={() => setSelectedCarParts(selectedCarParts.filter((p) => p.id !== part.id))}
-                        >
-                          ✖
-                        </button>
-                      )}
-                    </div>
-                  ))
+                        {/* Nếu đang chỉnh sửa, hiển thị nút xóa */}
+                        {isEditing && (
+                          <button
+                            className="text-red-600"
+                            onClick={() =>
+                              setSelectedCarParts(
+                                selectedCarParts.filter((p) => p.id !== part.id)
+                              )
+                            }
+                          >
+                            ✖
+                          </button>
+                        )}
+                      </div>
+                    )
+                  )
                 ) : (
-                  <p className="text-gray-500 italic">{t("product_details.no_car_parts")}</p>
+                  <p className="text-gray-500 italic">
+                    {t("product_details.no_car_parts")}
+                  </p>
                 )}
               </div>
             </div>
 
             {/* Car Models */}
             <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-2">{t("product_details.car_models")}</h2>
+              <h2 className="text-xl font-semibold mb-2">
+                {t("product_details.car_models")}
+              </h2>
 
               {/* Nếu đang chỉnh sửa, hiển thị nút chọn Car Models */}
               {isEditing && (
@@ -345,39 +402,54 @@ export default function ProductDetails() {
 
               {/* Hiển thị danh sách Car Models từ product hoặc state */}
               <div className="mt-2 flex flex-wrap gap-2">
-                {(isEditing ? selectedCarModels : product?.carModels || []).length > 0 ? (
-                  (isEditing ? selectedCarModels : product.carModels).map((model) => (
-                    <div key={model.id} className="bg-gray-200 px-3 py-1 rounded-lg text-gray-800 flex items-center gap-2">
-                      {model.modelName}
+                {(isEditing ? selectedCarModels : product?.carModels || [])
+                  .length > 0 ? (
+                  (isEditing ? selectedCarModels : product.carModels).map(
+                    (model) => (
+                      <div
+                        key={model.id}
+                        className="bg-gray-200 px-3 py-1 rounded-lg text-gray-800 flex items-center gap-2"
+                      >
+                        {model.modelName}
 
-                      {/* Nếu đang chỉnh sửa, hiển thị nút xóa */}
-                      {isEditing && (
-                        <button
-                          className="text-red-600"
-                          onClick={() => setSelectedCarModels(selectedCarModels.filter((m) => m.id !== model.id))}
-                        >
-                          ✖
-                        </button>
-                      )}
-                    </div>
-                  ))
+                        {/* Nếu đang chỉnh sửa, hiển thị nút xóa */}
+                        {isEditing && (
+                          <button
+                            className="text-red-600"
+                            onClick={() =>
+                              setSelectedCarModels(
+                                selectedCarModels.filter(
+                                  (m) => m.id !== model.id
+                                )
+                              )
+                            }
+                          >
+                            ✖
+                          </button>
+                        )}
+                      </div>
+                    )
+                  )
                 ) : (
-                  <p className="text-gray-500 italic">{t("product_details.no_car_models")}</p>
+                  <p className="text-gray-500 italic">
+                    {t("product_details.no_car_models")}
+                  </p>
                 )}
               </div>
             </div>
 
-            <h2 className="text-xl font-semibold mb-2">{t("product_details.description")}</h2>
+            <h2 className="text-xl font-semibold mb-2">
+              {t("product_details.description")}
+            </h2>
             {isEditing ? (
               <MDEditor
                 value={watch("productDescription")}
                 onChange={(val) => setValue("productDescription", val)}
               />
             ) : (
-              <MDEditor.Markdown source={watch("productDescription") || ''} />
+              <MDEditor.Markdown source={watch("productDescription") || ""} />
             )}
           </div>
-
 
           {/* Nút Save và Cancel */}
           {isEditing && (
@@ -398,7 +470,6 @@ export default function ProductDetails() {
             </div>
           )}
 
-
           {/* Modal chọn Car Parts */}
           {isCarPartModalOpen && (
             <ModelSelectCarPart
@@ -418,15 +489,16 @@ export default function ProductDetails() {
               setSelectedCarModels={setSelectedCarModels}
             />
           )}
-
         </form>
       ) : (
-        <p className="text-center text-red-500">{t("product_details.not_found")}</p>
+        <p className="text-center text-red-500">
+          {t("product_details.not_found")}
+        </p>
       )}
 
       {/* Nút "Chỉnh sửa" được đặt bên ngoài form để không kích hoạt submit */}
       {/* 1 con bug khong duoc quyen quen  */}
-      {!isEditing && (
+      {!isEditing && sAccount.value.role === "Administrator" && (
         <div className="flex justify-end mt-6">
           <button
             type="button"

@@ -46,5 +46,22 @@
   "TokenConfirmEmailRequired": "Token for confirming email is required.",
   "TokenResetPasswordRequired": "Token for resetting password is required.",
   "TooManyRequestsWithRetryAfter": "You have exceeded the request limit. Please wait 300 second(s) before retrying.",
-  "InvalidEndpoint": "The endpoint used is incorrect for creating a customer. Please verify the URL and try again."
+  "InvalidEndpoint": "The endpoint used is incorrect for creating a customer. Please verify the URL and try again.",
+  "AppointmentNotFound": "Appointment not found",
+  "InvalidAppointment": "Please provide at least one service or package.",
+  "NotAllowedToConfirmAppointment": "You are not allowed to confirm this appointment",
+  "AppointmentExceedLimit": "Garage , can only have {1} appoinment per day.",
+  "AppointmentServiceDuplicate": "Service already added to appointment",
+  "AppointmentPackageDuplicate": "Package already added to appointment",
+  "AppointmentHasDuplicateProductInService": "Service , has duplicate product ,",
+  "AppointmentWrongPackageType": "Package type is not correct",
+  "AppointmentStatusNotPending": "Appointment , is not in pending status so cannot be confirm.",
+  "AppointmentEstimatedAppointmentTimeInvalid": " Estimated appointment time must be greater than current time",
+  "AppointmentEstimatedEndTimeInvalid": " Estimated end time must be greater than current time",
+  "AppointmentStatusCompleted": "Appointment , is already completed",
+  "AppointmentDetailIdRequired": "Appointment detail id is required",
+  "AppointmentDetailNotFound": "Appointment detail , not found",
+  "AppointmentDetailAlreadyCancelled": "Appointment detail , is already cancelled",
+  "AppointmentDetailAlreadyRejected": "Appointment detail , is already rejected",
+  "AppointmentReplacementPartNotFound": "Appointment replacement part not found"
 }

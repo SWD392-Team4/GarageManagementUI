@@ -21,15 +21,18 @@ const ProductSelect = ({ idServices, carPartId }) => {
     fetchProducts();
   }, [carPartId]);
 
-  const options = products.map((product) => ({
-    value: product.id,
-    label: product.productName,
-    Price: formatVietnameseCurrency(product.productPrice),
-    image:
-      product.imageLink && product.imageLink.length > 0
-        ? product.imageLink[0]
-        : "",
-  }));
+  const options = products
+    .filter((product) => product.totalQuantity !== 0)
+    .map((product) => ({
+      value: product.id,
+      label: product.productName,
+      Price: formatVietnameseCurrency(product.productPrice),
+      image:
+        product.imageLink && product.imageLink.length > 0
+          ? product.imageLink[0]
+          : "",
+      totalQuantity: product.totalQuantity,
+    }));
 
   // Hàm cập nhật số lượng cho một product
   const handleQuantityChange = (productId, newQuantity) => {
@@ -75,7 +78,8 @@ const ProductSelect = ({ idServices, carPartId }) => {
           {context === "value" && (
             <input
               type="number"
-              min="0"
+              min="1"
+              max={option.totalQuantity}
               value={option.quantity || 0}
               onMouseDown={(e) => e.stopPropagation()}
               onClick={(e) => e.stopPropagation()}

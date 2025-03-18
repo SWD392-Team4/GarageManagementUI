@@ -25,16 +25,97 @@
     "title10": "Ghi chú dịch vụ"
   },
   "list-packages": {
-    "title1": "Mã ID",
+    "title1": "STT",
     "title2": "Tên gói dịch vụ",
-    "title3": "Thời gian hiệu lực",
-    "title4": "Đơn vị thời gian",
-    "title5": "Giới hạn số lần sử dụng",
-    "title6": "Số lần đã sử dụng",
-    "title7": "Ngày bắt đầu",
-    "title8": "Thời gian kết thúc",
-    "title9": "Trạng thái",
-    "title10": "Giá gói dịch vụ",
-    "title11": "Ghi chú dịch vụ"
+    "title3": "Giá gói dịch vụ",
+    "title4": "Trạng thái",
+    "title5": "Ngày tạo",
+    "title6": "Ngày cập nhật",
+    "view": "Xem"
+  },
+  "arrivalModal": {
+    "title": "Xác nhận thông tin nhận xe",
+    "customerNameLabel": "Tên khách hàng:",
+    "phoneLabel": "Số điện thoại:",
+    "emailLabel": "Địa chỉ email:",
+    "licenserLabel": "Biển số xe:",
+    "estimatedEndTimeLabel": "Thời gian kết thúc dự kiến:"
+  },
+  "cancelModal": {
+    "title": "Hủy lịch",
+    "prompt": "Vui lòng nhập lý do hủy:",
+    "placeholder": "Lý do hủy",
+    "confirmButton": "Xác nhận hủy",
+    "emptyReason": "Lý do không được để trống!",
+    "cancel": "Hủy lịnh từ nhân viên",
+    "reject": "Hủy lịnh từ yêu cầu của khách hàng"
+  },
+  "confirmationModal": {
+    "title": "Xác nhận",
+    "prompt": "Bạn có chắc chắn muốn xác nhận lịch hẹn này?"
+  },
+  "common": {
+    "cancel": "Hủy",
+    "loading": "Đang xử lý...",
+    "confirm": "Xác nhận"
+  },
+  "bookingInfo": {
+    "id": "Mã số",
+    "employeeApproved": "Nhân viên duyệt",
+    "employeeReject": "Nhân viên từ chối",
+    "status": "Trạng thái",
+    "model": "Model",
+    "mileage": "Số km đã đi",
+    "licenser": "Biển số xe",
+    "gara": "Garage",
+    "estimatedTime": "Thời gian hẹn dự kiến",
+    "actualTime": "Thời gian thực tế",
+    "estimatedEndTime": "Thời gian kết thúc dự kiến",
+    "actualEndTime": "Thời gian kết thúc thực tế",
+    "expectedPrice": "Giá dự kiến",
+    "dateCreated": "Ngày tạo",
+    "dateUpdated": "Ngày cập nhật",
+    "type": "Loại",
+    "customerName": "Tên khách hàng",
+    "phone": "Số điện thoại",
+    "email": "Email",
+    "packagesInAppointment": "Các gói dịch vụ trong lịch hẹn"
+  },
+  "replacementPartsModal": {
+    "title": "Cập nhật Phụ Tùng Thay Thế"
+  },
+  "tableHeaders": {
+    "stt": "STT",
+    "productId": "Sản Phẩm",
+    "quantity": "Số Lượng",
+    "action": "Thao tác",
+    "total": "Tổng Số Lượng"
+  },
+  "buttons": {
+    "edit": "Chỉnh sửa",
+    "delete": "Xóa",
+    "add": "Thêm",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "confirm": "Xác nhận",
+    "close": "Đóng"
+  },
+  "placeholders": {
+    "productId": "Chọn Sản Phẩm",
+    "quantity": "Nhập Số Lượng"
+  },
+  "text": {
+    "available": "Còn lại"
+  },
+  "errors": {
+    "exceedsQuantity": "Số lượng vượt quá số tồn kho"
+  },
+  "status": {
+    "all": "Tất cả",
+    "waiting": "Trạng thái chờ",
+    "approved": "Đã xác nhận",
+    "in_progress": "Đang thực hiện",
+    "completed": "Hoàn thành",
+    "canceled": "Đã hủy"
   }
 }

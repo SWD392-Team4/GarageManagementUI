@@ -1,23 +1,27 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useForm, Controller } from "react-hook-form";
-import Select from "react-select";
 import { yupResolver } from "@hookform/resolvers/yup";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import Select from "react-select";
+import UserService from "../../hooks/services/UserService";
+import { formatVietnameseCurrency } from "../ManageGoodsIssued/schemas/GoodsIssuedSchemas";
+import Breadcrumb from "./partials/Breadcrumb";
 import { getAppointmentSchema } from "./schemas/appointmentSchema";
 import {
   createAppointmentApi,
   getAllCarModel,
-  getAllServices,
   getAllPackages,
-  getAllProductsOnService,
+  getAllProductSuitable,
+  getAllServiceByCarModel,
 } from "./services/AppointmentService";
-import Breadcrumb from "./partials/Breadcrumb";
+import ListServiceinPackage from "./partials/ListServiceinPackage";
+import { packagePick } from "./services/store/AppointmentSignify";
 
 export default function CreateAppointment() {
   // Sử dụng useTranslation và lấy schema validate từ file riêng
   const { t } = useTranslation("create_appointment");
   const schema = getAppointmentSchema(t);
-
+  const useService = new UserService();
   const {
     register,
     handleSubmit,
@@ -37,17 +41,33 @@ export default function CreateAppointment() {
       carLicensePlateNumber: "",
     },
   });
+  const spackage = packagePick.use();
 
   // State chứa dữ liệu cho dropdown
   const [carModels, setCarModels] = useState([]);
+  const [carModelSelectId, setCarModelSelectId] = useState("");
   const [services, setServices] = useState([]);
   const [packages, setPackages] = useState([]);
   const [productsOnService, setProductsOnService] = useState([]);
+  const [allProduct, setAllProduct] = useState([]);
+  const [selectedServices, setSelectedServices] = useState([]);
+
+  useEffect(() => {
+    fetchDataService();
+    if (Array.isArray(packagePick.value.servicesOnPackage)) {
+      setSelectedServices((prevSelectedServices) =>
+        prevSelectedServices.filter(
+          (service) =>
+            !packagePick.value.servicesOnPackage.includes(service.serviceId)
+        )
+      );
+    }
+  }, [packagePick.value.servicesOnPackage]);
 
   // State quản lý danh sách dịch vụ đã chọn (mỗi dịch vụ có danh sách replacementParts)
-  const [selectedServices, setSelectedServices] = useState([]);
   // State cho lựa chọn hiện tại của service và danh sách product (multi-select)
-  const [selectedServiceId, setSelectedServiceId] = useState(null);
+  const [selectedServiceId, setSelectedServiceId] = useState("");
+  const [carPartId, setCarPartId] = useState("");
   const [selectedProductsForService, setSelectedProductsForService] = useState(
     []
   );
@@ -55,19 +75,18 @@ export default function CreateAppointment() {
 
   // State cho các package được chọn (multi select)
   const [selectedPackageIds, setSelectedPackageIds] = useState([]);
-
   // Load dữ liệu từ API
+
   const fetchData = useCallback(async () => {
     try {
       const carModelsResponse = await getAllCarModel();
       setCarModels(carModelsResponse.data.value);
-
-      const servicesResponse = await getAllServices();
-      setServices(servicesResponse.data.value);
-
-      const productsResponse = await getAllProductsOnService();
-      setProductsOnService(productsResponse.data.value);
-
+    } catch (error) {
+      console.error("Error loading data", error);
+    }
+  }, []);
+  const fetchPackage = useCallback(async () => {
+    try {
       const packagesResponse = await getAllPackages();
       setPackages(packagesResponse.data.value);
     } catch (error) {
@@ -75,56 +94,141 @@ export default function CreateAppointment() {
     }
   }, []);
 
+  const fetchDataService = useCallback(async () => {
+    try {
+      const servicesResponse = await getAllServiceByCarModel(carModelSelectId);
+      setServices(servicesResponse.data.value);
+    } catch (error) {
+      console.error("Error loading data", error);
+    }
+  }, [carModelSelectId]);
+
   useEffect(() => {
+    if (carModelSelectId !== "") {
+      packagePick.reset();
+      fetchPackage();
+      fetchDataService();
+      setSelectedServiceId("");
+      setAllProduct([]);
+      setSelectedServices([]);
+      setPackages([]);
+      setProductsOnService([]);
+      setSelectedProductsForService([]);
+      setSelectedPackageIds([]);
+    }
+  }, [carModelSelectId]);
+
+  const fetchDataProduct = useCallback(async () => {
+    try {
+      const productsResponse = await getAllProductSuitable(
+        carModelSelectId,
+        carPartId
+      );
+      setProductsOnService(productsResponse.data.value);
+      setAllProduct((prev) => {
+        const newProducts = productsResponse.data.value.filter(
+          (newProd) => !prev.some((oldProd) => oldProd.id === newProd.id)
+        );
+        return [...prev, ...newProducts];
+      });
+    } catch (error) {
+      console.error("Error loading data", error);
+    }
+  }, [carModelSelectId, carPartId]);
+
+  useEffect(() => {
+    if (selectedServiceId !== "") {
+      fetchDataProduct();
+    }
+  }, [selectedServiceId]);
+
+  useEffect(() => {
+    packagePick.reset();
     fetchData();
   }, [fetchData]);
 
-  // Thêm dịch vụ với replacementParts (cho phép không chọn product)
   const handleAddService = () => {
     if (!selectedServiceId) return;
 
     setSelectedServices((prev) => {
+      // Tính tổng số lượng hiện có của từng sản phẩm trên toàn bộ các service đã chọn
+      const cumulativeQuantities = {};
+      prev.forEach((service) => {
+        service.replacementParts.forEach((part) => {
+          cumulativeQuantities[part.productId] =
+            (cumulativeQuantities[part.productId] || 0) + part.quantity;
+        });
+      });
+
+      // Tạo danh sách các sản phẩm sẽ thêm kèm theo thông tin productName
       const partsToAdd =
         selectedProductsForService && selectedProductsForService.length > 0
           ? selectedProductsForService.map((product) => ({
               productId: product.value,
+              productName: product.label, // Giả sử label chứa tên sản phẩm
               quantity: selectedProductQuantity,
+              totalQuantity: product.totalQuantity,
             }))
-          : []; // cho phép rỗng nếu không chọn sản phẩm
+          : [];
 
-      const existingService = prev.find(
+      // Kiểm tra cho từng sản phẩm trong danh sách sẽ thêm
+      for (const np of partsToAdd) {
+        // Nếu số lượng được chọn là 0, hiển thị thông báo "đã hết hàng"
+        if (selectedProductQuantity === 0) {
+          useService.showToast(400, `${np.productName} đã hết hàng`);
+          return prev;
+        }
+
+        // Lấy số lượng đã được cộng dồn của sản phẩm đó trên tất cả các service đã chọn
+        const currentQuantity = cumulativeQuantities[np.productId] || 0;
+        // Nếu tổng số lượng (hiện có + số lượng muốn thêm) vượt quá tồn kho
+        if (currentQuantity + np.quantity > np.totalQuantity) {
+          const remaining = np.totalQuantity - currentQuantity;
+          if (remaining <= 0) {
+            useService.showToast(400, `${np.productName} đã hết hàng`);
+          } else {
+            useService.showToast(
+              400,
+              `${np.productName} chỉ còn ${remaining} sản phẩm`
+            );
+          }
+          return prev;
+        }
+      }
+
+      // Nếu service đã tồn tại, cập nhật mảng replacementParts
+      const existingServiceIndex = prev.findIndex(
         (s) => s.serviceId === selectedServiceId
       );
-      if (existingService) {
-        // Nếu service đã tồn tại thì cập nhật mảng replacementParts
-        return prev.map((s) => {
-          if (s.serviceId === selectedServiceId) {
-            const updatedParts = [...s.replacementParts];
-            partsToAdd.forEach((np) => {
-              const index = updatedParts.findIndex(
-                (p) => p.productId === np.productId
-              );
-              if (index !== -1) {
-                updatedParts[index].quantity += np.quantity;
-              } else {
-                updatedParts.push(np);
-              }
-            });
-            return { ...s, replacementParts: updatedParts };
+      if (existingServiceIndex !== -1) {
+        const updatedServices = [...prev];
+        const updatedService = { ...updatedServices[existingServiceIndex] };
+        const updatedParts = [...updatedService.replacementParts];
+
+        partsToAdd.forEach((np) => {
+          const index = updatedParts.findIndex(
+            (p) => p.productId === np.productId
+          );
+          if (index !== -1) {
+            updatedParts[index].quantity += np.quantity;
+          } else {
+            updatedParts.push(np);
           }
-          return s;
         });
+        updatedService.replacementParts = updatedParts;
+        updatedServices[existingServiceIndex] = updatedService;
+        return updatedServices;
       } else {
+        // Nếu service chưa tồn tại, thêm service mới
         return [
           ...prev,
           { serviceId: selectedServiceId, replacementParts: partsToAdd },
         ];
       }
     });
-
-    // Reset lựa chọn của service
-    setSelectedServiceId(null);
+    setSelectedServiceId("");
     setSelectedProductsForService([]);
+    setProductsOnService([]);
     setSelectedProductQuantity(1);
   };
 
@@ -146,11 +250,17 @@ export default function CreateAppointment() {
   const handleRemovePackage = (packageId) => {
     setSelectedPackageIds((prev) => prev.filter((id) => id !== packageId));
   };
+  useEffect(() => {
+    packagePick.set((v) => {
+      v.value.Packages = selectedPackageIds;
+    });
+  }, [selectedPackageIds]);
 
   // Khi submit form, chuyển đổi payload theo định dạng API yêu cầu
   const onSubmit = async (data) => {
-    if (selectedServices.length === 0) {
-      alert(
+    if (selectedServices.length === 0 && selectedPackageIds.length === 0) {
+      useService.showToast(
+        400,
         t(
           "error.add_service",
           "Vui lòng thêm ít nhất một dịch vụ (có thể không chọn sản phẩm)"
@@ -176,6 +286,8 @@ export default function CreateAppointment() {
     try {
       await createAppointmentApi(payload);
       reset();
+      setServices([]);
+      setPackages([]);
       setSelectedServices([]);
       setSelectedPackageIds([]);
     } catch (error) {
@@ -186,20 +298,60 @@ export default function CreateAppointment() {
   // Chuyển đổi dữ liệu API thành options cho react-select
   const carModelOptions = carModels.map((model) => ({
     value: model.id,
-    label: model.brandName,
+    label: `${model.modelName} - ${new Date(model.modelYear).getFullYear()}`,
   }));
-  const serviceOptions = services.map((s) => ({
-    value: s.id,
-    label: s.serviceName,
-  }));
-  const productOptions = productsOnService.map((p) => ({
-    value: p.id,
-    label: p.productName,
-  }));
+
+  // Tính toán serviceOptions dựa trên services và packagePick.value.servicesOnPackage
+  const serviceOptions = useMemo(() => {
+    return services
+      .filter((s) => !packagePick.value.servicesOnPackage.includes(s.id))
+      .map((s) => ({
+        value: s.id,
+        label: s.serviceName,
+        price: s.price,
+        carPartId: s.carPartId,
+      }));
+  }, [services, packagePick.value.servicesOnPackage]);
+
+  // Tính tổng số lượng đã chọn cho mỗi productId
+  const aggregatedQuantities = selectedServices.reduce((acc, service) => {
+    service.replacementParts.forEach((part) => {
+      acc[part.productId] = (acc[part.productId] || 0) + part.quantity;
+    });
+    return acc;
+  }, {});
+
+  const productOptions = productsOnService
+    .filter((p) => {
+      const selectedQty = aggregatedQuantities[p.id] || 0;
+      return p.totalQuantity - selectedQty > 0;
+    })
+    .map((p) => ({
+      value: p.id,
+      label: p.productName,
+      totalQuantity: p.totalQuantity,
+    }));
+
   const packageOptions = packages.map((pkg) => ({
     value: pkg.id,
     label: pkg.packageName,
+    price: pkg.packagePrice,
   }));
+  const totalServicePrice = selectedServices.reduce((acc, service) => {
+    const serviceOption = services.find((opt) => opt.id === service.serviceId);
+    // Nếu không tìm thấy thì mặc định giá là 0
+    const servicePrice = serviceOption.price || 0;
+    return acc + servicePrice;
+  }, 0);
+
+  const totalProductPrice = selectedServices.reduce((acc, service) => {
+    const partsTotal =
+      service.replacementParts?.reduce((sum, part) => {
+        const product = allProduct.find((p) => p.id === part.productId);
+        return sum + (product ? product.productPrice * part.quantity : 0);
+      }, 0) || 0;
+    return acc + partsTotal;
+  }, 0);
 
   return (
     <div className=" p-4">
@@ -221,7 +373,10 @@ export default function CreateAppointment() {
                 <Select
                   {...field}
                   options={carModelOptions}
-                  onChange={(option) => field.onChange(option.value)}
+                  onChange={(option) => {
+                    field.onChange(option.value);
+                    setCarModelSelectId(option.value);
+                  }}
                   value={
                     carModelOptions.find(
                       (option) => option.value === field.value
@@ -369,7 +524,10 @@ export default function CreateAppointment() {
                   (option) => option.value === selectedServiceId
                 ) || null
               }
-              onChange={(option) => setSelectedServiceId(option.value)}
+              onChange={(option) => {
+                setSelectedServiceId(option.value);
+                setCarPartId(option.carPartId);
+              }}
               placeholder={t("placeholder.selectService", "Chọn Service")}
               className="min-w-64"
             />
@@ -417,8 +575,15 @@ export default function CreateAppointment() {
                 <th scope="col" className="px-4 py-3 text-left">
                   {t("tableHeaders.serviceName", "Tên Dịch Vụ")}
                 </th>
+
                 <th scope="col" className="px-4 py-3 text-left">
                   {t("tableHeaders.products", "Replacement Parts")}
+                </th>
+                <th scope="col" className="px-4 py-3 text-left">
+                  {t("tableHeaders.priceService", "Giá Dịch vụ")}
+                </th>
+                <th scope="col" className="px-4 py-3 text-left">
+                  {t("tableHeaders.priceProduct", "Giá Phụ Tùng")}
                 </th>
                 <th scope="col" className="px-4 py-3 text-left">
                   {t("tableHeaders.action", "Action")}
@@ -426,42 +591,88 @@ export default function CreateAppointment() {
               </tr>
             </thead>
             {selectedServices.length > 0 && (
-              <tbody className="divide-y divide-gray-200">
-                {selectedServices.map((service, index) => (
-                  <tr key={service.serviceId} className="hover:bg-gray-50">
-                    <td className="px-4 py-2 whitespace-nowrap">{index + 1}</td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      {serviceOptions.find(
-                        (opt) => opt.value === service.serviceId
-                      )?.label || service.serviceId}
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      {service.replacementParts &&
-                      service.replacementParts.length > 0 ? (
-                        service.replacementParts.map((part) => (
-                          <div key={part.productId}>
-                            {productOptions.find(
-                              (opt) => opt.value === part.productId
-                            )?.label || part.productId}{" "}
-                            x {part.quantity}
-                          </div>
-                        ))
-                      ) : (
-                        <span>N/A</span>
-                      )}
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveService(service.serviceId)}
-                        className="text-red-500 hover:underline"
-                      >
-                        {t("buttons.remove", "Xóa")}
-                      </button>
-                    </td>
+              <>
+                <tbody className="divide-y divide-gray-200">
+                  {selectedServices.map((service, index) => (
+                    <tr key={service.serviceId} className="hover:bg-gray-50">
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {index + 1}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {serviceOptions.find(
+                          (opt) => opt.value === service.serviceId
+                        )?.label || service.serviceId}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {service.replacementParts &&
+                        service.replacementParts.length > 0 ? (
+                          service.replacementParts.map((part) => (
+                            <div key={part.productId}>
+                              {allProduct.find(
+                                (product) => product.id === part.productId
+                              )?.productName || part.productId}{" "}
+                              x {part.quantity}
+                            </div>
+                          ))
+                        ) : (
+                          <span>N/A</span>
+                        )}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {" "}
+                        {formatVietnameseCurrency(
+                          serviceOptions.find(
+                            (opt) => opt.value === service.serviceId
+                          )?.price || service.serviceId
+                        )}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {service.replacementParts &&
+                        service.replacementParts.length > 0 ? (
+                          service.replacementParts.map((part) => {
+                            const product = allProduct.find(
+                              (product) => product.id === part.productId
+                            );
+                            const totalPrice = product
+                              ? product.productPrice * part.quantity
+                              : 0;
+                            return (
+                              <div key={part.productId}>
+                                {formatVietnameseCurrency(totalPrice)}
+                              </div>
+                            );
+                          })
+                        ) : (
+                          <span>N/A</span>
+                        )}
+                      </td>
+
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveService(service.serviceId)}
+                          className="text-red-500 hover:underline"
+                        >
+                          {t("buttons.remove", "Xóa")}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+                <tfoot className="bg-gray-100 border-b border-gray-300 uppercase text-xs font-medium text-gray-700">
+                  <tr>
+                    <th scope="col" className="px-4 py-3 text-left" colSpan={3}>
+                      {t("tableHeaders.Total", "Total price")}
+                    </th>
+                    <th scope="col" className="px-4 py-3 text-left">
+                      {formatVietnameseCurrency(totalServicePrice)}
+                    </th>
+                    <th scope="col" className="px-4 py-3 text-left" colSpan={2}>
+                      {formatVietnameseCurrency(totalProductPrice)}
+                    </th>
                   </tr>
-                ))}
-              </tbody>
+                </tfoot>
+              </>
             )}
           </table>
         </div>
@@ -495,10 +706,10 @@ export default function CreateAppointment() {
                         {service.replacementParts &&
                         service.replacementParts.length > 0 ? (
                           service.replacementParts.map((part) => (
-                            <div key={part.productId} className="ml-4">
-                              {productOptions.find(
-                                (opt) => opt.value === part.productId
-                              )?.label || part.productId}{" "}
+                            <div key={part.productId}>
+                              {allProduct.find(
+                                (product) => product.id === part.productId
+                              )?.productName || part.productId}{" "}
                               x {part.quantity}
                             </div>
                           ))
@@ -540,6 +751,9 @@ export default function CreateAppointment() {
                   {t("tableHeaders.packageName", "Tên Package")}
                 </th>
                 <th scope="col" className="px-4 py-3 text-left">
+                  {t("tableHeaders.packagePrice", "Giá Package")}
+                </th>
+                <th scope="col" className="px-4 py-3 text-left">
                   {t("tableHeaders.action", "Action")}
                 </th>
               </tr>
@@ -559,6 +773,9 @@ export default function CreateAppointment() {
                         {pkg?.label || packageId}
                       </td>
                       <td className="px-4 py-2 whitespace-nowrap">
+                        {formatVietnameseCurrency(pkg?.price) || packageId}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
                         <button
                           type="button"
                           onClick={() => handleRemovePackage(packageId)}
@@ -574,7 +791,7 @@ export default function CreateAppointment() {
             )}
           </table>
         </div>
-
+        <ListServiceinPackage />
         <button
           type="submit"
           className="bg-green-500 text-white p-2 rounded mt-4"

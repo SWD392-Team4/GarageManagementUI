@@ -39,17 +39,28 @@ import { useMediaQuery } from "react-responsive";
 import LanguageSwitcherSideBar from "../../components/LanguageSwitcherSideBar/LanguageSwitcherSideBar";
 import { useHandleLogout } from "../Header/service/logout";
 
-export default function SidebarCashier({
+export default function SideBarAdmin({
   isSidebarOpen,
   toggleSidebar,
   onLanguageChange,
 }) {
   const { t } = useTranslation("sidebar_admin");
-
+  const [isDarkMode, setIsDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
   const [openMenu, setOpenMenu] = useState(null);
 
   const isMobile = useMediaQuery({ query: "(max-width: 1024px)" });
   const handleLogout = useHandleLogout();
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDarkMode]);
 
   // Đóng tất cả submenu khi sidebar đóng
   useEffect(() => {
@@ -106,19 +117,7 @@ export default function SidebarCashier({
             <ul className="space-y-3">
               <li className="group">
                 <Link
-                  to="dashboard"
-                  className="flex items-center p-2  text-white  transition-all rounded-lg"
-                >
-                  <FaHome className="w-6 h-6" />
-                  {isSidebarOpen && (
-                    <span className="ml-3">{t("sidebar_admin.dashboard")}</span>
-                  )}
-                </Link>
-                <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
-              </li>
-              <li className="group">
-                <Link
-                  to=""
+                  to="/cashier"
                   className="flex items-center p-2  text-white  transition-all rounded-lg"
                 >
                   <FaUser className="w-6 h-6" />
@@ -128,32 +127,22 @@ export default function SidebarCashier({
                 </Link>
                 <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
               </li>
-              <li className="group">
-                <Link
-                  to="service"
-                  className="flex items-center p-2  text-white  transition-all rounded-lg"
-                >
-                  <FaClipboardList className="w-6 h-6" />
-                  {isSidebarOpen && (
-                    <span className="ml-3">{t("sidebar_admin.service")}</span>
-                  )}
-                </Link>
-                <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
-              </li>
 
-              {/* Suppliers */}
+              {/* Product At Store and Warehouse*/}
               <li className="group">
                 <button
-                  onClick={() => toggleSubMenu("suppliers")}
-                  className="flex items-center p-2  text-white  transition-all rounded-lg"
+                  onClick={() => toggleSubMenu("product_at")}
+                  className="flex items-center p-2 text-white transition-all rounded-lg"
                 >
-                  <FaTruck className="w-6 h-6" />
+                  <FaBox className="w-6 h-6" />
                   {isSidebarOpen && (
-                    <span className="ml-3">{t("sidebar_admin.suppliers")}</span>
+                    <span className="ml-3">
+                      {t("sidebar_admin.product_at")}
+                    </span>
                   )}
                   {isSidebarOpen && (
                     <span className="ml-2">
-                      {openMenu === "suppliers" ? (
+                      {openMenu === "product" ? (
                         <FaChevronDown />
                       ) : (
                         <FaChevronRight />
@@ -162,33 +151,76 @@ export default function SidebarCashier({
                   )}
                 </button>
                 <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
-                {openMenu === "suppliers" && (
-                  <ul className="ml-6  space-y-1">
+                {openMenu === "product_at" && (
+                  <ul className="ml-6 space-y-1">
                     <li>
                       <div className="group/link">
                         <Link
-                          to="suppliers"
-                          className="text-white flex items-center p-2 "
+                          to="/cashier/product-at-store"
+                          className="text-white flex items-center p-2"
                         >
-                          <FaUsers className="w-5 h-5" />
+                          <FaBox className="w-5 h-5" />
                           <span className="ml-2">
-                            {t("sidebar_admin.supplier_list")}
+                            {t("sidebar_admin.product_at_store")}
                           </span>
                         </Link>
                         <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
                       </div>
                     </li>
-                    <li className="group/link">
-                      <Link
-                        to="suppliers-contact"
-                        className="text-white flex items-center p-2 "
-                      >
-                        <FaClipboardList className="w-5 h-5" />
-                        <span className="ml-2">
-                          {t("sidebar_admin.supplier_contact")}
-                        </span>
-                      </Link>
-                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
+                  </ul>
+                )}
+              </li>
+
+              {/* Package Service */}
+              <li className="group">
+                <button
+                  onClick={() => toggleSubMenu("package-service")}
+                  className="flex items-center p-2 text-white transition-all rounded-lg"
+                >
+                  <FaClipboardList className="w-6 h-6" />
+                  {isSidebarOpen && (
+                    <span className="ml-3">{t("sidebar_admin.service")}</span>
+                  )}
+                  {isSidebarOpen && (
+                    <span className="ml-2">
+                      {openMenu === "package-service" ? (
+                        <FaChevronDown />
+                      ) : (
+                        <FaChevronRight />
+                      )}
+                    </span>
+                  )}
+                </button>
+                <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
+                {openMenu === "package-service" && (
+                  <ul className="ml-6 space-y-1">
+                    <li>
+                      <div className="group/link">
+                        <Link
+                          to="/cashier/package-service"
+                          className="text-white flex items-center p-2"
+                        >
+                          <FaClipboardList className="w-5 h-5" />
+                          <span className="ml-2">
+                            {t("sidebar_admin.package_service")}
+                          </span>
+                        </Link>
+                        <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
+                      </div>
+                    </li>
+                    <li>
+                      <div className="group/link">
+                        <Link
+                          to="/cashier/service"
+                          className="text-white flex items-center p-2"
+                        >
+                          <FaClipboardList className="w-5 h-5" />
+                          <span className="ml-2">
+                            {t("sidebar_admin.service_list")}
+                          </span>
+                        </Link>
+                        <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
+                      </div>
                     </li>
                   </ul>
                 )}
@@ -220,24 +252,12 @@ export default function SidebarCashier({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="employee"
+                        to="/cashier/employee"
                         className="text-white flex items-center p-2"
                       >
                         <FaUserCog className="w-5 h-5" />
                         <span className="ml-2">
                           {t("sidebar_admin.employee_list")}
-                        </span>
-                      </Link>
-                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
-                    </li>
-                    <li className="group/link">
-                      <Link
-                        to="employee-schedule"
-                        className="text-white flex items-center p-2"
-                      >
-                        <FaBuilding className="w-5 h-5" />
-                        <span className="ml-2">
-                          {t("sidebar_admin.employee_schedule")}
                         </span>
                       </Link>
                       <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
@@ -272,7 +292,7 @@ export default function SidebarCashier({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="product"
+                        to="/cashier/product"
                         className="text-white flex items-center p-2"
                       >
                         <FaBox className="w-5 h-5" />
@@ -284,7 +304,7 @@ export default function SidebarCashier({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="productCategory"
+                        to="/cashier/productCategory"
                         className="text-white flex items-center p-2"
                       >
                         <FaLayerGroup className="w-5 h-5" />
@@ -296,7 +316,7 @@ export default function SidebarCashier({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="brand"
+                        to="/cashier/brand"
                         className="text-white flex items-center p-2"
                       >
                         <FaTags className="w-5 h-5" />
@@ -336,7 +356,7 @@ export default function SidebarCashier({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="carModal"
+                        to="/cashier/carModal"
                         className="text-white flex items-center p-2"
                       >
                         <FaCarSide className="w-5 h-5" />
@@ -348,7 +368,7 @@ export default function SidebarCashier({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="carCategory"
+                        to="/cashier/carCategory"
                         className="text-white flex items-center p-2"
                       >
                         <FaThList className="w-5 h-5" />
@@ -387,7 +407,7 @@ export default function SidebarCashier({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="carPart"
+                        to="/cashier/carPart"
                         className="text-white flex items-center p-2"
                       >
                         <FaCar className="w-5 h-5" />
@@ -399,7 +419,7 @@ export default function SidebarCashier({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="carPartCategory"
+                        to="/cashier/carPartCategory"
                         className="text-white flex items-center p-2"
                       >
                         <FaThList className="w-5 h-5" />
@@ -438,39 +458,13 @@ export default function SidebarCashier({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="invoice-sale"
+                        to="/cashier/invoice-sale"
                         className="text-white flex items-center p-2"
                       >
                         <FaFileInvoiceDollar className="w-5 h-5" />
 
                         <span className="ml-2">
                           {t("sidebar_admin.invoice_sale")}
-                        </span>
-                      </Link>
-                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
-                    </li>
-                    <li className="group/link">
-                      <Link
-                        to="invoice-service"
-                        className="text-white flex items-center p-2"
-                      >
-                        <TbFileInvoice className="w-5 h-5" />
-
-                        <span className="ml-2">
-                          {t("sidebar_admin.invoice_service")}
-                        </span>
-                      </Link>
-                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
-                    </li>
-                    <li className="group/link">
-                      <Link
-                        to="booking"
-                        className="text-white flex items-center p-2"
-                      >
-                        <TbBrandBooking className="w-5 h-5" />
-
-                        <span className="ml-2">
-                          {t("sidebar_admin.invoice_booking")}
                         </span>
                       </Link>
                       <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
@@ -503,7 +497,7 @@ export default function SidebarCashier({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="manage-customer"
+                        to="/cashier/manage-customer"
                         className="text-white flex items-center p-2"
                       >
                         <PiUserFocus className="w-5 h-5" />
@@ -516,7 +510,7 @@ export default function SidebarCashier({
                     </li>
                     <li className="group/link">
                       <Link
-                        to="chat"
+                        to="/chat"
                         className="text-white flex items-center p-2"
                       >
                         <RiCustomerServiceLine className="w-5 h-5" />
@@ -557,7 +551,7 @@ export default function SidebarCashier({
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
                       <Link
-                        to="appointment"
+                        to="/cashier/appointment"
                         className="text-white flex items-center p-2"
                       >
                         <TbReportSearch className="w-5 h-5" />
@@ -571,26 +565,13 @@ export default function SidebarCashier({
 
                     <li className="group/link">
                       <Link
-                        to="create-appointment"
+                        to="/cashier/create-appointment"
                         className="text-white flex items-center p-2"
                       >
                         <IoCreateOutline className="w-5 h-5" />
 
                         <span className="ml-2">
                           {t("sidebar_admin.ce-appointment")}
-                        </span>
-                      </Link>
-                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
-                    </li>
-                    <li className="group/link">
-                      <Link
-                        to="appointment-mine"
-                        className="text-white flex items-center p-2"
-                      >
-                        <RiGalleryView2 className="w-5 h-5" />
-
-                        <span className="ml-2">
-                          {t("sidebar_admin.now-appointment")}
                         </span>
                       </Link>
                       <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>

@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { getGoodsIssuedSchema } from "./schemas/GoodsIssuedSchemas";
 import { CurrentWarehouse } from "./services/SiginifyGoodsIssued";
 import ProductSelectWithSearch from "./partials/ProductSelectWithSearch";
+import UserService from "../../hooks/services/UserService";
 
 const CreateGoodsIssued = () => {
   const { t } = useTranslation("create_goods_issued");
@@ -31,8 +32,6 @@ const CreateGoodsIssued = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      referenceNumber: "",
-      invoiceCode: "",
       warehouseId: "",
       garageId: "",
     },
@@ -58,7 +57,7 @@ const CreateGoodsIssued = () => {
   const fetchProduct = useCallback(async () => {
     try {
       let response = await getAllProductAtWarehouse();
-      setProducts(response.data);
+      setProducts(response.data.value);
     } catch (error) {
       console.error("Error loading data", error);
     }
@@ -75,12 +74,15 @@ const CreateGoodsIssued = () => {
     setSelectedProducts([]);
     setSelectedProductId(null);
   }, [CurrentWarehouse.value.id]);
-
+  const useService = new UserService();
   const handleAddProduct = () => {
     if (!selectedProductId) return;
     const productFound = products.find((p) => p.id === selectedProductId);
     if (!productFound) return;
-
+    if (productFound.totalQuantity === 0) {
+      useService.showToast(400, "Product out of stock");
+      return;
+    }
     setSelectedProducts((prev) => {
       const existingIndex = prev.findIndex(
         (item) => item.productAtWareHouseId === productFound.id
@@ -182,6 +184,8 @@ const CreateGoodsIssued = () => {
               t={t}
               error={errors.warehouseId?.message}
             />
+          </div>
+          <div>
             <LabelSelectWithSearch
               labelKey="garage"
               name="garageId"
@@ -192,26 +196,8 @@ const CreateGoodsIssued = () => {
             />
           </div>
 
-          {/* Cột 2: Reference Number + Invoice Code */}
-          <div>
-            <LabelInput
-              labelKey="reference_number"
-              name="referenceNumber"
-              register={register}
-              t={t}
-              error={errors.referenceNumber?.message}
-            />
-            <LabelInput
-              labelKey="invoice_code"
-              name="invoiceCode"
-              register={register}
-              t={t}
-              error={errors.invoiceCode?.message}
-            />
-          </div>
-
           {/* Cột 3: Nút Submit và Reset */}
-          <div className="flex flex-col justify-center items-start space-y-7 mt-3">
+          <div className="flex justify-center items-center space-x-7 mt-3">
             <button
               type="submit"
               className="bg-green-500 text-white py-2 px-4 rounded-sm hover:bg-green-600 w-1/3 duration-300"
@@ -221,7 +207,7 @@ const CreateGoodsIssued = () => {
             <button
               type="button"
               onClick={handleResetForm}
-              className="bg-gray-400 text-white py-2 px-4 rounded-sm hover:bg-gray-500 w-1/3"
+              className="bg-gray-500 text-white py-2 px-4 rounded-sm hover:bg-gray-600 w-1/3 duration-300"
             >
               {t("buttons.reset")}
             </button>

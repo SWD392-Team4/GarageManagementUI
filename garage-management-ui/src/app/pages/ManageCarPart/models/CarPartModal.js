@@ -62,7 +62,9 @@ export default function CarPartModal({ isOpen, onClose, onCarPartCreated }) {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 className="text-xl font-semibold mb-4">{t("manage_carpart.create_carpart.title")}</h2>
+        <h2 className="text-xl font-semibold mb-4">
+          {t("manage_carpart.create_carpart.title")}
+        </h2>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* Input Tên phụ tùng */}
@@ -73,7 +75,9 @@ export default function CarPartModal({ isOpen, onClose, onCarPartCreated }) {
               className="w-full p-2 border rounded focus:ring focus:ring-blue-300"
               placeholder={t("manage_carpart.create_carpart.name")}
             />
-            {errors.partName && <p className="text-red-500 text-sm">{errors.partName.message}</p>}
+            {errors.partName && (
+              <p className="text-red-500 text-sm">{errors.partName.message}</p>
+            )}
           </div>
 
           {/* Dropdown Chọn danh mục */}
@@ -82,14 +86,20 @@ export default function CarPartModal({ isOpen, onClose, onCarPartCreated }) {
               {...register("carPartCategoryId")}
               className="w-full p-2 border rounded focus:ring focus:ring-blue-300"
             >
-              <option value="">{t("manage_carpart.create_carpart.select_category")}</option>
+              <option value="">
+                {t("manage_carpart.create_carpart.select_category")}
+              </option>
               {categories.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.partCategory}
                 </option>
               ))}
             </select>
-            {errors.carPartCategoryId && <p className="text-red-500 text-sm">{errors.carPartCategoryId.message}</p>}
+            {errors.carPartCategoryId && (
+              <p className="text-red-500 text-sm">
+                {errors.carPartCategoryId.message}
+              </p>
+            )}
           </div>
 
           {/* Nút hành động */}
@@ -102,27 +112,39 @@ export default function CarPartModal({ isOpen, onClose, onCarPartCreated }) {
             >
               {t("manage_carpart.cancel")}
             </button>
-            <button
-              type="submit"
-              className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 flex items-center"
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? (
-                <>
-                  <svg className="animate-spin h-5 w-5 mr-2 text-white" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8v8H4z"
-                    ></path>
-                  </svg>
-                  {t("manage_carpart.saving")}
-                </>
-              ) : (
-                t("manage_carpart.save")
-              )}
-            </button>
+            {sAccount.value.role === "Administrator" && (
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-700 flex items-center"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <svg
+                      className="animate-spin h-5 w-5 mr-2 text-white"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8v8H4z"
+                      ></path>
+                    </svg>
+                    {t("manage_carpart.saving")}
+                  </>
+                ) : (
+                  t("manage_carpart.save")
+                )}
+              </button>
+            )}
           </div>
         </form>
       </div>

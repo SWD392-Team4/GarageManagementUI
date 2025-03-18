@@ -96,8 +96,7 @@ export const getAllServiceByCarModel = async () => {
 export const getAllProductSuitable = async (carPartId) => {
   try {
     const response = await userService.sendAjax(
-      // `/api/products/car-model/car-part/${BookingSignify.value.carModel}/${carPartId}?ProductStatus=Active&PageSize=0`,
-      "/api/products?ProductStatus=Active",
+      `/api/products/car-model/car-part/noau/${BookingSignify.value.garaId}/${BookingSignify.value.carModel}/${BookingSignify.value.carPartId}?ProductStatus=Active&PageSize=0`,
       "GET",
       null,
       false

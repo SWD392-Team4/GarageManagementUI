@@ -167,17 +167,17 @@
       {
         "index": true,
         "element": "SignIn",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "reset",
         "element": "ResetPasswordWorker",
-        "isSuspense": true
+        "isSuspense2": true
       },
       {
         "path": "logout",
         "element": "LogOut",
-        "isSuspense": true
+        "isSuspense2": true
       }
     ]
   },
@@ -185,9 +185,7 @@
     "path": "/customer",
     "element": "LayoutCustomer",
     "private": {
-      "allowedRoles": [
-        "Customer"
-      ]
+      "allowedRoles": ["Customer"]
     },
     "isSuspense": true,
     "children": [
@@ -209,10 +207,7 @@
     "path": "/Mechanic",
     "element": "LayoutMechanic",
     "private": {
-      "allowedRoles": [
-        "Administrator",
-        "Mechanic"
-      ]
+      "allowedRoles": ["Administrator", "Mechanic"]
     },
     "isSuspense": true,
     "children": [
@@ -246,11 +241,9 @@
   },
   {
     "path": "/chat",
-    "element": "LayoutAdminHome",
+    "element": "DynamicLayout",
     "private": {
-      "allowedRoles": [
-        "Administrator"
-      ]
+      "allowedRoles": ["Administrator", "Cashier", "Mechanic"]
     },
     "isSuspense": true,
     "children": [
@@ -262,12 +255,10 @@
     ]
   },
   {
-    "path": "/admin",
+    "path": "/Administrator",
     "element": "LayoutAdminHome",
     "private": {
-      "allowedRoles": [
-        "Administrator"
-      ]
+      "allowedRoles": ["Administrator"]
     },
     "isSuspense": true,
     "children": [
@@ -507,10 +498,7 @@
     "path": "/Cashier",
     "element": "LayoutCashier",
     "private": {
-      "allowedRoles": [
-        "Administrator",
-        "Cashier"
-      ]
+      "allowedRoles": ["Administrator", "Cashier"]
     },
     "isSuspense": true,
     "children": [
@@ -519,11 +507,7 @@
         "element": "AdminProfile",
         "isSuspense2": true
       },
-      {
-        "path": "dashboard",
-        "element": "Dashboard",
-        "isSuspense2": true
-      },
+
       {
         "path": "suppliers",
         "element": "ManageSupplier",
@@ -537,6 +521,21 @@
       {
         "path": "employee",
         "element": "ManageEmployee",
+        "isSuspense2": true
+      },
+      {
+        "path": "package-service",
+        "element": "ManagePackageService",
+        "isSuspense2": true
+      },
+      {
+        "path": "package-service/create-package",
+        "element": "CreatePackageServicePage",
+        "isSuspense2": true
+      },
+      {
+        "path": "package-service/:id",
+        "element": "ViewPackageServicePage",
         "isSuspense2": true
       },
       {
@@ -605,13 +604,35 @@
         "isSuspense2": true
       },
       {
-        "path": "Chat",
-        "element": "Chat",
+        "path": "manage-customer",
+        "element": "ManageCustomer",
+        "isSuspense2": true
+      },
+
+      {
+        "path": "product-at-store",
+        "element": "ProductAtStore",
+        "isSuspense2": true
+      },
+
+      {
+        "path": "invoice-sale",
+        "element": "ManageInvoiceSale",
         "isSuspense2": true
       },
       {
-        "path": "manage-customer",
-        "element": "ManageCustomer",
+        "path": "invoice-sale/create",
+        "element": "CreateInvoiceSale",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-service",
+        "element": "ManageInvoiceService",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-service/create",
+        "element": "CreateInvoiceService",
         "isSuspense2": true
       },
       {
@@ -629,11 +650,6 @@
             "isSuspense": true
           },
           {
-            "path": "approved",
-            "element": "Approved",
-            "isSuspense": true
-          },
-          {
             "path": "in-progress",
             "element": "InProgess",
             "isSuspense": true
@@ -644,6 +660,11 @@
             "isSuspense": true
           },
           {
+            "path": "approved",
+            "element": "Approved",
+            "isSuspense": true
+          },
+          {
             "path": "canceled",
             "element": "Canceled",
             "isSuspense": true
@@ -651,28 +672,78 @@
         ]
       },
       {
-        "path": "create-appointment",
-        "element": "CreateAppointment"
-      },
-      {
         "path": "appointment/:id",
         "element": "appointmentDetail"
       },
       {
-        "path": "appointment-mine",
-        "element": "MechanicManageAppointment",
-        "isSuspense": true,
-        "children": [
-          {
-            "index": true,
-            "element": "AppoinmentList"
-          },
-          {
-            "path": "detail/:id",
-            "element": "MechanicDashboard",
-            "isSuspense2": true
-          }
-        ]
+        "path": "create-appointment",
+        "element": "CreateAppointment"
+      }
+    ]
+  },
+  {
+    "path": "/WarehouseManager",
+    "element": "LayoutWareHouse",
+    "private": {
+      "allowedRoles": ["Administrator", "WarehouseManager"]
+    },
+    "isSuspense": true,
+    "children": [
+      {
+        "index": true,
+        "element": "AdminProfile",
+        "isSuspense2": true
+      },
+      {
+        "path": "suppliers",
+        "element": "ManageSupplier",
+        "isSuspense2": true
+      },
+      {
+        "path": "suppliers-contact",
+        "element": "ManageSupplierContact",
+        "isSuspense2": true
+      },
+
+      {
+        "path": "product-at-warehouse",
+        "element": "ProductAtWareHouse",
+        "isSuspense2": true
+      },
+      {
+        "path": "product-at-store",
+        "element": "ProductAtStore",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goodsIssued",
+        "element": "ManageGoodsIssued",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goodsIssued/create-goodsIssued",
+        "element": "CreateGoodsIssued",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goodsIssued/:id",
+        "element": "ViewGoodsIssued",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goods-Received",
+        "element": "ManageGoodReceived",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goods-Received/create-goods-Received",
+        "element": "CreateGoodReceived",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-goods-Received/:id",
+        "element": "ViewGoodReceived",
+        "isSuspense2": true
       }
     ]
   }

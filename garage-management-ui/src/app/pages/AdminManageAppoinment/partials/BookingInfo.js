@@ -1,295 +1,508 @@
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { FaEdit } from "react-icons/fa";
-import { GiConfirmed, GiCancel } from "react-icons/gi";
+import React, { useCallback, useEffect, useState } from "react";
+import { FaEdit, FaRegCalendarCheck } from "react-icons/fa";
+import { GiCancel, GiConfirmed } from "react-icons/gi";
+import { IoMdOptions } from "react-icons/io";
+import { TbCalendarCancel } from "react-icons/tb";
+import { useParams } from "react-router-dom";
+import {
+  LabelDateTime,
+  LabelInput,
+  LabelReactSelect,
+  LabelSelect,
+} from "./InputSelect";
+
+import { formatVietnameseCurrency } from "../../ManageGoodsIssued/schemas/GoodsIssuedSchemas";
+import {
+  confirmAppointment,
+  getAllCarModel,
+  getAllGara,
+  getFullInfomationAppointment,
+  updatedAppointmentApi,
+} from "../services/AppointmentService";
+import { currentAppointment } from "../services/store/AppointmentSignify";
+
+// Import các modal đã tách
+import { sAccount } from "../../AuthCustomer/services/store";
+import ArrivalModal from "../models/ArrivalModal";
+import CancelModal from "../models/CancelModal";
+import ConfirmationModal from "../models/ConfirmationModal";
+import { useTranslation } from "react-i18next";
+
+// Hàm chuyển đổi datetime (cắt phần giây, timezone, ...)
+const formatDateTime = (dateString) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  const pad = (n) => n.toString().padStart(2, "0");
+  const year = date.getFullYear();
+  const month = pad(date.getMonth() + 1);
+  const day = pad(date.getDate());
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
+};
+
+const defaultValues = {
+  id: "#",
+  emp1: "",
+  emp2: "",
+  gara: "",
+  status: "",
+  model: "", // carModelId
+  mileage: "",
+  licenser: "",
+  estimatedTime: "",
+  actualTime: "",
+  estimatedEndTime: "",
+  actualEndTime: "",
+  expectedPrice: "",
+  dateCreated: "",
+  dateUpdated: "",
+  type: "",
+  customerName: "",
+  phone: "",
+  email: "",
+};
 
 const BookingInfo = () => {
-  const { register, handleSubmit, setValue, reset } = useForm();
+  const { id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
+  const [carModels, setCarModels] = useState([]);
+  const [gara, setGara] = useState([]);
+  const [formData, setFormData] = useState(defaultValues);
+  const { t } = useTranslation("appoinment-admin");
+  // State quản lý hiển thị menu options và các modal
+  const [showOptionsMenu, setShowOptionsMenu] = useState(false);
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showCancelModal, setShowCancelModal] = useState(false);
+  const [showArrivalModal, setShowArrivalModal] = useState(false);
+  const sAppointment = currentAppointment.use();
+  const fetchData = useCallback(async () => {
+    try {
+      const carModelsResponse = await getAllCarModel();
+      setCarModels(carModelsResponse.data.value);
+      const garaRes = await getAllGara();
+      setGara(garaRes.data.value);
+    } catch (error) {
+      console.error("Error loading car models", error);
+    }
+  }, [id]);
 
-  // 🟢 Dữ liệu giả lập từ Backend
-  const garages = [
-    { id: "1", name: "Gara A" },
-    { id: "2", name: "Gara B" },
-    { id: "3", name: "Gara C" },
-  ];
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
-  const statuses = ["Pending", "Confirmed", "Completed", "Cancelled"];
-  const types = ["Repair", "Maintenance", "Inspection"];
+  const fetchAppointment = useCallback(async () => {
+    try {
+      const response = await getFullInfomationAppointment(id);
+      const appointment = response.data.value;
+      const apiValues = {
+        id: appointment.verificationCode,
+        emp1: appointment.approveByEmployee
+          ? { name: appointment.approveByEmployee, bg: "bg-gray-200" }
+          : { name: "N/A", bg: "bg-gray-200" },
+        emp2: appointment.rejectByEmployee
+          ? { name: appointment.rejectByEmployee, bg: "bg-gray-200" }
+          : { name: "N/A", bg: "bg-gray-200" },
+        gara: appointment.garageId,
+        status: { name: appointment.status, bg: "bg-gray-200" },
+        model: appointment.carModelId,
+        mileage: appointment.mileage,
+        licenser: appointment.carLicensePlateNumber,
+        estimatedTime: formatDateTime(appointment.estimatedAppointmentTime),
+        actualTime: "",
+        estimatedEndTime: formatDateTime(appointment.estimatedEndTime),
+        actualEndTime: "",
+        expectedPrice: formatVietnameseCurrency(appointment.price),
+        dateCreated: formatDateTime(appointment.createdAt),
+        dateUpdated: formatDateTime(appointment.updatedAt),
+        type: appointment.appointmentType,
+        customerName: appointment.customerName,
+        phone: appointment.customerPhoneNumber,
+        email: appointment.customerEmail,
+      };
+      currentAppointment.set((v) => {
+        v.value.status = appointment.status;
+        v.value.appointmentDetails = appointment.appointmentDetails;
+        v.value.appointmentDetailPackages =
+          appointment.appointmentDetailPackages;
+      });
+      setFormData(apiValues);
+    } catch (error) {
+      console.error("Error fetching appointment: ", error);
+    }
+  }, [id]);
 
-  // 🟢 Dữ liệu mặc định
-  const defaultValues = {
-    id: "#123",
-    emp: "Huy Hanh",
-    gara: "1",
-    status: "Pending",
-    model: "#123",
-    mileage: "20000",
-    licenser: "1",
-    condition: "Good",
-    estimatedTime: "2025-02-13T10:00",
-    actualTime: "",
-    estimatedEndTime: "2025-02-14T18:00",
-    actualEndTime: "",
-    expectedPrice: "300000000",
-    dateCreated: "2025-02-13T05:00",
-    dateUpdated: "",
-    type: "Repair",
-    customerName: "Tran Huy Hanh",
-    phone: "0962147742",
-    email: "huyhanhpopo@gmail.com",
+  useEffect(() => {
+    fetchAppointment();
+  }, [id, isEditing, currentAppointment.value.load]);
+
+  // Hàm kiểm tra xem estimatedTime có cùng ngày với hiện tại không
+  const isSameDay = (dateString) => {
+    if (!dateString) return false;
+    const date = new Date(dateString);
+    const now = new Date();
+    return (
+      date.getFullYear() === now.getFullYear() &&
+      date.getMonth() === now.getMonth() &&
+      date.getDate() === now.getDate()
+    );
   };
 
-  // Khi component mount, đặt giá trị mặc định
-  useEffect(() => {
-    Object.keys(defaultValues).forEach((key) => {
-      setValue(key, defaultValues[key]);
-    });
-  }, [setValue]);
+  // Xử lý thay đổi input thông thường
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-  // 🟢 Nhấn "Edit" để vào chế độ chỉnh sửa
+  // Nhận giá trị từ react-select cho Model
+  const handleModelChange = (selectedOption) => {
+    setFormData((prev) => ({
+      ...prev,
+      model: selectedOption ? selectedOption.id : "",
+    }));
+  };
+
+  // Chuyển sang chế độ chỉnh sửa
   const handleEdit = () => {
     setIsEditing(true);
   };
 
-  // 🟢 Nhấn "Confirm" để lưu thay đổi
-  const handleConfirm = (data) => {
-    console.log("Updated Data:", data);
+  const handleConfirm = async (e) => {
+    e.preventDefault();
+    const payload = {
+      carModelId: formData.model,
+      mileage: Number(formData.mileage),
+      customerName: formData.customerName,
+      customerPhoneNumber: formData.phone,
+      customerEmail: formData.email,
+      estimatedAppointmentTime: new Date(formData.estimatedTime).toISOString(),
+      estimatedEndTime: new Date(formData.estimatedEndTime).toISOString(),
+      carLicensePlateNumber: formData.licenser,
+    };
+
+    try {
+      await updatedAppointmentApi(payload, id);
+    } catch (error) {
+      console.error("Error updating appointment:", error);
+    }
     setIsEditing(false);
   };
 
-  // 🟢 Nhấn "Cancel" để hủy thay đổi
+  // Hủy chỉnh sửa, đặt lại giá trị mặc định hiện tại
   const handleCancel = () => {
-    reset(defaultValues);
+    setFormData(defaultValues);
     setIsEditing(false);
+  };
+  const handleCancelMenu = () => {
+    setShowOptionsMenu(false);
+  };
+
+  // Xử lý khi nhấn vào một trong các option của menu
+  const handleOptionClick = (optionType) => {
+    setShowOptionsMenu(false);
+    if (optionType === "confirmation") {
+      setShowConfirmModal(true);
+    } else if (optionType === "cancel") {
+      setShowCancelModal(true);
+    } else if (optionType === "arrival") {
+      setShowArrivalModal(true);
+    }
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(handleConfirm)}
-      className="border bg-white border-gray-300 shadow-md p-4 w-full overflow-auto"
-    >
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-5 sm:grid-cols-2">
-        <div>
-          <LabelInput label="Id" name="id" register={register} readOnly />
-          <LabelInput
-            label="Emp"
-            name="emp"
-            register={register}
-            editable={isEditing}
-          />
-          <LabelSelect
-            label="Gara"
-            name="gara"
-            register={register}
-            options={garages}
-            editable={isEditing}
-          />
-          <LabelSelect
-            label="Status"
-            name="status"
-            register={register}
-            options={statuses}
-            editable={isEditing}
-          />
-        </div>
+    <>
+      <div className="border bg-white border-gray-300 shadow-md p-4 w-full overflow-auto">
+        <form onSubmit={handleConfirm}>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-5 sm:grid-cols-2">
+            <div>
+              <LabelInput
+                label={t("bookingInfo.id")}
+                name="id"
+                value={formData.id}
+                onChange={handleChange}
+                readOnly={true}
+              />
+              <LabelInput
+                label={t("bookingInfo.employeeApproved")}
+                name="emp1"
+                value={formData.emp1.name}
+                bg={formData.emp1.bg}
+                onChange={handleChange}
+                // editable={isEditing}
+              />
+              <LabelInput
+                label={t("bookingInfo.employeeReject")}
+                name="emp2"
+                value={formData.emp2.name}
+                bg={formData.emp2.bg}
+                onChange={handleChange}
+                // editable={isEditing}
+              />
+              <LabelInput
+                label={t("bookingInfo.status")}
+                name="status"
+                value={formData.status.name}
+                bg={formData.status.bg}
+              />
+            </div>
 
-        <div>
-          <LabelInput
-            label="Model"
-            name="model"
-            register={register}
-            editable={isEditing}
-          />
-          <LabelInput
-            label="Mileage"
-            name="mileage"
-            register={register}
-            editable={isEditing}
-          />
-          <LabelInput
-            label="Licenser"
-            name="licenser"
-            register={register}
-            editable={isEditing}
-          />
-          <LabelInput
-            label="Condition"
-            name="condition"
-            register={register}
-            editable={isEditing}
-          />
-        </div>
+            <div>
+              <LabelReactSelect
+                label={t("bookingInfo.model")}
+                name="model"
+                value={formData.model}
+                onChange={handleModelChange}
+                options={carModels}
+                editable={isEditing}
+              />
+              <LabelInput
+                label={t("bookingInfo.mileage")}
+                name="mileage"
+                value={formData.mileage}
+                onChange={handleChange}
+                editable={isEditing}
+              />
+              <LabelInput
+                label={t("bookingInfo.licenser")}
+                name="licenser"
+                value={formData.licenser}
+                onChange={handleChange}
+                editable={isEditing}
+              />
 
-        <div>
-          <LabelDateTime
-            label="Estimated Time"
-            name="estimatedTime"
-            register={register}
-            editable={isEditing}
-          />
-          <LabelDateTime
-            label="Actual Time"
-            name="actualTime"
-            register={register}
-            // editable={isEditing}
-          />
-          <LabelDateTime
-            label="Estimated End Time"
-            name="estimatedEndTime"
-            register={register}
-            editable={isEditing}
-          />
-          <LabelDateTime
-            label="Actual End Time"
-            name="actualEndTime"
-            register={register}
-            // editable={isEditing}
-          />
-        </div>
+              <LabelSelect
+                label={t("bookingInfo.gara")}
+                options={gara}
+                name="gara"
+                value={formData.gara}
+              />
+            </div>
 
-        <div>
-          <LabelInput
-            label="Expected Price"
-            name="expectedPrice"
-            register={register}
-            editable={isEditing}
-          />
-          <LabelDateTime
-            label="Date Created"
-            name="dateCreated"
-            register={register}
-            readOnly
-          />
-          <LabelDateTime
-            label="Date Updated"
-            name="dateUpdated"
-            register={register}
-            // editable={isEditing}
-          />
-          <LabelSelect
-            label="Type"
-            name="type"
-            register={register}
-            options={types}
-            editable={isEditing}
-          />
-        </div>
+            <div>
+              <LabelDateTime
+                label={t("bookingInfo.estimatedTime")}
+                name="estimatedTime"
+                value={formData.estimatedTime}
+                onChange={handleChange}
+                editable={isEditing}
+              />
+              <LabelDateTime
+                label={t("bookingInfo.actualTime")}
+                name="actualTime"
+                value={formData.actualTime}
+                onChange={handleChange}
+              />
+              <LabelDateTime
+                label={t("bookingInfo.estimatedEndTime")}
+                name="estimatedEndTime"
+                value={formData.estimatedEndTime}
+                onChange={handleChange}
+                editable={isEditing}
+              />
+              <LabelDateTime
+                label={t("bookingInfo.actualEndTime")}
+                name="actualEndTime"
+                value={formData.actualEndTime}
+                onChange={handleChange}
+              />
+            </div>
 
-        <div>
-          <LabelInput
-            label="Customer Name"
-            name="customerName"
-            register={register}
-            editable={isEditing}
-          />
-          <LabelInput
-            label="Phone"
-            name="phone"
-            register={register}
-            editable={isEditing}
-          />
-          <LabelInput
-            label="Email"
-            name="email"
-            register={register}
-            editable={isEditing}
-          />
+            <div>
+              <LabelInput
+                label={t("bookingInfo.expectedPrice")}
+                name="expectedPrice"
+                value={formData.expectedPrice}
+              />
+              <LabelDateTime
+                label={t("bookingInfo.dateCreated")}
+                name="dateCreated"
+                value={formData.dateCreated}
+                onChange={handleChange}
+                readOnly={true}
+              />
+              <LabelDateTime
+                label={t("bookingInfo.dateUpdated")}
+                name="dateUpdated"
+                value={formData.dateUpdated}
+                onChange={handleChange}
+              />
+              <LabelInput
+                label={t("bookingInfo.type")}
+                name="type"
+                value={formData.type}
+                readOnly
+              />
+            </div>
+
+            <div>
+              <LabelInput
+                label={t("bookingInfo.customerName")}
+                name="customerName"
+                value={formData.customerName}
+                onChange={handleChange}
+                editable={isEditing}
+              />
+              <LabelInput
+                label={t("bookingInfo.phone")}
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                editable={isEditing}
+              />
+              <LabelInput
+                label={t("bookingInfo.email")}
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                editable={isEditing}
+              />
+            </div>
+          </div>
+          {/* Nút Hành Động */}
+        </form>
+
+        <div className="flex justify-end mt-4">
+          {isEditing ? (
+            <>
+              <button
+                type="button"
+                onClick={handleCancel}
+                className="p-2 bg-red-300 rounded hover:bg-red-400 mr-2"
+              >
+                <GiCancel className="text-white" />
+              </button>
+              <button
+                type="submit"
+                onClick={handleConfirm}
+                className="p-2 bg-green-300 rounded hover:bg-green-400"
+              >
+                <GiConfirmed className="text-white" />
+              </button>
+            </>
+          ) : showOptionsMenu ? (
+            <div className="flex">
+              {formData.status.name === "Pending" && (
+                <button
+                  type="button"
+                  onClick={() => handleOptionClick("confirmation")}
+                  className="p-2 bg-blue-300 rounded hover:bg-blue-400 mr-2"
+                >
+                  <GiConfirmed className="text-white" />
+                </button>
+              )}
+              {(formData.status.name === "Pending" ||
+                formData.status.name === "Approved") && (
+                <button
+                  type="button"
+                  onClick={() => handleOptionClick("cancel")}
+                  className="p-2 bg-red-300 rounded hover:bg-red-400 mr-2"
+                >
+                  <TbCalendarCancel className="text-white" />
+                </button>
+              )}
+              {isSameDay(formData.estimatedTime) &&
+                formData.status.name !== "Rejected" && (
+                  <button
+                    type="button"
+                    onClick={() => handleOptionClick("arrival")}
+                    className="p-2 bg-green-300 rounded hover:bg-green-400 mr-2"
+                  >
+                    <FaRegCalendarCheck className="text-white" />
+                  </button>
+                )}
+              <button
+                type="button"
+                onClick={handleCancelMenu}
+                className="p-2 bg-red-300 rounded hover:bg-red-400"
+              >
+                <GiCancel className="text-white" />
+              </button>
+            </div>
+          ) : (
+            <div className="flex">
+              {formData.status.name !== "Rejected" &&
+                formData.status.name !== "Cancelled" && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={handleEdit}
+                      className="p-2 bg-gray-300 rounded hover:bg-gray-400 mr-2"
+                    >
+                      <FaEdit className="text-purple-700" />
+                    </button>
+
+                    {(formData.status.name === "Pending" ||
+                      formData.status.name === "Approved") && (
+                      <button
+                        type="button"
+                        onClick={() => setShowOptionsMenu(true)}
+                        className="p-2 bg-gray-300 rounded hover:bg-gray-400"
+                      >
+                        <IoMdOptions className="text-purple-700" />
+                      </button>
+                    )}
+                  </>
+                )}
+            </div>
+          )}
         </div>
       </div>
 
-      {/* 🟢 Nút Hành Động */}
-      <div className="flex justify-end mt-4">
-        {isEditing ? (
-          <>
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="p-2 bg-red-300 rounded hover:bg-red-400 mr-2"
-            >
-              <GiCancel className="text-white" />
-            </button>
-            <button
-              type="submit"
-              className="p-2 bg-green-300 rounded hover:bg-green-400"
-            >
-              <GiConfirmed className="text-white" />
-            </button>
-          </>
-        ) : (
-          <button
-            type="button"
-            onClick={handleEdit}
-            className="p-2 bg-gray-300 rounded hover:bg-gray-400"
-          >
-            <FaEdit className="text-purple-700" />
-          </button>
-        )}
-      </div>
-    </form>
+      {/* Sử dụng các modal riêng */}
+      <ConfirmationModal
+        isOpen={showConfirmModal}
+        appointmentId={id}
+        confirmAppointment={confirmAppointment}
+        onCancel={() => setShowConfirmModal(false)}
+        onConfirm={(response) => {
+          setShowConfirmModal(false);
+          if (response) {
+            setFormData((prev) => ({
+              ...prev,
+              emp1: {
+                name: sAccount.value.firstName + sAccount.value.lastName,
+                bg: "bg-green-200",
+              },
+              status: { name: "Approved", bg: "bg-green-200" },
+            }));
+          }
+        }}
+      />
+
+      <CancelModal
+        isOpen={showCancelModal}
+        onCancel={() => setShowCancelModal(false)}
+        id={id}
+        onConfirm={(response) => {
+          if (response) {
+            setFormData((prev) => ({
+              ...prev,
+              emp2: {
+                name: sAccount.value.firstName + sAccount.value.lastName,
+                bg: "bg-red-200",
+              },
+              status: { name: "Reject", bg: "bg-red-200" },
+            }));
+          }
+          setShowCancelModal(false);
+        }}
+      />
+
+      <ArrivalModal
+        isOpen={showArrivalModal}
+        formData={formData}
+        onCancel={() => setShowArrivalModal(false)}
+        id={id}
+        onConfirm={() => {
+          // Xử lý logic xác nhận arrival
+          setShowArrivalModal(false);
+        }}
+      />
+    </>
   );
 };
-
-// 🟢 Component Input Linh Hoạt
-const LabelInput = ({
-  label,
-  name,
-  register,
-  editable = false,
-  readOnly = false,
-}) => (
-  <div className="flex items-center gap-2 mb-2">
-    <label className="text-sm font-medium text-gray-600 w-1/3">{label}</label>
-    <input
-      type="text"
-      {...register(name)}
-      readOnly={readOnly || !editable}
-      className={`w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm ${
-        editable ? "bg-white" : "bg-gray-200"
-      }`}
-    />
-  </div>
-);
-
-// Component Select
-const LabelSelect = ({ label, name, register, options, editable }) => (
-  <div className="flex items-center gap-2 mb-2">
-    <label className="text-sm font-medium text-gray-600 w-1/3">{label}</label>
-    <select
-      {...register(name)}
-      disabled={!editable}
-      className={`w-2/3 border bg-gray-200  border-gray-300 rounded-sm px-2 py-1 text-sm ${
-        editable ? "bg-white" : "bg-gray-200 "
-      }`}
-    >
-      {options.map((option) =>
-        typeof option === "object" ? (
-          <option key={option.id} value={option.id}>
-            {option.name}
-          </option>
-        ) : (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        )
-      )}
-    </select>
-  </div>
-);
-
-// 🟢 Component DateTime Picker
-const LabelDateTime = ({ label, name, register, editable, readOnly }) => (
-  <div className="flex items-center gap-2 mb-2">
-    <label className="text-sm font-medium text-gray-600 w-1/3">{label}</label>
-    <input
-      type="datetime-local"
-      {...register(name)}
-      readOnly={readOnly || !editable}
-      className={`w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm ${
-        editable ? "bg-white" : "bg-gray-200"
-      }`}
-    />
-  </div>
-);
 
 export default BookingInfo;
