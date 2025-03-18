@@ -31,6 +31,33 @@
       "quantity": "Số lượng",
       "created_at": "Ngày tạo",
       "close": "Đóng"
+    },
+    "card_product": {
+      "brand": "Thương hiệu",
+      "category": "Danh mục",
+      "no_category": "Không có danh mục",
+      "no_brand": "Không có thương hiệu"
+    },
+    "status": {
+      "active": "Hoạt động",
+      "inactive": "Không hoạt động"
+    },
+    "stock": {
+      "available": "Còn hàng",
+      "out_of_stock": "Hết hàng"
+    },
+    "sidebar_product": {
+      "product_name": "Tên sản phẩm",
+      "price": "Giá bán",
+      "currency": "VND",
+      "status": "Trạng thái",
+      "stock_quantity": "Số lượng tồn kho",
+      "category": "Danh mục",
+      "brand": "Thương hiệu",
+      "barcode": "Mã vạch",
+      "description": "Mô tả sản phẩm",
+      "no_description": "Chưa có mô tả.",
+      "loading": "Đang tải..."
     }
   }
 }

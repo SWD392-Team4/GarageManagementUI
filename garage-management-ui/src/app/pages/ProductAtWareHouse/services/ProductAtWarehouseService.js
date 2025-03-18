@@ -9,7 +9,7 @@ const userService = new UserService();
 export const getAllProductAtWarehouse = async (PageNumber = 1) => {
   try {
     const response = await userService.sendAjax(
-      `/api/product-at-warehouses?PageNumber=${PageNumber}`,
+      `/api/product-at-garages?PageNumber=${PageNumber}`,
       "GET",
       null,
       true
@@ -73,7 +73,7 @@ export const getProductByWareHouse = async (warehouseId, params) => {
       .map((key) => `${key}=${encodeURIComponent(params[key])}`)
       .join("&");
 
-    const url = `/api/products/warehouse/${warehouseId}${
+    const url = `/api/product-at-garages/${
       queryString ? `?${queryString}` : ""
     }`;
 
@@ -92,7 +92,7 @@ export const getProductByWareHouse = async (warehouseId, params) => {
 export const getProductDetails = async (productId) => {
   try {
     const response = await userService.sendAjax(
-      `/api/products/product/${productId}`,
+      `/api/product-at-garages/${productId}`,
       "GET",
       null,
       true

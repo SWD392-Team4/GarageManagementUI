@@ -8,11 +8,15 @@ import {
   getStockColor,
 } from "../../schemas/ProductAtStoreSchemas";
 import Barcode from "react-barcode";
+import { useTranslation } from "react-i18next";
 
 export default function ProductSidebar({
   selectedProduct,
   handleCloseSidebar,
+  isMobile,
 }) {
+  const { t } = useTranslation("product_at_store");
+
   return (
     selectedProduct && (
       <>
@@ -30,7 +34,7 @@ export default function ProductSidebar({
             <div className="w-full flex justify-center">
               <img
                 src={
-                  selectedProduct.imageLink?.[0] ||
+                  selectedProduct.productImage?.[0] ||
                   "https://via.placeholder.com/300"
                 }
                 alt={selectedProduct.productName}
@@ -42,7 +46,10 @@ export default function ProductSidebar({
             <div className="mt-4 flex flex-col gap-4">
               {/* Tên sản phẩm */}
               <div>
-                <label className="text-gray-500 text-sm">Tên sản phẩm:</label>
+                <label className="text-gray-500 text-sm">
+                  {t("product_at_store.sidebar_product.product_name")}:
+                </label>
+
                 <h2 className="text-2xl font-bold text-gray-800">
                   {selectedProduct.productName}
                 </h2>
@@ -52,7 +59,9 @@ export default function ProductSidebar({
 
               {/* Giá tiền */}
               <div>
-                <label className="text-gray-500 text-sm">Giá bán:</label>
+                <label className="text-gray-500 text-sm">
+                  {t("product_at_store.sidebar_product.price")}:
+                </label>
                 <p className="text-lg font-semibold text-blue-600">
                   {selectedProduct.productPrice} VND
                 </p>
@@ -62,7 +71,9 @@ export default function ProductSidebar({
 
               {/* Trạng thái Hoạt động/Không hoạt động */}
               <div>
-                <label className="text-gray-500 text-sm">Trạng thái:</label>
+                <label className="text-gray-500 text-sm">
+                  {t("product_at_store.sidebar_product.status")}:
+                </label>
                 <span
                   className={`px-3 py-1 text-sm font-semibold rounded-md ${getStatusColor(
                     selectedProduct.status
@@ -77,25 +88,23 @@ export default function ProductSidebar({
               {/* Số lượng & Tình trạng tồn kho */}
               <div>
                 <label className="text-gray-500 text-sm">
-                  Số lượng tồn kho:
+                  {t("product_at_store.sidebar_product.stock_quantity")}:
                 </label>
                 <div className="flex items-center gap-2">
                   <span className="flex items-center gap-1 text-md font-semibold">
                     <FaBox className="text-gray-600" />
-                    <span
-                      className={getStockColor(selectedProduct.totalQuantity)}
-                    >
-                      {selectedProduct.totalQuantity}
+                    <span className={getStockColor(selectedProduct.quantity)}>
+                      {selectedProduct.quantity}
                     </span>
                   </span>
                   <span
                     className={`px-3 py-1 text-sm font-semibold rounded-md ${
-                      selectedProduct.totalQuantity > 0
+                      selectedProduct.quantity > 0
                         ? "bg-green-100 text-green-700"
                         : "bg-red-100 text-red-700"
                     }`}
                   >
-                    {getStockLabel(selectedProduct.totalQuantity)}
+                    {getStockLabel(selectedProduct.quantity)}
                   </span>
                 </div>
               </div>
@@ -104,15 +113,19 @@ export default function ProductSidebar({
 
               {/* Danh mục xe */}
               <div>
-                <label className="text-gray-500 text-sm">Danh mục xe:</label>
+                <label className="text-gray-500 text-sm">
+                  {t("product_at_store.sidebar_product.category")}:
+                </label>
                 <p className="text-gray-700 text-md">
-                  {selectedProduct.category} Car Category
+                  {selectedProduct.category}
                 </p>
               </div>
 
               {/* Thương hiệu */}
               <div>
-                <label className="text-gray-500 text-sm">Thương hiệu:</label>
+                <label className="text-gray-500 text-sm">
+                  {t("product_at_store.sidebar_product.brand")}:
+                </label>
                 <p className="text-gray-700 text-md">
                   {selectedProduct.brandName}
                 </p>
@@ -122,28 +135,33 @@ export default function ProductSidebar({
 
               {/*Barcode*/}
               <div>
-                <label className="text-gray-500 text-sm">BarCode:</label>
-                <div className="border rounded-md p-3 bg-gray-50">
+                <label className="text-gray-500 text-sm">
+                  {t("product_at_store.sidebar_product.barcode")}:
+                </label>
+                <div className="border rounded-md p-3 bg-gray-50 flex justify-center items-center">
                   <Barcode
-                    value={selectedProduct.productBarcode}
-                    width={1}
-                    height={80}
-                    // displayValue={true}
-                    fontSize={10}
-                    // lineColor="#333"
+                    value={selectedProduct.productBarcodeAtGarage}
+                    width={isMobile ? 0.5 : 0.6}
+                    height={isMobile ? 50 : 80}
+                    fontSize={isMobile ? 10 : 15}
+                    displayValue={true}
+                    lineColor="#333"
                   />
                 </div>
               </div>
               {/* Mô tả sản phẩm (Markdown) */}
               <div>
-                <label className="text-gray-500 text-sm">Mô tả sản phẩm:</label>
+                <label className="text-gray-500 text-sm">
+                  {t("product_at_store.sidebar_product.description")}:
+                </label>
                 <div
                   className="border rounded-md p-3 bg-gray-50"
                   data-color-mode="light"
                 >
                   <MDEditor.Markdown
                     source={
-                      selectedProduct.productDescription || "_Chưa có mô tả._"
+                      selectedProduct.productDescription ||
+                      t("product_at_store.sidebar_product.no_description")
                     }
                   />
                 </div>
@@ -151,7 +169,9 @@ export default function ProductSidebar({
             </div>
           </>
         ) : (
-          <p className="text-gray-500 text-center">Loading...</p>
+          <p className="text-gray-500 text-center">
+            {t("product_at_store.sidebar_product.loading")}
+          </p>
         )}
       </>
     )

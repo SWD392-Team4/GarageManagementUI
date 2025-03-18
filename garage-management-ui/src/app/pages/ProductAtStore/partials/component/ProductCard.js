@@ -5,14 +5,16 @@ import {
   getStockLabel,
   getStockColor,
 } from "../../schemas/ProductAtStoreSchemas";
+import { useTranslation } from "react-i18next";
 
 export default function ProductCard({ product, handleSelectProduct }) {
+  const { t } = useTranslation("product_at_store");
   console.log("Check product : ", product);
   return (
     <div
       key={product.id}
       className="border rounded-xl shadow-md p-4 cursor-pointer hover:shadow-xl transition bg-white h-full flex flex-col justify-between"
-      onClick={() => handleSelectProduct(product.productId)}
+      onClick={() => handleSelectProduct(product.id)}
     >
       {/* Ảnh sản phẩm */}
       <img
@@ -34,13 +36,14 @@ export default function ProductCard({ product, handleSelectProduct }) {
           <div className="flex items-center gap-1">
             <FaTag className="text-gray-500" />
             <span className="font-medium">
-              {product.productCategory || "Không có danh mục"}
+              {product.productCategory ||
+                t("product_at_store.card_product.no_category")}
             </span>
           </div>
           <div className="flex items-center gap-1">
             <FaIndustry className="text-gray-500" />
             <span className="font-medium">
-              {product.brandName || "Không có thương hiệu"}
+              {product.brandName || t("product_at_store.card_product.no_brand")}
             </span>
           </div>
         </div>
@@ -60,16 +63,14 @@ export default function ProductCard({ product, handleSelectProduct }) {
           <div className="flex items-center gap-2">
             <span className="flex items-center gap-1">
               <FaBox className="text-gray-600" />
-              <span className="font-semibold text-md">
-                {product.totalQuantity}
-              </span>
+              <span className="font-semibold text-md">{product.quantity}</span>
             </span>
             <span
               className={`px-3 py-1 text-sm font-semibold rounded-md ${getStockColor(
-                product.totalQuantity
+                product.quantity
               )}`}
             >
-              {getStockLabel(product.totalQuantity)}
+              {getStockLabel(product.quantity)}
             </span>
           </div>
         </div>

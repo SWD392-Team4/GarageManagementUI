@@ -171,49 +171,6 @@ export default function SideBarAdmin({
                 )}
               </li>
 
-              {/* Suppliers */}
-              <li className="group">
-                <button
-                  onClick={() => toggleSubMenu("product_at")}
-                  className="flex items-center p-2 text-white transition-all rounded-lg"
-                >
-                  <FaBox className="w-6 h-6" />
-                  {isSidebarOpen && (
-                    <span className="ml-3">
-                      {t("sidebar_admin.product_at")}
-                    </span>
-                  )}
-                  {isSidebarOpen && (
-                    <span className="ml-2">
-                      {openMenu === "product" ? (
-                        <FaChevronDown />
-                      ) : (
-                        <FaChevronRight />
-                      )}
-                    </span>
-                  )}
-                </button>
-                <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
-                {openMenu === "product_at" && (
-                  <ul className="ml-6 space-y-1">
-                    <li>
-                      <div className="group/link">
-                        <Link
-                          to="/cashier/product-at-store"
-                          className="text-white flex items-center p-2"
-                        >
-                          <FaBox className="w-5 h-5" />
-                          <span className="ml-2">
-                            {t("sidebar_admin.product_at_store")}
-                          </span>
-                        </Link>
-                        <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
-                      </div>
-                    </li>
-                  </ul>
-                )}
-              </li>
-
               {/* Package Service */}
               <li className="group">
                 <button

@@ -1,25 +1,43 @@
 {
-    "product_at_warehouse": {
-        "search": {
-            "minQuantity": "Min Quantity",
-            "search_placeholder_minQuantity": "Enter minimum quantity",
-            "maxQuantity": "Max Quantity",
-            "search_placeholder_maxQuantity": "Enter maximum quantity",
-            "status": "Status",
-            "search_status_placeholder": "Select status",
-            "active": "Active",
-            "inactive": "Inactive",
-            "createdAt": "Created At",
-            "updatedAt": "Updated At",
-            "clear_filters": "Clear Filters",
-            "search": "Search"
-        },
-        "product_at_house": "View",
-        "id": "ID",
-        "quantity": "Quantity",
-        "goodsReceivedDetailId": "Goods Received Detail ID",
-        "status": "Status",
-        "createdAt": "Created At",
-        "updatedAt": "Updated At"
+  "product_at_warehouse": {
+    "search": {
+      "minQuantity": "Min Quantity",
+      "search_placeholder_minQuantity": "Enter minimum quantity",
+      "maxQuantity": "Max Quantity",
+      "search_placeholder_maxQuantity": "Enter maximum quantity",
+      "status": "Status",
+      "search_status_placeholder": "Select status",
+      "active": "Active",
+      "inactive": "Inactive",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "clear_filters": "Clear Filters",
+      "search": "Search"
+    },
+    "product_at_house": "View",
+    "id": "ID",
+    "quantity": "Quantity",
+    "goodsReceivedDetailId": "Goods Received Detail ID",
+    "status": "Status",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "product_card": {
+      "no_category": "No Category",
+      "no_brand": "No Brand",
+      "currency": "VND"
+    },
+    "sidebar_product": {
+      "product_name": "Product Name",
+      "price": "Price",
+      "currency": "VND",
+      "status": "Status",
+      "stock_quantity": "Stock Quantity",
+      "category": "Category",
+      "brand": "Brand",
+      "barcode": "Barcode",
+      "description": "Description",
+      "no_description": "No description available.",
+      "loading": "Loading..."
     }
+  }
 }

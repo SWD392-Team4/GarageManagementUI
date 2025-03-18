@@ -31,6 +31,33 @@
       "quantity": "Quantity",
       "created_at": "Created At",
       "close": "Close"
+    },
+    "card_product": {
+      "brand": "Brand",
+      "category": "Category",
+      "no_category": "No Category",
+      "no_brand": "No Brand"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "stock": {
+      "available": "In Stock",
+      "out_of_stock": "Out of Stock"
+    },
+    "sidebar_product": {
+      "product_name": "Product Name",
+      "price": "Price",
+      "currency": "VND",
+      "status": "Status",
+      "stock_quantity": "Stock Quantity",
+      "category": "Category",
+      "brand": "Brand",
+      "barcode": "Barcode",
+      "description": "Description",
+      "no_description": "No description available.",
+      "loading": "Loading..."
     }
   }
 }

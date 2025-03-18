@@ -22,7 +22,7 @@ export default function ViewSoldProductsModal({
             <thead>
               <tr className="bg-gray-100">
                 <th className="border px-4 py-2">
-                  {t("invoice.product_name")}
+                  {t("product_at_store.invoice.product_name")}
                 </th>
                 <th className="border px-4 py-2">
                   {t("product_at_store.invoice.quantity")}

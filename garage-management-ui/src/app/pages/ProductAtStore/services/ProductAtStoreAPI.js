@@ -1,3 +1,4 @@
+import { m } from "framer-motion";
 import UserService from "../../../hooks/services/UserService";
 import {
   formatDate,
@@ -41,10 +42,10 @@ export const getAllStore = async () => {
   }
 };
 
-export const getProductDetails = async (productId, garageId) => {
+export const getProductDetails = async (productId) => {
   try {
     const response = await userService.sendAjax(
-      `/api/products/product/${productId}/${garageId}`,
+      `/api/product-at-garages/${productId}`,
       "GET",
       null,
       true
@@ -55,6 +56,20 @@ export const getProductDetails = async (productId, garageId) => {
     return response;
   } catch (error) {
     console.error("Error with: ", error);
+  }
+};
+
+export const getProductAtGarageByBarCode = async (productBarCode) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/product-at-garages/${productBarCode}`,
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fail With: ", error.message);
   }
 };
 
@@ -72,6 +87,7 @@ export const generationBarCode = async (barcode) => {
   }
 };
 
+///////////////////////////////////////////////////////////////////Phan invoice
 export const getAllInvoiceSale = async (PageNumber) => {
   try {
     const response = await userService.sendAjax(

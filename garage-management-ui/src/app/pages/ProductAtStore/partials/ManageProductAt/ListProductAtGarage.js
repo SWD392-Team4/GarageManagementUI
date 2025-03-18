@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   getAllProductAtGarage,
+  getProductAtGarageByBarCode,
   getProductDetails,
 } from "../../services/ProductAtStoreAPI";
 import SearchProduct from "../../partials/component/SearchProduct";
 import ProductCard from "../../partials/component/ProductCard";
 import ProductSidebar from "../../partials/component/ProductSidebar";
+import { useMediaQuery } from "react-responsive";
 
 export default function ListProductAtGarage({ garageId }) {
   const { t } = useTranslation("product_at_store");
@@ -18,7 +20,7 @@ export default function ListProductAtGarage({ garageId }) {
   const [isScanning, setIsScanning] = useState(false);
 
   // Check moblie
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const fetchListProduct = async () => {
     if (!garageId) return;
@@ -80,7 +82,7 @@ export default function ListProductAtGarage({ garageId }) {
   // ✅ API lấy sản phẩm theo Barcode
   const fetchProductByBarcode = async (barcode) => {
     try {
-      const response = await getProductByWareHouse(warehouseId, {
+      const response = await getProductAtGarageByBarCode(warehouseId, {
         ProductBarcode: barcode,
       });
       setSelectedProduct(response.data.value);
@@ -172,6 +174,7 @@ export default function ListProductAtGarage({ garageId }) {
               selectedProduct={selectedProduct}
               isSidebarOpen={isSidebarOpen}
               handleCloseSidebar={handleCloseSidebar}
+              isMobile={isMobile}
             />
           </div>
         )}
