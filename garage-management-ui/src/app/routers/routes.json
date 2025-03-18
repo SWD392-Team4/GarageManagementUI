@@ -411,7 +411,7 @@
       {
         "path": "appointment",
         "element": "LayoutAppointment",
-        "isSuspense": true,
+        "isSuspense2": true,
         "children": [
           {
             "index": true,
@@ -420,27 +420,27 @@
           {
             "path": "waiting",
             "element": "Waiting",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "in-progress",
             "element": "InProgess",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "completed",
             "element": "Completed",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "approved",
             "element": "Approved",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "canceled",
             "element": "Canceled",
-            "isSuspense": true
+            "isSuspense2": true
           }
         ]
       },
@@ -633,32 +633,32 @@
         "children": [
           {
             "index": true,
-            "element": "AllAppointment"
+            "isSuspense2": "AllAppointment"
           },
           {
             "path": "waiting",
             "element": "Waiting",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "in-progress",
             "element": "InProgess",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "completed",
             "element": "Completed",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "approved",
             "element": "Approved",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "canceled",
             "element": "Canceled",
-            "isSuspense": true
+            "isSuspense2": true
           }
         ]
       },
