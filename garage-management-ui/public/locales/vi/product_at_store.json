@@ -1,0 +1,36 @@
+{
+  "product_at_store": {
+    "search_invoice": {
+      "invoiceNumber": "Số hóa đơn",
+      "customerName": "Tên khách hàng",
+      "minTotalPrice": "Giá trị tối thiểu",
+      "maxTotalPrice": "Giá trị tối đa",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "clear_filters": "Xóa bộ lọc",
+      "search": "Tìm kiếm",
+      "search_status_enum": {
+        "choose": "Chọn trạng thái",
+        "paid": "Đã thanh toán",
+        "unpaid": "Chưa thanh toán"
+      }
+    },
+    "invoice": {
+      "id": "Mã hóa đơn",
+      "invoiceType": "Loại hóa đơn",
+      "customerName": "Tên khách hàng",
+      "customerPhoneNumber": "Số điện thoại khách hàng",
+      "customerEmail": "Email khách hàng",
+      "totalPrice": "Tổng giá trị",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo",
+      "edit": "Chỉnh sửa",
+      "sold_products": "Sản phẩm đã bán",
+      "product_name": "Tên sản phẩm",
+      "quantity": "Số lượng",
+      "created_at": "Ngày tạo",
+      "close": "Đóng"
+    }
+  }
+}

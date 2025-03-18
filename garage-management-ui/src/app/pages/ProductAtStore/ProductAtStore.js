@@ -1,6 +1,6 @@
-import React from 'react'
-import Breadcrumb from '../AdminManageAppoinment/partials/Breadcrumb'
-import ProductAt from './partials/ProductAt'
+import React from "react";
+import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
+import ProductAt from "./partials/ProductAt";
 
 export default function ProductAtStore() {
   return (
@@ -8,5 +8,5 @@ export default function ProductAtStore() {
       <Breadcrumb />
       <ProductAt />
     </div>
-  )
+  );
 }

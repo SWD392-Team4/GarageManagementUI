@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { getAllProductAtGarage, getProductDetails } from '../../services/ProductAtStoreAPI';
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  getAllProductAtGarage,
+  getProductDetails,
+} from "../../services/ProductAtStoreAPI";
 import SearchProduct from "../../partials/component/SearchProduct";
 import ProductCard from "../../partials/component/ProductCard";
-import ProductSidebar from "../../partials/component/ProductSidebar"
+import ProductSidebar from "../../partials/component/ProductSidebar";
 
 export default function ListProductAtGarage({ garageId }) {
   const { t } = useTranslation("product_at_store");
@@ -17,12 +20,11 @@ export default function ListProductAtGarage({ garageId }) {
   // Check moblie
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-
   const fetchListProduct = async () => {
     if (!garageId) return;
     const response = await getAllProductAtGarage(garageId, searchParams || {});
     setProducts(response.data.value || []);
-  }
+  };
 
   useEffect(() => {
     fetchListProduct();
@@ -52,7 +54,6 @@ export default function ListProductAtGarage({ garageId }) {
     setSelectedProduct(null);
   };
 
-
   ///CHUC NANG SCANING BAR CODE ===========================================================
 
   // ✅ Lắng nghe sự kiện quét barcode
@@ -79,14 +80,15 @@ export default function ListProductAtGarage({ garageId }) {
   // ✅ API lấy sản phẩm theo Barcode
   const fetchProductByBarcode = async (barcode) => {
     try {
-      const response = await getProductByWareHouse(warehouseId, { ProductBarcode: barcode });
+      const response = await getProductByWareHouse(warehouseId, {
+        ProductBarcode: barcode,
+      });
       setSelectedProduct(response.data.value);
       setIsSidebarOpen(true);
     } catch (error) {
       console.error("Lỗi khi tìm kiếm sản phẩm:", error);
     }
   };
-
 
   return (
     <div className="flex flex-col gap-4">
@@ -99,7 +101,9 @@ export default function ListProductAtGarage({ garageId }) {
       {isMobile && (
         <div className="flex justify-center mt-2">
           <button
-            className={`px-4 py-2 rounded-lg text-white ${isScanning ? "bg-red-500" : "bg-blue-500"}`}
+            className={`px-4 py-2 rounded-lg text-white ${
+              isScanning ? "bg-red-500" : "bg-blue-500"
+            }`}
             onClick={() => setIsScanning(!isScanning)}
           >
             {isScanning ? "Tắt Quét Barcode" : "Bật Quét Barcode"}
@@ -124,14 +128,20 @@ export default function ListProductAtGarage({ garageId }) {
         </div>
       )}
 
-
-
       {/* Container chia sidebar & danh sách sản phẩm */}
       <div className="relative flex gap-4">
         {/* Danh sách sản phẩm - Ẩn trên mobile khi sidebar mở */}
         {!isMobile || !isSidebarOpen ? (
-          <div className={`flex-grow transition-all ${isSidebarOpen && !isMobile ? "w-3/4" : "w-full"} min-h-[250px] max-h-[calc(100vh-100px)] overflow-y-auto`}>
-            <div className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-3"} grid-auto-rows`}>
+          <div
+            className={`flex-grow transition-all ${
+              isSidebarOpen && !isMobile ? "w-3/4" : "w-full"
+            } min-h-[250px] max-h-[calc(100vh-100px)] overflow-y-auto`}
+          >
+            <div
+              className={`grid gap-4 ${
+                isMobile ? "grid-cols-1" : "grid-cols-3"
+              } grid-auto-rows`}
+            >
               {products.length > 0 ? (
                 products.map((product) => (
                   <ProductCard
@@ -141,7 +151,9 @@ export default function ListProductAtGarage({ garageId }) {
                   />
                 ))
               ) : (
-                <p className="text-gray-500 text-center col-span-full">Không có sản phẩm nào.</p>
+                <p className="text-gray-500 text-center col-span-full">
+                  Không có sản phẩm nào.
+                </p>
               )}
             </div>
           </div>
@@ -149,7 +161,13 @@ export default function ListProductAtGarage({ garageId }) {
 
         {/* Sidebar - Chiếm toàn bộ khi mở trên mobile, bên phải trên desktop */}
         {isSidebarOpen && (
-          <div className={`${isMobile ? "w-full h-full fixed top-0 left-0 bg-white z-50" : "w-1/3 max-w-[600px] bg-white shadow-lg rounded-lg"} flex flex-col p-6 relative`}>
+          <div
+            className={`${
+              isMobile
+                ? "w-full h-full fixed top-0 left-0 bg-white z-50"
+                : "w-1/3 max-w-[600px] bg-white shadow-lg rounded-lg"
+            } flex flex-col p-6 relative`}
+          >
             <ProductSidebar
               selectedProduct={selectedProduct}
               isSidebarOpen={isSidebarOpen}
@@ -158,7 +176,6 @@ export default function ListProductAtGarage({ garageId }) {
           </div>
         )}
       </div>
-
     </div>
-  )
+  );
 }
