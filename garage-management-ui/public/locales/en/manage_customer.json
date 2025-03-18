@@ -19,6 +19,44 @@
             "choose": "Choose Status",
             "active": "Active",
             "inactive": "Inactive"
+        },
+        "apointment_info": {
+            "title": "List Apointment",
+            "id": "ID",
+            "customerName": "Customer Name",
+            "customerPhoneNumber": "Customer Phone Number",
+            "customerEmail": "Customer Email",
+            "price": "Price",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At",
+            "status": "Status",
+            "carLicensePlateNumber": "Car License Plate Number"
+        },
+        "appointment": {
+            "carLicensePlateNumber": "Car License Plate Number",
+            "appointmentType": "Appointment Type",
+            "appointmentStatus": "Appointment Status",
+            "fromTime": "From Time",
+            "toTime": "To Time",
+            "search_placeholder": "Enter search keyword...",
+            "search": "Search",
+            "clear_filters": "Clear Filters",
+            "search_type_enum": {
+                "choose": "Choose Type",
+                "serviceBooking": "Service Booking",
+                "servicePackageBooking": "Service Package Booking",
+                "scheduledMaintenance": "Scheduled Maintenance",
+                "sellingProduct": "Selling Product"
+            },
+            "search_status_enum": {
+                "choose": "Choose Status",
+                "pending": "Pending",
+                "approved": "Approved",
+                "rejected": "Rejected",
+                "cancelled": "Cancelled",
+                "inProgress": "In Progress",
+                "completed": "Completed"
+            }
         }
     }
 }

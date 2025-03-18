@@ -1,10 +1,11 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Mission() {
+  const { t } = useTranslation("about_overview");
   return (
     <p className="text-2xl md:text-5xl font-semibold max-w-6xl">
-      At Turbo Track, we deliver premium car parts and expert maintenance to
-      keep your vehicle performing at its best.
+      {t("about_overview.mission_text")}
     </p>
   );
 }

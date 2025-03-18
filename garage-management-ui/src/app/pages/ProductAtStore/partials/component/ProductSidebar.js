@@ -4,10 +4,10 @@ import { FaTimes, FaBox } from "react-icons/fa";
 import { getStatusLabel, getStatusColor, getStockLabel, getStockColor } from "../../schemas/ProductAtStoreSchemas"
 
 
-export default function ProductSidebar({ selectedProduct, isSidebarOpen, handleCloseSidebar }) {
+export default function ProductSidebar({ selectedProduct, handleCloseSidebar }) {
     return (
-        isSidebarOpen && (
-            <div className={`transition-all duration-300 ${isSidebarOpen ? "w-1/3 max-w-[600px] opacity-100 visible" : "w-0 opacity-0 invisible"} overflow-hidden bg-white shadow-lg p-6 rounded-lg flex flex-col`}>
+        selectedProduct && (
+            <>
                 {/* Nút đóng sidebar */}
                 <button className="absolute top-2 right-2 text-gray-500 hover:text-red-500" onClick={handleCloseSidebar}>
                     <FaTimes size={18} />
@@ -96,7 +96,7 @@ export default function ProductSidebar({ selectedProduct, isSidebarOpen, handleC
                 ) : (
                     <p className="text-gray-500 text-center">Loading...</p>
                 )}
-            </div>
+            </>
         )
     );
 }

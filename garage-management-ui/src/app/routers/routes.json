@@ -373,6 +373,11 @@
         "isSuspense2": true
       },
       {
+        "path": "manage-customer/:id",
+        "element": "CustomerDetails",
+        "isSuspense2": true
+      },
+      {
         "path": "product-at-warehouse",
         "element": "ProductAtWareHouse",
         "isSuspense2": true
@@ -382,36 +387,7 @@
         "element": "ProductAtStore",
         "isSuspense2": true
       },
-      {
-        "path": "invoice-goodsIssued",
-        "element": "ManageGoodsIssued",
-        "isSuspense2": true
-      },
-      {
-        "path": "invoice-goodsIssued/create-goodsIssued",
-        "element": "CreateGoodsIssued",
-        "isSuspense2": true
-      },
-      {
-        "path": "invoice-goodsIssued/:id",
-        "element": "ViewGoodsIssued",
-        "isSuspense2": true
-      },
-      {
-        "path": "invoice-goods-Received",
-        "element": "ManageGoodReceived",
-        "isSuspense2": true
-      },
-      {
-        "path": "invoice-goods-Received/create-goods-Received",
-        "element": "CreateGoodReceived",
-        "isSuspense2": true
-      },
-      {
-        "path": "invoice-goods-Received/:id",
-        "element": "ViewGoodReceived",
-        "isSuspense2": true
-      },
+
       {
         "path": "invoice-sale",
         "element": "ManageInvoiceSale",
@@ -633,6 +609,21 @@
       {
         "path": "invoice-service/create",
         "element": "CreateInvoiceService",
+        "isSuspense2": true
+      },
+      {
+        "path": "manage-customer/:id",
+        "element": "CustomerDetails",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-sale",
+        "element": "ManageInvoiceSale",
+        "isSuspense2": true
+      },
+      {
+        "path": "invoice-sale/create",
+        "element": "CreateInvoiceSale",
         "isSuspense2": true
       },
       {

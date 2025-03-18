@@ -27,7 +27,7 @@ export const getAllPackageService = async (PageNumber = 1) => {
     return response;
   } catch (error) {
     userService.showToast(400, "Loading Package Service Fail");
-    console.error("Fail with: ", error);
+    console.error("Fail with: ", error.message);
   }
 };
 
@@ -54,7 +54,8 @@ export const searchPackageService = async (params) => {
 
     return response;
   } catch (error) {
-    console.error("Fail with: ", error);
+    userService.showToast(400, error.message);
+    console.error("Fail with: ", error.message);
   }
 };
 
@@ -97,8 +98,8 @@ export const createPackage = async (data) => {
     userService.showToast(200, "Create Package Service Successful");
     return response;
   } catch (error) {
-    userService.showToast(400, "Create Package Service Fail");
-    console.error("❌ Error:", error);
+    userService.showToast(400, error.message);
+    console.error("❌ Error:", error.message);
   }
 };
 
@@ -119,7 +120,7 @@ export const getPackageDetail = async (PackageId) => {
     return response;
   } catch (error) {
     console.error("Error with : ", error.message);
-    userService.showToast(400, "Loading PackageDetail Successful");
+    userService.showToast(400, error.message);
   }
 };
 
@@ -171,8 +172,8 @@ export const updatePackage = async (PackageId, FormData) => {
     userService.showToast(200, "Update Package Service Successful");
     return response;
   } catch (error) {
-    userService.showToast(400, "Update Package Service Fail");
-    console.error("Error with: ", error);
+    userService.showToast(400, error.message);
+    console.error("Error with: ", error.message);
   }
 };
 
@@ -186,7 +187,7 @@ export const createImagePackage = async (PackageID, FormImage) => {
     );
     return response;
   } catch (error) {
-    console.error("Error with: ", error);
+    console.error("Error with: ", error.message);
   }
 };
 

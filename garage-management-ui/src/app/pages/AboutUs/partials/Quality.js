@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next";
+
 const QualitySection = () => {
+  const { t } = useTranslation("about_quality");
   return (
     <section className="relative p-10 bg-white overflow-hidden">
       <div className="absolute bottom-0 right-0 w-auto h-auto">
@@ -19,14 +22,10 @@ const QualitySection = () => {
           </div>
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Quality Work is Our First Priority
+            {t("about_quality.quality_title")}
             </h2>
             <p className="text-gray-600 mb-6">
-              At Turbo Track, we are committed to delivering top-notch
-              automotive services that ensure reliability, safety, and
-              performance. Our experienced mechanics and cutting-edge technology
-              guarantee precision in every repair, maintenance, and
-              customization service.
+            {t("about_quality.quality_description")}
             </p>
           </div>
         </div>

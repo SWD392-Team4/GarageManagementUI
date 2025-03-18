@@ -128,31 +128,36 @@ export default function ListProductAtWareHouse({ warehouseId }) {
 
             {/* Container chia sidebar & danh sách sản phẩm */}
             <div className="relative flex gap-4">
-                {/* Danh sách sản phẩm - chiếm toàn bộ khi sidebar đóng */}
-                <div className={`flex-grow transition-all ${isSidebarOpen ? "w-3/4" : "w-full"} min-h-[250px] max-h-[calc(100vh-100px)] overflow-y-auto`}>
-                    <div className="grid gap-4 grid-cols-3 grid-auto-rows">
-                        {products.length > 0 ? (
-                            products.map((product) => (
-                                <ProductCards
-                                    key={product.id}
-                                    product={product}
-                                    handleSelectProduct={handleSelectProduct}
-                                />
-                            ))
-                        ) : (
-                            <p className="text-gray-500 text-center col-span-full">Không có sản phẩm nào.</p>
-                        )}
+                {/* Danh sách sản phẩm - Ẩn trên mobile khi sidebar mở */}
+                {!isMobile || !isSidebarOpen ? (
+                    <div className={`flex-grow transition-all ${isSidebarOpen && !isMobile ? "w-3/4" : "w-full"} min-h-[250px] max-h-[calc(100vh-100px)] overflow-y-auto`}>
+                        <div className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-3"} grid-auto-rows`}>
+                            {products.length > 0 ? (
+                                products.map((product) => (
+                                    <ProductCards
+                                        key={product.id}
+                                        product={product}
+                                        handleSelectProduct={handleSelectProduct}
+                                    />
+                                ))
+                            ) : (
+                                <p className="text-gray-500 text-center col-span-full">Không có sản phẩm nào.</p>
+                            )}
+                        </div>
                     </div>
-                </div>
+                ) : null}
 
-                {/* Sidebar - hien thong tin  */}
-                <ProductSidebar
-                    selectedProduct={selectedProduct}
-                    isSidebarOpen={isSidebarOpen}
-                    handleCloseSidebar={handleCloseSidebar}
-                />
+                {/* Sidebar - Chiếm toàn bộ khi mở trên mobile, bên phải trên desktop */}
+                {isSidebarOpen && (
+                    <div className={`${isMobile ? "w-full h-full fixed top-0 left-0 bg-white z-50" : "w-1/3 max-w-[600px] bg-white shadow-lg rounded-lg"} flex flex-col p-6 relative`}>
+                        <ProductSidebar
+                            selectedProduct={selectedProduct}
+                            isSidebarOpen={isSidebarOpen}
+                            handleCloseSidebar={handleCloseSidebar}
+                        />
+                    </div>
+                )}
             </div>
         </div>
-
     )
 }

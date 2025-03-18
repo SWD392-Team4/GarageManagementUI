@@ -39,7 +39,7 @@ export const searchInvoiceSale = async (params) => {
 export const createInvoiceSale = async (data) => {
   try {
     const response = await userService.sendAjax(
-      "/api/invocie-sale",
+      "/api/invoices",
       "POST",
       data,
       true
@@ -47,7 +47,7 @@ export const createInvoiceSale = async (data) => {
     userService.showToast(200, "Create Goods Issued Successful");
     return response;
   } catch (error) {
-    userService.showToast(400, "Create Goods Issued Fail");
+    userService.showToast(400, error.message);
     console.error("Fail to searching Goods Issued", error.message);
   }
 };
@@ -55,7 +55,7 @@ export const createInvoiceSale = async (data) => {
 export const updateInvoiceSale = async (invoiceSaleId, updatedData) => {
   try {
     const response = await userService.sendAjax(
-      `/api/invoice-sale${invoiceSaleId}`,
+      `/api/invoices-sale${invoiceSaleId}`,
       "PUT",
       updatedData,
       true
@@ -65,5 +65,20 @@ export const updateInvoiceSale = async (invoiceSaleId, updatedData) => {
   } catch (error) {
     userService.showToast(400, "Updated Invoice Sale Fail");
     console.error("Fail to searching Invoice Sale ", error.message);
+  }
+};
+
+export const getProductAtStore = async (data) => {
+  try {
+    const response = await userService.sendAjax(
+      "/api/product-at-garages/garage",
+      "GET",
+      null,
+      data
+    );
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+    console.error("Fail with: ", error.message);
   }
 };

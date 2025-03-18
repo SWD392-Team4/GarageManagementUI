@@ -26,15 +26,15 @@ export default function PackageList({ packages }) {
                   </div>
 
                   {/* Text Section */}
-                  <div className="rounded-md absolute left-0 top-[200px] h-2/5 w-10/12 bg-black text-white p-4 transition-all duration-300 group-hover:w-full group-hover:bg-red-600">
+                  <div className="rounded-md absolute left-0 top-[200px] h-2/5 w-10/12 bg-white text-black p-4 transition-all duration-300 group-hover:w-full group-hover:bg-red-600 group-hover:text-white">
                     <h3 className="text-xl font-semibold mb-2">{pkg.packageName}</h3>
-                    <p className="text-gray-300 group-hover:text-white line-clamp-3">
+                    <p className="text-black-300 group-hover:text-white line-clamp-3">
                     {t("customer_package_category.service_category")}: { pkg.serviceCategory}
                     </p>
-                    <p className="text-gray-300 group-hover:text-white line-clamp-3">
+                    <p className="text-black-300 group-hover:text-white line-clamp-3">
                     {t("customer_package_category.car_type")}: {pkg.category}
                     </p>
-                    <p className="text-gray-300 group-hover:text-white line-clamp-3">
+                    <p className="text-black-300 group-hover:text-white line-clamp-3">
                     {t("customer_package_category.package_type")}: {pkg.type}
                     </p>
                   </div>

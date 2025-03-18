@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { IoChevronForward } from "react-icons/io5";
-
+import ReactMarkdown from "react-markdown";
 export default function PackageContent({ packageData, services, conditions }) {
   const { t } = useTranslation("customer_package_content");
   return (
@@ -10,9 +10,13 @@ export default function PackageContent({ packageData, services, conditions }) {
       <h3 className="text-3xl font-extrabold mb-6 relative pb-3 border-b-4 border-red-500 inline-block text-gray-900">
         {packageData.packageName}
       </h3>
-
-      <p className="text-xl text-gray-800 mb-8 leading-relaxed">{packageData.description}</p>
-
+      
+      <div className="text-xl text-gray-800 mb-8 leading-relaxed">
+        <ReactMarkdown>{packageData.description}</ReactMarkdown>
+      </div>
+      <div className="bg-red-100 text-red-600 text-4xl font-extrabold px-6 py-3 rounded-lg shadow-md inline-block mb-6 ">
+        {t("customer_package_content.price")}: {packageData.packagePrice}đ
+      </div>
       {/* Package Conditions */}
       <div className="mt-12">
         <h3 className="text-2xl font-bold mb-4 relative pb-2 border-b-4 border-red-500 inline-block text-gray-900">
@@ -43,7 +47,7 @@ export default function PackageContent({ packageData, services, conditions }) {
               className="text-xl flex items-center space-x-4 text-gray-800 hover:text-red-600 transition-all duration-300 border-b pb-2 last:border-b-0"
             >
               <IoChevronForward className="text-red-500 text-xl" />
-              <a href="/package-details" className="hover:underline font-semibold">
+              <a href={`/services/detail/${service.id}`} className="hover:underline font-semibold">
                 {service.serviceName}
               </a>
             </li>
