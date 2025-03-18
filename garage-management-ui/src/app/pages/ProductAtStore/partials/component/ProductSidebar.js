@@ -2,6 +2,7 @@ import React from 'react'
 import MDEditor from "@uiw/react-md-editor";
 import { FaTimes, FaBox } from "react-icons/fa";
 import { getStatusLabel, getStatusColor, getStockLabel, getStockColor } from "../../schemas/ProductAtStoreSchemas"
+import Barcode from 'react-barcode';
 
 
 export default function ProductSidebar({ selectedProduct, handleCloseSidebar }) {
@@ -84,6 +85,20 @@ export default function ProductSidebar({ selectedProduct, handleCloseSidebar }) 
 
                             <hr className="border-gray-200" />
 
+                            {/*Barcode*/}
+                            <div>
+                                <label className="text-gray-500 text-sm">BarCode:</label>
+                                <div className="border rounded-md p-3 bg-gray-50" >
+                                    <Barcode
+                                        value={selectedProduct.productBarcode}
+                                        width={0.7}
+                                        height={80}
+                                        // displayValue={true}
+                                        fontSize={10}
+                                    // lineColor="#333"
+                                    />
+                                </div>
+                            </div>
                             {/* Mô tả sản phẩm (Markdown) */}
                             <div>
                                 <label className="text-gray-500 text-sm">Mô tả sản phẩm:</label>

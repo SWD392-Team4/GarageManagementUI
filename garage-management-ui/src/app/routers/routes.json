@@ -8,6 +8,28 @@
     "redirect": "/"
   },
   {
+    "path": "look-up",
+    "element": "LayoutBookingPage",
+    "children": [
+      {
+        "index": true,
+        "element": "StepLookUp"
+      },
+      {
+        "path": "select-garage",
+        "element": "PickGarage"
+      },
+      {
+        "path": "look-up-information",
+        "element": "FillingInformation"
+      },
+      {
+        "path": "view-appointment",
+        "element": "ViewAppointmentLookUp"
+      }
+    ]
+  },
+  {
     "path": "/booking",
     "element": "LayoutBookingPage",
     "children": [
@@ -58,10 +80,6 @@
         "element": "Home"
       },
       {
-        "path": "lookup",
-        "element": "LookUpPage"
-      },
-      {
         "path": "product",
         "element": "CustomerProductPage"
       },
@@ -102,10 +120,6 @@
       {
         "index": true,
         "element": "Home"
-      },
-      {
-        "path": "lookup",
-        "element": "LookUpPage"
       },
       {
         "path": "products",
@@ -542,6 +556,11 @@
       {
         "path": "employee",
         "element": "ManageEmployee",
+        "isSuspense2": true
+      },
+      {
+        "path": "product-at-store",
+        "element": "ProductAtStore",
         "isSuspense2": true
       },
       {

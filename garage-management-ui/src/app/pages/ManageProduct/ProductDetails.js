@@ -11,6 +11,7 @@ import { parseVietnameseCurrency } from "./schemas/ProductValid";
 import AsyncSelect from 'react-select/async';
 import ModelSelectCarPart from "./models/ModelSelectCarPart";
 import ModelSelectCarModel from "./models/ModelSelectCarModel";
+import Barcode from "react-barcode";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -212,10 +213,6 @@ export default function ProductDetails() {
                 )}
               </h1>
 
-              {/* Mã vạch */}
-              <p className="text-gray-700 text-xl mb-4">
-                <strong className="font-semibold">{t("product_details.barcode")}: </strong>{product.productBarcode}
-              </p>
 
               {/* Danh mục sản phẩm */}
               <p className="text-gray-700 text-xl mb-4">
@@ -284,6 +281,18 @@ export default function ProductDetails() {
               <p className="text-gray-700 text-xl mb-4">
                 <strong className="font-semibold">{t("product_details.updated_at")}: </strong> {product.updatedAt}
               </p>
+
+
+              {/* Mã vạch */}
+              <Barcode
+                value={product.productBarcode}
+                width={0.5}
+                height={80}
+                displayValue={true}
+                fontSize={14}
+                lineColor="#333"
+              />
+
             </div>
           </div>
 

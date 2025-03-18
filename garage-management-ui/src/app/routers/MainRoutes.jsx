@@ -17,6 +17,10 @@ import SelectService from "../pages/BookingPage/Partials/SelectService";
 import PackageSelect from "../pages/BookingPage/Partials/PackageSelect";
 import SuccessPage from "../pages/BookingPage/Partials/SuccessPage";
 import { LoadingProvider } from "./LoadingContext";
+import StepLookUp from "../pages/LookUpPage/partials/StepLookup";
+import PickGarage from "../pages/LookUpPage/partials/PickGarage"
+import FillingInformation from "../pages/LookUpPage/partials/FillingInformation";
+import ViewAppointmentLookUp from "../pages/LookUpPage/partials/ViewAppointmentLookUp";
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
@@ -29,9 +33,12 @@ const componentMap = {
   FormCustomer: FormCustomer,
   BookingOnlineComponent: BookingOnlineComponent,
   LayoutHome: lazy(() => import("../layouts/LayoutHome")),
-  LookUpPage: lazy(() => import("../pages/LookUpPage/LookUpPage")),
   LayoutAuthenCustomer: LayoutAuthenCustomer,
   LayoutBookingPage: LayoutBookingPage,
+  StepLookUp: StepLookUp,
+  PickGarage: PickGarage,
+  FillingInformation: FillingInformation,
+  ViewAppointmentLookUp: ViewAppointmentLookUp,
   LayoutMechanic: lazy(() =>
     import("../layouts/LayoutMechanic/LayoutMechanic")
   ),
@@ -225,7 +232,7 @@ const componentMap = {
     import("../pages/CustomerPackage/CustomerPackageDetail")
   ),
   ManageCustomer: lazy(() => import("../pages/ManageCustomer/ManageCustomer")),
-  CustomerDetails: lazy(() => import("../pages/ManageCustomer/CustomerDetails"))
+  CustomerDetails: lazy(() => import("../pages/ManageCustomer/CustomerDetails")),
 };
 const generateRoutes = (routes) => {
   return routes.map((route, index) => {

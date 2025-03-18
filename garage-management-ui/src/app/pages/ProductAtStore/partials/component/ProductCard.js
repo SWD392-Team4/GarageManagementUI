@@ -6,7 +6,7 @@ export default function ProductCard({ product, handleSelectProduct }) {
         <div
             key={product.id}
             className="border rounded-xl shadow-md p-4 cursor-pointer hover:shadow-xl transition bg-white h-full flex flex-col justify-between"
-            onClick={() => handleSelectProduct(product.id)}
+            onClick={() => handleSelectProduct(product.productId)}
         >
             {/* Ảnh sản phẩm */}
             <img

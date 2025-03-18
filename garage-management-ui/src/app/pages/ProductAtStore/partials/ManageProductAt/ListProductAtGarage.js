@@ -61,7 +61,7 @@ export default function ListProductAtGarage({ garageId }) {
       const handleBarcodeScan = async (event) => {
         if (event.key === "Enter" && barcodeInput.trim() !== "") {
           console.log("Barcode scanned:", barcodeInput);
-          await fetchProductByBarcode(barcodeInput);
+          await fetchProductByBarcode(garageId, barcodeInput);
           setBarcodeInput("");
         } else {
           setBarcodeInput((prev) => prev + event.key);
@@ -84,7 +84,6 @@ export default function ListProductAtGarage({ garageId }) {
       setIsSidebarOpen(true);
     } catch (error) {
       console.error("Lỗi khi tìm kiếm sản phẩm:", error);
-      toast.error("Lỗi khi tìm kiếm sản phẩm.");
     }
   };
 
@@ -136,7 +135,7 @@ export default function ListProductAtGarage({ garageId }) {
               {products.length > 0 ? (
                 products.map((product) => (
                   <ProductCard
-                    key={product.id}
+                    key={product.productId}
                     product={product}
                     handleSelectProduct={handleSelectProduct}
                   />

@@ -11,7 +11,7 @@ export const getAllProductAtGarage = async (garageId, params) => {
             .map(key => `${key}=${encodeURIComponent(params[key])}`)
             .join("&");
 
-        const url = `/api/products/warehouse/${garageId}${queryString ? `?${queryString}` : ""}`;
+        const url = `/api/product-at-garages/garage`;
 
         const response = await userService.sendAjax(
             url,

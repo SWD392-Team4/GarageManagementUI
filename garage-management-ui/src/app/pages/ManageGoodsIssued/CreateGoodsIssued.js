@@ -31,8 +31,6 @@ const CreateGoodsIssued = () => {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      referenceNumber: "",
-      invoiceCode: "",
       warehouseId: "",
       garageId: "",
     },
@@ -58,7 +56,7 @@ const CreateGoodsIssued = () => {
   const fetchProduct = useCallback(async () => {
     try {
       let response = await getAllProductAtWarehouse();
-      setProducts(response.data);
+      setProducts(response.data.value);
     } catch (error) {
       console.error("Error loading data", error);
     }
@@ -193,7 +191,7 @@ const CreateGoodsIssued = () => {
           </div>
 
           {/* Cột 2: Reference Number + Invoice Code */}
-          <div>
+          {/* <div>
             <LabelInput
               labelKey="reference_number"
               name="referenceNumber"
@@ -208,7 +206,7 @@ const CreateGoodsIssued = () => {
               t={t}
               error={errors.invoiceCode?.message}
             />
-          </div>
+          </div> */}
 
           {/* Cột 3: Nút Submit và Reset */}
           <div className="flex flex-col justify-center items-start space-y-7 mt-3">

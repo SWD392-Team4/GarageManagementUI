@@ -16,7 +16,7 @@ const Header = () => {
     product: "/product",
     package: "/packages",
     contact: "/contact",
-    lookup: "/lookup",
+    lookup: "/look-up",
     booking: "/booking",
   };
 
@@ -33,9 +33,8 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed z-30 top-0 left-0  w-full  transition-all duration-300 ${
-        isVisible ? "translate-y-0" : "-translate-y-full"
-      } bg-black/80 backdrop-blur-sm shadow-lg border-b border-gray-200`}
+      className={`fixed z-30 top-0 left-0  w-full  transition-all duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"
+        } bg-black/80 backdrop-blur-sm shadow-lg border-b border-gray-200`}
     >
       <div className="w-full">
         <div className="container mx-auto px-4">
@@ -63,7 +62,7 @@ const Header = () => {
                           <div key={index}>{char}</div>
                         ))}
                     </span> */}
-                     <span className="menu-text">{t(`home_page_menu.${key}`)}</span>
+                    <span className="menu-text">{t(`home_page_menu.${key}`)}</span>
                   </Link>
                 </li>
               ))}
@@ -71,11 +70,10 @@ const Header = () => {
 
             {/* Menu Items */}
             <ul
-              className={`${
-                isMenuOpen
+              className={`${isMenuOpen
                   ? "grid grid-cols-3 gap-4 animate-slide-down"
                   : "hidden"
-              } absolute z-20 top-24 left-0 w-full backdrop-blur-sm bg-black/50 shadow-lg text-white font-bold font-title text-base p-4 lg:hidden transition-all duration-500`}
+                } absolute z-20 top-24 left-0 w-full backdrop-blur-sm bg-black/50 shadow-lg text-white font-bold font-title text-base p-4 lg:hidden transition-all duration-500`}
             >
               {Object.entries(menuItems).map(([key, path]) => (
                 <li key={key} className="hover:text-red-500 text-center">
