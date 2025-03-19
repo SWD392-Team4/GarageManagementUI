@@ -648,11 +648,11 @@
       {
         "path": "appointment",
         "element": "LayoutAppointment",
-        "isSuspense": true,
+        "isSuspense2": true,
         "children": [
           {
             "index": true,
-            "isSuspense2": "AllAppointment"
+            "element": "AllAppointment"
           },
           {
             "path": "waiting",
