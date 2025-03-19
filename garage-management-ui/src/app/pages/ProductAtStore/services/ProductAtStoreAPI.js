@@ -25,7 +25,9 @@ export const getAllProductAtGarage = async (garageId, params) => {
     }));
 
     return response;
-  } catch (error) {}
+  } catch (error) {
+    console.error("Fail with: ", error);
+  }
 };
 
 export const getAllStore = async () => {
@@ -62,7 +64,7 @@ export const getProductDetails = async (productId) => {
 export const getProductAtGarageByBarCode = async (productBarCode) => {
   try {
     const response = await userService.sendAjax(
-      `/api/product-at-garages/${productBarCode}`,
+      `/api/barcode/scan/garage/${productBarCode}`,
       "GET",
       null,
       true

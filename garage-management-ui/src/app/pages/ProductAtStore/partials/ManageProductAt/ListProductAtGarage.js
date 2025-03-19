@@ -59,13 +59,24 @@ export default function ListProductAtGarage({ garageId }) {
   ///CHUC NANG SCANING BAR CODE ===========================================================
 
   // ✅ Lắng nghe sự kiện quét barcode
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setIsSidebarOpen(true);
+    }
+  }, [selectedProduct]);
+
   useEffect(() => {
     if (!isMobile) {
       const handleBarcodeScan = async (event) => {
         if (event.key === "Enter" && barcodeInput.trim() !== "") {
           console.log("Barcode scanned:", barcodeInput);
-          await getProductAtGarageByBarCode(barcodeInput);
-          setBarcodeInput("");
+          const response = await getProductAtGarageByBarCode(barcodeInput);
+          if (response.data.value) {
+            setSelectedProduct(response.data.value);
+            setIsSidebarOpen(true);
+          }
+          setBarcodeInput(""); // Reset input
         } else {
           setBarcodeInput((prev) => prev + event.key);
         }
