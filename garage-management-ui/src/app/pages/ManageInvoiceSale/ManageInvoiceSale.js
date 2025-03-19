@@ -19,7 +19,7 @@ export default function ManageInvoiceSale() {
         <button
           className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
           onClick={() =>
-            navigate(`{/${sAccount.value.role}/invoice-sale/create}`)
+            navigate(`/${sAccount.value.role}/invoice-sale/create`)
           }
         >
           {t("manage_invoice_sale.create")}

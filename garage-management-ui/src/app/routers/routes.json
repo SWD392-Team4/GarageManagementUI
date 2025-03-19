@@ -8,6 +8,28 @@
     "redirect": "/"
   },
   {
+    "path": "look-up",
+    "element": "LayoutBookingPage",
+    "children": [
+      {
+        "index": true,
+        "element": "StepLookUp"
+      },
+      {
+        "path": "select-garage",
+        "element": "PickGarage"
+      },
+      {
+        "path": "look-up-information",
+        "element": "FillingInformation"
+      },
+      {
+        "path": "view-appointment",
+        "element": "ViewAppointmentLookUp"
+      }
+    ]
+  },
+  {
     "path": "/booking",
     "element": "LayoutBookingPage",
     "children": [
@@ -58,10 +80,6 @@
         "element": "Home"
       },
       {
-        "path": "lookup",
-        "element": "LookUpPage"
-      },
-      {
         "path": "product",
         "element": "CustomerProductPage"
       },
@@ -102,10 +120,6 @@
       {
         "index": true,
         "element": "Home"
-      },
-      {
-        "path": "lookup",
-        "element": "LookUpPage"
       },
       {
         "path": "products",
@@ -273,6 +287,11 @@
         "isSuspense2": true
       },
       {
+        "path": "package-register",
+        "element": "PackageRegister",
+        "isSuspense2": true
+      },
+      {
         "path": "suppliers",
         "element": "ManageSupplier",
         "isSuspense2": true
@@ -411,7 +430,7 @@
       {
         "path": "appointment",
         "element": "LayoutAppointment",
-        "isSuspense": true,
+        "isSuspense2": true,
         "children": [
           {
             "index": true,
@@ -420,27 +439,27 @@
           {
             "path": "waiting",
             "element": "Waiting",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "in-progress",
             "element": "InProgess",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "completed",
             "element": "Completed",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "approved",
             "element": "Approved",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "canceled",
             "element": "Canceled",
-            "isSuspense": true
+            "isSuspense2": true
           }
         ]
       },
@@ -500,8 +519,8 @@
         "isSuspense2": true
       },
       {
-        "path": "package-service",
-        "element": "ManagePackageService",
+        "path": "product-at-store",
+        "element": "ProductAtStore",
         "isSuspense2": true
       },
       {
@@ -633,32 +652,32 @@
         "children": [
           {
             "index": true,
-            "element": "AllAppointment"
+            "isSuspense2": "AllAppointment"
           },
           {
             "path": "waiting",
             "element": "Waiting",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "in-progress",
             "element": "InProgess",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "completed",
             "element": "Completed",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "approved",
             "element": "Approved",
-            "isSuspense": true
+            "isSuspense2": true
           },
           {
             "path": "canceled",
             "element": "Canceled",
-            "isSuspense": true
+            "isSuspense2": true
           }
         ]
       },

@@ -15,8 +15,9 @@ const Header = () => {
     service: "/services",
     product: "/product",
     package: "/packages",
-    // contact: "/contact",
-    lookup: "/lookup",
+    contact: "/contact",
+    lookup: "/look-up",
+    contact: "/contact",
     booking: "/booking",
   };
 
@@ -63,7 +64,9 @@ const Header = () => {
                           <div key={index}>{char}</div>
                         ))}
                     </span> */}
-                     <span className="menu-text">{t(`home_page_menu.${key}`)}</span>
+                    <span className="menu-text">
+                      {t(`home_page_menu.${key}`)}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -90,7 +93,9 @@ const Header = () => {
                           <div key={index}>{char}</div>
                         ))}
                     </span> */}
-                    <span className="menu-text">{t(`home_page_menu.${key}`)}</span>
+                    <span className="menu-text">
+                      {t(`home_page_menu.${key}`)}
+                    </span>
                   </Link>
                 </li>
               ))}

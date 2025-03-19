@@ -156,7 +156,7 @@ export default function SideBarAdmin({
                     <li>
                       <div className="group/link">
                         <Link
-                          to="/cashier/product-at-store"
+                          to="/Cashier/product-at-store"
                           className="text-white flex items-center p-2"
                         >
                           <FaBox className="w-5 h-5" />

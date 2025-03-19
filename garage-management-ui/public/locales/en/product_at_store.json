@@ -1,0 +1,63 @@
+{
+  "product_at_store": {
+    "search_invoice": {
+      "invoiceNumber": "Invoice Number",
+      "customerName": "Customer Name",
+      "minTotalPrice": "Min Total Price",
+      "maxTotalPrice": "Max Total Price",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "clear_filters": "Clear Filters",
+      "search": "Search",
+      "search_status_enum": {
+        "choose": "Choose status",
+        "paid": "Paid",
+        "unpaid": "Unpaid"
+      }
+    },
+    "invoice": {
+      "id": "ID",
+      "invoiceType": "Invoice Type",
+      "customerName": "Customer Name",
+      "customerPhoneNumber": "Customer Phone",
+      "customerEmail": "Customer Email",
+      "totalPrice": "Total Price",
+      "status": "Status",
+      "createdAt": "Created At",
+      "edit": "Edit",
+      "sold_products": "Sold Products",
+      "product_name": "Product Name",
+      "quantity": "Quantity",
+      "created_at": "Created At",
+      "close": "Close"
+    },
+    "card_product": {
+      "brand": "Brand",
+      "category": "Category",
+      "no_category": "No Category",
+      "no_brand": "No Brand"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "stock": {
+      "available": "In Stock",
+      "out_of_stock": "Out of Stock"
+    },
+    "sidebar_product": {
+      "product_name": "Product Name",
+      "price": "Price",
+      "currency": "VND",
+      "status": "Status",
+      "stock_quantity": "Stock Quantity",
+      "category": "Category",
+      "brand": "Brand",
+      "barcode": "Barcode",
+      "description": "Description",
+      "no_description": "No description available.",
+      "loading": "Loading..."
+    }
+  }
+}

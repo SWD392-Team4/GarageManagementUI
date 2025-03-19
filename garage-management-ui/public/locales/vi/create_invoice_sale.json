@@ -1,0 +1,24 @@
+{
+  "create_invoice_sale": {
+    "product_card": {
+      "price": "Giá",
+      "stock": "Tồn kho",
+      "created_at": "Ngày tạo",
+      "not_available": "Không có sẵn"
+    },
+    "sidebar_checkout": {
+      "customer_info": "Thông tin khách hàng",
+      "customer_name": "Tên khách hàng",
+      "customer_phone": "Số điện thoại",
+      "customer_email": "Email khách hàng",
+      "selected_products": "Sản phẩm đã chọn",
+      "product_name": "Tên sản phẩm",
+      "quantity": "Số lượng",
+      "actions": "Hành động",
+      "remove": "Xóa",
+      "no_products": "Chưa có sản phẩm nào",
+      "total": "Tổng tiền:",
+      "create_invoice": "Tạo hóa đơn"
+    }
+  }
+}

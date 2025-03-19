@@ -1,25 +1,20 @@
 {
-    "title": "Invoice Lookup",
-    "input_invoice_id": "Enter invoice ID",
-    "search": "Search",
-    "invoice_payment": "Invoice Payment",
-    "invoice_id": "Invoice ID",
-    "created_date": "Created Date",
-    "updated_date": "Updated Date",
-    "customer": "Customer",
-    "phone": "Phone",
-    "email": "Email",
-    "garage": "Garage",
-    "garage_address": "Garage Address",
-    "garage_email": "Garage Email",
-    "assigned_employee": "Assigned Employee",
-    "appointment_id": "Appointment ID",
-    "status": "Status",
-    "services_used": "Services Used",
-    "service_id": "Service ID",
-    "service_name": "Service Name",
-    "quantity": "Quantity",
-    "unit_price": "Unit Price",
-    "total": "Total",
-    "thank_you": "Thank you"
+    "look_up_page": {
+        "step_page": {
+            "title": "Watch the process of service implementation.",
+            "description": "We make it easy for you to observe the service process with just a few clicks!",
+            "find_garage": "Find a Garage",
+            "column1Description": "Find the garage where your car is or has been serviced.",
+            "column2Title": "Appointment Details",
+            "column2Description": "Fill in the appointment information.",
+            "column3Title": "Look up appointment",
+            "column3Description": "View appointment details and ongoing procedures.",
+            "buttonFindGarage": "Find Garage"
+        },
+        "pick_garage": {
+            "choiceGara1": "Choose Garage",
+            "choiceGara2": "Please choose a garage to continue",
+            "choiceGara3": "LOCATION & CONTACT"
+        }
+    }
 }

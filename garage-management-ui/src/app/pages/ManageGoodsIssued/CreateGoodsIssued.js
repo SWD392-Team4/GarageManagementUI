@@ -196,6 +196,24 @@ const CreateGoodsIssued = () => {
             />
           </div>
 
+          {/* Cột 2: Reference Number + Invoice Code */}
+          {/* <div>
+            <LabelInput
+              labelKey="reference_number"
+              name="referenceNumber"
+              register={register}
+              t={t}
+              error={errors.referenceNumber?.message}
+            />
+            <LabelInput
+              labelKey="invoice_code"
+              name="invoiceCode"
+              register={register}
+              t={t}
+              error={errors.invoiceCode?.message}
+            />
+          </div> */}
+
           {/* Cột 3: Nút Submit và Reset */}
           <div className="flex justify-center items-center space-x-7 mt-3">
             <button

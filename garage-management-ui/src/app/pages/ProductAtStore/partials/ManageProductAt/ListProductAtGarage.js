@@ -1,9 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { getAllProductAtGarage, getProductDetails } from '../../services/ProductAtStoreAPI';
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  getAllProductAtGarage,
+  getProductAtGarageByBarCode,
+  getProductDetails,
+} from "../../services/ProductAtStoreAPI";
 import SearchProduct from "../../partials/component/SearchProduct";
 import ProductCard from "../../partials/component/ProductCard";
-import ProductSidebar from "../../partials/component/ProductSidebar"
+import ProductSidebar from "../../partials/component/ProductSidebar";
+import { useMediaQuery } from "react-responsive";
 
 export default function ListProductAtGarage({ garageId }) {
   const { t } = useTranslation("product_at_store");
@@ -15,14 +20,13 @@ export default function ListProductAtGarage({ garageId }) {
   const [isScanning, setIsScanning] = useState(false);
 
   // Check moblie
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
+  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const fetchListProduct = async () => {
     if (!garageId) return;
     const response = await getAllProductAtGarage(garageId, searchParams || {});
     setProducts(response.data.value || []);
-  }
+  };
 
   useEffect(() => {
     fetchListProduct();
@@ -52,17 +56,27 @@ export default function ListProductAtGarage({ garageId }) {
     setSelectedProduct(null);
   };
 
-
   ///CHUC NANG SCANING BAR CODE ===========================================================
 
   // ✅ Lắng nghe sự kiện quét barcode
+
+  useEffect(() => {
+    if (selectedProduct) {
+      setIsSidebarOpen(true);
+    }
+  }, [selectedProduct]);
+
   useEffect(() => {
     if (!isMobile) {
       const handleBarcodeScan = async (event) => {
         if (event.key === "Enter" && barcodeInput.trim() !== "") {
           console.log("Barcode scanned:", barcodeInput);
-          await fetchProductByBarcode(barcodeInput);
-          setBarcodeInput("");
+          const response = await getProductAtGarageByBarCode(barcodeInput);
+          if (response.data.value) {
+            setSelectedProduct(response.data.value);
+            setIsSidebarOpen(true);
+          }
+          setBarcodeInput(""); // Reset input
         } else {
           setBarcodeInput((prev) => prev + event.key);
         }
@@ -79,15 +93,15 @@ export default function ListProductAtGarage({ garageId }) {
   // ✅ API lấy sản phẩm theo Barcode
   const fetchProductByBarcode = async (barcode) => {
     try {
-      const response = await getProductByWareHouse(warehouseId, { ProductBarcode: barcode });
+      const response = await getProductAtGarageByBarCode({
+        ProductBarcode: barcode,
+      });
       setSelectedProduct(response.data.value);
       setIsSidebarOpen(true);
     } catch (error) {
       console.error("Lỗi khi tìm kiếm sản phẩm:", error);
-      toast.error("Lỗi khi tìm kiếm sản phẩm.");
     }
   };
-
 
   return (
     <div className="flex flex-col gap-4">
@@ -100,7 +114,9 @@ export default function ListProductAtGarage({ garageId }) {
       {isMobile && (
         <div className="flex justify-center mt-2">
           <button
-            className={`px-4 py-2 rounded-lg text-white ${isScanning ? "bg-red-500" : "bg-blue-500"}`}
+            className={`px-4 py-2 rounded-lg text-white ${
+              isScanning ? "bg-red-500" : "bg-blue-500"
+            }`}
             onClick={() => setIsScanning(!isScanning)}
           >
             {isScanning ? "Tắt Quét Barcode" : "Bật Quét Barcode"}
@@ -118,31 +134,39 @@ export default function ListProductAtGarage({ garageId }) {
               if (result) {
                 console.log("Barcode scanned:", result.text);
                 fetchProductByBarcode(result.text);
-                setIsScanning(false); // Tự động tắt quét sau khi scan xong
+                setIsScanning(false);
               }
             }}
           />
         </div>
       )}
 
-
-
       {/* Container chia sidebar & danh sách sản phẩm */}
       <div className="relative flex gap-4">
         {/* Danh sách sản phẩm - Ẩn trên mobile khi sidebar mở */}
         {!isMobile || !isSidebarOpen ? (
-          <div className={`flex-grow transition-all ${isSidebarOpen && !isMobile ? "w-3/4" : "w-full"} min-h-[250px] max-h-[calc(100vh-100px)] overflow-y-auto`}>
-            <div className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-3"} grid-auto-rows`}>
+          <div
+            className={`flex-grow transition-all ${
+              isSidebarOpen && !isMobile ? "w-3/4" : "w-full"
+            } min-h-[250px] max-h-[calc(100vh-100px)] overflow-y-auto`}
+          >
+            <div
+              className={`grid gap-4 ${
+                isMobile ? "grid-cols-1" : "grid-cols-3"
+              } grid-auto-rows`}
+            >
               {products.length > 0 ? (
                 products.map((product) => (
                   <ProductCard
-                    key={product.id}
+                    key={product.productId}
                     product={product}
                     handleSelectProduct={handleSelectProduct}
                   />
                 ))
               ) : (
-                <p className="text-gray-500 text-center col-span-full">Không có sản phẩm nào.</p>
+                <p className="text-gray-500 text-center col-span-full">
+                  Không có sản phẩm nào.
+                </p>
               )}
             </div>
           </div>
@@ -150,16 +174,22 @@ export default function ListProductAtGarage({ garageId }) {
 
         {/* Sidebar - Chiếm toàn bộ khi mở trên mobile, bên phải trên desktop */}
         {isSidebarOpen && (
-          <div className={`${isMobile ? "w-full h-full fixed top-0 left-0 bg-white z-50" : "w-1/3 max-w-[600px] bg-white shadow-lg rounded-lg"} flex flex-col p-6 relative`}>
+          <div
+            className={`${
+              isMobile
+                ? "w-full h-full fixed top-0 left-0 bg-white z-50"
+                : "w-1/3 max-w-[600px] bg-white shadow-lg rounded-lg"
+            } flex flex-col p-6 relative`}
+          >
             <ProductSidebar
               selectedProduct={selectedProduct}
               isSidebarOpen={isSidebarOpen}
               handleCloseSidebar={handleCloseSidebar}
+              isMobile={isMobile}
             />
           </div>
         )}
       </div>
-
     </div>
-  )
+  );
 }

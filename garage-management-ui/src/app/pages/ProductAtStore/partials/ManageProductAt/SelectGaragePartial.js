@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { getAllStore } from '../../services/ProductAtStoreAPI';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { getAllStore } from "../../services/ProductAtStoreAPI";
+import { NavLink } from "react-router-dom";
 
-export default function SelectGaragePartial({ selectedGarageId, onSelecteGarage }) {
+export default function SelectGaragePartial({
+  selectedGarageId,
+  onSelecteGarage,
+}) {
   const [garages, setGarages] = useState([]);
-
 
   useEffect(() => {
     const fetchGarages = async () => {
@@ -14,11 +16,10 @@ export default function SelectGaragePartial({ selectedGarageId, onSelecteGarage 
       if (garageList.length > 0) {
         onSelecteGarage(garageList[0].id);
       }
-    }
+    };
 
     fetchGarages();
-
-  }, [onSelecteGarage])
+  }, [onSelecteGarage]);
 
   return (
     <nav className="border-b bg-white shadow-md mb-3">
@@ -39,5 +40,5 @@ export default function SelectGaragePartial({ selectedGarageId, onSelecteGarage 
         ))}
       </ul>
     </nav>
-  )
+  );
 }

@@ -6,7 +6,10 @@ export default function LayoutBookingPage() {
   return (
     <div className="relative min-h-screen">
       {/* Video nền */}
-      <video
+      <div className="bg-black absolute top-0 left-0 w-full h-full object-cover">
+
+      </div>
+      {/* <video
         autoPlay
         loop
         playsInline
@@ -14,7 +17,7 @@ export default function LayoutBookingPage() {
       >
         <source src="/assets/video/carvideo.mov" type="video/mp4" />
         Your browser does not support the video tag.
-      </video>
+      </video> */}
 
       {/* Nội dung */}
       <div className="relative z-10">

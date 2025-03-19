@@ -1,11 +1,15 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useTranslation } from 'react-i18next';
-import { getAllSupplier, getSupplierDetails, SearchSupplier } from '../services/SupplierService';
-import { sSupplier } from '../services/SupplierSignify';
-import { FaPencilAlt } from 'react-icons/fa';
-import BaseTable from '../../../components/BaseTable/BaseTable';
-import SearchSupplierPage from './SearchSupplierPage';
-import UpdateSupplierModal from '../models/UpdateSupplierModal';
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  getAllSupplier,
+  getSupplierDetails,
+  SearchSupplier,
+} from "../services/SupplierService";
+import { sSupplier } from "../services/SupplierSignify";
+import { FaPencilAlt } from "react-icons/fa";
+import BaseTable from "../../../components/BaseTable/BaseTable";
+import SearchSupplierPage from "./SearchSupplierPage";
+import UpdateSupplierModal from "../models/UpdateSupplierModal";
 
 export default function ListSupplier({ refresh }) {
   const { t, i18n } = useTranslation("manage_supplier");
@@ -53,7 +57,6 @@ export default function ListSupplier({ refresh }) {
     fetchData();
   }, [refresh, fetchData]);
 
-
   // Xử lý tìm kiếm thương hiệu
   const handleSearch = (params) => {
     setSearchParams(params); // Lưu tham số tìm kiếm để dùng khi chuyển trang
@@ -67,7 +70,11 @@ export default function ListSupplier({ refresh }) {
 
   const columns = useMemo(
     () => [
-      { header: t("manage_supplier.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
+      {
+        header: t("manage_supplier.id"),
+        accessorKey: "id",
+        accessorFn: (_row, index) => index + 1,
+      },
       { header: t("manage_supplier.name"), accessorKey: "name" },
       { header: t("manage_supplier.taxCode"), accessorKey: "taxCode" },
       { header: t("manage_supplier.address"), accessorKey: "address" },
@@ -77,7 +84,10 @@ export default function ListSupplier({ refresh }) {
       { header: t("manage_supplier.status"), accessorKey: "status" },
       { header: t("manage_supplier.createdAt"), accessorKey: "createdAt" },
       { header: t("manage_supplier.updatedAt"), accessorKey: "updatedAt" },
-      { header: t("manage_supplier.supplierCategory"), accessorKey: "supplierCategory" },
+      {
+        header: t("manage_supplier.supplierCategory"),
+        accessorKey: "supplierCategory",
+      },
     ],
     [t, i18n.language]
   );
@@ -121,5 +131,5 @@ export default function ListSupplier({ refresh }) {
         }}
       />
     </>
-  )
+  );
 }

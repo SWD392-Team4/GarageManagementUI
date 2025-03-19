@@ -1,13 +1,12 @@
 import { signify } from "react-signify";
 
 export const sInvoiceSale = signify(
-    {
-        id: "",
-
+  {
+    id: "",
+  },
+  {
+    cache: {
+      key: "sInvoiceSaleManage",
     },
-    {
-        cache: {
-            key: "sInvoiceSale",
-        },
-    }
+  }
 );
