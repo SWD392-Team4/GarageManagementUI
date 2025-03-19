@@ -1,221 +1,213 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import AppointmentCard from "./AppointmentCard";
 import AppointmentDetailModal from "./AppointmentDetailModal";
+import ConfirmDragModal from "./ConfirmDragModal"; // Component mới tách riêng để xác nhận thao tác drag
 import UserService from "../../../hooks/services/UserService";
-
-// Dữ liệu fake cho appointment (bao gồm header và danh sách service)
-const fakeAppointment = {
-  id: "appointment",
-  customerName: "Trần Thị B",
-  CarLicensePlateNumber: "51D-678.90",
-  ActualAppointmentTime: "28/02/2025 11:00 AM",
-  status: "Đã confirm",
-  listServices: [
-    {
-      id: "appointmentdetail-1",
-      ServicesName: "Kiểm tra động cơ",
-      status: "upcoming",
-      Action: "action services",
-      Description: "Description servies",
-      WorkNature: "WorkNature",
-      ServiceNote: "Yêu cầu thay bugi loại Iridium",
-      imagesBefore: [],
-      imagesAfter: [],
-      tasks: [
-        {
-          id: "appointmentReplace-1",
-          Action: "Thay thế",
-          ProductName: "Bánh xe",
-          Status: "Pending",
-        },
-        {
-          id: "appointmentReplace-2",
-          Action: "Thay thế",
-          ProductName: "Niềng xe",
-          Status: "Pending",
-        },
-      ],
-    },
-    {
-      id: "appointmentdetail-2",
-      ServicesName: "Kiểm tra động cơ 2",
-      status: "completed",
-      Action: "action services",
-      Description: "Description servies",
-      WorkNature: "WorkNature",
-      ServiceNote: "Yêu cầu thay bugi loại Iridium",
-      imagesBefore: [],
-      imagesAfter: [],
-      tasks: [
-        {
-          id: "appointmentReplace-3",
-          Action: "Thay thế",
-          ProductName: "Bánh xe",
-          Status: "Pending",
-        },
-        {
-          id: "appointmentReplace-4",
-          Action: "Thay thế",
-          ProductName: "Niềng xe",
-          Status: "Pending",
-        },
-      ],
-    },
-    {
-      id: "appointmentdetail-3",
-      ServicesName: "Kiểm tra động cơ 3",
-      status: "in-progress",
-      Action: "action services",
-      Description: "Description servies",
-      WorkNature: "WorkNature",
-      ServiceNote: "Yêu cầu thay bugi loại Iridium",
-      imagesBefore: [],
-      imagesAfter: [],
-    },
-  ],
-};
+import { currentAppointment } from "../../AdminManageAppoinment/services/store/AppointmentSignify";
+import { useParams } from "react-router-dom";
+import { getFullInfomationAppointment } from "../../AdminManageAppoinment/services/AppointmentService";
 
 function MechanicDashboard() {
-  // State header dùng fakeAppointment
-  const [appointmentInfo] = useState(fakeAppointment);
-  const [selectedService, setSelectedService] = useState(null);
-  // State lưu các service (mapping từ id -> service)
-  const [services, setServices] = useState(() => {
-    const map = {};
-    fakeAppointment.listServices.forEach((service) => {
-      map[service.id] = service;
-    });
-    return map;
-  });
-  const userService = new UserService();
-  // Tạo 3 cột cố định: Upcoming, In Progress, Completed
-  const initialColumns = {
-    "column-upcoming": {
-      id: "column-upcoming",
-      title: "Upcoming (Sắp tới)",
-      serviceIds: fakeAppointment.listServices
-        .filter((service) => service.status === "upcoming")
-        .map((service) => service.id),
-    },
-    "column-in-progress": {
-      id: "column-in-progress",
-      title: "In Progress (Đang thực hiện)",
-      serviceIds: fakeAppointment.listServices
-        .filter((service) => service.status === "in-progress")
-        .map((service) => service.id),
-    },
-    "column-completed": {
-      id: "column-completed",
-      title: "Completed (Hoàn thành)",
-      serviceIds: fakeAppointment.listServices
-        .filter((service) => service.status === "completed")
-        .map((service) => service.id),
-    },
-  };
-
-  const [columns, setColumns] = useState(initialColumns);
-
-  // State cho modal xem/sửa hoặc tạo mới
-  const [showModal, setShowModal] = useState(false);
+  const { id } = useParams();
+  const [appointmentInfo, setAppointmentInfo] = useState({});
+  const [services, setServices] = useState({});
+  const [columns, setColumns] = useState({});
+  const [showDetailModal, setShowDetailModal] = useState(false);
   const [isNew, setIsNew] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
+  const [confirmData, setConfirmData] = useState(null); // Lưu thông tin drag để xác nhận
 
-  // -----------------------------
-  // Xử lý Drag & Drop
-  // -----------------------------
-  const onDragEnd = async (result) => {
+  const userService = new UserService();
+  // Định nghĩa thứ tự cột cố định
+  const columnOrder = [
+    "column-pending",
+    "column-inprogress",
+    "column-completed",
+    "column-cancel",
+  ];
+
+  // Hàm fetch appointment từ API và khởi tạo state
+  const fetchAppointment = useCallback(async () => {
+    try {
+      const response = await getFullInfomationAppointment(id);
+      const appointment = response.data.value;
+      setAppointmentInfo(appointment);
+
+      // Chuyển appointmentDetails thành map và đảm bảo trạng thái ban đầu là "pending"
+      const servicesMap = {};
+      appointment.appointmentDetails.forEach((detail) => {
+        servicesMap[detail.id] = {
+          ...detail,
+          // Nếu status trả về là "Approved" hay "Pending", ta đưa vào trạng thái pending ban đầu
+          status:
+            detail.status === "Pending" || detail.status === "Approved"
+              ? "pending"
+              : detail.status,
+        };
+      });
+      setServices(servicesMap);
+
+      // Khởi tạo 4 cột: toàn bộ detail ban đầu được đưa vào cột "Chưa làm gì" (pending)
+      const initialColumns = {
+        "column-pending": {
+          id: "column-pending",
+          title: "Chưa làm gì",
+          serviceIds: appointment.appointmentDetails.map((detail) => detail.id),
+        },
+        "column-inprogress": {
+          id: "column-inprogress",
+          title: "In Progress",
+          serviceIds: [],
+        },
+        "column-completed": {
+          id: "column-completed",
+          title: "Completed",
+          serviceIds: [],
+        },
+        "column-cancel": {
+          id: "column-cancel",
+          title: "Cancel",
+          serviceIds: [],
+        },
+      };
+      setColumns(initialColumns);
+
+      // Cập nhật thông tin global nếu cần
+      currentAppointment.set((v) => {
+        v.value.status = appointment.status;
+        v.value.appointmentDetails = appointment.appointmentDetails;
+        v.value.appointmentDetailPackages =
+          appointment.appointmentDetailPackages;
+      });
+    } catch (error) {
+      console.error("Error fetching appointment: ", error);
+    }
+  }, [id]);
+
+  useEffect(() => {
+    fetchAppointment();
+  }, [id, currentAppointment.value.load]);
+
+  // Xử lý kéo thả
+  const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
     if (!destination) return;
+
+    // Lấy vị trí của cột nguồn và đích theo thứ tự cố định
+    const sourceIndex = columnOrder.indexOf(source.droppableId);
+    const destIndex = columnOrder.indexOf(destination.droppableId);
+
+    // Chỉ cho phép kéo sang cột bên phải liền kề
     if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
+      !(destIndex === sourceIndex + 1 || destIndex === columnOrder.length - 1)
     ) {
       return;
     }
 
+    // Lưu lại state cũ để có thể revert nếu cần
+    const oldColumns = { ...columns };
+
+    // Tính toán lại thứ tự serviceIds trong cột
     const sourceColumn = columns[source.droppableId];
     const destColumn = columns[destination.droppableId];
 
-    const sourceServiceIds = Array.from(sourceColumn.serviceIds);
-    sourceServiceIds.splice(source.index, 1);
+    const newSourceServiceIds = Array.from(sourceColumn.serviceIds);
+    newSourceServiceIds.splice(source.index, 1);
+    const newDestServiceIds = Array.from(destColumn.serviceIds);
+    newDestServiceIds.splice(destination.index, 0, draggableId);
 
-    const destServiceIds = Array.from(destColumn.serviceIds);
-    destServiceIds.splice(destination.index, 0, draggableId);
-
-    setColumns({
+    const newColumns = {
       ...columns,
-      [sourceColumn.id]: {
+      [source.droppableId]: {
         ...sourceColumn,
-        serviceIds: sourceServiceIds,
+        serviceIds: newSourceServiceIds,
       },
-      [destColumn.id]: {
+      [destination.droppableId]: {
         ...destColumn,
-        serviceIds: destServiceIds,
+        serviceIds: newDestServiceIds,
       },
-    });
+    };
 
-    // Cập nhật status của service dựa trên cột đích
-    const newStatus = destColumn.id.replace("column-", "");
+    // Cập nhật state tạm thời (optimistic update)
+    setColumns(newColumns);
+    // Xác định trạng thái mới dựa trên id của cột đích (bỏ tiền tố "column-")
+    const newStatus = destination.droppableId.replace("column-", "");
     setServices((prev) => ({
       ...prev,
-      [draggableId]: {
-        ...prev[draggableId],
-        status: newStatus,
-      },
+      [draggableId]: { ...prev[draggableId], status: newStatus },
     }));
 
-    // Gọi API cập nhật (giả lập)
+    // Lưu thông tin drag để xác nhận trong modal
+    setConfirmData({
+      draggableId,
+      newStatus,
+      oldColumns,
+    });
+  };
+
+  // Xác nhận cập nhật sau khi kéo
+  const handleConfirmDrag = async () => {
     try {
       await fetch("https://example.com/api/appointments/update", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          serviceId: draggableId,
-          newStatus: newStatus,
+          serviceId: confirmData.draggableId,
+          newStatus: confirmData.newStatus,
         }),
       });
+      // Có thể hiển thị thông báo thành công tại đây
     } catch (error) {
       console.error("Error updating service status:", error);
     }
+    setConfirmData(null);
   };
 
-  // -----------------------------
-  // Modal: Mở chi tiết (xem/sửa)
-  // -----------------------------
+  // Hủy xác nhận => revert lại state ban đầu
+  const handleCancelDrag = () => {
+    setColumns(confirmData.oldColumns);
+    // Giả sử trạng thái ban đầu của service là "pending"
+    setServices((prev) => ({
+      ...prev,
+      [confirmData.draggableId]: {
+        ...prev[confirmData.draggableId],
+        status: "pending",
+      },
+    }));
+    setConfirmData(null);
+  };
+
+  // Mở modal xem/chỉnh sửa chi tiết
   const handleOpenDetails = (service) => {
     setIsNew(false);
     setSelectedService(service);
-    setShowModal(true);
+    setShowDetailModal(true);
   };
 
-  // -----------------------------
-  // Modal: Tạo mới
-  // -----------------------------
+  // Hàm tạo mới chi tiết (nếu cần)
   const handleCreateNew = () => {
     setIsNew(true);
     setSelectedService(null);
-    setShowModal(true);
+    setShowDetailModal(true);
   };
 
-  // -----------------------------
-  // Modal: Lưu/Tạo
-  // -----------------------------
+  // Hàm lưu thông tin chi tiết (tạo mới hoặc cập nhật)
   const handleSave = async (newData) => {
     if (isNew) {
       const newId = `appointmentdetail-${Date.now()}`;
-      const serviceStatus = newData.status || "upcoming";
+      const serviceStatus = newData.status || "pending";
       newData.id = newId;
       setServices((prev) => ({
         ...prev,
         [newId]: newData,
       }));
-      // Thêm service mới vào cột tương ứng
-      const colId = `column-${serviceStatus}`;
+      // Thêm service mới vào cột tương ứng (ở đây chỉ cho phép thêm vào cột pending)
       setColumns((prev) => ({
         ...prev,
-        [colId]: {
-          ...prev[colId],
-          serviceIds: [newId, ...prev[colId].serviceIds],
+        "column-pending": {
+          ...prev["column-pending"],
+          serviceIds: [newId, ...prev["column-pending"].serviceIds],
         },
       }));
       // Gọi API tạo mới (giả lập)
@@ -231,11 +223,11 @@ function MechanicDashboard() {
         ...prev,
         [id]: { ...prev[id], ...newData },
       }));
+      // Xử lý upload file, gọi API… (giữ nguyên code hiện tại)
       const formData = new FormData();
       newData.imagesBefore.forEach((file) => {
         formData.append("fileDtos", file);
       });
-
       try {
         const response = await userService.sendAjax(
           "/api/products/ac103ccc-bd82-44ca-adb7-5b478b95965a/images",
@@ -256,7 +248,7 @@ function MechanicDashboard() {
         userService.showToast(error.status, error.message);
       }
     }
-    setShowModal(false);
+    setShowDetailModal(false);
   };
 
   return (
@@ -283,30 +275,30 @@ function MechanicDashboard() {
           <div>
             <div className="flex items-center gap-2 mb-2">
               <label className="text-sm font-medium text-gray-600 w-1/3">
-                CarLicensePlateNumber
+                Verification Code
               </label>
               <div className="w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm bg-gray-200">
-                {appointmentInfo.CarLicensePlateNumber}
+                {appointmentInfo.verificationCode}
               </div>
             </div>
           </div>
           <div>
             <div className="flex items-center gap-2 mb-2">
               <label className="text-sm font-medium text-gray-600 w-1/3">
-                Actual Appointment Time
+                Phone number
               </label>
               <div className="w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm bg-gray-200">
-                {appointmentInfo.ActualAppointmentTime}
+                {appointmentInfo.customerPhoneNumber}
               </div>
             </div>
           </div>
           <div>
             <div className="flex items-center gap-2 mb-2">
               <label className="text-sm font-medium text-gray-600 w-1/3">
-                Appointment Status
+                Phone number
               </label>
               <div className="w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm bg-gray-200">
-                {appointmentInfo.status}
+                {appointmentInfo.customerEmail}
               </div>
             </div>
           </div>
@@ -320,62 +312,80 @@ function MechanicDashboard() {
         </h1>
         <div className="border-t border-red-950 text-left text-gray-500 text-sm w-full"></div>
       </div>
+
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {Object.values(columns).map((column) => (
-            <Droppable key={column.id} droppableId={column.id}>
-              {(provided, snapshot) => (
-                <div
-                  className={`bg-white rounded-md p-3 shadow-md ${
-                    snapshot.isDraggingOver ? "bg-blue-50" : "bg-white"
-                  }`}
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  <h2 className="text-xl font-semibold mb-2">{column.title}</h2>
-                  {column.serviceIds.map((serviceId, index) => {
-                    const service = services[serviceId];
-                    return (
-                      <Draggable
-                        key={service.id}
-                        draggableId={service.id}
-                        index={index}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          {columnOrder.map((columnId) => {
+            const column = columns[columnId];
+            if (!column) return null;
+            return (
+              <Droppable key={column.id} droppableId={column.id}>
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className={`bg-white rounded-md p-3 shadow-md ${
+                      snapshot.isDraggingOver ? "bg-blue-50" : "bg-white"
+                    }`}
+                  >
+                    <h2 className="text-xl font-semibold mb-2">
+                      {column.title}
+                    </h2>
+                    {column.serviceIds.map((serviceId, index) => {
+                      const service = services[serviceId];
+                      return (
+                        <Draggable
+                          key={service.id}
+                          draggableId={service.id}
+                          index={index}
+                        >
+                          {(provided, snapshot) => (
+                            <AppointmentCard
+                              appointment={service}
+                              onClick={() => handleOpenDetails(service)}
+                              provided={provided}
+                              snapshot={snapshot}
+                            />
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                    {/* Nút "New" chỉ hiển thị ở cột pending */}
+                    {column.id === "column-pending" && (
+                      <button
+                        className="mt-3 w-full bg-blue-600 text-white py-2 rounded"
+                        onClick={handleCreateNew}
                       >
-                        {(provided, snapshot) => (
-                          <AppointmentCard
-                            appointment={service}
-                            onClick={() => handleOpenDetails(service)}
-                            provided={provided}
-                            snapshot={snapshot}
-                          />
-                        )}
-                      </Draggable>
-                    );
-                  })}
-                  {/* Nút "New" chỉ hiển thị ở cột Upcoming */}
-                  {column.id === "column-upcoming" && (
-                    <button
-                      className="mt-3 w-full bg-blue-600 text-white py-2 rounded"
-                      onClick={handleCreateNew}
-                    >
-                      + New
-                    </button>
-                  )}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          ))}
+                        + New
+                      </button>
+                    )}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            );
+          })}
         </div>
       </DragDropContext>
 
-      {/* Modal chi tiết (xem / tạo mới) */}
-      {showModal && (
+      {/* Modal xem/chỉnh sửa chi tiết */}
+      {showDetailModal && (
         <AppointmentDetailModal
           service={selectedService}
           isNew={isNew}
-          onClose={() => setShowModal(false)}
+          onClose={() => setShowDetailModal(false)}
           onSave={handleSave}
+        />
+      )}
+
+      {/* Modal xác nhận thao tác kéo */}
+      {confirmData && (
+        <ConfirmDragModal
+          // Bạn có thể truyền thêm thông tin trạng thái nguồn nếu cần
+          sourceStatus="pending"
+          destinationStatus={confirmData.newStatus}
+          onConfirm={handleConfirmDrag}
+          onCancel={handleCancelDrag}
         />
       )}
     </div>

@@ -32,7 +32,7 @@ const CancelModal = ({ isOpen, id, onCancel, onConfirm }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
       <div className="bg-white p-4 rounded">
         <h2 className="text-xl font-semibold mb-2 border-b border-gray-800 text-center font-title">
           {t("cancelModal.title")}

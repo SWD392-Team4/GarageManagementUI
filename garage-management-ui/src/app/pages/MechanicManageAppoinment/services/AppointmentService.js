@@ -1,4 +1,6 @@
 import UserService from "../../../hooks/services/UserService";
+import { AppointmentSignify } from "../../AdminManageAppoinment/services/store/AppointmentSignify";
+import { sAccount } from "../../AuthCustomer/services/store";
 import { formatDate } from "../schemas/appointmentSchema";
 import { FilterAppointment } from "./store/FilterStore";
 
@@ -50,5 +52,28 @@ export const getAllAppointment = async (status) => {
     return response;
   } catch (error) {
     console.error("Fail with: ", error);
+  }
+};
+export const AddAppointmentReplacementPartDetailApi = async (
+  data,
+  id,
+  serviceDetailId
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${id}/details/${serviceDetailId}/products`,
+      "POST",
+      data,
+      true
+    );
+    userService.showToast(200, "Add Product to service successful");
+    return response;
+  } catch (error) {
+    console.error("Fail with : ", error.message);
+    userService.showToast(400, error.message);
   }
 };

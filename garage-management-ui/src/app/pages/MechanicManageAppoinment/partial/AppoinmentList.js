@@ -86,7 +86,7 @@ export default function AppointmentList() {
       label: t("manage_product.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
-      link: (id) => `detail/${id}`,
+      link: (row) => `detail/${row.original.id}`,
     },
   ];
 

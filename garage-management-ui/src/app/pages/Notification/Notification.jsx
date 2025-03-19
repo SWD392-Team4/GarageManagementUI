@@ -34,29 +34,74 @@ const Notification = () => {
             const currentMessages = chatStore.value.messages || [];
             const currentUserId = sAccount.value.id;
             const currentRole = sAccount.value.role;
-            if (currentRole === "Cashier") {
-              if (
-                v.value.typeChatOfCashier === "type-1" &&
-                message.receiverId === null &&
-                v.value.activeChatId === message.senderId.id
-              ) {
-                v.value.messages = [...currentMessages, message];
-              }
-            } else if (currentRole === "Customer") {
-              if (
-                v.value.activeChatId === null &&
-                message.senderId.id === currentUserId
-              ) {
-                console.log("heaa");
-                v.value.messages = [...currentMessages, message];
-              }
-            }
+            const chatType = v.value.typeChatOfCashier; // "type-1" cho hỗ trợ, "type-2" cho chat cá nhân
+            const activeChatId = v.value.activeChatId;
+            const isNull = currentMessages.some(
+              (message) => message.receiverId === null
+            );
 
-            if (
-              message.senderId.id === currentUserId &&
-              v.value.activeChatId === message.receiverId.id
-            ) {
-              v.value.messages = [...currentMessages, message];
+            if (message.receiverId === null) {
+              // ---- Trường hợp tin hỗ trợ ban đầu ----
+              // Khi khách hàng gửi hỗ trợ: senderId là khách hàng, receiverId === null.
+              // Cả khách hàng (người gửi) và Cashier (ở mode type-1) đều nhận được tin.
+              if (
+                currentUserId === message.senderId.id ||
+                (currentRole === "Cashier" &&
+                  chatType === "type-1" &&
+                  activeChatId === message.senderId.id)
+              ) {
+                v.value.messages = [...currentMessages, message];
+              }
+            } else {
+              // ---- Trường hợp tin nhắn có receiverId (reply trong hỗ trợ hoặc chat cá nhân) ----
+
+              // Nếu đang là Cashier
+              if (currentRole === "Cashier") {
+                if (chatType === "type-1") {
+                  // Trong hỗ trợ (type-1):
+                  // - Khi Cashier gửi tin trả lời: activeChatId cần trùng với id khách hàng (message.receiverId.id)
+                  // - Khi Cashier nhận tin trả lời từ khách hàng: activeChatId cần trùng với id khách hàng (message.senderId.id)
+                  if (
+                    (message.senderId.id === currentUserId &&
+                      activeChatId === message.receiverId.id) ||
+                    (message.senderId.id !== currentUserId &&
+                      activeChatId === message.senderId.id)
+                  ) {
+                    v.value.messages = [...currentMessages, message];
+                  }
+                } else if (chatType === "type-2") {
+                  // Trong chat cá nhân (type-2):
+                  // - Khi Cashier gửi tin: activeChatId phải khớp với receiver.
+                  // - Khi nhận tin: activeChatId phải khớp với sender.
+                  if (message.senderId.id === currentUserId) {
+                    if (activeChatId === message.receiverId.id) {
+                      v.value.messages = [...currentMessages, message];
+                    }
+                  } else if (message.receiverId.id === currentUserId) {
+                    if (activeChatId === message.senderId.id) {
+                      v.value.messages = [...currentMessages, message];
+                    }
+                  }
+                }
+              }
+              // Nếu đang là Customer (luôn ở chế độ chat cá nhân)
+              else {
+                // - Khi Customer gửi tin: activeChatId cần trùng với receiver.
+                // - Khi Customer nhận tin: activeChatId cần trùng với sender.
+                if (message.senderId.id === currentUserId) {
+                  if (activeChatId === message.receiverId.id) {
+                    v.value.messages = [...currentMessages, message];
+                  }
+                } else if (message.receiverId.id === currentUserId) {
+                  console.log(" message.senderId.id");
+                  if (activeChatId === message.senderId.id) {
+                    console.log(" message.senderId.id");
+                    v.value.messages = [...currentMessages, message];
+                  } else if (activeChatId === null && isNull) {
+                    v.value.messages = [...currentMessages, message];
+                  }
+                }
+              }
             }
 
             if (

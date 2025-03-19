@@ -114,6 +114,19 @@ export const getAllProducts = async () => {
     console.error("Fail with: getAllProducts", error);
   }
 };
+export const getAllProductsAtGara = async () => {
+  try {
+    const response = await userService.sendAjax(
+      "/api/product-at-garages/garage",
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fail with: getAllProducts", error);
+  }
+};
 export const getAllAppointment = async (status) => {
   // Khởi tạo query với pageNumber và trạng thái nếu có
   let queryParams = `PageNumber=${FilterAppointment.value.pageCurrent}`;

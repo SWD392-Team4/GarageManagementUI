@@ -207,7 +207,7 @@
     "path": "/Mechanic",
     "element": "LayoutMechanic",
     "private": {
-      "allowedRoles": ["Administrator", "Mechanic"]
+      "allowedRoles": ["Administrator", "Mechanic", "Cashier"]
     },
     "isSuspense": true,
     "children": [
@@ -669,6 +669,22 @@
       {
         "path": "create-appointment",
         "element": "CreateAppointment"
+      },
+      {
+        "path": "appointment-mine",
+        "element": "MechanicManageAppointment",
+        "isSuspense": true,
+        "children": [
+          {
+            "index": true,
+            "element": "AppoinmentList"
+          },
+          {
+            "path": "detail/:id",
+            "element": "MechanicDashboard",
+            "isSuspense2": true
+          }
+        ]
       }
     ]
   },

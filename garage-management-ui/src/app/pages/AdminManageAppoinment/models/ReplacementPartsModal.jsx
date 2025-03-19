@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import {
   getAllProducts,
   AddAppointmentReplacementPartDetailApi,
+  getAllProductsAtGara,
 } from "../services/AppointmentService";
 import { formatVietnameseCurrency } from "../../ManageGoodsIssued/schemas/GoodsIssuedSchemas";
 
@@ -58,7 +59,7 @@ const ReplacementPartsModal = ({
   // Lấy danh sách sản phẩm từ API
   const fetchData = useCallback(async () => {
     try {
-      const productRes = await getAllProducts();
+      const productRes = await getAllProductsAtGara();
       setProducts(productRes.data.value);
     } catch (error) {
       console.error("Error loading data", error);

@@ -121,7 +121,7 @@ export default function ServicesInAppointment() {
       color: "bg-gray-500",
       onClick: async (row) => {
         try {
-          setIsUpdateModalOpen1(true);
+          setIsUpdateModalOpen2(true);
           setServiceDetailId(row.id);
         } catch (error) {
           console.error("Error reject details: ", error);
@@ -137,7 +137,10 @@ export default function ServicesInAppointment() {
     <>
       <div className="bg-gray-300 text-xs md:text-sm uppercase mt-3 md:mt-5 p-2 font-title font-bold flex flex-col md:flex-row justify-between items-start md:items-center">
         <div>Services in appointment</div>
-        <AddAppointmentDetail id={id} />
+        {currentAppointment.value.status !== "Rejected" &&
+          currentAppointment.value.status !== "Cancelled" && (
+            <AddAppointmentDetail id={id} />
+          )}
       </div>
 
       <div className="">

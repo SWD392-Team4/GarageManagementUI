@@ -97,7 +97,6 @@ const SkeletonCard = () => (
         <div className="w-36 h-3 bg-gray-300 rounded"></div>
       </div>
     </div>
-    {/* Một tin nhắn khác từ người khác */}
   </div>
 );
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import UserService from "../../../hooks/services/UserService";
 import { cancelAppointmentDetail } from "../services/AppointmentService";
+import { currentAppointment } from "../services/store/AppointmentSignify";
 
 const CancelDetailAppointment = ({
   isOpen,
@@ -35,6 +36,11 @@ const CancelDetailAppointment = ({
         serviceDetailId,
         type
       );
+      if (response) {
+        currentAppointment.set((v) => {
+          v.value.load += 1;
+        });
+      }
       onConfirm(response);
     } catch (error) {
       console.error("Error canceling appointment:", error);
@@ -46,7 +52,7 @@ const CancelDetailAppointment = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-40 flex justify-center items-center">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
       <div className="bg-white p-4 rounded">
         <h2 className="text-xl font-semibold mb-2 border-b border-gray-800 text-center font-title">
           {t(`cancelModal.${type}`)}
