@@ -65,6 +65,7 @@ export default function UpdateCarModal({
 
     try {
       await updateCarModal(formData.id, formData);
+      console.log("Da chay api");
       onCarModelUpdated();
       onClose();
     } catch (error) {

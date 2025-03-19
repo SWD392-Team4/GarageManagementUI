@@ -1,4 +1,5 @@
 import UserService from "../../../hooks/services/UserService";
+import { sAccount } from "../../AuthCustomer/services/store";
 
 const userService = new UserService();
 
@@ -71,7 +72,7 @@ export const updateInvoiceSale = async (invoiceSaleId, updatedData) => {
 export const getProductAtStore = async (data) => {
   try {
     const response = await userService.sendAjax(
-      "/api/product-at-garages/garage",
+      `/api/product-at-garages/${sAccount.value.workPlaceId}`,
       "GET",
       null,
       data

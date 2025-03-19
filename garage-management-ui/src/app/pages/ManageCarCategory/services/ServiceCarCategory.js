@@ -98,6 +98,8 @@ export const UpdateCarCategory = async (carCategoryID, data) => {
       data,
       true
     );
+    // console.log("Check data", data);
+    // data.updatedAt = formatDate(data.updatedAt);
     if (response) {
       //logic signify
       sCarCategory.set((pre) => {
@@ -107,9 +109,11 @@ export const UpdateCarCategory = async (carCategoryID, data) => {
         pre.value.createdAt = "";
         pre.value.updatedAt = "";
       });
+
       //gan thong tin moi vao
       sCarCategory.set((pre) => {
         pre.value.id = carCategoryID;
+        pre.value.category = data.category;
         pre.value.status = data.status;
         pre.value.createdAt = data.createdAt;
         pre.value.updatedAt = data.updatedAt;

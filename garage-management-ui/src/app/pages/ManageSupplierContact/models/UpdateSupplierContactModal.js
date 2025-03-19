@@ -2,14 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Select from "react-select";
 import { useTranslation } from "react-i18next";
-import { getAllSupplier, updateSupplierContact } from "../services/SupliersContactService";
+import {
+  getAllSupplier,
+  updateSupplierContact,
+} from "../services/SupliersContactService";
 import { FaTimes } from "react-icons/fa"; // Import icon đóng modal
 
-export default function UpdateSupplierContactModal({ isOpen, onClose, supplierContact, onSupplierUpdated }) {
+export default function UpdateSupplierContactModal({
+  isOpen,
+  onClose,
+  supplierContact,
+  onSupplierUpdated,
+}) {
   const { t } = useTranslation("manage_supplier_contact");
   const [suppliers, setSuppliers] = useState([]);
   const [selectedSupplier, setSelectedSupplier] = useState(null);
+  const [selectedStatus, setSelectedStatus] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+
+  const statusOptions = [
+    { value: "Active", label: t("manage_supplier_contact.active") },
+    { value: "Inactive", label: t("manage_supplier_contact.inactive") },
+  ];
 
   const {
     register,
@@ -24,9 +38,9 @@ export default function UpdateSupplierContactModal({ isOpen, onClose, supplierCo
     const fetchSuppliers = async () => {
       try {
         const response = await getAllSupplier();
-        const formattedSuppliers = response.data.value.map(supplier => ({
+        const formattedSuppliers = response.data.value.map((supplier) => ({
           value: supplier.id,
-          label: `${supplier.name} - ${supplier.taxCode} - ${supplier.address}, ${supplier.province}, ${supplier.district}, ${supplier.wards}`
+          label: `${supplier.name} - ${supplier.taxCode} - ${supplier.address}, ${supplier.province}, ${supplier.district}, ${supplier.wards}`,
         }));
         setSuppliers(formattedSuppliers);
       } catch (error) {
@@ -42,9 +56,14 @@ export default function UpdateSupplierContactModal({ isOpen, onClose, supplierCo
   // Khi mở modal, load dữ liệu cũ vào form
   useEffect(() => {
     if (supplierContact && suppliers.length > 0) {
-      const matchingSupplier = suppliers.find(supplier => supplier.value === supplierContact.supplierId);
-
+      const matchingSupplier = suppliers.find(
+        (supplier) => supplier.value === supplierContact.supplierId
+      );
       setSelectedSupplier(matchingSupplier || null);
+      setSelectedStatus(
+        statusOptions.find((opt) => opt.value === supplierContact.status) ||
+          null
+      );
 
       reset({
         supplierId: supplierContact.supplierId || "",
@@ -52,6 +71,7 @@ export default function UpdateSupplierContactModal({ isOpen, onClose, supplierCo
         contactPosition: supplierContact.contactPosition || "",
         contactPhoneNumber: supplierContact.contactPhoneNumber || "",
         contactEmail: supplierContact.contactEmail || "",
+        status: supplierContact.status || "Active",
       });
     }
   }, [supplierContact, suppliers, reset]);
@@ -61,6 +81,7 @@ export default function UpdateSupplierContactModal({ isOpen, onClose, supplierCo
       await updateSupplierContact(supplierContact.id, {
         ...data,
         supplierId: selectedSupplier?.value || supplierContact.supplierId,
+        status: selectedStatus?.value || "Active",
       });
       onSupplierUpdated();
       setIsEditing(false);
@@ -73,8 +94,14 @@ export default function UpdateSupplierContactModal({ isOpen, onClose, supplierCo
   const handleCancelEdit = () => {
     reset();
     if (supplierContact && suppliers.length > 0) {
-      const matchingSupplier = suppliers.find(supplier => supplier.value === supplierContact.supplierId);
+      const matchingSupplier = suppliers.find(
+        (supplier) => supplier.value === supplierContact.supplierId
+      );
       setSelectedSupplier(matchingSupplier || null);
+      setSelectedStatus(
+        statusOptions.find((opt) => opt.value === supplierContact.status) ||
+          null
+      );
     }
     setIsEditing(false);
   };
@@ -92,11 +119,15 @@ export default function UpdateSupplierContactModal({ isOpen, onClose, supplierCo
           <FaTimes size={18} />
         </button>
 
-        <h2 className="text-xl font-semibold mb-4">{t("manage_supplier_contact.edit")}</h2>
+        <h2 className="text-xl font-semibold mb-4">
+          {t("manage_supplier_contact.edit")}
+        </h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           {/* Supplier Select */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium">{t("manage_supplier_contact.supplierId")}</label>
+            <label className="text-sm font-medium">
+              {t("manage_supplier_contact.supplierId")}
+            </label>
             <Select
               options={suppliers}
               value={selectedSupplier}
@@ -113,45 +144,78 @@ export default function UpdateSupplierContactModal({ isOpen, onClose, supplierCo
 
           {/* Contact Person Name */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium">{t("manage_supplier_contact.contactPersonName")}</label>
+            <label className="text-sm font-medium">
+              {t("manage_supplier_contact.contactPersonName")}
+            </label>
             <input
               type="text"
               {...register("contactPersonName", { required: true })}
               disabled={!isEditing}
-              className={`p-2 border rounded-md ${isEditing ? "bg-white" : "bg-gray-100"}`}
+              className={`p-2 border rounded-md ${
+                isEditing ? "bg-white" : "bg-gray-100"
+              }`}
             />
           </div>
 
           {/* Contact Position */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium">{t("manage_supplier_contact.contactPosition")}</label>
+            <label className="text-sm font-medium">
+              {t("manage_supplier_contact.contactPosition")}
+            </label>
             <input
               type="text"
               {...register("contactPosition", { required: true })}
               disabled={!isEditing}
-              className={`p-2 border rounded-md ${isEditing ? "bg-white" : "bg-gray-100"}`}
+              className={`p-2 border rounded-md ${
+                isEditing ? "bg-white" : "bg-gray-100"
+              }`}
             />
           </div>
 
           {/* Contact Phone Number */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium">{t("manage_supplier_contact.contactPhoneNumber")}</label>
+            <label className="text-sm font-medium">
+              {t("manage_supplier_contact.contactPhoneNumber")}
+            </label>
             <input
               type="text"
               {...register("contactPhoneNumber", { required: true })}
               disabled={!isEditing}
-              className={`p-2 border rounded-md ${isEditing ? "bg-white" : "bg-gray-100"}`}
+              className={`p-2 border rounded-md ${
+                isEditing ? "bg-white" : "bg-gray-100"
+              }`}
             />
           </div>
 
           {/* Contact Email */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium">{t("manage_supplier_contact.contactEmail")}</label>
+            <label className="text-sm font-medium">
+              {t("manage_supplier_contact.contactEmail")}
+            </label>
             <input
               type="email"
               {...register("contactEmail", { required: true })}
               disabled={!isEditing}
-              className={`p-2 border rounded-md ${isEditing ? "bg-white" : "bg-gray-100"}`}
+              className={`p-2 border rounded-md ${
+                isEditing ? "bg-white" : "bg-gray-100"
+              }`}
+            />
+          </div>
+
+          {/* Status Select */}
+          <div className="flex flex-col">
+            <label className="text-sm font-medium">
+              {t("manage_supplier_contact.status")}
+            </label>
+            <Select
+              options={statusOptions}
+              value={selectedStatus}
+              onChange={(option) => {
+                setSelectedStatus(option);
+                setValue("status", option.value);
+              }}
+              isDisabled={!isEditing}
+              placeholder={t("manage_supplier_contact.select_status")}
             />
           </div>
         </form>

@@ -63,6 +63,8 @@ export const searchCarModal = async (params) => {
 
 export const createCarModal = async (data) => {
   try {
+    console.log("Check data: ", data);
+
     const response = await userService.sendAjax(
       "/api/car-models",
       "POST",
@@ -84,6 +86,16 @@ export const createCarModal = async (data) => {
 
 export const updateCarModal = async (carModalId, updateData) => {
   try {
+    // Chuyển đổi modelYear từ "d/m/yyyy" thành "yyyy-mm-dd"
+    if (updateData.modelYear) {
+      const dateParts = updateData.modelYear.split("/"); // Tách theo dấu '/'
+      if (dateParts.length === 3) {
+        const [day, month, year] = dateParts.map((num) => num.padStart(2, "0"));
+        updateData.modelYear = `${year}-${month}-${day}`;
+      }
+    }
+    console.log("Check dinh dang ngay: ", updateData.modelYear);
+
     const response = await userService.sendAjax(
       `/api/car-models/${carModalId}`,
       "PUT",
