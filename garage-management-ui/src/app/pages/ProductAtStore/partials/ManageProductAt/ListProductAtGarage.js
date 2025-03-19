@@ -64,7 +64,7 @@ export default function ListProductAtGarage({ garageId }) {
       const handleBarcodeScan = async (event) => {
         if (event.key === "Enter" && barcodeInput.trim() !== "") {
           console.log("Barcode scanned:", barcodeInput);
-          await fetchProductByBarcode(garageId, barcodeInput);
+          await getProductAtGarageByBarCode(barcodeInput);
           setBarcodeInput("");
         } else {
           setBarcodeInput((prev) => prev + event.key);
@@ -82,7 +82,7 @@ export default function ListProductAtGarage({ garageId }) {
   // ✅ API lấy sản phẩm theo Barcode
   const fetchProductByBarcode = async (barcode) => {
     try {
-      const response = await getProductAtGarageByBarCode(warehouseId, {
+      const response = await getProductAtGarageByBarCode({
         ProductBarcode: barcode,
       });
       setSelectedProduct(response.data.value);
@@ -123,7 +123,7 @@ export default function ListProductAtGarage({ garageId }) {
               if (result) {
                 console.log("Barcode scanned:", result.text);
                 fetchProductByBarcode(result.text);
-                setIsScanning(false); // Tự động tắt quét sau khi scan xong
+                setIsScanning(false);
               }
             }}
           />

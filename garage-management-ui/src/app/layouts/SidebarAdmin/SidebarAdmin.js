@@ -140,6 +140,21 @@ export default function SideBarAdmin({
                 <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
               </li>
 
+              <li className="group">
+                <Link
+                  to="/administrator/package-register"
+                  className="flex items-center p-2  text-white  transition-all rounded-lg"
+                >
+                  <FaUser className="w-6 h-6" />
+                  {isSidebarOpen && (
+                    <span className="ml-3">
+                      {t("sidebar_admin.package-register")}
+                    </span>
+                  )}
+                </Link>
+                <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover:w-full"></div>
+              </li>
+
               {/* Product At Store and Warehouse*/}
               <li className="group">
                 <button

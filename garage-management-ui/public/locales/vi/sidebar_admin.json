@@ -38,6 +38,7 @@
     "package_service": "Gói dịch vụ",
     "product_at": "Hàng tồn kho",
     "product_at_warehouse": "Sản phẩm tại kho",
-    "product_at_store": "Sản phẩm tại cửa hàng"
+    "product_at_store": "Sản phẩm tại cửa hàng",
+    "Package Register": "Đăng ký gói"
   }
 }

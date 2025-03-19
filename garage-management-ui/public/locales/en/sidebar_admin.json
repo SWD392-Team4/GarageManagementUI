@@ -41,6 +41,7 @@
     "package_service": "Package Service",
     "product_at": "Inventory",
     "product_at_warehouse": "Product at Warehouse",
-    "product_at_store": "Product at Store"
+    "product_at_store": "Product at Store",
+    "package-register": "Package Register"
   }
 }

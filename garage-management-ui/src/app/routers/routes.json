@@ -287,6 +287,11 @@
         "isSuspense2": true
       },
       {
+        "path": "package-register",
+        "element": "PackageRegister",
+        "isSuspense2": true
+      },
+      {
         "path": "suppliers",
         "element": "ManageSupplier",
         "isSuspense2": true

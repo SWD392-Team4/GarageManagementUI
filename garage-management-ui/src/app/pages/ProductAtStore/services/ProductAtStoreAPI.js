@@ -69,6 +69,7 @@ export const getProductAtGarageByBarCode = async (productBarCode) => {
     );
     return response;
   } catch (error) {
+    userService.showToast(400, error.description);
     console.error("Fail With: ", error.message);
   }
 };

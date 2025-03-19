@@ -1,0 +1,24 @@
+{
+  "create_invoice_sale": {
+    "product_card": {
+      "price": "Price",
+      "stock": "Stock",
+      "created_at": "Created At",
+      "not_available": "N/A"
+    },
+    "sidebar_checkout": {
+      "customer_info": "Customer Information",
+      "customer_name": "Customer Name",
+      "customer_phone": "Phone Number",
+      "customer_email": "Customer Email",
+      "selected_products": "Selected Products",
+      "product_name": "Product Name",
+      "quantity": "Quantity",
+      "actions": "Actions",
+      "remove": "Remove",
+      "no_products": "No products selected",
+      "total": "Total:",
+      "create_invoice": "Create Invoice"
+    }
+  }
+}
