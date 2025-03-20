@@ -36,7 +36,7 @@ export default function ProductCard({ product, handleSelectProduct }) {
           <div className="flex items-center gap-1">
             <FaTag className="text-gray-500" />
             <span className="font-medium">
-              {product.productCategory ||
+              {product.productCategoryName ||
                 t("product_at_store.card_product.no_category")}
             </span>
           </div>

@@ -117,7 +117,7 @@ export default function ProductSidebar({
                   {t("product_at_store.sidebar_product.category")}:
                 </label>
                 <p className="text-gray-700 text-md">
-                  {selectedProduct.category}
+                  {selectedProduct.productCategoryName}
                 </p>
               </div>
 

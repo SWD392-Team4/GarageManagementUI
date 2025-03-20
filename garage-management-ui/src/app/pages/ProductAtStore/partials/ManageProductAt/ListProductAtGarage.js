@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   getAllProductAtGarage,
@@ -9,8 +9,10 @@ import SearchProduct from "../../partials/component/SearchProduct";
 import ProductCard from "../../partials/component/ProductCard";
 import ProductSidebar from "../../partials/component/ProductSidebar";
 import { useMediaQuery } from "react-responsive";
+import { AppointmentSignify } from "../../../AdminManageAppoinment/services/store/AppointmentSignify"
 
-export default function ListProductAtGarage({ garageId }) {
+export default function ListProductAtGarage() {
+  const sAppointmentSignify = AppointmentSignify.use();
   const { t } = useTranslation("product_at_store");
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -19,12 +21,15 @@ export default function ListProductAtGarage({ garageId }) {
   const [barcodeInput, setBarcodeInput] = useState("");
   const [isScanning, setIsScanning] = useState(false);
 
+  //quan ly render scan
+  const barcodeBufferRef = useRef(""); // Dùng useRef để tránh re-render
+  const lastKeyPressTimeRef = useRef(0);
+
   // Check moblie
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const fetchListProduct = async () => {
-    if (!garageId) return;
-    const response = await getAllProductAtGarage(garageId, searchParams || {});
+    const response = await getAllProductAtGarage(searchParams || {});
     setProducts(response.data.value || []);
   };
 
@@ -34,7 +39,7 @@ export default function ListProductAtGarage({ garageId }) {
     //chuyen gara thi tat
     setIsSidebarOpen(false);
     setSelectedProduct(null);
-  }, [garageId, searchParams]);
+  }, [AppointmentSignify.value.garaCurrent, searchParams]);
 
   // Khi click vào sản phẩm -> Fetch chi tiết sản phẩm và mở sidebar
   const handleSelectProduct = async (productId) => {
@@ -68,27 +73,49 @@ export default function ListProductAtGarage({ garageId }) {
 
   useEffect(() => {
     if (!isMobile) {
+      let timeout;
+
       const handleBarcodeScan = async (event) => {
-        if (event.key === "Enter" && barcodeInput.trim() !== "") {
-          console.log("Barcode scanned:", barcodeInput);
-          const response = await getProductAtGarageByBarCode(barcodeInput);
-          if (response.data.value) {
-            setSelectedProduct(response.data.value);
-            setIsSidebarOpen(true);
-          }
-          setBarcodeInput(""); // Reset input
+        const currentTime = new Date().getTime();
+
+        // Nếu khoảng cách giữa hai lần nhập > 100ms, reset buffer (nhập tay)
+        if (currentTime - lastKeyPressTimeRef.current > 100) {
+          barcodeBufferRef.current = event.key;
         } else {
-          setBarcodeInput((prev) => prev + event.key);
+          barcodeBufferRef.current += event.key;
         }
+
+        lastKeyPressTimeRef.current = currentTime;
+
+        // Nếu nhấn Enter, xử lý barcode
+        if (event.key === "Enter") {
+          const barcode = barcodeBufferRef.current.trim().replace(/[\r\n]+|Enter/g, '');
+          if (barcode !== "") {
+            console.log("Barcode scanned:", barcode);
+            const response = await getProductAtGarageByBarCode(barcode);
+            if (response.data.value) {
+              setSelectedProduct(response.data.value);
+              setIsSidebarOpen(true);
+            }
+          }
+          barcodeBufferRef.current = ""; // Reset bộ đệm sau khi xử lý
+        }
+
+        // Xóa bộ đệm nếu không có ký tự mới trong 500ms
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          barcodeBufferRef.current = "";
+        }, 500);
       };
 
       window.addEventListener("keydown", handleBarcodeScan);
 
       return () => {
         window.removeEventListener("keydown", handleBarcodeScan);
+        clearTimeout(timeout);
       };
     }
-  }, [barcodeInput]);
+  }, []);
 
   // ✅ API lấy sản phẩm theo Barcode
   const fetchProductByBarcode = async (barcode) => {
@@ -114,9 +141,8 @@ export default function ListProductAtGarage({ garageId }) {
       {isMobile && (
         <div className="flex justify-center mt-2">
           <button
-            className={`px-4 py-2 rounded-lg text-white ${
-              isScanning ? "bg-red-500" : "bg-blue-500"
-            }`}
+            className={`px-4 py-2 rounded-lg text-white ${isScanning ? "bg-red-500" : "bg-blue-500"
+              }`}
             onClick={() => setIsScanning(!isScanning)}
           >
             {isScanning ? "Tắt Quét Barcode" : "Bật Quét Barcode"}
@@ -146,14 +172,12 @@ export default function ListProductAtGarage({ garageId }) {
         {/* Danh sách sản phẩm - Ẩn trên mobile khi sidebar mở */}
         {!isMobile || !isSidebarOpen ? (
           <div
-            className={`flex-grow transition-all ${
-              isSidebarOpen && !isMobile ? "w-3/4" : "w-full"
-            } min-h-[250px] max-h-[calc(100vh-100px)] overflow-y-auto`}
+            className={`flex-grow transition-all ${isSidebarOpen && !isMobile ? "w-3/4" : "w-full"
+              } min-h-[250px] max-h-[calc(100vh-100px)] overflow-y-auto`}
           >
             <div
-              className={`grid gap-4 ${
-                isMobile ? "grid-cols-1" : "grid-cols-3"
-              } grid-auto-rows`}
+              className={`grid gap-4 ${isMobile ? "grid-cols-1" : "grid-cols-3"
+                } grid-auto-rows`}
             >
               {products.length > 0 ? (
                 products.map((product) => (
@@ -175,11 +199,10 @@ export default function ListProductAtGarage({ garageId }) {
         {/* Sidebar - Chiếm toàn bộ khi mở trên mobile, bên phải trên desktop */}
         {isSidebarOpen && (
           <div
-            className={`${
-              isMobile
-                ? "w-full h-full fixed top-0 left-0 bg-white z-50"
-                : "w-1/3 max-w-[600px] bg-white shadow-lg rounded-lg"
-            } flex flex-col p-6 relative`}
+            className={`${isMobile
+              ? "w-full h-full fixed top-0 left-0 bg-white z-50"
+              : "w-1/3 max-w-[600px] bg-white shadow-lg rounded-lg"
+              } flex flex-col p-6 relative`}
           >
             <ProductSidebar
               selectedProduct={selectedProduct}
