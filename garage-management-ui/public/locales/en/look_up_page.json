@@ -1,20 +1,50 @@
 {
-    "look_up_page": {
-        "step_page": {
-            "title": "Watch the process of service implementation.",
-            "description": "We make it easy for you to observe the service process with just a few clicks!",
-            "find_garage": "Find a Garage",
-            "column1Description": "Find the garage where your car is or has been serviced.",
-            "column2Title": "Appointment Details",
-            "column2Description": "Fill in the appointment information.",
-            "column3Title": "Look up appointment",
-            "column3Description": "View appointment details and ongoing procedures.",
-            "buttonFindGarage": "Find Garage"
-        },
-        "pick_garage": {
-            "choiceGara1": "Choose Garage",
-            "choiceGara2": "Please choose a garage to continue",
-            "choiceGara3": "LOCATION & CONTACT"
-        }
+  "look_up_page": {
+    "step_page": {
+      "title": "Watch the process of service implementation.",
+      "description": "We make it easy for you to observe the service process with just a few clicks!",
+      "find_garage": "Find a Garage",
+      "column1Description": "Find the garage where your car is or has been serviced.",
+      "column2Title": "Appointment Details",
+      "column2Description": "Fill in the appointment information.",
+      "column3Title": "Look up appointment",
+      "column3Description": "View appointment details and ongoing procedures.",
+      "buttonFindGarage": "Find Garage"
+    },
+    "pick_garage": {
+      "choiceGara1": "Choose Garage",
+      "choiceGara2": "Please choose a garage to continue",
+      "choiceGara3": "LOCATION & CONTACT"
+    },
+    "view_look_up": {
+      "appointment_info": "Appointment Info",
+      "customer_details": "Customer Details",
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email",
+      "car_details": "Car Details",
+      "license_plate": "License Plate",
+      "car_model_id": "Car Model ID",
+      "mileage": "Mileage",
+      "km": "km",
+      "appointment_time": "Appointment Time",
+      "start": "Start",
+      "end": "End",
+      "service_details": "Service Details",
+      "appointment_services": "Appointment Services",
+      "part": "Part",
+      "service": "Service",
+      "estimated_hours": "Estimated Hours",
+      "price": "Price",
+      "status": "Status",
+      "replacement_parts": "Replacement Parts",
+      "parts": "parts",
+      "pcs": "pcs",
+      "service_packages": "Service Packages",
+      "package_name": "Package Name",
+      "package_price": "Package Price",
+      "show_more": "Show More",
+      "show_less": "Show Less"
     }
+  }
 }

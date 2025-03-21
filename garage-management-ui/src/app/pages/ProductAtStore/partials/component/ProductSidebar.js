@@ -141,8 +141,8 @@ export default function ProductSidebar({
                 <div className="border rounded-md p-3 bg-gray-50 flex justify-center items-center">
                   <Barcode
                     value={selectedProduct.productBarcodeAtGarage}
-                    width={isMobile ? 0.5 : 0.6}
-                    height={isMobile ? 50 : 80}
+                    width={isMobile ? 2 : 2}
+                    height={isMobile ? 80 : 60}
                     fontSize={isMobile ? 10 : 15}
                     displayValue={true}
                     lineColor="#333"

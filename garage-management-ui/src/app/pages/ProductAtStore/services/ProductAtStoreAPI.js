@@ -5,8 +5,8 @@ import {
   formatVietnameseCurrency,
 } from "../schemas/ProductAtStoreSchemas";
 import { sProductAtStore } from "./ProductAtStoreSignify";
-import { sAccount } from "../../AuthCustomer/services/store"
-import { AppointmentSignify } from "../../AdminManageAppoinment/services/store/AppointmentSignify"
+import { sAccount } from "../../AuthCustomer/services/store";
+import { AppointmentSignify } from "../../AdminManageAppoinment/services/store/AppointmentSignify";
 
 const userService = new UserService();
 
@@ -17,10 +17,11 @@ export const getAllProductAtGarage = async (params) => {
       .map((key) => `${key}=${encodeURIComponent(params[key])}`)
       .join("&");
 
-    const url = `/api/product-at-garages/product/${sAccount.value.role === "Administrator"
-      ? AppointmentSignify.value.garaCurrent
-      : sAccount.value.workPlaceId
-      }`;
+    const url = `/api/product-at-garages/product/${
+      sAccount.value.role === "Administrator"
+        ? AppointmentSignify.value.garaCurrent
+        : sAccount.value.workPlaceId
+    }${queryString ? `?${queryString}` : ""}`;
 
     const response = await userService.sendAjax(url, "GET", null, true);
 
@@ -69,9 +70,10 @@ export const getProductDetails = async (productId) => {
 export const getProductAtGarageByBarCode = async (productBarCode) => {
   try {
     const response = await userService.sendAjax(
-      `/api/barcode/scan/garage/${productBarCode}/${sAccount.value.role === "Administrator"
-        ? AppointmentSignify.value.garaCurrent
-        : sAccount.value.workPlaceId
+      `/api/barcode/scan/garage/${productBarCode}/${
+        sAccount.value.role === "Administrator"
+          ? AppointmentSignify.value.garaCurrent
+          : sAccount.value.workPlaceId
       }`,
       "GET",
       null,
@@ -101,12 +103,15 @@ export const generationBarCode = async (barcode) => {
 ///////////////////////////////////////////////////////////////////Phan invoice
 export const getAllInvoiceSale = async (PageNumber) => {
   try {
-    const response = await userService.sendAjax(
-      `/api/invoices/cashier?PageNumber=${PageNumber}`,
-      "GET",
-      null,
-      true
-    );
+    let url;
+
+    if (sAccount.value.role === "Administrator") {
+      url = `/api/invoices/admin/${AppointmentSignify.value.garaCurrent}?PageNumber=${PageNumber}`;
+    } else {
+      url = `/api/invoices/cashier?PageNumber=${PageNumber}`;
+    }
+
+    const response = await userService.sendAjax(url, "GET", null, true);
     response.data.value = response.data.value.map((pre) => ({
       ...pre,
       totalPrice: formatVietnameseCurrency(pre.totalPrice),
@@ -126,12 +131,15 @@ export const searchInvoice = async (params) => {
       .map((key) => `${key}=${encodeURIComponent(params[key])}`)
       .join("&");
 
-    const response = await userService.sendAjax(
-      `/api/invoices/cashier?${queryString}`,
-      "GET",
-      null,
-      true
-    );
+    let url;
+
+    if (sAccount.value.role === "Administrator") {
+      url = `/api/invoices/admin/${AppointmentSignify.value.garaCurrent}?${queryString}`;
+    } else {
+      url = `/api/invoices/cashier?${queryString}`;
+    }
+
+    const response = await userService.sendAjax(url, "GET", null, true);
 
     response.data.value = response.data.value.map((pre) => ({
       ...pre,
@@ -152,6 +160,11 @@ export const getDetailProductSell = async (invoiceId) => {
       null,
       true
     );
+    response.data.value = response.data.value.map((pre) => ({
+      ...pre,
+      createdAt: formatDate(pre.createdAt),
+    }));
+
     return response;
   } catch (error) {
     console.error("Fail with :", error.message);

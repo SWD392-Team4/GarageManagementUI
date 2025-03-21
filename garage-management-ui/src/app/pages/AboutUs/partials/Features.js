@@ -1,5 +1,3 @@
-
-
 import { FaBox, FaTruck, FaMoneyBillWave } from "react-icons/fa";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -10,27 +8,24 @@ const FeatureSection = () => {
     {
       icon: <FaBox size={24} />,
       title: t("about_features.trusted_quality"),
-      description:
-      t("about_features.trusted_quality_desc"),
+      description: t("about_features.trusted_quality_desc"),
     },
     {
       icon: <FaTruck size={24} />,
       title: t("about_features.fast_service"),
-      description:
-      t("about_features.fast_service_desc"),
+      description: t("about_features.fast_service_desc"),
     },
     {
       icon: <FaMoneyBillWave size={24} />,
       title: t("about_features.money_back"),
-      description:
-      t("about_features.money_back_desc"),
+      description: t("about_features.money_back_desc"),
     },
   ];
   return (
-    <div className="bg-black relative overflow-hidden">
+    <div className="bg-black relative overflow-hidden h-screen">
       {/* Feature Shape */}
       <div className="absolute right-16 bottom-0 opacity-10 z-10 hidden lg:block">
-        <img src="/assets/img/feature-shape.png" alt="Feature"  />
+        <img src="/assets/img/feature-shape.png" alt="Feature" />
       </div>
 
       <div className="container mx-auto sm:pt-8 lg:pt-0 ">
@@ -49,7 +44,7 @@ const FeatureSection = () => {
           <div className="w-full lg:w-1/2 p-0 flex items-center justify-center">
             <div className="max-w-[670px] mx-auto lg:mx-auto pt-10 pb-10 lg:pt-[100px] lg:pb-[100px] relative z-10 px-4 lg:px-0">
               <h2 className="font-semibold text-3xl lg:text-[38px] text-white mb-8 lg:mb-10">
-              {t("about_features.our_features")}
+                {t("about_features.our_features")}
               </h2>
               <ul className="list-none p-0">
                 {features.map((feature, index) => (

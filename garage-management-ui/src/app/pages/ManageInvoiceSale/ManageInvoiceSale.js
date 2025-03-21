@@ -1,5 +1,5 @@
 import React from "react";
-import ListInvoiceSale from "./partials/ListInvoiceSale";
+import InvoiceSale from "./partials/InvoiceSale";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
@@ -16,16 +16,26 @@ export default function ManageInvoiceSale() {
         <h1 className="text-2xl font-semibold">
           {t("manage_invoice_sale.title")}
         </h1>
-        <button
+        {sAccount.value.role != "Administrator" && (
+          <button
+            className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
+            onClick={() =>
+              navigate(`/${sAccount.value.role}/invoice-sale/create`)
+            }
+          >
+            {t("manage_invoice_sale.create")}
+          </button>
+        )}
+        {/* <button
           className="px-4 py-2 bg-gray-700 text-white rounded-lg hover:bg-gray-900"
           onClick={() =>
             navigate(`/${sAccount.value.role}/invoice-sale/create`)
           }
         >
           {t("manage_invoice_sale.create")}
-        </button>
+        </button> */}
       </div>
-      <ListInvoiceSale />
+      <InvoiceSale />
     </div>
   );
 }

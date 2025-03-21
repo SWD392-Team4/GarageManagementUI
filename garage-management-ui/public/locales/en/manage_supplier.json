@@ -1,28 +1,31 @@
 {
-    "manage_supplier": {
-        "title": "Manage Supplier",
-        "create": "Create Supplier",
-        "id": "ID",
-        "name": "Name",
-        "taxCode": "Tax Code",
-        "address": "Address",
-        "province": "Province",
-        "district": "District",
-        "wards": "Wards",
-        "status": "Status",
-        "createdAt": "Created At",
-        "updatedAt": "Updated At",
-        "supplierCategory": "Supplier Category",
-        "edit": "Edit Supplier",
-        "search_placeholder": "Enter search keyword...",
-        "search_status_enum": {
-            "choose": "Choose status",
-            "active": "Active",
-            "inactive": "Inactive"
-        },
-        "clear_filters": "Clear Filters",
-        "search": "Search",
-        "cancel": "Cancel",
-        "save": "Save"
-    }
+  "manage_supplier": {
+    "title": "Manage Supplier",
+    "create": "Create Supplier",
+    "id": "ID",
+    "name": "Name",
+    "taxCode": "Tax Code",
+    "address": "Address",
+    "province": "Province",
+    "district": "District",
+    "wards": "Wards",
+    "status": "Status",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "supplierCategory": "Supplier Category",
+    "edit": "Edit Supplier",
+    "search_placeholder": "Enter search keyword...",
+    "search_status_enum": {
+      "choose": "Choose status",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "clear_filters": "Clear Filters",
+    "search": "Search",
+    "cancel": "Cancel",
+    "save": "Save",
+    "selectCategory": "Select Category",
+    "production": "Production",
+    "transportation": "Transportation"
+  }
 }

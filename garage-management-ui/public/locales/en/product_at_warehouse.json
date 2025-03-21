@@ -38,6 +38,16 @@
       "description": "Description",
       "no_description": "No description available.",
       "loading": "Loading..."
+    },
+    "table": {
+      "id": "ID",
+      "invoiceCode": "Invoice Code",
+      "userName": "User Name",
+      "contactPersonName": "Contact Person",
+      "totalPrice": "Total Price",
+      "quantity": "Quantity",
+      "status": "Status",
+      "createdAt": "Created At"
     }
   }
 }

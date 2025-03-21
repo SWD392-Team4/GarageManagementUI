@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 const OverlayText = () => {
   const { t } = useTranslation("about_overview");
   return (
-    <div className="relative flex items-center justify-center min-h-[20rem] bg-white text-black">
+    <div className="relative flex items-center justify-center min-h-[20rem] bg-white text-black h-screen">
       {/* Chữ nền mờ */}
       <h1
         className="absolute text-[4rem] md:text-[5rem] font-extrabold font-raleway select-none

@@ -1,6 +1,26 @@
 {
-    "manage_invoice_sale": {
-        "title": "Quản lý hoá đơn bán",
-        "create": "Tạo hoá đơn"
+  "manage_invoice_sale": {
+    "title": "Quản lý hoá đơn bán",
+    "create": "Tạo hoá đơn",
+    "form_view_modal": {
+      "invoiceTitle": "Hóa đơn",
+      "paymentInvoice": "Thanh toán hóa đơn",
+      "invoiceCode": "Mã hóa đơn",
+      "createdAt": "Ngày tạo",
+      "updatedAt": "Ngày cập nhật",
+      "customer": "Khách hàng",
+      "phone": "Số điện thoại",
+      "email": "Email",
+      "productDetails": "Chi tiết sản phẩm",
+      "productName": "Tên sản phẩm",
+      "quantity": "Số lượng",
+      "totalPrice": "Tổng tiền",
+      "address": "Địa chỉ",
+      "thankYou": "Cảm ơn quý khách đã tin tưởng dịch vụ của chúng tôi!",
+      "close": "Đóng",
+      "seller": "Seller",
+      "sellerPhone": "Seller Phone",
+      "sellerEmail": "Seller Email"
     }
+  }
 }

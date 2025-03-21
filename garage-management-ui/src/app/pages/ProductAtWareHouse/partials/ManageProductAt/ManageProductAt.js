@@ -1,17 +1,13 @@
-import React, { useState } from 'react'
-import SelectWarehousePartial from './SelectWarehousePartial'
-import ListProductAtWareHouse from './ListProductAtWareHouse'
+import React from "react";
+import ListProductAtWareHouse from "./ListProductAtWareHouse";
+import { sAccount } from "../../../AuthCustomer/services/store";
+import Nav3 from "../component/Nav3";
 
 export default function ManageProductAt() {
-    const [selectedWarehouseId, setSelectedWarehouseId] = useState(null);
-    
-    return (
-        <>
-            <SelectWarehousePartial
-                selectedWarehouseId={selectedWarehouseId}
-                onSelectWarehouse={setSelectedWarehouseId}
-            />
-            {selectedWarehouseId && <ListProductAtWareHouse warehouseId={selectedWarehouseId} />}
-        </>
-    )
+  return (
+    <>
+      {sAccount.value.role === "Administrator" && <Nav3 />}
+      <ListProductAtWareHouse />
+    </>
+  );
 }
