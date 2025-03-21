@@ -7,21 +7,21 @@ import UserService from "../../../hooks/services/UserService";
 import { currentAppointment } from "../../AdminManageAppoinment/services/store/AppointmentSignify";
 import { useParams } from "react-router-dom";
 import { getFullInfomationAppointment } from "../../AdminManageAppoinment/services/AppointmentService";
+import { getAllAppointment } from "../services/AppointmentService";
 
 function MechanicDashboard() {
-  const { id } = useParams();
   const [appointmentInfo, setAppointmentInfo] = useState({});
   const [services, setServices] = useState({});
   const [columns, setColumns] = useState({});
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [isNew, setIsNew] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
-  const [confirmData, setConfirmData] = useState(null); // Lưu thông tin drag để xác nhận
+  const [confirmData, setConfirmData] = useState(null);
 
   const userService = new UserService();
   // Định nghĩa thứ tự cột cố định
   const columnOrder = [
-    "column-pending",
+    "column-assigned",
     "column-inprogress",
     "column-completed",
     "column-cancel",
@@ -30,30 +30,28 @@ function MechanicDashboard() {
   // Hàm fetch appointment từ API và khởi tạo state
   const fetchAppointment = useCallback(async () => {
     try {
-      const response = await getFullInfomationAppointment(id);
+      const response = await getAllAppointment();
       const appointment = response.data.value;
-      setAppointmentInfo(appointment);
+      setAppointmentInfo(appointment.appointmentDetail);
 
-      // Chuyển appointmentDetails thành map và đảm bảo trạng thái ban đầu là "pending"
-      const servicesMap = {};
-      appointment.appointmentDetails.forEach((detail) => {
-        servicesMap[detail.id] = {
-          ...detail,
-          // Nếu status trả về là "Approved" hay "Pending", ta đưa vào trạng thái pending ban đầu
-          status:
-            detail.status === "Pending" || detail.status === "Approved"
-              ? "pending"
-              : detail.status,
-        };
-      });
-      setServices(servicesMap);
+      const servicesObj = appointment.reduce((acc, item) => {
+        acc[item.appointmentDetail.id] = item;
+        return acc;
+      }, {});
+      setServices(servicesObj);
+
+      const assignedAppointments = appointment.filter(
+        (item) => item.status === "Assigned"
+      );
 
       // Khởi tạo 4 cột: toàn bộ detail ban đầu được đưa vào cột "Chưa làm gì" (pending)
       const initialColumns = {
-        "column-pending": {
-          id: "column-pending",
-          title: "Chưa làm gì",
-          serviceIds: appointment.appointmentDetails.map((detail) => detail.id),
+        "column-assigned": {
+          id: "column-assigned",
+          title: "Được phân công",
+          serviceIds: assignedAppointments.map(
+            (item) => item.appointmentDetail.id
+          ),
         },
         "column-inprogress": {
           id: "column-inprogress",
@@ -73,21 +71,21 @@ function MechanicDashboard() {
       };
       setColumns(initialColumns);
 
-      // Cập nhật thông tin global nếu cần
-      currentAppointment.set((v) => {
-        v.value.status = appointment.status;
-        v.value.appointmentDetails = appointment.appointmentDetails;
-        v.value.appointmentDetailPackages =
-          appointment.appointmentDetailPackages;
-      });
+      // // Cập nhật thông tin global nếu cần
+      // currentAppointment.set((v) => {
+      //   v.value.status = appointment.status;
+      //   v.value.appointmentDetails = appointment.appointmentDetails;
+      //   v.value.appointmentDetailPackages =
+      //     appointment.appointmentDetailPackages;
+      // });
     } catch (error) {
       console.error("Error fetching appointment: ", error);
     }
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     fetchAppointment();
-  }, [id, currentAppointment.value.load]);
+  }, []);
 
   // Xử lý kéo thả
   const onDragEnd = (result) => {
@@ -253,7 +251,7 @@ function MechanicDashboard() {
 
   return (
     <div className="">
-      {/* Thông tin header của appointment */}
+      Thông tin header của appointment
       <div className="pb-4">
         <div className="my-5">
           <h1 className="text-2xl font-raleway font-semibold text-center md:text-left">
@@ -268,7 +266,7 @@ function MechanicDashboard() {
                 Customer Name
               </label>
               <div className="w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm bg-gray-200">
-                {appointmentInfo.customerName}
+                {/* {appointmentInfo.customerName} */}
               </div>
             </div>
           </div>
@@ -278,7 +276,7 @@ function MechanicDashboard() {
                 Verification Code
               </label>
               <div className="w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm bg-gray-200">
-                {appointmentInfo.verificationCode}
+                {/* {appointmentInfo.verificationCode} */}
               </div>
             </div>
           </div>
@@ -288,7 +286,7 @@ function MechanicDashboard() {
                 Phone number
               </label>
               <div className="w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm bg-gray-200">
-                {appointmentInfo.customerPhoneNumber}
+                {/* {appointmentInfo.customerPhoneNumber} */}
               </div>
             </div>
           </div>
@@ -298,13 +296,12 @@ function MechanicDashboard() {
                 Phone number
               </label>
               <div className="w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm bg-gray-200">
-                {appointmentInfo.customerEmail}
+                {/* {appointmentInfo.customerEmail} */}
               </div>
             </div>
           </div>
         </div>
       </div>
-
       {/* Danh sách Services */}
       <div className="my-5">
         <h1 className="text-2xl font-raleway font-semibold text-center md:text-left">
@@ -312,7 +309,6 @@ function MechanicDashboard() {
         </h1>
         <div className="border-t border-red-950 text-left text-gray-500 text-sm w-full"></div>
       </div>
-
       <DragDropContext onDragEnd={onDragEnd}>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           {columnOrder.map((columnId) => {
@@ -351,7 +347,7 @@ function MechanicDashboard() {
                       );
                     })}
                     {/* Nút "New" chỉ hiển thị ở cột pending */}
-                    {column.id === "column-pending" && (
+                    {column.id === "column-assigned" && (
                       <button
                         className="mt-3 w-full bg-blue-600 text-white py-2 rounded"
                         onClick={handleCreateNew}
@@ -367,17 +363,14 @@ function MechanicDashboard() {
           })}
         </div>
       </DragDropContext>
-
       {/* Modal xem/chỉnh sửa chi tiết */}
       {showDetailModal && (
         <AppointmentDetailModal
           service={selectedService}
-          isNew={isNew}
           onClose={() => setShowDetailModal(false)}
           onSave={handleSave}
         />
       )}
-
       {/* Modal xác nhận thao tác kéo */}
       {confirmData && (
         <ConfirmDragModal

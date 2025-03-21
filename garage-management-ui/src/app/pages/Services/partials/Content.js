@@ -75,8 +75,8 @@ const Content = () => {
                     key={service.id}
                     id={service.id}
                     title={service.serviceName}
-                    partName={service.partName}
-                    category={service.category}
+                    partName={service.carPart}
+                    category={service.carCategory}
                     serviceCategory={service.serviceCategory}
                     image={
                       service.imageLink && service.imageLink.length > 0
@@ -85,12 +85,6 @@ const Content = () => {
                     }
                     icon={service.action}
                     price={service.price}
-                    onBook={() =>
-                      alert(`Booking service: ${service.serviceName}`)
-                    }
-                    onView={() =>
-                      alert(`Viewing details for: ${service.serviceName}`)
-                    }
                   />
                 ))}
               </div>

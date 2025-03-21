@@ -35,13 +35,15 @@
     "estimatedEndTimeLabel": "Estimated End Time:"
   },
   "cancelModal": {
-    "title": "Cancel Appointment",
+    "title": "Cancel Service",
     "prompt": "Please enter the reason for cancellation:",
     "placeholder": "Reason for cancellation",
     "confirmButton": "Confirm Cancellation",
     "emptyReason": "The reason cannot be empty!",
-    "cancel": "Cancel order from employee",
-    "reject": "Cancel order from customer request"
+    "type": "Please select cancellation type:",
+    "selectType": "Please select cancellation type",
+    "cancel": "Requested by the customer to discontinue the service.",
+    "reject": "The store is unable to provide the service."
   },
   "confirmationModal": {
     "title": "Confirmation",
@@ -118,6 +120,19 @@
     "approved": "Approved",
     "in_progress": "In Progress",
     "completed": "Completed",
-    "canceled": "Canceled"
+    "canceled": "Canceled",
+    "arrival": "Arrival"
+  },
+  "unAssgn": {
+    "UnassignEmployee": "Unassign Employee",
+    "Reason": "Please select a reason below to cancel the service appointment:",
+    "ServicesUn": "Booked Services:",
+    "hours": "hours",
+    "ReplacementParts": "Replacement Parts",
+    "NoProduct": "No replacement product available",
+    "InfomationEmployee": "Employee Information",
+    "TypeCancel": "Cancellation Type",
+    "title1": "Requested by the customer to discontinue the service.",
+    "title2": "Due to staff changes or the store being unable to provide this service."
   }
 }

@@ -22,6 +22,7 @@ import StepLookUp from "../pages/LookUpPage/partials/StepLookup";
 import PickGarage from "../pages/LookUpPage/partials/PickGarage";
 import FillingInformation from "../pages/LookUpPage/partials/FillingInformation";
 import ViewAppointmentLookUp from "../pages/LookUpPage/partials/ViewAppointmentLookUp";
+import ScrollToTop from "./ScrollToTop";
 
 const componentMap = {
   PageNotFound: lazy(() => import("../layouts/PageNotFound")),
@@ -219,6 +220,9 @@ const componentMap = {
   InProgess: lazy(() =>
     import("../pages/AdminManageAppoinment/partials/InProgess")
   ),
+  Arrival: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/Arrival")
+  ),
   Approved: lazy(() =>
     import("../pages/AdminManageAppoinment/partials/Approved")
   ),
@@ -298,6 +302,7 @@ export default function MainRoutes() {
   return (
     <BrowserRouter>
       <LoadingProvider>
+        <ScrollToTop />
         <Routes>{generateRoutes(routesConfig)}</Routes>
       </LoadingProvider>
     </BrowserRouter>

@@ -150,6 +150,7 @@
   {
     "path": "/authen",
     "element": "LayoutAuthenCustomer",
+
     "children": [
       {
         "index": true,
@@ -447,6 +448,11 @@
             "isSuspense2": true
           },
           {
+            "path": "arrival",
+            "element": "Arrival",
+            "isSuspense2": true
+          },
+          {
             "path": "completed",
             "element": "Completed",
             "isSuspense2": true
@@ -524,8 +530,8 @@
         "isSuspense2": true
       },
       {
-        "path": "package-service/create-package",
-        "element": "CreatePackageServicePage",
+        "path": "package-service",
+        "element": "ManagePackageService",
         "isSuspense2": true
       },
       {
@@ -662,6 +668,11 @@
           {
             "path": "in-progress",
             "element": "InProgess",
+            "isSuspense2": true
+          },
+          {
+            "path": "arrival",
+            "element": "Arrival",
             "isSuspense2": true
           },
           {

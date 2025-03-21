@@ -15,9 +15,7 @@ const Header = () => {
     service: "/services",
     product: "/product",
     package: "/packages",
-    contact: "/contact",
     lookup: "/look-up",
-    contact: "/contact",
     booking: "/booking",
   };
 

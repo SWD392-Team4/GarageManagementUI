@@ -42,7 +42,7 @@ const ReservationDate = () => {
           </li>
           <li className="flex justify-between">
             <span className="text-sm font-raleway"> {t("title3")} </span>
-            <span className="max-w-40 text-right">
+            <span className="max-w-40 md:max-w-80 text-right">
               421 Phường Long Thạnh Mỹ, Thủ Đức, Hồ Chí Minh
             </span>
           </li>
@@ -73,12 +73,12 @@ const ReservationDate = () => {
       {/* Danh sách thông tin */}
       <ul className="space-y-2">
         <li className="flex justify-between">
-          <span className="text-sm font-raleway"> {t("title2")}: </span>
+          <span className="text-sm font-raleway"> {t("title2")} </span>
           <span className="max-w-40 text-right">{workPlaceData.name}</span>
         </li>
         <li className="flex justify-between">
           <span className="text-sm font-raleway"> {t("title3")} </span>
-          <span className="max-w-40 text-right">
+          <span className="max-w-40 md:max-w-80 text-right">
             {workPlaceData.fullAddress}
           </span>
         </li>

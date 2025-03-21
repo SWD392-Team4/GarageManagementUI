@@ -67,8 +67,10 @@ export default function PackeagesINAppointment() {
       color: "bg-gray-500",
       onClick: async (row) => {
         try {
-          const serviceListOnPackage = await getAllServicesOnPackages(row.id);
-          setSelectedBrand(serviceListOnPackage.data.value);
+          const serviceListOnPackage = await getAllServicesOnPackages(
+            row.packageId
+          );
+          setServices(serviceListOnPackage.data.value);
           setIsUpdateModalOpen(true);
         } catch (error) {
           console.error("Error fetching serviceListOnPackage details: ", error);

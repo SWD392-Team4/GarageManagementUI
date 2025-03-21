@@ -42,13 +42,16 @@
     "estimatedEndTimeLabel": "Thời gian kết thúc dự kiến:"
   },
   "cancelModal": {
-    "title": "Hủy lịch",
+    "title": "Hủy dịch vụ",
     "prompt": "Vui lòng nhập lý do hủy:",
+    "selectType": "Vui lòng chọn lý do hủy.",
     "placeholder": "Lý do hủy",
     "confirmButton": "Xác nhận hủy",
     "emptyReason": "Lý do không được để trống!",
-    "cancel": "Hủy lịnh từ nhân viên",
-    "reject": "Hủy lịnh từ yêu cầu của khách hàng"
+    "type": "Vui lòng chọn loại hủy:",
+
+    "cancel": "là do khách hàng yêu cầu không thực hiện dịch vụ nữa.",
+    "reject": "là do cửa hàng không thể cung cấp dịch vụ này nữa."
   },
   "confirmationModal": {
     "title": "Xác nhận",
@@ -114,8 +117,22 @@
     "all": "Tất cả",
     "waiting": "Trạng thái chờ",
     "approved": "Đã xác nhận",
+    "arrival": "Đã đến",
     "in_progress": "Đang thực hiện",
     "completed": "Hoàn thành",
     "canceled": "Đã hủy"
+  },
+  "unAssgn": {
+    "UnassignEmployee": "Bỏ phân công nhân viên",
+    "Reason": "Vui lòng chọn lý do bên dưới để hủy lịch cho dịch vụ:",
+    "ServicesUn": "Dịch vụ đã đặt:",
+    "hours": "giờ",
+    "ReplacementParts": "Sản phẩm thay thế",
+    "InfomationEmployee": "Thông tin nhân viên",
+    "NoProduct": "Không có sản phẩm thay thế",
+
+    "TypeCancel": "Loại Hủy",
+    "title1": "là do khách hàng yêu cầu không thực hiện dịch vụ nữa.",
+    "title2": "là do cửa hàng có sự thay đổi nhân sự hoặc không thể cung cấp dịch vụ này nữa."
   }
 }

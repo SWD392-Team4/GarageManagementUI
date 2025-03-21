@@ -24,7 +24,7 @@ export default function Banner() {
           {t("banner.offer")}
         </h2>
 
-        <Link to={"/contact"}>
+        <Link to={"/booking"}>
           <div className="flex justify-center">
             <button
               className=" group p-5 cursor-pointer  relative      text-xl     border-0  flex  items-center 

@@ -19,21 +19,22 @@ function AppointmentCard({ appointment, onClick, provided, snapshot }) {
       {...provided.dragHandleProps}
       onClick={onClick}
     >
-      <p className="font-bold">{appointment.serviceName}</p>
+      <p className="font-bold">{appointment.appointmentDetail.serviceName}</p>
       <p>
-        <span className=" font-semibold ">Giá: </span> {appointment.price}
+        <span className=" font-semibold ">Giá: </span>{" "}
+        {appointment.appointmentDetail.price}
       </p>
       <p>
         <span className=" font-semibold">Estimated Hours: </span>{" "}
-        {appointment.estimatedHours}
+        {appointment.appointmentDetail.estimatedHours}
       </p>
       <p>
         <span className=" font-semibold">Lưu ý: </span>{" "}
-        {appointment.serviceNote}
+        {appointment.appointmentDetail.serviceNote}
       </p>
       <p>
         <span className=" font-semibold">Trạng thái: </span>{" "}
-        {appointment.status}
+        {appointment.appointmentDetail.status}
       </p>
     </div>
   );

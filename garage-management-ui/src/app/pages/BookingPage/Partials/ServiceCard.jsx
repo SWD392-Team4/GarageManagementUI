@@ -14,7 +14,7 @@ const ServiceCard = ({ icon, service }) => {
         const currentServices = v.value.services || [];
         v.value.services = [
           ...currentServices,
-          { serviceId: id, replacementParts: [{}] },
+          { serviceId: id, replacementParts: [] },
         ];
       } else {
         const currentServices = v.value.services || [];

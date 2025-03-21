@@ -1,7 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import LoadingSpinner from "../partials/LoadingSpinner";
 import { getProduct } from "../services/CustomerProductService";
 import ImageCarousel from "../../ManageProduct/partials/ImageCarousel";
@@ -92,8 +92,9 @@ const ProductDetail = () => {
             </p>
           </div>
 
-          <button
-            className="
+          <Link to={"/booking"}>
+            <button
+              className="
 						text-base
 						flex
 						items-center
@@ -107,9 +108,10 @@ const ProductDetail = () => {
             rounded-lg 
             transition
 					"
-          >
-            {t("customer_product_detail.product_book_now")}
-          </button>
+            >
+              {t("customer_product_detail.product_book_now")}
+            </button>
+          </Link>
         </div>
       </div>
       {/* Product Description */}

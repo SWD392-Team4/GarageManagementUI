@@ -118,7 +118,10 @@ const CardService = ({
             </div>
             <div className="group/link flex justify-center">
               <div>
-                <Link className="inline-flex items-center text-blue-500 font-semibold uppercase text-sm md:text-sm mt-3 group-hover/link:text-rose-700 duration-300 transition-colors">
+                <Link
+                  to={"/booking"}
+                  className="inline-flex items-center text-blue-500 font-semibold uppercase text-sm md:text-sm mt-3 group-hover/link:text-rose-700 duration-300 transition-colors"
+                >
                   BOOK NOW
                 </Link>
                 <div className="border-t  border-orange-700 h-1 w-0 group-hover/link:w-20 transition-all duration-300"></div>
