@@ -1,0 +1,22 @@
+{
+  "error": {
+    "required": "비어 있을 수 없습니다",
+    "at_least_one_product": "최소한 하나의 제품을 추가해야 합니다",
+    "min": "{field}는 최소 {min} 이상이어야 합니다"
+  },
+  "labels": {
+    "reference_number": "참조 번호",
+    "invoice_code": "송장 코드",
+    "warehouse": "창고",
+    "garage": "정비소",
+    "product_name": "제품명",
+    "quantity": "수량",
+    "goods_received_id": "입고 ID"
+  },
+  "buttons": {
+    "create": "생성",
+    "reset": "초기화",
+    "add": "추가",
+    "remove": "삭제"
+  }
+}

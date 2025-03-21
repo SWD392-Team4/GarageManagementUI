@@ -1,0 +1,43 @@
+{
+  "manage_package": {
+    "title": "패키지 서비스 관리",
+    "create1": "패키지 서비스 생성",
+    "id": "ID",
+    "packageName": "패키지 이름",
+    "category": "카테고리",
+    "serviceCategory": "서비스 카테고리",
+    "type": "유형",
+    "packagePrice": "패키지 가격",
+    "validityPeriod": "유효 기간",
+    "timeUnit": "시간 단위",
+    "usageLimit": "사용 제한",
+    "status": "상태",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜",
+    "search": "검색",
+    "clear_filters": "필터 초기화",
+    "search_package_name": "패키지 이름 검색",
+    "search_category": "카테고리 검색",
+    "search_service_category": "서비스 카테고리 검색",
+    "search_type": "유형 검색",
+    "search_status": "상태 검색",
+    "search_validity_period": "유효 기간 검색",
+    "search_time_unit": "시간 단위 검색",
+    "search_usage_limit": "사용 제한 검색",
+    "search_created_at": "생성 날짜 검색",
+    "search_updated_at": "업데이트 날짜 검색",
+    "search_min_price": "최소 가격",
+    "search_max_price": "최대 가격",
+    "search_placeholder": "검색어 입력...",
+    "search_status_enum": {
+      "choose": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성"
+    },
+    "search_time_unit_enum": {
+      "choose": "시간 단위 선택",
+      "days": "일",
+      "months": "개월"
+    }
+  }
+}

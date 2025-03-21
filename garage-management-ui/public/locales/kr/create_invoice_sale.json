@@ -1,0 +1,24 @@
+{
+  "create_invoice_sale": {
+    "product_card": {
+      "price": "가격",
+      "stock": "재고",
+      "created_at": "생성 날짜",
+      "not_available": "N/A"
+    },
+    "sidebar_checkout": {
+      "customer_info": "고객 정보",
+      "customer_name": "고객 이름",
+      "customer_phone": "전화번호",
+      "customer_email": "고객 이메일",
+      "selected_products": "선택한 제품",
+      "product_name": "제품명",
+      "quantity": "수량",
+      "actions": "작업",
+      "remove": "삭제",
+      "no_products": "선택한 제품 없음",
+      "total": "총합:",
+      "create_invoice": "송장 생성"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "manage_goods_received": {
+    "title": "입고 관리",
+    "create": "입고 생성",
+    "id": "ID",
+    "referenceNumber": "참조 번호",
+    "invoiceCode": "송장 코드",
+    "sourceAddress": "출처 주소",
+    "sourceProvince": "출처 도",
+    "sourceDistrict": "출처 구",
+    "sourceWards": "출처 동",
+    "totalPrice": "총 가격",
+    "contactPersonName": "담당자",
+    "workPlaceName": "근무지",
+    "warehouseManagerName": "창고 관리자",
+    "status": "상태",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜",
+    "userName": "매니저 이름",
+    "warehouse": "창고",
+    "loading": "로딩 중...",
+    "search": {
+      "reference_number": "참조 번호",
+      "invoice_code": "송장 코드",
+      "source_address": "출처 주소",
+      "source_province": "출처 도",
+      "source_district": "출처 구",
+      "source_wards": "출처 동",
+      "min_price": "최소 가격",
+      "max_price": "최대 가격",
+      "status": "상태",
+      "created_at": "생성 날짜",
+      "clear_filters": "필터 초기화",
+      "search": "검색",
+      "status_enum": {
+        "choose": "상태 선택",
+        "active": "활성",
+        "inactive": "비활성"
+      }
+    },
+    "view": "세부 정보 보기",
+    "goods_received_details": {
+      "title": "입고된 제품",
+      "id": "ID",
+      "quantity": "수량",
+      "unit_price": "단가",
+      "total_price": "총 가격",
+      "product_name": "제품명",
+      "reference_number": "참조 번호",
+      "status": "상태",
+      "created_at": "생성 날짜",
+      "updated_at": "업데이트 날짜"
+    }
+  }
+}

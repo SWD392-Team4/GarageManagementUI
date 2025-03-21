@@ -1,0 +1,14 @@
+{
+  "customer_product_detail": {
+    "product_code": "제품 코드",
+    "product_brand": "브랜드",
+    "product_made_in": "제조국",
+    "product_book_now": "지금 예약",
+    "product_warranty": "보증 기간",
+    "product_detail": "제품 상세 정보",
+    "product_list_title": "우리의 제품",
+    "product_list_heading": "제품",
+    "product_list_heading_home": "홈",
+    "product_detail_heading": "세부 정보"
+  }
+}

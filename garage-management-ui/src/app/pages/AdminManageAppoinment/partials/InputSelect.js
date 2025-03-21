@@ -90,7 +90,7 @@ const LabelReactSelect = ({
     </div>
   );
 };
-// Component Input linh hoạt
+
 const LabelInput = ({
   label,
   name,
@@ -99,21 +99,33 @@ const LabelInput = ({
   editable = false,
   readOnly = false,
   bg = "bg-gray-200",
-}) => (
-  <div className="flex items-center gap-2 mb-2">
-    <label className="text-sm font-medium text-gray-600 w-1/3">{label}</label>
-    <input
-      type="text"
-      name={name}
-      value={value}
-      onChange={onChange}
-      readOnly={readOnly || !editable}
-      className={`w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm ${
-        editable ? "bg-white" : bg
-      }`}
-    />
-  </div>
-);
+  error, // Prop thêm vào để nhận thông báo lỗi
+  onBlur, // Có thể thêm onBlur để kiểm tra khi người dùng rời khỏi ô input
+}) => {
+  return (
+    <div className="flex flex-col mb-2">
+      <div className="flex items-center gap-2">
+        <label className="text-sm font-medium text-gray-600 w-1/3">
+          {label}
+        </label>
+        <input
+          type="text"
+          name={name}
+          value={value}
+          onChange={onChange}
+          onBlur={onBlur}
+          readOnly={readOnly || !editable}
+          className={`w-2/3 border border-gray-300 rounded-sm px-2 py-1 text-sm ${
+            editable ? "bg-white" : bg
+          }`}
+        />
+      </div>
+      {error && <div className="text-xs text-red-600 mt-1 ml-1">{error}</div>}
+    </div>
+  );
+};
+
+export default LabelInput;
 
 // Component Select thông thường
 const LabelSelect = ({

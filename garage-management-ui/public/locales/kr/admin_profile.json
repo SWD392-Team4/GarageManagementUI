@@ -1,0 +1,22 @@
+{
+  "admin_profile": {
+    "title": "관리자 프로필",
+    "name": "존 도",
+    "role": "관리자",
+    "email": "johndoe@example.com",
+    "stats": {
+      "total_users": "총 사용자 수",
+      "orders_processed": "처리된 주문",
+      "revenue": "수익"
+    },
+    "profile_details": {
+      "title": "프로필 상세정보",
+      "full_name": "전체 이름",
+      "email": "이메일"
+    },
+    "biography": {
+      "title": "약력",
+      "content": "로렘 입숨 돌로르 시트 아메트, 콘섹테투르 아디피스킹 엘리트. 오르시 벨 리굴라 파레트라 로레트 네크 아크 리굴라..."
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "product_at_store": {
+    "search_invoice": {
+      "invoiceNumber": "송장 번호",
+      "customerName": "고객 이름",
+      "minTotalPrice": "최소 총 가격",
+      "maxTotalPrice": "최대 총 가격",
+      "status": "상태",
+      "createdAt": "생성 날짜",
+      "updatedAt": "업데이트 날짜",
+      "clear_filters": "필터 초기화",
+      "search": "검색",
+      "search_status_enum": {
+        "choose": "상태 선택",
+        "paid": "결제 완료",
+        "unpaid": "미결제"
+      }
+    },
+    "invoice": {
+      "id": "ID",
+      "invoiceType": "송장 유형",
+      "customerName": "고객 이름",
+      "customerPhoneNumber": "고객 전화번호",
+      "customerEmail": "고객 이메일",
+      "totalPrice": "총 가격",
+      "status": "상태",
+      "createdAt": "생성 날짜",
+      "edit": "편집",
+      "sold_products": "판매된 제품",
+      "product_name": "제품명",
+      "quantity": "수량",
+      "created_at": "생성 날짜",
+      "close": "닫기"
+    }
+  }
+}

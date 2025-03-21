@@ -1,0 +1,10 @@
+{
+  "workPlaceInformation": "근무지 정보",
+  "name": "이름",
+  "phoneNumber": "전화번호",
+  "fullAddress": "전체 주소",
+  "workplaceType": "근무지 유형",
+  "status": "상태",
+  "createdAt": "생성 날짜",
+  "updatedAt": "업데이트 날짜"
+}

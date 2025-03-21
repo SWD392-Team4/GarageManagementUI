@@ -1,0 +1,25 @@
+{
+  "product_at_warehouse": {
+    "search": {
+      "minQuantity": "최소 수량",
+      "search_placeholder_minQuantity": "최소 수량 입력",
+      "maxQuantity": "최대 수량",
+      "search_placeholder_maxQuantity": "최대 수량 입력",
+      "status": "상태",
+      "search_status_placeholder": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성",
+      "createdAt": "생성 날짜",
+      "updatedAt": "업데이트 날짜",
+      "clear_filters": "필터 초기화",
+      "search": "검색"
+    },
+    "product_at_house": "보기",
+    "id": "ID",
+    "quantity": "수량",
+    "goodsReceivedDetailId": "입고 상세 ID",
+    "status": "상태",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜"
+  }
+}

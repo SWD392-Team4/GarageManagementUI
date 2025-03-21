@@ -1,0 +1,14 @@
+{
+  "profile": {
+    "name": "홍길동",
+    "role": "VIP 고객"
+  },
+  "menu": {
+    "personal_info": "개인 정보",
+    "order_history": "주문 내역",
+    "current_orders": "현재 주문",
+    "settings": "설정",
+    "logout": "로그아웃",
+    "chatting": "채팅"
+  }
+}

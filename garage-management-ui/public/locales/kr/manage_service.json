@@ -1,0 +1,47 @@
+{
+  "manage_service": {
+    "Id": "ID",
+    "ServiceName": "서비스 이름",
+    "ServiceCategory": "서비스 카테고리",
+    "PartName": "부품 이름",
+    "Category": "자동차 카테고리",
+    "Price": "가격",
+    "WorkNature": "작업 성격",
+    "Action": "작업",
+    "EstimatedHours": "예상 시간",
+    "Status": "상태",
+    "view": "보기",
+    "title": "서비스 관리",
+    "create": "서비스 생성",
+    "search_service_name": "서비스 이름 검색",
+    "search_category": "카테고리 검색",
+    "search_part_name": "부품 이름 검색",
+    "search_min_price": "최소 가격",
+    "search_max_price": "최대 가격",
+    "search_work_nature": "작업 성격 검색",
+    "search_estimated_hours": "예상 시간 검색",
+    "search_status": "상태 검색",
+    "search": "검색",
+    "clear_filters": "필터 초기화",
+    "search_placeholder": "키워드 입력...",
+    "search_status_enum": {
+      "choose": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성"
+    },
+    "service_feedback": "서비스 피드백",
+    "feedback_id": "피드백 ID",
+    "feedback": "피드백",
+    "emoji": "이모티콘",
+    "customer_id": "고객 ID",
+    "service_id": "서비스 ID",
+    "created_at": "생성 날짜",
+    "updated_at": "업데이트 날짜",
+    "no_feedback": "사용 가능한 피드백 없음",
+    "common": {
+      "save": "저장",
+      "close": "닫기"
+    },
+    "edit_status": "상태 편집"
+  }
+}

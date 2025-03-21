@@ -134,5 +134,8 @@
     "TypeCancel": "Cancellation Type",
     "title1": "Requested by the customer to discontinue the service.",
     "title2": "Due to staff changes or the store being unable to provide this service."
+  },
+  "assignModal": {
+    "confirmButton": "Confirm"
   }
 }

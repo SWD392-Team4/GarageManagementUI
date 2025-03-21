@@ -1,0 +1,33 @@
+{
+  "manage_product_category": {
+    "title": "제품 카테고리 관리",
+    "create": "제품 카테고리 추가",
+    "id": "ID",
+    "name": "이름",
+    "status": "상태",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜",
+    "save": "업데이트",
+    "edit": "편집",
+    "linkLogo": "URL 로고",
+    "active": "활성",
+    "inactive": "비활성",
+    "create_title": "새 카테고리 생성",
+    "category": "카테고리 이름",
+    "required": "카테고리 이름이 필요합니다",
+    "cancel": "취소",
+    "saving": "저장 중...",
+    "search_brand_name": "카테고리 이름 검색",
+    "search_placeholder": "카테고리 이름 입력...",
+    "search_status": "상태 검색",
+    "search_status_enum": {
+      "choose": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성"
+    },
+    "clear_filters": "필터 초기화",
+    "search": "검색",
+    "search_updated_at": "업데이트 날짜 검색",
+    "search_created_at": "생성 날짜 검색"
+  }
+}

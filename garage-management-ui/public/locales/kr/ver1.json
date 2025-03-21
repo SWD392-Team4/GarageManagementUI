@@ -1,0 +1,120 @@
+{
+  "page_not_found": {
+    "title": "오류가 발생했습니다.",
+    "description": "죄송합니다. 해당 페이지를 찾을 수 없습니다. 홈페이지에서 더 많은 내용을 탐색할 수 있습니다.",
+    "go_back": "돌아가기"
+  },
+  "home_page_menu": {
+    "home": "홈",
+    "about": "회사 소개",
+    "service": "서비스",
+    "product": "제품",
+    "package": "패키지",
+    "contact": "문의하기",
+    "lookup": "조회",
+    "booking": "예약"
+  },
+  "slides": [
+    {
+      "id": 1,
+      "title1": "자동차 수리 및 유지보수",
+      "title2": "서비스",
+      "description": "인증된 기술진이 고품질 자동차 수리 및 유지보수 서비스를 제공하여 차량이 최상의 성능을 유지하도록 합니다.",
+      "img": "hero_slider_bg_1"
+    },
+    {
+      "id": 2,
+      "title1": "자동차 수리",
+      "title2": "정비",
+      "description": "인증된 기술진이 고품질 자동차 수리 및 유지보수 서비스를 제공하여 차량이 최상의 성능을 유지하도록 합니다.",
+      "img": "hero_slider_bg_2"
+    }
+  ],
+  "best_services": {
+    "title": "최고의 서비스",
+    "title2": "차량을 최고의 상태로 유지하는 곳",
+    "description": "정기적인 타이어 회전은 균일한 마모를 보장하고 타이어 수명을 연장하며 차량 성능을 향상시킵니다."
+  },
+  "PaneSwitcher": {
+    "title1": "전 & 후",
+    "title2": "최근 완료된 프로젝트",
+    "Before": "이전",
+    "After": "이후"
+  },
+  "Contact": {
+    "title": "연락처 정보",
+    "subTitle": "입증된 기록을 보유한 신뢰할 수 있는 자동차 서비스.",
+    "address": "2972 Westheimer Rd. <br/>Santa Ana, Illinois 5486",
+    "email": "Cripar@gmail.com <br/>InfoCripar@gmal.com",
+    "number": "(402) 4521 5458 44 <br/> (123) 2154 5464 55",
+    "clientNumber": "5,400",
+    "img": "/assets/img/contact_img_1.jpg",
+    "client": "만족한 고객",
+    "subtitle2": "지금 예약하세요!",
+    "title2": "예약 신청",
+    "submit": "예약하기",
+    "thankyou": "감사합니다!"
+  },
+  "loginCustomer": {
+    "pageTitle": "로그인 | CLCA | 2KS1.NET",
+    "userNameLabel": "사용자 이름",
+    "emailPlaceholder": "name@company.com",
+    "emailRequired": "이메일을 입력하세요.",
+    "passwordLabel": "비밀번호",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "비밀번호를 입력하세요.",
+    "passwordMinLength": "비밀번호는 최소 8자 이상이어야 합니다.",
+    "signInButton": "로그인",
+    "newMemberText": "새 회원이신가요?",
+    "signUpLink": "회원가입",
+    "bttnSignIn": "로그인",
+    "bttnSigningIn": "로그인 중...",
+    "forgotPasswordText": "비밀번호를 잊으셨나요?",
+    "resetPassLink": "비밀번호 재설정"
+  },
+  "footer": {
+    "logoTitle": "로고",
+    "description": "TurboTrack에 오신 것을 환영합니다. 신뢰할 수 있는 자동차 정비 및 유지보수 서비스를 제공합니다.",
+    "phone": "+84 962-418-452",
+    "quickLink1Title": "빠른 링크",
+    "quickLink1": {
+      "about": "회사 소개",
+      "services": "서비스",
+      "pricing": "요금표",
+      "team": "팀",
+      "contactUs": "문의하기"
+    },
+    "quickLink2Title": "빠른 링크",
+    "quickLink2": {
+      "appointment": "예약 신청",
+      "faq": "자주 묻는 질문",
+      "blogNews": "뉴스/블로그",
+      "team": "팀"
+    },
+    "locationContactTitle": "위치 및 연락처",
+    "locationContact": {
+      "address": "FPT 호치민시 롱탄미, 투득시",
+      "email": "email@email.com",
+      "hours": "월요일 - 토요일: 24시간 운영"
+    },
+    "footerBottom": {
+      "copyright": "저작권 2025, 모든 권리 보유",
+      "socialLinks": {
+        "facebook": "페이스북",
+        "twitter": "트위터",
+        "instagram": "인스타그램",
+        "linkedin": "링크드인"
+      }
+    }
+  },
+  "slogan": {
+    "qualityService": "최고 품질의 자동차 서비스를 경험하세요.",
+    "customerSatisfaction": "고객 만족이 최우선입니다.",
+    "accessoryVariety": "모든 맞춤형 요구를 충족하는 다양한 자동차 액세서리.",
+    "trustworthy": "신뢰 - 품질 - 명성을 보장합니다.",
+    "innovation": "최고의 경험을 제공하기 위한 지속적인 혁신.",
+    "bestDeals": "모든 제품에 대한 매력적인 거래 및 경쟁력 있는 가격.",
+    "ecoFriendly": "지속 가능하고 친환경적인 발전을 위한 약속.",
+    "professionalSupport": "언제든지 도와줄 준비가 되어 있는 전문 팀."
+  }
+}

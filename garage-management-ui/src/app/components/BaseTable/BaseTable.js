@@ -147,6 +147,16 @@ export default function BaseTable({
                                 </Link>
                               );
                             }
+                            if (action.type === "link-set") {
+                              return (
+                                <Link key={index} to={action.link(row)}>
+                                  <button
+                                    {...actionProps}
+                                    onClick={() => action.onClick(row.original)}
+                                  />
+                                </Link>
+                              );
+                            }
 
                             if (action.type === "navigate") {
                               return (

@@ -1,0 +1,12 @@
+{
+  "customer_product_filter": {
+    "title": "제품 필터",
+    "search": "검색...",
+    "category": "카테고리",
+    "category_all": "모든 카테고리",
+    "brand": "브랜드",
+    "brand_all": "모든 브랜드",
+    "price_range": "가격 범위",
+    "apply": "필터 적용"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "manage_supplier_contact": {
+    "title": "공급업체 연락처 관리",
+    "create": "공급업체 연락처 생성",
+    "id": "ID",
+    "contactPersonName": "담당자 이름",
+    "contactPosition": "직책",
+    "contactPhoneNumber": "전화번호",
+    "contactEmail": "이메일",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜",
+    "edit": "공급업체 연락처 편집",
+    "search_placeholder": "검색어 입력...",
+    "search_status_enum": {
+      "choose": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성"
+    },
+    "clear_filters": "필터 초기화",
+    "search": "검색",
+    "status": "상태",
+    "cancel": "취소",
+    "supplierId": "공급업체 ID",
+    "select_supplier": "공급업체 선택",
+    "required": "필수 입력 항목",
+    "creating": "생성 중",
+    "save": "저장"
+  }
+}

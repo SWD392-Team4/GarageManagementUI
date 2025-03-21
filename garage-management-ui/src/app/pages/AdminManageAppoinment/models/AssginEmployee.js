@@ -100,6 +100,7 @@ export default function AssginEmployee({
                 <SelectEmployee
                   setEmployeeId={setEmployeeId}
                   employeeid={employeeid}
+                  employeeSchedules={serviceDetail.employeeSchedules}
                 />
               </div>
             </div>

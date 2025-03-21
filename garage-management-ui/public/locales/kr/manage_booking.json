@@ -1,0 +1,14 @@
+{
+  "manage_booking": {
+    "title": "예약 관리",
+    "id": "예약 ID",
+    "customer": "고객",
+    "room": "객실",
+    "status": "상태",
+    "confirm": "확인",
+    "cancel": "취소",
+    "confirming": "예약 확인 중",
+    "cancelling": "예약 취소 중",
+    "view": "보기"
+  }
+}

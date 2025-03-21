@@ -134,5 +134,8 @@
     "TypeCancel": "Loại Hủy",
     "title1": "là do khách hàng yêu cầu không thực hiện dịch vụ nữa.",
     "title2": "là do cửa hàng có sự thay đổi nhân sự hoặc không thể cung cấp dịch vụ này nữa."
+  },
+  "assignModal": {
+    "confirmButton": "Xác nhận"
   }
 }

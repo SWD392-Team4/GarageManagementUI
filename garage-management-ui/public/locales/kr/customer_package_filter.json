@@ -1,0 +1,14 @@
+{
+  "customer_package_filter": {
+    "title": "패키지 필터",
+    "search": "이름 검색...",
+    "service_category": "서비스 카테고리",
+    "service_category_all": "모든 카테고리",
+    "car_category": "자동차 유형",
+    "car_category_all": "모든 유형",
+    "package_type": "패키지 유형",
+    "package_type_all": "모든 유형",
+    "price_range": "가격 범위",
+    "apply": "필터 적용"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "title": "프로필",
+  "edit_button": "편집",
+  "cancel_button": "취소",
+  "update_button": "업데이트",
+  "profile": {
+    "name": "이름",
+    "role": "VIP 고객"
+  },
+  "personal_info": {
+    "title": "개인 정보",
+    "last_name": "성",
+    "first_name": "이름",
+    "email": "이메일",
+    "phone": "전화번호",
+    "address": "주소",
+    "error": "정보 변경 실패!",
+    "success": "정보가 성공적으로 변경되었습니다!",
+    "imgSuccess": "프로필 사진이 성공적으로 업데이트되었습니다!",
+    "imgError": "사진 업데이트 실패!",
+    "ErrorServer": "사진 업데이트 중 오류가 발생했습니다.",
+    "successMessagePass": "비밀번호를 재설정하려면 이메일을 확인하세요.",
+    "errorMessagePass": "오류가 발생했습니다"
+  },
+  "transaction_history": {
+    "title": "거래 내역",
+    "transactions": [
+      "MacBook Pro 2023 구매 - 35,000,000đ",
+      "iPhone 15 Pro Max 구매 - 30,000,000đ",
+      "AirPods Pro 2 구매 - 5,000,000đ"
+    ]
+  },
+  "forgot_password": {
+    "title": "비밀번호 찾기",
+    "description": "비밀번호를 잊으셨다면 아래 버튼을 클릭하여 재설정하세요.",
+    "button": "비밀번호 재설정",
+    "success": "비밀번호 재설정 링크가 이메일로 전송되었습니다."
+  },
+  "change_password": {
+    "title": "비밀번호 변경",
+    "current": "현재 비밀번호",
+    "new": "새 비밀번호",
+    "loading": "진행 중 . . ",
+    "confirm": "새 비밀번호 확인",
+    "button": "비밀번호 변경",
+    "error": "현재 비밀번호가 잘못되었습니다!",
+    "success": "비밀번호가 성공적으로 변경되었습니다!"
+  }
+}

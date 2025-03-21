@@ -1,0 +1,39 @@
+{
+  "manage_carpart": {
+    "title": "자동차 부품 관리",
+    "create": "자동차 부품 추가",
+    "create_carpart": {
+      "title": "새 자동차 부품 생성",
+      "name": "자동차 부품 이름",
+      "name_placeholder": "자동차 부품 이름 입력",
+      "select_category": "카테고리 선택"
+    },
+    "id": "ID",
+    "name": "자동차 부품 이름",
+    "category": "카테고리",
+    "price": "가격",
+    "status": "상태",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜",
+    "edit": "편집",
+    "search_part_name": "자동차 부품 이름",
+    "search_placeholder": "자동차 부품 이름 입력...",
+    "search_status": "상태",
+    "search_status_enum": {
+      "choose": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성"
+    },
+    "search_created_at": "생성 날짜",
+    "search_updated_at": "업데이트 날짜",
+    "clear_filters": "필터 초기화",
+    "search": "검색",
+    "cancel": "취소",
+    "save": "저장",
+    "saving": "저장 중..."
+  },
+  "validation": {
+    "required_part_name": "자동차 부품 이름이 필요합니다",
+    "required_category": "카테고리를 선택하세요"
+  }
+}

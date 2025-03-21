@@ -1,0 +1,14 @@
+{
+  "title": "주문 내역",
+  "status": {
+    "pending": "대기 중",
+    "completed": "완료됨",
+    "cancelled": "취소됨"
+  },
+  "order": {
+    "id": "주문 ID",
+    "date": "날짜",
+    "amount": "금액",
+    "view": "보기"
+  }
+}

@@ -23,7 +23,6 @@ export const getAllServices = async () => {
     const response = await userService.sendAjax(
       "/api/services?Status=Active&PageSize=1000",
 
-      // "/api/services/carModel/1f9f9bce-f9f2-4ac6-a614-004ae7fd9d6a",
       "GET",
       null,
       true

@@ -1,0 +1,33 @@
+{
+  "title1": "ID",
+  "title2": "고객",
+  "title3": "직원",
+  "title4": "유형",
+  "title5": "상태",
+  "title6": "예상 가격",
+  "title7": "예상 시간",
+  "title8": "실제 시간",
+  "title9": "예상 종료 시간",
+  "title10": "실제 종료 시간",
+  "title13": "고객 이메일",
+  "title12": "고객 전화번호",
+  "title11": "작업",
+  "confirmationModal": {
+    "title": "확인",
+    "prompt": "이 예약을 확인하시겠습니까?"
+  },
+  "common": {
+    "cancel": "취소",
+    "loading": "로딩 중...",
+    "confirm": "확인"
+  },
+  "buttons": {
+    "edit": "편집",
+    "delete": "삭제",
+    "add": "추가",
+    "save": "저장",
+    "cancel": "취소",
+    "confirm": "확인",
+    "close": "닫기"
+  }
+}

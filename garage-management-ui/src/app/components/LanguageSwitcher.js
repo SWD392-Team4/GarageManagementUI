@@ -7,8 +7,10 @@ const LanguageSwitcher = () => {
 
   // Danh sách ngôn ngữ
   const languages = [
-    { code: "en", label: "English", flag: "us" }, // Cờ Mỹ (us)
-    { code: "vi", label: "Vietnamese", flag: "vn" }, // Cờ Việt Nam (vn)
+    { code: "en", label: "English", flag: "us" },
+    { code: "vi", label: "Vietnamese", flag: "vn" },
+    { code: "kr", label: "Korean", flag: "kr" },
+    { code: "kh", label: "Cambodia", flag: "kh" },
   ];
 
   // Lấy ngôn ngữ hiện tại

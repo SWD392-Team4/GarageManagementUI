@@ -1,0 +1,31 @@
+{
+  "personal_info": {
+    "title": "개인 정보",
+    "last_name": "이름",
+    "first_name": "성",
+    "email": "이메일",
+    "phone": "전화번호",
+    "dateBirth": "생년월일",
+    "Citizen": "주민등록번호",
+    "Gender": "성별",
+    "SGender": "성별 선택",
+    "Male": "남성",
+    "Female": "여성",
+    "error": "정보 변경 실패!",
+    "success": "정보가 성공적으로 변경되었습니다!",
+    "imgSuccess": "프로필 사진이 성공적으로 업데이트되었습니다!",
+    "imgError": "사진 업데이트 실패!",
+    "ErrorServer": "사진 업데이트 중 오류가 발생했습니다.",
+    "successMessagePass": "비밀번호를 재설정하려면 이메일을 확인하세요.",
+    "errorMessagePass": "오류가 발생했습니다"
+  },
+  "error_info": {
+    "N/A": "잘못된 ID/주민등록번호입니다. 9자리 또는 12자리를 입력하세요.",
+    "first": "이름은 필수 입력 항목입니다",
+    "last": "성은 필수 입력 항목입니다",
+    "dateOfBirth1": "생년월일은 필수 입력 항목입니다",
+    "dateOfBirth2": "올바른 생년월일을 입력하세요",
+    "Citizen": "주민등록번호는 필수 입력 항목입니다",
+    "Gender": "올바른 성별을 입력하세요"
+  }
+}

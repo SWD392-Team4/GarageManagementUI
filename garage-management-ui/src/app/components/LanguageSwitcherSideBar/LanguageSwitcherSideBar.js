@@ -9,6 +9,7 @@ const LanguageSwitcherSideBar = ({ isSidebarOpen }) => {
   const languages = [
     { code: "en", label: "English", flag: "us" },
     { code: "vi", label: "Tiếng Việt", flag: "vn" },
+    { code: "kr", label: "Korean", flag: "kr" }, // Cờ Việt Nam (vn)
   ];
 
   const currentLanguage =

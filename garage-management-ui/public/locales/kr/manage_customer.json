@@ -1,0 +1,62 @@
+{
+  "manage_customer": {
+    "id": "ID",
+    "firstName": "이름",
+    "lastName": "성",
+    "email": "이메일",
+    "phoneNumber": "전화번호",
+    "status": "상태",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜",
+    "view": "보기",
+    "search": "검색",
+    "clear_filters": "필터 초기화",
+    "search_placeholder": "값 입력...",
+    "search_status": "상태 검색",
+    "search_created_at": "생성 날짜 검색",
+    "search_updated_at": "업데이트 날짜 검색",
+    "search_status_enum": {
+      "choose": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성"
+    },
+    "apointment_info": {
+      "title": "예약 목록",
+      "id": "ID",
+      "customerName": "고객 이름",
+      "customerPhoneNumber": "고객 전화번호",
+      "customerEmail": "고객 이메일",
+      "price": "가격",
+      "createdAt": "생성 날짜",
+      "updatedAt": "업데이트 날짜",
+      "status": "상태",
+      "carLicensePlateNumber": "차량 번호판"
+    },
+    "appointment": {
+      "carLicensePlateNumber": "차량 번호판",
+      "appointmentType": "예약 유형",
+      "appointmentStatus": "예약 상태",
+      "fromTime": "시작 시간",
+      "toTime": "종료 시간",
+      "search_placeholder": "검색 키워드 입력...",
+      "search": "검색",
+      "clear_filters": "필터 초기화",
+      "search_type_enum": {
+        "choose": "유형 선택",
+        "serviceBooking": "서비스 예약",
+        "servicePackageBooking": "서비스 패키지 예약",
+        "scheduledMaintenance": "예정된 유지보수",
+        "sellingProduct": "제품 판매"
+      },
+      "search_status_enum": {
+        "choose": "상태 선택",
+        "pending": "대기 중",
+        "approved": "승인됨",
+        "rejected": "거부됨",
+        "cancelled": "취소됨",
+        "inProgress": "진행 중",
+        "completed": "완료됨"
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "customer_package_category": {
+    "service_category": "카테고리",
+    "car_type": "자동차 유형",
+    "package_type": "패키지 유형",
+    "price": "가격"
+  }
+}

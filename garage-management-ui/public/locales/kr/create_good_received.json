@@ -1,0 +1,32 @@
+{
+  "title": "입고 송장 생성",
+  "error": {
+    "supplier_required": "공급업체가 필요합니다",
+    "warehouse_required": "창고가 필요합니다",
+    "reference_number_required": "참조 번호가 필요합니다",
+    "invoice_code_required": "송장 코드가 필요합니다",
+    "source_address_required": "출처 주소가 필요합니다",
+    "source_wards_required": "출처 동이 필요합니다",
+    "source_province_required": "출처 도가 필요합니다",
+    "source_district_required": "출처 구가 필요합니다",
+    "at_least_one_product": "최소한 하나의 제품을 추가해야 합니다",
+    "min_price": "단가는 최소 1000 VND 이상이어야 합니다"
+  },
+  "labels": {
+    "supplier": "공급업체",
+    "warehouse": "창고",
+    "reference_number": "참조 번호",
+    "invoice_code": "송장 코드",
+    "source_address": "출처 주소",
+    "source_wards": "출처 동",
+    "source_province": "출처 도",
+    "source_district": "출처 구",
+    "product_in_invoice": "송장 내 제품"
+  },
+  "buttons": {
+    "create": "생성",
+    "reset": "초기화",
+    "add": "추가",
+    "remove": "삭제"
+  }
+}

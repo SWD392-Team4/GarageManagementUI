@@ -1,0 +1,42 @@
+{
+  "manage_brand": {
+    "title": "브랜드 관리",
+    "id": "ID",
+    "name": "브랜드 이름",
+    "status": "상태",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜",
+    "view": "보기",
+    "create": "브랜드 추가",
+    "createBrand": "새 브랜드 생성",
+    "brandName": "브랜드 이름",
+    "linkLogo": "로고 URL",
+    "cancel": "취소",
+    "save": "저장",
+    "updateBrand": "브랜드 업데이트",
+    "statusActive": "활성",
+    "statusInactive": "비활성",
+    "saving": "저장 중...",
+    "edit": "편집",
+    "active": "활성",
+    "inactive": "비활성",
+    "error": {
+      "requiredFields": "모든 필드를 입력하세요.",
+      "updateFailed": "브랜드 업데이트 실패. 다시 시도하세요!"
+    },
+    "search_status_enum": {
+      "choose": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성",
+      "none": "없음"
+    },
+    "search_brand_name": "브랜드 이름 검색",
+    "search_status": "상태 검색",
+    "search_placeholder": "브랜드 이름 입력...",
+    "clear_filters": "필터 초기화",
+    "search": "검색",
+    "clean": "초기화",
+    "search_updated_at": "업데이트 날짜",
+    "search_created_at": "생성 날짜"
+  }
+}

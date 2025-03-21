@@ -4,20 +4,20 @@ import ServiceTasks from "./ServiceTasks";
 function AppointmentDetailModal({ service, onClose, onUpdate }) {
   // Khởi tạo state với dữ liệu từ service (đảm bảo imagesBefore và imagesAfter là mảng)
   const [serviceData, setServiceData] = useState({
-    ...service.appointmentDetail,
-    imagesBefore: service.appointmentDetail.imagesBefore || [],
-    imagesAfter: service.appointmentDetail.imagesAfter || [],
+    ...service,
+    imagesBefore: service.imagesBefore || [],
+    imagesAfter: service.imagesAfter || [],
   });
 
   useEffect(() => {
     if (service) {
       setServiceData({
-        ...service.appointmentDetail,
-        imagesBefore: service.appointmentDetail.imagesBefore || [],
-        imagesAfter: service.appointmentDetail.imagesAfter || [],
+        ...service,
+        imagesBefore: service.imagesBefore || [],
+        imagesAfter: service.imagesAfter || [],
       });
     }
-  }, [service.appointmentDetail]);
+  }, [service]);
 
   const handleTaskStatusChange = (taskId, newStatus) => {
     setServiceData((prev) => ({
@@ -46,22 +46,14 @@ function AppointmentDetailModal({ service, onClose, onUpdate }) {
             <label className="font-semibold w-1/3">Tên dịch vụ:</label>
             <span className="w-2/3 text-right">{serviceData.serviceName}</span>
           </li>
-          <li className="flex justify-between">
-            <label className="font-semibold w-1/3">Is From Package:</label>
-            <span className="w-2/3 text-right">
-              {serviceData.isFromPackage}
-            </span>
-          </li>
+
           <li className="flex justify-between">
             <label className="font-semibold w-1/3">Estimated Hours:</label>
             <span className="w-2/3 text-right">
               {serviceData.estimatedHours}
             </span>
           </li>
-          <li className="flex justify-between">
-            <label className="font-semibold w-1/3">Trạng thái:</label>
-            <span className="w-2/3 text-right">{serviceData.status}</span>
-          </li>
+
           <li className="justify-between">
             <label className="font-semibold block">Ghi chú dịch vụ:</label>
             <textarea
@@ -75,7 +67,7 @@ function AppointmentDetailModal({ service, onClose, onUpdate }) {
           <ServiceTasks
             tasks={serviceData.appointmentReplacementParts}
             onTaskStatusChange={handleTaskStatusChange}
-            serviceDetailId={service.appointmentDetailId}
+            serviceDetailId={service.id}
           />
         )}
         {/* Phần ảnh */}

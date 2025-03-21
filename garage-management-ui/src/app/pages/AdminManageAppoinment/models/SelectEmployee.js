@@ -3,7 +3,11 @@ import Select from "react-select";
 import { FaUser, FaEnvelope, FaPhone } from "react-icons/fa";
 import { getAllMechanic } from "../services/AppointmentService";
 
-export default function SelectEmployee({ setEmployeeId, employeeid }) {
+export default function SelectEmployee({
+  setEmployeeId,
+  employeeid,
+  employeeSchedules,
+}) {
   const [employees, setEmployees] = useState([]);
 
   // Hàm formatOptionLabel để tùy chỉnh hiển thị option
@@ -46,13 +50,18 @@ export default function SelectEmployee({ setEmployeeId, employeeid }) {
     fetchData();
   }, []);
 
-  const employeesOptions = employees.map((emp) => ({
-    value: emp.id,
-    label: `${emp.firstName} ${emp.lastName}`,
-    email: emp.email,
-    image: emp.imageLink,
-    phone: emp.phoneNumber,
-  }));
+  const employeesOptions = employees
+    .filter(
+      (emp) =>
+        !employeeSchedules.some((schedule) => schedule.employee.id === emp.id)
+    )
+    .map((emp) => ({
+      value: emp.id,
+      label: `${emp.firstName} ${emp.lastName}`,
+      email: emp.email,
+      image: emp.imageLink,
+      phone: emp.phoneNumber,
+    }));
 
   return (
     <Select

@@ -1,0 +1,10 @@
+{
+  "about_engineer": {
+    "engineer": "엔지니어",
+    "meet_experts": "전문 엔지니어 만나기",
+    "mechanical_engineer": "기계 엔지니어",
+    "system_engineer": "시스템 엔지니어",
+    "head_engineer": "수석 엔지니어",
+    "automobile_engineer": "자동차 엔지니어"
+  }
+}

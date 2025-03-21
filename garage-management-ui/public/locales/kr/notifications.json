@@ -1,0 +1,14 @@
+{
+  "notifications": "알림",
+  "markAsRead": "읽음으로 표시",
+  "clearAll": "모두 삭제",
+  "new": "새로운 알림",
+  "earlier": "이전 알림",
+  "showAll": "모두 보기",
+  "from": "보낸 사람",
+  "messages": {
+    "newMessage": "새로운 메시지가 있습니다",
+    "appointmentAssigned": "예약이 배정되었습니다",
+    "other": "기타 알림"
+  }
+}

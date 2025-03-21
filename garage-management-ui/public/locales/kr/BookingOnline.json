@@ -1,0 +1,20 @@
+{
+  "title": "온라인 차량 서비스 예약을 확인하세요!",
+  "description": "최적의 정비소를 쉽게 찾고, 세부 정보를 확인하고, 몇 번의 클릭으로 예약하세요!",
+  "column1Title": "정비소 찾기",
+  "column1Description": "가까운 최고의 정비소를 찾아 정비 또는 수리를 받으세요.",
+  "column2Title": "세부 정보 보기",
+  "column2Description": "정비소 위치, 이용 가능한 서비스 및 운영 시간을 확인하세요.",
+  "column3Title": "서비스 예약",
+  "column3Description": "편리한 시간대를 선택하고 간단한 단계로 차량 서비스를 예약하세요.",
+  "buttonFindGarage": "정비소 찾기",
+  "billingDetails": "결제 정보",
+  "fullName": "전체 이름",
+  "emailAddress": "이메일 주소",
+  "phone": "전화번호",
+  "carLicensePlateNumber": "차량 번호판",
+  "mileage": "주행 거리",
+  "placeOrder": "주문하기",
+  "requiredField": "이 필드는 필수입니다.",
+  "invalidEmail": "잘못된 이메일 형식입니다."
+}

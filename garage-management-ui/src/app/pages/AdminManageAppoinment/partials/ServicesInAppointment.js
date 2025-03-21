@@ -16,8 +16,12 @@ import {
   MdOutlineAssignmentInd,
   MdOutlineAssignmentLate,
 } from "react-icons/md";
+import { FaPencilAlt } from "react-icons/fa";
+import { LuView } from "react-icons/lu";
+
 import AssginEmployee from "../models/AssginEmployee";
 import UnAssginEmployee from "./UnAssginEmployee";
+import ServiceDetailModal from "../models/ServiceDetailModal";
 
 export default function ServicesInAppointment() {
   const { t, i18n } = useTranslation("appoinment-admin");
@@ -35,8 +39,10 @@ export default function ServicesInAppointment() {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isUpdateModalOpen1, setIsUpdateModalOpen1] = useState(false);
   const [isUpdateModalOpen3, setIsUpdateModalOpen3] = useState(false);
-  const [isUpdateModalOpen4, setIsUpdateModalOpen4] = useState(false);
   const [serviceDetailId, setServiceDetailId] = useState(null);
+  const [isServiceDetailModalOpen, setIsServiceDetailModalOpen] =
+    useState(false);
+
   const [serviceDetail, setServiceDetail] = useState(null);
   useEffect(() => {
     fetchData(pagination.page).then((response) => {
@@ -76,7 +82,7 @@ export default function ServicesInAppointment() {
         accessorFn: (_row, index) => index + 1,
       },
       { header: t("list-services.title2"), accessorKey: "serviceName" },
-      { header: t("list-services.title3"), accessorKey: "appointmentId" },
+      // { header: t("list-services.title3"), accessorKey: "appointmentId" },
       { header: t("list-services.title11"), accessorKey: "estimatedHours" },
       { header: t("list-services.title6"), accessorKey: "price" },
       { header: t("list-services.title7"), accessorKey: "createAt" },
@@ -105,6 +111,17 @@ export default function ServicesInAppointment() {
       // luôn hiển thị, không cần điều kiện
       shouldDisplay: (row) =>
         row.status !== "Declined" && row.status !== "Cancelled",
+    },
+    {
+      type: "modal",
+      label: "view",
+      icon: <LuView />,
+      color: "bg-gray-500",
+      onClick: async (row) => {
+        setServiceDetail(row);
+        setIsServiceDetailModalOpen(true);
+      },
+      shouldDisplay: (row) => true,
     },
     {
       type: "modal",
@@ -193,13 +210,11 @@ export default function ServicesInAppointment() {
         appointmentId={id}
         serviceDetail={serviceDetail}
       />
-      {/* <UnAssginEmployee
-        isOpen={isUpdateModalOpen4}
-        onCancel={() => setIsUpdateModalOpen4(false)}
-        appointmentId={id}
+      <ServiceDetailModal
+        isOpen={isServiceDetailModalOpen}
+        onClose={() => setIsServiceDetailModalOpen(false)}
         serviceDetail={serviceDetail}
-        employee={employee}
-      /> */}
+      />
     </>
   );
 }

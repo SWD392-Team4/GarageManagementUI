@@ -1,0 +1,7 @@
+{
+  "customer_package_content": {
+    "conditions": "패키지 조건",
+    "services": "포함된 서비스",
+    "price": "가격"
+  }
+}

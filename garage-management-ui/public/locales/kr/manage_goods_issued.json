@@ -1,0 +1,36 @@
+{
+  "manage_goods_issued": {
+    "title": "출고 관리",
+    "create": "출고 생성",
+    "loading": "로딩 중...",
+    "search": {
+      "reference_number": "참조 번호",
+      "invoice_code": "송장 코드",
+      "min_total_cost": "최소 총 비용",
+      "max_total_cost": "최대 총 비용",
+      "status": "상태",
+      "created_at": "생성 날짜",
+      "updated_at": "업데이트 날짜",
+      "status_enum": {
+        "choose": "상태 선택",
+        "active": "활성",
+        "inactive": "비활성"
+      },
+      "clear_filters": "필터 초기화",
+      "search": "검색"
+    },
+    "table": {
+      "id": "ID",
+      "total_cost": "총 비용",
+      "reference_number": "참조 번호",
+      "invoice_code": "송장 코드",
+      "status": "상태",
+      "created_at": "생성 날짜",
+      "updated_at": "업데이트 날짜",
+      "view": "보기",
+      "warehouseName": "창고 이름",
+      "managerName": "매니저 이름",
+      "garageName": "정비소 이름"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "manage_product": {
+    "view": "보기",
+    "title": "제품 관리",
+    "create": "제품 생성",
+    "id": "ID",
+    "name": "이름",
+    "barcode": "바코드",
+    "status": "상태",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜",
+    "price": "가격",
+    "upload_images": "이미지 업로드",
+    "search_product_name": "제품 이름 검색",
+    "search_placeholder": "제품 이름 입력...",
+    "search_status": "상태 검색",
+    "search_status_enum": {
+      "choose": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성"
+    },
+    "clear_filters": "필터 초기화",
+    "search": "검색",
+    "search_updated_at": "업데이트 날짜 검색",
+    "search_created_at": "생성 날짜 검색",
+    "search_min_price": "최소 가격",
+    "search_max_price": "최대 가격",
+    "car_parts": "자동차 부품"
+  }
+}

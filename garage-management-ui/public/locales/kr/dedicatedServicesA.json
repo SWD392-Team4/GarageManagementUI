@@ -1,0 +1,73 @@
+{
+  "title": "고품질 서비스",
+  "subtitle": "우리는 고품질 차량 유지보수 서비스를 제공합니다",
+  "pageTitle": "서비스",
+  "pageTitle2": "서비스 카테고리",
+  "home": "홈",
+  "services": {
+    "inspect": {
+      "title": "점검",
+      "description": "문제 및 잠재적 손상을 철저히 점검"
+    },
+    "replace": {
+      "title": "교체",
+      "description": "손상되거나 오래된 부품 교체"
+    },
+    "lubricate": {
+      "title": "윤활",
+      "description": "원활한 작동을 위한 적절한 윤활 제공"
+    },
+    "align": {
+      "title": "정렬",
+      "description": "최적의 성능을 위한 위치 조정"
+    },
+    "refill": {
+      "title": "보충",
+      "description": "필요한 액체 및 재료 보충"
+    },
+    "repair": {
+      "title": "수리",
+      "description": "식별된 손상을 효율적으로 복구"
+    },
+    "clean": {
+      "title": "청소",
+      "description": "더 나은 효율성을 위한 청결 유지"
+    },
+    "upgrade": {
+      "title": "업그레이드",
+      "description": "현대적인 솔루션을 통한 기능 향상"
+    },
+    "restore": {
+      "title": "복원",
+      "description": "원래 상태 및 품질로 되돌리기"
+    },
+    "update": {
+      "title": "업데이트",
+      "description": "최신 소프트웨어 및 시스템 개선 사항 설치"
+    },
+    "polish": {
+      "title": "광택",
+      "description": "표면 광택으로 미적 매력 향상"
+    },
+    "protect": {
+      "title": "보호",
+      "description": "외부 손상으로부터 부품 보호"
+    },
+    "deodorize": {
+      "title": "탈취",
+      "description": "악취 제거 및 환경 상쾌하게 유지"
+    },
+    "condition": {
+      "title": "컨디셔닝",
+      "description": "장기적인 내구성을 위한 재료 보존"
+    },
+    "remove": {
+      "title": "제거",
+      "description": "불필요하거나 유해한 요소 제거"
+    },
+    "restoreLighting": {
+      "title": "조명 복원",
+      "description": "적절한 밝기 및 가시성 보장"
+    }
+  }
+}

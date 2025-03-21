@@ -3,6 +3,7 @@ import { AppointmentSignify } from "../../AdminManageAppoinment/services/store/A
 import { sAccount } from "../../AuthCustomer/services/store";
 import { formatDate } from "../schemas/appointmentSchema";
 import { FilterAppointment } from "./store/FilterStore";
+import { currentAppointment } from "./store/mechanic";
 
 const userService = new UserService();
 
@@ -42,7 +43,7 @@ export const getAllAppointment = async (status) => {
 
   try {
     const response = await userService.sendAjax(
-      "/api/users/my-schedule",
+      "/api/users/my-schedules",
       "GET",
       null,
       true
@@ -80,5 +81,57 @@ export const AddAppointmentReplacementPartDetailApi = async (
   } catch (error) {
     console.error("Fail with : ", error.message);
     userService.showToast(400, error.message);
+  }
+};
+export const StartAppointmet = async (scheduleId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/users/schedules/${scheduleId}/start`,
+      "POST",
+      null,
+      true
+    );
+    userService.showToast(200, " Start appointment successful");
+    return response;
+  } catch (error) {
+    console.error("Fail with StartAppointmet : ", error.message);
+    userService.showToast(400, error.message);
+  }
+};
+export const EndAppointmet = async (scheduleId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/users/schedules/${scheduleId}/end`,
+      "POST",
+      null,
+      true
+    );
+    userService.showToast(200, " End appointment successful");
+    return response;
+  } catch (error) {
+    console.error("Fail with StartAppointmet : ", error.message);
+    userService.showToast(400, error.message);
+  }
+};
+export const addAppointmentDetail = async (data, appoinmentId) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${sAccount.value.workPlaceId}/appointments/${appoinmentId}/details`,
+      "POST",
+      data,
+      true
+    );
+    currentAppointment.set((v) => {
+      v.value.load += 1;
+    });
+    userService.showToast(
+      200,
+      "Request add service successfull please waiting cashier confirm!"
+    );
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
   }
 };

@@ -1,0 +1,60 @@
+{
+  "create_service_page": {
+    "title": "새 서비스 생성",
+    "form": {
+      "service_name": "서비스 이름",
+      "select_car_category": "자동차 카테고리 선택",
+      "select_car_part": "자동차 부품 선택",
+      "select_service_category": "서비스 카테고리 선택",
+      "select_action": "작업 선택",
+      "select_work_nature": "작업 성격 선택",
+      "estimated_hours": "예상 시간",
+      "service_price": "서비스 가격",
+      "description": "설명",
+      "create_service": "서비스 생성",
+      "service_image": "서비스 이미지"
+    },
+    "errors": {
+      "service_name": "서비스 이름이 필요합니다",
+      "car_category": "자동차 카테고리가 필요합니다",
+      "car_part": "자동차 부품이 필요합니다",
+      "category": "카테고리가 필요합니다",
+      "action": "작업이 필요합니다",
+      "work_nature": "작업 성격이 필요합니다",
+      "estimated_hours": "예상 시간이 필요합니다",
+      "service_price": "서비스 가격이 필요합니다"
+    },
+    "categories": {
+      "repair": "수리",
+      "maintenance": "정비",
+      "upgrade": "업그레이드",
+      "car_wash": "세차",
+      "detailing": "디테일링"
+    },
+    "actions": {
+      "inspect": "점검",
+      "replace": "교체",
+      "lubricate": "윤활",
+      "align": "정렬",
+      "refill": "보충",
+      "repair": "수리",
+      "clean": "청소",
+      "upgrade": "업그레이드",
+      "restore": "복원",
+      "update": "업데이트",
+      "polish": "광택",
+      "protect": "보호",
+      "deodorize": "탈취",
+      "condition": "컨디셔닝",
+      "remove": "제거",
+      "restore_lighting": "조명 복원"
+    },
+    "work_natures": {
+      "preventive": "예방 조치",
+      "corrective": "교정 조치",
+      "enhancement": "향상 조치",
+      "digital": "디지털 조치",
+      "aesthetic": "미적 조치"
+    }
+  }
+}

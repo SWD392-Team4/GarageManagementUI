@@ -1,0 +1,15 @@
+{
+  "pageTitle": "비밀번호 찾기",
+  "title": "비밀번호 찾기",
+  "home": "홈",
+  "subtitle": "비밀번호 재설정",
+  "emailLabel": "이메일",
+  "emailPlaceholder": "이메일 입력",
+  "confirmButton": "확인",
+  "confirmingText": "확인 중...",
+  "alreadyMember": "이미 회원이신가요?",
+  "signIn": "로그인",
+  "loading": "로딩 중...",
+  "successMessage": "비밀번호를 재설정하려면 이메일을 확인하세요.",
+  "errorMessage": "오류가 발생했습니다."
+}

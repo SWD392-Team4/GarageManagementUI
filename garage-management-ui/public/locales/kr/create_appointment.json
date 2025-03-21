@@ -1,0 +1,61 @@
+{
+  "labels": {
+    "carModel": "자동차 모델",
+    "mileage": "주행 거리",
+    "customerName": "고객 이름",
+    "customerPhoneNumber": "전화번호",
+    "customerEmail": "이메일",
+    "estimatedAppointmentTime": "예약 시간",
+    "estimatedEndTime": "종료 시간",
+    "carLicensePlateNumber": "차량 번호판",
+    "serviceAndProduct": "서비스 및 부품",
+    "selectPackage": "패키지 선택"
+  },
+  "placeholder": {
+    "selectCarModel": "자동차 모델 선택",
+    "enterMileage": "주행 거리 입력",
+    "enterCustomerName": "고객 이름 입력",
+    "enterPhoneNumber": "전화번호 입력",
+    "enterEmail": "이메일 입력",
+    "selectService": "서비스 선택",
+    "selectProduct": "제품 선택",
+    "enterQuantity": "수량 입력",
+    "selectPackage": "패키지 선택",
+    "enterCarLicensePlateNumber": "차량 번호판 입력"
+  },
+  "common": {
+    "cancel": "취소",
+    "loading": "로딩 중...",
+    "confirm": "확인"
+  },
+  "error2": {
+    "required_carModelId": "자동차 모델을 선택하세요",
+    "required_mileage": "주행 거리를 입력하세요",
+    "invalid_mileage": "잘못된 주행 거리",
+    "required_customerName": "고객 이름을 입력하세요",
+    "required_customerPhoneNumber": "전화번호를 입력하세요",
+    "invalid_email": "잘못된 이메일 형식",
+    "required_customerEmail": "이메일을 입력하세요",
+    "required_estimatedAppointmentTime": "예약 시간을 선택하세요",
+    "required_estimatedEndTime": "종료 시간을 선택하세요",
+    "required_carLicensePlateNumber": "차량 번호판을 입력하세요",
+    "required_carLicensePlateNumber2": "잘못된 차량 번호판 형식입니다. 올바른 형식(예: 30A-12345 또는 51G-678901)을 입력하세요.",
+    "add_service": "최소한 하나의 서비스를 추가하세요(제품 선택은 필수 아님)",
+    "create": "예약을 생성하는 동안 오류가 발생했습니다"
+  },
+  "buttons": {
+    "add": "추가",
+    "remove": "삭제",
+    "createAppointment": "예약 생성"
+  },
+  "tableHeaders": {
+    "stt": "번호",
+    "serviceName": "서비스 이름",
+    "products": "부품",
+    "packageName": "패키지 이름",
+    "action": "작업"
+  },
+  "success": {
+    "create": "예약이 성공적으로 생성되었습니다!"
+  }
+}

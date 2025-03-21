@@ -1,0 +1,6 @@
+{
+  "manage_invoice_service": {
+    "title": "서비스 송장 관리",
+    "create": "송장 생성"
+  }
+}

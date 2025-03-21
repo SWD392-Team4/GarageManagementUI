@@ -28,6 +28,9 @@ import CancelModal from "../models/CancelModal";
 import ConfirmationModal from "../models/ConfirmationModal";
 import { useTranslation } from "react-i18next";
 
+// Import Yup để xử lý validation
+import * as Yup from "yup";
+
 // Hàm chuyển đổi datetime (cắt phần giây, timezone, ...)
 const formatDateTime = (dateString) => {
   if (!dateString) return "";
@@ -63,6 +66,27 @@ const defaultValues = {
   email: "",
 };
 
+// Định nghĩa schema Yup cho các trường cần validate
+const validationSchema = Yup.object().shape({
+  mileage: Yup.number()
+    .typeError("Mileage phải là số")
+    .positive("Mileage phải là số dương")
+    .required("Vui lòng nhập Mileage"),
+  licenser: Yup.string()
+    .required("Vui lòng nhập biển số xe")
+    .matches(
+      /^(?:\d{2}[A-Z]-\d{5,6})$/,
+      "Biển số xe không hợp lệ. Vui lòng nhập đúng định dạng (ví dụ: 30A-12345 hoặc 51G-678901)."
+    ),
+  customerName: Yup.string().required("Vui lòng nhập tên khách hàng"),
+  phone: Yup.string()
+    .required("Vui lòng nhập số điện thoại")
+    .matches(/^\d+$/, "Số điện thoại phải là số"),
+  email: Yup.string()
+    .required("Vui lòng nhập email")
+    .email("Email không hợp lệ"),
+});
+
 const BookingInfo = () => {
   const { id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
@@ -75,6 +99,9 @@ const BookingInfo = () => {
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [showArrivalModal, setShowArrivalModal] = useState(false);
+  // State lưu các thông báo lỗi của validation
+  const [errors, setErrors] = useState({});
+
   const sAppointment = currentAppointment.use();
   const fetchData = useCallback(async () => {
     try {
@@ -157,6 +184,23 @@ const BookingInfo = () => {
     }));
   };
 
+  // Xử lý sự kiện onBlur dùng để validate các trường theo Yup (bao gồm Mileage, License Plate, Customer Name, Phone, Email)
+  const handleBlur = async (e) => {
+    const { name, value } = e.target;
+    // Nếu trường hiện không nằm trong schema thì bỏ qua
+    if (
+      !["mileage", "licenser", "customerName", "phone", "email"].includes(name)
+    ) {
+      return;
+    }
+    try {
+      await validationSchema.validateAt(name, { [name]: value });
+      setErrors((prev) => ({ ...prev, [name]: "" }));
+    } catch (err) {
+      setErrors((prev) => ({ ...prev, [name]: err.message }));
+    }
+  };
+
   // Nhận giá trị từ react-select cho Model
   const handleModelChange = (selectedOption) => {
     setFormData((prev) => ({
@@ -172,6 +216,31 @@ const BookingInfo = () => {
 
   const handleConfirm = async (e) => {
     e.preventDefault();
+    // Validate các trường sử dụng Yup trước khi submit
+    try {
+      await validationSchema.validate(
+        {
+          mileage: formData.mileage,
+          licenser: formData.licenser,
+          customerName: formData.customerName,
+          phone: formData.phone,
+          email: formData.email,
+        },
+        { abortEarly: false }
+      );
+      // Nếu validate thành công, xóa lỗi
+      setErrors({});
+    } catch (err) {
+      const validationErrors = {};
+      if (err.inner) {
+        err.inner.forEach((error) => {
+          validationErrors[error.path] = error.message;
+        });
+      }
+      setErrors(validationErrors);
+      return; // Ngừng submit nếu có lỗi
+    }
+
     const payload = {
       carModelId: formData.model,
       mileage: Number(formData.mileage),
@@ -196,6 +265,7 @@ const BookingInfo = () => {
     setFormData(defaultValues);
     setIsEditing(false);
   };
+
   const handleCancelMenu = () => {
     setShowOptionsMenu(false);
   };
@@ -231,7 +301,6 @@ const BookingInfo = () => {
                 value={formData.emp1.name}
                 bg={formData.emp1.bg}
                 onChange={handleChange}
-                // editable={isEditing}
               />
               <LabelInput
                 label={t("bookingInfo.employeeReject")}
@@ -239,7 +308,6 @@ const BookingInfo = () => {
                 value={formData.emp2.name}
                 bg={formData.emp2.bg}
                 onChange={handleChange}
-                // editable={isEditing}
               />
               <LabelInput
                 label={t("bookingInfo.status")}
@@ -263,16 +331,19 @@ const BookingInfo = () => {
                 name="mileage"
                 value={formData.mileage}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 editable={isEditing}
+                error={errors.mileage}
               />
               <LabelInput
                 label={t("bookingInfo.licenser")}
                 name="licenser"
                 value={formData.licenser}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 editable={isEditing}
+                error={errors.licenser}
               />
-
               <LabelSelect
                 label={t("bookingInfo.gara")}
                 options={gara}
@@ -343,21 +414,27 @@ const BookingInfo = () => {
                 name="customerName"
                 value={formData.customerName}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 editable={isEditing}
+                error={errors.customerName}
               />
               <LabelInput
                 label={t("bookingInfo.phone")}
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 editable={isEditing}
+                error={errors.phone}
               />
               <LabelInput
                 label={t("bookingInfo.email")}
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
+                onBlur={handleBlur}
                 editable={isEditing}
+                error={errors.email}
               />
             </div>
           </div>
@@ -433,7 +510,6 @@ const BookingInfo = () => {
                     >
                       <FaEdit className="text-purple-700" />
                     </button>
-
                     {(formData.status.name === "Pending" ||
                       formData.status.name === "Approved") && (
                       <button

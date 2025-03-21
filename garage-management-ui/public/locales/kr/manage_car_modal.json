@@ -1,0 +1,28 @@
+{
+  "manage_car_modal": {
+    "title": "자동차 모델 관리",
+    "create": "자동차 모델 생성",
+    "id": "ID",
+    "modalName": "모델 이름",
+    "category": "카테고리",
+    "brand": "브랜드",
+    "modelYear": "모델 연도",
+    "createdAt": "생성 날짜",
+    "updatedAt": "업데이트 날짜",
+    "edit": "편집",
+    "search_model_name": "모델 이름 검색",
+    "search_placeholder": "모델 이름 입력...",
+    "search_status": "상태",
+    "search_status_enum": {
+      "choose": "상태 선택",
+      "active": "활성",
+      "inactive": "비활성"
+    },
+    "search_modal_year": "모델 연도",
+    "search_modal_year_placeholder": "모델 연도 입력",
+    "search_created_at": "생성 날짜",
+    "search_updated_at": "업데이트 날짜",
+    "clear_filters": "필터 초기화",
+    "search": "검색"
+  }
+}

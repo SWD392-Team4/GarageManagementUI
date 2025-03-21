@@ -8,6 +8,7 @@ import {
 } from "../services/store/FilterStore";
 import { getAllAppointment } from "../services/AppointmentService";
 import FilterTablePost from "./FilterTablePosts";
+import { currentAppointment } from "../services/store/mechanic";
 
 export default function AppointmentList() {
   const { t, i18n } = useTranslation("appoinment-admin");
@@ -20,6 +21,7 @@ export default function AppointmentList() {
     hasNext: false,
   });
   const filter = FilterAppointment.use();
+  const sCurrentAppointment = currentAppointment.use();
   const fetchData = useCallback(async () => {
     try {
       let response = await getAllAppointment();
@@ -82,11 +84,20 @@ export default function AppointmentList() {
   );
   const actions = [
     {
-      type: "link",
+      type: "link-set",
       label: t("manage_product.view"),
       icon: <FaEye />,
       color: "bg-gray-500",
       link: (row) => `detail/${row.original.id}`,
+      onClick: async (row) => {
+        try {
+          currentAppointment.set((v) => {
+            v.value.appointmentDetail = row;
+          });
+        } catch (error) {
+          console.error("Error reject details: ", error);
+        }
+      },
     },
   ];
 

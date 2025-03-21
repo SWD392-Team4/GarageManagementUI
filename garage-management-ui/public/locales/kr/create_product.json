@@ -1,0 +1,44 @@
+{
+  "create_product": {
+    "title": "제품 생성",
+    "name": "제품명",
+    "category": "카테고리",
+    "price": "가격",
+    "stock": "재고",
+    "brand": "브랜드",
+    "supplier": "공급업체",
+    "description": "제품 설명",
+    "submit": "제품 생성",
+    "back": "제품 목록으로 돌아가기",
+    "barcode": "바코드",
+    "select_brand": "브랜드 선택",
+    "select_category": "카테고리 선택",
+    "upload_images": "이미지 URL",
+    "car_parts": "자동차 부품",
+    "no_car_parts_selected": "선택된 자동차 부품 없음",
+    "car_models": "자동차 모델",
+    "no_car_models_selected": "선택된 자동차 모델 없음",
+    "select_car_parts": {
+      "title": "자동차 부품 선택",
+      "search_placeholder": "자동차 부품 검색...",
+      "category": "카테고리",
+      "active": "활성",
+      "inactive": "비활성",
+      "created_at": "생성 날짜",
+      "updated_at": "업데이트 날짜",
+      "no_results": "검색된 자동차 부품 없음",
+      "confirm": "확인"
+    },
+    "select_car_models": {
+      "title": "자동차 모델 선택",
+      "search_placeholder": "자동차 모델 검색...",
+      "brand": "브랜드",
+      "category": "카테고리",
+      "year": "연도",
+      "active": "활성",
+      "inactive": "비활성",
+      "no_results": "검색된 자동차 모델 없음",
+      "confirm": "확인"
+    }
+  }
+}
