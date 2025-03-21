@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   getAllProductAtGarage,
@@ -9,23 +9,25 @@ import SearchProduct from "../../partials/component/SearchProduct";
 import ProductCard from "../../partials/component/ProductCard";
 import ProductSidebar from "../../partials/component/ProductSidebar";
 import { useMediaQuery } from "react-responsive";
+import { AppointmentSignify } from "../../../AdminManageAppoinment/services/store/AppointmentSignify";
 
-export default function ListProductAtGarage({ garageId }) {
-  const { t } = useTranslation("product_at_store");
+export default function ListProductAtGarage() {
+  const sAppointmentSignify = AppointmentSignify.use();
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchParams, setSearchParams] = useState(null);
-  const [barcodeInput, setBarcodeInput] = useState("");
-  const [isScanning, setIsScanning] = useState(false);
 
+  //quan ly render scan
+  const barcodeBufferRef = useRef("");
+  const lastKeyPressTimeRef = useRef(0);
+  const [isScanning, setIsScanning] = useState(false);
   // Check moblie
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const fetchListProduct = async () => {
-    if (!garageId) return;
-    const response = await getAllProductAtGarage(garageId, searchParams || {});
-    setProducts(response.data.value || []);
+    const response = await getAllProductAtGarage(searchParams || {});
+    setProducts(response?.data?.value || []);
   };
 
   useEffect(() => {
@@ -34,7 +36,7 @@ export default function ListProductAtGarage({ garageId }) {
     //chuyen gara thi tat
     setIsSidebarOpen(false);
     setSelectedProduct(null);
-  }, [garageId, searchParams]);
+  }, [AppointmentSignify.value.garaCurrent, searchParams]);
 
   // Khi click vào sản phẩm -> Fetch chi tiết sản phẩm và mở sidebar
   const handleSelectProduct = async (productId) => {
@@ -68,27 +70,51 @@ export default function ListProductAtGarage({ garageId }) {
 
   useEffect(() => {
     if (!isMobile) {
+      let timeout;
+
       const handleBarcodeScan = async (event) => {
-        if (event.key === "Enter" && barcodeInput.trim() !== "") {
-          console.log("Barcode scanned:", barcodeInput);
-          const response = await getProductAtGarageByBarCode(barcodeInput);
-          if (response.data.value) {
-            setSelectedProduct(response.data.value);
-            setIsSidebarOpen(true);
-          }
-          setBarcodeInput(""); // Reset input
+        const currentTime = new Date().getTime();
+
+        // Nếu khoảng cách giữa hai lần nhập > 100ms, reset buffer (nhập tay)
+        if (currentTime - lastKeyPressTimeRef.current > 100) {
+          barcodeBufferRef.current = event.key;
         } else {
-          setBarcodeInput((prev) => prev + event.key);
+          barcodeBufferRef.current += event.key;
         }
+
+        lastKeyPressTimeRef.current = currentTime;
+
+        // Nếu nhấn Enter, xử lý barcode
+        if (event.key === "Enter") {
+          const barcode = barcodeBufferRef.current
+            .trim()
+            .replace(/[\r\n]+|Enter/g, "");
+          if (barcode !== "") {
+            console.log("Barcode scanned:", barcode);
+            const response = await getProductAtGarageByBarCode(barcode);
+            if (response.data.value) {
+              setSelectedProduct(response.data.value);
+              setIsSidebarOpen(true);
+            }
+          }
+          barcodeBufferRef.current = ""; // Reset bộ đệm sau khi xử lý
+        }
+
+        // Xóa bộ đệm nếu không có ký tự mới trong 500ms
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          barcodeBufferRef.current = "";
+        }, 500);
       };
 
       window.addEventListener("keydown", handleBarcodeScan);
 
       return () => {
         window.removeEventListener("keydown", handleBarcodeScan);
+        clearTimeout(timeout);
       };
     }
-  }, [barcodeInput]);
+  }, []);
 
   // ✅ API lấy sản phẩm theo Barcode
   const fetchProductByBarcode = async (barcode) => {

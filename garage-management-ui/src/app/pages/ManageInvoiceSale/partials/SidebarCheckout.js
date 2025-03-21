@@ -128,10 +128,10 @@ export default function SidebarCheckout({
       </div>
       {/* Tổng tiền */}
       <div className="mt-6">
-        <h3 className="text-lg font-semibold text-gray-800">{t("total")}</h3>
-        <p className="text-2xl font-bold text-green-600">
-          {calculateTotal().toLocaleString()} VND
-        </p>
+        <h3 className="text-lg font-semibold text-gray-800">
+          {t("create_invoice_sale.sidebar_checkout.total")}
+        </h3>
+        <p className="text-2xl font-bold text-green-600">{calculateTotal()}</p>
       </div>
       {/* Nút tạo hóa đơn */}
       <button

@@ -19,6 +19,10 @@ import { viewAppointmentLookUp } from "../services/LookUpService";
 import { sLookUp } from "../services/LookUpSignify";
 import { useNavigate } from "react-router-dom";
 import CarConditionImages from "./CarConditionImages";
+import { useMediaQuery } from "react-responsive";
+import ViewAppointmentLookUpMobile from "./ViewAppointmentLookUpMobile";
+import { useTranslation } from "react-i18next";
+import { formatVietnameseCurrency } from "../schemas/LookUpSchemas";
 
 export default function ViewAppointmentLookUp() {
   const [showAllPackages, setShowAllPackages] = useState(false);
@@ -26,6 +30,8 @@ export default function ViewAppointmentLookUp() {
   const [appointment, setAppointment] = useState();
   const [loading, setLoading] = useState(true);
   const navigation = useNavigate();
+  const isMobile = useMediaQuery({ maxWidth: 768 });
+  const { t } = useTranslation("look_up_page");
 
   // const toggleService = (index) => {
   //     setExpandedService(expandedService === index ? null : index);
@@ -77,232 +83,243 @@ export default function ViewAppointmentLookUp() {
   }
 
   return (
-    <div className="font-extrabold font-space pb-10 relative flex gap-6 p-6 bg-transparent rounded-lg shadow-md backdrop-blur-sm max-w-screen-2xl">
-      {/* Sidebar */}
-      <div className="w-1/3 bg-transparent text-black p-6 rounded-lg shadow-lg flex flex-col justify-between">
-        <div>
-          <h2 className="text-2xl font-bold text-center mb-4 text-red-700">
-            Appointment Info
-          </h2>
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold border-b pb-2 text-red-700">
-              Customer Details
-            </h3>
-            <p>
-              <FaUser className="inline mr-2 text-red-700" />
-              <strong className="text-red-700">Name:</strong>{" "}
-              {appointment.customerName}
-            </p>
-            <p>
-              <FaPhone className="inline mr-2 text-red-700" />
-              <strong className="text-red-700">Phone:</strong>{" "}
-              {appointment.customerPhoneNumber}
-            </p>
-            <p>
-              <FaEnvelope className="inline mr-2 text-red-700" />
-              <strong className="text-red-700">Email:</strong>{" "}
-              {appointment.customerEmail}
-            </p>
+    <>
+      {isMobile ? (
+        <ViewAppointmentLookUpMobile appointment={appointment} />
+      ) : (
+        <div className="font-extrabold font-space pb-10 relative flex gap-6 p-6 bg-transparent rounded-lg shadow-md backdrop-blur-sm max-w-screen-2xl">
+          {/* Sidebar */}
+          <div className="w-1/3 bg-transparent text-black p-6 rounded-lg shadow-lg flex flex-col justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-center mb-4 text-red-700">
+                {t("look_up_page.view_look_up.appointment_info")}
+              </h2>
+              <div className="space-y-4">
+                <h3 className="text-lg font-semibold border-b pb-2 text-red-700">
+                  {t("look_up_page.view_look_up.customer_details")}
+                </h3>
+                <p>
+                  <FaUser className="inline mr-2 text-red-700" />
+                  <strong className="text-red-700">
+                    {t("look_up_page.view_look_up.name")}:
+                  </strong>{" "}
+                  {appointment.customerName}
+                </p>
+                <p>
+                  <FaPhone className="inline mr-2 text-red-700" />
+                  <strong className="text-red-700">
+                    {t("look_up_page.view_look_up.phone")}:
+                  </strong>{" "}
+                  {appointment.customerPhoneNumber}
+                </p>
+                <p>
+                  <FaEnvelope className="inline mr-2 text-red-700" />
+                  <strong className="text-red-700">
+                    {t("look_up_page.view_look_up.email")}:
+                  </strong>{" "}
+                  {appointment.customerEmail}
+                </p>
 
-            <h3 className="text-lg font-semibold border-b pb-2 mt-4">
-              Car Details
-            </h3>
-            <p>
-              <FaCar className="inline mr-2 text-red-700" />
-              <strong className="text-red-700">License Plate:</strong>{" "}
-              {appointment.carLicensePlateNumber}
-            </p>
-            <p>
-              <FaTag className="inline mr-2 text-red-700" />
-              <strong className="text-red-700">Car Model ID:</strong>{" "}
-              {appointment.carModelId}
-            </p>
-            <p>
-              <FaWrench className="inline mr-2 text-red-700" />
-              <strong className="text-red-700">Mileage:</strong>{" "}
-              {appointment.mileage} km
-            </p>
-          </div>
-        </div>
+                <h3 className="text-lg font-semibold border-b pb-2 mt-4">
+                  {t("look_up_page.view_look_up.car_details")}
+                </h3>
+                <p>
+                  <FaCar className="inline mr-2 text-red-700" />
+                  <strong className="text-red-700">
+                    {t("look_up_page.view_look_up.license_plate")}:
+                  </strong>{" "}
+                  {appointment.carLicensePlateNumber}
+                </p>
 
-        <div className="mt-6">
-          <h3 className="text-lg font-semibold border-b pb-2">
-            Appointment Time
-          </h3>
-          <p>
-            <FaClock className="inline mr-2 text-red-700" />
-            <strong className="text-red-700">Start:</strong>{" "}
-            {appointment.estimatedAppointmentTime}
-          </p>
-          <p>
-            <FaClock className="inline mr-2 text-red-700" />
-            <strong className="text-red-700">End:</strong>{" "}
-            {appointment.estimatedEndTime}
-          </p>
-        </div>
-      </div>
+                <p>
+                  <FaWrench className="inline mr-2 text-red-700" />
+                  <strong className="text-red-700">
+                    {t("look_up_page.view_look_up.mileage")}:
+                  </strong>{" "}
+                  {appointment.mileage} {t("look_up_page.view_look_up.km")}
+                </p>
+              </div>
+            </div>
 
-      {/* Main Content */}
-      <div className="w-2/3 space-y-6 bg-transparent">
-        <h2 className="text-3xl font-bold text-red-700 text-center">
-          Service Details
-        </h2>
-
-        {/* Appointment Product Details */}
-        <div className="grid grid-cols-2 gap-6 bg-transparent">
-          {/* Appointment Services (Danh sách dịch vụ) */}
-          <div className="bg-transparent">
-            <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-red-700">
-              Appointment Services
-            </h3>
-            <div className="space-y-4 bg-transparent">
-              {appointment.appointmentDetails.map((detail, index) => (
-                <div
-                  key={index}
-                  className={`p-4 border rounded-lg shadow-md cursor-pointer ${
-                    selectedService === index ? "bg-blue-100" : "bg-white/10"
-                  }`}
-                  onClick={() => setSelectedService(index)}
-                >
-                  <h3 className="text-lg font-semibold flex items-center">
-                    <FaTools className="mr-2" /> {detail.serviceName} (
-                    {detail.appointmentReplacementParts.length} parts)
-                  </h3>
-                </div>
-              ))}
+            <div className="mt-6">
+              <h3 className="text-lg font-semibold border-b pb-2">
+                {t("look_up_page.view_look_up.appointment_time")}
+              </h3>
+              <p>
+                <FaClock className="inline mr-2 text-red-700" />
+                <strong className="text-red-700">
+                  {" "}
+                  {t("look_up_page.view_look_up.start")}:
+                </strong>{" "}
+                {appointment.estimatedAppointmentTime}
+              </p>
+              <p>
+                <FaClock className="inline mr-2 text-red-700" />
+                <strong className="text-red-700">
+                  {t("look_up_page.view_look_up.end")}:
+                </strong>{" "}
+                {appointment.estimatedEndTime}
+              </p>
             </div>
           </div>
 
-          {/* Service Details (Chi tiết dịch vụ) */}
-          <div>
-            {selectedService !== null && (
-              <div className="p-6 border rounded-lg shadow-md bg-transparent relative">
-                <button
-                  className="absolute top-2 right-2 text-red-700 hover:text-red-800"
-                  onClick={() => setSelectedService(null)}
-                >
-                  <FaTimes />
-                </button>
+          {/* Main Content */}
+          <div className="w-2/3 space-y-6 bg-transparent">
+            <h2 className="text-3xl font-bold text-red-700 text-center">
+              {t("look_up_page.view_look_up.service_details")}:
+            </h2>
+
+            {/* Appointment Product Details */}
+            <div className="grid grid-cols-2 gap-6 bg-transparent">
+              {/* Appointment Services (Danh sách dịch vụ) */}
+              <div className="bg-transparent">
                 <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-red-700">
-                  Service Details
+                  {t("look_up_page.view_look_up.appointment_services")}:
                 </h3>
-                <p>
-                  <strong>Service:</strong>{" "}
-                  {appointment.appointmentDetails[selectedService].serviceName}
-                </p>
-                <p>
-                  <strong>Estimated Hours:</strong>{" "}
-                  {
-                    appointment.appointmentDetails[selectedService]
-                      .estimatedHours
-                  }
-                </p>
-                <p>
-                  <strong>Price:</strong> $
-                  {appointment.appointmentDetails[selectedService].price}
-                </p>
-                <p>
-                  <strong>Status:</strong>{" "}
-                  {appointment.appointmentDetails[selectedService].status}
-                </p>
-
-                {/* Replacement Parts */}
-                <h4 className="mt-4 font-semibold ">REPLACEMENT PARTS :</h4>
-                <ul className="mt-2 space-y-2">
-                  {appointment.appointmentDetails[
-                    selectedService
-                  ].appointmentReplacementParts.map((part, i) => (
-                    <li key={i} className="bg-transparent p-2 rounded-lg">
-                      <span>- {part.productName}</span> - {part.quantity} pcs -
-                      <span> ${part.productPrice}</span>
-                    </li>
+                <div className="space-y-4 bg-transparent">
+                  {appointment.appointmentDetails.map((detail, index) => (
+                    <div
+                      key={index}
+                      className={`p-4 border rounded-lg shadow-md cursor-pointer ${
+                        selectedService === index
+                          ? "bg-blue-100"
+                          : "bg-white/10"
+                      }`}
+                      onClick={() => setSelectedService(index)}
+                    >
+                      <h3 className="text-lg font-semibold flex items-center">
+                        <FaTools className="mr-2" /> {detail.serviceName} (
+                        {detail.appointmentReplacementParts.length}{" "}
+                        {t("look_up_page.view_look_up.part")}:)
+                      </h3>
+                    </div>
                   ))}
-                </ul>
+                </div>
+              </div>
 
-                {/* Car conditions image */}
-                <CarConditionImages
-                  appointmentDetails={appointment.appointmentDetails}
-                  selectedService={selectedService}
-                />
-                {/* <h4 className="mt-4 font-semibold">Car Conditions Image :</h4>
+              {/* Service Details (Chi tiết dịch vụ) */}
+              <div>
+                {selectedService !== null && (
+                  <div className="p-6 border rounded-lg shadow-md bg-transparent relative">
+                    <button
+                      className="absolute top-2 right-2 text-red-700 hover:text-red-800"
+                      onClick={() => setSelectedService(null)}
+                    >
+                      <FaTimes />
+                    </button>
+                    <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-red-700">
+                      {t("look_up_page.view_look_up.service_details")}
+                    </h3>
+                    <p>
+                      <strong>
+                        {" "}
+                        {t("look_up_page.view_look_up.service")}:
+                      </strong>{" "}
+                      {
+                        appointment.appointmentDetails[selectedService]
+                          .serviceName
+                      }
+                    </p>
+                    <p>
+                      <strong>
+                        {t("look_up_page.view_look_up.estimated_hours")}:
+                      </strong>{" "}
+                      {
+                        appointment.appointmentDetails[selectedService]
+                          .estimatedHours
+                      }
+                    </p>
+                    <p>
+                      <strong> {t("look_up_page.view_look_up.price")}:</strong>{" "}
+                      {formatVietnameseCurrency(
+                        appointment.appointmentDetails[selectedService].price
+                      )}
+                    </p>
+                    <p>
+                      <strong> {t("look_up_page.view_look_up.status")}:</strong>{" "}
+                      {appointment.appointmentDetails[selectedService].status}
+                    </p>
 
-                {appointment.appointmentDetails[selectedService]
-                  ?.carConditionImages && (
-                  <div className="space-y-6">
-                    {["Before", "After"].map((stage) => {
-                      const stageImages = appointment.appointmentDetails[
+                    {/* Replacement Parts */}
+                    <h4 className="mt-4 font-semibold ">
+                      {t("look_up_page.view_look_up.replacement_parts")} :
+                    </h4>
+                    <ul className="mt-2 space-y-2">
+                      {appointment.appointmentDetails[
                         selectedService
-                      ].carConditionImages.filter(
-                        (img) => img.conditionStage === stage
-                      );
+                      ].appointmentReplacementParts.map((part, i) => (
+                        <li key={i} className="bg-transparent p-2 rounded-lg">
+                          <span>- {part.productName}</span> - {part.quantity}{" "}
+                          {t("look_up_page.view_look_up.pcs")} -
+                          <span>
+                            {" "}
+                            {formatVietnameseCurrency(part.productPrice)}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
 
-                      if (stageImages.length === 0) return null;
-
-                      return (
-                        <div key={stage}>
-                          <h5 className="text-lg font-semibold text-gray-700">
-                            {stage} Condition:
-                          </h5>
-                          <div className="grid grid-cols-5 gap-4">
-                            {stageImages.map((image, index) => (
-                              <div key={index} className="relative group">
-                                <img
-                                  src={image.imageLink}
-                                  alt={`Car Condition ${stage} - ${index + 1}`}
-                                  className="w-32 h-32 object-cover rounded-lg shadow-md transition-transform duration-300 group-hover:scale-105"
-                                />
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      );
-                    })}
+                    {/* Car conditions image */}
+                    <CarConditionImages
+                      appointmentDetails={appointment.appointmentDetails}
+                      selectedService={selectedService}
+                    />
                   </div>
-                )} */}
+                )}
+              </div>
+            </div>
+
+            {/* Package Details */}
+            {appointment.appointmentDetailPackages.length > 0 && (
+              <div className="bg-transparent">
+                <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-red-700">
+                  {t("look_up_page.view_look_up.service_packages")}
+                </h3>
+                <div className="grid grid-cols-2 gap-6 bg-transparent">
+                  {(showAllPackages
+                    ? appointment.appointmentDetailPackages
+                    : appointment.appointmentDetailPackages.slice(0, 2)
+                  ).map((pkg, index) => (
+                    <div
+                      key={index}
+                      className="p-4 border rounded-lg shadow-md"
+                    >
+                      <h4 className="text-lg font-semibold mb-2">
+                        {pkg.packageName}
+                      </h4>
+                      <p>
+                        <strong>
+                          {" "}
+                          {t("look_up_page.view_look_up.price")}:
+                        </strong>{" "}
+                        {formatVietnameseCurrency(pkg.packagePrice)}
+                      </p>
+                      <p>
+                        <strong>
+                          {t("look_up_page.view_look_up.status")}:
+                        </strong>{" "}
+                        {pkg.status}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                {appointment.appointmentDetailPackages.length > 2 && (
+                  <button
+                    className="w-full text-blue-600 font-semibold mt-2 flex items-center justify-center gap-2"
+                    onClick={() => setShowAllPackages(!showAllPackages)}
+                  >
+                    {showAllPackages ? (
+                      <FaChevronUp className="text-lg text-blue-600 animate-bounce transition-transform duration-300 ease-in-out" />
+                    ) : (
+                      <FaChevronDown className="text-lg text-blue-600 animate-bounce transition-transform duration-300 ease-in-out" />
+                    )}
+                  </button>
+                )}
               </div>
             )}
           </div>
         </div>
-
-        {/* Package Details */}
-        {appointment.appointmentDetailPackages.length > 0 && (
-          <div className="bg-transparent">
-            <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-red-700">
-              Service Packages
-            </h3>
-            <div className="grid grid-cols-2 gap-6 bg-transparent">
-              {(showAllPackages
-                ? appointment.appointmentDetailPackages
-                : appointment.appointmentDetailPackages.slice(0, 2)
-              ).map((pkg, index) => (
-                <div key={index} className="p-4 border rounded-lg shadow-md">
-                  <h4 className="text-lg font-semibold mb-2">
-                    {pkg.PackageName}
-                  </h4>
-                  <p>
-                    <strong>Price:</strong> ${pkg.PackagePrice}
-                  </p>
-                  <p>
-                    <strong>Status:</strong> {pkg.Status}
-                  </p>
-                </div>
-              ))}
-            </div>
-            {appointment.appointmentDetailPackages.length > 2 && (
-              <button
-                className="w-full text-blue-600 font-semibold mt-2 flex items-center justify-center gap-2"
-                onClick={() => setShowAllPackages(!showAllPackages)}
-              >
-                {showAllPackages ? (
-                  <FaChevronUp className="text-lg text-blue-600 animate-bounce transition-transform duration-300 ease-in-out" />
-                ) : (
-                  <FaChevronDown className="text-lg text-blue-600 animate-bounce transition-transform duration-300 ease-in-out" />
-                )}
-              </button>
-            )}
-          </div>
-        )}
-      </div>
-    </div>
+      )}
+    </>
   );
 }

@@ -18,7 +18,7 @@ export default function ProductCard({ product, handleSelectProduct }) {
     >
       {/* Ảnh sản phẩm */}
       <img
-        src={product.imageLink?.[0] || "/placeholder.jpg"}
+        src={product.productImage?.[0] || "/placeholder.jpg"}
         alt={product.productName}
         className="w-full h-48 object-cover rounded-lg"
       />

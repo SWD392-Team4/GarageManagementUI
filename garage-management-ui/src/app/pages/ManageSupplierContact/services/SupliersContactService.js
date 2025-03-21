@@ -81,6 +81,7 @@ export const updateSupplierContact = async (supplierContactId, updatedData) => {
     userService.showToast(200, "Update Supplier contact successfull");
     return response;
   } catch (error) {
+    userService.showToast(400, error.message);
     console.error("Error : ", error.message);
     // userService.showToast(200, "Update Supplier contact fail")
   }

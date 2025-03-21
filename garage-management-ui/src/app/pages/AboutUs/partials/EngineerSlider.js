@@ -53,11 +53,15 @@ const EngineerSlider = () => {
   };
   const { t } = useTranslation("about_engineer");
   return (
-    <section className="py-12 bg-gray-100">
+    <section className="py-12 bg-gray-100 h-screen">
       <div className="container mx-auto text-center">
         <div className="mb-8">
-          <span className="text-lg text-red-500 font-semibold">{t("about_engineer.engineer")}</span>
-          <h2 className="text-3xl font-bold text-gray-800">{t("about_engineer.meet_experts")}</h2>
+          <span className="text-lg text-red-500 font-semibold">
+            {t("about_engineer.engineer")}
+          </span>
+          <h2 className="text-3xl font-bold text-gray-800">
+            {t("about_engineer.meet_experts")}
+          </h2>
         </div>
 
         <Slider {...settings}>
@@ -69,11 +73,14 @@ const EngineerSlider = () => {
                   alt={engineer.name}
                   className="w-full h-80 object-cover"
                 />
-                <div className="absolute inset-0 bg-white w-2/3 shadow-lg p-4  mx-auto mt-[-35px] relative z-10 transition-all duration-500 group-hover:bg-red-600 group-hover:w-full group-hover:h-full">
+                <div className="absolute inset-0 bg-white w-2/3 shadow-lg p-4  mx-auto mt-[-35px]  z-10 transition-all duration-500 group-hover:bg-red-600 group-hover:w-full group-hover:h-full">
                   <h3 className="text-xl font-semibold text-gray-800 transition-all duration-500 group-hover:text-white">
                     {engineer.name}
                   </h3>
-                  <span className="block text-base text-gray-500 transition-all duration-500 group-hover:text-white"> {t(`about_engineer.${engineer.role}`)}</span>
+                  <span className="block text-base text-gray-500 transition-all duration-500 group-hover:text-white">
+                    {" "}
+                    {t(`about_engineer.${engineer.role}`)}
+                  </span>
                 </div>
               </div>
             </div>

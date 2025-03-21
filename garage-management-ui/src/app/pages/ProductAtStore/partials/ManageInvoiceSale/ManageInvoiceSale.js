@@ -9,8 +9,11 @@ import BaseTable from "../../../../components/BaseTable/BaseTable";
 import SearchInvoicePage from "./SearchInvoicePage";
 import { useTranslation } from "react-i18next";
 import ViewSoldProductsModal from "./ViewSoldProductsModal";
+import { AppointmentSignify } from "../../../AdminManageAppoinment/services/store/AppointmentSignify";
 
 export default function ManageInvoiceSale() {
+  const signifyInformation = AppointmentSignify.use();
+
   const { t, i18n } = useTranslation("product_at_store");
   const [pagination, setPagination] = useState({
     currentPage: 1,
@@ -54,7 +57,7 @@ export default function ManageInvoiceSale() {
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, [fetchData, AppointmentSignify.value.garaCurrent]);
 
   // Xử lý tìm kiếm thương hiệu
   const handleSearch = (params) => {

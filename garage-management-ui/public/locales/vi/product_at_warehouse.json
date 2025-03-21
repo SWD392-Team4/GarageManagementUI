@@ -38,6 +38,16 @@
       "description": "Mô tả sản phẩm",
       "no_description": "Chưa có mô tả.",
       "loading": "Đang tải..."
+    },
+    "table": {
+      "id": "ID",
+      "invoiceCode": "Mã hóa đơn",
+      "userName": "Tên người dùng",
+      "contactPersonName": "Người liên hệ",
+      "totalPrice": "Tổng giá trị",
+      "quantity": "Số lượng",
+      "status": "Trạng thái",
+      "createdAt": "Ngày tạo"
     }
   }
 }

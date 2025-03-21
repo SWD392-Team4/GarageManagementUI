@@ -1,6 +1,26 @@
 {
-    "manage_invoice_sale": {
-        "title": "Manage Invoice Sale",
-        "create": "Create Invoice"
+  "manage_invoice_sale": {
+    "title": "Manage Invoice Sale",
+    "create": "Create Invoice",
+    "form_view_modal": {
+      "invoiceTitle": "Invoice",
+      "paymentInvoice": "Invoice Payment",
+      "invoiceCode": "Invoice Code",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "customer": "Customer",
+      "phone": "Phone",
+      "email": "Email",
+      "productDetails": "Product Details",
+      "productName": "Product Name",
+      "quantity": "Quantity",
+      "totalPrice": "Total Price",
+      "address": "Address",
+      "thankYou": "Thank you for your trust in our service!",
+      "close": "Close",
+      "seller": "Người bán",
+      "sellerPhone": "SĐT Người bán",
+      "sellerEmail": "Email Người bán"
     }
+  }
 }

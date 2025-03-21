@@ -7,7 +7,6 @@ export default function ViewSoldProductsModal({
   invoiceDetails,
 }) {
   const { t } = useTranslation("product_at_store");
-  console.log("check details: ", invoiceDetails);
 
   if (!open) return null;
 

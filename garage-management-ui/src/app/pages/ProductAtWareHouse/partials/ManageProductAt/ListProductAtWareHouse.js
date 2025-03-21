@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useEffect, useRef, useState } from "react";
 import {
   getProductByWareHouse,
   getProductDetails,
@@ -9,35 +8,36 @@ import ProductSidebar from "../component/ProductSidebar";
 import SearchProduct from "../component/SearchProduct";
 import BarcodeScannerComponent from "react-qr-barcode-scanner";
 import { useMediaQuery } from "react-responsive";
+import { AppointmentSignify } from "../../../AdminManageAppoinment/services/store/AppointmentSignify";
 
-export default function ListProductAtWareHouse({ warehouseId }) {
-  console.log("check warehouse id : ", warehouseId);
-  const { t } = useTranslation("product_at_warehouse");
+export default function ListProductAtWareHouse() {
+  const sAppointmentSignify = AppointmentSignify.use();
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchParams, setSearchParams] = useState(null);
-  const [barcodeInput, setBarcodeInput] = useState("");
   const [isScanning, setIsScanning] = useState(false);
+
+  //quan ly render scan
+  const barcodeBufferRef = useRef("");
+  const lastKeyPressTimeRef = useRef(0);
 
   // Check moblie
   const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const fetchListProduct = async () => {
-    if (!warehouseId) return;
-    const response = await getProductByWareHouse(
-      warehouseId,
-      searchParams || {}
-    );
-    console.log("check response : ", response);
-    setProducts(response.data.value || []);
+    const response = await getProductByWareHouse(searchParams || {});
+    setProducts(response?.data?.value || []);
+    console.log("Check set Product: ", products);
   };
 
   useEffect(() => {
     fetchListProduct();
+
+    //chuyen gara thi tat
     setIsSidebarOpen(false);
     setSelectedProduct(null);
-  }, [warehouseId, searchParams]);
+  }, [AppointmentSignify.value.garaCurrent, searchParams]);
 
   // Khi click vào sản phẩm -> Fetch chi tiết sản phẩm và mở sidebar
   const handleSelectProduct = async (productId) => {
@@ -63,36 +63,69 @@ export default function ListProductAtWareHouse({ warehouseId }) {
 
   // ✅ Lắng nghe sự kiện quét barcode
   useEffect(() => {
+    if (selectedProduct) {
+      setIsSidebarOpen(true);
+    }
+  }, [selectedProduct]);
+
+  useEffect(() => {
     if (!isMobile) {
+      let timeout;
+
       const handleBarcodeScan = async (event) => {
-        if (event.key === "Enter" && barcodeInput.trim() !== "") {
-          console.log("Barcode scanned:", barcodeInput);
-          await fetchProductByBarcode(barcodeInput);
-          setBarcodeInput("");
+        const currentTime = new Date().getTime();
+
+        // Nếu khoảng cách giữa hai lần nhập > 100ms, reset buffer (nhập tay)
+        if (currentTime - lastKeyPressTimeRef.current > 100) {
+          barcodeBufferRef.current = event.key;
         } else {
-          setBarcodeInput((prev) => prev + event.key);
+          barcodeBufferRef.current += event.key;
         }
+
+        lastKeyPressTimeRef.current = currentTime;
+
+        // Nếu nhấn Enter, xử lý barcode
+        if (event.key === "Enter") {
+          const barcode = barcodeBufferRef.current
+            .trim()
+            .replace(/[\r\n]+|Enter/g, "");
+          if (barcode !== "") {
+            console.log("Barcode scanned:", barcode);
+            const response = await getProductAtGarageByBarCode(barcode);
+            if (response.data.value) {
+              setSelectedProduct(response.data.value);
+              setIsSidebarOpen(true);
+            }
+          }
+          barcodeBufferRef.current = ""; // Reset bộ đệm sau khi xử lý
+        }
+
+        // Xóa bộ đệm nếu không có ký tự mới trong 500ms
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+          barcodeBufferRef.current = "";
+        }, 500);
       };
 
       window.addEventListener("keydown", handleBarcodeScan);
 
       return () => {
         window.removeEventListener("keydown", handleBarcodeScan);
+        clearTimeout(timeout);
       };
     }
-  }, [barcodeInput]);
+  }, []);
 
   // ✅ API lấy sản phẩm theo Barcode
   const fetchProductByBarcode = async (barcode) => {
     try {
-      const response = await getProductByWareHouse(warehouseId, {
+      const response = await getProductAtWarehouseByBarCode({
         ProductBarcode: barcode,
       });
       setSelectedProduct(response.data.value);
       setIsSidebarOpen(true);
     } catch (error) {
       console.error("Lỗi khi tìm kiếm sản phẩm:", error);
-      toast.error("Lỗi khi tìm kiếm sản phẩm.");
     }
   };
 

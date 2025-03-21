@@ -1,29 +1,31 @@
 {
-    "manage_supplier_contact": {
-        "title": "Manage Supplier Contact",
-        "create": "Create Supplier Contact",
-        "id": "ID",
-        "contactPersonName": "Contact Person Name",
-        "contactPosition": "Contact Position",
-        "contactPhoneNumber": "Contact Phone Number",
-        "contactEmail": "Contact Email",
-        "createdAt": "Created At",
-        "updatedAt": "Updated At",
-        "edit": "Edit Supplier Contact",
-        "search_placeholder": "Enter search keyword...",
-        "search_status_enum": {
-            "choose": "Choose status",
-            "active": "Active",
-            "inactive": "Inactive"
-        },
-        "clear_filters": "Clear Filters",
-        "search": "Search",
-        "status": "Status",
-        "cancel": "Cancel",
-        "supplierId": "Supplier ID",
-        "select_supplier": "Select Supplier",
-        "required": "Required",
-        "creating": "Creating",
-        "save": "Save"
-    }
+  "manage_supplier_contact": {
+    "title": "Manage Supplier Contact",
+    "create": "Create Supplier Contact",
+    "id": "ID",
+    "contactPersonName": "Contact Person Name",
+    "contactPosition": "Contact Position",
+    "contactPhoneNumber": "Contact Phone Number",
+    "contactEmail": "Contact Email",
+    "createdAt": "Created At",
+    "updatedAt": "Updated At",
+    "edit": "Edit Supplier Contact",
+    "search_placeholder": "Enter search keyword...",
+    "search_status_enum": {
+      "choose": "Choose status",
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "clear_filters": "Clear Filters",
+    "search": "Search",
+    "status": "Status",
+    "cancel": "Cancel",
+    "supplierId": "Supplier ID",
+    "select_supplier": "Select Supplier",
+    "required": "Required",
+    "creating": "Creating",
+    "save": "Save",
+    "inactive": "Inactive",
+    "active": "Active"
+  }
 }
