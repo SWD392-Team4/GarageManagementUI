@@ -73,7 +73,7 @@ const EngineerSlider = () => {
                   alt={engineer.name}
                   className="w-full h-80 object-cover"
                 />
-                <div className="absolute inset-0 bg-white w-2/3 shadow-lg p-4  mx-auto mt-[-35px]  z-10 transition-all duration-500 group-hover:bg-red-600 group-hover:w-full group-hover:h-full">
+                <div className=" inset-0 bg-white w-2/3 shadow-lg p-4  mx-auto mt-[-35px] relative z-10 transition-all duration-500 group-hover:bg-red-600 group-hover:w-full group-hover:h-full">
                   <h3 className="text-xl font-semibold text-gray-800 transition-all duration-500 group-hover:text-white">
                     {engineer.name}
                   </h3>
