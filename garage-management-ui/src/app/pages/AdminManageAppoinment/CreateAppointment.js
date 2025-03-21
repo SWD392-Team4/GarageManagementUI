@@ -42,7 +42,7 @@ export default function CreateAppointment() {
     },
   });
   const spackage = packagePick.use();
-
+  const [loading, setLoading] = useState(false);
   // State chứa dữ liệu cho dropdown
   const [carModels, setCarModels] = useState([]);
   const [carModelSelectId, setCarModelSelectId] = useState("");
@@ -284,7 +284,10 @@ export default function CreateAppointment() {
     };
 
     try {
+      setLoading(true);
       await createAppointmentApi(payload);
+      setLoading(false);
+
       reset();
       setServices([]);
       setPackages([]);
@@ -794,9 +797,12 @@ export default function CreateAppointment() {
         <ListServiceinPackage />
         <button
           type="submit"
+          disabled={loading}
           className="bg-green-500 text-white p-2 rounded mt-4"
         >
-          {t("buttons.createAppointment", "Tạo Appointment")}
+          {loading
+            ? t("common.loading")
+            : t("buttons.createAppointment", "Tạo Appointment")}
         </button>
       </form>
     </div>

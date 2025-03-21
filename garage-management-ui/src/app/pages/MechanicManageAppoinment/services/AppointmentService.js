@@ -41,7 +41,12 @@ export const getAllAppointment = async (status) => {
   const query = `/api/workplaces/6760cbb7-f1fa-445f-a175-97e3f060c861/appointments?${queryParams}`;
 
   try {
-    const response = await userService.sendAjax(query, "GET", null, true);
+    const response = await userService.sendAjax(
+      "/api/users/my-schedule",
+      "GET",
+      null,
+      true
+    );
     response.data.value = response.data.value.map((pre) => ({
       ...pre,
       estimatedAppointmentTime: formatDate(pre.estimatedAppointmentTime),

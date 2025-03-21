@@ -23,6 +23,11 @@
     "selectPackage": "Chọn Package",
     "enterCarLicensePlateNumber": "Nhập biển số xe"
   },
+  "common": {
+    "cancel": "Hủy",
+    "loading": "Đang xử lý...",
+    "confirm": "Xác nhận"
+  },
   "error2": {
     "required_carModelId": "Vui lòng chọn model xe",
     "required_mileage": "Vui lòng nhập số km",

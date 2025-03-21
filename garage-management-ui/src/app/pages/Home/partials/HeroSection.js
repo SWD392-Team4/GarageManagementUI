@@ -59,13 +59,13 @@ const HeroSection = () => {
                     {slide.description}
                   </p>
                   <div className="mt-16">
-                    <a
-                      href="appointment.html"
+                    <Link
+                      to="/booking"
                       className="px-14 py-6 mt-6 bg-red-600 text-white font-title text-xl uppercase rounded-sm shadow-lg 
                transition-all transform hover:-translate-y-2 hover:bg-white hover:text-black hover:shadow-xl duration-300"
                     >
                       {t("appointment")}
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

@@ -4,20 +4,20 @@ import ServiceTasks from "./ServiceTasks";
 function AppointmentDetailModal({ service, onClose, onUpdate }) {
   // Khởi tạo state với dữ liệu từ service (đảm bảo imagesBefore và imagesAfter là mảng)
   const [serviceData, setServiceData] = useState({
-    ...service,
-    imagesBefore: service.imagesBefore || [],
-    imagesAfter: service.imagesAfter || [],
+    ...service.appointmentDetail,
+    imagesBefore: service.appointmentDetail.imagesBefore || [],
+    imagesAfter: service.appointmentDetail.imagesAfter || [],
   });
 
   useEffect(() => {
     if (service) {
       setServiceData({
-        ...service,
-        imagesBefore: service.imagesBefore || [],
-        imagesAfter: service.imagesAfter || [],
+        ...service.appointmentDetail,
+        imagesBefore: service.appointmentDetail.imagesBefore || [],
+        imagesAfter: service.appointmentDetail.imagesAfter || [],
       });
     }
-  }, [service]);
+  }, [service.appointmentDetail]);
 
   const handleTaskStatusChange = (taskId, newStatus) => {
     setServiceData((prev) => ({
@@ -75,7 +75,7 @@ function AppointmentDetailModal({ service, onClose, onUpdate }) {
           <ServiceTasks
             tasks={serviceData.appointmentReplacementParts}
             onTaskStatusChange={handleTaskStatusChange}
-            serviceDetailId={serviceData.id}
+            serviceDetailId={service.appointmentDetailId}
           />
         )}
         {/* Phần ảnh */}

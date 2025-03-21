@@ -23,6 +23,12 @@
     "selectPackage": "Select Package",
     "enterCarLicensePlateNumber": "Enter license plate number"
   },
+
+  "common": {
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "confirm": "Confirm"
+  },
   "error2": {
     "required_carModelId": "Please select a car model",
     "required_mileage": "Please enter mileage",

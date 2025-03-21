@@ -10,9 +10,147 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useTranslation } from "react-i18next";
 import data from "../../Data/services1.json";
+import { useEffect, useState } from "react";
+import UserService from "../../../../hooks/services/UserService";
+
+import InspectImage from "../../../../assets/services/inspect.jpg";
+import ReplaceImage from "../../../../assets/services/replace.jpg";
+import LubricateImage from "../../../../assets/services/lubricate.jpg";
+import AlignImage from "../../../../assets/services/align.jpg";
+import RefillImage from "../../../../assets/services/refill.jpg";
+import RepairImage from "../../../../assets/services/repair.jpg";
+import CleanImage from "../../../../assets/services/clean.jpg";
+import UpgradeImage from "../../../../assets/services/upgrade.jpg";
+import RestoreImage from "../../../../assets/services/restore.jpg";
+import UpdateImage from "../../../../assets/services/update.jpg";
+import PolishImage from "../../../../assets/services/polish.jpg";
+import ProtectImage from "../../../../assets/services/protect.jpg";
+import DeodorizeImage from "../../../../assets/services/deodorize.jpg";
+import ConditionImage from "../../../../assets/services/condition.jpg";
+import RemoveImage from "../../../../assets/services/remove.jpg";
+import RestoreLightingImage from "../../../../assets/services/restore-lighting.jpg";
+import {
+  FaSearch,
+  FaSyncAlt,
+  FaOilCan,
+  FaRuler,
+  FaBolt,
+  FaTools,
+  FaSoap,
+  FaRocket,
+  FaRedo,
+  FaSave,
+  FaStar,
+  FaShieldAlt,
+  FaWind,
+  FaTint,
+  FaTrash,
+  FaLightbulb,
+} from "react-icons/fa";
+const services = [
+  {
+    image: InspectImage,
+    icon: <FaSearch className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "inspect",
+  }, // Kiểm tra
+  {
+    image: ReplaceImage,
+    icon: <FaSyncAlt className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "replace",
+  }, // Thay thế
+  {
+    image: LubricateImage,
+    icon: <FaOilCan className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "lubricate",
+  }, // Bôi trơn
+  {
+    image: AlignImage,
+    icon: <FaRuler className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "align",
+  }, // Căn chỉnh
+  {
+    image: RefillImage,
+    icon: <FaBolt className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "refill",
+  }, // Nạp
+  {
+    image: RepairImage,
+    icon: <FaTools className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "repair",
+  }, // Sửa chữa
+  {
+    image: CleanImage,
+    icon: <FaSoap className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "clean",
+  }, // Làm sạch
+  {
+    image: UpgradeImage,
+    icon: <FaRocket className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "upgrade",
+  }, // Nâng cấp
+  {
+    image: RestoreImage,
+    icon: <FaRedo className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "restore",
+  }, // Phục hồi
+  {
+    image: UpdateImage,
+    icon: <FaSave className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "update",
+  }, // Cập nhật phần mềm
+  {
+    image: PolishImage,
+    icon: <FaStar className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "polish",
+  }, // Đánh bóng
+  {
+    image: ProtectImage,
+    icon: <FaShieldAlt className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "protect",
+  }, // Bảo vệ
+  {
+    image: DeodorizeImage,
+    icon: <FaWind className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "deodorize",
+  }, // Khử mùi
+  {
+    image: ConditionImage,
+    icon: <FaTint className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "condition",
+  }, // Dưỡng
+  {
+    image: RemoveImage,
+    icon: <FaTrash className="text-white w-8 md:w-12 h-8 md:h-12" />,
+    key: "remove",
+  }, // Loại bỏ
+  {
+    image: RestoreLightingImage,
+    icon: <FaLightbulb />,
+    key: "restoreLighting",
+  }, // Phục hồi ánh sáng
+];
 
 const Services1 = () => {
   const { t } = useTranslation("ver1");
+  const [service, setService] = useState(data);
+  const useService = new UserService();
+  const getService = async () => {
+    try {
+      const response = await useService.sendAjax(
+        `/api/services/random?number=5`,
+        "GET",
+        null,
+        false
+      );
+      setService(response.data);
+    } catch (error) {
+      console.error("Error fetching customer: ", error);
+      return [];
+    }
+  };
+  useEffect(() => {
+    getService();
+  }, []);
   return (
     <section className="bg-gray-50 relative w-full min-h-screen overflow-hidden">
       {/* Phần Header */}
@@ -55,38 +193,55 @@ const Services1 = () => {
             }}
             className="overflow-hidden"
           >
-            {data.map((item, index) => (
-              <SwiperSlide key={index} className="p-3 md:p-4 bg-gray-50">
-                <div className="relative flex flex-col items-center">
-                  {/* Ảnh dịch vụ */}
-                  <img
-                    src={item.img}
-                    alt="Service"
-                    className="w-80 relative z-10 top-10 md:w-96 h-48 md:h-56 object-cover border-b-4 border-rose-700 "
-                  />
+            {service.map((item, index) => {
+              const matchAction = services.find(
+                (s) => s.key === item.action.toLowerCase()
+              );
 
-                  {/* Nội dung */}
-                  <div className="p-4 pt-14 shadow-lg bg-white text-center border border-transparent hover:border-rose-700 rounded-lg transition-all group duration-300 relative w-full">
-                    {/* Icon */}
-                    <div className="absolute -top-10 z-20 left-1/2 transform -translate-x-1/2 w-16 md:w-28 h-16 md:h-28 flex items-center justify-center bg-blue-950 group-hover:bg-rose-700 transition-colors duration-200">
-                      <GiMechanicGarage className="text-white w-8 md:w-12 h-8 md:h-12" />
+              return (
+                <SwiperSlide key={index} className="p-3 md:p-4 bg-gray-50">
+                  <div className="relative flex flex-col items-center">
+                    <img
+                      src={
+                        item.imageLink && item.imageLink.length > 0
+                          ? item.imageLink[0]
+                          : matchAction
+                          ? matchAction.image
+                          : "/assets/img/service_img_1.jpg"
+                      }
+                      alt={item.action}
+                      className="w-80 relative z-10 top-10 md:w-96 h-48 md:h-56 object-cover border-b-4 border-rose-700"
+                    />
+
+                    {/* Nội dung */}
+                    <div className="p-4 pt-14 shadow-lg bg-white text-center border border-transparent hover:border-rose-700 rounded-lg transition-all group duration-300 relative w-full">
+                      {/* Icon - sử dụng icon từ matchAction nếu có */}
+                      <div className="absolute -top-10 z-20 left-1/2 transform -translate-x-1/2 w-16 md:w-28 h-16 md:h-28 flex items-center justify-center bg-blue-950 group-hover:bg-rose-700 transition-colors duration-200">
+                        {matchAction ? (
+                          matchAction.icon
+                        ) : (
+                          <GiMechanicGarage className="text-white w-8 md:w-12 h-8 md:h-12" />
+                        )}
+                      </div>
+                      <h3 className="text-xl md:text-3xl font-semibold text-gray-800 mt-6 md:mt-8 hover:text-rose-700 duration-300 transition-colors">
+                        <Link to={`/services/detail/${item.id}`}>
+                          {item.serviceName}
+                        </Link>
+                      </h3>
+                      <p className="text-sm md:text-lg font-normal mx-4 md:mx-10 text-gray-600 mt-2">
+                        {item.description}
+                      </p>
+                      <Link
+                        to={`/services/detail/${item.id}`}
+                        className="inline-flex items-center text-blue-500 font-semibold uppercase text-sm md:text-lg mt-3 hover:text-rose-700 duration-300 transition-colors"
+                      >
+                        READ MORE
+                      </Link>
                     </div>
-                    <h3 className="text-xl md:text-3xl font-semibold text-gray-800 mt-6 md:mt-8 hover:text-rose-700 duration-300 transition-colors">
-                      <Link to={item.btnLink}>{item.title}</Link>
-                    </h3>
-                    <p className="text-sm md:text-lg font-normal mx-4 md:mx-10 text-gray-600 mt-2">
-                      {item.desc}
-                    </p>
-                    <Link
-                      to={item.btnLink}
-                      className="inline-flex items-center text-blue-500 font-semibold uppercase text-sm md:text-lg mt-3 hover:text-rose-700 duration-300 transition-colors"
-                    >
-                      {item.btnText}
-                    </Link>
                   </div>
-                </div>
-              </SwiperSlide>
-            ))}
+                </SwiperSlide>
+              );
+            })}
           </Swiper>
 
           {/* Nút điều hướng */}

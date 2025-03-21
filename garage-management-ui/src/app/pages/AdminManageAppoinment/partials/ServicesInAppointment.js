@@ -12,6 +12,12 @@ import { formatDate } from "../schemas/appointmentSchema";
 import { currentAppointment } from "../services/store/AppointmentSignify";
 import { sServicesInAppointment } from "../services/store/FilterStore";
 import CancelDetailAppointment from "../models/CancelDetailAppointment";
+import {
+  MdOutlineAssignmentInd,
+  MdOutlineAssignmentLate,
+} from "react-icons/md";
+import AssginEmployee from "../models/AssginEmployee";
+import UnAssginEmployee from "./UnAssginEmployee";
 
 export default function ServicesInAppointment() {
   const { t, i18n } = useTranslation("appoinment-admin");
@@ -23,12 +29,15 @@ export default function ServicesInAppointment() {
     page: 1,
     pageSize: 10,
   });
+
   const sAppointment = currentAppointment.use();
   const [products, setProducts] = useState(null);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [isUpdateModalOpen1, setIsUpdateModalOpen1] = useState(false);
-  const [isUpdateModalOpen2, setIsUpdateModalOpen2] = useState(false);
+  const [isUpdateModalOpen3, setIsUpdateModalOpen3] = useState(false);
+  const [isUpdateModalOpen4, setIsUpdateModalOpen4] = useState(false);
   const [serviceDetailId, setServiceDetailId] = useState(null);
+  const [serviceDetail, setServiceDetail] = useState(null);
   useEffect(() => {
     fetchData(pagination.page).then((response) => {
       setData(response.data);
@@ -116,20 +125,22 @@ export default function ServicesInAppointment() {
     },
     {
       type: "modal",
-      label: "reject",
-      icon: <IoRemoveCircleOutline />,
+      label: "Assign",
+      icon: <MdOutlineAssignmentInd />,
       color: "bg-gray-500",
       onClick: async (row) => {
         try {
-          setIsUpdateModalOpen2(true);
-          setServiceDetailId(row.id);
+          setIsUpdateModalOpen3(true);
+          setServiceDetail(row);
         } catch (error) {
           console.error("Error reject details: ", error);
         }
       },
       // chỉ hiển thị nếu row.status không bằng "Declined"
       shouldDisplay: (row) =>
-        row.status !== "Declined" && row.status !== "Cancelled",
+        row.status !== "Declined" &&
+        row.status !== "Cancelled" &&
+        (row.status === "Assigned" || row.status === "Unsigned"),
     },
   ];
 
@@ -172,18 +183,23 @@ export default function ServicesInAppointment() {
       <CancelDetailAppointment
         isOpen={isUpdateModalOpen1}
         onCancel={() => setIsUpdateModalOpen1(false)}
-        type="cancel"
         appointmentId={id}
         serviceDetailId={serviceDetailId}
       />
 
-      <CancelDetailAppointment
-        isOpen={isUpdateModalOpen2}
-        onCancel={() => setIsUpdateModalOpen2(false)}
-        type="reject"
+      <AssginEmployee
+        isOpen={isUpdateModalOpen3}
+        onCancel={() => setIsUpdateModalOpen3(false)}
         appointmentId={id}
-        serviceDetailId={serviceDetailId}
+        serviceDetail={serviceDetail}
       />
+      {/* <UnAssginEmployee
+        isOpen={isUpdateModalOpen4}
+        onCancel={() => setIsUpdateModalOpen4(false)}
+        appointmentId={id}
+        serviceDetail={serviceDetail}
+        employee={employee}
+      /> */}
     </>
   );
 }

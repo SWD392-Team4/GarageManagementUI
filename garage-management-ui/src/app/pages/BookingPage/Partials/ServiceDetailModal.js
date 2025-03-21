@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 const ServiceDetailModal = ({ service, onClose }) => {
   return (
-    <div className="fixed inset-0 z-40 flex items-start justify-center bg-black bg-opacity-30">
+    <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-30">
       <div className="mt-10 relative w-full max-w-sm p-4 bg-white rounded shadow-lg animate-slideDown">
         <button
           onClick={onClose}

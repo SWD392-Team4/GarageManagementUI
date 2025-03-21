@@ -1,9 +1,8 @@
 import React from "react";
-import Breadcrumb from "./Breadcrumb";
 import BookingInfo from "./BookingInfo";
-import ServicesInAppointment from "./ServicesInAppointment";
+import Breadcrumb from "./Breadcrumb";
 import PackeagesINAppointment from "./PackeagesINAppointment";
-import { currentAppointment } from "../services/store/AppointmentSignify";
+import ServicesInAppointment from "./ServicesInAppointment";
 
 export default function appointmentDetail() {
   return (

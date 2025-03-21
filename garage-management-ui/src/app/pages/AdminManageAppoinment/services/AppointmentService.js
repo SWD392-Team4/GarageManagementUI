@@ -47,6 +47,19 @@ export const getAllServiceByCarModel = async (carModelId) => {
     console.error("Fail with: getAllServiceByCarModel", error);
   }
 };
+export const getAllMechanic = async () => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/users/employees?Role=Mechanic`,
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fail with: getAllMechanic", error);
+  }
+};
 export const getAllService = async () => {
   try {
     const response = await userService.sendAjax(
@@ -117,7 +130,7 @@ export const getAllProducts = async () => {
 export const getAllProductsAtGara = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/product-at-garages/garage",
+      `/api/product-at-garages/product/${sAccount.value.workPlaceId}?minQuantity=1`,
       "GET",
       null,
       true
@@ -345,6 +358,59 @@ export const cancelAppointmentDetail = async (
       true
     );
     userService.showToast(200, "Cancel appointment detail successfull!");
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const AssignAppointmentDetail = async (
+  appoinmentId,
+  detailId,
+  employeeid
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${appoinmentId}/details/${detailId}/assign `,
+      "POST",
+      {
+        employeeId: employeeid,
+      },
+      true
+    );
+    userService.showToast(
+      200,
+      "Assign Employee to appointment detail successfull!"
+    );
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const UnAssignAppointmentDetail = async (
+  appoinmentId,
+  detailId,
+  payload
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${
+        sAccount.value.role !== "Administrator"
+          ? sAccount.value.workPlaceId
+          : AppointmentSignify.value.garaCurrent
+      }/appointments/${appoinmentId}/details/${detailId}/unassign `,
+      "POST",
+      payload,
+      true
+    );
+    userService.showToast(200, "UnAssign Employee successfull!");
     return response;
   } catch (error) {
     userService.showToast(400, error.message);

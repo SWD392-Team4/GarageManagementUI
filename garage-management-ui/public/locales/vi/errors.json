@@ -50,5 +50,6 @@
   "AppointmentDetailNotFound": "Không tìm thấy chi tiết lịch hẹn.",
   "AppointmentDetailAlreadyCancelled": "Chi tiết lịch hẹn đã bị hủy.",
   "AppointmentDetailAlreadyRejected": "Chi tiết lịch hẹn đã bị từ chối.",
+  "AppointmentDetailCanNotUpdate": "Trạng thái chi tiết cuộc hẹn là Đang chờ, không thể cập nhật",
   "AppointmentReplacementPartNotFound": "Không tìm thấy linh kiện thay thế cho lịch hẹn."
 }
