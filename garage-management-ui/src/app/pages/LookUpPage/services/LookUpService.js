@@ -30,3 +30,26 @@ export const viewAppointmentLookUp = async () => {
     console.error("Fail with : ", error.message);
   }
 };
+
+export const cancelAppointment = async (reasonData) => {
+  try {
+    const data = {
+      verifyCode: sLookUp.value.VerifyCode,
+      customerEmail: sLookUp.value.CustomerEmail,
+      customerPhoneNumber: sLookUp.value.CustomerPhoneNumber,
+      estimatedTime: sLookUp.value.EstimatedTime,
+      cancelledReason: reasonData,
+    };
+    const response = await userService.sendAjax(
+      `/api/workplaces/${sLookUp.value.garareId}/appointments/guest/cancel`,
+      "PUT",
+      data,
+      false
+    );
+    userService.showToast(200, "Canceled Apointment Successful");
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+    console.error("Fail with : ", error.message);
+  }
+};
