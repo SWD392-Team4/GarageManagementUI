@@ -1,58 +1,68 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
-import Miniwidget from "./partials/Miniwidget";
-import MonthlyEarnings from "./partials/MonthlyEarnings";
-import GaraPerformance from "./partials/GaraPerformance";
-import MonthlyEarnings2 from "./partials/MonthlyEarnings2";
+import GarageRevenue from "./partials/GarageRevenue";
+import GarageSelect from "./partials/GarageSelect";
+import PackageDashboard from "./partials/PackageDashboard";
+import ServiceDashboard from "./partials/ServiceDashboard";
+import DashboardOverview from "./partials/DashboardOverview";
 
 export default function Dashboard() {
-  const reports = [
-    {
-      title: "Orders",
-      iconClass: "cube-outline",
-      total: "1,587",
-      average: "+11%",
-      badgecolor: "info",
-    },
-    {
-      title: "Revenue",
-      iconClass: "buffer",
-      total: "$46,782",
-      average: "-29%",
-      badgecolor: "danger",
-    },
-    {
-      title: "Average Price",
-      iconClass: "tag-text-outline",
-      total: "$15.9",
-      average: "0%",
-      badgecolor: "warning",
-    },
-    {
-      title: "Product Sold",
-      iconClass: "briefcase-check",
-      total: "1890",
-      average: "+89%",
-      badgecolor: "info",
-    },
-  ];
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Kích hoạt hiệu ứng sau khi component mount
+    const timeout = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timeout);
+  }, []);
 
   return (
-    <div className="md:p-6">
-      <Breadcrumb />
-      <Miniwidget reports={reports} />
-      <div className="flex flex-wrap -mx-2 mt-4">
-        <div className="w-full xl:w-3/12 px-2">
-          <MonthlyEarnings />
-        </div>
+    <div className="md:p-6 space-y-0">
+      <div
+        className={`transition-opacity duration-700 ease-out ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <Breadcrumb />
+      </div>
 
-        <div className="w-full xl:w-6/12 px-2">
-          <GaraPerformance />
-        </div>
+      {/* <div
+        className={`transition-opacity duration-700 ease-out delay-200 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <GarageRevenue />
+      </div> */}
 
-        <div className="w-full xl:w-3/12 px-2">
-          <MonthlyEarnings2 />
-        </div>
+      <div
+        className={`transition-opacity duration-700 ease-out delay-300 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <GarageSelect />
+      </div>
+
+      <div
+        className={`transition-opacity duration-700 ease-out delay-400 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <DashboardOverview />
+      </div>
+
+      <div
+        className={`transition-opacity duration-700 ease-out delay-600 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <ServiceDashboard />
+      </div>
+
+      <div
+        className={`transition-opacity duration-700 ease-out delay-500 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <PackageDashboard />
       </div>
     </div>
   );
