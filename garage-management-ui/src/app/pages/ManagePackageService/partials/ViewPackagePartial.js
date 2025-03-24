@@ -169,6 +169,7 @@ export default function ViewPackagePartial() {
             setPackageImages={setPackageImages}
             packageId={packageData.id}
             isEditing={isEditing}
+            fetchData={fetchData}
           />
           {/* <div className="mt-6 border p-6 rounded-lg shadow-md bg-white"> */}
           <PackageInfo
