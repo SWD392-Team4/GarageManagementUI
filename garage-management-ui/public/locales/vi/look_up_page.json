@@ -45,6 +45,11 @@
       "package_price": "Giá gói",
       "show_more": "Xem thêm",
       "show_less": "Thu gọn"
+    },
+    "error_not_found": {
+      "title": "Không tìm thấy lịch hẹn",
+      "description": "Vui lòng kiểm tra lại mã lịch hẹn, email hoặc số điện thoại của bạn.",
+      "button": "Quay lại trang tra cứu"
     }
   }
 }

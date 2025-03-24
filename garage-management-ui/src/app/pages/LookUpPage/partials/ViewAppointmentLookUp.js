@@ -27,7 +27,6 @@ import { useMediaQuery } from "react-responsive";
 import ViewAppointmentLookUpMobile from "./ViewAppointmentLookUpMobile";
 import { useTranslation } from "react-i18next";
 import { formatVietnameseCurrency } from "../schemas/LookUpSchemas";
-import { formatDateTimeHour } from "../../BookingPage/schemas/bookingSchema";
 
 export default function ViewAppointmentLookUp() {
   const [showAllPackages, setShowAllPackages] = useState(false);
@@ -44,29 +43,6 @@ export default function ViewAppointmentLookUp() {
   const openCancelModal = () => setIsCancelModalOpen(true);
   const closeCancelModal = () => setIsCancelModalOpen(false);
 
-  // const toggleService = (index) => {
-  //     setExpandedService(expandedService === index ? null : index);
-  // };
-
-  //   useEffect(() => {
-  //     if (
-  //       sLookUp.value.garareId == "" ||
-  //       sLookUp.value.VerifyCode == "" ||
-  //       sLookUp.value.CustomerEmail == "" ||
-  //       sLookUp.value.CustomerPhoneNumber == "" ||
-  //       sLookUp.value.EstimatedTime == ""
-  //     ) {
-  //       navigation("/look-up");
-  //     }
-  //     // sLookUp.set((v) => {
-  //     //   // v.value.garareId == "";
-  //     //   v.value.VerifyCode = "";
-  //     //   v.value.CustomerEmail = "";
-  //     //   v.value.CustomerPhoneNumber = "";
-  //     //   v.value.EstimatedTime = "";
-  //     // });
-  //   }, []);
-
   const fecthData = async () => {
     try {
       const response = await viewAppointmentLookUp();
@@ -74,6 +50,8 @@ export default function ViewAppointmentLookUp() {
       setLoading(false);
     } catch (error) {
       console.error("Fail with: ", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -87,8 +65,24 @@ export default function ViewAppointmentLookUp() {
 
   if (!appointment) {
     return (
-      <div className="text-center text-lg font-bold text-red-600">
-        No appointment data available.
+      <div className="flex flex-col items-center justify-center min-h-[300px] text-center px-4">
+        <div className="bg-red-100 text-red-700 border border-red-400 px-6 py-4 rounded-lg shadow-md max-w-md w-full">
+          <div className="flex flex-col items-center space-y-3">
+            <FaExclamationTriangle className="text-4xl text-red-600" />
+            <h2 className="text-xl font-semibold">
+              {t("look_up_page.error_not_found.title")}
+            </h2>
+            <p className="text-sm text-gray-700">
+              {t("look_up_page.error_not_found.description")}
+            </p>
+            <button
+              onClick={() => navigation("/look-up")}
+              className="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition duration-200"
+            >
+              {t("look_up_page.error_not_found.button")}
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
@@ -164,14 +158,14 @@ export default function ViewAppointmentLookUp() {
                     {" "}
                     {t("look_up_page.view_look_up.start")}:
                   </strong>{" "}
-                  {formatDateTimeHour(appointment.estimatedAppointmentTime)}
+                  {appointment.estimatedAppointmentTime}
                 </p>
                 <p>
                   <FaClock className="inline mr-2 text-red-700" />
                   <strong className="text-red-700">
                     {t("look_up_page.view_look_up.end")}:
                   </strong>{" "}
-                  {formatDateTimeHour(appointment.estimatedEndTime)}
+                  {appointment.estimatedEndTime}
                 </p>
               </div>
             </div>

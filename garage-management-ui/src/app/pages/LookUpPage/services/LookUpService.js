@@ -34,6 +34,7 @@ export const viewAppointmentLookUp = async () => {
     );
     return response;
   } catch (error) {
+    userService.showToast(400, error.message);
     console.error("Fail with : ", error.message);
   }
 };

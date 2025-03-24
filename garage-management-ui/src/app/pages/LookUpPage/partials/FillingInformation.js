@@ -3,6 +3,7 @@ import { PiSteeringWheel } from "react-icons/pi";
 import Navigation from "./Navigation";
 import { sLookUp } from "../services/LookUpSignify";
 import { useNavigate } from "react-router-dom";
+import { sAccount } from "../../AuthCustomer/services/store";
 
 export default function FillingInformation() {
   // State lưu trữ dữ liệu nhập vào
@@ -105,6 +106,16 @@ export default function FillingInformation() {
     setErrorMessage("");
   };
 
+  useEffect(() => {
+    if (sAccount?.value?.email || sAccount?.value?.phoneNumber) {
+      setFormData((prev) => ({
+        ...prev,
+        customerEmail: sAccount.value.email || prev.customerEmail,
+        customerPhone: sAccount.value.phoneNumber || prev.customerPhone,
+      }));
+    }
+  }, [sAccount.value.email, sAccount.value.phoneNumber]);
+
   return (
     <div className="font-extrabold font-space relative pb-10 ">
       {/* Container chính */}
@@ -134,7 +145,7 @@ export default function FillingInformation() {
                 value={formData.verifyCode}
                 onChange={handleChange}
                 disabled={isConfirmed}
-                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-white ${
+                className={`w-full bg-transparent border-b p-2 outline-none text-black placeholder-black ${
                   errorMessage && !formData.verifyCode
                     ? "border-red-500"
                     : "border-black"
@@ -155,7 +166,7 @@ export default function FillingInformation() {
                 value={formData.customerEmail}
                 onChange={handleChange}
                 disabled={isConfirmed}
-                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-white ${
+                className={`w-full bg-transparent border-b p-2 outline-none text-black placeholder-black ${
                   errorMessage && !formData.customerEmail
                     ? "border-red-500"
                     : "border-black"
@@ -176,7 +187,7 @@ export default function FillingInformation() {
                 value={formData.customerPhone}
                 onChange={handleChange}
                 disabled={isConfirmed}
-                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-white ${
+                className={`w-full bg-transparent border-b p-2 outline-none text-black placeholder-black ${
                   errorMessage && !formData.customerPhone
                     ? "border-red-500"
                     : "border-black"
@@ -198,7 +209,7 @@ export default function FillingInformation() {
                 value={formData.estimatedTime}
                 onChange={handleChange}
                 disabled={isConfirmed}
-                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-gray-400 ${
+                className={`w-full bg-transparent border-b p-2 outline-none text-black placeholder-black ${
                   errorMessage && !formData.estimatedTime
                     ? "border-red-500"
                     : "border-black"
