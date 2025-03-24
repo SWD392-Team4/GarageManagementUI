@@ -2,7 +2,12 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import PackageList from "./PackageList";
 import Pagination from "../../../components/Pagination/Pagination";
-import { getAllCars, getAllPackages, getAllServicesCategories, getAllTypes } from "../services/PackageServiceAPI";
+import {
+  getAllCars,
+  getAllPackages,
+  getAllServicesCategories,
+  getAllTypes,
+} from "../services/PackageServiceAPI";
 import LoadingSpinner from "../../CustomerProduct/partials/LoadingSpinner";
 import PackageFilterBar from "./PackageFilterBar";
 import { BsSliders } from "react-icons/bs";
@@ -32,7 +37,7 @@ const PackageListPage = () => {
       carCategory: searchParams.get("carCategory") || "",
       price: searchParams.get("price")
         ? searchParams.get("price").split(",").map(Number)
-        : [0, 10000000],
+        : [0, 10000000000],
     }),
     [searchParams]
   );
@@ -43,7 +48,7 @@ const PackageListPage = () => {
         const [categories, types, carCategories] = await Promise.all([
           getAllServicesCategories(),
           getAllTypes(),
-          getAllCars()
+          getAllCars(),
         ]);
         setServiceCategories(categories);
         setPackageTypes(types);
@@ -100,7 +105,7 @@ const PackageListPage = () => {
     <div className="bg-gray-100 min-h-screen py-6">
       <div className="container mx-auto px-4 p-6">
         <h1 className="text-4xl font-bold mb-6 text-center p-6">
-        {t("customer_package_list.title")}
+          {t("customer_package_list.title")}
         </h1>
 
         <div className="flex flex-col md:flex-row gap-4">

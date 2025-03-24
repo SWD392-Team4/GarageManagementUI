@@ -1,59 +1,69 @@
 {
-    "manage_goods_issued": {
-        "title": "Manage Goods Issued",
-        "create": "Create Goods Issued",
-        "loading": "Loading...",
-        "search": {
-            "reference_number": "Reference Number",
-            "invoice_code": "Invoice Code",
-            "min_total_cost": "Min Total Cost",
-            "max_total_cost": "Max Total Cost",
-            "status": "Status",
-            "created_at": "Created At",
-            "updated_at": "Updated At",
-            "status_enum": {
-                "choose": "Choose Status",
-                "active": "Active",
-                "inactive": "Inactive"
-            },
-            "clear_filters": "Clear Filters",
-            "search": "Search"
-        },
-        "table": {
-            "id": "Id",
-            "total_cost": "Total Cost",
-            "reference_number": "Reference Number",
-            "invoice_code": "Invoice Code",
-            "status": "Status",
-            "created_at": "Created At",
-            "updated_at": "Updated At",
-            "view": "view",
-            "warehouseName": "Warehouse Name",
-            "managerName": "Manager Name",
-            "garageName": "Garage Name"
-        },
-        "detail_table": {
-            "id": "Id",
-            "total_cost": "Total Cost",
-            "reference_number": "Reference Number",
-            "invoice_code": "Invoice Code",
-            "status": "Status",
-            "created_at": "Created At",
-            "updated_at": "Updated At",
-            "warehouseName": "Warehouse Name",
-            "managerName": "Manager Name",
-            "garageName": "Garage Name"
-        },
-        "view_goods_issued": {
-            "title": "Goods Issued Details",
-            "reference_number": "Reference Number",
-            "invoice_code": "Invoice Code",
-            "total_price": "Total Price",
-            "createdWareHouseManager": "Created Warehouse Manager",
-            "wareHouse": "Warehouse",
-            "status": "Status",
-            "created_at": "Created At",
-            "updated_at": "Updated At"
-        }
+  "manage_goods_issued": {
+    "title": "Manage Goods Issued",
+    "create": "Create Goods Issued",
+    "loading": "Loading...",
+    "search": {
+      "reference_number": "Reference Number",
+      "invoice_code": "Invoice Code",
+      "min_total_cost": "Min Total Cost",
+      "max_total_cost": "Max Total Cost",
+      "status": "Status",
+      "created_at": "Created At",
+      "updated_at": "Updated At",
+      "status_enum": {
+        "choose": "Choose Status",
+        "active": "Active",
+        "inactive": "Inactive"
+      },
+      "clear_filters": "Clear Filters",
+      "search": "Search"
+    },
+    "table": {
+      "id": "Id",
+      "total_cost": "Total Cost",
+      "reference_number": "Reference Number",
+      "invoice_code": "Invoice Code",
+      "status": "Status",
+      "created_at": "Created At",
+      "updated_at": "Updated At",
+      "view": "view",
+      "warehouseName": "Warehouse Name",
+      "managerName": "Manager Name",
+      "garageName": "Garage Name"
+    },
+    "detail_table": {
+      "id": "Id",
+      "total_cost": "Total Cost",
+      "reference_number": "Reference Number",
+      "invoice_code": "Invoice Code",
+      "status": "Status",
+      "created_at": "Created At",
+      "updated_at": "Updated At",
+      "warehouseName": "Warehouse Name",
+      "managerName": "Manager Name",
+      "garageName": "Garage Name"
+    },
+    "view_goods_issued": {
+      "title": "Goods Issued Details",
+      "reference_number": "Reference Number",
+      "invoice_code": "Invoice Code",
+      "total_price": "Total Price",
+      "createdWareHouseManager": "Created Warehouse Manager",
+      "wareHouse": "Warehouse",
+      "status": "Status",
+      "created_at": "Created At",
+      "updated_at": "Updated At"
+    },
+    "goods_issued_details": {
+      "title": "Goods Issued Details",
+      "goodsIssuedId": "Goods Issued ID",
+      "productName": "Product Name",
+      "quantity": "Quantity",
+      "unitPrice": "Unit Price",
+      "status": "Status",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
     }
+  }
 }

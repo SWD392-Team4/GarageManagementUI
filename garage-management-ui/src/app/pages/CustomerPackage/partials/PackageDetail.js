@@ -7,12 +7,15 @@ import PackageContent from "./PackageContent";
 import Banner from "../../Services/partials/Banner";
 import Category from "./Category";
 import Contact from "./Contact";
-import { getPackage, getPackageConditions, getPackageServices } from "../services/PackageServiceAPI";
+import {
+  getPackage,
+  getPackageConditions,
+  getPackageServices,
+} from "../services/PackageServiceAPI";
 import LoadingSpinner from "../../CustomerProduct/partials/LoadingSpinner";
 
 export default function PackageDetail() {
- 
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [packageData, setPackageData] = useState(null);
   const [services, setServices] = useState([]);
   const [conditions, setConditions] = useState([]);
@@ -39,10 +42,10 @@ export default function PackageDetail() {
       try {
         const packageData = await getPackage(id);
         const serviceData = await getPackageServices(id);
-        const conditionData = await getPackageConditions(id); 
+        const conditionData = await getPackageConditions(id);
         if (packageData && serviceData) {
           setPackageData(packageData);
-          setServices(serviceData); 
+          setServices(serviceData);
           setConditions(conditionData);
         } else {
           setError("Package not found");
@@ -58,7 +61,6 @@ export default function PackageDetail() {
   if (loading) return <LoadingSpinner />;
   if (error) return <p className="text-center text-red-500 p-6">{error}</p>;
   if (!packageData) return null;
-
 
   return (
     <div className="pt-5 pb-16 bg-gray-100">
@@ -80,14 +82,18 @@ export default function PackageDetail() {
             </Slider>
 
             {/* Package Details */}
-            <PackageContent packageData={packageData} services={services} conditions={conditions} />
+            <PackageContent
+              packageData={packageData}
+              services={services}
+              conditions={conditions}
+            />
           </div>
 
           {/* Sidebar */}
           <div className="lg:w-1/3 p-6">
             <Contact />
             <div className=" mb-6 ">
-              <Category packageData={packageData}/>
+              <Category packageData={packageData} />
             </div>
             <Banner />
           </div>

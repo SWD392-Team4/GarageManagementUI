@@ -1,5 +1,8 @@
 import UserService from "../../../hooks/services/UserService";
-import { formatDate } from "../schemas/GoodsIssuedSchemas";
+import {
+  formatDate,
+  formatVietnameseCurrency,
+} from "../schemas/GoodsIssuedSchemas";
 import { CurrentWarehouse } from "./SiginifyGoodsIssued";
 
 const userService = new UserService();
@@ -141,7 +144,7 @@ export const getGoodsIssued = async (id) => {
 export const getGoodsIssuedDetails = async (id) => {
   try {
     const response = await userService.sendAjax(
-      `/api/goods-issued/detail/${id}`,
+      `/api/goods-issued/detail/${id}/details`,
       "GET",
       null,
       true
@@ -151,6 +154,7 @@ export const getGoodsIssuedDetails = async (id) => {
       ...pre,
       createdAt: formatDate(pre.createdAt),
       updatedAt: formatDate(pre.updatedAt),
+      unitPrice: formatVietnameseCurrency(pre.unitPrice),
     }));
 
     return response;

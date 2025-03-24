@@ -1,7 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { getGoodsIssued, getGoodsIssuedDetails, } from "./services/ServiceGoodsIssued";
+import {
+  getGoodsIssued,
+  getGoodsIssuedDetails,
+} from "./services/ServiceGoodsIssued";
 import BaseTable from "../../components/BaseTable/BaseTable";
 import Breadcrumb from "../AdminManageAppoinment/partials/Breadcrumb";
 import { sGoodsIssued } from "./services/SiginifyGoodsIssued";
@@ -48,9 +51,35 @@ export default function ViewGoodsIssued() {
 
   const columns = useMemo(
     () => [
-      { header: t("manage_goods_issued.goods_issued_details.id"), accessorKey: "id", accessorFn: (_row, index) => index + 1 },
-      { header: t("manage_goods_issued.goods_issued_details.id"), accessorKey: "id" },
-
+      {
+        header: t("manage_goods_issued.goods_issued_details.goodsIssuedId"),
+        accessorKey: "goodsIssuedId",
+        accessorFn: (_row, index) => index + 1,
+      },
+      {
+        header: t("manage_goods_issued.goods_issued_details.productName"),
+        accessorKey: "productName",
+      },
+      {
+        header: t("manage_goods_issued.goods_issued_details.quantity"),
+        accessorKey: "quantity",
+      },
+      {
+        header: t("manage_goods_issued.goods_issued_details.unitPrice"),
+        accessorKey: "unitPrice",
+      },
+      {
+        header: t("manage_goods_issued.goods_issued_details.status"),
+        accessorKey: "status",
+      },
+      {
+        header: t("manage_goods_issued.goods_issued_details.createdAt"),
+        accessorKey: "createdAt",
+      },
+      {
+        header: t("manage_goods_issued.goods_issued_details.updatedAt"),
+        accessorKey: "updatedAt",
+      },
     ],
     [t, i18n.language]
   );
@@ -59,7 +88,9 @@ export default function ViewGoodsIssued() {
     <div className="md:p-6">
       <Breadcrumb />
 
-      <h1 className="text-2xl font-bold text-gray-800 mb-4">{t('manage_goods_issued.view_goods_issued.title')}</h1>
+      <h1 className="text-2xl font-bold text-gray-800 mb-4">
+        {t("manage_goods_issued.view_goods_issued.title")}
+      </h1>
 
       {/* Kiểm tra dữ liệu trước khi hiển thị */}
       {goodsIssued ? (
@@ -72,32 +103,55 @@ export default function ViewGoodsIssued() {
             {/* Cột 1 */}
             <div>
               <p className="text-gray-600">
-                <strong>{t('manage_goods_issued.view_goods_issued.reference_number')}:</strong> {goodsIssued.referenceNumber}
+                <strong>
+                  {t("manage_goods_issued.view_goods_issued.reference_number")}:
+                </strong>{" "}
+                {goodsIssued.referenceNumber}
               </p>
               <p className="text-gray-600">
-                <strong>{t('manage_goods_issued.view_goods_issued.invoice_code')}:</strong> {goodsIssued.invoiceCode}
+                <strong>
+                  {t("manage_goods_issued.view_goods_issued.invoice_code")}:
+                </strong>{" "}
+                {goodsIssued.invoiceCode}
               </p>
               <p className="text-gray-600">
-                <strong>{t('manage_goods_issued.view_goods_issued.total_price')}:</strong>
-                <span className="text-green-600 font-medium"> {goodsIssued.totalCost} VND</span>
+                <strong>
+                  {t("manage_goods_issued.view_goods_issued.total_price")}:
+                </strong>
+                <span className="text-green-600 font-medium">
+                  {" "}
+                  {goodsIssued.totalCost} VND
+                </span>
               </p>
             </div>
 
             {/* Cột 2 */}
             <div>
               <p className="text-gray-600">
-                <strong>{t('manage_goods_issued.view_goods_issued.createdWareHouseManager')}:</strong> {goodsIssued.createdWareHouseManager || 'N/A'}
+                <strong>
+                  {t(
+                    "manage_goods_issued.view_goods_issued.createdWareHouseManager"
+                  )}
+                  :
+                </strong>{" "}
+                {goodsIssued.userName || "N/A"}
               </p>
               <p className="text-gray-600">
-                <strong>{t('manage_goods_issued.view_goods_issued.wareHouse')}:</strong> {goodsIssued.wareHouse || 'N/A'}
+                <strong>
+                  {t("manage_goods_issued.view_goods_issued.wareHouse")}:
+                </strong>{" "}
+                {goodsIssued.warehouseName || "N/A"}
               </p>
               <p className="text-gray-600">
-                <strong>{t('manage_goods_issued.view_goods_issued.status')}:</strong>
+                <strong>
+                  {t("manage_goods_issued.view_goods_issued.status")}:
+                </strong>
                 <span
-                  className={`px-2 py-1 text-sm font-medium rounded-md ${goodsIssued.status === 'Active'
-                    ? 'bg-green-100 text-green-700'
-                    : 'bg-red-100 text-red-700'
-                    }`}
+                  className={`px-2 py-1 text-sm font-medium rounded-md ${
+                    goodsIssued.status === "Active"
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
                 >
                   {goodsIssued.status}
                 </span>
@@ -107,21 +161,23 @@ export default function ViewGoodsIssued() {
           {/* Ngày tạo & cập nhật */}
           <div className="flex justify-between items-center mt-4 text-gray-500 text-sm">
             <p>
-              {t('manage_goods_issued.view_goods_issued.created_at')}:{" "}
+              {t("manage_goods_issued.view_goods_issued.created_at")}:{" "}
               <span className="font-medium">{goodsIssued.createdAt}</span>
             </p>
-            <p>
-              {t('manage_goods_issued.view_goods_issued.updated_at')}:{" "}
+            {/* <p>
+              {t("manage_goods_issued.view_goods_issued.updated_at")}:{" "}
               <span className="font-medium">{goodsIssued.updatedAt}</span>
-            </p>
+            </p> */}
           </div>
         </div>
       ) : (
-        <p className="text-gray-500">{t('manage_goods_issued.loading')}</p>
+        <p className="text-gray-500">{t("manage_goods_issued.loading")}</p>
       )}
 
       <div className="border border-gray-200 p-4 rounded-md bg-gray-50 mt-5">
-        <h1 className="text-2xl font-bold text-gray-800 mb-4">{t('manage_goods_received.goods_received_details.title')}</h1>
+        <h1 className="text-2xl font-bold text-gray-800 mb-4">
+          {t("manage_goods_issued.goods_issued_details.title")}
+        </h1>
         <BaseTable
           columns={columns}
           data={goodsIssuedDetails}
@@ -131,7 +187,6 @@ export default function ViewGoodsIssued() {
           signifyInformation={sGoodsIssued.value}
         />
       </div>
-
     </div>
   );
 }
