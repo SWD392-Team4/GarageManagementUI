@@ -4,7 +4,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
 
 // import schema
-import { bookingSchema } from "../schemas/bookingSchema";
+import {
+  bookingSchema,
+  formatLocalDatetimeWithOffset,
+} from "../schemas/bookingSchema";
 import { createAppointmentApi } from "../Services/BookingPageService";
 import { BookingSignify } from "../Services/BookingSignify";
 import { useNavigate } from "react-router-dom";
@@ -44,9 +47,10 @@ const BillingDetails = () => {
         customerName: formData.customerName,
         customerPhoneNumber: formData.customerPhoneNumber,
         customerEmail: formData.customerEmail,
-        estimatedAppointmentTime: new Date(
+        estimatedAppointmentTime: formatLocalDatetimeWithOffset(
           formData.estimatedAppointmentTime
-        ).toISOString(),
+        ),
+
         carLicensePlateNumber: formData.carLicensePlateNumber || undefined,
         services: BookingSignify.value.services,
         packages: BookingSignify.value.package,
