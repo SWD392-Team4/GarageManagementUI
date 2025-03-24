@@ -15,6 +15,7 @@ import { sServicesInAppointment } from "../services/store/FilterStore";
 
 import AssginEmployee from "../models/AssginEmployee";
 import ServiceDetailModal from "../models/ServiceDetailModal";
+import { sAccount } from "../../AuthCustomer/services/store";
 
 export default function ServicesInAppointment() {
   const { t, i18n } = useTranslation("appoinment-admin");
@@ -166,16 +167,15 @@ export default function ServicesInAppointment() {
         <div>Services in appointment</div>
         {currentAppointment.value.status !== "Rejected" &&
           currentAppointment.value.status !== "Cancelled" &&
-          currentAppointment.value.status !== "Completed" && (
-            <AddAppointmentDetail id={id} />
-          )}
+          currentAppointment.value.status !== "Completed" &&
+          sAccount.value.role === "Cashier" && <AddAppointmentDetail id={id} />}
       </div>
 
       <div className="">
         <BaseTable
           columns={columns}
           data={data}
-          actions={actions}
+          actions={sAccount.value.role === "Cashier" ? actions : ""}
           pagination={pagination}
           fetchData={fetchData}
           signifyInformation={sServicesInAppointment.value}

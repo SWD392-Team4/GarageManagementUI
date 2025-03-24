@@ -188,7 +188,6 @@ export const getAllAppointment = async (status) => {
     sAccount.value.role === "Administrator"
       ? `/api/workplaces/${AppointmentSignify.value.garaCurrent}/appointments?${queryParams}`
       : `/api/workplaces/${sAccount.value.workPlaceId}/appointments?${queryParams}`;
-  console.log("query ", query);
   try {
     const response = await userService.sendAjax(query, "GET", null, true);
     response.data.value = response.data.value.map((pre) => ({
