@@ -1,0 +1,14 @@
+{
+    "manage_carpartcate": {
+        "title": "汽车配件类别管理",
+        "create": "新增类别",
+        "id": "编号",
+        "name": "类别名称",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "edit": "编辑",
+        "clear_filters": "清除筛选",
+        "search": "搜索"
+    }
+}

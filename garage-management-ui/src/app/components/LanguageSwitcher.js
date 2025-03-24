@@ -10,7 +10,7 @@ const LanguageSwitcher = () => {
     { code: "en", label: "English", flag: "us" },
     { code: "vi", label: "Vietnamese", flag: "vn" },
     { code: "kr", label: "Korean", flag: "kr" },
-    { code: "kh", label: "Cambodia", flag: "kh" },
+    { code: "ch", label: "China", flag: "cn" },
   ];
 
   // Lấy ngôn ngữ hiện tại

@@ -1,0 +1,11 @@
+{
+    "labels": {
+        "reference_number": "参考编号",
+        "invoice_code": "发票编号",
+        "warehouse": "仓库",
+        "garage": "车库",
+        "product_name": "产品名称",
+        "quantity": "数量",
+        "goods_received_id": "入库单编号"
+    }
+}

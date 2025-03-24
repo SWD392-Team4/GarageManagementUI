@@ -246,13 +246,13 @@ export default function ProductDetails() {
                       product.productCategoryId
                         ? {
                             value: product.productCategoryId,
-                            label: product.category,
+                            label: product.productCategoryName,
                           }
                         : null
                     }
                   />
                 ) : (
-                  product.category
+                  product.productCategoryName
                 )}
               </p>
 

@@ -1,0 +1,14 @@
+{
+    "customer_product_detail": {
+        "product_code": "产品编号",
+        "product_brand": "产品品牌",
+        "product_made_in": "产地",
+        "product_book_now": "立即预订",
+        "product_warranty": "保修期",
+        "product_detail": "产品详情",
+        "product_list_title": "我们的产品",
+        "product_list_heading": "产品",
+        "product_list_heading_home": "首页",
+        "product_detail_heading": "详情"
+    }
+}

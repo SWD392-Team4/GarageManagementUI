@@ -1,0 +1,17 @@
+{
+    "manage_product_category": {
+        "title": "产品类别管理",
+        "create": "新增产品类别",
+        "id": "编号",
+        "name": "名称",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "edit": "编辑",
+        "linkLogo": "Logo链接",
+        "active": "启用",
+        "inactive": "停用",
+        "clear_filters": "清除筛选",
+        "search": "搜索"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "manage_goods_received": {
+        "title": "入库管理",
+        "create": "创建入库单",
+        "id": "编号",
+        "referenceNumber": "参考编号",
+        "invoiceCode": "发票编号",
+        "sourceAddress": "来源地址",
+        "sourceProvince": "省份",
+        "sourceDistrict": "地区",
+        "sourceWards": "乡镇",
+        "totalPrice": "总价",
+        "contactPersonName": "联系人",
+        "workPlaceName": "工作地点",
+        "warehouseManagerName": "仓库管理员",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "userName": "管理员姓名",
+        "warehouse": "仓库",
+        "loading": "加载中..."
+    }
+}

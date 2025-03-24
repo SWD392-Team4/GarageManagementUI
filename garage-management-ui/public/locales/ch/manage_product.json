@@ -1,0 +1,20 @@
+{
+    "manage_product": {
+        "view": "查看",
+        "title": "产品管理",
+        "create": "创建产品",
+        "id": "编号",
+        "name": "名称",
+        "barcode": "条形码",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "price": "价格",
+        "upload_images": "上传图片",
+        "search_product_name": "产品名称",
+        "search_placeholder": "输入产品名称...",
+        "search_status": "状态",
+        "clear_filters": "清除筛选",
+        "search": "搜索"
+    }
+}

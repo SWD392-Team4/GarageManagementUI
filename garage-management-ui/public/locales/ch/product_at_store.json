@@ -1,0 +1,12 @@
+{
+    "product_at_store": {
+        "search_invoice": {
+            "invoiceNumber": "发票编号",
+            "customerName": "客户姓名",
+            "status": "状态",
+            "createdAt": "创建日期",
+            "clear_filters": "清除筛选",
+            "search": "搜索"
+        }
+    }
+}

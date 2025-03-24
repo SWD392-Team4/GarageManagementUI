@@ -1,0 +1,13 @@
+{
+    "manage_supplier_contact": {
+        "title": "供应商联系人管理",
+        "create": "创建联系人",
+        "id": "编号",
+        "contactPersonName": "联系人姓名",
+        "contactPosition": "职位",
+        "contactPhoneNumber": "联系电话",
+        "contactEmail": "联系邮箱",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期"
+    }
+}

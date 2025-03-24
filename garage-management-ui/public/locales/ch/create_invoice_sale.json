@@ -1,0 +1,24 @@
+{
+    "create_invoice_sale": {
+        "product_card": {
+            "price": "价格",
+            "stock": "库存",
+            "created_at": "创建于",
+            "not_available": "无"
+        },
+        "sidebar_checkout": {
+            "customer_info": "客户信息",
+            "customer_name": "客户姓名",
+            "customer_phone": "联系电话",
+            "customer_email": "客户邮箱",
+            "selected_products": "已选产品",
+            "product_name": "产品名称",
+            "quantity": "数量",
+            "actions": "操作",
+            "remove": "移除",
+            "no_products": "未选择产品",
+            "total": "合计：",
+            "create_invoice": "创建发票"
+        }
+    }
+}

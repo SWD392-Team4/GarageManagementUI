@@ -1,0 +1,12 @@
+{
+    "customer_product_filter": {
+        "title": "产品筛选",
+        "search": "搜索...",
+        "category": "类别",
+        "category_all": "所有类别",
+        "brand": "品牌",
+        "brand_all": "所有品牌",
+        "price_range": "价格范围",
+        "apply": "应用筛选"
+    }
+}

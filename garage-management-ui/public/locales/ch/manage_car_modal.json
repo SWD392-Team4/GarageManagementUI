@@ -1,0 +1,28 @@
+{
+    "manage_car_modal": {
+        "title": "车型管理",
+        "create": "创建车型",
+        "id": "编号",
+        "modalName": "车型名称",
+        "category": "类别",
+        "brand": "品牌",
+        "modelYear": "年份",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "edit": "编辑",
+        "search_model_name": "搜索车型名称",
+        "search_placeholder": "输入车型名称...",
+        "search_status": "状态",
+        "search_status_enum": {
+            "choose": "选择状态",
+            "active": "启用",
+            "inactive": "停用"
+        },
+        "search_modal_year": "年份",
+        "search_modal_year_placeholder": "输入年份",
+        "search_created_at": "创建日期",
+        "search_updated_at": "更新日期",
+        "clear_filters": "清除筛选",
+        "search": "搜索"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "manage_booking": {
+        "title": "预订管理",
+        "id": "预订编号",
+        "customer": "客户",
+        "room": "房间",
+        "status": "状态",
+        "confirm": "确认",
+        "cancel": "取消",
+        "view": "查看"
+    }
+}

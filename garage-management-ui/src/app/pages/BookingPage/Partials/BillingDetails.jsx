@@ -79,7 +79,6 @@ const BillingDetails = () => {
             </label>
             <input
               type="text"
-              value={sAccount.value.firstName + sAccount.value.lastName}
               className="w-full p-2 bg-white/40 outline-none"
               {...register("customerName")}
             />

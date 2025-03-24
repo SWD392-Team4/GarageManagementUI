@@ -1,0 +1,22 @@
+{
+    "register": {
+        "pageTitle": "注册 | TURBO TRACK | 2KS1.NET",
+        "userNameLabel": "用户名",
+        "userNamePlaceholder": "输入用户名",
+        "emailPlaceholder": "name@company.com",
+        "passwordLabel": "密码",
+        "comfirmPasswordLabel": "确认密码",
+        "signUpButton": "注册",
+        "signingUpButton": "正在注册...",
+        "MemberText": "已有账户？",
+        "signInLink": "登录",
+        "forgotPasswordText": "忘记密码？",
+        "resetPassLink": "重置密码",
+        "firstName": "名字",
+        "firstNamePlaceholder": "请输入名字",
+        "lastName": "姓氏",
+        "lastNamePlaceholder": "请输入姓氏",
+        "phone": "联系电话",
+        "phonePlaceholder": "请输入联系电话"
+    }
+}

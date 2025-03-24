@@ -18,7 +18,7 @@ export const getAllGara = async () => {
 export const getAllBrand = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/brands?PageSize=1000",
+      "/api/brands?PageSize=0",
       "GET",
       null,
       false
@@ -31,7 +31,7 @@ export const getAllBrand = async () => {
 export const getAllCarCategory = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/car-categories?Status=Active&PageSize=100",
+      "/api/car-categories?Status=Active&PageSize=0",
       "GET",
       null,
       false
@@ -44,7 +44,7 @@ export const getAllCarCategory = async () => {
 export const getAllPackage = async () => {
   try {
     const response = await userService.sendAjax(
-      `/api/packages?CarCategoryId=${BookingSignify.value.carCategoryId}&CarPartId=${BookingSignify.value.carPartId}&Status=Active&PageSize=50`,
+      `/api/packages?CarCategoryId=${BookingSignify.value.carCategoryId}&CarPartId=${BookingSignify.value.carPartId}&Status=Active&PageSize=0`,
       "GET",
       null,
       false
@@ -57,7 +57,7 @@ export const getAllPackage = async () => {
 export const getAllCarPart = async () => {
   try {
     const response = await userService.sendAjax(
-      `/api/car-parts?Status=Active&PageSize=50`,
+      `/api/car-parts?Status=Active&PageSize=0`,
       "GET",
       null,
       false
@@ -70,7 +70,7 @@ export const getAllCarPart = async () => {
 export const ServiceOnPackage = async (packageId) => {
   try {
     const response = await userService.sendAjax(
-      `/api/packages/${packageId}/services?PageSize=50'`,
+      `/api/packages/${packageId}/services?PageSize=0'`,
       "GET",
       null,
       false
@@ -109,7 +109,7 @@ export const getAllProductSuitable = async (carPartId) => {
 export const getAllCarModelWithBrandAndCategory = async () => {
   try {
     const response = await userService.sendAjax(
-      `/api/car-models?BrandId=${BookingSignify.value.brandId}&CarCategoryId=${BookingSignify.value.carCategoryId}&Status=Active&PageSize=100`,
+      `/api/car-models?BrandId=${BookingSignify.value.brandId}&CarCategoryId=${BookingSignify.value.carCategoryId}&Status=Active&PageSize=50`,
       "GET",
       null,
       false

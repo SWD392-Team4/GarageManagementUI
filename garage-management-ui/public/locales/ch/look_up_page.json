@@ -1,0 +1,10 @@
+{
+    "look_up_page": {
+        "step_page": {
+            "title": "查看服务流程",
+            "description": "只需几步，轻松查看服务进度！",
+            "find_garage": "查找车库",
+            "buttonFindGarage": "查找车库"
+        }
+    }
+}

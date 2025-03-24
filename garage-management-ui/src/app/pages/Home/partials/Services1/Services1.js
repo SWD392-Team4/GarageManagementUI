@@ -3,6 +3,25 @@ import {
   HiOutlineArrowNarrowLeft,
   HiOutlineArrowNarrowRight,
 } from "react-icons/hi";
+import {
+  FaArrowRight,
+  FaSearch,
+  FaSyncAlt,
+  FaOilCan,
+  FaRuler,
+  FaBolt,
+  FaTools,
+  FaSoap,
+  FaRocket,
+  FaRedo,
+  FaSave,
+  FaStar,
+  FaShieldAlt,
+  FaWind,
+  FaTint,
+  FaTrash,
+  FaLightbulb,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -29,111 +48,104 @@ import DeodorizeImage from "../../../../assets/services/deodorize.jpg";
 import ConditionImage from "../../../../assets/services/condition.jpg";
 import RemoveImage from "../../../../assets/services/remove.jpg";
 import RestoreLightingImage from "../../../../assets/services/restore-lighting.jpg";
-import {
-  FaSearch,
-  FaSyncAlt,
-  FaOilCan,
-  FaRuler,
-  FaBolt,
-  FaTools,
-  FaSoap,
-  FaRocket,
-  FaRedo,
-  FaSave,
-  FaStar,
-  FaShieldAlt,
-  FaWind,
-  FaTint,
-  FaTrash,
-  FaLightbulb,
-} from "react-icons/fa";
+
+// Mảng dịch vụ với icon và ảnh tương ứng
 const services = [
   {
     image: InspectImage,
     icon: <FaSearch className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "inspect",
-  }, // Kiểm tra
+  },
   {
     image: ReplaceImage,
     icon: <FaSyncAlt className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "replace",
-  }, // Thay thế
+  },
   {
     image: LubricateImage,
     icon: <FaOilCan className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "lubricate",
-  }, // Bôi trơn
+  },
   {
     image: AlignImage,
     icon: <FaRuler className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "align",
-  }, // Căn chỉnh
+  },
   {
     image: RefillImage,
     icon: <FaBolt className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "refill",
-  }, // Nạp
+  },
   {
     image: RepairImage,
     icon: <FaTools className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "repair",
-  }, // Sửa chữa
+  },
   {
     image: CleanImage,
     icon: <FaSoap className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "clean",
-  }, // Làm sạch
+  },
   {
     image: UpgradeImage,
     icon: <FaRocket className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "upgrade",
-  }, // Nâng cấp
+  },
   {
     image: RestoreImage,
     icon: <FaRedo className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "restore",
-  }, // Phục hồi
+  },
   {
     image: UpdateImage,
     icon: <FaSave className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "update",
-  }, // Cập nhật phần mềm
+  },
   {
     image: PolishImage,
     icon: <FaStar className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "polish",
-  }, // Đánh bóng
+  },
   {
     image: ProtectImage,
     icon: <FaShieldAlt className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "protect",
-  }, // Bảo vệ
+  },
   {
     image: DeodorizeImage,
     icon: <FaWind className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "deodorize",
-  }, // Khử mùi
+  },
   {
     image: ConditionImage,
     icon: <FaTint className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "condition",
-  }, // Dưỡng
+  },
   {
     image: RemoveImage,
     icon: <FaTrash className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "remove",
-  }, // Loại bỏ
+  },
   {
     image: RestoreLightingImage,
-    icon: <FaLightbulb />,
+    icon: <FaLightbulb className="text-white w-8 md:w-12 h-8 md:h-12" />,
     key: "restoreLighting",
-  }, // Phục hồi ánh sáng
+  },
 ];
+
+// Hàm rút gọn mô tả: loại bỏ ký tự markdown cơ bản và cắt ngắn nếu quá dài
+const getShortDescription = (description, maxLength = 150) => {
+  const plainText = description.replace(/[#*_>`-]/g, "");
+  return plainText.length > maxLength
+    ? plainText.substring(0, maxLength) + "..."
+    : plainText;
+};
 
 const Services1 = () => {
   const { t } = useTranslation("ver1");
   const [service, setService] = useState(data);
   const useService = new UserService();
+
   const getService = async () => {
     try {
       const response = await useService.sendAjax(
@@ -144,16 +156,18 @@ const Services1 = () => {
       );
       setService(response.data);
     } catch (error) {
-      console.error("Error fetching customer: ", error);
+      console.error("Error fetching service: ", error);
       return [];
     }
   };
+
   useEffect(() => {
     getService();
   }, []);
+
   return (
     <section className="bg-gray-50 relative w-full min-h-screen overflow-hidden">
-      {/* Phần Header */}
+      {/* Header */}
       <div className="h-24 md:h-20"></div>
       <div className="container mx-auto px-4">
         {/* Tiêu đề dịch vụ */}
@@ -197,7 +211,6 @@ const Services1 = () => {
               const matchAction = services.find(
                 (s) => s.key === item.action.toLowerCase()
               );
-
               return (
                 <SwiperSlide key={index} className="p-3 md:p-4 bg-gray-50">
                   <div className="relative flex flex-col items-center">
@@ -215,7 +228,7 @@ const Services1 = () => {
 
                     {/* Nội dung */}
                     <div className="p-4 pt-14 shadow-lg bg-white text-center border border-transparent hover:border-rose-700 rounded-lg transition-all group duration-300 relative w-full">
-                      {/* Icon - sử dụng icon từ matchAction nếu có */}
+                      {/* Icon */}
                       <div className="absolute -top-10 z-20 left-1/2 transform -translate-x-1/2 w-16 md:w-28 h-16 md:h-28 flex items-center justify-center bg-blue-950 group-hover:bg-rose-700 transition-colors duration-200">
                         {matchAction ? (
                           matchAction.icon
@@ -229,13 +242,13 @@ const Services1 = () => {
                         </Link>
                       </h3>
                       <p className="text-sm md:text-lg font-normal mx-4 md:mx-10 text-gray-600 mt-2">
-                        {item.description}
+                        {getShortDescription(item.description, 150)}
                       </p>
                       <Link
                         to={`/services/detail/${item.id}`}
                         className="inline-flex items-center text-blue-500 font-semibold uppercase text-sm md:text-lg mt-3 hover:text-rose-700 duration-300 transition-colors"
                       >
-                        READ MORE
+                        READ MORE <FaArrowRight className="ml-2" />
                       </Link>
                     </div>
                   </div>
@@ -245,7 +258,7 @@ const Services1 = () => {
           </Swiper>
 
           {/* Nút điều hướng */}
-          <div className="absolute top-1/2 -translate-y-1/2 left-2 md:left-[-60px] z-10 custom-button-prev flex items-center justify-center w-8 md:w-10 h-8 md:h-10 bg-blue-950 text-white shadow-lg hover:bg-rose-700 transition-all cursor-pointer ">
+          <div className="absolute top-1/2 -translate-y-1/2 left-2 md:left-[-60px] z-10 custom-button-prev flex items-center justify-center w-8 md:w-10 h-8 md:h-10 bg-blue-950 text-white shadow-lg hover:bg-rose-700 transition-all cursor-pointer">
             <HiOutlineArrowNarrowLeft className="w-4 md:w-5 h-4 md:h-5 transition-transform transform hover:-translate-x-1" />
           </div>
 

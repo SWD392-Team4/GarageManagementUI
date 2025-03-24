@@ -42,8 +42,8 @@ const ProductDetail = () => {
       <div className="md:flex items-start justify-center">
         {/* Image Carousel Section */}
         <div className="xl:w-2/6 lg:w-2/5 sm:w-full flex flex-col items-center">
-          {product.imageLink ? (
-            <ImageCarousel linkImage={product.imageLink} imagesWatch={[]} />
+          {product.productImage ? (
+            <ImageCarousel linkImage={product.productImage} imagesWatch={[]} />
           ) : (
             <img
               src={placeholder}

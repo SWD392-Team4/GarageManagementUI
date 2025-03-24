@@ -1,0 +1,14 @@
+{
+    "title": "创建入库单",
+    "labels": {
+        "supplier": "供应商",
+        "warehouse": "仓库",
+        "reference_number": "参考编号",
+        "invoice_code": "发票编号",
+        "source_address": "来源地址",
+        "source_wards": "来源区/乡镇",
+        "source_province": "来源省份",
+        "source_district": "来源地区",
+        "product_in_invoice": "发票中的产品"
+    }
+}

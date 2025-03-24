@@ -1,0 +1,15 @@
+{
+    "personal_info": {
+        "title": "个人信息",
+        "last_name": "名字",
+        "first_name": "姓氏",
+        "email": "邮箱",
+        "phone": "电话号码",
+        "dateBirth": "出生日期",
+        "Citizen": "身份证号",
+        "Gender": "性别",
+        "SGender": "选择性别",
+        "Male": "男",
+        "Female": "女"
+    }
+}

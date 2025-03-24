@@ -1,0 +1,13 @@
+{
+    "manage_customer": {
+        "id": "编号",
+        "firstName": "名字",
+        "lastName": "姓氏",
+        "email": "邮箱",
+        "phoneNumber": "联系电话",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "view": "查看"
+    }
+}

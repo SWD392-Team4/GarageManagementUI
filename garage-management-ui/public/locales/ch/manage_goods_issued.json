@@ -1,0 +1,8 @@
+{
+    "manage_goods_issued": {
+        "title": "出库管理",
+        "create": "创建出库单",
+        "loading": "加载中...",
+        "search": "搜索"
+    }
+}

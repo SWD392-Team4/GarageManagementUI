@@ -1,0 +1,22 @@
+{
+    "admin_profile": {
+        "title": "管理员资料",
+        "name": "约翰·多伊",
+        "role": "管理员",
+        "email": "johndoe@example.com",
+        "stats": {
+            "total_users": "用户总数",
+            "orders_processed": "已处理订单",
+            "revenue": "收入"
+        },
+        "profile_details": {
+            "title": "资料详情",
+            "full_name": "全名",
+            "email": "电子邮箱"
+        },
+        "biography": {
+            "title": "个人简介",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
+        }
+    }
+}

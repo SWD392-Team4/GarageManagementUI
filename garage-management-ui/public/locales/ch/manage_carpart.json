@@ -1,0 +1,29 @@
+{
+    "manage_carpart": {
+        "title": "汽车配件管理",
+        "create": "新增汽车配件",
+        "id": "编号",
+        "name": "配件名称",
+        "category": "类别",
+        "price": "价格",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "edit": "编辑",
+        "search_part_name": "配件名称",
+        "search_placeholder": "输入配件名称...",
+        "search_status": "状态",
+        "search_status_enum": {
+            "choose": "选择状态",
+            "active": "启用",
+            "inactive": "停用"
+        },
+        "search_created_at": "创建日期",
+        "search_updated_at": "更新日期",
+        "clear_filters": "清除筛选",
+        "search": "搜索",
+        "cancel": "取消",
+        "save": "保存",
+        "saving": "保存中..."
+    }
+}

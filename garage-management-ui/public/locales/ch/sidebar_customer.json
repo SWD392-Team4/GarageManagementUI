@@ -1,0 +1,14 @@
+{
+    "profile": {
+        "name": "约翰·多伊",
+        "role": "VIP客户"
+    },
+    "menu": {
+        "personal_info": "个人信息",
+        "order_history": "订单历史",
+        "current_orders": "当前订单",
+        "settings": "设置",
+        "logout": "退出",
+        "chatting": "聊天"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "pageTitle": "忘记密码",
+    "title": "忘记密码",
+    "home": "首页",
+    "subtitle": "重置您的密码",
+    "emailLabel": "邮箱",
+    "emailPlaceholder": "请输入您的邮箱",
+    "confirmButton": "确认",
+    "loading": "加载中...",
+    "successMessage": "请检查您的邮箱以重置密码。",
+    "errorMessage": "发生错误"
+}
