@@ -16,6 +16,7 @@ export default function ProductSidebar({
   isMobile,
 }) {
   const { t } = useTranslation("product_at_warehouse");
+  // console.log("Check selected Product ching chong hahaha: ", selectedProduct);
   return (
     selectedProduct && (
       <>
@@ -115,7 +116,7 @@ export default function ProductSidebar({
                   {t("product_at_warehouse.sidebar_product.category")}:
                 </label>
                 <p className="text-gray-700 text-md">
-                  {selectedProduct.carCategoryName}
+                  {selectedProduct.productCategoryName}
                 </p>
               </div>
 
@@ -138,7 +139,7 @@ export default function ProductSidebar({
                 </label>
                 <div className="border rounded-md p-3 bg-gray-50 flex justify-center items-center">
                   <Barcode
-                    value={selectedProduct.productBarcodeAtGarage}
+                    value={selectedProduct.productBarcode}
                     width={isMobile ? 2 : 2}
                     height={isMobile ? 80 : 60}
                     fontSize={isMobile ? 10 : 15}
@@ -151,7 +152,7 @@ export default function ProductSidebar({
               <hr className="border-gray-200" />
 
               {/* Mô tả sản phẩm (Markdown) */}
-              <div>
+              {/* <div>
                 <label className="text-gray-500 text-sm">
                   {t("product_at_warehouse.sidebar_product.description")}:
                 </label>
@@ -166,7 +167,7 @@ export default function ProductSidebar({
                     }
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
           </>
         ) : (

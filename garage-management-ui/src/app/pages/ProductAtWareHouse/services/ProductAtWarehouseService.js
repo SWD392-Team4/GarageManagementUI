@@ -135,6 +135,25 @@ export const getProductAtWarehouseByBarCode = async (productBarCode) => {
   }
 };
 
+export const getProductAtGarageByBarCode = async (productBarCode) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/barcode/scan/warehouse/${
+        sAccount.value.role === "Administrator"
+          ? AppointmentSignify.value.garaCurrent
+          : sAccount.value.workPlaceId
+      }/${productBarCode}`,
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.description);
+    console.error("Fail With: ", error.message);
+  }
+};
+
 // ========================================================Goods Received==========================================
 
 export const getAllGoodsReceived = async (params = {}) => {

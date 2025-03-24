@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   getProductByWareHouse,
   getProductDetails,
+  getProductAtGarageByBarCode,
 } from "../../services/ProductAtWarehouseService";
 import ProductCards from "../component/ProductCards";
 import ProductSidebar from "../component/ProductSidebar";
@@ -41,7 +42,7 @@ export default function ListProductAtWareHouse() {
 
   // Khi click vào sản phẩm -> Fetch chi tiết sản phẩm và mở sidebar
   const handleSelectProduct = async (productId) => {
-    const details = await getProductDetails(productId);
+    const details = await getProductAtGarageByBarCode(productId);
     setSelectedProduct(details.data.value);
     setIsSidebarOpen(true);
   };

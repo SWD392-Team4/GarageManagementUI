@@ -10,11 +10,13 @@ import { useTranslation } from "react-i18next";
 export default function ProductCard({ product, handleSelectProduct }) {
   const { t } = useTranslation("product_at_warehouse");
 
+  // console.log("Check product chil chil: ", product);
+
   return (
     <div
       key={product.id}
       className="border rounded-xl shadow-md p-4 cursor-pointer hover:shadow-xl transition bg-white h-full flex flex-col justify-between"
-      onClick={() => handleSelectProduct(product.id)}
+      onClick={() => handleSelectProduct(product.productBarcode)}
     >
       {/* Ảnh sản phẩm */}
       <img
@@ -36,7 +38,7 @@ export default function ProductCard({ product, handleSelectProduct }) {
           <div className="flex items-center gap-1">
             <FaTag className="text-gray-500" />
             <span className="font-medium">
-              {product.productCategory ||
+              {product.productCategoryName ||
                 t("product_at_warehouse.product_card.no_category")}
             </span>
           </div>
@@ -83,7 +85,7 @@ export default function ProductCard({ product, handleSelectProduct }) {
             product.status
           )}`}
         >
-          {getStatusLabel(product.status)}
+          {getStatusLabel(product.productStatus)}
         </span>
       </div>
     </div>

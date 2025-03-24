@@ -11,7 +11,10 @@ import {
 } from "./service/GoodsReceivedService";
 import { useTranslation } from "react-i18next";
 import ProductSelectWithSearch from "./partials/ProductSelectWithSearch";
-import { getGoodsReceivedSchema } from "./schemas/GoodsReceivedSchema";
+import {
+  formatVietnameseCurrency,
+  getGoodsReceivedSchema,
+} from "./schemas/GoodsReceivedSchema";
 
 const CreateGoodReceived = () => {
   const { t } = useTranslation("create_good_received");
@@ -291,44 +294,69 @@ const CreateGoodReceived = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {selectedProducts.map((item, index) => (
-                  <tr key={index} className="hover:bg-gray-50">
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      {item.productName}
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      <input
-                        type="number"
-                        min={1}
-                        value={item.quantity}
-                        onChange={(e) =>
-                          handleUpdateQuantity(index, e.target.value)
-                        }
-                        className="w-20 border border-gray-300 rounded-sm px-2 py-1 text-sm"
-                      />
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      <input
-                        type="number"
-                        min={1000}
-                        value={item.unitPrice}
-                        onChange={(e) =>
-                          handleUpdatePrice(index, e.target.value)
-                        }
-                        className="w-1/2 border border-gray-300 rounded-sm px-2 py-1 text-sm"
-                      />
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveProduct(index)}
-                        className="text-red-500 hover:underline"
-                      >
-                        {t("buttons.remove")}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {selectedProducts.map((item, index) => {
+                  // Lấy giá sản phẩm từ danh sách products
+                  console.log(item);
+                  const product = products.find((p) => p.id === item.productId);
+                  const productPrice = product ? product.productPrice : 0; // Mặc định 0 nếu không tìm thấy
+
+                  // Tính toán chênh lệch giá
+                  const difference = item.unitPrice - productPrice;
+
+                  return (
+                    <tr key={index} className="hover:bg-gray-50">
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {item.productName}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <input
+                          type="number"
+                          min={1}
+                          value={item.quantity}
+                          onChange={(e) =>
+                            handleUpdateQuantity(index, e.target.value)
+                          }
+                          className="w-20 border border-gray-300 rounded-sm px-2 py-1 text-sm"
+                        />
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <input
+                          type="number"
+                          min={1000}
+                          value={item.unitPrice}
+                          onChange={(e) =>
+                            handleUpdatePrice(index, e.target.value)
+                          }
+                          className="w-1/2 border border-gray-300 rounded-sm px-2 py-1 text-sm"
+                        />
+                        {difference !== 0 && (
+                          <span
+                            className={`ml-2 text-xs ${
+                              difference > 0 ? "text-green-500" : "text-red-500"
+                            }`}
+                          >
+                            {difference > 0
+                              ? `Trên giá cửa hàng ${formatVietnameseCurrency(
+                                  difference
+                                )} `
+                              : `Dưới giá cửa hàng ${formatVietnameseCurrency(
+                                  difference
+                                )} `}
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveProduct(index)}
+                          className="text-red-500 hover:underline"
+                        >
+                          {t("buttons.remove")}
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
