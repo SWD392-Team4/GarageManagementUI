@@ -8,6 +8,7 @@ import {
   FaWrench,
   FaClock,
   FaTimes,
+  FaExclamationTriangle,
 } from "react-icons/fa";
 import { useMediaQuery } from "react-responsive";
 import CarConditionImages from "./CarConditionImages";
@@ -20,6 +21,12 @@ export default function ViewAppointmentLookUpMobile({ appointment }) {
   const [selectedService, setSelectedService] = useState(null);
   const [showAllPackages, setShowAllPackages] = useState(false);
   const { t } = useTranslation("look_up_page");
+  ///Cancel them tinh nanng vui ve kh quao
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
+
+  const openCancelModal = () => setIsCancelModalOpen(true);
+  const closeCancelModal = () => setIsCancelModalOpen(false);
 
   if (!isMobile) return null;
   if (!appointment) {
@@ -30,6 +37,11 @@ export default function ViewAppointmentLookUpMobile({ appointment }) {
     );
   }
 
+  const submitCancel = async () => {
+    if (cancelReason.trim() === "") return;
+    await cancelAppointment(cancelReason);
+    closeCancelModal();
+  };
   return (
     <div className="p-4 md:hidden">
       {/* Appointment Info */}
@@ -92,6 +104,16 @@ export default function ViewAppointmentLookUpMobile({ appointment }) {
               {appointment.estimatedEndTime}
             </p>
           </div>
+          {appointment.status !== "Cancelled" && (
+            <div>
+              <button
+                onClick={openCancelModal}
+                className="bg-red-600 text-white p-2 rounded flex items-center gap-2"
+              >
+                <FaExclamationTriangle /> Cancel
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -188,6 +210,43 @@ export default function ViewAppointmentLookUpMobile({ appointment }) {
               )}
             </button>
           )}
+        </div>
+      )}
+
+      {isCancelModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded shadow-lg w-96 relative">
+            <button
+              onClick={closeCancelModal}
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+            >
+              <FaTimes />
+            </button>
+            <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+              <FaExclamationTriangle className="text-red-600" /> Cancel
+              Appointment
+            </h2>
+            <textarea
+              placeholder="Enter reason for cancellation..."
+              value={cancelReason}
+              onChange={(e) => setCancelReason(e.target.value)}
+              className="w-full p-2 border rounded"
+            />
+            <div className="flex justify-end gap-2 mt-4">
+              <button
+                onClick={closeCancelModal}
+                className="bg-gray-300 p-2 rounded"
+              >
+                Close
+              </button>
+              <button
+                onClick={submitCancel}
+                className="bg-red-600 text-white p-2 rounded flex items-center gap-2"
+              >
+                <FaExclamationTriangle /> Submit
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>

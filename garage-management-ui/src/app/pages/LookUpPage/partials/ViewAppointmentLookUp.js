@@ -14,8 +14,12 @@ import {
   FaChevronRight,
   FaTimes,
   FaChevronUp,
+  FaExclamationTriangle,
 } from "react-icons/fa";
-import { viewAppointmentLookUp } from "../services/LookUpService";
+import {
+  cancelAppointment,
+  viewAppointmentLookUp,
+} from "../services/LookUpService";
 import { sLookUp } from "../services/LookUpSignify";
 import { useNavigate } from "react-router-dom";
 import CarConditionImages from "./CarConditionImages";
@@ -32,6 +36,12 @@ export default function ViewAppointmentLookUp() {
   const navigation = useNavigate();
   const isMobile = useMediaQuery({ maxWidth: 768 });
   const { t } = useTranslation("look_up_page");
+  ///Cancel them tinh nanng vui ve kh quao
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
+
+  const openCancelModal = () => setIsCancelModalOpen(true);
+  const closeCancelModal = () => setIsCancelModalOpen(false);
 
   // const toggleService = (index) => {
   //     setExpandedService(expandedService === index ? null : index);
@@ -81,6 +91,12 @@ export default function ViewAppointmentLookUp() {
       </div>
     );
   }
+
+  const submitCancel = async () => {
+    if (cancelReason.trim() === "") return;
+    await cancelAppointment(cancelReason);
+    closeCancelModal();
+  };
 
   return (
     <>
@@ -161,6 +177,16 @@ export default function ViewAppointmentLookUp() {
                 {appointment.estimatedEndTime}
               </p>
             </div>
+            {appointment.status !== "Cancelled" && (
+              <div>
+                <button
+                  onClick={openCancelModal}
+                  className="bg-red-600 text-white p-2 rounded flex items-center gap-2"
+                >
+                  <FaExclamationTriangle /> Cancel
+                </button>
+              </div>
+            )}
           </div>
 
           {/* Main Content */}
@@ -317,6 +343,42 @@ export default function ViewAppointmentLookUp() {
                 )}
               </div>
             )}
+          </div>
+        </div>
+      )}
+      {isCancelModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded shadow-lg w-96 relative">
+            <button
+              onClick={closeCancelModal}
+              className="absolute top-2 right-2 text-gray-600 hover:text-gray-900"
+            >
+              <FaTimes />
+            </button>
+            <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+              <FaExclamationTriangle className="text-red-600" /> Cancel
+              Appointment
+            </h2>
+            <textarea
+              placeholder="Enter reason for cancellation..."
+              value={cancelReason}
+              onChange={(e) => setCancelReason(e.target.value)}
+              className="w-full p-2 border rounded"
+            />
+            <div className="flex justify-end gap-2 mt-4">
+              <button
+                onClick={closeCancelModal}
+                className="bg-gray-300 p-2 rounded"
+              >
+                Close
+              </button>
+              <button
+                onClick={submitCancel}
+                className="bg-red-600 text-white p-2 rounded flex items-center gap-2"
+              >
+                <FaExclamationTriangle /> Submit
+              </button>
+            </div>
           </div>
         </div>
       )}

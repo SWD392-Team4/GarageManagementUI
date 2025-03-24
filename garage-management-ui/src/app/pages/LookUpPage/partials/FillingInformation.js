@@ -108,10 +108,10 @@ export default function FillingInformation() {
   return (
     <div className="font-extrabold font-space relative pb-10 ">
       {/* Container chính */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-5xl mx-auto p-8 relative border-2 border-gray-300 rounded-lg overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center max-w-5xl mx-auto p-8 relative border-2 border-black rounded-lg overflow-hidden">
         {/* Cột Trái - Form Nhập Thông Tin */}
         <div className="space-y-6">
-          <h2 className="text-4xl font-bold uppercase tracking-wide text-gray-700 mb-6">
+          <h2 className="text-4xl font-bold uppercase tracking-wide text-black mb-6">
             Fill Your Information
           </h2>
 
@@ -125,7 +125,7 @@ export default function FillingInformation() {
           {/* Input Fields */}
           <div className="space-y-6">
             <div>
-              <label className="block text-gray-700 text-lg mb-1">
+              <label className="block text-black text-lg mb-1">
                 Verify Code
               </label>
               <input
@@ -134,10 +134,10 @@ export default function FillingInformation() {
                 value={formData.verifyCode}
                 onChange={handleChange}
                 disabled={isConfirmed}
-                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-gray-400 ${
+                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-white ${
                   errorMessage && !formData.verifyCode
                     ? "border-red-500"
-                    : "border-gray-500"
+                    : "border-black"
                 } ${
                   isConfirmed ? "cursor-not-allowed" : "focus:border-orange-500"
                 }`}
@@ -146,7 +146,7 @@ export default function FillingInformation() {
             </div>
 
             <div>
-              <label className="block text-gray-700 text-lg mb-1">
+              <label className="block text-black text-lg mb-1">
                 Customer Email
               </label>
               <input
@@ -155,10 +155,10 @@ export default function FillingInformation() {
                 value={formData.customerEmail}
                 onChange={handleChange}
                 disabled={isConfirmed}
-                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-gray-400 ${
+                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-white ${
                   errorMessage && !formData.customerEmail
                     ? "border-red-500"
-                    : "border-gray-500"
+                    : "border-black"
                 } ${
                   isConfirmed ? "cursor-not-allowed" : "focus:border-orange-500"
                 }`}
@@ -167,7 +167,7 @@ export default function FillingInformation() {
             </div>
 
             <div>
-              <label className="block text-gray-700 text-lg mb-1">
+              <label className="block text-black text-lg mb-1">
                 Customer Phone Number
               </label>
               <input
@@ -176,10 +176,10 @@ export default function FillingInformation() {
                 value={formData.customerPhone}
                 onChange={handleChange}
                 disabled={isConfirmed}
-                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-gray-400 ${
+                className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-white ${
                   errorMessage && !formData.customerPhone
                     ? "border-red-500"
-                    : "border-gray-500"
+                    : "border-black"
                 } ${
                   isConfirmed ? "cursor-not-allowed" : "focus:border-orange-500"
                 }`}
@@ -189,7 +189,7 @@ export default function FillingInformation() {
 
             {/* Trường EstimatedTime */}
             <div>
-              <label className="block text-gray-700 text-lg mb-1">
+              <label className="block text-black text-lg mb-1">
                 Estimated Time
               </label>
               <input
@@ -201,7 +201,7 @@ export default function FillingInformation() {
                 className={`w-full bg-transparent border-b p-2 outline-none text-white placeholder-gray-400 ${
                   errorMessage && !formData.estimatedTime
                     ? "border-red-500"
-                    : "border-gray-500"
+                    : "border-black"
                 } ${
                   isConfirmed ? "cursor-not-allowed" : "focus:border-orange-500"
                 }`}
@@ -213,7 +213,7 @@ export default function FillingInformation() {
               {isConfirmed && (
                 <button
                   onClick={handleCancel}
-                  className="group/link px-6 py-2 text-gray-700 border border-gray-700 rounded hover:bg-gray-700 hover:text-white transition relative"
+                  className="group/link px-6 py-2 text-white border border-black rounded hover:bg-black hover:text-white transition relative"
                 >
                   Cancel
                   <span className="block border-b border-orange-700 h-1 w-5 ml-auto group-hover/link:w-[60px] transition-all duration-300"></span>
@@ -223,7 +223,7 @@ export default function FillingInformation() {
               {!isConfirmed && (
                 <button
                   onClick={handleConfirm}
-                  className="group/link px-6 py-2 text-gray-700 border border-gray-700 rounded hover:bg-gray-700 hover:text-white transition relative"
+                  className="group/link px-6 py-2 text-white border border-black rounded hover:bg-black hover:text-white transition relative"
                 >
                   Confirm
                   <span className="block border-b border-orange-700 h-1 w-5 ml-auto group-hover/link:w-[60px] transition-all duration-300"></span>
@@ -234,23 +234,22 @@ export default function FillingInformation() {
         </div>
 
         {/* Cột Phải - Slogan + Animation */}
-        <div className="flex flex-col items-center text-center text-gray-700 space-y-6 relative">
+        <div className="flex flex-col items-center text-center text-black space-y-6 relative">
           <h3 className="text-3xl font-bold uppercase">
             Drive with Confidence
           </h3>
-          <p className="text-lg text-gray-700 max-w-md">
+          <p className="text-lg text-black max-w-md">
             We ensure your car gets the best service, keeping you safe on every
             journey.
           </p>
 
           <div className="relative w-32 h-32 flex items-center justify-center">
-            <PiSteeringWheel className="text-gray-700 w-full h-full animate-spin-slow" />
+            <PiSteeringWheel className="text-black w-full h-full animate-spin-slow" />
           </div>
 
           <Navigation
             prevLink="/look-up/select-garage"
-            // {...(formData ? { nextLink: "/look-up/view-appointment" } : {})}
-            nextLink="/look-up/view-appointment"
+            nextLink={isConfirmed ? "/look-up/view-appointment" : ""}
           />
         </div>
       </div>

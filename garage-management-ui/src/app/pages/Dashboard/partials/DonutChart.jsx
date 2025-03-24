@@ -6,9 +6,8 @@ class DonutChart extends Component {
   render() {
     const data = {
       columns: [
-        ["Invoice use services", 12],
-        ["Invoice buy product ", 30],
-        ["Invoice buy package", 20],
+        ["Invoice use ser,vices", 12],
+        ["Invoice buy product ", 30][("Invoice buy package", 20)],
       ],
       type: "donut",
     };
