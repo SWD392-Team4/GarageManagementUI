@@ -10,6 +10,7 @@ import ProductCard from "../../partials/component/ProductCard";
 import ProductSidebar from "../../partials/component/ProductSidebar";
 import { useMediaQuery } from "react-responsive";
 import { AppointmentSignify } from "../../../AdminManageAppoinment/services/store/AppointmentSignify";
+import BarcodeScannerComponent from "react-qr-barcode-scanner";
 
 export default function ListProductAtGarage() {
   const sAppointmentSignify = AppointmentSignify.use();
@@ -40,7 +41,7 @@ export default function ListProductAtGarage() {
 
   // Khi click vào sản phẩm -> Fetch chi tiết sản phẩm và mở sidebar
   const handleSelectProduct = async (productId) => {
-    const details = await getProductDetails(productId);
+    const details = await getProductAtGarageByBarCode(productId);
     setSelectedProduct(details.data.value);
     setIsSidebarOpen(true);
   };
@@ -126,6 +127,9 @@ export default function ListProductAtGarage() {
       setIsSidebarOpen(true);
     } catch (error) {
       console.error("Lỗi khi tìm kiếm sản phẩm:", error);
+    } finally {
+      setIsLoading(false);
+      setIsScanning(false);
     }
   };
 

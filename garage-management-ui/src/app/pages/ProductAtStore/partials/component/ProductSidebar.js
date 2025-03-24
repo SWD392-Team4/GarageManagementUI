@@ -16,6 +16,7 @@ export default function ProductSidebar({
   isMobile,
 }) {
   const { t } = useTranslation("product_at_store");
+  console.log("Check product tai side bar:  ", selectedProduct);
 
   return (
     selectedProduct && (
@@ -93,18 +94,20 @@ export default function ProductSidebar({
                 <div className="flex items-center gap-2">
                   <span className="flex items-center gap-1 text-md font-semibold">
                     <FaBox className="text-gray-600" />
-                    <span className={getStockColor(selectedProduct.quantity)}>
-                      {selectedProduct.quantity}
+                    <span
+                      className={getStockColor(selectedProduct.totalQuantity)}
+                    >
+                      {selectedProduct.totalQuantity}
                     </span>
                   </span>
                   <span
                     className={`px-3 py-1 text-sm font-semibold rounded-md ${
-                      selectedProduct.quantity > 0
+                      selectedProduct.totalQuantity > 0
                         ? "bg-green-100 text-green-700"
                         : "bg-red-100 text-red-700"
                     }`}
                   >
-                    {getStockLabel(selectedProduct.quantity)}
+                    {getStockLabel(selectedProduct.totalQuantity)}
                   </span>
                 </div>
               </div>
