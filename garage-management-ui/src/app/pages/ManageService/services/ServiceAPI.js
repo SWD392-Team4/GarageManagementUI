@@ -184,7 +184,7 @@ export const updateService = async (serviceId, updateData) => {
 export const getCarCategory = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/car-categories?PageSize=50&Fields=id%2C%20category",
+      "/api/car-categories?PageSize=0&Fields=id%2C%20category",
       "GET",
       null,
       true
@@ -202,7 +202,7 @@ export const getCarCategory = async () => {
 export const getCarPart = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/car-parts?Fields=Id%2C%20PartName",
+      "/api/car-parts?PageSize=0&Fields=id%2C%20partName",
       "GET",
       null,
       true
