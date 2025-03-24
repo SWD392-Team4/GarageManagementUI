@@ -190,7 +190,7 @@ const Notification = () => {
   const unreadCount = notifications.filter((item) => !item.isRead).length;
 
   return (
-    <div className="relative">
+    <div className="relative hidden md:block">
       <button onClick={toggleDropdown} className="focus:outline-none relative">
         <GoBell className="text-3xl" />{" "}
         {unreadCount > 0 && (

@@ -1,7 +1,11 @@
 import UserService from "../../../hooks/services/UserService";
 import { sAccount } from "../../AuthCustomer/services/store";
+import { ConnectionSignify } from "../../Notification/services/connectionSignify";
 import { formatDate } from "../schemas/appointmentSchema";
-import { AppointmentSignify } from "./store/AppointmentSignify";
+import {
+  AppointmentSignify,
+  currentAppointment,
+} from "./store/AppointmentSignify";
 import { FilterAppointment } from "./store/FilterStore";
 
 const userService = new UserService();
@@ -382,6 +386,11 @@ export const AssignAppointmentDetail = async (
       },
       true
     );
+    await sendNotification(
+      ConnectionSignify.value.connection,
+      notificationTypes.APPOINTMENT_ASSIGNED,
+      employeeid
+    );
     userService.showToast(
       200,
       "Assign Employee to appointment detail successfull!"
@@ -469,6 +478,37 @@ export const addAppointmentDetail = async (data, appoinmentId) => {
       true
     );
     userService.showToast(200, "Add detail appointment successfull");
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const updateReplacementPart = async (
+  appoinmentId,
+  detailId,
+  replacementPartId,
+  data
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${sAccount.value.workPlaceId}/appointments/${appoinmentId}/details/${detailId}/products/${replacementPartId}`,
+      "PUT",
+      data,
+      true
+    );
+    currentAppointment.set((v) => {
+      v.value.load += 1;
+    });
+    if (response) {
+      userService.showToast(
+        200,
+        data.status === "Cancelled"
+          ? "Delete product from Service successfull! "
+          : "Update product from Service successfull! "
+      );
+    }
     return response;
   } catch (error) {
     userService.showToast(400, error.message);

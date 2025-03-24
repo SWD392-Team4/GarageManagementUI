@@ -1,26 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { GiCancel } from "react-icons/gi";
-import { IoRemoveCircleOutline } from "react-icons/io5";
-import { MdListAlt } from "react-icons/md";
+import { LuView } from "react-icons/lu";
+import { MdListAlt, MdOutlineAssignmentInd } from "react-icons/md";
 import { useParams } from "react-router-dom";
 import BaseTable from "../../../components/BaseTable/BaseTable";
 import { formatVietnameseCurrency } from "../../ManageGoodsIssued/schemas/GoodsIssuedSchemas";
 import AddAppointmentDetail from "../models/AddAppointmentDetail";
+import CancelDetailAppointment from "../models/CancelDetailAppointment";
 import ReplacementPartsModal from "../models/ReplacementPartsModal";
 import { formatDate } from "../schemas/appointmentSchema";
 import { currentAppointment } from "../services/store/AppointmentSignify";
 import { sServicesInAppointment } from "../services/store/FilterStore";
-import CancelDetailAppointment from "../models/CancelDetailAppointment";
-import {
-  MdOutlineAssignmentInd,
-  MdOutlineAssignmentLate,
-} from "react-icons/md";
-import { FaPencilAlt } from "react-icons/fa";
-import { LuView } from "react-icons/lu";
 
 import AssginEmployee from "../models/AssginEmployee";
-import UnAssginEmployee from "./UnAssginEmployee";
 import ServiceDetailModal from "../models/ServiceDetailModal";
 
 export default function ServicesInAppointment() {
@@ -53,6 +46,7 @@ export default function ServicesInAppointment() {
     pagination.page,
     sAppointment.appointmentDetailPackages,
     sAppointment.appointmentDetails,
+    sAppointment.load,
   ]);
 
   const fetchData = async (page) => {
@@ -102,6 +96,7 @@ export default function ServicesInAppointment() {
       onClick: async (row) => {
         try {
           setProducts(row.appointmentReplacementParts);
+
           setIsUpdateModalOpen(true);
           setServiceDetailId(row.id);
         } catch (error) {
@@ -110,7 +105,9 @@ export default function ServicesInAppointment() {
       },
       // luôn hiển thị, không cần điều kiện
       shouldDisplay: (row) =>
-        row.status !== "Declined" && row.status !== "Cancelled",
+        row.status !== "Declined" &&
+        row.status !== "Cancelled" &&
+        row.status !== "Completed",
     },
     {
       type: "modal",
@@ -138,7 +135,9 @@ export default function ServicesInAppointment() {
       },
       // chỉ hiển thị nếu row.status không bằng "Declined"
       shouldDisplay: (row) =>
-        row.status !== "Declined" && row.status !== "Cancelled",
+        row.status !== "Declined" &&
+        row.status !== "Cancelled" &&
+        row.status !== "Completed",
     },
     {
       type: "modal",
@@ -166,7 +165,8 @@ export default function ServicesInAppointment() {
       <div className="bg-gray-300 text-xs md:text-sm uppercase mt-3 md:mt-5 p-2 font-title font-bold flex flex-col md:flex-row justify-between items-start md:items-center">
         <div>Services in appointment</div>
         {currentAppointment.value.status !== "Rejected" &&
-          currentAppointment.value.status !== "Cancelled" && (
+          currentAppointment.value.status !== "Cancelled" &&
+          currentAppointment.value.status !== "Completed" && (
             <AddAppointmentDetail id={id} />
           )}
       </div>
@@ -175,12 +175,7 @@ export default function ServicesInAppointment() {
         <BaseTable
           columns={columns}
           data={data}
-          actions={
-            currentAppointment.value.status !== "Rejected" &&
-            currentAppointment.value.status !== "Cancelled"
-              ? actions
-              : ""
-          }
+          actions={actions}
           pagination={pagination}
           fetchData={fetchData}
           signifyInformation={sServicesInAppointment.value}

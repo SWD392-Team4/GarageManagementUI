@@ -39,15 +39,10 @@ export const getAllAppointment = async (status) => {
   }
 
   // Xây dựng URL đầy đủ với workplaceId và các queryParams
-  const query = `/api/workplaces/6760cbb7-f1fa-445f-a175-97e3f060c861/appointments?${queryParams}`;
+  const query = `/api/users/my-schedules?${queryParams}`;
 
   try {
-    const response = await userService.sendAjax(
-      "/api/users/my-schedules",
-      "GET",
-      null,
-      true
-    );
+    const response = await userService.sendAjax(query, "GET", null, true);
     response.data.value = response.data.value.map((pre) => ({
       ...pre,
       estimatedAppointmentTime: formatDate(pre.estimatedAppointmentTime),
@@ -77,35 +72,58 @@ export const AddAppointmentReplacementPartDetailApi = async (
       true
     );
     userService.showToast(200, "Add Product to service successful");
+    await refreshCurrentAppointment();
     return response;
   } catch (error) {
     console.error("Fail with : ", error.message);
     userService.showToast(400, error.message);
   }
 };
-export const StartAppointmet = async (scheduleId) => {
+export const StartAppointmet = async (
+  scheduleId,
+  imageFormData,
+  appoinmentId,
+  detailId
+) => {
   try {
     const response = await userService.sendAjax(
       `/api/users/schedules/${scheduleId}/start`,
-      "POST",
+      "GET",
       null,
       true
     );
+    const response2 = await carconditonImageBefore(
+      imageFormData,
+      appoinmentId,
+      detailId
+    );
+    await refreshCurrentAppointment();
     userService.showToast(200, " Start appointment successful");
-    return response;
+    return response, response2;
   } catch (error) {
     console.error("Fail with StartAppointmet : ", error.message);
     userService.showToast(400, error.message);
   }
 };
-export const EndAppointmet = async (scheduleId) => {
+export const EndAppointmet = async (
+  scheduleId,
+  imageFormData,
+  appoinmentId,
+  detailId
+) => {
   try {
     const response = await userService.sendAjax(
       `/api/users/schedules/${scheduleId}/end`,
-      "POST",
+      "GET",
       null,
       true
     );
+    const response2 = await carconditonImageAfter(
+      imageFormData,
+      appoinmentId,
+      detailId
+    );
+    await refreshCurrentAppointment();
     userService.showToast(200, " End appointment successful");
     return response;
   } catch (error) {
@@ -121,9 +139,7 @@ export const addAppointmentDetail = async (data, appoinmentId) => {
       data,
       true
     );
-    currentAppointment.set((v) => {
-      v.value.load += 1;
-    });
+    await refreshCurrentAppointment();
     userService.showToast(
       200,
       "Request add service successfull please waiting cashier confirm!"
@@ -133,5 +149,93 @@ export const addAppointmentDetail = async (data, appoinmentId) => {
     userService.showToast(400, error.message);
 
     console.error("Fail with: ", error);
+  }
+};
+export const carconditonImageBefore = async (
+  imageFormData,
+  appoinmentId,
+  detailId
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/appointments/${appoinmentId}/appointment-details/${detailId}/car-conditions/before`,
+      "POST",
+      imageFormData,
+      true,
+      true
+    );
+
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const carconditonImageAfter = async (
+  imageFormData,
+  appoinmentId,
+  detailId
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/appointments/${appoinmentId}/appointment-details/${detailId}/car-conditions/after`,
+      "POST",
+      imageFormData,
+      true,
+      true
+    );
+
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+export const updateReplacementPart = async (
+  appoinmentId,
+  detailId,
+  replacementPartId,
+  data
+) => {
+  try {
+    const response = await userService.sendAjax(
+      `/api/workplaces/${sAccount.value.workPlaceId}/appointments/${appoinmentId}/details/${detailId}/products/${replacementPartId}`,
+      "PUT",
+      data,
+      true
+    );
+    await refreshCurrentAppointment();
+    return response;
+  } catch (error) {
+    userService.showToast(400, error.message);
+
+    console.error("Fail with: ", error);
+  }
+};
+// Giả sử hàm getAllAppointment đã được import và trả về response với:
+// response.data.value là một mảng các appointment,
+// trong đó mỗi appointment có thuộc tính "id" và "appointmentDetails"
+export const refreshCurrentAppointment = async () => {
+  try {
+    const response = await getAllAppointment();
+    // Lấy id của appointment hiện tại (theo store)
+    const currentId = currentAppointment.value.appointmentDetail.id;
+    // Tìm appointment trong kết quả trả về có id khớp
+    const updatedAppointment = response.data.value.find(
+      (app) => app.id === currentId
+    );
+    if (updatedAppointment) {
+      // Cập nhật lại store currentAppointment để giao diện được re-render
+      currentAppointment.set((v) => {
+        v.value.appointmentDetail = updatedAppointment;
+        return v;
+      });
+    } else {
+      console.error("Không tìm thấy appointment có id:", currentId);
+    }
+  } catch (error) {
+    console.error("Error refreshing current appointment:", error);
   }
 };

@@ -120,7 +120,8 @@
     "arrival": "Đã đến",
     "in_progress": "Đang thực hiện",
     "completed": "Hoàn thành",
-    "canceled": "Đã hủy"
+    "canceled": "Đã hủy",
+    "rejected": "Khách Hủy"
   },
   "unAssgn": {
     "UnassignEmployee": "Bỏ phân công nhân viên",

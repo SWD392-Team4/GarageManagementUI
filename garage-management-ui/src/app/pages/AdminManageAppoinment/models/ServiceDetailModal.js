@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { GiCancel } from "react-icons/gi";
 import {
   MdListAlt,
@@ -12,7 +12,17 @@ import { formatVietnameseCurrency } from "../../ManageGoodsIssued/schemas/GoodsI
 
 const ServiceDetailModal = ({ isOpen, onClose, serviceDetail }) => {
   if (!isOpen || !serviceDetail) return null;
-
+  const [serviceData, setServiceData] = useState({
+    ...serviceDetail,
+    imagesBefore:
+      serviceDetail.carConditionImages?.filter(
+        (img) => img.conditionStage === "Before"
+      ) || [],
+    imagesAfter:
+      serviceDetail.carConditionImages?.filter(
+        (img) => img.conditionStage === "After"
+      ) || [],
+  });
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 ">
       {/* Overlay */}
@@ -64,20 +74,22 @@ const ServiceDetailModal = ({ isOpen, onClose, serviceDetail }) => {
                   Phụ tùng thay thế
                 </h3>
                 <div className="mt-2 space-x-2 grid grid-cols-4">
-                  {serviceDetail.appointmentReplacementParts.map((part) => (
-                    <div key={part.id} className="p-2 border rounded">
-                      <p>
-                        <strong>Tên phụ tùng:</strong> {part.productName}
-                      </p>
-                      <p>
-                        <strong>Số lượng:</strong> {part.quantity}
-                      </p>
-                      <p>
-                        <strong>Giá:</strong>{" "}
-                        {formatVietnameseCurrency(part.productPrice)}
-                      </p>
-                    </div>
-                  ))}
+                  {serviceDetail.appointmentReplacementParts
+                    .filter((part) => part.status !== "Cancelled")
+                    .map((part) => (
+                      <div key={part.id} className="p-2 border rounded">
+                        <p>
+                          <strong>Tên phụ tùng:</strong> {part.productName}
+                        </p>
+                        <p>
+                          <strong>Số lượng:</strong> {part.quantity}
+                        </p>
+                        <p>
+                          <strong>Giá:</strong>{" "}
+                          {formatVietnameseCurrency(part.productPrice)}
+                        </p>
+                      </div>
+                    ))}
                 </div>
               </div>
             )}
@@ -152,19 +164,44 @@ const ServiceDetailModal = ({ isOpen, onClose, serviceDetail }) => {
           )}
           {serviceDetail.carConditionImages &&
             serviceDetail.carConditionImages.length > 0 && (
-              <div className="p-2 border rounded">
-                <h3 className="text-lg font-semibold">
-                  Hình ảnh tình trạng xe
-                </h3>
-                <div className="flex flex-wrap mt-2 gap-2">
-                  {serviceDetail.carConditionImages.map((img, index) => (
-                    <img
-                      key={index}
-                      src={img}
-                      alt={`Car condition ${index}`}
-                      className="w-24 h-24 object-cover rounded"
-                    />
-                  ))}
+              <div className="grid grid-cols-2 gap-4 mt-4">
+                <div>
+                  {serviceData.imagesBefore.length !== 0 && (
+                    <>
+                      <p className="font-semibold">Ảnh Before</p>
+                      <div className="flex flex-wrap gap-2">
+                        {(serviceData.imagesBefore || []).map((url, idx) => (
+                          <div key={idx} className="relative">
+                            <img
+                              src={url.imageLink}
+                              alt={`before-${idx}`}
+                              className="w-20 h-20 border"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Ảnh After */}
+                <div>
+                  {serviceData.imagesAfter.length !== 0 && (
+                    <>
+                      <p className="font-semibold">Ảnh After</p>
+                      <div className="flex flex-wrap gap-2">
+                        {(serviceData.imagesAfter || []).map((url, idx) => (
+                          <div key={idx} className="relative">
+                            <img
+                              src={url.imageLink}
+                              alt={`after-${idx}`}
+                              className="w-20 h-20 border"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             )}

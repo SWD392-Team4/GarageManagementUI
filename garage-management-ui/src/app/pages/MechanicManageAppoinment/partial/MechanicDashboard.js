@@ -5,10 +5,16 @@ import { currentAppointment } from "../services/store/mechanic";
 import AddAppointmentDetail from "./AddAppointmentDetail";
 import AppointmentCard from "./AppointmentCard";
 import AppointmentDetailModal from "./AppointmentDetailModal";
-import ConfirmDragModal from "./ConfirmDragModal";
+import StartConfirmModal from "../modal/StartConfirmModal"; // Modal xác nhận start (before evidence)
+import EndConfirmModal from "../modal/EndConfirmModal"; // Modal xác nhận end (after evidence)
+import { StartAppointmet, EndAppointmet } from "../services/AppointmentService";
 
 function MechanicDashboard() {
+  const [showStartModal, setShowStartModal] = useState(false);
+  const [showEndModal, setShowEndModal] = useState(false);
+  const [selectedDetail, setSelectedDetail] = useState(null);
   const [appointmentInfo, setAppointmentInfo] = useState({});
+
   const [services, setServices] = useState({});
   const [columns, setColumns] = useState({});
   const [showDetailModal, setShowDetailModal] = useState(false);
@@ -16,39 +22,144 @@ function MechanicDashboard() {
 
   const [isNew, setIsNew] = useState(false);
   const [selectedService, setSelectedService] = useState(null);
+  // Dùng để lưu lại trạng thái cũ khi kéo để có thể revert nếu người dùng hủy modal
   const [confirmData, setConfirmData] = useState(null);
 
   const userService = new UserService();
 
-  // Định nghĩa thứ tự cột cố định
+  // Hàm mở modal xem/chỉnh sửa chi tiết
+  const handleOpenDetails = (service) => {
+    setIsNew(false);
+    setSelectedService(service);
+    setShowDetailModal(true);
+  };
+
+  // Hàm xử lý sau khi người dùng chọn ảnh trong modal Start
+  const handleStartConfirm = async (selectedImages) => {
+    // Lấy schedule có status "Assigned" từ mảng employeeSchedules của selectedDetail
+    const assignedSchedule = selectedDetail.employeeSchedules?.find(
+      (schedule) => schedule.status === "Assigned"
+    );
+    currentAppointment.set((v) => {
+      v.value.load += 1;
+    });
+    if (!assignedSchedule) {
+      console.error("Không tìm thấy schedule có status 'Assigned'");
+      return;
+    }
+    const scheduleId = assignedSchedule.id;
+
+    // Tạo FormData và append từng file với key "formFileDtos"
+    let imageFormData = new FormData();
+    selectedImages.forEach((image) => {
+      imageFormData.append("formFileDtos", image, image.name);
+    });
+
+    try {
+      await StartAppointmet(
+        scheduleId,
+        imageFormData,
+        appointmentInfo.id,
+        selectedDetail.id
+      );
+      currentAppointment.set((v) => {
+        v.value.load += 1;
+      });
+    } catch (error) {
+      console.error("Lỗi khi bắt đầu appointment:", error);
+    }
+    // Sau khi xác nhận thành công, revert trạng thái nếu cần và tắt modal
+    setConfirmData(null);
+    setShowStartModal(false);
+  };
+
+  // Hàm xử lý sau khi người dùng chọn ảnh trong modal End
+  const handleEndConfirm = async (selectedImages) => {
+    // Lấy schedule có status "InProgress" từ mảng employeeSchedules của selectedDetail
+    const assignedSchedule = selectedDetail.employeeSchedules?.find(
+      (schedule) =>
+        schedule.status === "InProgress" || schedule.status === "Assigned"
+    );
+    if (!assignedSchedule) {
+      console.error("Không tìm thấy schedule có status 'InProgress'");
+      return;
+    }
+    const scheduleId = assignedSchedule.id;
+
+    // Tạo FormData và append từng file với key "formFileDtos"
+    let imageFormData = new FormData();
+    selectedImages.forEach((image) => {
+      imageFormData.append("formFileDtos", image, image.name);
+    });
+
+    try {
+      await EndAppointmet(
+        scheduleId,
+        imageFormData,
+        appointmentInfo.id,
+        selectedDetail.id
+      );
+    } catch (error) {
+      console.error("Lỗi khi hoàn thành appointment:", error);
+    }
+    setConfirmData(null);
+    setShowEndModal(false);
+  };
+
+  // Hàm hủy chung khi người dùng hủy modal (start hoặc end) để revert lại trạng thái trước đó
+  const handleCancel = () => {
+    if (confirmData) {
+      setColumns(confirmData.oldColumns);
+      // Tìm lại trạng thái ban đầu từ oldColumns
+      let oldColId = "";
+      for (const colId in confirmData.oldColumns) {
+        if (
+          confirmData.oldColumns[colId].serviceIds.includes(
+            confirmData.draggableId
+          )
+        ) {
+          oldColId = colId;
+          break;
+        }
+      }
+      setServices((prev) => ({
+        ...prev,
+        [confirmData.draggableId]: {
+          ...prev[confirmData.draggableId],
+          status: mapColumnIdToStatus(oldColId),
+        },
+      }));
+    }
+    setConfirmData(null);
+    setShowStartModal(false);
+    setShowEndModal(false);
+  };
+
+  // Định nghĩa thứ tự cột (3 cột)
   const columnOrder = [
     "column-assigned",
     "column-inprogress",
     "column-completed",
-    "column-cancel",
   ];
 
-  // Hàm ánh xạ status của detail sang id cột tương ứng
+  // Ánh xạ trạng thái sang id cột
   const mapStatusToColumnId = (status) => {
     if (status === "Assigned") return "column-assigned";
     if (status === "InProgress") return "column-inprogress";
     if (status === "Completed") return "column-completed";
-    // Với các status khác như Cancelled, Declined, Unsigned... đưa vào cột "cancel"
-    return "column-cancel";
+    return "";
   };
 
-  // Hàm ánh xạ ngược: từ id cột sang status chuẩn
+  // Ánh xạ id cột sang trạng thái chuẩn
   const mapColumnIdToStatus = (columnId) => {
     if (columnId === "column-assigned") return "Assigned";
     if (columnId === "column-inprogress") return "InProgress";
     if (columnId === "column-completed") return "Completed";
-    if (columnId === "column-cancel") return "Cancelled";
     return "";
   };
 
   const fetchAppointment = useCallback(async () => {
     try {
-      // Lấy dữ liệu từ currentAppointment.value
       const appointmentData = currentAppointment.value.appointmentDetail;
       setAppointmentInfo(appointmentData);
 
@@ -79,17 +190,14 @@ function MechanicDashboard() {
           title: "Completed",
           serviceIds: [],
         },
-        "column-cancel": {
-          id: "column-cancel",
-          title: "Cancel",
-          serviceIds: [],
-        },
       };
 
-      // Duyệt qua toàn bộ appointment detail và đẩy id vào cột phù hợp dựa trên status
+      // Đẩy id service vào cột tương ứng dựa trên status
       appointmentData.appointmentDetails.forEach((item) => {
         const colId = mapStatusToColumnId(item.status);
-        initialColumns[colId].serviceIds.push(item.id);
+        if (colId) {
+          initialColumns[colId].serviceIds.push(item.id);
+        }
       });
 
       setColumns(initialColumns);
@@ -107,18 +215,14 @@ function MechanicDashboard() {
     const { destination, source, draggableId } = result;
     if (!destination) return;
 
-    // Xác định vị trí cột nguồn và đích theo thứ tự cố định
     const sourceIndex = columnOrder.indexOf(source.droppableId);
     const destIndex = columnOrder.indexOf(destination.droppableId);
-
-    // Cho phép kéo sang cột ngay bên phải hoặc sang cột cuối cùng (nếu đó là thao tác hủy)
     if (
       !(destIndex === sourceIndex + 1 || destIndex === columnOrder.length - 1)
-    ) {
+    )
       return;
-    }
 
-    // Lưu lại state cũ để có thể revert nếu cần
+    // Lưu lại trạng thái cũ để có thể revert nếu cần
     const oldColumns = { ...columns };
     const sourceColumn = columns[source.droppableId];
     const destColumn = columns[destination.droppableId];
@@ -140,132 +244,29 @@ function MechanicDashboard() {
       },
     };
 
-    // Cập nhật state cột tạm thời
     setColumns(newColumns);
-    // Xác định trạng thái mới dựa trên id cột đích
     const newStatus = mapColumnIdToStatus(destination.droppableId);
     setServices((prev) => ({
       ...prev,
       [draggableId]: { ...prev[draggableId], status: newStatus },
     }));
 
-    // Lưu thông tin drag để xác nhận trong modal
-    setConfirmData({
-      draggableId,
-      newStatus,
-      oldColumns,
-    });
-  };
+    // Lưu lại dữ liệu cần revert
+    setConfirmData({ draggableId, newStatus, oldColumns });
 
-  // Xác nhận cập nhật sau khi kéo
-  const handleConfirmDrag = async () => {
-    try {
-      await fetch("https://example.com/api/appointments/update", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          serviceId: confirmData.draggableId,
-          newStatus: confirmData.newStatus,
-        }),
-      });
-      // Có thể hiển thị thông báo thành công tại đây
-    } catch (error) {
-      console.error("Error updating service status:", error);
+    // Mở modal tương ứng với trạng thái mới
+    if (newStatus === "InProgress") {
+      setSelectedDetail(services[draggableId]);
+      setShowStartModal(true);
+    } else if (newStatus === "Completed") {
+      setSelectedDetail(services[draggableId]);
+      setShowEndModal(true);
     }
-    setConfirmData(null);
-  };
-
-  // Hủy thao tác kéo => revert lại trạng thái cũ
-  const handleCancelDrag = () => {
-    setColumns(confirmData.oldColumns);
-    // Tìm lại trạng thái ban đầu từ oldColumns
-    let oldStatus = "";
-    for (const colId in confirmData.oldColumns) {
-      if (
-        confirmData.oldColumns[colId].serviceIds.includes(
-          confirmData.draggableId
-        )
-      ) {
-        oldStatus = mapColumnIdToStatus(colId);
-        break;
-      }
-    }
-    setServices((prev) => ({
-      ...prev,
-      [confirmData.draggableId]: {
-        ...prev[confirmData.draggableId],
-        status: oldStatus,
-      },
-    }));
-    setConfirmData(null);
-  };
-
-  // Mở modal xem/chỉnh sửa chi tiết
-  const handleOpenDetails = (service) => {
-    setIsNew(false);
-    setSelectedService(service);
-    setShowDetailModal(true);
-  };
-
-  // Lưu thông tin chi tiết (tạo mới hoặc cập nhật)
-  const handleSave = async (newData) => {
-    if (isNew) {
-      const newId = `appointmentdetail-${Date.now()}`;
-      const serviceStatus = newData.status || "Assigned";
-      newData.id = newId;
-      setServices((prev) => ({
-        ...prev,
-        [newId]: newData,
-      }));
-      // Thêm service mới vào cột "column-assigned" (mặc định khi tạo mới)
-      setColumns((prev) => ({
-        ...prev,
-        "column-assigned": {
-          ...prev["column-assigned"],
-          serviceIds: [newId, ...prev["column-assigned"].serviceIds],
-        },
-      }));
-      // Gọi API tạo mới (giả lập)
-      fetch("https://example.com/api/appointments/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(newData),
-      }).catch((err) => console.error(err));
-    } else {
-      const { id } = newData;
-      setServices((prev) => ({
-        ...prev,
-        [id]: { ...prev[id], ...newData },
-      }));
-      // Xử lý upload file (nếu có) và gọi API cập nhật
-      const formData = new FormData();
-
-      try {
-        const response = await userService.sendAjax(
-          "/api/products/ac103ccc-bd82-44ca-adb7-5b478b95965a/images",
-          "POST",
-          formData,
-          false,
-          true
-        );
-        if (response.status === 204) {
-          userService.showToast(response.status, "Lưu được");
-        } else {
-          userService.showToast(
-            response.status,
-            response.message || "Lưu không được"
-          );
-        }
-      } catch (error) {
-        userService.showToast(error.status, error.message);
-      }
-    }
-    setShowDetailModal(false);
   };
 
   return (
     <div className="">
-      {/* Thông tin header của appointment */}
+      {/* Header thông tin appointment */}
       <div className="pb-4">
         <div className="my-5">
           <h1 className="text-2xl font-raleway font-semibold text-center md:text-left">
@@ -294,7 +295,7 @@ function MechanicDashboard() {
               </div>
             </div>
           </div>
-          {appointmentInfo.mileage ? (
+          {appointmentInfo.mileage && (
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <label className="text-sm font-medium text-gray-600 w-1/3">
@@ -305,10 +306,7 @@ function MechanicDashboard() {
                 </div>
               </div>
             </div>
-          ) : (
-            ""
           )}
-
           <div>
             <div className="flex items-center gap-2 mb-2">
               <label className="text-sm font-medium text-gray-600 w-1/3">
@@ -319,7 +317,6 @@ function MechanicDashboard() {
               </div>
             </div>
           </div>
-
           <div>
             <div className="flex items-center gap-2 mb-2">
               <label className="text-sm font-medium text-gray-600 w-1/3">
@@ -340,8 +337,7 @@ function MechanicDashboard() {
               </div>
             </div>
           </div>
-
-          {appointmentInfo.carLicensePlateNumber ? (
+          {appointmentInfo.carLicensePlateNumber && (
             <div>
               <div className="flex items-center gap-2 mb-2">
                 <label className="text-sm font-medium text-gray-600 w-1/3">
@@ -352,24 +348,25 @@ function MechanicDashboard() {
                 </div>
               </div>
             </div>
-          ) : (
-            ""
           )}
         </div>
       </div>
+
       {/* Danh sách Services */}
-      <div className="my-5 ">
+      <div className="my-5">
         <div className="flex justify-between pb-2">
           <h1 className="text-2xl font-raleway font-semibold text-center md:text-left">
             Services list
           </h1>
-          <AddAppointmentDetail id={appointmentInfo.id} />
+          {appointmentInfo.status !== "Completed" && (
+            <AddAppointmentDetail id={appointmentInfo.id} />
+          )}
         </div>
-
         <div className="border-t border-red-950 text-left text-gray-500 text-sm w-full"></div>
       </div>
+
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {columnOrder.map((columnId) => {
             const column = columns[columnId];
             if (!column) return null;
@@ -405,8 +402,6 @@ function MechanicDashboard() {
                         </Draggable>
                       );
                     })}
-                    {/* Nút "New" chỉ hiển thị ở cột "Được phân công" */}
-
                     {provided.placeholder}
                   </div>
                 )}
@@ -415,23 +410,26 @@ function MechanicDashboard() {
           })}
         </div>
       </DragDropContext>
+
       {/* Modal xem/chỉnh sửa chi tiết */}
       {showDetailModal && (
         <AppointmentDetailModal
           service={selectedService}
           onClose={() => setShowDetailModal(false)}
-          onSave={handleSave}
         />
       )}
 
-      {/* Modal xác nhận thao tác kéo thả */}
-      {confirmData && (
-        <ConfirmDragModal
-          sourceStatus={""}
-          destinationStatus={confirmData.newStatus}
-          onConfirm={handleConfirmDrag}
-          onCancel={handleCancelDrag}
+      {/* Modal Start */}
+      {showStartModal && (
+        <StartConfirmModal
+          onConfirm={handleStartConfirm}
+          onCancel={handleCancel}
         />
+      )}
+
+      {/* Modal End */}
+      {showEndModal && (
+        <EndConfirmModal onConfirm={handleEndConfirm} onCancel={handleCancel} />
       )}
     </div>
   );

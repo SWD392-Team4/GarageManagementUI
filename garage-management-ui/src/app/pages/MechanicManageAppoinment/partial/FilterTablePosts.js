@@ -120,9 +120,9 @@ export default function FilterTablePost() {
         />
       </div>
 
-      {/* Type Filter */}
+      {/* Type status */}
       <div className="flex flex-col">
-        <label className="text-sm ml-1 font-medium text-gray-700">Type</label>
+        <label className="text-sm ml-1 font-medium text-gray-700">Status</label>
         <select
           name="status"
           value={filters.status}
@@ -131,9 +131,9 @@ export default function FilterTablePost() {
         >
           <option value="">Select</option>
 
+          <option value="Pending">Pending</option>
           <option value="Approved">Approved</option>
-          <option value="Rejected">Rejected</option>
-          <option value="Canceled">Canceled</option>
+          <option value="Arrival">Arrival</option>
           <option value="InProgress">InProgress</option>
           <option value="Completed">Completed</option>
         </select>

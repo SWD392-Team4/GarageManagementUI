@@ -28,6 +28,7 @@ export const currentAppointment = signify(
   {
     status: "",
     appointmentDetails: "",
+    appointmentFull: "",
     appointmentDetailPackages: "",
     load: 1,
   },

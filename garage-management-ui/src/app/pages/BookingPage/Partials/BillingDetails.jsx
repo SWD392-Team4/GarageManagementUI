@@ -8,6 +8,7 @@ import { bookingSchema } from "../schemas/bookingSchema";
 import { createAppointmentApi } from "../Services/BookingPageService";
 import { BookingSignify } from "../Services/BookingSignify";
 import { useNavigate } from "react-router-dom";
+import { sAccount } from "../../AuthCustomer/services/store";
 
 const BillingDetails = () => {
   const { t } = useTranslation("BookingOnline");
@@ -22,9 +23,12 @@ const BillingDetails = () => {
   } = useForm({
     resolver: yupResolver(bookingSchema(t)),
     defaultValues: {
-      customerName: "",
-      customerEmail: "",
-      customerPhoneNumber: "",
+      customerName: sAccount.value
+        ? sAccount.value.firstName + " " + sAccount.value.lastName
+        : "",
+      customerEmail: sAccount.value ? sAccount.value.email : "",
+
+      customerPhoneNumber: sAccount.value ? sAccount.value.phoneNumber : "",
       carLicensePlateNumber: "",
       mileage: "",
       estimatedAppointmentTime: "",
@@ -75,6 +79,7 @@ const BillingDetails = () => {
             </label>
             <input
               type="text"
+              value={sAccount.value.firstName + sAccount.value.lastName}
               className="w-full p-2 bg-white/40 outline-none"
               {...register("customerName")}
             />

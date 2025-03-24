@@ -76,7 +76,7 @@ function AppointmentCard({ appointmentDetail, onClick, provided, snapshot }) {
               ))}
           </p>
           {/* Số lượng người */}
-          <p className="flex items-center">
+          {/* <p className="flex items-center">
             <span className="font-semibold flex items-center mr-1">
               <FaUserFriends className="mr-1 text-gray-600" />
               Số lượng người:
@@ -86,7 +86,7 @@ function AppointmentCard({ appointmentDetail, onClick, provided, snapshot }) {
                 (schedule) => schedule.status === "Assigned"
               ).length
             }
-          </p>
+          </p> */}
         </>
       ) : (
         ""
