@@ -25,10 +25,35 @@ export const viewAppointmentLookUp = async () => {
       null,
       false
     );
+    console.log("Check response format: ", response);
+    response.data.value.estimatedAppointmentTime = formatDateTime(
+      response.data.value.estimatedAppointmentTime
+    );
+    response.data.value.estimatedEndTime = formatDateTime(
+      response.data.value.estimatedEndTime
+    );
     return response;
   } catch (error) {
     console.error("Fail with : ", error.message);
   }
+};
+
+export const formatDateTime = (dateString) => {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return (
+    date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }) +
+    " " +
+    date.toLocaleTimeString("en-GB", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false, // Sử dụng định dạng 24 giờ
+    })
+  );
 };
 
 export const cancelAppointment = async (reasonData) => {

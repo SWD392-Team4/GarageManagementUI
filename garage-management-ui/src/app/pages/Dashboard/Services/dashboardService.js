@@ -1,8 +1,21 @@
 import UserService from "../../../hooks/services/UserService";
 import { AppointmentSignify } from "../../AdminManageAppoinment/services/store/AppointmentSignify";
-import { sAccount } from "../../AuthCustomer/services/store";
 
 const userService = new UserService();
+
+export const getGarageRevenueYear = async (year) => {
+  try {
+    const response = userService.sendAjax(
+      `/api/dashboard/revenue/${year}?garageId=${AppointmentSignify.value.garaCurrent}`,
+      "GET",
+      null,
+      true
+    );
+    return response;
+  } catch (error) {
+    console.error("Fail with: ", error.message);
+  }
+};
 
 export const getDashBoardPackageYear = async (year) => {
   try {

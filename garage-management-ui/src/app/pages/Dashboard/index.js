@@ -25,20 +25,20 @@ export default function Dashboard() {
         <Breadcrumb />
       </div>
 
-      {/* <div
-        className={`transition-opacity duration-700 ease-out delay-200 ${
-          isVisible ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <GarageRevenue />
-      </div> */}
-
       <div
         className={`transition-opacity duration-700 ease-out delay-300 ${
           isVisible ? "opacity-100" : "opacity-0"
         }`}
       >
         <GarageSelect />
+      </div>
+
+      <div
+        className={`transition-opacity duration-700 ease-out delay-200 ${
+          isVisible ? "opacity-100" : "opacity-0"
+        }`}
+      >
+        <GarageRevenue />
       </div>
 
       <div
