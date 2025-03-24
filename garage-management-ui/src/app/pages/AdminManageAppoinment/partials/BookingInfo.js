@@ -444,91 +444,92 @@ const BookingInfo = () => {
           {/* Nút Hành Động */}
         </form>
 
-        <div className="flex justify-end mt-4">
-          {isEditing ? (
-            <>
-              <button
-                type="button"
-                onClick={handleCancel}
-                className="p-2 bg-red-300 rounded hover:bg-red-400 mr-2"
-              >
-                <GiCancel className="text-white" />
-              </button>
-              <button
-                type="submit"
-                onClick={handleConfirm}
-                className="p-2 bg-green-300 rounded hover:bg-green-400"
-              >
-                <GiConfirmed className="text-white" />
-              </button>
-            </>
-          ) : showOptionsMenu ? (
-            <div className="flex">
-              {formData.status.name === "Pending" && (
+        {sAccount.value.role === "Cashier" && (
+          <div className="flex justify-end mt-4">
+            {isEditing ? (
+              <>
                 <button
                   type="button"
-                  onClick={() => handleOptionClick("confirmation")}
-                  className="p-2 bg-blue-300 rounded hover:bg-blue-400 mr-2"
+                  onClick={handleCancel}
+                  className="p-2 bg-red-300 rounded hover:bg-red-400 mr-2"
+                >
+                  <GiCancel className="text-white" />
+                </button>
+                <button
+                  type="submit"
+                  onClick={handleConfirm}
+                  className="p-2 bg-green-300 rounded hover:bg-green-400"
                 >
                   <GiConfirmed className="text-white" />
                 </button>
-              )}
-              {(formData.status.name === "Pending" ||
-                formData.status.name === "Approved") && (
-                <button
-                  type="button"
-                  onClick={() => handleOptionClick("cancel")}
-                  className="p-2 bg-red-300 rounded hover:bg-red-400 mr-2"
-                >
-                  <TbCalendarCancel className="text-white" />
-                </button>
-              )}
-              {isSameDay(formData.estimatedTime) &&
-                formData.status.name !== "Rejected" && (
+              </>
+            ) : showOptionsMenu ? (
+              <div className="flex">
+                {formData.status.name === "Pending" && (
                   <button
                     type="button"
-                    onClick={() => handleOptionClick("arrival")}
-                    className="p-2 bg-green-300 rounded hover:bg-green-400 mr-2"
+                    onClick={() => handleOptionClick("confirmation")}
+                    className="p-2 bg-blue-300 rounded hover:bg-blue-400 mr-2"
                   >
-                    <FaRegCalendarCheck className="text-white" />
+                    <GiConfirmed className="text-white" />
                   </button>
                 )}
-              <button
-                type="button"
-                onClick={handleCancelMenu}
-                className="p-2 bg-red-300 rounded hover:bg-red-400"
-              >
-                <GiCancel className="text-white" />
-              </button>
-            </div>
-          ) : (
-            <div className="flex">
-              {formData.status.name !== "Rejected" &&
-                formData.status.name !== "Cancelled" &&
-                formData.status.name !== "Completed" && (
-                  <>
+                {(formData.status.name === "Pending" ||
+                  formData.status.name === "Approved") && (
+                  <button
+                    type="button"
+                    onClick={() => handleOptionClick("cancel")}
+                    className="p-2 bg-red-300 rounded hover:bg-red-400 mr-2"
+                  >
+                    <TbCalendarCancel className="text-white" />
+                  </button>
+                )}
+                {isSameDay(formData.estimatedTime) &&
+                  formData.status.name !== "Rejected" && (
                     <button
                       type="button"
-                      onClick={handleEdit}
-                      className="p-2 bg-gray-300 rounded hover:bg-gray-400 mr-2"
+                      onClick={() => handleOptionClick("arrival")}
+                      className="p-2 bg-green-300 rounded hover:bg-green-400 mr-2"
                     >
-                      <FaEdit className="text-purple-700" />
+                      <FaRegCalendarCheck className="text-white" />
                     </button>
-                    {(formData.status.name === "Pending" ||
-                      formData.status.name === "Approved") && (
+                  )}
+                <button
+                  type="button"
+                  onClick={handleCancelMenu}
+                  className="p-2 bg-red-300 rounded hover:bg-red-400"
+                >
+                  <GiCancel className="text-white" />
+                </button>
+              </div>
+            ) : (
+              <div className="flex">
+                {formData.status.name !== "Rejected" &&
+                  formData.status.name !== "Cancelled" &&
+                  formData.status.name !== "Completed" && (
+                    <>
                       <button
                         type="button"
-                        onClick={() => setShowOptionsMenu(true)}
-                        className="p-2 bg-gray-300 rounded hover:bg-gray-400"
+                        onClick={handleEdit}
+                        className="p-2 bg-gray-300 rounded hover:bg-gray-400 mr-2"
                       >
-                        <IoMdOptions className="text-purple-700" />
+                        <FaEdit className="text-purple-700" />
                       </button>
-                    )}
-                  </>
-                )}
-            </div>
-          )}
-          {/* {formData.status.name === "Completed" && (
+                      {(formData.status.name === "Pending" ||
+                        formData.status.name === "Approved") && (
+                        <button
+                          type="button"
+                          onClick={() => setShowOptionsMenu(true)}
+                          className="p-2 bg-gray-300 rounded hover:bg-gray-400"
+                        >
+                          <IoMdOptions className="text-purple-700" />
+                        </button>
+                      )}
+                    </>
+                  )}
+              </div>
+            )}
+            {/* {formData.status.name === "Completed" && (
             <button
               type="button"
               onClick={() => setShowInvoice(true)}
@@ -537,7 +538,8 @@ const BookingInfo = () => {
               <FaFileInvoice className="text-white" />
             </button>
           )} */}
-        </div>
+          </div>
+        )}
       </div>
       <InvoiceModal
         isOpen={showInvoice}

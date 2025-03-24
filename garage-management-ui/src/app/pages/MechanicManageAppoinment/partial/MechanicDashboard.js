@@ -8,6 +8,7 @@ import AppointmentDetailModal from "./AppointmentDetailModal";
 import StartConfirmModal from "../modal/StartConfirmModal"; // Modal xác nhận start (before evidence)
 import EndConfirmModal from "../modal/EndConfirmModal"; // Modal xác nhận end (after evidence)
 import { StartAppointmet, EndAppointmet } from "../services/AppointmentService";
+import MechanicMessageForm from "./MechanicMessageForm";
 
 function MechanicDashboard() {
   const [showStartModal, setShowStartModal] = useState(false);
@@ -348,6 +349,9 @@ function MechanicDashboard() {
                 </div>
               </div>
             </div>
+          )}
+          {appointmentInfo.customerId && (
+            <MechanicMessageForm appointmentInfo={appointmentInfo} />
           )}
         </div>
       </div>

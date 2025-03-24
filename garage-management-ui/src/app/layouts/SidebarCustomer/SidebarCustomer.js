@@ -17,13 +17,13 @@ export default function SidebarCustomer() {
       path: "orderHistory",
       icon: <FaClipboardList />,
     },
-    {
-      text: t("menu.current_orders"),
-      path: "orders",
-      icon: <FaShoppingCart />,
-    },
+    // {
+    //   text: t("menu.current_orders"),
+    //   path: "orders",
+    //   icon: <FaShoppingCart />,
+    // },
     { text: t("menu.chatting"), path: "chatting", icon: <IoMdChatboxes /> },
-    { text: t("menu.settings"), path: "settings", icon: <FaCog /> },
+    // { text: t("menu.settings"), path: "settings", icon: <FaCog /> },
     {
       text: t("menu.logout"),
       path: "logout",

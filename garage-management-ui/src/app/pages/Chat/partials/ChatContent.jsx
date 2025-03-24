@@ -138,7 +138,10 @@ function ChatContent() {
 
   useEffect(() => {
     if (connection && state.activeChatId !== null) {
-      if (state.typeChatOfCashier === "type-1") {
+      if (
+        state.typeChatOfCashier === "type-1" &&
+        sAccount.value.role === "Cashier"
+      ) {
         GetManagerChatHistory();
       } else {
         getChatHistory();

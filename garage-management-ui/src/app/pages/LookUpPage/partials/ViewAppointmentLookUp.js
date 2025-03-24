@@ -104,9 +104,9 @@ export default function ViewAppointmentLookUp() {
       {isMobile ? (
         <ViewAppointmentLookUpMobile appointment={appointment} />
       ) : (
-        <div className="font-extrabold font-space relative flex gap-3 p-2 bg-transparent rounded-md shadow-md backdrop-blur-sm max-w-screen-2xl">
+        <div className="font-extrabold font-space relative flex gap-3   max-w-screen-2xl">
           {/* Sidebar */}
-          <div className="w-1/3 bg-transparent text-black p-6 rounded-lg shadow-lg flex flex-col justify-between">
+          <div className="w-1/3  text-black p-6 rounded-lg shadow-lg flex flex-col justify-between">
             <div>
               <h2 className="text-2xl font-bold text-center mb-4 text-red-700">
                 {t("look_up_page.view_look_up.appointment_info")}
@@ -270,27 +270,29 @@ export default function ViewAppointmentLookUp() {
                       <strong> {t("look_up_page.view_look_up.status")}:</strong>{" "}
                       {appointment.appointmentDetails[selectedService].status}
                     </p>
+                    {appointment.appointmentDetails[selectedService]
+                      ?.appointmentReplacementParts?.length > 0 && (
+                      <>
+                        <h4 className="text-red-700 font-semibold">
+                          {t("look_up_page.view_look_up.replacement_parts")} :
+                        </h4>
+                        <ul className="space-y-2">
+                          {appointment.appointmentDetails[
+                            selectedService
+                          ].appointmentReplacementParts.map((part, i) => (
+                            <li key={i} className="bg-transparent rounded-lg">
+                              <span>{part.productName}</span> x {part.quantity}{" "}
+                              -
+                              <span>
+                                {" "}
+                                {formatVietnameseCurrency(part.productPrice)}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
 
-                    {/* Replacement Parts */}
-                    <h4 className="mt-4 font-semibold ">
-                      {t("look_up_page.view_look_up.replacement_parts")} :
-                    </h4>
-                    <ul className="mt-2 space-y-2">
-                      {appointment.appointmentDetails[
-                        selectedService
-                      ].appointmentReplacementParts.map((part, i) => (
-                        <li key={i} className="bg-transparent p-2 rounded-lg">
-                          <span>- {part.productName}</span> - {part.quantity}{" "}
-                          {t("look_up_page.view_look_up.pcs")} -
-                          <span>
-                            {" "}
-                            {formatVietnameseCurrency(part.productPrice)}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Car conditions image */}
                     <CarConditionImages
                       appointmentDetails={appointment.appointmentDetails}
                       selectedService={selectedService}

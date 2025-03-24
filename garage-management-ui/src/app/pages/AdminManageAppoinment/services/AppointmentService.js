@@ -12,7 +12,7 @@ const userService = new UserService();
 export const getAllCarModel = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/car-models?Status=Active&PageSize=1000",
+      "/api/car-models?Status=Active&PageSize=50",
       "GET",
       null,
       true
@@ -25,7 +25,7 @@ export const getAllCarModel = async () => {
 export const getAllServices = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/services?Status=Active&PageSize=1000",
+      "/api/services?Status=Active&PageSize=0",
 
       "GET",
       null,
@@ -107,7 +107,7 @@ export const getAllProductSuitable = async (carModelSelectId, carPartId) => {
 export const getAllPackages = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/packages?Status=Active&PageSize=1000",
+      "/api/packages?Status=Active&PageSize=0",
       "GET",
       null,
       true
@@ -188,7 +188,6 @@ export const getAllAppointment = async (status) => {
     sAccount.value.role === "Administrator"
       ? `/api/workplaces/${AppointmentSignify.value.garaCurrent}/appointments?${queryParams}`
       : `/api/workplaces/${sAccount.value.workPlaceId}/appointments?${queryParams}`;
-  console.log("query ", query);
   try {
     const response = await userService.sendAjax(query, "GET", null, true);
     response.data.value = response.data.value.map((pre) => ({

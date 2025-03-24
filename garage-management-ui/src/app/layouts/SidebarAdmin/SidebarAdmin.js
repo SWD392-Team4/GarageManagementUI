@@ -656,20 +656,6 @@ export default function SideBarAdmin({
                       </Link>
                       <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
                     </li>
-
-                    <li className="group/link">
-                      <Link
-                        to="/administrator/create-appointment"
-                        className="text-white flex items-center p-2"
-                      >
-                        <IoCreateOutline className="w-5 h-5" />
-
-                        <span className="ml-2">
-                          {t("sidebar_admin.ce-appointment")}
-                        </span>
-                      </Link>
-                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
-                    </li>
                   </ul>
                 )}
               </li>
