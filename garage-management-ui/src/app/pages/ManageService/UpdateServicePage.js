@@ -26,7 +26,7 @@ export default function UpdateServicePage() {
     "Repair",
     "Maintenance",
     "Upgrade",
-    "Car Wash",
+    "CarWash",
     "Detailing",
   ];
   const actionKeys = [
@@ -45,7 +45,7 @@ export default function UpdateServicePage() {
     "Deodorize",
     "Condition",
     "Remove",
-    "Restore Lighting",
+    "RestoreLighting",
   ];
   const workNatureKeys = [
     "Preventive",

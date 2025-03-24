@@ -196,7 +196,7 @@ export default function ProductDetails() {
             {/* Cột hình ảnh (7/12) */}
             <div className="lg:col-span-7 flex flex-col items-center justify-center">
               <ImageCarousel
-                linkImage={product.imageLink}
+                linkImage={product.productImage}
                 imagesWatch={watch("imageLink") || []}
                 setImages={(newImages) => setValue("imageLink", newImages)}
                 setImageFiles={setImageFiles}
@@ -323,10 +323,10 @@ export default function ProductDetails() {
               {/* Mã vạch */}
               <Barcode
                 value={product.productBarcode}
-                width={0.5}
+                width={2}
                 height={80}
                 displayValue={true}
-                fontSize={14}
+                fontSize={16}
                 lineColor="#333"
               />
             </div>
