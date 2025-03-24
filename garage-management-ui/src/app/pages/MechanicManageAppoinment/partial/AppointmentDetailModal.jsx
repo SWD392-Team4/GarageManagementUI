@@ -5,16 +5,28 @@ function AppointmentDetailModal({ service, onClose, onUpdate }) {
   // Khởi tạo state với dữ liệu từ service (đảm bảo imagesBefore và imagesAfter là mảng)
   const [serviceData, setServiceData] = useState({
     ...service,
-    imagesBefore: service.imagesBefore || [],
-    imagesAfter: service.imagesAfter || [],
+    imagesBefore:
+      service.carConditionImages?.filter(
+        (img) => img.conditionStage === "Before"
+      ) || [],
+    imagesAfter:
+      service.carConditionImages?.filter(
+        (img) => img.conditionStage === "After"
+      ) || [],
   });
 
   useEffect(() => {
     if (service) {
       setServiceData({
         ...service,
-        imagesBefore: service.imagesBefore || [],
-        imagesAfter: service.imagesAfter || [],
+        imagesBefore:
+          service.carConditionImages?.filter(
+            (img) => img.conditionStage === "Before"
+          ) || [],
+        imagesAfter:
+          service.carConditionImages?.filter(
+            (img) => img.conditionStage === "After"
+          ) || [],
       });
     }
   }, [service]);
@@ -67,7 +79,7 @@ function AppointmentDetailModal({ service, onClose, onUpdate }) {
           <ServiceTasks
             tasks={serviceData.appointmentReplacementParts}
             onTaskStatusChange={handleTaskStatusChange}
-            serviceDetailId={service.id}
+            serviceDetailId={service}
           />
         )}
         {/* Phần ảnh */}
@@ -80,7 +92,7 @@ function AppointmentDetailModal({ service, onClose, onUpdate }) {
                   {(serviceData.imagesBefore || []).map((url, idx) => (
                     <div key={idx} className="relative">
                       <img
-                        src={url}
+                        src={url.imageLink}
                         alt={`before-${idx}`}
                         className="w-20 h-20 border"
                       />
@@ -100,7 +112,7 @@ function AppointmentDetailModal({ service, onClose, onUpdate }) {
                   {(serviceData.imagesAfter || []).map((url, idx) => (
                     <div key={idx} className="relative">
                       <img
-                        src={url}
+                        src={url.imageLink}
                         alt={`after-${idx}`}
                         className="w-20 h-20 border"
                       />

@@ -63,6 +63,6 @@
   "AppointmentDetailNotFound": "Appointment detail , not found",
   "AppointmentDetailAlreadyCancelled": "Appointment detail , is already cancelled",
   "AppointmentDetailAlreadyRejected": "Appointment detail , is already rejected",
-  "AppointmentDetailCanNotUpdate": "Appointment detail status is Pending can not update",
+  "AppointmentDetailCanNotUpdate": "Appointment detail status can not update",
   "AppointmentReplacementPartNotFound": "Appointment replacement part not found"
 }

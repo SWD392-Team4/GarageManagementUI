@@ -466,6 +466,11 @@
             "path": "canceled",
             "element": "Canceled",
             "isSuspense2": true
+          },
+          {
+            "path": "rejected",
+            "element": "Rejected",
+            "isSuspense2": true
           }
         ]
       },
@@ -688,6 +693,11 @@
           {
             "path": "canceled",
             "element": "Canceled",
+            "isSuspense2": true
+          },
+          {
+            "path": "rejected",
+            "element": "Rejected",
             "isSuspense2": true
           }
         ]

@@ -5,40 +5,25 @@ import {
   getAllProducts,
   AddAppointmentReplacementPartDetailApi,
   getAllProductsAtGara,
+  updateReplacementPart,
 } from "../services/AppointmentService";
 import { formatVietnameseCurrency } from "../../ManageGoodsIssued/schemas/GoodsIssuedSchemas";
-
-// Giả lập hàm xóa (nếu API chưa có)
-const DeleteAppointmentReplacementPartDetailApi = async (
-  payload,
-  appointmentId,
-  serviceDetailId
-) => {
-  // Setup sẵn hàm xóa, chỉ log payload
-  console.log(
-    "Deleting replacement part:",
-    payload,
-    appointmentId,
-    serviceDetailId
-  );
-  return false;
-};
+import { currentAppointment } from "../services/store/AppointmentSignify";
 
 const ReplacementPartsModal = ({
   isOpen,
   onClose,
   replacementParts,
-  onConfirm, // callback khi xóa hoặc thêm thành công, dùng để cập nhật lại giao diện cha (nếu cần)
+  onConfirm, // callback sau khi xóa/thêm thành công (nếu cần cập nhật giao diện cha)
   appointmentId,
   serviceDetailId,
 }) => {
   const { t } = useTranslation("appoinment-admin");
 
-  // Lưu danh sách phụ tùng thay thế hiện có (local state)
+  // State local: partsList sẽ lưu danh sách các dòng (mỗi dòng có thuộc tính isNew, isEditing, tempQuantity)
   const [partsList, setPartsList] = useState([]);
-  // Danh sách sản phẩm có sẵn từ API
   const [products, setProducts] = useState([]);
-  // Dòng thêm mới: lưu option đã chọn và số lượng
+  // Dòng thêm mới (newRow)
   const [newRow, setNewRow] = useState({
     productId: "",
     productName: "",
@@ -46,6 +31,7 @@ const ReplacementPartsModal = ({
     availableQuantity: 0,
     quantity: "",
   });
+
   const handleClose = () => {
     setNewRow({
       productId: "",
@@ -56,7 +42,7 @@ const ReplacementPartsModal = ({
     });
     onClose();
   };
-  // Lấy danh sách sản phẩm từ API
+
   const fetchData = useCallback(async () => {
     try {
       const productRes = await getAllProductsAtGara();
@@ -66,44 +52,37 @@ const ReplacementPartsModal = ({
     }
   }, []);
 
-  // Cập nhật partsList khi prop replacementParts thay đổi
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  // Khi replacementParts prop thay đổi, cập nhật partsList.
+  // Gắn availableQuantity từ sản phẩm, và set các dòng là không phải new, không editing.
   useEffect(() => {
     const updatedParts = (replacementParts || []).map((part) => {
       const matchedProduct = products.find(
         (prod) => prod.productId === part.productId
       );
       return matchedProduct
-        ? { ...part, availableQuantity: matchedProduct.quantity }
-        : part;
+        ? {
+            ...part,
+            availableQuantity: matchedProduct.quantity,
+            isNew: false,
+            isEditing: false,
+            tempQuantity: part.quantity,
+          }
+        : {
+            ...part,
+            isNew: false,
+            isEditing: false,
+            tempQuantity: part.quantity,
+          };
     });
     setPartsList(updatedParts);
   }, [replacementParts, products]);
 
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
-
   if (!isOpen) return null;
 
-  // filteredOptions: lọc ra danh sách sản phẩm chưa có trong partsList
-  const filteredOptions = products
-    .filter(
-      (prod) => !partsList.some((part) => part.productId === prod.productId)
-    )
-    .map((prod) => ({
-      value: prod.productId,
-      label: prod.productName,
-      productId: prod.productId,
-      productName: prod.productName,
-      productPrice: prod.productPrice,
-      availableQuantity: prod.quantity,
-      image:
-        prod.productImage && prod.productImage.length > 0
-          ? prod.productImage[0]
-          : "",
-    }));
-
-  // Custom styles cho react-select
   const customSelectStyles = {
     control: (provided) => ({
       ...provided,
@@ -127,7 +106,6 @@ const ReplacementPartsModal = ({
     }),
   };
 
-  // Hàm formatOptionLabel để hiển thị option với hình ảnh, label, giá (custom)
   const formatOptionLabel = (option) => {
     return (
       <div className="grid grid-cols-6 items-center w-full max-w-56 overflow-hidden">
@@ -150,7 +128,7 @@ const ReplacementPartsModal = ({
     );
   };
 
-  // Xử lý thêm dòng mới: khi nhấn "Add", gọi API ngay với payload mới
+  // Khi thêm dòng mới
   const handleAddRow = async () => {
     if (!newRow.productId.trim() || newRow.quantity === "") return;
     const quantityNumber = Number(newRow.quantity);
@@ -169,6 +147,7 @@ const ReplacementPartsModal = ({
         serviceDetailId
       );
       if (response) {
+        // Tạo id fake bằng Date.now(), đánh dấu dòng mới
         const tempId = Date.now().toString();
         const newPart = {
           id: tempId,
@@ -177,9 +156,12 @@ const ReplacementPartsModal = ({
           productPrice: newRow.productPrice,
           availableQuantity: newRow.availableQuantity,
           quantity: quantityNumber,
+          tempQuantity: quantityNumber,
+          isNew: true, // dòng mới
+          isEditing: false,
         };
         setPartsList((prev) => [...prev, newPart]);
-        // Reset dòng thêm mới
+        // Reset newRow
         setNewRow({
           productId: "",
           productName: "",
@@ -193,31 +175,119 @@ const ReplacementPartsModal = ({
     }
   };
 
-  // Xử lý xóa row: gọi API xóa ngay
+  // Xử lý xóa: nếu dòng là new, chỉ xóa khỏi state; nếu không, gọi API update với status "Cancelled"
   const handleDelete = async (id) => {
-    // Tìm dòng cần xóa để lấy productId và quantity (nếu cần gửi payload)
     const partToDelete = partsList.find((part) => part.id === id);
     if (!partToDelete) return;
+    if (partToDelete.isNew) {
+      setPartsList((prev) => prev.filter((part) => part.id !== id));
+      return;
+    }
     const payload = {
       productId: partToDelete.productId,
-      quantity: Number(partToDelete.quantity),
+      quantity: 0,
+      status: "Cancelled",
     };
     try {
-      const response = await DeleteAppointmentReplacementPartDetailApi(
-        payload,
+      const response = await updateReplacementPart(
         appointmentId,
-        serviceDetailId
+        serviceDetailId,
+        partToDelete.id,
+        payload
       );
       if (response) {
         setPartsList((prev) => prev.filter((part) => part.id !== id));
       }
-      // Nếu thành công, cập nhật local state
     } catch (error) {
       console.error("Error deleting replacement part:", error);
     }
   };
 
-  // Không còn nút Confirm cuối modal (mỗi thao tác đã gọi API riêng)
+  // Cập nhật số lượng cho row không phải là new
+  const handleQuantityChange = (id, value) => {
+    const quantity = Number(value);
+    setPartsList((prev) =>
+      prev.map((part) => {
+        if (part.id === id) {
+          if (quantity > part.availableQuantity) {
+            alert(
+              t("errors.exceedsQuantity", "Quantity exceeds available stock")
+            );
+            return part;
+          }
+          // Chỉ cho phép chỉnh sửa nếu không phải dòng mới
+          if (!part.isNew) {
+            return { ...part, tempQuantity: value, isEditing: true };
+          }
+        }
+        return part;
+      })
+    );
+  };
+
+  // Khi bấm Save, gọi API updateReplacementPart với payload cập nhật số lượng (status Pending)
+  const handleSaveTask = async (id) => {
+    const part = partsList.find((p) => p.id === id);
+    if (!part) return;
+    const newQuantity = Number(part.tempQuantity);
+    const payload = {
+      productId: part.productId,
+      quantity: newQuantity,
+      status: "Pending",
+    };
+    try {
+      const response = await updateReplacementPart(
+        appointmentId,
+        serviceDetailId,
+        part.id,
+        payload
+      );
+      if (response) {
+        setPartsList((prev) =>
+          prev.map((p) =>
+            p.id === id
+              ? {
+                  ...p,
+                  quantity: newQuantity,
+                  isEditing: false,
+                  tempQuantity: newQuantity,
+                }
+              : p
+          )
+        );
+      }
+    } catch (error) {
+      console.error("Error updating replacement part:", error);
+    }
+  };
+
+  // Khi bấm Cancel, revert lại thay đổi
+  const handleCancelTask = (id) => {
+    setPartsList((prev) =>
+      prev.map((p) =>
+        p.id === id ? { ...p, isEditing: false, tempQuantity: p.quantity } : p
+      )
+    );
+  };
+
+  // filteredOptions cho dòng thêm mới
+  const filteredOptions = products
+    .filter(
+      (prod) => !partsList.some((part) => part.productId === prod.productId)
+    )
+    .map((prod) => ({
+      value: prod.productId,
+      label: prod.productName,
+      productId: prod.productId,
+      productName: prod.productName,
+      productPrice: prod.productPrice,
+      availableQuantity: prod.quantity,
+      image:
+        prod.productImage && prod.productImage.length > 0
+          ? prod.productImage[0]
+          : "",
+    }));
+
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex justify-center items-start pt-10 transition-all duration-300">
       <div className="bg-white w-full max-w-4xl rounded shadow-lg overflow-auto">
@@ -227,7 +297,16 @@ const ReplacementPartsModal = ({
             {t("replacementPartsModal.title", "Update Replacement Parts")}
           </h2>
           <button
-            onClick={handleClose}
+            onClick={() => {
+              setNewRow({
+                productId: "",
+                productName: "",
+                productPrice: 0,
+                availableQuantity: 0,
+                quantity: "",
+              });
+              onClose();
+            }}
             className="text-red-500 font-bold hover:underline"
           >
             {t("buttons.close", "Close")}
@@ -260,51 +339,77 @@ const ReplacementPartsModal = ({
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {partsList.map((part, index) => (
-                  <tr key={part.id} className="hover:bg-gray-50">
-                    <td className="px-4 py-2 whitespace-nowrap">{index + 1}</td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      {part.productName} <br />
-                      <span className="text-xs text-gray-500">
-                        ({part.productId})
-                      </span>
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      <input
-                        type="number"
-                        value={part.quantity}
-                        min={1}
-                        max={part.availableQuantity}
-                        onChange={(e) =>
-                          handleQuantityChange(part.id, e.target.value)
-                        }
-                        className="border border-gray-300 rounded px-2 py-1 w-full"
-                      />
-                      <div className="text-xs text-gray-500">
-                        {t("text.available", "Available")}:{" "}
-                        {part.availableQuantity}
-                      </div>
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      {formatVietnameseCurrency(part.productPrice)}
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      {formatVietnameseCurrency(
-                        part.productPrice * part.quantity
-                      )}
-                    </td>
-                    <td className="px-4 py-2 whitespace-nowrap">
-                      <button
-                        type="button"
-                        onClick={() => handleDelete(part.id)}
-                        className="text-red-500 hover:underline"
-                      >
-                        {t("buttons.delete", "Delete")}
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-                {/* Dòng thêm mới sử dụng React Select */}
+                {partsList
+                  .filter((part) => part.status !== "Cancelled")
+                  .map((part, index) => (
+                    <tr key={part.id} className="hover:bg-gray-50">
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {index + 1}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {part.productName} <br />
+                        <span className="text-xs text-gray-500">
+                          ({part.productId})
+                        </span>
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        <input
+                          type="number"
+                          value={
+                            part.isEditing ? part.tempQuantity : part.quantity
+                          }
+                          min={1}
+                          max={part.availableQuantity}
+                          onChange={(e) =>
+                            handleQuantityChange(part.id, e.target.value)
+                          }
+                          className="border border-gray-300 rounded px-2 py-1 w-full"
+                        />
+                        <div className="text-xs text-gray-500">
+                          {t("text.available", "Available")}:{" "}
+                          {part.availableQuantity}
+                        </div>
+                        {part.isEditing && (
+                          <div className="mt-1 space-x-2">
+                            <button
+                              onClick={() => handleSaveTask(part.id)}
+                              className="text-green-500 text-sm hover:underline"
+                            >
+                              Save
+                            </button>
+                            <button
+                              onClick={() => handleCancelTask(part.id)}
+                              className="text-red-500 text-sm hover:underline"
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {formatVietnameseCurrency(part.productPrice)}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {formatVietnameseCurrency(
+                          part.productPrice * part.quantity
+                        )}
+                      </td>
+                      <td className="px-4 py-2 whitespace-nowrap">
+                        {part.isNew ? (
+                          <span className="text-gray-500">New</span>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(part.id)}
+                            className="text-red-500 hover:underline"
+                          >
+                            {t("buttons.delete", "Delete")}
+                          </button>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                {/* Dòng thêm mới */}
                 <tr className="hover:bg-gray-50">
                   <td className="px-4 py-2 whitespace-nowrap"></td>
                   <td className="px-4 py-2 whitespace-nowrap">
@@ -413,7 +518,7 @@ const ReplacementPartsModal = ({
             </table>
           </div>
         </div>
-        {/* Footer: chỉ có nút Close */}
+        {/* Footer */}
         <div className="p-4 border-t border-gray-300 flex justify-end">
           <button
             type="button"

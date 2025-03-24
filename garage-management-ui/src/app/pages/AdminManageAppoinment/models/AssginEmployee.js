@@ -6,6 +6,11 @@ import EmployeeList from "../partials/EmployeeList";
 import { AssignAppointmentDetail } from "../services/AppointmentService";
 import { currentAppointment } from "../services/store/AppointmentSignify";
 import SelectEmployee from "./SelectEmployee";
+import {
+  notificationTypes,
+  sendNotification,
+} from "../../Notification/services/sendNotification";
+import { ConnectionSignify } from "../../Notification/services/connectionSignify";
 
 export default function AssginEmployee({
   isOpen,
@@ -18,9 +23,10 @@ export default function AssginEmployee({
   const [employeeid, setEmployeeId] = useState("");
   const [loading, setLoading] = useState(false);
   const userService = new UserService();
+  const connection = ConnectionSignify.use().connection;
   if (!isOpen) return null;
   const handleConfirm = async () => {
-    console.log("employeeid: ", employeeid);
+    // console.log("employeeid: ", employeeid);
 
     if (!employeeid) {
       userService.showToast(
@@ -36,6 +42,11 @@ export default function AssginEmployee({
       const response = await AssignAppointmentDetail(
         appointmentId,
         serviceDetail.id,
+        employeeid
+      );
+      await sendNotification(
+        connection,
+        notificationTypes.APPOINTMENT_ASSIGNED,
         employeeid
       );
       currentAppointment.set((v) => {
@@ -95,13 +106,16 @@ export default function AssginEmployee({
                   onCancel2={onCancel}
                   serviceDetail={serviceDetail}
                 />
-
-                <h6 className="font-semibold">Select Employee</h6>
-                <SelectEmployee
-                  setEmployeeId={setEmployeeId}
-                  employeeid={employeeid}
-                  employeeSchedules={serviceDetail.employeeSchedules}
-                />
+                {serviceDetail.status === "Unsigned" && (
+                  <>
+                    <h6 className="font-semibold">Select Employee</h6>
+                    <SelectEmployee
+                      setEmployeeId={setEmployeeId}
+                      employeeid={employeeid}
+                      employeeSchedules={serviceDetail.employeeSchedules}
+                    />
+                  </>
+                )}
               </div>
             </div>
           </div>

@@ -90,27 +90,28 @@ export default function ListCustomer() {
       color: "bg-gray-500",
       link: (row) => `${row.original.id}`,
     },
-    {
-      type: "modal",
-      label: t("manage_customer.view"),
-      color: "bg-yellow-500",
-      icon: <IoIosChatbubbles />,
-      onClick: (row) => {
-        const friendExists = chatStore.value.friendList.some(
-          (friend) => friend.id === row.original.id
-        );
+    // ,
+    // {
+    //   type: "modal",
+    //   label: t("manage_customer.view"),
+    //   color: "bg-yellow-500",
+    //   icon: <IoIosChatbubbles />,
+    //   onClick: (row) => {
+    //     const friendExists = chatStore.value.friendList.some(
+    //       (friend) => friend.id === row.original.id
+    //     );
 
-        chatStore.set((v) => {
-          v.value.imageLink =
-            row.imageLink !== "N/A"
-              ? row.imageLink
-              : "https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg";
-          v.value.activeChatId = row.id;
-        });
+    //     chatStore.set((v) => {
+    //       v.value.imageLink =
+    //         row.imageLink !== "N/A"
+    //           ? row.imageLink
+    //           : "https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg";
+    //       v.value.activeChatId = row.id;
+    //     });
 
-        navigate("/chat");
-      },
-    },
+    //     navigate("/chat");
+    //   },
+    // },
   ];
 
   return (

@@ -9,6 +9,7 @@ import {
   sListApointment,
 } from "../services/store/FilterStore";
 import { sAccount } from "../../AuthCustomer/services/store";
+import { formatVietnameseCurrency } from "../../ManageGoodsIssued/schemas/GoodsIssuedSchemas";
 
 export default function ListAppoinment({ status }) {
   const { t, i18n } = useTranslation("appoinment-admin");
@@ -27,6 +28,13 @@ export default function ListAppoinment({ status }) {
       let response = await getAllAppointment(status);
       if (response?.data?.value) {
         SetAppointment(response.data.value);
+        SetAppointment(
+          response.data.value.map((item) => ({
+            ...item,
+            price: formatVietnameseCurrency(item.price),
+          }))
+        );
+
         setPagination({
           currentPage: response.data.paging.currentPage,
           totalPages: response.data.paging.totalPages,

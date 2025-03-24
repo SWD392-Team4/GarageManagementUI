@@ -20,11 +20,12 @@ export default function Navbar() {
     { path: "in-progress", label: t("status.in_progress") },
     { path: "completed", label: t("status.completed") },
     { path: "canceled", label: t("status.canceled") },
+    { path: "rejected", label: t("status.rejected") },
   ];
 
   return (
     <nav className="border-b bg-white shadow-md">
-      <ul className="grid grid-cols-2 sm:grid-cols-3 font-title md:grid-cols-7 text-center">
+      <ul className="grid grid-cols-2 sm:grid-cols-4 font-title md:grid-cols-8 text-center">
         {navItems.map(({ path, label }) => (
           <li key={path}>
             <NavLink

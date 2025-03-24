@@ -120,8 +120,9 @@
     "approved": "Approved",
     "in_progress": "In Progress",
     "completed": "Completed",
-    "canceled": "Canceled",
-    "arrival": "Arrival"
+    "canceled": "Cancelled",
+    "arrival": "Arrival",
+    "rejected": "Rejected"
   },
   "unAssgn": {
     "UnassignEmployee": "Unassign Employee",

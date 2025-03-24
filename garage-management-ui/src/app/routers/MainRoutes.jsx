@@ -220,6 +220,9 @@ const componentMap = {
   InProgess: lazy(() =>
     import("../pages/AdminManageAppoinment/partials/InProgess")
   ),
+  Rejected: lazy(() =>
+    import("../pages/AdminManageAppoinment/partials/Rejected")
+  ),
   Arrival: lazy(() =>
     import("../pages/AdminManageAppoinment/partials/Arrival")
   ),

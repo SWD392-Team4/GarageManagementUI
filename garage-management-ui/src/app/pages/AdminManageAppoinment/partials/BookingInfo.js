@@ -10,6 +10,7 @@ import {
   LabelReactSelect,
   LabelSelect,
 } from "./InputSelect";
+import { FaFileInvoice } from "react-icons/fa";
 
 import { formatVietnameseCurrency } from "../../ManageGoodsIssued/schemas/GoodsIssuedSchemas";
 import {
@@ -30,6 +31,7 @@ import { useTranslation } from "react-i18next";
 
 // Import Yup để xử lý validation
 import * as Yup from "yup";
+import InvoiceModal from "../models/InvoiceModal";
 
 // Hàm chuyển đổi datetime (cắt phần giây, timezone, ...)
 const formatDateTime = (dateString) => {
@@ -101,7 +103,7 @@ const BookingInfo = () => {
   const [showArrivalModal, setShowArrivalModal] = useState(false);
   // State lưu các thông báo lỗi của validation
   const [errors, setErrors] = useState({});
-
+  const [showInvoice, setShowInvoice] = useState(false);
   const sAppointment = currentAppointment.use();
   const fetchData = useCallback(async () => {
     try {
@@ -149,6 +151,7 @@ const BookingInfo = () => {
       };
       currentAppointment.set((v) => {
         v.value.status = appointment.status;
+        v.value.appointmentFull = appointment;
         v.value.appointmentDetails = appointment.appointmentDetails;
         v.value.appointmentDetailPackages =
           appointment.appointmentDetailPackages;
@@ -501,7 +504,8 @@ const BookingInfo = () => {
           ) : (
             <div className="flex">
               {formData.status.name !== "Rejected" &&
-                formData.status.name !== "Cancelled" && (
+                formData.status.name !== "Cancelled" &&
+                formData.status.name !== "Completed" && (
                   <>
                     <button
                       type="button"
@@ -524,9 +528,22 @@ const BookingInfo = () => {
                 )}
             </div>
           )}
+          {/* {formData.status.name === "Completed" && (
+            <button
+              type="button"
+              onClick={() => setShowInvoice(true)}
+              className="p-2 bg-gray-300 rounded hover:bg-gray-400 mr-2"
+            >
+              <FaFileInvoice className="text-white" />
+            </button>
+          )} */}
         </div>
       </div>
-
+      <InvoiceModal
+        isOpen={showInvoice}
+        onClose={() => setShowInvoice(false)}
+        appointmentData={currentAppointment.value.appointmentFull}
+      />
       {/* Sử dụng các modal riêng */}
       <ConfirmationModal
         isOpen={showConfirmModal}
@@ -572,9 +589,21 @@ const BookingInfo = () => {
         formData={formData}
         onCancel={() => setShowArrivalModal(false)}
         id={id}
-        onConfirm={() => {
-          // Xử lý logic xác nhận arrival
+        onConfirm={(response) => {
           setShowArrivalModal(false);
+          currentAppointment.set((v) => {
+            v.value.load += 1;
+          });
+          if (response) {
+            setFormData((prev) => ({
+              ...prev,
+              emp1: {
+                name: sAccount.value.firstName + sAccount.value.lastName,
+                bg: "bg-green-200",
+              },
+              status: { name: "Arrival", bg: "bg-green-200" },
+            }));
+          }
         }}
       />
     </>
