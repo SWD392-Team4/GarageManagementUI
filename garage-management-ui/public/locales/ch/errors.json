@@ -1,0 +1,6 @@
+{
+    "UserExisted": "提供的电子邮箱、用户名和电话号码的用户已存在。",
+    "UsernameRequired": "用户名为必填项。",
+    "EmailRequired": "邮箱为必填项。",
+    "PasswordRequired": "密码为必填项。"
+}

@@ -1,0 +1,15 @@
+{
+    "sidebar_admin": {
+        "profile": "个人资料",
+        "dashboard": "仪表盘",
+        "accounts": "账户",
+        "booking": "预约",
+        "product": "产品",
+        "product_list": "产品列表",
+        "product_category": "产品类别",
+        "product_brand": "品牌",
+        "invoices": "发票",
+        "appointment": "预约",
+        "logout": "退出"
+    }
+}

@@ -1,0 +1,31 @@
+{
+    "labels": {
+        "carModel": "车型",
+        "mileage": "里程数",
+        "customerName": "客户姓名",
+        "customerPhoneNumber": "联系电话",
+        "customerEmail": "电子邮箱",
+        "estimatedAppointmentTime": "预约时间",
+        "estimatedEndTime": "预计结束时间",
+        "carLicensePlateNumber": "车牌号码",
+        "serviceAndProduct": "服务和配件",
+        "selectPackage": "选择套餐"
+    },
+    "placeholder": {
+        "selectCarModel": "请选择车型",
+        "enterMileage": "请输入里程数",
+        "enterCustomerName": "请输入客户姓名",
+        "enterPhoneNumber": "请输入联系电话",
+        "enterEmail": "请输入电子邮箱",
+        "selectService": "选择服务",
+        "selectProduct": "选择产品",
+        "enterQuantity": "数量",
+        "selectPackage": "选择套餐",
+        "enterCarLicensePlateNumber": "请输入车牌号码"
+    },
+    "common": {
+        "cancel": "取消",
+        "loading": "加载中...",
+        "confirm": "确认"
+    }
+}

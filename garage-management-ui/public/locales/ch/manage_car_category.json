@@ -1,0 +1,15 @@
+{
+    "manage_car_category": {
+        "title": "汽车类别管理",
+        "create": "新增汽车类别",
+        "id": "编号",
+        "category": "类别",
+        "description": "描述",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "edit": "编辑",
+        "save": "保存",
+        "close": "关闭"
+    }
+}

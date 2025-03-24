@@ -13,9 +13,9 @@ export default function ServiceCategory() {
     <>
       <PageTitle
         image={commpagesbg}
-        title={t("about_title.title")}
-        title1={t("about_title.breadcrumb_home")}
-        subtitle={t("about_title.title")}
+        title={t("pageTitle")}
+        title1={t("home")}
+        subtitle={t("pageTitle2")}
         height="500"
       />
 

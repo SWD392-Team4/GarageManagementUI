@@ -1,0 +1,14 @@
+{
+    "title": "订单历史",
+    "status": {
+        "pending": "待处理",
+        "completed": "已完成",
+        "cancelled": "已取消"
+    },
+    "order": {
+        "id": "订单编号",
+        "date": "日期",
+        "amount": "金额",
+        "view": "查看"
+    }
+}

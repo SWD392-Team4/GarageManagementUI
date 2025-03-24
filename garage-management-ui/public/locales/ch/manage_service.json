@@ -1,0 +1,14 @@
+{
+    "manage_service": {
+        "title": "服务管理",
+        "create": "创建服务",
+        "Id": "编号",
+        "ServiceName": "服务名称",
+        "ServiceCategory": "服务类别",
+        "Price": "价格",
+        "Status": "状态",
+        "view": "查看",
+        "search": "搜索",
+        "clear_filters": "清除筛选"
+    }
+}

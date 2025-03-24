@@ -386,11 +386,14 @@ export const AssignAppointmentDetail = async (
       },
       true
     );
-    await sendNotification(
-      ConnectionSignify.value.connection,
-      notificationTypes.APPOINTMENT_ASSIGNED,
-      employeeid
-    );
+    if (ConnectionSignify.value.connection) {
+      await sendNotification(
+        ConnectionSignify.value.connection,
+        notificationTypes.APPOINTMENT_ASSIGNED,
+        employeeid
+      );
+    }
+
     userService.showToast(
       200,
       "Assign Employee to appointment detail successfull!"

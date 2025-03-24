@@ -40,6 +40,8 @@ import RemoveImage from "../../assets/services/remove.jpg";
 import RestoreLightingImage from "../../assets/services/restore-lighting.jpg";
 import TestimonialSwiper from "./TestimonialSwiper";
 import { useNavigate } from "react-router-dom";
+import commpagesbg from "../../assets/HomePage/slideshow-home-1.jpg";
+
 const services = [
   { image: InspectImage, icon: <FaSearch />, key: "inspect" }, // Kiểm tra
   { image: ReplaceImage, icon: <FaSyncAlt />, key: "replace" }, // Thay thế
@@ -70,9 +72,11 @@ const ServicesSection = () => {
   return (
     <>
       <PageTitle
+        image={commpagesbg}
         title={t("pageTitle")}
         title1={t("home")}
         subtitle={t("pageTitle")}
+        height={400}
       />
       <section className="pt-16 bg-gray-100 text-center relative ">
         <h2 className="text-red-500 uppercase text-2xl font-shadows font-semibold">

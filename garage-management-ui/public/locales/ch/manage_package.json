@@ -1,0 +1,20 @@
+{
+    "manage_package": {
+        "title": "套餐服务管理",
+        "create1": "创建套餐服务",
+        "id": "编号",
+        "packageName": "套餐名称",
+        "category": "类别",
+        "serviceCategory": "服务类别",
+        "type": "类型",
+        "packagePrice": "套餐价格",
+        "validityPeriod": "有效期",
+        "timeUnit": "时间单位",
+        "usageLimit": "使用限制",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "search": "搜索",
+        "clear_filters": "清除筛选"
+    }
+}

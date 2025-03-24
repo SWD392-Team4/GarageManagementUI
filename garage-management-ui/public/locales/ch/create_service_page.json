@@ -1,0 +1,15 @@
+{
+    "create_service_page": {
+        "title": "创建新服务",
+        "form": {
+            "service_name": "服务名称",
+            "select_car_category": "选择车型类别",
+            "select_car_part": "选择汽车配件",
+            "estimated_hours": "预计工时",
+            "service_price": "服务价格",
+            "description": "描述",
+            "create_service": "创建服务",
+            "service_image": "服务图片"
+        }
+    }
+}

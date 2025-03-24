@@ -1,0 +1,21 @@
+{
+    "manage_employee": {
+        "title": "员工管理",
+        "create": "创建员工",
+        "edit": "编辑",
+        "username": "用户名",
+        "password": "密码",
+        "confirm_password": "确认密码",
+        "firstName": "名字",
+        "lastName": "姓氏",
+        "email": "邮箱",
+        "phoneNumber": "联系电话",
+        "role": "角色",
+        "citizen_id": "身份证",
+        "dob": "出生日期",
+        "gender": "性别",
+        "workplace_id": "工作地点编号",
+        "male": "男",
+        "female": "女"
+    }
+}

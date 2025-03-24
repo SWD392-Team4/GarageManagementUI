@@ -245,14 +245,14 @@ export default function ProductDetails() {
                     defaultValue={
                       product.productCategoryId
                         ? {
-                          value: product.productCategoryId,
-                          label: product.category,
-                        }
+                            value: product.productCategoryId,
+                            label: product.productCategoryName,
+                          }
                         : null
                     }
                   />
                 ) : (
-                  product.category
+                  product.productCategoryName
                 )}
               </p>
 

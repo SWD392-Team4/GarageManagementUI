@@ -1,0 +1,20 @@
+{
+    "product_at_warehouse": {
+        "search": {
+            "minQuantity": "最小数量",
+            "maxQuantity": "最大数量",
+            "status": "状态",
+            "clear_filters": "清除筛选",
+            "search": "搜索"
+        },
+        "sidebar_product": {
+            "product_name": "产品名称",
+            "price": "价格",
+            "stock_quantity": "库存数量",
+            "category": "类别",
+            "brand": "品牌",
+            "barcode": "条形码",
+            "description": "描述"
+        }
+    }
+}

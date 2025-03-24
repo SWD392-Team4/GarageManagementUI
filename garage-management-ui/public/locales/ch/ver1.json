@@ -1,0 +1,120 @@
+{
+  "page_not_found": {
+    "title": "页面不存在",
+    "description": "很抱歉，我们无法找到该页面。您可以返回主页，浏览更多内容。",
+    "go_back": "返回"
+  },
+  "home_page_menu": {
+    "home": "首页",
+    "about": "关于我们",
+    "service": "服务",
+    "product": "产品",
+    "package": "套餐",
+    "contact": "联系我们",
+    "lookup": "查询",
+    "booking": "预约"
+  },
+  "slides": [
+    {
+      "id": 1,
+      "title1": "汽车维修与保养",
+      "title2": "服务",
+      "description": "我们专业认证的技术团队将为您的爱车提供高品质的维修和保养服务，确保您的车辆保持最佳性能。",
+      "img": "hero_slider_bg_1"
+    },
+    {
+      "id": 2,
+      "title1": "汽车维修",
+      "title2": "日常保养",
+      "description": "我们专业认证的技术团队将为您的爱车提供高品质的维修和保养服务，确保您的车辆保持最佳性能。",
+      "img": "hero_slider_bg_2"
+    }
+  ],
+  "best_services": {
+    "title": "最佳服务",
+    "title2": "让您的爱车享受最好的护理",
+    "description": "定期轮胎更换和保养可以延长轮胎寿命并提升车辆性能。如果您的车辆启动困难、怠速时灯光变暗或电池电量不足，我们都能提供帮助。"
+  },
+  "PaneSwitcher": {
+    "title1": "前后对比",
+    "title2": "最近完成的项目对比",
+    "Before": "之前",
+    "After": "之后"
+  },
+  "Contact": {
+    "title": "联系方式",
+    "subTitle": "毋庸置疑，一个良好的页面布局更能吸引读者。",
+    "address": "2972 Westheimer Rd. <br/>Santa Ana, Illinois 5486",
+    "email": "Cripar@gmail.com <br/>InfoCripar@gmal.com",
+    "number": "(402) 4521 5458 44 <br/> (123) 2154 5464 55",
+    "clientNumber": "5,400",
+    "img": "/assets/img/contact_img_1.jpg",
+    "client": "满意客户",
+    "subtitle2": "立即预约",
+    "title2": "预约服务",
+    "submit": "预约服务",
+    "thankyou": "感谢您！"
+  },
+  "loginCustomer": {
+    "pageTitle": "登录 | TURBO TRACK | 2KS1.NET",
+    "userNameLabel": "用户名",
+    "emailPlaceholder": "name@company.com",
+    "emailRequired": "邮箱为必填项",
+    "passwordLabel": "密码",
+    "passwordPlaceholder": "••••••••",
+    "passwordRequired": "密码为必填项",
+    "passwordMinLength": "密码至少需要8个字符",
+    "signInButton": "登录",
+    "newMemberText": "新用户？",
+    "signUpLink": "注册",
+    "forgotPasswordText": "忘记密码？",
+    "bttnSignIn": "登录",
+    "bttnSigningIn": "正在登录...",
+    "resetPassLink": "重置密码"
+  },
+  "footer": {
+    "logoTitle": "标志",
+    "description": "欢迎来到TurboTrack，我们提供可靠的汽车维修和保养服务，助您一路畅行。",
+    "phone": "+84 962-418-452",
+    "quickLink1Title": "快速链接",
+    "quickLink1": {
+      "about": "关于我们",
+      "services": "服务",
+      "pricing": "定价",
+      "team": "团队",
+      "contactUs": "联系我们"
+    },
+    "quickLink2Title": "快速链接",
+    "quickLink2": {
+      "appointment": "预约",
+      "faq": "常见问题",
+      "blogNews": "博客/新闻",
+      "team": "团队"
+    },
+    "locationContactTitle": "位置与联系方式",
+    "locationContact": {
+      "address": "FPT胡志明市隆盛美，守德市",
+      "email": "email@email.com",
+      "hours": "周一至周六：全天开放"
+    },
+    "footerBottom": {
+      "copyright": "版权所有 © 2025，保留所有权利",
+      "socialLinks": {
+        "facebook": "脸书",
+        "twitter": "推特",
+        "instagram": "Instagram",
+        "linkedin": "领英"
+      }
+    }
+  },
+  "slogan": {
+    "qualityService": "体验顶级汽车服务，确保最佳性能。",
+    "customerSatisfaction": "客户满意是我们所有工作的核心。",
+    "accessoryVariety": "提供丰富的汽车配件，满足所有个性化需求。",
+    "trustworthy": "信任—质量—信誉是我们的承诺。",
+    "innovation": "持续创新，提供最佳体验。",
+    "bestDeals": "所有产品享有超值优惠和有竞争力的价格。",
+    "ecoFriendly": "致力于可持续和环保发展。",
+    "professionalSupport": "专业团队随时提供专属支持。"
+  }
+}

@@ -1,0 +1,16 @@
+{
+    "manage_supplier": {
+        "title": "供应商管理",
+        "create": "创建供应商",
+        "id": "编号",
+        "name": "名称",
+        "address": "地址",
+        "province": "省份",
+        "district": "地区",
+        "wards": "乡镇",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "supplierCategory": "供应商类别"
+    }
+}

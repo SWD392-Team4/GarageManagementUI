@@ -1,0 +1,10 @@
+{
+    "workPlaceInformation": "工作地点信息",
+    "name": "名称",
+    "phoneNumber": "联系电话",
+    "fullAddress": "详细地址",
+    "workplaceType": "类型",
+    "status": "状态",
+    "createdAt": "创建日期",
+    "updatedAt": "更新日期"
+}

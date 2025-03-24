@@ -1,0 +1,17 @@
+{
+    "manage_brand": {
+        "title": "品牌管理",
+        "id": "编号",
+        "name": "品牌名称",
+        "status": "状态",
+        "createdAt": "创建日期",
+        "updatedAt": "更新日期",
+        "view": "查看",
+        "create": "新增品牌",
+        "edit": "编辑",
+        "active": "启用",
+        "inactive": "停用",
+        "clear_filters": "清除筛选",
+        "search": "搜索"
+    }
+}

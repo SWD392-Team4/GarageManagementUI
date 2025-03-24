@@ -1,0 +1,18 @@
+{
+    "create_product": {
+        "title": "创建产品",
+        "name": "产品名称",
+        "category": "类别",
+        "price": "价格",
+        "stock": "库存",
+        "brand": "品牌",
+        "supplier": "供应商",
+        "description": "产品描述",
+        "submit": "创建产品",
+        "back": "返回产品列表",
+        "barcode": "条形码",
+        "select_brand": "选择品牌",
+        "select_category": "选择类别",
+        "upload_images": "图片链接"
+    }
+}

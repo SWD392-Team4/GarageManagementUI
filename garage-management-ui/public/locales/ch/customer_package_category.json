@@ -1,0 +1,8 @@
+{
+    "customer_package_category": {
+        "service_category": "服务类别",
+        "car_type": "车型",
+        "package_type": "套餐类型",
+        "price": "价格"
+    }
+}

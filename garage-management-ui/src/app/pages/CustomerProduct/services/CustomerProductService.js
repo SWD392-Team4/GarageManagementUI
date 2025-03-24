@@ -9,17 +9,37 @@ export const getAllProducts = async (
   filters = {}
 ) => {
   try {
-    const queryString = new URLSearchParams({
+    // Khởi tạo các tham số bắt buộc
+    const params = {
       PageNumber,
       PageSize,
-      ProductName: filters?.searchTerm || "",
-      ProductCategory: filters?.category || "",
-      ProductBrandName: filters?.brand || "",
-      MinPrice: filters?.price ? Number(filters.price[0]) : 0,
-      MaxPrice: filters?.price ? Number(filters.price[1]) : 10000000,
       ProductStatus: "Active",
-    }).toString();
+    };
+
+    // Chỉ gắn các tham số filter nếu chúng tồn tại
+    if (filters?.searchTerm) {
+      params.ProductName = filters.searchTerm;
+    }
+    if (filters?.category) {
+      params.ProductCategory = filters.category;
+    }
+    if (filters?.brand) {
+      params.ProductBrandName = filters.brand;
+    }
+    if (
+      filters?.price &&
+      Array.isArray(filters.price) &&
+      filters.price.length === 2
+    ) {
+      params.MinPrice = Number(filters.price[0]);
+      params.MaxPrice = Number(filters.price[1]);
+    }
+
+    // Tạo query string từ object params
+    const queryString = new URLSearchParams(params).toString();
     console.log("API Query:", queryString);
+
+    // Gửi yêu cầu với query string đã tạo
     const response = await userService.sendAjax(
       `/api/products?${queryString}`,
       "GET",
@@ -27,6 +47,7 @@ export const getAllProducts = async (
       false
     );
 
+    // Format lại các trường createdAt và updatedAt
     if (response?.data?.value) {
       response.data.value = response.data.value.map((product) => ({
         ...product,

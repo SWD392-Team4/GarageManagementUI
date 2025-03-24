@@ -1,0 +1,15 @@
+{
+    "pageTitle": "确认邮箱",
+    "loadingTitle": "🔄 正在验证邮箱...",
+    "loadingMessage": "请稍等片刻。",
+    "successTitle": "✅ 邮箱确认成功！",
+    "successMessage": "感谢使用CLCA。",
+    "signInButton": "登录",
+    "errorTitle": "❌ 邮箱验证失败",
+    "errorMessage": "链接可能已过期或邮箱未注册。",
+    "errorHint": "如果您未收到确认邮件，请点击下面按钮重新发送。",
+    "resendButton": "重新发送确认邮件",
+    "resending": "正在重新发送...",
+    "resendSuccess": "确认邮件已重新发送，请检查您的邮箱！5秒后跳转...",
+    "resendFailed": "邮件无法重新发送，请稍后再试！4秒后跳转..."
+}

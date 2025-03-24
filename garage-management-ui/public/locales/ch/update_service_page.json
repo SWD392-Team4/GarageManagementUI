@@ -1,0 +1,26 @@
+{
+    "update_service_page": {
+        "title": "更新服务",
+        "breadcrumb": "服务管理",
+        "form": {
+            "service_name": "服务名称",
+            "service_category": "服务类别",
+            "car_part": "汽车配件",
+            "car_category": "车型类别",
+            "work_nature": "工作性质",
+            "action": "操作",
+            "estimated_hours": "预计工时",
+            "price": "价格",
+            "status": "状态",
+            "description": "描述",
+            "images": "服务图片"
+        },
+        "buttons": {
+            "edit": "编辑",
+            "save_changes": "保存",
+            "cancel": "取消",
+            "upload": "上传",
+            "delete": "删除"
+        }
+    }
+}

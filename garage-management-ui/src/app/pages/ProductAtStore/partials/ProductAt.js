@@ -10,11 +10,12 @@ export default function ProductAt() {
         <ManageProductAt />
       </div>
 
-      {sAccount.value.role !== "Mechanic" && (
-        <div className="border border-gray-200 p-4 rounded-md bg-gray-50 mt-5">
-          <ManageInvoiceSale />
-        </div>
-      )}
+      {sAccount.value.role !== "Mechanic" &&
+        sAccount.value.role !== "WarehouseManager" && (
+          <div className="border border-gray-200 p-4 rounded-md bg-gray-50 mt-5">
+            <ManageInvoiceSale />
+          </div>
+        )}
     </>
   );
 }

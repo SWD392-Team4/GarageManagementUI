@@ -1,0 +1,15 @@
+{
+    "register": {
+        "pageTitle": "注册 | TURBO TRACK | 2KS1.NET",
+        "userNameLabel": "用户名",
+        "emailPlaceholder": "name@company.com",
+        "passwordLabel": "密码",
+        "comfirmPasswordLabel": "确认密码",
+        "signUpButton": "注册",
+        "signingUpButton": "正在注册...",
+        "MemberText": "已有账户？",
+        "signInLink": "登录",
+        "forgotPasswordText": "忘记密码？",
+        "resetPassLink": "重置密码"
+    }
+}

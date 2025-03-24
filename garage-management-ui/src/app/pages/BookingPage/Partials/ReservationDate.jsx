@@ -15,7 +15,7 @@ const ReservationDate = () => {
           `/api/workplaces/${BookingSignify.value.garaId}`,
           "GET",
           null,
-          true
+          false
         );
         setWorkPlaceData(response.data.value);
       } catch (error) {

@@ -1,0 +1,14 @@
+{
+    "customer_package_filter": {
+        "title": "套餐筛选",
+        "search": "搜索名称...",
+        "service_category": "服务类别",
+        "service_category_all": "所有类别",
+        "car_category": "车型",
+        "car_category_all": "所有车型",
+        "package_type": "套餐类型",
+        "package_type_all": "所有类型",
+        "price_range": "价格范围",
+        "apply": "应用筛选"
+    }
+}
