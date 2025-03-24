@@ -46,17 +46,18 @@ export default function CreateInvoiceSale() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const response = await getProductAtStore();
-        if (response) {
-          setAvailableProducts(response.data.value);
-        }
-      } catch (error) {
-        console.error("Lỗi khi lấy sản phẩm:", error);
+  const fetchProducts = async () => {
+    try {
+      const response = await getProductAtStore();
+      if (response) {
+        setAvailableProducts(response.data.value);
       }
+    } catch (error) {
+      console.error("Lỗi khi lấy sản phẩm:", error);
     }
+  };
+
+  useEffect(() => {
     fetchProducts();
   }, []);
 
@@ -137,6 +138,7 @@ export default function CreateInvoiceSale() {
     try {
       const response = await createInvoiceSale(invoiceData);
       if (response) {
+        fetchProducts();
         setInvoice(response.data);
         setShowInvoiceModal(true);
         reset();
@@ -201,20 +203,21 @@ export default function CreateInvoiceSale() {
 
       const product = response.data.value;
 
-      if (product.totalQuantity === 0) {
+      console.log("Check product scan barcode: ", product);
+      if (product.quantity === 0) {
         // ✅ Kiểm tra tồn kho
         console.warn(`🚫 Sản phẩm "${product.productName}" đã hết hàng.`);
         return;
       }
       console.log("📌 Fields trước khi tìm sản phẩm:", fieldsRef);
       const existingIndex = fieldsRef.current.findIndex(
-        (item) => item.productId === product.id
+        (item) => item.productId === product.productId
       );
 
       if (existingIndex !== -1) {
         const currentQuantity = fieldsRef.current[existingIndex].quantity;
         console.log("dong nay loi");
-        const maxQuantity = product.totalQuantity;
+        const maxQuantity = product.quantity;
 
         if (currentQuantity < maxQuantity) {
           update(existingIndex, {
@@ -226,10 +229,10 @@ export default function CreateInvoiceSale() {
         }
       } else {
         append({
-          productId: product.id,
+          productId: product.productId,
           name: product.productName,
           quantity: 1,
-          maxQuantity: product.totalQuantity,
+          maxQuantity: product.quantity,
           price: product.productPrice || 0,
         });
       }

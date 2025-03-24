@@ -77,10 +77,10 @@ export default function ProductSidebar({
                 </label>
                 <span
                   className={`px-3 py-1 text-sm font-semibold rounded-md ${getStatusColor(
-                    selectedProduct.status
+                    selectedProduct.productStatus
                   )}`}
                 >
-                  {getStatusLabel(selectedProduct.status)}
+                  {getStatusLabel(selectedProduct.productStatus)}
                 </span>
               </div>
 
@@ -94,20 +94,18 @@ export default function ProductSidebar({
                 <div className="flex items-center gap-2">
                   <span className="flex items-center gap-1 text-md font-semibold">
                     <FaBox className="text-gray-600" />
-                    <span
-                      className={getStockColor(selectedProduct.totalQuantity)}
-                    >
-                      {selectedProduct.totalQuantity}
+                    <span className={getStockColor(selectedProduct.quantity)}>
+                      {selectedProduct.quantity}
                     </span>
                   </span>
                   <span
                     className={`px-3 py-1 text-sm font-semibold rounded-md ${
-                      selectedProduct.totalQuantity > 0
+                      selectedProduct.quantity > 0
                         ? "bg-green-100 text-green-700"
                         : "bg-red-100 text-red-700"
                     }`}
                   >
-                    {getStockLabel(selectedProduct.totalQuantity)}
+                    {getStockLabel(selectedProduct.quantity)}
                   </span>
                 </div>
               </div>

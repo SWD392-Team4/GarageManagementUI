@@ -75,10 +75,10 @@ export default function ProductSidebar({
                 </label>
                 <span
                   className={`px-3 py-1 text-sm font-semibold rounded-md ${getStatusColor(
-                    selectedProduct.status
+                    selectedProduct.productStatus
                   )}`}
                 >
-                  {getStatusLabel(selectedProduct.status)}
+                  {getStatusLabel(selectedProduct.productStatus)}
                 </span>
               </div>
 
