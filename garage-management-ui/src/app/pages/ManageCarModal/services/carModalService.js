@@ -178,7 +178,7 @@ export const getAllCarCategory = async () => {
   try {
     //call api
     const response = await userService.sendAjax(
-      "/api/car-categories",
+      "/api/car-categories?PageSize=0&Fields=id%2C%20category",
       "GET",
       null,
       true
