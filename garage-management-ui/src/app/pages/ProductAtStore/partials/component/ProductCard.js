@@ -9,12 +9,12 @@ import { useTranslation } from "react-i18next";
 
 export default function ProductCard({ product, handleSelectProduct }) {
   const { t } = useTranslation("product_at_store");
-  console.log("Check product : ", product);
+  // console.log("Check product : ", product);
   return (
     <div
       key={product.id}
       className="border rounded-xl shadow-md p-4 cursor-pointer hover:shadow-xl transition bg-white h-full flex flex-col justify-between"
-      onClick={() => handleSelectProduct(product.id)}
+      onClick={() => handleSelectProduct(product.productBarcodeAtGarage)}
     >
       {/* Ảnh sản phẩm */}
       <img
@@ -79,10 +79,10 @@ export default function ProductCard({ product, handleSelectProduct }) {
         {/* Trạng thái Active/Inactive */}
         <span
           className={`px-3 py-1 text-sm font-semibold rounded-md w-fit ${getStatusColor(
-            product.status
+            product.productStatus
           )}`}
         >
-          {getStatusLabel(product.status)}
+          {getStatusLabel(product.productStatus)}
         </span>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { createImagePackage, createImagePackageUpdate, deteleImagePackage } from
 import { FaTrash, FaPlus } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 
-export default function PackageImages({ packageImages, setPackageImages, packageId, isEditing }) {
+export default function PackageImages({ packageImages, setPackageImages, packageId, isEditing, fetchData }) {
     const { t, i8ln } = useTranslation("manage_package");
     const [isUploading, setIsUploading] = useState(false);
     const [previewImages, setPreviewImages] = useState([]); // ✅ State lưu ảnh preview
@@ -32,6 +32,7 @@ export default function PackageImages({ packageImages, setPackageImages, package
             if (isDeleted) {
                 setPackageImages((prevImages) => prevImages.filter((img) => img.id !== imageId));
             }
+            fetchData();
         } catch (error) {
             console.error("Lỗi khi xóa ảnh:", error);
         }
@@ -92,6 +93,7 @@ export default function PackageImages({ packageImages, setPackageImages, package
             await createImagePackageUpdate(packageId, formData);
             setPackageImages((prev) => [...prev, ...previewImages]);
             setPreviewImages([]); // ✅ Xóa ảnh preview sau khi gửi
+            fetchData();
         } catch (error) {
             console.error("Lỗi khi tải ảnh lên:", error);
         } finally {
