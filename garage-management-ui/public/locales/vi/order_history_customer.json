@@ -1,14 +1,36 @@
 {
-    "title": "Lịch Sử Đơn Hàng",
-    "status": {
-        "pending": "Chờ xử lý",
-        "completed": "Hoàn thành",
-        "cancelled": "Đã hủy"
-    },
-    "order": {
-        "id": "Mã đơn hàng",
-        "date": "Ngày",
-        "amount": "Số tiền",
-        "view": "Xem"
-    }
+  "title": "Lịch sử đơn hàng",
+  "order_detail": "Chi tiết đơn hàng",
+  "status": {
+    "active": "Đang xử lý",
+    "inactive": "Đã hoàn tất"
+  },
+  "customer_name": "Tên khách hàng",
+  "phone": "Số điện thoại",
+  "email": "Email",
+  "total_price": "Tổng tiền",
+  "product": "Sản phẩm",
+  "close": "Đóng",
+  "service_invoices": "Hóa đơn dịch vụ",
+  "product_invoices": "Hóa đơn sản phẩm",
+  "package_invoices": "Hóa đơn gói dịch vụ",
+  "invoice_service": {
+    "name": "Dịch vụ",
+    "category": "Danh mục",
+    "price": "Giá",
+    "nature": "Tính chất",
+    "action": "Hành động",
+    "estimated_hours": "Thời gian ước tính",
+    "status": "Trạng thái"
+  },
+  "invoice_product": {
+    "quantity": "Số lượng",
+    "created_at": "Thời gian"
+  },
+  "invoice_package": {
+    "type": "Loại",
+    "package_price": "Giá gói",
+    "validity": "Hiệu lực",
+    "usage_limit": "Giới hạn sử dụng"
+  }
 }

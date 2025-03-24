@@ -1,14 +1,36 @@
 {
-    "title": "Order History",
-    "status": {
-        "pending": "Pending",
-        "completed": "Completed",
-        "cancelled": "Cancelled"
-    },
-    "order": {
-        "id": "Order ID",
-        "date": "Date",
-        "amount": "Amount",
-        "view": "View"
-    }
+  "title": "Order History",
+  "order_detail": "Order Details",
+  "status": {
+    "active": "Processing",
+    "inactive": "Completed"
+  },
+  "customer_name": "Customer Name",
+  "phone": "Phone Number",
+  "email": "Email",
+  "total_price": "Total Price",
+  "product": "Product",
+  "close": "Close",
+  "service_invoices": "Service Invoices",
+  "product_invoices": "Product Invoices",
+  "package_invoices": "Package Invoices",
+  "invoice_service": {
+    "name": "Service",
+    "category": "Category",
+    "price": "Price",
+    "nature": "Nature",
+    "action": "Action",
+    "estimated_hours": "Estimated Hours",
+    "status": "Status"
+  },
+  "invoice_product": {
+    "quantity": "Quantity",
+    "created_at": "Created At"
+  },
+  "invoice_package": {
+    "type": "Type",
+    "package_price": "Package Price",
+    "validity": "Validity",
+    "usage_limit": "Usage Limit"
+  }
 }
