@@ -343,18 +343,6 @@ export default function SideBarAdmin({
                       </Link>
                       <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
                     </li>
-                    <li className="group/link">
-                      <Link
-                        to="/administrator/employee-schedule"
-                        className="text-white flex items-center p-2"
-                      >
-                        <FaBuilding className="w-5 h-5" />
-                        <span className="ml-2">
-                          {t("sidebar_admin.employee_schedule")}
-                        </span>
-                      </Link>
-                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
-                    </li>
                   </ul>
                 )}
               </li>
@@ -627,19 +615,6 @@ export default function SideBarAdmin({
 
                       <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
                     </li>
-                    <li className="group/link">
-                      <Link
-                        to="/chat"
-                        className="text-white flex items-center p-2"
-                      >
-                        <RiCustomerServiceLine className="w-5 h-5" />
-
-                        <span className="ml-2">
-                          {t("sidebar_admin.customer2")}
-                        </span>
-                      </Link>
-                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
-                    </li>
                   </ul>
                 )}
               </li>
@@ -691,19 +666,6 @@ export default function SideBarAdmin({
 
                         <span className="ml-2">
                           {t("sidebar_admin.ce-appointment")}
-                        </span>
-                      </Link>
-                      <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>
-                    </li>
-                    <li className="group/link">
-                      <Link
-                        to="/administrator/appointment-mine"
-                        className="text-white flex items-center p-2"
-                      >
-                        <RiGalleryView2 className="w-5 h-5" />
-
-                        <span className="ml-2">
-                          {t("sidebar_admin.now-appointment")}
                         </span>
                       </Link>
                       <div className="border-t border-white h-1 transition-all duration-500 w-0 group-hover/link:w-full"></div>

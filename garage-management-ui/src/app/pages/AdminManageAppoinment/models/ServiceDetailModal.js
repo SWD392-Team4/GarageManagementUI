@@ -74,20 +74,22 @@ const ServiceDetailModal = ({ isOpen, onClose, serviceDetail }) => {
                   Phụ tùng thay thế
                 </h3>
                 <div className="mt-2 space-x-2 grid grid-cols-4">
-                  {serviceDetail.appointmentReplacementParts.map((part) => (
-                    <div key={part.id} className="p-2 border rounded">
-                      <p>
-                        <strong>Tên phụ tùng:</strong> {part.productName}
-                      </p>
-                      <p>
-                        <strong>Số lượng:</strong> {part.quantity}
-                      </p>
-                      <p>
-                        <strong>Giá:</strong>{" "}
-                        {formatVietnameseCurrency(part.productPrice)}
-                      </p>
-                    </div>
-                  ))}
+                  {serviceDetail.appointmentReplacementParts
+                    .filter((part) => part.status !== "Cancelled")
+                    .map((part) => (
+                      <div key={part.id} className="p-2 border rounded">
+                        <p>
+                          <strong>Tên phụ tùng:</strong> {part.productName}
+                        </p>
+                        <p>
+                          <strong>Số lượng:</strong> {part.quantity}
+                        </p>
+                        <p>
+                          <strong>Giá:</strong>{" "}
+                          {formatVietnameseCurrency(part.productPrice)}
+                        </p>
+                      </div>
+                    ))}
                 </div>
               </div>
             )}

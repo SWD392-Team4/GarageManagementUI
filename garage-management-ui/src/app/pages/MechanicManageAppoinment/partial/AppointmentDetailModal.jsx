@@ -66,14 +66,14 @@ function AppointmentDetailModal({ service, onClose, onUpdate }) {
             </span>
           </li>
 
-          <li className="justify-between">
+          {/* <li className="justify-between">
             <label className="font-semibold block">Ghi chú dịch vụ:</label>
             <textarea
               className="block w-full border rounded p-1 mt-1"
               value={serviceData.serviceNote}
               disabled
             />
-          </li>
+          </li> */}
         </ul>
         {serviceData.appointmentReplacementParts && (
           <ServiceTasks

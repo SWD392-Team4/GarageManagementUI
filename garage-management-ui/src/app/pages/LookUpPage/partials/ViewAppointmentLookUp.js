@@ -27,6 +27,7 @@ import { useMediaQuery } from "react-responsive";
 import ViewAppointmentLookUpMobile from "./ViewAppointmentLookUpMobile";
 import { useTranslation } from "react-i18next";
 import { formatVietnameseCurrency } from "../schemas/LookUpSchemas";
+import { formatDateTimeHour } from "../../BookingPage/schemas/bookingSchema";
 
 export default function ViewAppointmentLookUp() {
   const [showAllPackages, setShowAllPackages] = useState(false);
@@ -103,7 +104,7 @@ export default function ViewAppointmentLookUp() {
       {isMobile ? (
         <ViewAppointmentLookUpMobile appointment={appointment} />
       ) : (
-        <div className="font-extrabold font-space pb-10 relative flex gap-6 p-6 bg-transparent rounded-lg shadow-md backdrop-blur-sm max-w-screen-2xl">
+        <div className="font-extrabold font-space relative flex gap-3 p-2 bg-transparent rounded-md shadow-md backdrop-blur-sm max-w-screen-2xl">
           {/* Sidebar */}
           <div className="w-1/3 bg-transparent text-black p-6 rounded-lg shadow-lg flex flex-col justify-between">
             <div>
@@ -154,43 +155,43 @@ export default function ViewAppointmentLookUp() {
                   </strong>{" "}
                   {appointment.mileage} {t("look_up_page.view_look_up.km")}
                 </p>
+                <h3 className="text-lg font-semibold border-b pb-2">
+                  {t("look_up_page.view_look_up.appointment_time")}
+                </h3>
+                <p>
+                  <FaClock className="inline mr-2 text-red-700" />
+                  <strong className="text-red-700">
+                    {" "}
+                    {t("look_up_page.view_look_up.start")}:
+                  </strong>{" "}
+                  {formatDateTimeHour(appointment.estimatedAppointmentTime)}
+                </p>
+                <p>
+                  <FaClock className="inline mr-2 text-red-700" />
+                  <strong className="text-red-700">
+                    {t("look_up_page.view_look_up.end")}:
+                  </strong>{" "}
+                  {formatDateTimeHour(appointment.estimatedEndTime)}
+                </p>
               </div>
             </div>
 
-            <div className="mt-6">
-              <h3 className="text-lg font-semibold border-b pb-2">
-                {t("look_up_page.view_look_up.appointment_time")}
-              </h3>
-              <p>
-                <FaClock className="inline mr-2 text-red-700" />
-                <strong className="text-red-700">
-                  {" "}
-                  {t("look_up_page.view_look_up.start")}:
-                </strong>{" "}
-                {appointment.estimatedAppointmentTime}
-              </p>
-              <p>
-                <FaClock className="inline mr-2 text-red-700" />
-                <strong className="text-red-700">
-                  {t("look_up_page.view_look_up.end")}:
-                </strong>{" "}
-                {appointment.estimatedEndTime}
-              </p>
-            </div>
-            {appointment.status !== "Cancelled" && (
-              <div>
-                <button
-                  onClick={openCancelModal}
-                  className="bg-red-600 text-white p-2 rounded flex items-center gap-2"
-                >
-                  <FaExclamationTriangle /> Cancel
-                </button>
-              </div>
-            )}
+            <div className="mt-6"></div>
+            {appointment.status !== "Cancelled" &&
+              appointment.status !== "Completed" && (
+                <div>
+                  <button
+                    onClick={openCancelModal}
+                    className="bg-red-600 text-white p-2 rounded flex items-center gap-2"
+                  >
+                    <FaExclamationTriangle /> Cancel
+                  </button>
+                </div>
+              )}
           </div>
 
           {/* Main Content */}
-          <div className="w-2/3 space-y-6 bg-transparent">
+          <div className="w-2/3 space-y-6 bg-transparent ">
             <h2 className="text-3xl font-bold text-red-700 text-center">
               {t("look_up_page.view_look_up.service_details")}:
             </h2>
@@ -202,7 +203,7 @@ export default function ViewAppointmentLookUp() {
                 <h3 className="text-lg font-semibold border-b pb-2 mb-4 text-red-700">
                   {t("look_up_page.view_look_up.appointment_services")}:
                 </h3>
-                <div className="space-y-4 bg-transparent">
+                <div className="space-y-4 bg-transparent md:max-h-[500px] md:overflow-y-auto">
                   {appointment.appointmentDetails.map((detail, index) => (
                     <div
                       key={index}
@@ -257,9 +258,13 @@ export default function ViewAppointmentLookUp() {
                     </p>
                     <p>
                       <strong> {t("look_up_page.view_look_up.price")}:</strong>{" "}
-                      {formatVietnameseCurrency(
-                        appointment.appointmentDetails[selectedService].price
-                      )}
+                      {appointment.appointmentDetails[selectedService]
+                        .isFromPackage
+                        ? "Include on package"
+                        : formatVietnameseCurrency(
+                            appointment.appointmentDetails[selectedService]
+                              .price
+                          )}
                     </p>
                     <p>
                       <strong> {t("look_up_page.view_look_up.status")}:</strong>{" "}

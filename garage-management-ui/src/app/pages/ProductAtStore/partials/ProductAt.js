@@ -1,6 +1,7 @@
 import React from "react";
 import ManageInvoiceSale from "./ManageInvoiceSale/ManageInvoiceSale";
 import ManageProductAt from "./ManageProductAt/ManageProductAt";
+import { sAccount } from "../../AuthCustomer/services/store";
 
 export default function ProductAt() {
   return (
@@ -9,9 +10,11 @@ export default function ProductAt() {
         <ManageProductAt />
       </div>
 
-      <div className="border border-gray-200 p-4 rounded-md bg-gray-50 mt-5">
-        <ManageInvoiceSale />
-      </div>
+      {sAccount.value.role !== "Mechanic" && (
+        <div className="border border-gray-200 p-4 rounded-md bg-gray-50 mt-5">
+          <ManageInvoiceSale />
+        </div>
+      )}
     </>
   );
 }

@@ -15,7 +15,7 @@ export default function LayoutAuthenCustomer() {
       console.log("sAccount.value.role: ", sAccount.value.role, targetRoute);
       navigate(targetRoute);
     }
-  }, [sAccount.value, navigate, useService]);
+  }, [sAccount.value]);
 
   return (
     <div>

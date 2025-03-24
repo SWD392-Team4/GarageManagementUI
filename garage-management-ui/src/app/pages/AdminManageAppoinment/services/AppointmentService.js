@@ -1,5 +1,6 @@
 import UserService from "../../../hooks/services/UserService";
 import { sAccount } from "../../AuthCustomer/services/store";
+import { ConnectionSignify } from "../../Notification/services/connectionSignify";
 import { formatDate } from "../schemas/appointmentSchema";
 import {
   AppointmentSignify,
@@ -384,6 +385,11 @@ export const AssignAppointmentDetail = async (
         employeeId: employeeid,
       },
       true
+    );
+    await sendNotification(
+      ConnectionSignify.value.connection,
+      notificationTypes.APPOINTMENT_ASSIGNED,
+      employeeid
     );
     userService.showToast(
       200,

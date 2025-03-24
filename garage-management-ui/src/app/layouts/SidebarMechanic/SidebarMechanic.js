@@ -123,7 +123,10 @@ export default function SidebarMechanic({
                 {openMenu === "extension" && (
                   <ul className="ml-6  space-y-1">
                     <li className="group/link">
-                      <Link to="#" className="text-white flex items-center p-2">
+                      <Link
+                        to="product-at-store"
+                        className="text-white flex items-center p-2"
+                      >
                         <MdOutlineHomeRepairService className="w-5 h-5" />
 
                         <span className="ml-2">

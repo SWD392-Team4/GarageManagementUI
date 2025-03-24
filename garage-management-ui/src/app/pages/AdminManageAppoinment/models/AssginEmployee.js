@@ -23,7 +23,6 @@ export default function AssginEmployee({
   const [employeeid, setEmployeeId] = useState("");
   const [loading, setLoading] = useState(false);
   const userService = new UserService();
-  const connection = ConnectionSignify.use().connection;
   if (!isOpen) return null;
   const handleConfirm = async () => {
     // console.log("employeeid: ", employeeid);
@@ -44,11 +43,7 @@ export default function AssginEmployee({
         serviceDetail.id,
         employeeid
       );
-      await sendNotification(
-        connection,
-        notificationTypes.APPOINTMENT_ASSIGNED,
-        employeeid
-      );
+
       currentAppointment.set((v) => {
         v.value.load += 1;
       });

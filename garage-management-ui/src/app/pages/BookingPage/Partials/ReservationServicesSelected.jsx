@@ -18,7 +18,7 @@ const ReservationServicesSelected = () => {
           `/api/workplaces/${BookingSignify.value.garaId}/appointments/checkPrice`,
           "POST",
           payload,
-          true
+          false
         );
         setAppointment(response.data.value);
       } catch (error) {

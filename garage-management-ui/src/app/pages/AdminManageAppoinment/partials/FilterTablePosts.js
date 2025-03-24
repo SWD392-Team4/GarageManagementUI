@@ -76,7 +76,7 @@ export default function FilterTablePost() {
   return (
     <div className="flex bg-white flex-wrap items-center gap-4 p-1 shadow-md">
       {/* Search Input */}
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
         <label className="text-sm ml-1 font-medium text-gray-700">
           Search Employee
         </label>
@@ -87,7 +87,7 @@ export default function FilterTablePost() {
           placeholder="Search title..."
           className="w-36 p-2 border border-gray-300  focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-      </div>
+      </div> */}
       <div className="flex flex-col">
         <label className="text-sm ml-1 font-medium text-gray-700">
           Search Customer{" "}

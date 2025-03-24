@@ -358,7 +358,9 @@ function MechanicDashboard() {
           <h1 className="text-2xl font-raleway font-semibold text-center md:text-left">
             Services list
           </h1>
-          <AddAppointmentDetail id={appointmentInfo.id} />
+          {appointmentInfo.status !== "Completed" && (
+            <AddAppointmentDetail id={appointmentInfo.id} />
+          )}
         </div>
         <div className="border-t border-red-950 text-left text-gray-500 text-sm w-full"></div>
       </div>

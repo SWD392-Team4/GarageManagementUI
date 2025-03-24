@@ -222,13 +222,19 @@
     "path": "/Mechanic",
     "element": "LayoutMechanic",
     "private": {
-      "allowedRoles": ["Administrator", "Mechanic", "Cashier"]
+      "allowedRoles": ["Mechanic"]
     },
     "isSuspense": true,
     "children": [
       {
         "index": true,
         "element": "AdminProfile",
+        "isSuspense2": true
+      },
+
+      {
+        "path": "product-at-store",
+        "element": "ProductAtStore",
         "isSuspense2": true
       },
       {
@@ -258,7 +264,7 @@
     "path": "/chat",
     "element": "DynamicLayout",
     "private": {
-      "allowedRoles": ["Administrator", "Cashier", "Mechanic"]
+      "allowedRoles": ["Cashier", "Mechanic"]
     },
     "isSuspense": true,
     "children": [
@@ -481,22 +487,6 @@
       {
         "path": "create-appointment",
         "element": "CreateAppointment"
-      },
-      {
-        "path": "appointment-mine",
-        "element": "MechanicManageAppointment",
-        "isSuspense": true,
-        "children": [
-          {
-            "index": true,
-            "element": "AppoinmentList"
-          },
-          {
-            "path": "detail/:id",
-            "element": "MechanicDashboard",
-            "isSuspense2": true
-          }
-        ]
       }
     ]
   },
@@ -504,7 +494,7 @@
     "path": "/Cashier",
     "element": "LayoutCashier",
     "private": {
-      "allowedRoles": ["Administrator", "Cashier"]
+      "allowedRoles": ["Cashier"]
     },
     "isSuspense": true,
     "children": [
@@ -732,7 +722,7 @@
     "path": "/WarehouseManager",
     "element": "LayoutWareHouse",
     "private": {
-      "allowedRoles": ["Administrator", "WarehouseManager"]
+      "allowedRoles": ["WarehouseManager"]
     },
     "isSuspense": true,
     "children": [
