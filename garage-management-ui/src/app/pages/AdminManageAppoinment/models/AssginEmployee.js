@@ -124,13 +124,15 @@ export default function AssginEmployee({
           >
             {t("common.cancel")}
           </button>
-          <button
-            className="p-2 bg-green-300 rounded hover:bg-green-400"
-            onClick={handleConfirm}
-            disabled={loading}
-          >
-            {loading ? t("common.loading") : t("assignModal.confirmButton")}
-          </button>
+          {serviceDetail.status === "Unsigned" && (
+            <button
+              className="p-2 bg-green-300 rounded hover:bg-green-400"
+              onClick={handleConfirm}
+              disabled={loading}
+            >
+              {loading ? t("common.loading") : t("assignModal.confirmButton")}
+            </button>
+          )}
         </div>
       </div>
     </div>
