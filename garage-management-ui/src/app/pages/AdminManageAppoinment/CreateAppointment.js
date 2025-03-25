@@ -16,6 +16,7 @@ import {
 } from "./services/AppointmentService";
 import ListServiceinPackage from "./partials/ListServiceinPackage";
 import { packagePick } from "./services/store/AppointmentSignify";
+import { formatLocalDatetimeWithOffset } from "../BookingPage/schemas/bookingSchema";
 
 export default function CreateAppointment() {
   // Sử dụng useTranslation và lấy schema validate từ file riêng
@@ -274,9 +275,9 @@ export default function CreateAppointment() {
       customerName: data.customerName,
       customerPhoneNumber: data.customerPhoneNumber,
       customerEmail: data.customerEmail,
-      estimatedAppointmentTime: new Date(
+      estimatedAppointmentTime: formatLocalDatetimeWithOffset(
         data.estimatedAppointmentTime
-      ).toISOString(),
+      ),
       // estimatedEndTime: new Date(data.estimatedEndTime).toISOString(),
       carLicensePlateNumber: data.carLicensePlateNumber,
       services: selectedServices, // mỗi object: { serviceId, replacementParts: [ { productId, quantity } ] }
