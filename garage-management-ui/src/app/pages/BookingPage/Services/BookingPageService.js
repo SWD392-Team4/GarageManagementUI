@@ -44,7 +44,7 @@ export const getAllCarCategory = async () => {
 export const getAllPackage = async () => {
   try {
     const response = await userService.sendAjax(
-      `/api/packages?CarCategoryId=${BookingSignify.value.carCategoryId}&CarPartId=${BookingSignify.value.carPartId}&Status=Active&PageSize=0`,
+      `/api/packages?CarCategoryId=${BookingSignify.value.carCategoryId}&CarPartId=${BookingSignify.value.carPartId}&Status=Active&PageSize=50`,
       "GET",
       null,
       false
