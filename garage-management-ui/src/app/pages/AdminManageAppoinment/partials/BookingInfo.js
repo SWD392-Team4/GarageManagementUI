@@ -32,6 +32,7 @@ import { useTranslation } from "react-i18next";
 // Import Yup để xử lý validation
 import * as Yup from "yup";
 import InvoiceModal from "../models/InvoiceModal";
+import { formatLocalDatetimeWithOffset } from "../../BookingPage/schemas/bookingSchema";
 
 // Hàm chuyển đổi datetime (cắt phần giây, timezone, ...)
 const formatDateTime = (dateString) => {
@@ -250,8 +251,12 @@ const BookingInfo = () => {
       customerName: formData.customerName,
       customerPhoneNumber: formData.phone,
       customerEmail: formData.email,
-      estimatedAppointmentTime: new Date(formData.estimatedTime).toISOString(),
-      estimatedEndTime: new Date(formData.estimatedEndTime).toISOString(),
+      estimatedAppointmentTime: formatLocalDatetimeWithOffset(
+        formData.estimatedTime
+      ),
+      estimatedEndTime: formatLocalDatetimeWithOffset(
+        formData.estimatedEndTime
+      ),
       carLicensePlateNumber: formData.licenser,
     };
 

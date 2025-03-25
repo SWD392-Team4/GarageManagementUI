@@ -53,7 +53,7 @@ export const getAllServiceByCarModel = async (carModelId) => {
 export const getAllMechanic = async () => {
   try {
     const response = await userService.sendAjax(
-      `/api/users/employees?Role=Mechanic`,
+      `/api/users/employees?WorkplaceId=${sAccount.value.workPlaceId}&Role=Mechanic`,
       "GET",
       null,
       true
