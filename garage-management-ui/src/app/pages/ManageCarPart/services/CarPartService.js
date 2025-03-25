@@ -134,7 +134,7 @@ export const getCarPartDetails = async (carPartId) => {
 export const getAllCarPartCate = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/car-parts/category?Fields=id%2C%20partCategory",
+      "/api/car-parts/category?PageSize=0&Fields=id%2C%20partCategory",
       "GET",
       null,
       true
