@@ -1,5 +1,8 @@
 import UserService from "../../../hooks/services/UserService";
-import { formatDate, formatVietnameseCurrency } from "../schemas/GoodsReceivedSchema";
+import {
+  formatDate,
+  formatVietnameseCurrency,
+} from "../schemas/GoodsReceivedSchema";
 import { sGoodsReceived, sGoodsReceivedGara } from "./GoodsReceivedSignify";
 
 const userService = new UserService();
@@ -72,7 +75,7 @@ export const createGoodsReceived = async (data) => {
 export const getAllProduct = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/products?PageNumber=0",
+      "/api/products?PageNumber=0&PageSize=0",
       "GET",
       null,
       true
