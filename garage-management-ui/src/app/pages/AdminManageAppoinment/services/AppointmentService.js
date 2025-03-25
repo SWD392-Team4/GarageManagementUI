@@ -12,7 +12,7 @@ const userService = new UserService();
 export const getAllCarModel = async () => {
   try {
     const response = await userService.sendAjax(
-      "/api/car-models?Status=Active&PageSize=50",
+      "/api/car-models?Status=Active&PageSize=0",
       "GET",
       null,
       true
