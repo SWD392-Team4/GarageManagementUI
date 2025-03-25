@@ -15,7 +15,12 @@ export default function DetailModal({ pack, onClose }) {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedService, setSelectedService] = useState(null);
-
+  const getShortDescription = (description, maxLength = 200) => {
+    const plainText = description.replace(/[#*_>`-]/g, "");
+    return plainText.length > maxLength
+      ? plainText.substring(0, maxLength) + "..."
+      : plainText;
+  };
   const fetchData = useCallback(async () => {
     try {
       let response = await ServiceOnPackage(pack.id);
@@ -64,34 +69,34 @@ export default function DetailModal({ pack, onClose }) {
           Detail package
         </h2>
         {/* Hiển thị thông tin package */}
-        <div className="mb-4 grid grid-cols-2">
+        <div className="mb-4 grid grid-cols-3">
           <h3 className="text-sm font-title font-extrabold text-left">
             <FaConciergeBell className="inline-block mr-1" />
             Service Category:
           </h3>
-          <h3 className="text-base font-medium text-gray-600 text-right">
+          <h3 className="text-base font-medium col-span-2 text-gray-600 text-right">
             {pack.serviceCategory}
           </h3>
           <h3 className="text-sm font-title font-extrabold text-left">
             <FaCar className="inline-block mr-1" />
             Car Category:
           </h3>
-          <h3 className="text-base font-medium text-gray-600 text-right">
+          <h3 className="text-base font-medium col-span-2 text-gray-600 text-right">
             {pack.category}
           </h3>
           <h3 className="text-sm font-title font-extrabold text-left">
             <FaMoneyBillWave className="inline-block mr-1" />
             Price:
           </h3>
-          <h3 className="text-base font-medium text-gray-600 text-right">
+          <h3 className="text-base font-medium col-span-2 text-gray-600 text-right">
             {formatVietnameseCurrency(pack.packagePrice)}
           </h3>
           <h3 className="text-sm font-title font-extrabold text-left">
             <FaRegStickyNote className="inline-block mr-1" />
             Description:
           </h3>
-          <h3 className="text-base font-medium text-gray-600 text-right">
-            {pack.description}
+          <h3 className="text-base font-light col-span-2 text-gray-900 text-right">
+            {getShortDescription(pack.description)}
           </h3>
         </div>
         <h2 className="text-xl font-semibold mb-2 border-b border-gray-800 text-center font-title">
@@ -124,7 +129,9 @@ export default function DetailModal({ pack, onClose }) {
                     </button>
                   </div>
                 </div>
-                <p className="text-sm text-gray-600">{service.description}</p>
+                <p className="text-sm text-gray-600">
+                  {getShortDescription(service.description)}
+                </p>
               </div>
             ))
           ) : (

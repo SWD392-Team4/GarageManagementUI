@@ -7,6 +7,12 @@ import {
   FaCog,
 } from "react-icons/fa";
 const ServiceDetailModal = ({ service, onClose }) => {
+  const getShortDescription = (description, maxLength = 300) => {
+    const plainText = description.replace(/[#*_>`-]/g, "");
+    return plainText.length > maxLength
+      ? plainText.substring(0, maxLength) + "..."
+      : plainText;
+  };
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center bg-black bg-opacity-30">
       <div className="mt-10 relative w-full max-w-sm p-4 bg-white rounded shadow-lg animate-slideDown">
@@ -19,7 +25,7 @@ const ServiceDetailModal = ({ service, onClose }) => {
         {/* Hiển thị hình ảnh nếu tồn tại imageLink */}
         {service.imageLink && (
           <img
-            src={service.imageLink}
+            src={service.imageLink[0]}
             alt={service.serviceName}
             className="w-full h-auto rounded mb-2"
           />
@@ -45,7 +51,9 @@ const ServiceDetailModal = ({ service, onClose }) => {
             <FaRegStickyNote className="mr-2 text-base" />
             <span className="font-semibold">Description:</span>
           </div>
-          <p className="text-sm text-gray-600 ml-8">{service.description}</p>
+          <p className="text-sm text-gray-600 ml-8">
+            {getShortDescription(service.description)}
+          </p>
         </div>
       </div>
     </div>
